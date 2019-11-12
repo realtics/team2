@@ -44,12 +44,17 @@ public class MonsterMovement : MonoBehaviour
         {
             Vector3 playerPos = _traceTarget.transform.position;
 
-            if (playerPos.x < transform.position.x)
-                _movementFlag = 1;
-            else if (playerPos.x > transform.position.x)
-                _movementFlag = 2;
+            Vector3 direction = playerPos - transform.position;
+            direction.Normalize();
 
-            if (Mathf.Abs(playerPos.x - transform.position.x) < attackRange)
+
+            transform.position += direction * movePower * Time.deltaTime;
+            if(direction.x >0)
+                transform.localScale = new Vector3(-1, 1, 1);
+            else
+                transform.localScale = new Vector3(1, 1, 1);
+
+            if ( (Mathf.Abs(playerPos.x - transform.position.x) < attackRange) && (Mathf.Abs(playerPos.y - transform.position.y) < attackRange/2) )
             {
                 _movementFlag = 0;
                 _anim.SetBool("isAttacking", true);
@@ -57,20 +62,23 @@ public class MonsterMovement : MonoBehaviour
             }
         }
 
-        //Movement Assign
-        if (_movementFlag == 1)
+        else 
         {
-            moveVelocity = Vector3.left;
-            transform.localScale = new Vector3(1, 1, 1);
-        }
+            //Movement Assign
+            if (_movementFlag == 1)
+            {
+                moveVelocity = Vector3.left;
+                transform.localScale = new Vector3(1, 1, 1);
+            }
 
-        else if (_movementFlag == 2)
-        {
-            moveVelocity = Vector3.right;
-            transform.localScale = new Vector3(-1, 1, 1);
-        }
+            else if (_movementFlag == 2)
+            {
+                moveVelocity = Vector3.right;
+                transform.localScale = new Vector3(-1, 1, 1);
+            }
 
-        transform.position += moveVelocity * movePower * Time.deltaTime;
+            transform.position += moveVelocity * movePower * Time.deltaTime;
+        }
     }
 
     //Coroutine
