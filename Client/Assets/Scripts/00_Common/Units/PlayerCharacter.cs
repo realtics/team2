@@ -19,11 +19,13 @@ public class PlayerCharacter : MonoBehaviour
 
     public void SetAxis(float horizontal, float vertical)
     {
-        if (horizontal < 0.0f)
-            _movement.SetFlipX(true);
-        else if (horizontal > 0.0f)
-            _movement.SetFlipX(false);
-
+        if (!_movement.IsAttack)
+        {
+            if (horizontal < 0.0f)
+                _movement.SetFlipX(true);
+            else if (horizontal > 0.0f)
+                _movement.SetFlipX(false);
+        }
         _movement.SetAxis(horizontal, vertical);
     }
 

@@ -47,7 +47,7 @@ public class BaseUnit : MonoBehaviour
     public bool IsJumpDown { get { return _jumpState == UnitJumpState.JumpDown; } }
     public bool IsHit { get { return _isHit; } }
 
-    virtual protected void Awake()
+    protected virtual void Awake()
     {
         _axisHorizontal = 0.0f;
         _axisVertical = 0.0f;
@@ -55,7 +55,7 @@ public class BaseUnit : MonoBehaviour
         _speedVertical = 3.0f;
     }
 
-    virtual protected void Start()
+    protected virtual void Start()
     {
         _animator = GetComponentInChildren<Animator>();
         _renderer = GetComponentInChildren<SpriteRenderer>();
@@ -63,13 +63,18 @@ public class BaseUnit : MonoBehaviour
         _originPos = _avatar.localPosition;
     }
 
-    virtual protected void FixedUpdate()
+    protected virtual void Update()
+    {
+
+    }
+
+    protected virtual void FixedUpdate()
     {
         MoveProcess();
         JumpProcess();
     }
 
-    virtual protected void MoveProcess()
+    protected virtual void MoveProcess()
     {
         Vector3 velocity = _rgdBody.velocity;
 
@@ -86,7 +91,7 @@ public class BaseUnit : MonoBehaviour
         _rgdBody.velocity = velocity;
     }
 
-    virtual protected void JumpProcess()
+    protected virtual void JumpProcess()
     {
         Vector3 groundPos = _originPos;
         groundPos.y += _height;
@@ -104,13 +109,14 @@ public class BaseUnit : MonoBehaviour
             {
                 _jumpState = UnitJumpState.None;
                 _height = 0.0f;
+                StopAttack();
             }
         }
     }
 
     public void SetAxis(float horizontal, float vertical)
     {
-        if (!IsWalkable())
+        if (!IsMovable())
         {
             _axisHorizontal = 0.0f;
             _axisVertical = 0.0f;
@@ -121,7 +127,7 @@ public class BaseUnit : MonoBehaviour
         _axisVertical = vertical;
     }
 
-    public void SetAttack()
+    public virtual void SetAttack()
     {
         if (!IsAttackable())
             return;
@@ -129,7 +135,7 @@ public class BaseUnit : MonoBehaviour
         _isAttack = true;
     }
 
-    public void StopAttack()
+    public virtual void StopAttack()
     {
         _isAttack = false;
     }
@@ -144,16 +150,36 @@ public class BaseUnit : MonoBehaviour
 
     public void StopRun()
     {
+        if (!IsGround)
+            return;
+
         _isRun = false;
     }
 
-    public bool IsWalkable()
+    public void SetJump()
+    {
+        if (!IsJupable())
+            return;
+
+        _jumpState = UnitJumpState.JumpUp;
+        _jumpValue = 0.25f;
+    }
+
+    public void SetFlipX(bool flip)
+    {
+        _renderer.flipX = flip;
+    }
+
+    public bool IsMovable()
     {
         if (_isHit)
             return false;
 
-        if (_isAttack)
-            return false;
+        if (IsGround)
+        {
+            if (_isAttack)
+                return false;
+        }
 
         return true;
     }
@@ -166,14 +192,11 @@ public class BaseUnit : MonoBehaviour
         return true;
     }
 
-    public void SetJump()
+    public bool IsJupable()
     {
-        _jumpState = UnitJumpState.JumpUp;
-        _jumpValue = 0.25f;
-    }
+        if (IsAttack)
+            return false;
 
-    public void SetFlipX(bool flip)
-    {
-        _renderer.flipX = flip;
+        return true;
     }
 }
