@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2771949664515847149}
   - component: {fileID: 4993077676668677030}
   - component: {fileID: 4109821799066028102}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -69,7 +69,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.26}
+  m_Offset: {x: 0, y: -0.17}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -107,6 +107,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _avatar: {fileID: 2771949665098156229}
+  _isAttack: 0
+  _attackIndex: 0
 --- !u!1 &2771949665098156224
 GameObject:
   m_ObjectHideFlags: 0
@@ -118,7 +120,7 @@ GameObject:
   - component: {fileID: 2771949665098156229}
   - component: {fileID: 2771949665098156230}
   - component: {fileID: 2771949665098156231}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SpriteAnimator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -133,8 +135,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2771949665098156224}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.35, z: 0}
-  m_LocalScale: {x: 2.6, y: 2.6, z: 2}
+  m_LocalPosition: {x: 0, y: -1.15, z: 0}
+  m_LocalScale: {x: 2.1, y: 2.1, z: 2}
   m_Children: []
   m_Father: {fileID: 2771949664515847145}
   m_RootOrder: 0

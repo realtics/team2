@@ -13,25 +13,25 @@ public class Monster : MonoBehaviour
     public float moveSpeed = 2.5f;
 
     public Transform target = null;
-    public Animation anim = null;
+    public Animator animator = null;
 
     private StateMachine<Monster> _state = null;
 
     private void Awake()
     {
-        anim = GetComponent<Animation>();
+        animator = GetComponentInChildren<Animator>();
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        ResetState();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        _state.Update();
     }
 
     // 상태변경
@@ -40,44 +40,35 @@ public class Monster : MonoBehaviour
         _state.ChangeState(state);
     }
 
-    void OnTriggerEnter(Collider other)
+    private void OnTriggerStay2D(Collider2D other)
     {
-        // 플레이어 접근시 move_state로 변경
         if (other.transform.tag == "Player")
         {
             Debug.Log("Player Detect.");
+            target = other.transform;
 
-            target = other.transform.Find("Player");
-
-            if (CheckRange())
-            {
-                // ChangeState(State_Attack.Instance);
-                Debug.Log("Attack.");
-            }
-            else
-            {
-                ChangeState(MoveState.GetInstance);
-            }
+            //if (CheckRange())
+            //{
+            //    Debug.Log("Attack.");
+            //    ChangeState(AttackState.GetInstance);
+              
+            //}
+            //else
+            //{
+            //    Debug.Log("Chsing.");
+            //    animator.SetBool("isMoving", true);
+            //    ChangeState(MoveState.GetInstance);
+            //}
         }
         else
         {
             return;
         }
-
     }
 
     public bool CheckRange()
     {
-        if (Vector3.Distance(target.transform.position, transform.position) <= attackRange)
-        {
-            return true;
-        }
-        return false;
-    }
-
-    public bool CheckAngle()
-    {
-        if (Vector3.Dot(target.transform.position, transform.position) >= 0.5f)
+        if ((Mathf.Abs(target.position.x - transform.position.x) < attackRange) && (Mathf.Abs(target.position.y - transform.position.y) < attackRange / 4))
         {
             return true;
         }

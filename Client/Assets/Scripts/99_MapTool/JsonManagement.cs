@@ -2,6 +2,8 @@
 using UnityEditor;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Text;
 
 public class JsonData
 {
@@ -18,49 +20,90 @@ public class JsonData
 
 public class JsonManagement
 {
-    List<JsonData> ObjectList;
+    List<JsonData> _ObjectList;
 
 
     public JsonManagement()
     {
-        ObjectList = new List<JsonData>();
+        _ObjectList = new List<JsonData>();
     }
 
     public void JsonSave()
     {
-        ObjectList.Clear();
+        _ObjectList.Clear();
 
         foreach (GameObject obj in GameObject.FindGameObjectsWithTag("FieldObject"))
         {
             //Debug.Log(obj.name);
             AddObject(obj);
         }
-    }
-    public void JsonLoad()
-    {
-        
-    }
 
+
+        string jsonData = ObjectToJson(_ObjectList);
+
+        CreateJsonFile(Application.dataPath, "Test", jsonData);
+    }
+    public void JsonLoad(string fileName)
+    {
+
+
+
+    }
+    public JsonData GetObject(int index)
+    {
+        return _ObjectList[index];
+    }
+    //public JsonData GetObject(string objectName)
+    //{
+    //    // ing..
+
+    //    foreach(JsonData item in _ObjectList)
+    //    {
+    //        //item._filePath
+    //    }
+
+    //    return null;
+    //}
     public void InstObject()
     {
-        foreach (JsonData data in ObjectList)
+        foreach (JsonData data in _ObjectList)
         {
             //GameObject obj = (GameObject)Resources.Load(data._filePath);
             GameObject obj = (GameObject)Resources.Load("Object\\StoneBar");
             obj.transform.position = data._position;
 
             GameObject.Instantiate(obj);
-            
+
         }
     }
 
     public void AddObject(GameObject obj)
     {
-        Object parentObject = PrefabUtility.GetCorrespondingObjectFromSource(obj);
-        string path = AssetDatabase.GetAssetPath(parentObject);
+        //Object parentObject = PrefabUtility.GetCorrespondingObjectFromOriginalSource(obj);
+        //string path = AssetDatabase.GetAssetPath(parentObject);
+        string path = "Object\\farBackground";
         Debug.Log(path);
 
         JsonData data = new JsonData(path, obj.transform.position);
-        ObjectList.Add(data);
+        _ObjectList.Add(data);
+    }
+
+    string ObjectToJson(object obj)
+    {
+        return JsonUtility.ToJson(obj);
+    }
+
+    T JsonToOject<T>(string jsonData)
+    {
+        return JsonUtility.FromJson<T>(jsonData);
+    }
+
+    void CreateJsonFile(string createPath, string fileName, string jsonData)
+    {
+        FileStream fileStream = new FileStream(string.Format("{0}/{1}.json", createPath, fileName), FileMode.Create);
+        byte[] data = Encoding.UTF8.GetBytes(jsonData);
+        fileStream.Write(data, 0, data.Length);
+        fileStream.Close();
     }
 }
+

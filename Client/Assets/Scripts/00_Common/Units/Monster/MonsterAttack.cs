@@ -22,8 +22,6 @@ public class MonsterAttack : MonoBehaviour
     private void FixedUpdate()
     {
         AttackStart();
-
-
     }
 
     private void AttackStart()

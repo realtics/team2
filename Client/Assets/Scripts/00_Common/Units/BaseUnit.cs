@@ -24,6 +24,7 @@ public class BaseUnit : MonoBehaviour
     private UnitJumpState _jumpState;
     private float _jumpValue;
 
+    [SerializeField]
     private bool _isAttack;
     private bool _isRun;
 
@@ -36,6 +37,8 @@ public class BaseUnit : MonoBehaviour
     private float _height;
     private bool _isHit;
 
+    private float _extraMoveDuration;
+
 
     // properties
     public bool IsGround { get { return !(_height > 0.0f); } }
@@ -46,6 +49,8 @@ public class BaseUnit : MonoBehaviour
     public bool IsJumpUp { get { return _jumpState == UnitJumpState.JumpUp; } }
     public bool IsJumpDown { get { return _jumpState == UnitJumpState.JumpDown; } }
     public bool IsHit { get { return _isHit; } }
+    public float Forward { get { return _renderer.flipX ? -1 : 1; } }
+    public float CurAnimTime { get { return _animator.GetCurrentAnimatorStateInfo(0).normalizedTime; } }
 
     protected virtual void Awake()
     {
@@ -72,6 +77,7 @@ public class BaseUnit : MonoBehaviour
     {
         MoveProcess();
         JumpProcess();
+        ExtraMoveTimeProcess();
     }
 
     protected virtual void MoveProcess()
@@ -102,37 +108,32 @@ public class BaseUnit : MonoBehaviour
             _height += _jumpValue;
             _jumpValue -= 0.01f;
 
-            if (_jumpValue < 0.0f)
-                _jumpState = UnitJumpState.JumpDown;
-
-            if (_height < 0.0f)
-            {
-                _jumpState = UnitJumpState.None;
-                _height = 0.0f;
-                StopAttack();
-            }
+            SetJumpDown();
+            CheckGroundAfterJump();
         }
     }
 
-    public void SetAxis(float horizontal, float vertical)
+    public virtual bool SetAxis(float horizontal, float vertical)
     {
         if (!IsMovable())
         {
             _axisHorizontal = 0.0f;
             _axisVertical = 0.0f;
-            return;
+            return false;
         }
 
         _axisHorizontal = horizontal;
         _axisVertical = vertical;
+        return true;
     }
 
-    public virtual void SetAttack()
+    public virtual bool SetAttack()
     {
         if (!IsAttackable())
-            return;
+            return false;
 
         _isAttack = true;
+        return true;
     }
 
     public virtual void StopAttack()
@@ -140,32 +141,57 @@ public class BaseUnit : MonoBehaviour
         _isAttack = false;
     }
 
-    public void SetRun()
+    public virtual bool SetRun()
     {
         if (!IsGround)
-            return;
+            return false;
 
         _isRun = true;
+        return true;
     }
 
-    public void StopRun()
+    public virtual bool StopRun()
     {
         if (!IsGround)
-            return;
+            return false;
 
         _isRun = false;
+        return true;
     }
 
-    public void SetJump()
+    public virtual bool SetJump()
     {
         if (!IsJupable())
-            return;
+            return false;
 
         _jumpState = UnitJumpState.JumpUp;
         _jumpValue = 0.25f;
+        return true;
     }
 
-    public void SetFlipX(bool flip)
+    protected virtual bool SetJumpDown()
+    {
+        if (_jumpValue >= 0.0f)
+            return false;
+
+        _jumpState = UnitJumpState.JumpDown;
+
+        return true;
+    }
+
+    protected virtual bool CheckGroundAfterJump()
+    {
+        if (_height >= 0.0f)
+            return false;
+
+        _jumpState = UnitJumpState.None;
+        _height = 0.0f;
+        StopAttack();
+
+        return true;
+    }
+
+    public virtual void SetFlipX(bool flip)
     {
         _renderer.flipX = flip;
     }
@@ -198,5 +224,31 @@ public class BaseUnit : MonoBehaviour
             return false;
 
         return true;
+    }
+
+    public void MoveUnit(float power, float duration, int direction)
+    {
+        if (direction > 0)
+            _extraSpeedHorizontal = power * Forward;
+        else
+            _extraSpeedVertical = power * Forward;
+
+        _extraMoveDuration = duration;
+    }
+
+    private void ExtraMoveTimeProcess()
+    {
+        if (_extraMoveDuration <= 0.0f)
+            return;
+
+        _extraMoveDuration -= Time.deltaTime;
+
+        if (_extraMoveDuration <= 0.0f)
+        {
+            _extraSpeedHorizontal = 0.0f;
+            _extraSpeedVertical = 0.0f;
+            _extraMoveDuration = 0.0f;
+            return;
+        }
     }
 }
