@@ -11,10 +11,15 @@ class session : public std::enable_shared_from_this<session>
 private:
 	tcp::socket socket_;
 	enum { max_length = 1024 };
-	char data_[max_length];
+	char data_[max_length] = {0};
 
 	void do_read()
 	{
+		for (int i = 0; i < max_length; i++)
+		{
+			data_[i] = 0;
+		}
+
 		auto self(shared_from_this());
 		socket_.async_read_some(boost::asio::buffer(data_, max_length),
 			[this, self](boost::system::error_code ec, std::size_t length)
@@ -37,6 +42,7 @@ private:
 					do_read();
 				}
 			});
+		std::cout << "[" << &socket_ << "] " << data_ << std::endl;
 	}
 public:
 	session(tcp::socket socket) : socket_(std::move(socket))

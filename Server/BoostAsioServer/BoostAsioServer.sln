@@ -7,6 +7,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BoostAsioServer", "BoostAsi
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "exam_async_tcp_echo_server", "exam_async_tcp_echo_server\exam_async_tcp_echo_server.vcxproj", "{20715FA6-3581-4A2C-8E75-FB749B498BAA}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "exam_chat_server", "exam_chat_server\exam_chat_server.vcxproj", "{8C50D8B2-6D40-40D1-8F8C-4318469B8228}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -31,6 +33,14 @@ Global
 		{20715FA6-3581-4A2C-8E75-FB749B498BAA}.Release|x64.Build.0 = Release|x64
 		{20715FA6-3581-4A2C-8E75-FB749B498BAA}.Release|x86.ActiveCfg = Release|Win32
 		{20715FA6-3581-4A2C-8E75-FB749B498BAA}.Release|x86.Build.0 = Release|Win32
+		{8C50D8B2-6D40-40D1-8F8C-4318469B8228}.Debug|x64.ActiveCfg = Debug|x64
+		{8C50D8B2-6D40-40D1-8F8C-4318469B8228}.Debug|x64.Build.0 = Debug|x64
+		{8C50D8B2-6D40-40D1-8F8C-4318469B8228}.Debug|x86.ActiveCfg = Debug|Win32
+		{8C50D8B2-6D40-40D1-8F8C-4318469B8228}.Debug|x86.Build.0 = Debug|Win32
+		{8C50D8B2-6D40-40D1-8F8C-4318469B8228}.Release|x64.ActiveCfg = Release|x64
+		{8C50D8B2-6D40-40D1-8F8C-4318469B8228}.Release|x64.Build.0 = Release|x64
+		{8C50D8B2-6D40-40D1-8F8C-4318469B8228}.Release|x86.ActiveCfg = Release|Win32
+		{8C50D8B2-6D40-40D1-8F8C-4318469B8228}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

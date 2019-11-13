@@ -18,23 +18,32 @@ int main()
 		boost::asio::connect(s, resolver.resolve("127.0.0.1", "13"));
 		for (;;)
 		{
-			std::cout << "Enter message: ";
+			std::cout << "메세지 입력 : ";
 			char request[max_length];
 			std::cin.getline(request, max_length);
+
 			if (strcmp(request, "quit") == 0)
 			{
 				break;
 			}
 
-			size_t request_length = std::strlen(request);
-			boost::asio::write(s, boost::asio::buffer(request, request_length));
+			if (std::cin.fail())
+			{
+				std::cin.clear();
+				std::cin.ignore(max_length, '\n');
+				std::cout << "입력 최대 값을 넘었습니다" << std::endl;
+			}
+			else
+			{
+				size_t request_length = std::strlen(request);
+				boost::asio::write(s, boost::asio::buffer(request, request_length));
 
-			char reply[max_length];
-			size_t reply_length = boost::asio::read(s,
-				boost::asio::buffer(reply, request_length));
-			std::cout << "Reply is: ";
-			std::cout.write(reply, reply_length);
-			std::cout << "\n";
+				char reply[max_length];
+				size_t reply_length = boost::asio::read(s, boost::asio::buffer(reply, request_length));
+				std::cout << "입력한 값 : ";
+				std::cout.write(reply, reply_length);
+				std::cout << std::endl;
+			}
 		}
 	}
 	catch (std::exception & e)
