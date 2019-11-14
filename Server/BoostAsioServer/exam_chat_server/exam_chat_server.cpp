@@ -29,6 +29,10 @@ typedef std::shared_ptr<chat_participant> chat_participant_ptr;
 
 class chat_room
 {
+private:
+	std::set<chat_participant_ptr> participants_;
+	enum { max_recent_msgs = 100 };
+	chat_message_queue recent_msgs_;
 public:
 	void join(chat_participant_ptr participant)
 	{
@@ -51,11 +55,6 @@ public:
 		for (auto participant : participants_)
 			participant->deliver(msg);
 	}
-
-private:
-	std::set<chat_participant_ptr> participants_;
-	enum { max_recent_msgs = 100 };
-	chat_message_queue recent_msgs_;
 };
 
 //----------------------------------------------------------------------
@@ -64,30 +63,12 @@ class chat_session
 	: public chat_participant,
 	public std::enable_shared_from_this<chat_session>
 {
-public:
-	chat_session(tcp::socket socket, chat_room& room)
-		: socket_(std::move(socket)),
-		room_(room)
-	{
-	}
-
-	void start()
-	{
-		room_.join(shared_from_this());
-		do_read_header();
-	}
-
-	void deliver(const chat_message& msg)
-	{
-		bool write_in_progress = !write_msgs_.empty();
-		write_msgs_.push_back(msg);
-		if (!write_in_progress)
-		{
-			do_write();
-		}
-	}
-
 private:
+	tcp::socket socket_;
+	chat_room& room_;
+	chat_message read_msg_;
+	chat_message_queue write_msgs_;
+
 	void do_read_header()
 	{
 		read_msg_.dataClear();
@@ -153,28 +134,41 @@ private:
 					room_.leave(shared_from_this());
 				}
 			});
-		std::cout << "[" << &socket_ << "] " << read_msg_.data() << std::endl;
+		std::cout << "[" << &socket_ << "] " << read_msg_.body_length() << "\t" << read_msg_.body() << std::endl;
+	}
+public:
+	chat_session(tcp::socket socket, chat_room& room)
+		: socket_(std::move(socket)),
+		room_(room)
+	{
+		std::cout << &socket << " Á¢¼Ó" << std::endl;
 	}
 
-	tcp::socket socket_;
-	chat_room& room_;
-	chat_message read_msg_;
-	chat_message_queue write_msgs_;
+	void start()
+	{
+		room_.join(shared_from_this());
+		do_read_header();
+	}
+
+	void deliver(const chat_message& msg)
+	{
+		bool write_in_progress = !write_msgs_.empty();
+		write_msgs_.push_back(msg);
+		if (!write_in_progress)
+		{
+			do_write();
+		}
+	}
 };
 
 //----------------------------------------------------------------------
 
 class chat_server
 {
-public:
-	chat_server(boost::asio::io_context& io_context,
-		const tcp::endpoint& endpoint)
-		: acceptor_(io_context, endpoint)
-	{
-		do_accept();
-	}
-
 private:
+	tcp::acceptor acceptor_;
+	chat_room room_;
+
 	void do_accept()
 	{
 		acceptor_.async_accept(
@@ -188,9 +182,13 @@ private:
 				do_accept();
 			});
 	}
-
-	tcp::acceptor acceptor_;
-	chat_room room_;
+public:
+	chat_server(boost::asio::io_context& io_context,
+		const tcp::endpoint& endpoint)
+		: acceptor_(io_context, endpoint)
+	{
+		do_accept();
+	}
 };
 
 //----------------------------------------------------------------------

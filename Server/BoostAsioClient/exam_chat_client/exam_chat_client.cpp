@@ -11,34 +11,11 @@ typedef std::deque<chat_message> chat_message_queue;
 
 class chat_client
 {
-public:
-	chat_client(boost::asio::io_context& io_context,
-		const tcp::resolver::results_type& endpoints)
-		: io_context_(io_context),
-		socket_(io_context)
-	{
-		do_connect(endpoints);
-	}
-
-	void write(const chat_message& msg)
-	{
-		boost::asio::post(io_context_,
-			[this, msg]()
-			{
-				bool write_in_progress = !write_msgs_.empty();
-				write_msgs_.push_back(msg);
-				if (!write_in_progress)
-				{
-					do_write();
-				}
-			});
-	}
-
-	void close()
-	{
-		boost::asio::post(io_context_, [this]() { socket_.close(); });
-	}
-
+private:
+	boost::asio::io_context& io_context_;
+	tcp::socket socket_;
+	chat_message read_msg_;
+	chat_message_queue write_msgs_;
 private:
 	void do_connect(const tcp::resolver::results_type& endpoints)
 	{
@@ -110,11 +87,33 @@ private:
 			});
 	}
 
-private:
-	boost::asio::io_context& io_context_;
-	tcp::socket socket_;
-	chat_message read_msg_;
-	chat_message_queue write_msgs_;
+public:
+	chat_client(boost::asio::io_context& io_context,
+		const tcp::resolver::results_type& endpoints)
+		: io_context_(io_context),
+		socket_(io_context)
+	{
+		do_connect(endpoints);
+	}
+
+	void write(const chat_message& msg)
+	{
+		boost::asio::post(io_context_,
+			[this, msg]()
+			{
+				bool write_in_progress = !write_msgs_.empty();
+				write_msgs_.push_back(msg);
+				if (!write_in_progress)
+				{
+					do_write();
+				}
+			});
+	}
+
+	void close()
+	{
+		boost::asio::post(io_context_, [this]() { socket_.close(); });
+	}
 };
 
 int main(/*int argc, char* argv[]*/)
