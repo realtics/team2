@@ -4,40 +4,18 @@ using UnityEngine;
 
 public class CharacterMovement : BaseUnit
 {
-    private int _maxAttackIndex;
-    [SerializeField]
-    private int _attackIndex;
-
+    private bool _nextAttack;
     protected override void Start()
     {
         base.Start();
-
-        _attackIndex = 0;
-        _maxAttackIndex = 3;
+        _nextAttack = false;
         _animator.SetBool("IsGround", true);
+        _animator.SetBool("NextAttack", false);
     }
 
     override protected void Update()
     {
         CheckAttackEnd();
-        CheckJumpAttackEnd();
-    }
-
-    private void CheckJumpAttackEnd()
-    {
-        if (IsGround)
-            return;
-
-        AnimatorStateInfo animStateInfo = _animator.GetCurrentAnimatorStateInfo(0);
-
-        if (!animStateInfo.IsName("JumpAttack"))
-            return;
-
-        if (CurAnimTime < 0.95f)
-            return;
-
-        base.StopAttack();
-        _animator.SetBool("IsAttack", false);
     }
 
     private void CheckAttackEnd()
@@ -50,7 +28,7 @@ public class CharacterMovement : BaseUnit
         if (!animStateInfo.IsTag("Attack"))
             return;
 
-        if (CurAnimTime < 0.95f)
+        if (IsAnimationPlaying())
             return;
 
         StopAttack();
@@ -58,10 +36,12 @@ public class CharacterMovement : BaseUnit
 
     public override void StopAttack()
     {
+        if (IsInTranstion)
+            return;
+
         base.StopAttack();
-        _attackIndex = 0;
         _animator.SetBool("IsAttack", false);
-        _animator.SetInteger("AttackIndex", _attackIndex);
+        _animator.SetBool("NextAttack", false);
     }
 
     public override bool SetAttack()
@@ -81,18 +61,19 @@ public class CharacterMovement : BaseUnit
         if (!animStateInfo.IsTag("Attack"))
             return;
 
-        if (_attackIndex >= _maxAttackIndex - 1)
+        if (animStateInfo.IsName("Attack3"))
             return;
 
         if (CurAnimTime < 0.5f)
             return;
 
-        if (_animator.IsInTransition(0))
+        if (IsInTranstion)
             return;
 
-        MoveUnit(1.0f, 0.3f, 1);
-        _attackIndex++;
-        _animator.SetInteger("AttackIndex", _attackIndex);
+        MoveUnit(1.0f, 0.3f, ExtraMoveDirection.Horizontal);
+
+        _animator.SetBool("NextAttack", true);
+        StartCoroutine(CoSetFalseNextAttack());
     }
 
     public override bool SetJump()
@@ -159,4 +140,9 @@ public class CharacterMovement : BaseUnit
         return true;
     }
 
+    IEnumerator CoSetFalseNextAttack()
+    {
+        yield return new WaitForEndOfFrame();
+        _animator.SetBool("NextAttack", false);
+    }
 }

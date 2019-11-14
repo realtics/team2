@@ -1,11 +1,4 @@
-﻿/*
- * StateMachine.cs
- * 출처 : https://carrotclub.tistory.com/entry/%EB%AA%AC%EC%8A%A4%ED%84%B0-FSM-%EA%B5%AC%ED%98%84
- * 몬스터 클래스에서 각 몬스터상태 클래스를 변경할 수 있도록 연결해주는 역할
- * ##공부중##
- */
-
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 

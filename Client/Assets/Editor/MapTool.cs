@@ -5,62 +5,64 @@ using UnityEditor;
 
 public enum ALIGN
 { 
-    ALIGN_LT = 0,
-    ALIGN_T,
-    ALIGN_RT,
-    ALIGN_L,
-    ALIGN_M,
-    ALIGN_R,
-    ALIGN_LB,
-    ALIGN_B,
-    ALIGN_RB,
+    LeftTop = 0,
+    Top,
+    RightTop,
+    Left,
+    Middle,
+    Right,
+    LeftBottom,
+    Bottom,
+    RightBottom,
 };
 
 public class MapTool : EditorWindow
 {
-    public static MapTool instance;
+    public static MapTool Instance { get; set; }
 
     static MapTool mapToolWIndow;
 
-    Vector2 scrollPos;
+    private Vector2 _scrollPos;
 
-    public static bool IsActivateTools;
+    //Tool Function.
+    public static bool isActivateTools;
     public static bool overWrite;
     public static bool snapping;
 
     //align
-    Vector2 alignPos;
-    int alignId;
+    private Vector2 _alignPos;
+    private int _alignId;
 
-    bool IsPlaying;
+    private bool _isPlaying;
 
     // Tile.
-    static SpriteRenderer gizmoTilesr;
+    static SpriteRenderer gizmoTileSpriteRenderer;
 
     public float layerDepthMultiplier = 0.1f;
 
-    public static int curLayer;
+    public static int currentLayer;
     public static Layer activeLayer;
 
-    public Tool currentTool;
+    private Tool _currentTool;
 
     public static bool mouseDown;
 
     public static GameObject gizmoCursor, gizmoTile;
 
-    public Vector2 mousePos;
+    private Vector2 mousePos;
 
-    public bool showConsole = false;
+    private bool _showConsole = false;
 
     static List<GameObject> allPrefabs;
-    public GameObject curPrefab;
+    private GameObject _currentPrefab;
 
-    List<Layer> layers;
-    static int selGridInt = 0;
+    private List<Layer> _layers;
 
-    public int controlID;
+    static int selectGrid = 0;
 
-    bool showAlign = true;
+    private int _controlID;
+
+    private bool _showAlign = true;
 
 
     [MenuItem("Window/MapTool/Open Editor %m", false, 1)]
@@ -76,86 +78,86 @@ public class MapTool : EditorWindow
     private void OnEnable()
     {
         Init();
-        LoadLayers();
+        Load_layers();
 
         SceneView.duringSceneGui += SceneGUI;
     }
     private void OnDisable()
     {
-        Tools.current = currentTool;
+        Tools.current = _currentTool;
         DestroyGizmo();
         SceneView.duringSceneGui -= SceneGUI;
     }
 
     private void DestroyGizmo()
     {
-        DestroyImmediate(GameObject.Find("gizmoTile"));
-        DestroyImmediate(GameObject.Find("gizmoCursor"));
+        DestroyImmediate(gizmoCursor);
+        DestroyImmediate(gizmoTile);
     }
 
     private void OnFocus()
     {
         LoadPrefabs();
         if (Tools.current != Tool.None)
-            currentTool = Tools.current;
+            _currentTool = Tools.current;
 
         Tools.current = Tool.None;
         if (gizmoTile != null)
             gizmoTile.SetActive(true);
         if (gizmoCursor != null)
             gizmoCursor.SetActive(true);
-        IsActivateTools = true;
+        isActivateTools = true;
 
-        if (gizmoTilesr == null && gizmoTile != null)
-            gizmoTilesr = gizmoTile.GetComponent<SpriteRenderer>();
+        if (gizmoTileSpriteRenderer == null && gizmoTile != null)
+            gizmoTileSpriteRenderer = gizmoTile.GetComponent<SpriteRenderer>();
     }
     private void Init()
     {
-        alignId = (int)ALIGN.ALIGN_M;
+        _alignId = (int)ALIGN.Middle;
 
         layerDepthMultiplier = 0.1f;
-        currentTool = Tools.current;
+        _currentTool = Tools.current;
 
-        selGridInt = 0;
-        instance = this;
+        selectGrid = 0;
+        Instance = this;
 
-        alignPos = Vector2.zero;
+        _alignPos = Vector2.zero;
         overWrite = true;
         snapping = true;
-        IsActivateTools = true;
+        isActivateTools = true;
 
-        layers = new List<Layer>();
+        _layers = new List<Layer>();
     }
     private void SceneGUI(SceneView sceneView)
     {
         if (Application.isPlaying)
         {
             DestroyGizmo();
-            IsActivateTools = false;
+            isActivateTools = false;
         }
-        else if (Application.isPlaying == false && IsPlaying == true)
+        else if (Application.isPlaying == false && _isPlaying == true)
         {
             DestroyGizmo();
-            IsActivateTools = true;
+            isActivateTools = true;
         }
 
-        IsPlaying = Application.isPlaying;
+        _isPlaying = Application.isPlaying;
 
         Event currentEvent = Event.current;
 
         if (currentEvent.type == EventType.KeyDown && currentEvent.keyCode == KeyCode.M)
         {
             ActivateTools();
-            IsActivateTools = true;
+            isActivateTools = true;
             Tools.current = Tool.None;
         }
 
         if (Tools.current != Tool.None)
-            IsActivateTools = false;
+            isActivateTools = false;
 
         mousePos = HandleUtility.GUIPointToWorldRay(currentEvent.mousePosition).origin;
 
-        if (IsActivateTools == false)
+        if (isActivateTools == false)
         {
             if (gizmoTile != null)
                 gizmoTile.SetActive(false);
@@ -164,10 +166,10 @@ public class MapTool : EditorWindow
             return;
         }
 
-        controlID = GUIUtility.GetControlID(FocusType.Passive);
+        _controlID = GUIUtility.GetControlID(FocusType.Passive);
         if (currentEvent.type == EventType.Layout)
         {
-            HandleUtility.AddDefaultControl(controlID);
+            HandleUtility.AddDefaultControl(_controlID);
 
         }
 
@@ -181,8 +183,8 @@ public class MapTool : EditorWindow
     {
         EditorGUILayout.BeginVertical();
 
-        scrollPos =
-            EditorGUILayout.BeginScrollView(scrollPos, false, false);
+        _scrollPos =
+            EditorGUILayout.BeginScrollView(_scrollPos, false, false);
         EditorGUILayout.LabelField("Select a prefab");
 
         if (allPrefabs != null && allPrefabs.Count > 0)
@@ -197,10 +199,10 @@ public class MapTool : EditorWindow
                     contents[i] = GUIContent.none;
             }
             EditorGUI.BeginChangeCheck();
-            while (selGridInt >= allPrefabs.Count)
-                selGridInt--;
+            while (selectGrid >= allPrefabs.Count)
+                selectGrid--;
 
-            selGridInt = GUILayout.SelectionGrid(selGridInt, contents, 5,
+            selectGrid = GUILayout.SelectionGrid(selectGrid, contents, 5,
                 GUILayout.Height(50 * (Mathf.Ceil(allPrefabs.Count / (float)5))),
                 GUILayout.Width(this.position.width - 30));
 
@@ -208,57 +210,57 @@ public class MapTool : EditorWindow
             {
                 ChangeGizmoTile();
             }
-            curPrefab = allPrefabs[selGridInt];
+            _currentPrefab = allPrefabs[selectGrid];
         }
 
         EditorGUILayout.Space();
 
         EditorGUI.BeginChangeCheck();
-        curLayer = EditorGUILayout.IntField("Layer", curLayer);
+        currentLayer = EditorGUILayout.IntField("Layer", currentLayer);
 
         snapping = EditorGUILayout.Toggle(new GUIContent("Snapping", "Should tiles snap to the grid"), snapping);
         overWrite = EditorGUILayout.Toggle(new GUIContent("OverWrite", "Do you want to overwrite tile in the same layer and position"), overWrite);
-        showConsole = EditorGUILayout.Toggle(new GUIContent("Show in Console", "Show Whats happening on the console"), showConsole);
+        _showConsole = EditorGUILayout.Toggle(new GUIContent("Show in Console", "Show Whats happening on the console"), _showConsole);
 
         if (EditorGUI.EndChangeCheck())
         {
-            Undo.RecordObject(instance, "Name");
+            Undo.RecordObject(Instance, "Name");
         }
         EditorGUILayout.Space();
 
         EditorGUI.BeginChangeCheck();
-        showAlign = EditorGUILayout.Foldout(showAlign, "Alignment");
+        _showAlign = EditorGUILayout.Foldout(_showAlign, "Alignment");
 
         if (EditorGUI.EndChangeCheck()) { }
 
-        if (showAlign)
+        if (_showAlign)
         {
             EditorGUI.BeginChangeCheck();
 
-            alignId = GUILayout.SelectionGrid(alignId, new string[9], 3, GUILayout.MaxHeight(100), GUILayout.MaxWidth(100));
+            _alignId = GUILayout.SelectionGrid(_alignId, new string[9], 3, GUILayout.MaxHeight(100), GUILayout.MaxWidth(100));
             if (EditorGUI.EndChangeCheck())
             {
-                alignPos = alignId2Vec(alignId);
+                _alignPos = _alignId2Vec(_alignId);
             }
         }
 
         EditorGUI.BeginChangeCheck();
 
-        curPrefab = (GameObject)EditorGUILayout.ObjectField("Currnet Prefab", curPrefab, typeof(GameObject), false);
+        _currentPrefab = (GameObject)EditorGUILayout.ObjectField("Currnet Prefab", _currentPrefab, typeof(GameObject), false);
         if (EditorGUI.EndChangeCheck())
         {
             if (allPrefabs != null)
             {
-                int activePre = allPrefabs.IndexOf(curPrefab);
+                int activePre = allPrefabs.IndexOf(_currentPrefab);
 
                 if (activePre > 0)
                 {
-                    selGridInt = activePre;
+                    selectGrid = activePre;
                 }
             }
 
         }
-        Texture2D previewImage = AssetPreview.GetAssetPreview(curPrefab);
+        Texture2D previewImage = AssetPreview.GetAssetPreview(_currentPrefab);
         GUILayout.Box(previewImage);
 
         EditorGUILayout.EndScrollView();
@@ -266,13 +268,13 @@ public class MapTool : EditorWindow
 
     }
 
-    private void LoadLayers()
+    private void Load_layers()
     {
-        if (layers != null)
-            layers.Clear();
+        if (_layers != null)
+            _layers.Clear();
         foreach (var item in Object.FindObjectsOfType<Layer>())
         {
-            layers.Add(item);
+            _layers.Add(item);
         }
     }
 
@@ -291,8 +293,7 @@ public class MapTool : EditorWindow
         }
 
     }
-
-    private GameObject isObjectAt(Vector2 tilePos, int curLayer)
+    private GameObject isObjectAt(Vector2 tilePos, int currentLayer)
     {
         object[] objects = GameObject.FindObjectsOfType(typeof(GameObject));
         foreach (object item in objects)
@@ -301,25 +302,27 @@ public class MapTool : EditorWindow
 
             ArtificialPosition artPos = gameObject.GetComponent<ArtificialPosition>();
 
-            if (artPos == null)
-            {
-                if (gameObject.transform.localPosition == (Vector3)tilePos &&
-                    (gameObject.name != "gizmoCursor" && gameObject.name != "gizmoTile"))
-                {
-                    if (gameObject.transform.parent != null
-                        && gameObject.transform.parent.GetComponent<Layer>().priority == curLayer)
-                    {
-                        if (gameObject.transform.parent.parent == null)
-                        {
-                            return gameObject;
-                        }
-                    }
-                }
-
-            }
-            else
+            if (artPos != null)
             {
                 if (artPos.position == tilePos && gameObject.name != "gizmoCursor")
+                {
+                    return gameObject;
+                }
+            }
+
+            if (gameObject.transform.localPosition != (Vector3)tilePos)
+            {
+                return null;
+            }
+            if (gameObject.name == "gizmoCursor" || gameObject.name == "gizmoTile")
+            {
+                return null;
+            }
+
+            if (gameObject.transform.parent != null
+                && gameObject.transform.parent.GetComponent<Layer>().priority == currentLayer)
+            {
+                if (gameObject.transform.parent.parent == null)
                 {
                     return gameObject;
                 }
@@ -328,7 +331,6 @@ public class MapTool : EditorWindow
         return null;
     }
 
-   
     private void ActivateTools()
     {
         Tools.current = Tool.None;
@@ -363,7 +365,7 @@ public class MapTool : EditorWindow
                 {
                     if (currentEvent.keyCode == KeyCode.M)
                     {
-                        IsActivateTools = true;
+                        isActivateTools = true;
                         Tools.current = Tool.None;
                     }
                 }
@@ -375,7 +377,7 @@ public class MapTool : EditorWindow
             if (snapping == false)
                 mouseDown = false;
 
-            AddTile(gizmoCursor.transform.position, curLayer);
+            AddTile(gizmoCursor.transform.position, currentLayer);
         }
     }
     private void CursorUpdate()
@@ -429,8 +431,8 @@ public class MapTool : EditorWindow
                 gizmoTile.transform.position = mousePos;
             }
 
-            if (curPrefab != null)
-                gizmoTile.transform.localScale = curPrefab.transform.localScale;
+            if (_currentPrefab != null)
+                gizmoTile.transform.localScale = _currentPrefab.transform.localScale;
         }
     }
 
@@ -452,10 +454,10 @@ public class MapTool : EditorWindow
     }
     void InstantiateTile(Vector2 pos, int layer)
     {
-        if (curPrefab == null)
+        if (_currentPrefab == null)
             return;
 
-        GameObject metaTile = (GameObject)Instantiate(curPrefab);
+        GameObject metaTile = (GameObject)Instantiate(_currentPrefab);
 
         metaTile.transform.SetParent(FindLayer(layer).transform);
         metaTile.transform.localPosition = (Vector3)pos + metaTile.transform.InverseTransformVector(OffsetWeirdTiles());
@@ -465,15 +467,15 @@ public class MapTool : EditorWindow
             ArtificialPosition artPos = metaTile.AddComponent<ArtificialPosition>();
             artPos.position = pos;
             artPos.offset = artPos.position - (Vector2)metaTile.transform.position;
-            artPos.layer = curLayer;
+            artPos.layer = currentLayer;
         }
         Undo.RegisterCreatedObjectUndo(metaTile, "Created go");
     }
 
     Vector3 OffsetWeirdTiles()
     {
-        if (gizmoTilesr != null && gizmoTilesr.sprite != null && (gizmoTilesr.sprite.bounds.extents.x != 0.5f || gizmoTilesr.sprite.bounds.extents.y != 0.5f))
-            return new Vector3(-alignPos.x * (gizmoTilesr.sprite.bounds.extents.x - 0.5f), alignPos.y * (gizmoTilesr.sprite.bounds.extents.y - 0.5f), 0);
+        if (gizmoTileSpriteRenderer != null && gizmoTileSpriteRenderer.sprite != null && (gizmoTileSpriteRenderer.sprite.bounds.extents.x != 0.5f || gizmoTileSpriteRenderer.sprite.bounds.extents.y != 0.5f))
+            return new Vector3(-_alignPos.x * (gizmoTileSpriteRenderer.sprite.bounds.extents.x - 0.5f), _alignPos.y * (gizmoTileSpriteRenderer.sprite.bounds.extents.y - 0.5f), 0);
 
         return Vector3.zero;
     }
@@ -484,11 +486,11 @@ public class MapTool : EditorWindow
 
         GameObject layer = null;
 
-        if (layers.Count == 0)
+        if (_layers.Count == 0)
         {
             foreach (Layer item in Object.FindObjectsOfType<Layer>())
             {
-                layers.Add(item);
+                _layers.Add(item);
             }
         }
         foreach (Layer item in Object.FindObjectsOfType<Layer>())
@@ -511,19 +513,19 @@ public class MapTool : EditorWindow
         }
 
         int i;
-        for (i = 0; i < layers.Count && currentLayer > layers[i].priority; i++) { }
+        for (i = 0; i < _layers.Count && currentLayer > _layers[i].priority; i++) { }
 
-        layers.Insert(i, layer.GetComponent<Layer>());
+        _layers.Insert(i, layer.GetComponent<Layer>());
 
-        for (int j = 0; j < layers.Count; j++)
+        for (int j = 0; j < _layers.Count; j++)
         {
-            for (int k = 0; k < layers.Count - 1; k++)
+            for (int k = 0; k < _layers.Count - 1; k++)
             {
-                if (layers[k].transform.GetSiblingIndex() > layers[k + 1].transform.GetSiblingIndex())
+                if (_layers[k].transform.GetSiblingIndex() > _layers[k + 1].transform.GetSiblingIndex())
                 {
-                    int siblingindex = layers[k].transform.GetSiblingIndex();
-                    layers[k].transform.SetSiblingIndex(layers[k + 1].transform.GetSiblingIndex());
-                    layers[k + 1].transform.SetSiblingIndex(siblingindex);
+                    int siblingindex = _layers[k].transform.GetSiblingIndex();
+                    _layers[k].transform.SetSiblingIndex(_layers[k + 1].transform.GetSiblingIndex());
+                    _layers[k + 1].transform.SetSiblingIndex(siblingindex);
                 }
             }
         }
@@ -535,15 +537,15 @@ public class MapTool : EditorWindow
 
         if (gizmoTile != null)
             DestroyImmediate(gizmoTile);
-        if (allPrefabs != null && allPrefabs.Count > selGridInt && allPrefabs[selGridInt] != null)
-            gizmoTile = Instantiate(allPrefabs[selGridInt]) as GameObject;
+        if (allPrefabs != null && allPrefabs.Count > selectGrid && allPrefabs[selectGrid] != null)
+            gizmoTile = Instantiate(allPrefabs[selectGrid]) as GameObject;
         else
             gizmoTile = new GameObject();
 
         gizmoTile.name = "gizmoTile";
         
-        if (gizmoTilesr == null)
-            gizmoTilesr = gizmoTile.GetComponent<SpriteRenderer>();
+        if (gizmoTileSpriteRenderer == null)
+            gizmoTileSpriteRenderer = gizmoTile.GetComponent<SpriteRenderer>();
 
         RecorrenciaSpriteRender(gizmoTile);
     }
@@ -563,7 +565,7 @@ public class MapTool : EditorWindow
         }
     }
 
-    Vector2 alignId2Vec(int alignIndex)
+    Vector2 _alignId2Vec(int alignIndex)
     {
         Vector2 aux;
 

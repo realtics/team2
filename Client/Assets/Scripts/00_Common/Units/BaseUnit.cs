@@ -9,8 +9,18 @@ public enum UnitJumpState
     JumpDown = -1,
 }
 
+public enum ExtraMoveDirection
+{
+    Horizontal = 0,
+    Vertical,
+}
+
 public class BaseUnit : MonoBehaviour
 {
+    private const float RunSpeedMultiple = 2.0f;
+    private const float JumpGravity = 0.01f;
+    private const float JumpPower = 0.25f;
+
     protected Animator _animator;
     protected SpriteRenderer _renderer;
     protected Rigidbody2D _rgdBody;
@@ -51,6 +61,9 @@ public class BaseUnit : MonoBehaviour
     public bool IsHit { get { return _isHit; } }
     public float Forward { get { return _renderer.flipX ? -1 : 1; } }
     public float CurAnimTime { get { return _animator.GetCurrentAnimatorStateInfo(0).normalizedTime; } }
+    public bool IsInTranstion { get { return _animator.IsInTransition(0); } }
+
+    public Vector3 OriginPos { get { return _avatar.position; } }
 
     protected virtual void Awake()
     {
@@ -70,7 +83,7 @@ public class BaseUnit : MonoBehaviour
 
     protected virtual void Update()
     {
-
+        FindObjectsOfType<GameObject>();
     }
 
     protected virtual void FixedUpdate()
@@ -87,7 +100,7 @@ public class BaseUnit : MonoBehaviour
         velocity.x = _axisHorizontal * _speedHorizontal;
 
         if (_isRun)
-            velocity.x *= 2.0f;
+            velocity.x *= RunSpeedMultiple;
 
         velocity.x += _extraSpeedHorizontal;
 
@@ -106,7 +119,7 @@ public class BaseUnit : MonoBehaviour
         if (_jumpState != UnitJumpState.None)
         {
             _height += _jumpValue;
-            _jumpValue -= 0.01f;
+            _jumpValue -= JumpGravity;
 
             SetJumpDown();
             CheckGroundAfterJump();
@@ -165,7 +178,7 @@ public class BaseUnit : MonoBehaviour
             return false;
 
         _jumpState = UnitJumpState.JumpUp;
-        _jumpValue = 0.25f;
+        _jumpValue = JumpPower;
         return true;
     }
 
@@ -226,9 +239,9 @@ public class BaseUnit : MonoBehaviour
         return true;
     }
 
-    public void MoveUnit(float power, float duration, int direction)
+    public void MoveUnit(float power, float duration, ExtraMoveDirection direction)
     {
-        if (direction > 0)
+        if (direction == ExtraMoveDirection.Horizontal)
             _extraSpeedHorizontal = power * Forward;
         else
             _extraSpeedVertical = power * Forward;
@@ -250,5 +263,15 @@ public class BaseUnit : MonoBehaviour
             _extraMoveDuration = 0.0f;
             return;
         }
+    }
+
+    public bool IsAnimationPlaying()
+    {
+        return _animator.GetCurrentAnimatorStateInfo(0).normalizedTime <= 0.95f;
+    }
+
+    public virtual void OnHit(float damage)
+    {
+
     }
 }

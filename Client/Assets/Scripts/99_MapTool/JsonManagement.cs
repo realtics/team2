@@ -38,22 +38,24 @@ public class JsonManagement
             AddObject(obj);
         }
 
+        string jsonData = ObjectToJson(_ObjectList[0]);
 
-        string jsonData = ObjectToJson(_ObjectList);
-
-        CreateJsonFile(Application.dataPath, "Test", jsonData);
+        CreateJsonFile(Application.dataPath, "Test1", jsonData);
     }
-    public void JsonLoad(string fileName)
+    public T JsonLoad<T>(string fileName)
     {
-
-
-
+        FileStream fileStream = new FileStream(string.Format("{0}/{1}.json", Application.dataPath+"\\Map\\", fileName), FileMode.Open);
+        byte[] data = new byte[fileStream.Length];
+        fileStream.Read(data, 0, data.Length);
+        fileStream.Close();
+        string jsonData = Encoding.UTF8.GetString(data);
+        return JsonUtility.FromJson<T>(jsonData);
     }
     public JsonData GetObject(int index)
     {
         return _ObjectList[index];
     }
-    //public JsonData GetObject(string objectName)
+    //public JsonData FindObject(string objectName)
     //{
     //    // ing..
 
@@ -81,7 +83,7 @@ public class JsonManagement
     {
         //Object parentObject = PrefabUtility.GetCorrespondingObjectFromOriginalSource(obj);
         //string path = AssetDatabase.GetAssetPath(parentObject);
-        string path = "Object\\farBackground";
+        string path = "Object\\far2Background";
         Debug.Log(path);
 
         JsonData data = new JsonData(path, obj.transform.position);

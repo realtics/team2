@@ -31,6 +31,10 @@ public class Monster : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //_state.Update();
+    }
+    private void FixedUpdate()
+    {
         _state.Update();
     }
 
@@ -82,5 +86,10 @@ public class Monster : MonoBehaviour
         _state.InitialSetting(this, MoveState.GetInstance);
         // 타겟 null 설정
         target = null;
+    }
+
+    public void OnHit()
+    {
+        Debug.Log("OnHit");
     }
 }

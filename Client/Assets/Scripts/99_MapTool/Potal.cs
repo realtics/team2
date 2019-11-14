@@ -16,14 +16,16 @@ public class Potal : MonoBehaviour
 
     public ARROW arrow;
     public string crossDungenName;
-    public bool IsPlayerEnter;
+
+    private bool _isPlayerEnter;
+    public bool IsPlayerEnter { get { return _isPlayerEnter; } }
 
     bool isPotalBlock;
 
     public Potal()
     {
         isPotalBlock = false;
-        IsPlayerEnter = false;
+        _isPlayerEnter = false;
         
     }
 
@@ -51,12 +53,12 @@ public class Potal : MonoBehaviour
     }
     private void PlayerEnterPotal()
     {
-        IsPlayerEnter = true;
+        _isPlayerEnter = true;
     }
     
     public void Teardown()
     {
         isPotalBlock = false;
-        IsPlayerEnter = false;
+        _isPlayerEnter = false;
     }
 }

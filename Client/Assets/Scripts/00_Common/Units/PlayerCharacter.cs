@@ -19,14 +19,22 @@ public class PlayerCharacter : MonoBehaviour
 
     public void SetAxis(float horizontal, float vertical)
     {
-        if (!_movement.IsAttack)
-        {
-            if (horizontal < 0.0f)
-                _movement.SetFlipX(true);
-            else if (horizontal > 0.0f)
-                _movement.SetFlipX(false);
-        }
+        if (horizontal < 0.0f)
+            SetFlipX(true);
+        else if (horizontal > 0.0f)
+            SetFlipX(false);
+
         _movement.SetAxis(horizontal, vertical);
+    }
+
+    private void SetFlipX(bool flip)
+    {
+        if (_movement.IsAttack)
+            return;
+        if (_movement.IsInTranstion)
+            return;
+
+        _movement.SetFlipX(flip);
     }
 
     public void SetRun()

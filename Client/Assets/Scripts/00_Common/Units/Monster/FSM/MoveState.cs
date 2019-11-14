@@ -1,9 +1,4 @@
-﻿/*
- * MoveState.cs
- * 몬스터이동 상태
- */
-
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -18,14 +13,21 @@ public class MoveState : FSMState<Monster>
         }
     }
 
-    private float _resetTime = 3f;
-    private float _currentTime;
-
-    private int   _movementFlag = 0; //0:Idle , 1:Left, 2:Right, 3:Up, 4:Down
-
     static MoveState() { }
     private MoveState() { }
 
+    private enum MovementState
+    {
+        Idle = 0,
+        Left = 1,
+        Right = 2,
+    }
+
+    private float _resetTime = 3f;
+    private float _currentTime;
+
+    private MovementState _moveMentState;
+    
     public override void EnterState(Monster monster)
     {
         Debug.Log("Enter MoveState");
@@ -75,13 +77,13 @@ public class MoveState : FSMState<Monster>
             SetRandDirection(monster);
             Vector3 direction = Vector3.zero;
 
-            if (_movementFlag == 1)
+            if (_moveMentState == MovementState.Left)
             {
                 direction = Vector3.left;
                 monster.transform.localScale = new Vector3(1, 1, 1);
             }
 
-            else if (_movementFlag == 2)
+            else if (_moveMentState == MovementState.Right)
             {
                 direction = Vector3.right;
                 monster.transform.localScale = new Vector3(-1, 1, 1);
@@ -94,7 +96,7 @@ public class MoveState : FSMState<Monster>
     public override void ExitState(Monster monster)
     {
         Debug.Log("Exit AttacState");
-        _movementFlag = 0;
+        _moveMentState = MovementState.Idle;
         monster.animator.SetBool("isMoving", false);
     }
 
@@ -105,9 +107,9 @@ public class MoveState : FSMState<Monster>
         _currentTime += Time.smoothDeltaTime;
         if (_currentTime >= _resetTime)
         {
-            _movementFlag = Random.Range(0, 3);
+            _moveMentState = (MovementState) Random.Range((int)MovementState.Idle, (int)MovementState.Right+1);
 
-            if (_movementFlag == 0)
+            if (_moveMentState == MovementState.Idle)
                 monster.animator.SetBool("isMoving", false);
             else
                 monster.animator.SetBool("isMoving", true);

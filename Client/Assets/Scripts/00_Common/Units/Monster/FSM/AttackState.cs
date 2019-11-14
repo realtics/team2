@@ -1,11 +1,4 @@
-﻿/*
- * AttackState.cs
- * 몬스터 기본공격
- * 
- * ## 스킬공격이랑 구분을 해야할까
- */
-
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -44,8 +37,6 @@ public class AttackState : FSMState<Monster>
             monster.animator.SetBool("isAttacking", false);
            
             monster.ChangeState(MoveState.GetInstance);
-           
-
         }
     }
 

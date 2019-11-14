@@ -6,7 +6,7 @@ using UnityEditor;
 public class DungenMamager : MonoBehaviour
 {
     [SerializeField]
-    private GameObject[] _potals;
+    private Potal[] _potals;
     private Potal _currentPotal;
     private ARROW _arrow;
 
@@ -15,22 +15,21 @@ public class DungenMamager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _potals = GameObject.FindGameObjectsWithTag("Potal");
+        FIndPotals();
         _jsonManagement = new JsonManagement();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(IsPotalsActiveAndCurrentPotal())
+        if(SetActiveCurrentPotal())
         {
-            Debug.Log("Active");
+            DestroyAllFieldObject();
 
             LoadPotalDungen();
 
             TeardownPotals();
         }
-
     }
     public void SaveDungen()
     {
@@ -40,28 +39,38 @@ public class DungenMamager : MonoBehaviour
     }
     private void LoadPotalDungen()
     {
-        _jsonManagement.JsonLoad(_currentPotal.crossDungenName);
+        JsonData data = _jsonManagement.JsonLoad<JsonData>(_currentPotal.crossDungenName);
+        GameObject obj = (GameObject)Resources.Load(data._filePath);
+        obj.transform.position = data._position;
+        Instantiate(obj);
     }
 
-    private bool IsPotalsActiveAndCurrentPotal()
+    private void FIndPotals()
+    {
+       _potals = FindObjectsOfType<Potal>();
+    }
+    private bool SetActiveCurrentPotal()
     {
         for (int i = 0; i < _potals.Length; i++)
         {
-            if (_potals[i].GetComponent<Potal>().IsPlayerEnter)
+            if (_potals[i].IsPlayerEnter)
             {
-                _currentPotal = _potals[i].GetComponent<Potal>();
-
+                _currentPotal = _potals[i];
                 return true;
             }
         }
         return false;
     }
+
     private void TeardownPotals()
     {
         for (int i = 0; i < _potals.Length; i++)
         {
-            _potals[i].GetComponent<Potal>().Teardown();
+            _potals[i].Teardown();
         }
     }
-
+    private void DestroyAllFieldObject()
+    {
+        
+    }
 }

@@ -11,9 +11,6 @@ public class ArtificialPosition : MonoBehaviour
     public int layer;
     public Vector2 offset;
 
-
-
-
     void Update()
     {
         if (Application.isPlaying)
