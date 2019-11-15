@@ -26,7 +26,7 @@ public class DungenMamager : MonoBehaviour
         {
             DestroyAllFieldObject();
 
-            LoadPotalDungen();
+            LoadPotalDungeon();
 
             TeardownPotals();
         }
@@ -37,11 +37,11 @@ public class DungenMamager : MonoBehaviour
         _jsonManagement.JsonSave();
         
     }
-    private void LoadPotalDungen()
+    private void LoadPotalDungeon()
     {
         JsonData data = _jsonManagement.JsonLoad<JsonData>(_currentPotal.crossDungenName);
-        GameObject obj = (GameObject)Resources.Load(data._filePath);
-        obj.transform.position = data._position;
+        GameObject obj = (GameObject)Resources.Load(data.filePath);
+        obj.transform.position = data.position;
         Instantiate(obj);
     }
 

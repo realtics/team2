@@ -36,7 +36,7 @@ public class JsonManagement
         {
             //GameObject obj = (GameObject)Resources.Load(data._filePath);
             GameObject obj = (GameObject)Resources.Load("Object\\StoneBar");
-            obj.transform.position = data._position;
+            obj.transform.position = data.position;
 
             GameObject.Instantiate(obj);
             

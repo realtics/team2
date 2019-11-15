@@ -16,10 +16,10 @@ public class StateMachine<T>
     }
 
     // 상태 변경
-    public void ChangeState(FSMState<T> _NewState)
+    public void ChangeState(FSMState<T> newState)
     {
         // 같은 상태를 변환하려 한다면 나감
-        if (_NewState == _currentState)
+        if (newState == _currentState)
         {
             return;
         }
@@ -32,7 +32,7 @@ public class StateMachine<T>
             _currentState.ExitState(_owner);
         }
 
-        _currentState = _NewState;
+        _currentState = newState;
 
         // 새로 적용된 상태가 null이 아니면 실행
         if (_currentState != null)
@@ -42,10 +42,10 @@ public class StateMachine<T>
     }
 
     // 초기상태설정
-    public void InitialSetting(T owner, FSMState<T> _InitialState)
+    public void InitialSetting(T owner, FSMState<T> initialState)
     {
         _owner = owner;
-        ChangeState(_InitialState);
+        ChangeState(initialState);
     }
 
     // 상태 업데이트

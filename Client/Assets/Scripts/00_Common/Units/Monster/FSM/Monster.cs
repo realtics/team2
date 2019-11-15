@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Monster : MonoBehaviour
 {
-    public float attackRange = 2f;
+    public float attackRange =3.8f;
     public float attackSpeed = 1.5f;
 
     public float chaseCancleTime = 5.0f;
@@ -17,25 +17,40 @@ public class Monster : MonoBehaviour
 
     private StateMachine<Monster> _state = null;
 
+    private Transform _smashHitBox;
+    private float _smashAttackTimer;
+    private float _smashAttackTime = 0.5f;
+
+
     private void Awake()
     {
         animator = GetComponentInChildren<Animator>();
     }
 
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
+        _smashHitBox = transform.Find("SmashHitBox");
+
         ResetState();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        //_state.Update();
+
     }
+
     private void FixedUpdate()
     {
         _state.Update();
+
+        if (IsActiveSmashHitBox())
+        {
+            _smashAttackTimer += Time.deltaTime;
+            if (_smashAttackTimer >= _smashAttackTime)
+            {
+                InactiveSmashHitBox();
+            }
+        }
     }
 
     // 상태변경
@@ -48,21 +63,11 @@ public class Monster : MonoBehaviour
     {
         if (other.transform.tag == "Player")
         {
-            Debug.Log("Player Detect.");
+            //Debug.Log("Player Detect.");
             target = other.transform;
 
-            //if (CheckRange())
-            //{
-            //    Debug.Log("Attack.");
-            //    ChangeState(AttackState.GetInstance);
-              
-            //}
-            //else
-            //{
-            //    Debug.Log("Chsing.");
-            //    animator.SetBool("isMoving", true);
-            //    ChangeState(MoveState.GetInstance);
-            //}
+            //TODO: 피격
+           
         }
         else
         {
@@ -72,7 +77,8 @@ public class Monster : MonoBehaviour
 
     public bool CheckRange()
     {
-        if ((Mathf.Abs(target.position.x - transform.position.x) < attackRange) && (Mathf.Abs(target.position.y - transform.position.y) < attackRange / 4))
+        if ((Mathf.Abs(target.position.x - transform.position.x) < attackRange) &&
+            (Mathf.Abs(target.position.y - transform.position.y) < attackRange / 4))
         {
             return true;
         }
@@ -82,14 +88,32 @@ public class Monster : MonoBehaviour
     public void ResetState()
     {
         _state = new StateMachine<Monster>();
-        // 초기 상태 설정
         _state.InitialSetting(this, MoveState.GetInstance);
-        // 타겟 null 설정
+    
         target = null;
     }
 
     public void OnHit()
     {
         Debug.Log("OnHit");
+    }
+
+    public void ActiveSmashHitBox()
+    {
+        _smashAttackTimer = 0.0f;
+        _smashHitBox.gameObject.SetActive(true);
+    }
+
+    public void InactiveSmashHitBox()
+    {
+        _smashHitBox.gameObject.SetActive(false);
+    }
+
+    private bool IsActiveSmashHitBox()
+    {
+        if (_smashHitBox.gameObject.activeSelf == true)
+            return true;
+        else
+            return false;
     }
 }

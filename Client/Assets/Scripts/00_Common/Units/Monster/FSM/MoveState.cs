@@ -30,19 +30,18 @@ public class MoveState : FSMState<Monster>
     
     public override void EnterState(Monster monster)
     {
-        Debug.Log("Enter MoveState");
+        //Debug.Log("Enter MoveState");
         _currentTime = _resetTime;
     }
 
     public override void UpdateState(Monster monster)
     {
-        //타겟 유무 확인
         if (monster.target != null)
         {
             monster.animator.SetBool("isMoving", true);
             if (!monster.CheckRange())
             {
-                //추적시간을 초과하면 타겟을 잃음
+                //FIXME : 추적시간 초과 함수화
                 monster.chaseTime += Time.deltaTime;
                 if (monster.chaseTime >= monster.chaseCancleTime)
                 {
@@ -51,7 +50,7 @@ public class MoveState : FSMState<Monster>
                     return;
                 }
 
-                //방향설정
+                //FIXME : 추적 함수화
                 Vector3 direction = monster.target.position - monster.transform.position;
                 direction.Normalize();
 
@@ -60,9 +59,12 @@ public class MoveState : FSMState<Monster>
                 else
                     monster.transform.localScale = new Vector3(1, 1, 1);
 
-                //monster.transform.position += direction * Time.smoothDeltaTime * monster.moveSpeed;
                 direction.x *= monster.moveSpeed;
                 direction.y *= (monster.moveSpeed / 2);
+
+                if ((Mathf.Abs(monster.target.position.x - monster.transform.position.x) <= monster.attackRange))
+                    direction.x = 0;
+
                 monster.transform.position += direction * Time.smoothDeltaTime;
             }
             else
@@ -72,9 +74,9 @@ public class MoveState : FSMState<Monster>
         }
         else
         {
-            //타겟이 없을 때는 임의의 방향으로 방황함
-            //방향재설정
             SetRandDirection(monster);
+
+            //FIXME :: 함수화
             Vector3 direction = Vector3.zero;
 
             if (_moveMentState == MovementState.Left)
@@ -95,14 +97,12 @@ public class MoveState : FSMState<Monster>
 
     public override void ExitState(Monster monster)
     {
-        Debug.Log("Exit AttacState");
+        //Debug.Log("Exit AttacState");
         _moveMentState = MovementState.Idle;
         monster.animator.SetBool("isMoving", false);
     }
 
-
-    // ResetTime 때 마다 임의의 방향으로 설정
-    void SetRandDirection(Monster monster)
+    private void SetRandDirection(Monster monster)
     {
         _currentTime += Time.smoothDeltaTime;
         if (_currentTime >= _resetTime)
@@ -114,7 +114,6 @@ public class MoveState : FSMState<Monster>
             else
                 monster.animator.SetBool("isMoving", true);
 
-            // 시간 재설정
             _resetTime = Random.Range(1f, 4f);
             _currentTime = 0f;
         }

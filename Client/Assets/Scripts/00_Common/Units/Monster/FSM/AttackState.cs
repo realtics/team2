@@ -20,8 +20,8 @@ public class AttackState : FSMState<Monster>
 
     public override void EnterState(Monster monster)
     {
-        Debug.Log("Enter AttackState");
-        //타겟 유무 확인
+        //Debug.Log("Enter AttackState");
+   
         if (monster.target == null)
         {
             return;
@@ -42,6 +42,6 @@ public class AttackState : FSMState<Monster>
 
     public override void ExitState(Monster monster)
     {
-        Debug.Log("Exit AttacState");
+        //Debug.Log("Exit AttacState");
     }
 }

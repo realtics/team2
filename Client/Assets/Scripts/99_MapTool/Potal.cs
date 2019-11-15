@@ -12,7 +12,7 @@ public enum ARROW
 
 public class Potal : MonoBehaviour
 {
-    SpriteRenderer spriteRenderer;
+    private SpriteRenderer _spriteRenderer;
 
     public ARROW arrow;
     public string crossDungenName;
@@ -20,11 +20,11 @@ public class Potal : MonoBehaviour
     private bool _isPlayerEnter;
     public bool IsPlayerEnter { get { return _isPlayerEnter; } }
 
-    bool isPotalBlock;
+    private bool _isPotalBlock;
 
     public Potal()
     {
-        isPotalBlock = false;
+        _isPotalBlock = false;
         _isPlayerEnter = false;
         
     }
@@ -32,7 +32,7 @@ public class Potal : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -42,14 +42,14 @@ public class Potal : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!isPotalBlock)
+        if (!_isPotalBlock)
         {
             PlayerEnterPotal();
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        isPotalBlock = false;
+        _isPotalBlock = false;
     }
     private void PlayerEnterPotal()
     {
@@ -58,7 +58,7 @@ public class Potal : MonoBehaviour
     
     public void Teardown()
     {
-        isPotalBlock = false;
+        _isPotalBlock = false;
         _isPlayerEnter = false;
     }
 }

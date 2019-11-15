@@ -34,7 +34,6 @@ public class BaseUnit : MonoBehaviour
     private UnitJumpState _jumpState;
     private float _jumpValue;
 
-    [SerializeField]
     private bool _isAttack;
     private bool _isRun;
 
@@ -272,6 +271,6 @@ public class BaseUnit : MonoBehaviour
 
     public virtual void OnHit(float damage)
     {
-
+        Debug.Log("UnitOnHit");
     }
 }

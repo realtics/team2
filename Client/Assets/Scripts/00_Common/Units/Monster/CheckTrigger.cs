@@ -4,16 +4,11 @@ using UnityEngine;
 
 public class CheckTrigger : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private void OnTriggerStay2D(Collider2D other)
     {
-        
+        if (other.tag.Contains("Player"))
+        {
+            other.transform.root.GetComponent<BaseUnit>().OnHit(100);
+        }
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
 }

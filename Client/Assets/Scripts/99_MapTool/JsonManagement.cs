@@ -7,30 +7,30 @@ using System.Text;
 
 public class JsonData
 {
-    public string _filePath;
-    public Vector3 _position;
+    public string filePath;
+    public Vector3 position;
 
     public JsonData(string path, Vector3 pos)
     {
-        _filePath = path;
-        _position = pos;
+        filePath = path;
+        position = pos;
     }
 
 }
 
 public class JsonManagement
 {
-    List<JsonData> _ObjectList;
+    List<JsonData> _objectList;
 
 
     public JsonManagement()
     {
-        _ObjectList = new List<JsonData>();
+        _objectList = new List<JsonData>();
     }
 
     public void JsonSave()
     {
-        _ObjectList.Clear();
+        _objectList.Clear();
 
         foreach (GameObject obj in GameObject.FindGameObjectsWithTag("FieldObject"))
         {
@@ -38,7 +38,7 @@ public class JsonManagement
             AddObject(obj);
         }
 
-        string jsonData = ObjectToJson(_ObjectList[0]);
+        string jsonData = ObjectToJson(_objectList[0]);
 
         CreateJsonFile(Application.dataPath, "Test1", jsonData);
     }
@@ -53,7 +53,7 @@ public class JsonManagement
     }
     public JsonData GetObject(int index)
     {
-        return _ObjectList[index];
+        return _objectList[index];
     }
     //public JsonData FindObject(string objectName)
     //{
@@ -68,11 +68,11 @@ public class JsonManagement
     //}
     public void InstObject()
     {
-        foreach (JsonData data in _ObjectList)
+        foreach (JsonData data in _objectList)
         {
             //GameObject obj = (GameObject)Resources.Load(data._filePath);
             GameObject obj = (GameObject)Resources.Load("Object\\StoneBar");
-            obj.transform.position = data._position;
+            obj.transform.position = data.position;
 
             GameObject.Instantiate(obj);
 
@@ -87,20 +87,20 @@ public class JsonManagement
         Debug.Log(path);
 
         JsonData data = new JsonData(path, obj.transform.position);
-        _ObjectList.Add(data);
+        _objectList.Add(data);
     }
 
-    string ObjectToJson(object obj)
+    private string ObjectToJson(object obj)
     {
         return JsonUtility.ToJson(obj);
     }
 
-    T JsonToOject<T>(string jsonData)
+    private T JsonToOject<T>(string jsonData)
     {
         return JsonUtility.FromJson<T>(jsonData);
     }
 
-    void CreateJsonFile(string createPath, string fileName, string jsonData)
+    private void CreateJsonFile(string createPath, string fileName, string jsonData)
     {
         FileStream fileStream = new FileStream(string.Format("{0}/{1}.json", createPath, fileName), FileMode.Create);
         byte[] data = Encoding.UTF8.GetBytes(jsonData);
