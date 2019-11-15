@@ -3,34 +3,35 @@
 
 
 Session::Session(int nSessionID, boost::asio::io_context& io_service, ChatServer* pServer)
-	: m_Socket(io_service)
-	, m_nSessionID(nSessionID)
-	, m_pServer(pServer)
+	: _Socket(io_service)
+	, _nSessionID(nSessionID)
+	, _pServer(pServer)
 {
 }
 
 Session::~Session()
 {
-	while (m_SendDataQueue.empty() == false)
+	while (_SendDataQueue.empty() == false)
 	{
-		delete[] m_SendDataQueue.front();
-		m_SendDataQueue.pop_front();
+		delete[] _SendDataQueue.front();
+		_SendDataQueue.pop_front();
 	}
 }
 
 void Session::Init()
 {
-	m_nPacketBufferMark = 0;
+	_nPacketBufferMark = 0;
 }
 
 void Session::PostReceive()
 {
-	m_Socket.async_read_some
+	_Socket.async_read_some
 	(
-		boost::asio::buffer(m_ReceiveBuffer),
-		boost::bind(&Session::handle_receive, this,
-			boost::asio::placeholders::error,
-			boost::asio::placeholders::bytes_transferred)
+		boost::asio::buffer(_ReceiveBuffer),
+							boost::bind(&Session::handle_receive,
+										this,
+										boost::asio::placeholders::error,
+										boost::asio::placeholders::bytes_transferred)
 
 	);
 }
@@ -44,35 +45,35 @@ void Session::PostSend(const bool bImmediately, const int nSize, char* pData)
 		pSendData = new char[nSize];
 		memcpy(pSendData, pData, nSize);
 
-		m_SendDataQueue.push_back(pSendData);
+		_SendDataQueue.push_back(pSendData);
 	}
 	else
 	{
 		pSendData = pData;
 	}
-
-
-
-	if (bImmediately == false && m_SendDataQueue.size() > 1)
+	
+	if (bImmediately == false && _SendDataQueue.size() > 1)
 	{
 		return;
 	}
 
-	boost::asio::async_write(m_Socket, boost::asio::buffer(pSendData, nSize),
-		boost::bind(&Session::handle_write, this,
-			boost::asio::placeholders::error,
-			boost::asio::placeholders::bytes_transferred)
+	boost::asio::async_write(_Socket,
+							boost::asio::buffer(pSendData, nSize),
+							boost::bind(&Session::handle_write,
+										this,
+										boost::asio::placeholders::error,
+										boost::asio::placeholders::bytes_transferred)
 	);
 }
 
 void Session::handle_write(const boost::system::error_code& error, size_t bytes_transferred)
 {
-	delete[] m_SendDataQueue.front();
-	m_SendDataQueue.pop_front();
+	delete[] _SendDataQueue.front();
+	_SendDataQueue.pop_front();
 
-	if (m_SendDataQueue.empty() == false)
+	if (_SendDataQueue.empty() == false)
 	{
-		char* pData = m_SendDataQueue.front();
+		char* pData = _SendDataQueue.front();
 
 		PACKET_HEADER* pHeader = (PACKET_HEADER*)pData;
 
@@ -93,13 +94,13 @@ void Session::handle_receive(const boost::system::error_code& error, size_t byte
 			std::cout << "error No: " << error.value() << " error Message: " << error.message() << std::endl;
 		}
 
-		m_pServer->CloseSession(m_nSessionID);
+		_pServer->CloseSession(_nSessionID);
 	}
 	else
 	{
-		memcpy(&m_PacketBuffer[m_nPacketBufferMark], m_ReceiveBuffer.data(), bytes_transferred);
+		memcpy(&_PacketBuffer[_nPacketBufferMark], _ReceiveBuffer.data(), bytes_transferred);
 
-		int nPacketData = m_nPacketBufferMark + bytes_transferred;
+		int nPacketData = _nPacketBufferMark + bytes_transferred;
 		int nReadData = 0;
 
 		while (nPacketData > 0)
@@ -109,11 +110,11 @@ void Session::handle_receive(const boost::system::error_code& error, size_t byte
 				break;
 			}
 
-			PACKET_HEADER* pHeader = (PACKET_HEADER*)&m_PacketBuffer[nReadData];
+			PACKET_HEADER* pHeader = (PACKET_HEADER*)&_PacketBuffer[nReadData];
 
 			if (pHeader->nSize <= nPacketData)
 			{
-				m_pServer->ProcessPacket(m_nSessionID, &m_PacketBuffer[nReadData]);
+				_pServer->ProcessPacket(_nSessionID, &_PacketBuffer[nReadData]);
 
 				nPacketData -= pHeader->nSize;
 				nReadData += pHeader->nSize;
@@ -127,12 +128,11 @@ void Session::handle_receive(const boost::system::error_code& error, size_t byte
 		if (nPacketData > 0)
 		{
 			char TempBuffer[MAX_RECEIVE_BUFFER_LEN] = { 0, };
-			memcpy(&TempBuffer[0], &m_PacketBuffer[nReadData], nPacketData);
-			memcpy(&m_PacketBuffer[0], &TempBuffer[0], nPacketData);
+			memcpy(&TempBuffer[0], &_PacketBuffer[nReadData], nPacketData);
+			memcpy(&_PacketBuffer[0], &TempBuffer[0], nPacketData);
 		}
 
-		m_nPacketBufferMark = nPacketData;
-
+		_nPacketBufferMark = nPacketData;
 
 		PostReceive();
 	}

@@ -1,5 +1,6 @@
 #pragma once 
 
+
 const unsigned short PORT_NUMBER = 31452;
 
 const int MAX_RECEIVE_BUFFER_LEN = 512;
@@ -7,11 +8,16 @@ const int MAX_RECEIVE_BUFFER_LEN = 512;
 const int MAX_NAME_LEN = 17;
 const int MAX_MESSAGE_LEN = 129;
 
+
+
+
 struct PACKET_HEADER
 {
 	short nID;
 	short nSize;
 };
+
+
 
 //  ÆÐÅ¶
 const short REQ_IN = 1;
@@ -25,6 +31,7 @@ const short REQ_CHAT = 6;
 
 const short NOTICE_CHAT = 7;
 // PKT_NOTICE_CHAT
+
 
 struct PKT_REQ_IN : public PACKET_HEADER
 {
