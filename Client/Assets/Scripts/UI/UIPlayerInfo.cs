@@ -4,8 +4,8 @@ using System.Collections;
 
 public class UIPlayerInfo : MonoBehaviour
 {
-    private PlayerStat _hpBar;
-    private PlayerStat _mpBar;
+    private UIPlayerStat _hpBar;
+    private UIPlayerStat _mpBar;
     private Text _level;
 
     // temp value.
@@ -14,8 +14,8 @@ public class UIPlayerInfo : MonoBehaviour
 
     void Awake()
     {
-        _hpBar = transform.Find("Hp").transform.Find("PlayerHpBar").GetComponent<PlayerStat>();
-        _mpBar = transform.Find("Mp").transform.Find("PlayerMpBar").GetComponent<PlayerStat>();
+        _hpBar = transform.Find("Hp").transform.Find("PlayerHpBar").GetComponent<UIPlayerStat>();
+        _mpBar = transform.Find("Mp").transform.Find("PlayerMpBar").GetComponent<UIPlayerStat>();
     }
 
     // Use this for initialization

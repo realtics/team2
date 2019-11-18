@@ -2,7 +2,7 @@
 using UnityEngine.UI;
 using System.Collections;
 
-public class Stat : MonoBehaviour
+public class UIStat : MonoBehaviour
 {
     protected Image _content;
 

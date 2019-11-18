@@ -11,7 +11,7 @@ public struct MonsterInfo
 
 public class UIMosterInfo : MonoBehaviour
 {
-    private MonsterStat _hpBar;
+    private UIMonsterStat _hpBar;
     private Text _name;
     private Text _level;
     private Text _multiple;
@@ -21,7 +21,7 @@ public class UIMosterInfo : MonoBehaviour
 
     void Awake()
     {
-        _hpBar = transform.Find("Hp").transform.Find("MosterHpBar").GetComponent<MonsterStat>();
+        _hpBar = transform.Find("Hp").transform.Find("MosterHpBar").GetComponent<UIMonsterStat>();
         _name = transform.Find("Name").transform.Find("MosterName").GetComponent<Text>();
         _level = transform.Find("Level").transform.Find("MosterLevel").GetComponent<Text>();
         _multiple = transform.Find("Hp").transform.Find("HpMultple").GetComponent<Text>();

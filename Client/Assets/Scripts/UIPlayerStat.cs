@@ -2,7 +2,7 @@
 using UnityEngine.UI;
 using System.Collections;
 
-public class PlayerStat : Stat
+public class UIPlayerStat : UIStat
 {
     [SerializeField]
     private Text _textValue;

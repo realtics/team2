@@ -2,7 +2,7 @@
 using UnityEngine.UI;
 using System.Collections;
 
-public class MonsterStat : Stat
+public class UIMonsterStat : UIStat
 {
     private int _multple;
     private const int _divideHp = 100;
