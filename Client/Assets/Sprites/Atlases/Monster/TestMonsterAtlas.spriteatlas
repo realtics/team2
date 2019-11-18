@@ -76,7 +76,15 @@ SpriteAtlas:
     - {fileID: 2800000, guid: 3dea837e51706764ebee516791bdb93b, type: 3}
     - {fileID: 2800000, guid: 949b2dd2c31aa6043884cf54dca8faa4, type: 3}
     - {fileID: 2800000, guid: 2ef532931c9ea5c4e9eb5fa90429cac7, type: 3}
-    totalSpriteSurfaceArea: 11516616
+    - {fileID: 2800000, guid: 442695b29613f844bba0dd15744c91a1, type: 3}
+    - {fileID: 2800000, guid: 4c4afced5fe503f4895c5c592bb6ae07, type: 3}
+    - {fileID: 2800000, guid: 4811fdbe42d09d841a8e334b21980113, type: 3}
+    - {fileID: 2800000, guid: 0f50f55608e28d646af4de246a37fe1b, type: 3}
+    - {fileID: 2800000, guid: a36392c189cfb4e4aa945b83b45047f9, type: 3}
+    - {fileID: 2800000, guid: b28df0213fe5c884696d39d52742e12f, type: 3}
+    - {fileID: 2800000, guid: 0c758121884678c4aa696a9885fc9637, type: 3}
+    - {fileID: 2800000, guid: 6498ba0e6b1ec5d44a8039d853d0eb4b, type: 3}
+    totalSpriteSurfaceArea: 14226408
     bindAsDefault: 1
     storedHash:
       serializedVersion: 2
@@ -85,11 +93,15 @@ SpriteAtlas:
   m_PackedSprites:
   - {fileID: 21300000, guid: 7284dcc0351303d459e9b73fda924d40, type: 3}
   - {fileID: 21300000, guid: bf9f54119e68cad43ba0afe3c3202cd6, type: 3}
+  - {fileID: 21300000, guid: b28df0213fe5c884696d39d52742e12f, type: 3}
+  - {fileID: 21300000, guid: 0c758121884678c4aa696a9885fc9637, type: 3}
   - {fileID: 21300000, guid: c96f91219242bf74eb85ca70be602dfc, type: 3}
   - {fileID: 21300000, guid: d5edd15115b730d4bba871e71c2c71d1, type: 3}
   - {fileID: 21300000, guid: e22ec6512345eb74c8f2715abc05e4ad, type: 3}
+  - {fileID: 21300000, guid: a36392c189cfb4e4aa945b83b45047f9, type: 3}
   - {fileID: 21300000, guid: 053609d1527f4c444bd6706542cf598b, type: 3}
   - {fileID: 21300000, guid: 83a3a102e0bac4946aa14206e9d59ee0, type: 3}
+  - {fileID: 21300000, guid: 442695b29613f844bba0dd15744c91a1, type: 3}
   - {fileID: 21300000, guid: 949b2dd2c31aa6043884cf54dca8faa4, type: 3}
   - {fileID: 21300000, guid: e67896f29b8f3f842a783d507e108a6f, type: 3}
   - {fileID: 21300000, guid: 68c39b83449eace489af3c327cafc9c6, type: 3}
@@ -99,6 +111,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: f62ce905490dbd24c8f0f4dcf56f1237, type: 3}
   - {fileID: 21300000, guid: 30573c9549d480949b2ef54c3356b1da, type: 3}
   - {fileID: 21300000, guid: 61a55ed5d3f984841a26c736654dbaab, type: 3}
+  - {fileID: 21300000, guid: 0f50f55608e28d646af4de246a37fe1b, type: 3}
   - {fileID: 21300000, guid: 2f595dd633536d041a7abb6b27fcbd59, type: 3}
   - {fileID: 21300000, guid: f2a790e65c79cbe438eff47a3e8e9ce6, type: 3}
   - {fileID: 21300000, guid: 150338f65db33714f81c40e22dff6ed4, type: 3}
@@ -113,18 +126,25 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 6d9aa1dbb40847a4dae7db591c62f410, type: 3}
   - {fileID: 21300000, guid: c4821cccbe16b29429aafc137e1889d2, type: 3}
   - {fileID: 21300000, guid: da32fedc986c1e44cae6b90b4048a474, type: 3}
+  - {fileID: 21300000, guid: 4c4afced5fe503f4895c5c592bb6ae07, type: 3}
+  - {fileID: 21300000, guid: 6498ba0e6b1ec5d44a8039d853d0eb4b, type: 3}
   - {fileID: 21300000, guid: 3dea837e51706764ebee516791bdb93b, type: 3}
   - {fileID: 21300000, guid: 621e379ea3cdeba43855bbe2f32241d5, type: 3}
+  - {fileID: 21300000, guid: 4811fdbe42d09d841a8e334b21980113, type: 3}
   - {fileID: 21300000, guid: 138ae7feadf4cfd44936d74f009e4eb9, type: 3}
   - {fileID: 21300000, guid: cae7fa7f1f67617459076ea8ccd49ea7, type: 3}
   m_PackedSpriteNamesToIndex:
   - testMonster_idle_2
   - testMonster_walk_8
+  - TestMonster_die6
+  - TestMonster_die7
   - testMonster_attack_ (14)
   - testMonster_attack_ (15)
   - testMonster_attack_ (5)
+  - TestMonster_die5
   - testMonster_attack_ (7)
   - testMonster_walk_1
+  - TestMonster_die1
   - TestMonster_hit1
   - testMonster_walk_2
   - testMonster_attack_ (16)
@@ -134,6 +154,7 @@ SpriteAtlas:
   - testMonster_attack_ (8)
   - testMonster_idle_6
   - testMonster_attack_ (10)
+  - TestMonster_die4
   - testMonster_idle_4
   - testMonster_walk_3
   - testMonster_walk_5
@@ -148,8 +169,11 @@ SpriteAtlas:
   - testMonster_attack_ (9)
   - testMonster_attack_ (11)
   - testMonster_idle_3
+  - TestMonster_die2
+  - TestMonster_die8
   - testMonster_attack_ (18)
   - testMonster_walk_7
+  - TestMonster_die3
   - testMonster_attack_ (6)
   - testMonster_attack_ (1)
   m_Tag: TestMonsterAtlas
