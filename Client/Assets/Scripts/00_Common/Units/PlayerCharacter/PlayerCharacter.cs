@@ -13,6 +13,7 @@ public class PlayerCharacter : MonoBehaviour
 
     public void SetJump()
     {
+
         if (_movement.IsGround)
             _movement.SetJump();
     }

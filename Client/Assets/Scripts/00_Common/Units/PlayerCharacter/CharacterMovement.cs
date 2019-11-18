@@ -16,6 +16,7 @@ public class CharacterMovement : BaseUnit
 
     override protected void Update()
     {
+
         CheckAttackEnd();
     }
 

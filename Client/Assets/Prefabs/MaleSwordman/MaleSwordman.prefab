@@ -81,8 +81,8 @@ GameObject:
   - component: {fileID: 4668375787229723022}
   - component: {fileID: 4668375787229723023}
   - component: {fileID: 4668375787229723018}
-  - component: {fileID: 2590817948576948673}
-  - component: {fileID: 6897143691423154721}
+  - component: {fileID: 4801644595513347903}
+  - component: {fileID: 2843314336654874862}
   m_Layer: 8
   m_Name: MaleSwordman
   m_TagString: Untagged
@@ -152,7 +152,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 0.55}
   m_EdgeRadius: 0
---- !u!114 &2590817948576948673
+--- !u!114 &4801644595513347903
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -161,10 +161,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 4668375787229723021}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a760b1a12bec86439aaa56a15e9d2f0, type: 3}
+  m_Script: {fileID: 11500000, guid: 8fa448ec5adf06a4aa1f4421c00bf41c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &6897143691423154721
+--- !u!114 &2843314336654874862
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -173,10 +173,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 4668375787229723021}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: adcb37cec3baa9c43a5d8fe72be41c9f, type: 3}
+  m_Script: {fileID: 11500000, guid: cb6233adfad91ce4fa1232213035325b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _avatar: {fileID: 4668375787703239330}
+  _avatar: {fileID: 0}
 --- !u!1 &4668375787703239335
 GameObject:
   m_ObjectHideFlags: 0
