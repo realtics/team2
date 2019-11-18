@@ -48,7 +48,7 @@ public class UIStat : MonoBehaviour
             _content.fillAmount = Mathf.Lerp(_content.fillAmount, _currentFill, Time.deltaTime * _lerpSpeed);
         }
     }
-    public virtual void Initialize(float currentValue,float maxValue)
+    public virtual void SetStat(float currentValue,float maxValue)
     {
         MaxValue = maxValue;
         CurrentValue = currentValue;

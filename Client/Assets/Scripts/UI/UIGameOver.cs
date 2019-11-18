@@ -25,7 +25,6 @@ public class UIGameOver : MonoBehaviour
             _coin = value;
             _remainCoin.text = _coin.ToString();
         }
-
     }
 
     private void OnEnable()
@@ -66,6 +65,11 @@ public class UIGameOver : MonoBehaviour
         {
             gameObject.SetActive(false);
         }
+    }
+
+    public void SetUIActive(bool active)
+    {
+        gameObject.SetActive(active);
     }
 
     IEnumerator SecondCountdown()
