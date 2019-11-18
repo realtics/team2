@@ -19,7 +19,7 @@ int main()
 	{
 		if (strnlen_s(inputMessage, MAX_MESSAGE_LEN) == 0)
 		{
-			break;
+			continue;
 		}
 
 		if (Cliet.IsConnecting() == false)
@@ -32,17 +32,17 @@ int main()
 		{
 			PKT_REQ_IN SendPkt;
 			SendPkt.Init();
-			strncpy_s(SendPkt.szName, MAX_NAME_LEN, inputMessage, MAX_NAME_LEN - 1);
+			strncpy_s(SendPkt.characterName, MAX_NAME_LEN, inputMessage, MAX_NAME_LEN - 1);
 
-			Cliet.PostSend(false, SendPkt.nSize, (char*)&SendPkt);
+			Cliet.PostSend(false, SendPkt.packetSize, (char*)&SendPkt);
 		}
 		else
 		{
 			PKT_REQ_CHAT SendPkt;
 			SendPkt.Init();
-			strncpy_s(SendPkt.szMessage, MAX_MESSAGE_LEN, inputMessage, MAX_MESSAGE_LEN - 1);
+			strncpy_s(SendPkt.userMessage, MAX_MESSAGE_LEN, inputMessage, MAX_MESSAGE_LEN - 1);
 
-			Cliet.PostSend(false, SendPkt.nSize, (char*)&SendPkt);
+			Cliet.PostSend(false, SendPkt.packetSize, (char*)&SendPkt);
 		}
 	}
 

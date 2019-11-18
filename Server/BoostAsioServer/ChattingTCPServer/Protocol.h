@@ -1,16 +1,20 @@
 #pragma once 
-
 const unsigned short PORT_NUMBER = 31452;
-
 const int MAX_RECEIVE_BUFFER_LEN = 512;
-
-const int MAX_NAME_LEN = 17;
+const int MAX_NAME_LEN = 13;
 const int MAX_MESSAGE_LEN = 129;
 
 struct PACKET_HEADER
 {
-	short nID;
-	short nSize;
+	short packetIndex;
+	short packetSize;
+};
+
+struct PACKET_CHARACTER_MOVE
+{
+	PACKET_HEADER header;
+	float characterMoveX;
+	float characterMoveY;
 };
 
 //  ÆÐÅ¶
@@ -28,50 +32,50 @@ const short NOTICE_CHAT = 7;
 
 struct PKT_REQ_IN : public PACKET_HEADER
 {
+	char characterName[MAX_NAME_LEN];
+
 	void Init()
 	{
-		nID = REQ_IN;
-		nSize = sizeof(PKT_REQ_IN);
-		memset(szName, 0, MAX_NAME_LEN);
+		packetIndex = REQ_IN;
+		packetSize = sizeof(PKT_REQ_IN);
+		memset(characterName, 0, MAX_NAME_LEN);
 	}
-
-	char szName[MAX_NAME_LEN];
 };
 
 struct PKT_RES_IN : public PACKET_HEADER
 {
+	bool isSuccess;
+
 	void Init()
 	{
-		nID = RES_IN;
-		nSize = sizeof(PKT_RES_IN);
-		bIsSuccess = false;
+		packetIndex = RES_IN;
+		packetSize = sizeof(PKT_RES_IN);
+		isSuccess = false;
 	}
-
-	bool bIsSuccess;
 };
 
 struct PKT_REQ_CHAT : public PACKET_HEADER
 {
+	char userMessage[MAX_MESSAGE_LEN];
+
 	void Init()
 	{
-		nID = REQ_CHAT;
-		nSize = sizeof(PKT_REQ_CHAT);
-		memset(szMessage, 0, MAX_MESSAGE_LEN);
+		packetIndex = REQ_CHAT;
+		packetSize = sizeof(PKT_REQ_CHAT);
+		memset(userMessage, 0, MAX_MESSAGE_LEN);
 	}
-
-	char szMessage[MAX_MESSAGE_LEN];
 };
 
 struct PKT_NOTICE_CHAT : public PACKET_HEADER
 {
+	char characterName[MAX_NAME_LEN];
+	char userMessage[MAX_MESSAGE_LEN];
+
 	void Init()
 	{
-		nID = NOTICE_CHAT;
-		nSize = sizeof(PKT_NOTICE_CHAT);
-		memset(szName, 0, MAX_NAME_LEN);
-		memset(szMessage, 0, MAX_MESSAGE_LEN);
+		packetIndex = NOTICE_CHAT;
+		packetSize = sizeof(PKT_NOTICE_CHAT);
+		memset(characterName, 0, MAX_NAME_LEN);
+		memset(userMessage, 0, MAX_MESSAGE_LEN);
 	}
-
-	char szName[MAX_NAME_LEN];
-	char szMessage[MAX_MESSAGE_LEN];
 };

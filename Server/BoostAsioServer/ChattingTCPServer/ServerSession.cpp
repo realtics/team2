@@ -1,5 +1,5 @@
 #include "ServerSession.h"
-#include "ChattingServer.h"
+#include "ChatServer.h"
 
 
 Session::Session(int nSessionID, boost::asio::io_context& io_service, ChatServer* pServer)
@@ -28,7 +28,7 @@ void Session::PostReceive()
 	_Socket.async_read_some
 	(
 		boost::asio::buffer(_ReceiveBuffer),
-							boost::bind(&Session::handle_receive,
+							boost::bind(&Session::handleReceive,
 										this,
 										boost::asio::placeholders::error,
 										boost::asio::placeholders::bytes_transferred)
@@ -36,14 +36,14 @@ void Session::PostReceive()
 	);
 }
 
-void Session::PostSend(const bool bImmediately, const int nSize, char* pData)
+void Session::PostSend(const bool bImmediately, const int packetSize, char* pData)
 {
 	char* pSendData = nullptr;
 
 	if (bImmediately == false)
 	{
-		pSendData = new char[nSize];
-		memcpy(pSendData, pData, nSize);
+		pSendData = new char[packetSize];
+		memcpy(pSendData, pData, packetSize);
 
 		_SendDataQueue.push_back(pSendData);
 	}
@@ -58,15 +58,15 @@ void Session::PostSend(const bool bImmediately, const int nSize, char* pData)
 	}
 
 	boost::asio::async_write(_Socket,
-							boost::asio::buffer(pSendData, nSize),
-							boost::bind(&Session::handle_write,
+							boost::asio::buffer(pSendData, packetSize),
+							boost::bind(&Session::handleWrite,
 										this,
 										boost::asio::placeholders::error,
 										boost::asio::placeholders::bytes_transferred)
 	);
 }
 
-void Session::handle_write(const boost::system::error_code& error, size_t bytes_transferred)
+void Session::handleWrite(const boost::system::error_code& error, size_t bytes_transferred)
 {
 	delete[] _SendDataQueue.front();
 	_SendDataQueue.pop_front();
@@ -77,11 +77,11 @@ void Session::handle_write(const boost::system::error_code& error, size_t bytes_
 
 		PACKET_HEADER* pHeader = (PACKET_HEADER*)pData;
 
-		PostSend(true, pHeader->nSize, pData);
+		PostSend(true, pHeader->packetSize, pData);
 	}
 }
 
-void Session::handle_receive(const boost::system::error_code& error, size_t bytes_transferred)
+void Session::handleReceive(const boost::system::error_code& error, size_t bytes_transferred)
 {
 	if (error)
 	{
@@ -103,6 +103,7 @@ void Session::handle_receive(const boost::system::error_code& error, size_t byte
 		int nPacketData = _nPacketBufferMark + bytes_transferred;
 		int nReadData = 0;
 
+
 		while (nPacketData > 0)
 		{
 			if (nPacketData < sizeof(PACKET_HEADER))
@@ -112,12 +113,12 @@ void Session::handle_receive(const boost::system::error_code& error, size_t byte
 
 			PACKET_HEADER* pHeader = (PACKET_HEADER*)&_PacketBuffer[nReadData];
 
-			if (pHeader->nSize <= nPacketData)
+			if (pHeader->packetSize <= nPacketData)
 			{
 				_pServer->ProcessPacket(_nSessionID, &_PacketBuffer[nReadData]);
 
-				nPacketData -= pHeader->nSize;
-				nReadData += pHeader->nSize;
+				nPacketData -= pHeader->packetSize;
+				nReadData += pHeader->packetSize;
 			}
 			else
 			{

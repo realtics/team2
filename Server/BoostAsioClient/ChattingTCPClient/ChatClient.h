@@ -34,7 +34,7 @@ public:
 
 	void Connect(boost::asio::ip::tcp::endpoint endpoint);
 	void Close();
-	void PostSend(const bool bImmediately, const int nSize, char* pData);
+	void PostSend(const bool bImmediately, const int packetSize, char* pData);
 
 	bool IsConnecting() { return _Socket.is_open(); }
 	void LoginOK() { _bIsLogin = true; }

@@ -1,6 +1,6 @@
-#include "ChattingServer.h"
+#include "ChatServer.h"
 
-const int MAX_SESSION_COUNT = 100;
+const int MAX_SESSION_COUNT = 3;
 
 int main()
 {

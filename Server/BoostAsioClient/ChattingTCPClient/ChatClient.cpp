@@ -73,7 +73,7 @@ void ChatClient::handle_write(const boost::system::error_code& error, size_t byt
 	if (pData != nullptr)
 	{
 		PACKET_HEADER* pHeader = (PACKET_HEADER*)pData;
-		PostSend(true, pHeader->nSize, pData);
+		PostSend(true, pHeader->packetSize, pData);
 	}
 }
 
@@ -108,12 +108,12 @@ void ChatClient::handle_receive(const boost::system::error_code& error, size_t b
 
 			PACKET_HEADER* pHeader = (PACKET_HEADER*)&_PacketBuffer[nReadData];
 
-			if (pHeader->nSize <= nPacketData)
+			if (pHeader->packetSize <= nPacketData)
 			{
 				ProcessPacket(&_PacketBuffer[nReadData]);
 
-				nPacketData -= pHeader->nSize;
-				nReadData += pHeader->nSize;
+				nPacketData -= pHeader->packetSize;
+				nReadData += pHeader->packetSize;
 			}
 			else
 			{
@@ -138,7 +138,7 @@ void ChatClient::ProcessPacket(const char* pData)
 {
 	PACKET_HEADER* pheader = (PACKET_HEADER*)pData;
 
-	switch (pheader->nID)
+	switch (pheader->packetIndex)
 	{
 		case RES_IN:
 		{
@@ -146,14 +146,14 @@ void ChatClient::ProcessPacket(const char* pData)
 
 			LoginOK();
 
-			std::cout << "클라이언트 로그인 성공 ?: " << pPacket->bIsSuccess << std::endl;
+			std::cout << "클라이언트 로그인 성공 ?: " << pPacket->isSuccess << std::endl;
 		}
 		break;
 		case NOTICE_CHAT:
 		{
 			PKT_NOTICE_CHAT* pPacket = (PKT_NOTICE_CHAT*)pData;
 
-			std::cout << pPacket->szName << ": " << pPacket->szMessage << std::endl;
+			std::cout << pPacket->characterName << ": " << pPacket->userMessage << std::endl;
 		}
 		break;
 	}
@@ -178,7 +178,7 @@ void ChatClient::Close()
 	}
 }
 
-void ChatClient::PostSend(const bool bImmediately, const int nSize, char* pData)
+void ChatClient::PostSend(const bool bImmediately, const int packetSize, char* pData)
 {
 	char* pSendData = nullptr;
 
@@ -186,8 +186,8 @@ void ChatClient::PostSend(const bool bImmediately, const int nSize, char* pData)
 
 	if (bImmediately == false)
 	{
-		pSendData = new char[nSize];
-		memcpy(pSendData, pData, nSize);
+		pSendData = new char[packetSize];
+		memcpy(pSendData, pData, packetSize);
 
 		_SendDataQueue.push_back(pSendData);
 	}
@@ -199,7 +199,7 @@ void ChatClient::PostSend(const bool bImmediately, const int nSize, char* pData)
 	if (bImmediately || _SendDataQueue.size() < 2)
 	{
 		boost::asio::async_write(_Socket,
-								boost::asio::buffer(pSendData, nSize),
+								boost::asio::buffer(pSendData, packetSize),
 								boost::bind(&ChatClient::handle_write,
 											this,
 											boost::asio::placeholders::error,
