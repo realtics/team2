@@ -146,6 +146,17 @@ public class CharacterMovement : BaseUnit
         base.OnHit(damage);
         SetHit();
         _animator.SetBool("IsHit", true);
+    }
+
+    public override void OnHit(float damage, Transform attacker)
+    {
+        base.OnHit(damage);
+
+        if (attacker.position.x > transform.position.x)
+            SetFlipX(false);
+        else
+            SetFlipX(true);
+
         MoveUnit(-1.0f, 0.1f, ExtraMoveDirection.Horizontal);
     }
 

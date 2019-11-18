@@ -16,6 +16,10 @@ public class CharacterStat : MonoBehaviour
 
     // properties
     public float AttackDamage { get { return _attackDamage; } }
+    public float MaxHp { get { return _maxHp; } }
+    public float Hp { get { return _hp; } }
+    public float MaxMp { get { return _maxMp; } }
+    public float Mp { get { return _mp; } }
 
     void Start()
     {

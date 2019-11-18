@@ -315,10 +315,14 @@ public class BaseUnit : MonoBehaviour
 
     public virtual void OnHit(float damage)
     {
-        Debug.Log("UnitOnHit");
         SetHit();
         StopAttack();
         _stat.OnHitDamage(damage);
+    }
+
+    public virtual void OnHit(float damage, Transform attacker)
+    {
+        OnHit(damage);
     }
 
     protected void SetRecoveryTime(float time)
