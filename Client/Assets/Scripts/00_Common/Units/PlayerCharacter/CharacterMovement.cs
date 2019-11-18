@@ -150,7 +150,7 @@ public class CharacterMovement : BaseUnit
 
     public override void OnHit(float damage, Transform attacker)
     {
-        base.OnHit(damage);
+        OnHit(damage);
 
         if (attacker.position.x > transform.position.x)
             SetFlipX(false);
