@@ -13,25 +13,16 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private CharacterMovement _player;
-    public CharacterMovement Player
-    {
-        get
-        {
-            return _player;
-        }
-
-    }
-
     private void Awake()
     {
-        _player = GameObject.FindObjectOfType<CharacterMovement>().GetComponent<CharacterMovement>();
+ 
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        _instance = this;
+
     }
 
     // Update is called once per frame

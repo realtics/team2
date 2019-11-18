@@ -8,21 +8,19 @@ public class UIPlayerInfo : MonoBehaviour
     private UIPlayerStat _mpBar;
     private Text _level;
 
-    // temp value.
-    private int _hp = 100; 
-    private int _Mp = 50;
-
     void Awake()
     {
         _hpBar = transform.Find("Hp").transform.Find("PlayerHpBar").GetComponent<UIPlayerStat>();
         _mpBar = transform.Find("Mp").transform.Find("PlayerMpBar").GetComponent<UIPlayerStat>();
+
     }
 
     // Use this for initialization
     void Start()
-    { 
-        _hpBar.Initialize(_hp, _hp);
-        _mpBar.Initialize(_Mp, _Mp);
+    {
+        CharacterStat characterStat = FindObjectOfType<CharacterStat>();
+        _hpBar.Initialize(characterStat.Hp, characterStat.MaxHp);
+        _mpBar.Initialize(characterStat.Mp, characterStat.MaxMp);
     }
 
     // Update is called once per frame
@@ -30,15 +28,4 @@ public class UIPlayerInfo : MonoBehaviour
     {
 
     }
-    public void SetHp(float CurrentHp, float MaxHp)
-    {
-        _hpBar.CurrentValue = CurrentHp;
-        _hpBar.MaxValue = MaxHp;
-    }
-    public void SetMp(float CurrentHp, float MaxHp)
-    {
-        _mpBar.CurrentValue = CurrentHp;
-        _mpBar.MaxValue = MaxHp;
-    }
-
 }

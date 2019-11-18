@@ -45,14 +45,6 @@ public class UIHelper : MonoBehaviour
         _gameOver.gameObject.SetActive(isActive);
     }
 
-    public void SetPlayerHp(float CurrentHp,float MaxHp)
-    {
-        _playerInfo.SetHp(CurrentHp, MaxHp);
-    }
-    public void SetPlayerMp(float CurrentMp, float MaxMp)
-    {
-        _playerInfo.SetMp(CurrentMp, MaxMp);
-    }
     public void SetMonsterHp(float CurrentHp, float MaxHp)
     {
         _monsterInfo.SetHp(CurrentHp, MaxHp);
