@@ -108,10 +108,10 @@ public class Monster : MonoBehaviour
         //TODO : UI와 상호작용
         //FIXME : 간단한 테스트후 수정
 
-        UIHelper.Instance.SetMonster(this);
-        UIHelper.Instance.AddMonsterHp(-damage);
         currentHp -= damage;
-
+        UIHelper.Instance.SetMonster(this);
+        UIHelper.Instance.SetMonsterHp(currentHp,maxHp);
+       
         _state.ChangeState(HitState.GetInstance);
     }
 
