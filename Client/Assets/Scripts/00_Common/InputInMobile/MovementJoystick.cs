@@ -34,7 +34,7 @@ public class MovementJoystick : MonoBehaviour
     {
         _stick = transform.GetChild(0);
         _initPos = _stick.GetComponent<RectTransform>().position;
-        _radius = GetComponent<RectTransform>().sizeDelta.x / 6.0f;
+        _radius = GetComponent<RectTransform>().sizeDelta.x / 3.0f;
         _stickDirection = JoystickDirection.None;
         _oldDirection = _stickDirection;
         _dirVec = Vector2.zero;

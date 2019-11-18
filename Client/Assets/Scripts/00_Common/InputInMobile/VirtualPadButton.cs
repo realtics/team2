@@ -15,10 +15,12 @@ public class VirtualPadButton : MonoBehaviour
     [SerializeField]
     private VirtualPadButtonType _type;
     private PlayerCharacter _pc;
+    private bool _isRun;
 
     private void Start()
     {
         _pc = FindObjectOfType<PlayerCharacter>();
+        _isRun = false;
     }
 
     public void OnClick()
@@ -37,7 +39,16 @@ public class VirtualPadButton : MonoBehaviour
                 _pc.SetJump();
                 break;
             case VirtualPadButtonType.Run:
-                _pc.SetRun();
+                if (!_isRun)
+                {
+                    _pc.SetRun();
+                    _isRun = true;
+                }
+                else
+                {
+                    _pc.StopRun();
+                    _isRun = false;
+                }
                 break;
         }
     }
