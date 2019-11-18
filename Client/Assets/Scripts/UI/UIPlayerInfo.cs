@@ -30,13 +30,15 @@ public class UIPlayerInfo : MonoBehaviour
     {
 
     }
-    public void AddHp(float value)
+    public void SetHp(float CurrentHp, float MaxHp)
     {
-        _hpBar.CurrentValue += value;
+        _hpBar.CurrentValue = CurrentHp;
+        _hpBar.MaxValue = MaxHp;
     }
-    public void AddMp(float value)
+    public void SetMp(float CurrentHp, float MaxHp)
     {
-        _mpBar.CurrentValue += value;
+        _mpBar.CurrentValue = CurrentHp;
+        _mpBar.MaxValue = MaxHp;
     }
 
 }
