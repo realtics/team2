@@ -72,7 +72,7 @@ public class Monster : MonoBehaviour
         if (other.transform.tag == "Player")
         {
             //Debug.Log("Player Detect.");
-            target = other.transform;
+            target = other.transform.root;
 
             //TODO: 피격
            
