@@ -146,6 +146,7 @@ public class CharacterMovement : BaseUnit
         base.OnHit(damage);
         SetHit();
         _animator.SetBool("IsHit", true);
+        MoveUnit(-1.0f, 0.1f, ExtraMoveDirection.Horizontal);
     }
 
     public override void SetHit()

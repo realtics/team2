@@ -83,6 +83,7 @@ GameObject:
   - component: {fileID: 4668375787229723018}
   - component: {fileID: 2590817948576948673}
   - component: {fileID: 6897143691423154721}
+  - component: {fileID: 1109627757}
   m_Layer: 8
   m_Name: MaleSwordman
   m_TagString: Untagged
@@ -177,6 +178,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _avatar: {fileID: 4668375787703239330}
+--- !u!114 &1109627757
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4668375787229723021}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c33b795c87bdc8648af87eb5557f5f26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _hp: 0
+  _mp: 0
 --- !u!1 &4668375787703239335
 GameObject:
   m_ObjectHideFlags: 0
