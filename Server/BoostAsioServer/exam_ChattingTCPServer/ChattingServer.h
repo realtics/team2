@@ -8,14 +8,17 @@
 #include <string>
 #include <vector>
 
+
 #include "ServerSession.h"
 #include "Protocol.h"
+
+
 
 class ChatServer
 {
 public:
-	ChatServer(boost::asio::io_context& io_service)
-		: m_acceptor(io_service, boost::asio::ip::tcp::endpoint(boost::asio::ip::tcp::v4(), PORT_NUMBER))
+	ChatServer(boost::asio::io_context& io_context)
+		: m_acceptor(io_context, boost::asio::ip::tcp::endpoint(boost::asio::ip::tcp::v4(), PORT_NUMBER))
 	{
 		m_bIsAccepting = false;
 	}
@@ -56,7 +59,7 @@ public:
 
 		m_SessionList[nSessionID]->Socket().close();
 
-		m_SessionQueue.push_back(nSessionID);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+		m_SessionQueue.push_back(nSessionID);
 
 		if (m_bIsAccepting == false)
 		{

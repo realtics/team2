@@ -20,8 +20,8 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
-    <ProjectGuid>{010CF8F9-EEB9-49F3-9EF4-903829511B6D}</ProjectGuid>
-    <RootNamespace>ChattingTCPClient</RootNamespace>
+    <ProjectGuid>{9BADC858-DD45-4A84-B01E-C378010D01DA}</ProjectGuid>
+    <RootNamespace>examChattingTCPServer</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -127,11 +127,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="ChatClient.cpp" />
-    <ClCompile Include="ChattingTCPClient.cpp" />
+    <ClCompile Include="ServerMain.cpp" />
+    <ClCompile Include="ServerSession.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ChatClient.h" />
+    <ClInclude Include="ChattingServer.h" />
+    <ClInclude Include="Protocol.h" />
+    <ClInclude Include="ServerSession.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
