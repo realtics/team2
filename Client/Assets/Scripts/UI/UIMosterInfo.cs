@@ -37,9 +37,10 @@ public class UIMosterInfo : MonoBehaviour
     {
         CheckDieMonster();
     }
-    public void AddHp(float value)
+    public void SetHp(float CurrentHp, float MaxHp)
     {
-        _hpBar.CurrentValue += value;
+        _hpBar.CurrentValue = CurrentHp;
+        _hpBar.MaxValue = MaxHp;
     }
     // ToDo.
     // MonsterInfo 말고 GameObject로 받아서 처리 할 예정, Monster GameObject가 만들어 질 때 까지 대기.

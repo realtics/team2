@@ -38,45 +38,24 @@ public class UIHelper : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Stat Test.
-        if(Input.GetKeyDown(KeyCode.Z))
-        {
-            AddPlayerHp(-10);
-        }
-        if (Input.GetKeyDown(KeyCode.X))
-        {
-            _gameOver.UseCoin();
-            AddPlayerMp(-10);
-        }
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            AddMonsterHp(-10);
-        }
-        if (Input.GetKeyDown(KeyCode.V))
-        {
-            SetMonster(null);
-        }
-        if (Input.GetKeyDown(KeyCode.B))
-        {
-            SetGameOver(true);
-        }
+
     }
     public void SetGameOver(bool isActive)
     {
         _gameOver.gameObject.SetActive(isActive);
     }
 
-    public void AddPlayerHp(float value)
+    public void SetPlayerHp(float CurrentHp,float MaxHp)
     {
-        _playerInfo.AddHp(value);
+        _playerInfo.SetHp(CurrentHp, MaxHp);
     }
-    public void AddPlayerMp(float value)
+    public void SetPlayerMp(float CurrentMp, float MaxMp)
     {
-        _playerInfo.AddMp(value);
+        _playerInfo.SetMp(CurrentMp, MaxMp);
     }
-    public void AddMonsterHp(float value)
+    public void SetMonsterHp(float CurrentHp, float MaxHp)
     {
-        _monsterInfo.AddHp(value);
+        _monsterInfo.SetHp(CurrentHp, MaxHp);
     }
     // Todo.
     public void SetMonster(Monster monster)
