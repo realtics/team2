@@ -50,14 +50,15 @@ public class Monster : MonoBehaviour
     {
         _state.Update();
 
-        if (IsActiveSmashHitBox())
-        {
-            _smashAttackTimer += Time.deltaTime;
-            if (_smashAttackTimer >= _smashAttackTime)
-            {
-                InactiveSmashHitBox();
-            }
-        }
+        //TODO : 공격박스 제거 방식 변경 전
+        //if (IsActiveSmashHitBox())
+        //{
+        //    _smashAttackTimer += Time.deltaTime;
+        //    if (_smashAttackTimer >= _smashAttackTime)
+        //    {
+        //        InactiveSmashHitBox();
+        //    }
+        //}
     }
 
     // 상태변경
@@ -116,7 +117,7 @@ public class Monster : MonoBehaviour
 
     public void ActiveSmashHitBox()
     {
-        _smashAttackTimer = 0.0f;
+        //_smashAttackTimer = 0.0f;
         _smashHitBox.gameObject.SetActive(true);
     }
 

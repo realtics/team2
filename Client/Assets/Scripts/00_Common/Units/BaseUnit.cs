@@ -17,6 +17,7 @@ public enum ExtraMoveDirection
 
 public class BaseUnit : MonoBehaviour
 {
+    protected CharacterStat _stat;
     private const float RunSpeedMultiple = 2.0f;
     private const float JumpGravity = 0.01f;
     private const float JumpPower = 0.25f;
@@ -45,6 +46,7 @@ public class BaseUnit : MonoBehaviour
 
     private float _height;
     private bool _isHit;
+    private float _hitRecoveryTime;
 
     private float _extraMoveDuration;
 
@@ -63,6 +65,7 @@ public class BaseUnit : MonoBehaviour
     public bool IsInTranstion { get { return _animator.IsInTransition(0); } }
 
     public Vector3 OriginPos { get { return _avatar.position; } }
+    public CharacterStat Stat { get { return _stat; } }
 
     protected virtual void Awake()
     {
@@ -77,6 +80,7 @@ public class BaseUnit : MonoBehaviour
         _animator = GetComponentInChildren<Animator>();
         _renderer = GetComponentInChildren<SpriteRenderer>();
         _rgdBody = GetComponent<Rigidbody2D>();
+        _stat = GetComponent<CharacterStat>();
         _originPos = _avatar.localPosition;
     }
 
@@ -89,7 +93,21 @@ public class BaseUnit : MonoBehaviour
     {
         MoveProcess();
         JumpProcess();
+        RecoveryHit();
         ExtraMoveTimeProcess();
+    }
+
+    protected virtual void RecoveryHit()
+    {
+        if (!_isHit)
+            return;
+
+        _hitRecoveryTime -= Time.deltaTime;
+
+        if (_hitRecoveryTime <= 0.0f)
+        {
+            StopHit();
+        }
     }
 
     protected virtual void MoveProcess()
@@ -245,6 +263,8 @@ public class BaseUnit : MonoBehaviour
 
     public bool IsJupable()
     {
+        if (IsHit)
+            return false;
         if (IsAttack)
             return false;
 
@@ -279,7 +299,13 @@ public class BaseUnit : MonoBehaviour
 
     public virtual void SetHit()
     {
+        _isHit = true;
+    }
 
+    public virtual void StopHit()
+    {
+        _isHit = false;
+        _hitRecoveryTime = 0.0f;
     }
 
     public bool IsAnimationPlaying()
@@ -290,5 +316,13 @@ public class BaseUnit : MonoBehaviour
     public virtual void OnHit(float damage)
     {
         Debug.Log("UnitOnHit");
+        SetHit();
+        StopAttack();
+        _stat.OnHitDamage(damage);
+    }
+
+    protected void SetRecoveryTime(float time)
+    {
+        _hitRecoveryTime = time;
     }
 }

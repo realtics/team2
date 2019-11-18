@@ -144,18 +144,21 @@ public class CharacterMovement : BaseUnit
     public override void OnHit(float damage)
     {
         base.OnHit(damage);
+        SetHit();
+        _animator.SetBool("IsHit", true);
     }
 
     public override void SetHit()
     {
         base.SetHit();
-
+        SetRecoveryTime(1.0f);
     }
 
-    IEnumerator CoHitFalse(float hitTime)
+    public override void StopHit()
     {
-        yield return new WaitForSeconds(hitTime);
-
+        base.StopHit();
+        _animator.SetBool("IsHit", false);
+        _animator.SetBool("IsAttack", false);
     }
 
     IEnumerator CoSetFalseNextAttack()

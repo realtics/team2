@@ -13,7 +13,6 @@ public class HitState : FSMState<Monster>
             return instance;
         }
     }
-    private float _attackTimer = 0f;
 
     static HitState() { }
     private HitState() { }

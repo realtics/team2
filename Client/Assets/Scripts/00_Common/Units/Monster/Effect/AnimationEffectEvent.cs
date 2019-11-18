@@ -33,4 +33,14 @@ public class AnimationEffectEvent : MonoBehaviour
         else
             effect.GetComponent<SpriteRenderer>().flipX = true;
     }
+
+    public void OnSmashAttackBox()
+    {
+        _monster.ActiveSmashHitBox();
+    }
+
+    public void OffSmashAttackBox()
+    {
+        _monster.InactiveSmashHitBox();
+    }
 }

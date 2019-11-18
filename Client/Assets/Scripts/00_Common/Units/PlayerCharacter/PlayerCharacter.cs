@@ -31,6 +31,10 @@ public class PlayerCharacter : MonoBehaviour
     {
         if (_movement.IsAttack)
             return;
+
+        if (_movement.IsHit)
+            return;
+
         if (_movement.IsInTranstion)
             return;
 

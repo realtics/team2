@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CharacterAttackBox : MonoBehaviour
 {
+    private const float AttackRange = 0.8f;
     private BaseUnit _unit;
     void Start()
     {
@@ -20,10 +21,10 @@ public class CharacterAttackBox : MonoBehaviour
         if (!other.tag.Contains("Monster"))
             return;
 
-        if (Mathf.Abs(_unit.transform.position.y - other.transform.position.y) > 0.9f)
+        if (Mathf.Abs(_unit.transform.position.y - other.transform.position.y) > AttackRange)
             return;
 
-        other.transform.root.GetComponent<Monster>().OnHit(10.0f);
+        other.transform.root.GetComponent<Monster>().OnHit(_unit.Stat.AttackDamage);
 
     }
 }
