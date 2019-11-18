@@ -13,9 +13,12 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void Awake()
+    public CharacterMovement player
     {
- 
+        get
+        {
+            return player;
+        }
     }
 
     // Start is called before the first frame update
