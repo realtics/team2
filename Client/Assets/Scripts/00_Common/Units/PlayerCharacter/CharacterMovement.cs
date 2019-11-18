@@ -5,6 +5,7 @@ using UnityEngine;
 public class CharacterMovement : BaseUnit
 {
     private bool _nextAttack;
+    private CharacterAnimController _animController;
 
     protected override void Start()
     {
@@ -12,6 +13,7 @@ public class CharacterMovement : BaseUnit
         _nextAttack = false;
         _animator.SetBool("IsGround", true);
         _animator.SetBool("NextAttack", false);
+        _animController = GetComponentInChildren<CharacterAnimController>();
     }
 
     override protected void Update()
@@ -43,6 +45,7 @@ public class CharacterMovement : BaseUnit
         base.StopAttack();
         _animator.SetBool("IsAttack", false);
         _animator.SetBool("NextAttack", false);
+        _animController.OffAttackBox();
     }
 
     public override bool SetAttack()
