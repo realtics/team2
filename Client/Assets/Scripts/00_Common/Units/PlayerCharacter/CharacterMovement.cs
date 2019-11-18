@@ -5,6 +5,7 @@ using UnityEngine;
 public class CharacterMovement : BaseUnit
 {
     private bool _nextAttack;
+
     protected override void Start()
     {
         base.Start();
@@ -138,6 +139,23 @@ public class CharacterMovement : BaseUnit
         _animator.SetBool("IsMoving", IsMoving);
 
         return true;
+    }
+
+    public override void OnHit(float damage)
+    {
+        base.OnHit(damage);
+    }
+
+    public override void SetHit()
+    {
+        base.SetHit();
+
+    }
+
+    IEnumerator CoHitFalse(float hitTime)
+    {
+        yield return new WaitForSeconds(hitTime);
+
     }
 
     IEnumerator CoSetFalseNextAttack()

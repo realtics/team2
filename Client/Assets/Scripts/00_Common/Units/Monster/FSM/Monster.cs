@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class Monster : MonoBehaviour
 {
+    public string monsterName = "testMonser";
+    public int monsterLevel = 99;
+
+    public float currentHp = 200.0f;
+    public float maxHp = 200.0f;
+
     public float attackRange =3.8f;
     public float attackSpeed = 1.5f;
 
@@ -36,7 +42,8 @@ public class Monster : MonoBehaviour
 
     private void Update()
     {
-
+        //FIXME : 플레이어 공격 판정 완료시 삭제
+        TestHitKeyInput();
     }
 
     private void FixedUpdate()
@@ -93,9 +100,18 @@ public class Monster : MonoBehaviour
         target = null;
     }
 
-    public void OnHit()
+    public void OnHit(float damage)
     {
         Debug.Log("OnHit");
+
+        //TODO : UI와 상호작용
+        //FIXME : 간단한 테스트후 수정
+
+        UIHelper.Instance.SetMonster(this);
+        UIHelper.Instance.AddMonsterHp(-damage);
+        currentHp -= damage;
+
+        _state.ChangeState(HitState.GetInstance);
     }
 
     public void ActiveSmashHitBox()
@@ -115,5 +131,12 @@ public class Monster : MonoBehaviour
             return true;
         else
             return false;
+    }
+
+    //FIXME : 플레이어 공격판정 완료시, 삭제
+    private void TestHitKeyInput()
+    {
+        if (Input.GetKeyDown(KeyCode.Y))
+            OnHit(5.0f);
     }
 }

@@ -22,7 +22,7 @@ public class DungenMamager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(SetActiveCurrentPotal())
+        if(FindActiveCurrentPotal())
         {
             DestroyAllFieldObject();
 
@@ -49,7 +49,7 @@ public class DungenMamager : MonoBehaviour
     {
        _potals = FindObjectsOfType<Potal>();
     }
-    private bool SetActiveCurrentPotal()
+    private bool FindActiveCurrentPotal()
     {
         for (int i = 0; i < _potals.Length; i++)
         {

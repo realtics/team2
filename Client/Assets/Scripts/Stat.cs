@@ -4,7 +4,7 @@ using System.Collections;
 
 public class Stat : MonoBehaviour
 {
-    private Image _content;
+    protected Image _content;
 
     [SerializeField]
     private float _lerpSpeed = 3;
@@ -48,7 +48,7 @@ public class Stat : MonoBehaviour
             _content.fillAmount = Mathf.Lerp(_content.fillAmount, _currentFill, Time.deltaTime * _lerpSpeed);
         }
     }
-    public void Initialize(float currentValue,float maxValue)
+    public virtual void Initialize(float currentValue,float maxValue)
     {
         MaxValue = maxValue;
         CurrentValue = currentValue;

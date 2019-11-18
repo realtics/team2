@@ -58,7 +58,7 @@ public class BaseUnit : MonoBehaviour
     public bool IsJumpUp { get { return _jumpState == UnitJumpState.JumpUp; } }
     public bool IsJumpDown { get { return _jumpState == UnitJumpState.JumpDown; } }
     public bool IsHit { get { return _isHit; } }
-    public float Forward { get { return _renderer.flipX ? -1 : 1; } }
+    public float Forward { get { return _avatar.transform.localScale.x < 0 ? -1 : 1; } }
     public float CurAnimTime { get { return _animator.GetCurrentAnimatorStateInfo(0).normalizedTime; } }
     public bool IsInTranstion { get { return _animator.IsInTransition(0); } }
 
@@ -205,7 +205,20 @@ public class BaseUnit : MonoBehaviour
 
     public virtual void SetFlipX(bool flip)
     {
-        _renderer.flipX = flip;
+        Vector3 scale = _avatar.transform.localScale;
+
+        if (flip)
+        {
+            if (scale.x > 0)
+                scale.x = -scale.x;
+        }
+        else
+        {
+            if (scale.x < 0)
+                scale.x = -scale.x;
+        }
+        _avatar.localScale = scale;
+        //_renderer.flipX = flip;
     }
 
     public bool IsMovable()
@@ -262,6 +275,11 @@ public class BaseUnit : MonoBehaviour
             _extraMoveDuration = 0.0f;
             return;
         }
+    }
+
+    public virtual void SetHit()
+    {
+
     }
 
     public bool IsAnimationPlaying()

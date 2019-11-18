@@ -20,23 +20,25 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: 21300000, guid: 4a71be4ac2e8f1f458e7ad75322032d3, type: 3}
+      value: {fileID: 21300000, guid: 7cfd42c210e1a6847b81f488a5a66267, type: 3}
     - time: 0.083333336
-      value: {fileID: 21300000, guid: 37f94b86529565b4fac5417a9136572b, type: 3}
+      value: {fileID: 21300000, guid: f4b78cc790aa47f408a1e5498abb09cb, type: 3}
     - time: 0.16666667
-      value: {fileID: 21300000, guid: fd710f73128d8ab439b41e653557f573, type: 3}
+      value: {fileID: 21300000, guid: 53d935a361165684d98f90a21d4e7429, type: 3}
     - time: 0.25
-      value: {fileID: 21300000, guid: 4a93d8bb140fe2941b46c9a1c06f9201, type: 3}
+      value: {fileID: 21300000, guid: f9ad3ef984eb97c40a3c7a18c6db35ea, type: 3}
     - time: 0.33333334
-      value: {fileID: 21300000, guid: 79cc44624ab3ac140916f39feb92b96d, type: 3}
+      value: {fileID: 21300000, guid: 8ad579d98353f904b81a0e5f28b0c703, type: 3}
     - time: 0.41666666
-      value: {fileID: 21300000, guid: 7f0e91bc9426fb24a9c4703b1ea78546, type: 3}
+      value: {fileID: 21300000, guid: 54d15ceb1d5de114e90994b744a3e486, type: 3}
     - time: 0.5
-      value: {fileID: 21300000, guid: c83445aefabcb7e49a9aa9f21dc9af04, type: 3}
+      value: {fileID: 21300000, guid: 462831babb46b744592efa06a4fa9d30, type: 3}
     - time: 0.5833333
-      value: {fileID: 21300000, guid: fea57b07ffcd87a44aa3bf2478e37dec, type: 3}
+      value: {fileID: 21300000, guid: 7381d3b045c861243bc794d1e6fbdc38, type: 3}
     - time: 0.6666667
-      value: {fileID: 21300000, guid: 438e91e89a999e34ebc7065e3a859d07, type: 3}
+      value: {fileID: 21300000, guid: bd6364edd1abc304982e85e10ea21d30, type: 3}
+    - time: 0.75
+      value: {fileID: 21300000, guid: a6b593528c6553949a5df6f1a6d2c10c, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -56,21 +58,22 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: 21300000, guid: 4a71be4ac2e8f1f458e7ad75322032d3, type: 3}
-    - {fileID: 21300000, guid: 37f94b86529565b4fac5417a9136572b, type: 3}
-    - {fileID: 21300000, guid: fd710f73128d8ab439b41e653557f573, type: 3}
-    - {fileID: 21300000, guid: 4a93d8bb140fe2941b46c9a1c06f9201, type: 3}
-    - {fileID: 21300000, guid: 79cc44624ab3ac140916f39feb92b96d, type: 3}
-    - {fileID: 21300000, guid: 7f0e91bc9426fb24a9c4703b1ea78546, type: 3}
-    - {fileID: 21300000, guid: c83445aefabcb7e49a9aa9f21dc9af04, type: 3}
-    - {fileID: 21300000, guid: fea57b07ffcd87a44aa3bf2478e37dec, type: 3}
-    - {fileID: 21300000, guid: 438e91e89a999e34ebc7065e3a859d07, type: 3}
+    - {fileID: 21300000, guid: 7cfd42c210e1a6847b81f488a5a66267, type: 3}
+    - {fileID: 21300000, guid: f4b78cc790aa47f408a1e5498abb09cb, type: 3}
+    - {fileID: 21300000, guid: 53d935a361165684d98f90a21d4e7429, type: 3}
+    - {fileID: 21300000, guid: f9ad3ef984eb97c40a3c7a18c6db35ea, type: 3}
+    - {fileID: 21300000, guid: 8ad579d98353f904b81a0e5f28b0c703, type: 3}
+    - {fileID: 21300000, guid: 54d15ceb1d5de114e90994b744a3e486, type: 3}
+    - {fileID: 21300000, guid: 462831babb46b744592efa06a4fa9d30, type: 3}
+    - {fileID: 21300000, guid: 7381d3b045c861243bc794d1e6fbdc38, type: 3}
+    - {fileID: 21300000, guid: bd6364edd1abc304982e85e10ea21d30, type: 3}
+    - {fileID: 21300000, guid: a6b593528c6553949a5df6f1a6d2c10c, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.75
+    m_StopTime: 0.8333333
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -89,4 +92,18 @@ AnimationClip:
   m_EulerEditorCurves: []
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
-  m_Events: []
+  m_Events:
+  - time: 0.25
+    functionName: OnAttackBox
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.5833333
+    functionName: OffAttackBox
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0

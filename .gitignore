@@ -3,3 +3,8 @@ Debug/
 Library/
 Logs/
 obj/
+Temp/
+Assembly-CSharp.csproj
+Assembly-CSharp-Editor.csproj
+Client.sln
+.collabignore

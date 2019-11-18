@@ -20,6 +20,6 @@ public class SpriteOrderSetter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _renderer.sortingOrder = -(int)(transform.parent.position.y * 2);
+        _renderer.sortingOrder = -(int)(transform.parent.position.y * 10.0f);
     }
 }

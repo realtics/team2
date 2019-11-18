@@ -73,7 +73,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &4127798058604522686
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -86,6 +86,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efca241d36d50144c8a671ef50081592, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  monsterName: testMonser
+  monsterLevel: 99
+  currentHp: 200
+  maxHp: 200
   attackRange: 3.8
   attackSpeed: 1.5
   chaseCancleTime: 5
@@ -106,6 +110,7 @@ GameObject:
   - component: {fileID: 4127798058618418205}
   - component: {fileID: 1283702879}
   - component: {fileID: 829045832864292645}
+  - component: {fileID: 1724810926}
   m_Layer: 0
   m_Name: SpriteAnimator
   m_TagString: Untagged
@@ -229,6 +234,18 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &1724810926
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4127798058618418200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48d06c5856586af4b8c3570d7dc496f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5627144005039119760
 GameObject:
   m_ObjectHideFlags: 0
@@ -241,7 +258,7 @@ GameObject:
   - component: {fileID: 7704160847158494301}
   m_Layer: 0
   m_Name: HitBox
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -270,7 +287,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.13747811, y: 1.2922935}
@@ -296,6 +313,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5101124502921087084}
   - component: {fileID: 365751213}
+  - component: {fileID: 365751214}
   m_Layer: 0
   m_Name: SmashHitBox
   m_TagString: Untagged
@@ -343,6 +361,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 3.9397612, y: 1.182703}
   m_EdgeRadius: 0
+--- !u!114 &365751214
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6134038880612843575}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29b97b68b6ba3e64d9587aedd9fa5c26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8854073493097922824
 GameObject:
   m_ObjectHideFlags: 0

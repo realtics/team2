@@ -43,5 +43,6 @@ public class AttackState : FSMState<Monster>
     public override void ExitState(Monster monster)
     {
         //Debug.Log("Exit AttacState");
+        monster.animator.SetBool("isAttacking", false);
     }
 }
