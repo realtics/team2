@@ -8,7 +8,7 @@ public class CheckTrigger : MonoBehaviour
     {
         if (other.tag.Contains("Player"))
         {
-            other.transform.root.GetComponent<BaseUnit>().OnHit(100);
+            other.transform.root.GetComponent<BaseUnit>().OnHit(100,transform.root);
         }
     }
 }
