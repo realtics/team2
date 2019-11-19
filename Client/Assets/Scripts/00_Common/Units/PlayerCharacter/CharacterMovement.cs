@@ -163,10 +163,27 @@ public class CharacterMovement : BaseUnit
         MoveUnit(-1.0f, 0.1f, ExtraMoveDirection.Horizontal);
     }
 
-    public override void SetHit()
+    public override void OnHit(AttackInfoSender sender)
     {
-        base.SetHit();
-        SetRecoveryTime(1.0f);
+        base.OnHit(sender);
+        _animator.SetBool("IsHit", true);
+
+        if (sender.Attacker.position.x > transform.position.x)
+            SetFlipX(false);
+        else
+            SetFlipX(true);
+
+        if (sender.HorizontalExtraMoveDuration > 0.0f)
+            MoveUnit(sender.HorizontalExtraMoveValue, sender.HorizontalExtraMoveDuration, ExtraMoveDirection.Horizontal);
+
+        if (sender.VerticalExtraMoveDuration > 0.0f)
+            MoveUnit(sender.VerticalExtraMoveValue, sender.VerticalExtraMoveDuration, ExtraMoveDirection.Vertical);
+    }
+
+    public override void SetHit(float stunDuration)
+    {
+        base.SetHit(stunDuration);
+        SetRecoveryTime(stunDuration);
     }
 
     public override void StopHit()

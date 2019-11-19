@@ -42,6 +42,13 @@ public class CharacterStat : MonoBehaviour
         _uiPlayerInfo.SetPlayerHp(_hp, _maxHp);
     }
 
+    public void OnHitDamage(AttackInfoSender sender)
+    {
+        float damage = CalcReceiveDamage(sender.Damage);
+        _hp = Mathf.Max(_hp - damage, 0);
+        _uiPlayerInfo.SetPlayerHp(_hp, _maxHp);
+    }
+
     private float CalcReceiveDamage(float damage)
     {
         float trueDamage;

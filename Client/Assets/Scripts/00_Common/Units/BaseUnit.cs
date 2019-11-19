@@ -297,7 +297,7 @@ public class BaseUnit : MonoBehaviour
         }
     }
 
-    public virtual void SetHit()
+    public virtual void SetHit(float stunDuration)
     {
         _isHit = true;
     }
@@ -315,7 +315,7 @@ public class BaseUnit : MonoBehaviour
 
     public virtual void OnHit(float damage)
     {
-        SetHit();
+        SetHit(0.0f);
         StopAttack();
         _stat.OnHitDamage(damage);
     }
@@ -323,6 +323,13 @@ public class BaseUnit : MonoBehaviour
     public virtual void OnHit(float damage, Transform attacker)
     {
         OnHit(damage);
+    }
+
+    public virtual void OnHit(AttackInfoSender sender)
+    {
+        SetHit(sender.StunDuration);
+        StopAttack();
+        _stat.OnHitDamage(sender);
     }
 
     protected void SetRecoveryTime(float time)
