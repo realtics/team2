@@ -17,12 +17,13 @@ public class AnimationEffectEvent : MonoBehaviour
     }
     private void OnSmashEffect()
     {
-        Vector3 SmashEffectPos = _smashEffectPivot.position;
+        if (_monster.IsAttack)
+        {
+            Vector3 SmashEffectPos = _smashEffectPivot.position;
 
-        FlipEffect();
-        Instantiate(effect, SmashEffectPos, Quaternion.Euler(Vector3.zero));
-
-        _monster.ActiveSmashHitBox();
+            FlipEffect();
+            Instantiate(effect, SmashEffectPos, Quaternion.Euler(Vector3.zero));
+        }
     }
     
     private void FlipEffect()
@@ -36,7 +37,10 @@ public class AnimationEffectEvent : MonoBehaviour
 
     public void OnSmashAttackBox()
     {
-        _monster.ActiveSmashHitBox();
+        if (_monster.IsAttack)
+        {
+            _monster.ActiveSmashHitBox();
+        }
     }
 
     public void OffSmashAttackBox()
