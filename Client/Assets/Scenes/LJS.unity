@@ -876,13 +876,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4127798058604522686, guid: 1062798e89fa7ff48b49faaa1a382347,
         type: 3}
-      propertyPath: attackRange
-      value: 2.5
+      propertyPath: monsterName
+      value: testMonster
       objectReference: {fileID: 0}
-    - target: {fileID: 6134038880612843575, guid: 1062798e89fa7ff48b49faaa1a382347,
+    - target: {fileID: 4127798058604522686, guid: 1062798e89fa7ff48b49faaa1a382347,
         type: 3}
-      propertyPath: m_IsActive
-      value: 0
+      propertyPath: currentHp
+      value: 200
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1062798e89fa7ff48b49faaa1a382347, type: 3}
