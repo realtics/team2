@@ -23,6 +23,7 @@ public class AttackState : FSMState<Monster>
         {
             return;
         }
+        monster.IsAttack = true;
 
         monster.FlipImage();
         monster.animator.SetBool("isAttacking", true);
@@ -41,5 +42,7 @@ public class AttackState : FSMState<Monster>
     public override void ExitState(Monster monster)
     {
         monster.animator.SetBool("isAttacking", false);
+        monster.IsAttack = false;
+        monster.InactiveSmashHitBox();
     }
 }
