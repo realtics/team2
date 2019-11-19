@@ -5,11 +5,13 @@ using UnityEngine;
 public class CharacterAnimController : MonoBehaviour
 {
     private GameObject _attackBox;
+    private BaseUnit _movement;
 
     private void Start()
     {
         _attackBox = transform.GetChild(0).gameObject;
         _attackBox.SetActive(false);
+        _movement = transform.root.GetComponent<BaseUnit>();
     }
 
     private void Update()
@@ -18,6 +20,9 @@ public class CharacterAnimController : MonoBehaviour
 
     public void OnAttackBox()
     {
+        if (!_movement.IsAttackable())
+            return;
+
         _attackBox.SetActive(true);
     }
 
