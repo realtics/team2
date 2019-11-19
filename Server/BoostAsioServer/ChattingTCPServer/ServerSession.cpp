@@ -104,7 +104,7 @@ void Session::handleReceive(const boost::system::error_code& error, size_t bytes
 		int nReadData = 0;
 
 
-//		////역직렬화
+///////////////////
 		std::string stringReceiveBuffer;
 		stringReceiveBuffer = _ReceiveBuffer.data();
 		std::cout << stringReceiveBuffer << std::endl;
@@ -117,11 +117,14 @@ void Session::handleReceive(const boost::system::error_code& error, size_t bytes
 		int headerIndex = children.get<int>("packetIndex");
 		int packetSize = children.get<int>("packetSize");
 
-		int jsonCharacterMoveX = ptRecv.get<float>("characterMoveX");
-		int jsonCharacterMoveY = ptRecv.get<float>("characterMoveY");
+		float jsonCharacterMoveX = ptRecv.get<float>("characterMoveX");
+		float jsonCharacterMoveY = ptRecv.get<float>("characterMoveY");
 		//std::string jsonString = ptRecv.get<std::string>("String");
 
-		//직렬화
+
+
+
+////////////////
 		PACKET_CHARACTER_MOVE packetCharacterMove;
 		packetCharacterMove.header.packetIndex = RES_IN;
 		packetCharacterMove.header.packetSize = sizeof(PACKET_CHARACTER_MOVE);
@@ -172,6 +175,8 @@ void Session::handleReceive(const boost::system::error_code& error, size_t bytes
 			}
 			else
 			{
+				nPacketData = 0;
+				_nPacketBufferMark = 0;
 				break;
 			}
 		}

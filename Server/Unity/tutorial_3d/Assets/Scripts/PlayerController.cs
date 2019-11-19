@@ -125,6 +125,24 @@ public class PlayerController : MonoBehaviour
 
 
 
+
+        }
+        else
+        {
+            //Vector3 movement = new Vector3(horizontal, 0f, vertical);//입력받은 방향대로 벡터값을 저장
+            //rb.AddForce(movement * speed);  //rigidbody에 힘을 가함
+
+            data._vecPositon = new Vector3(horizontal, 0.0f, vertical);
+            rb.AddForce(data._vecPositon * speed);  //rigidbody에 힘을 가함
+
+            string str = JsonUtility.ToJson(data);
+            Debug.Log("ToJson : " + str);
+
+            //var data2 = JsonUtility.FromJson(str);
+            //data2.printData();
+
+
+
             //
             Vector3 objectPos = this.gameObject.transform.position;
 
@@ -144,24 +162,6 @@ public class PlayerController : MonoBehaviour
             Debug.Log("recv");
 
             string recvData = Encoding.UTF8.GetString(recvBuf, 0, socketRecive);
-        }
-        else
-        {
-            //Vector3 movement = new Vector3(horizontal, 0f, vertical);//입력받은 방향대로 벡터값을 저장
-            //rb.AddForce(movement * speed);  //rigidbody에 힘을 가함
-
-            data._vecPositon = new Vector3(horizontal, 0.0f, vertical);
-            rb.AddForce(data._vecPositon * speed);  //rigidbody에 힘을 가함
-
-            string str = JsonUtility.ToJson(data);
-            Debug.Log("ToJson : " + str);
-
-            //var data2 = JsonUtility.FromJson(str);
-            //data2.printData();
-
-
-
-            
         }
     }
 
