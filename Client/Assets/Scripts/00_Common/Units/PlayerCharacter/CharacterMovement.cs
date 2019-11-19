@@ -39,13 +39,14 @@ public class CharacterMovement : BaseUnit
 
     public override void StopAttack()
     {
+        _animController.OffAttackBox();
+
         if (IsInTranstion)
             return;
 
         base.StopAttack();
         _animator.SetBool("IsAttack", false);
         _animator.SetBool("NextAttack", false);
-        _animController.OffAttackBox();
     }
 
     public override bool SetAttack()
