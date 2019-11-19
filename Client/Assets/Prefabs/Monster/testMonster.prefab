@@ -88,7 +88,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   monsterName: testMonser
   monsterLevel: 99
-  currentHp: 200
+  currentHp: 10
   maxHp: 200
   attackRange: 2.5
   chaseCancleTime: 5
