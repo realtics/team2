@@ -30,6 +30,14 @@ public class Monster : MonoBehaviour
     private bool _isAttack;
     private bool _isHit;
 
+    //FIXME: 피격시 밀림 변수 테스트중
+    private Vector3 _hitDirection;
+    private float _hitSpeed;
+    private float _hitDuration;
+    private float _hitTime;
+       
+
+
     //properties
     public bool IsAttack { get { return _isAttack; } set { _isAttack = value; } }
     public bool IsHit { get { return _isHit; } set { _isHit = value; } }
@@ -56,6 +64,11 @@ public class Monster : MonoBehaviour
         {
             _state.ChangeState(DieState.GetInstance);
             _isDead = true;
+        }
+
+        if (_isHit)
+        {
+            
         }
 
         _state.Update();
@@ -102,6 +115,7 @@ public class Monster : MonoBehaviour
         //SetHit(sender.StunDuration);
         //StopAttack();
 
+        MovedOnHit(sender);
         currentHp -= sender.Damage;
         UIHelper.Instance.SetMonster(this);
         UIHelper.Instance.SetMonsterHp(currentHp, maxHp);
@@ -142,5 +156,20 @@ public class Monster : MonoBehaviour
         {
             transform.localScale = new Vector3(1, 1, 1);
         }
+    }
+
+    private void MovedOnHit(AttackInfoSender sender)
+    {
+        Vector3 direction = Vector3.zero;
+
+        if ((sender.Attacker.position.x - transform.position.x) < 0)
+            direction = Vector3.left;
+
+        else
+            direction = Vector3.right;
+
+        _hitDirection = direction;
+        _hitSpeed = sender.HorizontalExtraMoveValue;
+        _hitDuration = sender.HorizontalExtraMoveDuration;
     }
 }
