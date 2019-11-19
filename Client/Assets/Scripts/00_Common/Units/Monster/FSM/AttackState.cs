@@ -40,7 +40,7 @@ public class AttackState : FSMState<Monster>
 
     public override void ExitState(Monster monster)
     {
-        monster.InactiveSmashHitBox();
         monster.animator.SetBool("isAttacking", false);
+        monster.InactiveSmashHitBox();
     }
 }
