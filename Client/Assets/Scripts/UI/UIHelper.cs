@@ -40,11 +40,15 @@ public class UIHelper : MonoBehaviour
     {
 
     }
-    public void SetGameOver(bool isActive)
+    public void SetGameOver(bool isActive, int coin)
     {
         _gameOver.gameObject.SetActive(isActive);
+        _gameOver.Coin = coin;
     }
-
+    public void SetTime(int time)
+    {
+        _gameOver.SetTime(time);
+    }
     public void SetMonsterHp(float CurrentHp, float MaxHp)
     {
         _monsterInfo.SetHp(CurrentHp, MaxHp);
