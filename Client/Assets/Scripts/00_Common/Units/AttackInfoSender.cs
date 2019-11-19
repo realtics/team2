@@ -8,4 +8,5 @@ public class AttackInfoSender
     public float Damage { get; set; }
     public float HorizontalExtraMoveValue { get; set; }
     public float VerticalExtraMoveValue { get; set; }
+    public float StunTime { get; set; }
 }

@@ -13,6 +13,7 @@ public class CharacterStat : MonoBehaviour
     private float _attackDamage = 10.0f;
     private float _defense = 1.0f;
     private float _attackSpeed = 100.0f;
+    private UIPlayerInfo _uiPlayerInfo;
 
     // properties
     public float AttackDamage { get { return _attackDamage; } }
@@ -25,6 +26,9 @@ public class CharacterStat : MonoBehaviour
     {
         _hp = _maxHp;
         _mp = _maxMp;
+        _uiPlayerInfo = FindObjectOfType<UIPlayerInfo>();
+        _uiPlayerInfo.SetPlayerHp(_hp, _maxHp);
+        _uiPlayerInfo.SetPlayerMp(_mp, _maxMp);
     }
 
     void Update()
@@ -35,6 +39,7 @@ public class CharacterStat : MonoBehaviour
     public void OnHitDamage(float damage)
     {
         _hp = Mathf.Max(_hp - CalcReceiveDamage(damage), 0);
+        _uiPlayerInfo.SetPlayerHp(_hp, _maxHp);
     }
 
     private float CalcReceiveDamage(float damage)

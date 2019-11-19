@@ -30,11 +30,11 @@ public class UIPlayerInfo : MonoBehaviour
         
     }
 
-    private void SetPlayerHp(float value, float maxValue)
+    public void SetPlayerHp(float value, float maxValue)
     {
         _hpBar.SetStat(value, maxValue);
     }
-    private void SetPlayerMp(float value, float maxValue)
+    public void SetPlayerMp(float value, float maxValue)
     {
         _mpBar.SetStat(value, maxValue);
     }
