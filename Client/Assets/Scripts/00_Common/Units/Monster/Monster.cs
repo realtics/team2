@@ -114,4 +114,20 @@ public class Monster : MonoBehaviour
     {
         _hitBox.gameObject.SetActive(false);
     }
+
+    public void FlipImage()
+    {
+        if (target == null)
+            return;
+
+        if ((target.position.x - transform.position.x) > 0)
+        {
+           transform.localScale = new Vector3(-1, 1, 1);
+        }
+
+        else
+        {
+           transform.localScale = new Vector3(1, 1, 1);
+        }
+    }
 }

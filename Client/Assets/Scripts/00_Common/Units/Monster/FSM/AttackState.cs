@@ -23,7 +23,8 @@ public class AttackState : FSMState<Monster>
         {
             return;
         }
-        
+
+        monster.FlipImage();
         monster.animator.SetBool("isAttacking", true);
     }
 

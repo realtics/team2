@@ -53,10 +53,7 @@ public class MoveState : FSMState<Monster>
                 Vector3 direction = monster.target.position - monster.transform.position;
                 direction.Normalize();
 
-                if (direction.x > 0)
-                    monster.transform.localScale = new Vector3(-1, 1, 1);
-                else
-                    monster.transform.localScale = new Vector3(1, 1, 1);
+                monster.FlipImage();
 
                 direction.x *= monster.moveSpeed;
                 direction.y *= (monster.moveSpeed / 2);
