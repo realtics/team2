@@ -20,7 +20,10 @@ public class GameManager : MonoBehaviour
     private int _coin;
 
     private int _countDown;
-    private const int _maxCountDown = 10;
+    private const int _maxDieCountDown = 10;
+    private const int _maxResultCountDown = 4;
+    private bool _countOver;
+    private float _currentTime = 0.0f;
 
     private CharacterStat _playerStat;
 
@@ -35,39 +38,38 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public CharacterMovement player
-    {
-        get
-        {
-            return player;
-        }
-    }
-
     // Start is called before the first frame update
     void Start()
     {
+
+
         _playerState = PlayerState.Alive;
         _instance = this;
-        _playerStat = FindObjectOfType<CharacterStat>().GetComponent<CharacterStat>();
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        if(_countOver)
+        {
+            Invoke("CountOver", 1f);
+        }
     }
 
-    //To do.
-    // GameManager에 코인 사용, 코인을 사용할 수 있는 Countdown과 코인을 전부 사용 후 menu 화면으로 넘어가기.
+    void CountOver()
+    {
+        MoveToScene((int)SceneIndex.MainMenu);
+    }
+
     public void GameOver()
     {
         if (_playerState == PlayerState.Alive)
         {
             _playerState = PlayerState.Die;
             UIHelper.Instance.SetGameOver(true, _coin);
-            _countDown = _maxCountDown;
-            UIHelper.Instance.SetTime(_countDown);
-            StartCoroutine(SecondCountdown());
+            _countDown = _maxDieCountDown;
+            UIHelper.Instance.GameOverSetTime(_countDown);
+            StartCoroutine(DieSecondCountdown());
         }
     }
     public void UseCoin()
@@ -75,38 +77,63 @@ public class GameManager : MonoBehaviour
         if(_coin > 0)
         {
             _coin -= 1;
-            _countDown = _maxCountDown;
-            StopCoroutine(SecondCountdown());
+            _countDown = _maxDieCountDown;
+            StopCoroutine(DieSecondCountdown());
         }
     }
 
-    public void CountOver()
+    public void DieCountOver()
     {
-        _countDown = _maxCountDown;
+        _countDown = _maxDieCountDown;
         _playerState = PlayerState.Alive;
-        StopCoroutine(SecondCountdown());
+    }
 
-        MoveToScene((int)SceneIndex.MainMenu);
+    public void GameResult()
+    {
+        UIHelper.Instance.SetGameResult(true);
+        _countDown = _maxResultCountDown;
+        UIHelper.Instance.GameResultSetTime(_countDown);
+        StartCoroutine(ResultSecondCountdown());
     }
 
     public void MoveToScene(int Scene)
     {
         SceneManager.LoadScene(Scene);
     }
-
-    IEnumerator SecondCountdown()
+    IEnumerator DieSecondCountdown()
     {
         while (true)
         {
             if (_countDown > 0)
             {
                 _countDown -= 1;
-                UIHelper.Instance.SetTime(_countDown);
+                UIHelper.Instance.GameOverSetTime(_countDown);
             }
             else
             {
-                CountOver();
                 UIHelper.Instance.SetGameOver(false, _coin);
+                _countOver = true;
+
+                StopCoroutine(DieSecondCountdown());
+            }
+            yield return new WaitForSeconds(1);
+        }
+    }
+    IEnumerator ResultSecondCountdown()
+    {
+        while (true)
+        {
+            if (_countDown > 0)
+            {
+                _countDown -= 1;
+                UIHelper.Instance.GameResultSetTime(_countDown);
+            }
+            else
+            {
+                //UIHelper.Instance.SetGameResult(false);
+                UIHelper.Instance.GameResultEnd();
+                //_countOver = true;
+                StopCoroutine(ResultSecondCountdown());
             }
             yield return new WaitForSeconds(1);
         }

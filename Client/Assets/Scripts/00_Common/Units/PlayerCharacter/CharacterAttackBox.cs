@@ -5,14 +5,15 @@ using UnityEngine;
 public class CharacterAttackBox : MonoBehaviour
 {
     private const float AttackRange = 0.8f;
-    private BaseUnit _unit;
+    private CharacterStat _stat;
     private AttackInfoSender _sender;
+
     void Start()
     {
-        _unit = transform.root.GetComponent<BaseUnit>();
+        _stat = transform.root.GetComponent<CharacterStat>();
 
         _sender = new AttackInfoSender(transform.root);
-        _sender.Damage = 1.0f;
+        _sender.Damage = _stat.AttackDamage;
         _sender.HorizontalExtraMoveDuration = 0.2f;
         _sender.HorizontalExtraMoveValue = -15.0f;
         _sender.StunDuration = 1.0f;
@@ -27,7 +28,7 @@ public class CharacterAttackBox : MonoBehaviour
         if (!other.tag.Contains("Monster"))
             return;
 
-        if (Mathf.Abs(_unit.transform.position.y - other.transform.position.y) > AttackRange)
+        if (Mathf.Abs(_stat.transform.position.y - other.transform.position.y) > AttackRange)
             return;
 
 

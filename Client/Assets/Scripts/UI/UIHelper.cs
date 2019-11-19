@@ -16,6 +16,7 @@ public class UIHelper : MonoBehaviour
     private UIMosterInfo _monsterInfo;
 
     private UIGameOver _gameOver;
+    private UIGameResult _gameResult;
 
     void Awake()
     {
@@ -23,6 +24,7 @@ public class UIHelper : MonoBehaviour
         _monsterInfo = GameObject.Find("MonsterInfo").GetComponent<UIMosterInfo>();
 
         _gameOver = GameObject.Find("GameOver").GetComponent<UIGameOver>();
+        _gameResult = GameObject.Find("GameResult").GetComponent<UIGameResult>();
     }
 
     // Use this for initialization
@@ -32,23 +34,45 @@ public class UIHelper : MonoBehaviour
 
         _monsterInfo.gameObject.SetActive(false);
         _gameOver.gameObject.SetActive(false);
-
+        _gameResult.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        // hack Test.
+        if(Input.GetKeyDown(KeyCode.V))
+        {
+            GameManager.Instance.GameResult();
+        }
+    }
+    public void SetGameOver(bool isActive)
+    {
+        _gameOver.gameObject.SetActive(isActive);
     }
     public void SetGameOver(bool isActive, int coin)
     {
         _gameOver.gameObject.SetActive(isActive);
         _gameOver.Coin = coin;
     }
-    public void SetTime(int time)
+    public void GameOverSetTime(int time)
     {
         _gameOver.SetTime(time);
     }
+
+    public void SetGameResult(bool isActive)
+    {
+        _gameResult.gameObject.SetActive(isActive);
+    }
+    public void GameResultSetTime(int time)
+    {
+        _gameResult.SetTime(time);
+    }
+    public void GameResultEnd()
+    {
+        _gameResult.AllOpenResultBox();
+    }
+
     public void SetMonsterHp(float CurrentHp, float MaxHp)
     {
         _monsterInfo.SetHp(CurrentHp, MaxHp);
@@ -57,8 +81,7 @@ public class UIHelper : MonoBehaviour
     public void SetMonster(Monster monster)
     {
         _monsterInfo.gameObject.SetActive(true);
-        //임시값.
-
+        
         //FIXME :  현재체력, 최대체력 구분
         MonsterInfo monsterInfo;
         monsterInfo.name = monster.monsterName;

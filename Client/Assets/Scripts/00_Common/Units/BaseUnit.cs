@@ -81,6 +81,7 @@ public class BaseUnit : MonoBehaviour
         _renderer = GetComponentInChildren<SpriteRenderer>();
         _rgdBody = GetComponent<Rigidbody2D>();
         _stat = GetComponent<CharacterStat>();
+        _stat.SetUnit(this);
         _originPos = _avatar.localPosition;
     }
 
@@ -95,6 +96,7 @@ public class BaseUnit : MonoBehaviour
         JumpProcess();
         RecoveryHit();
         ExtraMoveTimeProcess();
+        SetAttackSpeed();
     }
 
     protected virtual void RecoveryHit()
@@ -323,5 +325,18 @@ public class BaseUnit : MonoBehaviour
     protected void SetRecoveryTime(float time)
     {
         _hitRecoveryTime = time;
+    }
+
+    public void SetAttackSpeed()
+    {
+        AnimatorStateInfo animStateInfo = _animator.GetCurrentAnimatorStateInfo(0);
+
+        if (!animStateInfo.IsTag("Attack"))
+        {
+            _animator.speed = 1.0f;
+            return;
+        }
+
+        _animator.speed = _stat.AttackSpeed / 100.0f;
     }
 }
