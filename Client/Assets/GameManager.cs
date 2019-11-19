@@ -50,15 +50,15 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(_countOver && _currentTime > 1.0f)
+        if(_countOver)
         {
-            MoveToScene((int)SceneIndex.MainMenu);
+            Invoke("CountOver", 1f);
         }
-        else if(_countOver)
-        {
-            _currentTime += Time.deltaTime;
-        }
+    }
 
+    void CountOver()
+    {
+        MoveToScene((int)SceneIndex.MainMenu);
     }
 
     public void GameOver()
@@ -113,6 +113,7 @@ public class GameManager : MonoBehaviour
             {
                 UIHelper.Instance.SetGameOver(false, _coin);
                 _countOver = true;
+
                 StopCoroutine(DieSecondCountdown());
             }
             yield return new WaitForSeconds(1);
@@ -129,8 +130,9 @@ public class GameManager : MonoBehaviour
             }
             else
             {
-                UIHelper.Instance.SetGameResult(false);
-                _countOver = true;
+                //UIHelper.Instance.SetGameResult(false);
+                UIHelper.Instance.GameResultEnd();
+                //_countOver = true;
                 StopCoroutine(ResultSecondCountdown());
             }
             yield return new WaitForSeconds(1);
