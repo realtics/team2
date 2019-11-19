@@ -10,7 +10,7 @@ public class Monster : MonoBehaviour
     public float currentHp = 200.0f;
     public float maxHp = 200.0f;
 
-    public float attackRange =3.8f;
+    public float attackRange = 3.8f;
 
     public float chaseCancleTime = 5.0f;
     public float chaseTime = 0;
@@ -28,9 +28,11 @@ public class Monster : MonoBehaviour
     private bool _isDead = false;
 
     private bool _isAttack;
+    private bool _isHit;
 
     //properties
     public bool IsAttack { get { return _isAttack; } set { _isAttack = value; } }
+    public bool IsHit { get { return _isHit; } set { _isHit = value; } }
 
     private void Awake()
     {
@@ -55,7 +57,7 @@ public class Monster : MonoBehaviour
             _state.ChangeState(DieState.GetInstance);
             _isDead = true;
         }
- 
+
         _state.Update();
     }
 
@@ -91,17 +93,8 @@ public class Monster : MonoBehaviour
     {
         _state = new StateMachine<Monster>();
         _state.InitialSetting(this, MoveState.GetInstance);
-    
+
         target = null;
-    }
-
-    public void OnHit(float damage)
-    {
-        currentHp -= damage;
-        UIHelper.Instance.SetMonster(this);
-        UIHelper.Instance.SetMonsterHp(currentHp,maxHp);
-
-        ChangeState(HitState.GetInstance);
     }
 
     public void OnHit(AttackInfoSender sender)
@@ -113,7 +106,11 @@ public class Monster : MonoBehaviour
         UIHelper.Instance.SetMonster(this);
         UIHelper.Instance.SetMonsterHp(currentHp, maxHp);
 
-        _state.ChangeState(HitState.GetInstance);
+        if (!_isHit)
+            _state.ChangeState(HitState.GetInstance);
+
+        else
+            _state.RestartState();
     }
 
     public void ActiveSmashHitBox()
@@ -138,12 +135,12 @@ public class Monster : MonoBehaviour
 
         if ((target.position.x - transform.position.x) > 0)
         {
-           transform.localScale = new Vector3(-1, 1, 1);
+            transform.localScale = new Vector3(-1, 1, 1);
         }
 
         else
         {
-           transform.localScale = new Vector3(1, 1, 1);
+            transform.localScale = new Vector3(1, 1, 1);
         }
     }
 }
