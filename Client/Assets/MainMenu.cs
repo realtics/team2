@@ -7,7 +7,7 @@ public class MainMenu : MonoBehaviour
 {
     public void GameStart()
     {
-        // scene abu
+        // scene Town
         SceneManager.LoadScene(1);
     }
 

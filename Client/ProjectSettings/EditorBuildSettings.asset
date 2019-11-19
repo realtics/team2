@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: 5772615f15bc7654db78ac524060e242
   - enabled: 1
+    path: Assets/Scenes/KSJ/Town.unity
+    guid: 0073f535bcc4d5142821109953d2da5a
+  - enabled: 1
     path: Assets/Scenes/Abu.unity
     guid: ff33c24bf4a20534dafc06e337a5e58d
   m_configObjects: {}
