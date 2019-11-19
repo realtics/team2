@@ -39,6 +39,7 @@ public class HitState : FSMState<Monster>
     public override void ExitState(Monster monster)
     {
         _currentTime = 0.0f;
+        monster.animator.SetBool("isHit", false);
     }
 
     private bool IsHitRecoveryTimeEnd()
