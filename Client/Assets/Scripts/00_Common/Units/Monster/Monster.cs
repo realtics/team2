@@ -115,7 +115,7 @@ public class Monster : MonoBehaviour
         //SetHit(sender.StunDuration);
         //StopAttack();
 
-        MovedOnHit(sender);
+        SetMovedOnHit(sender);
         currentHp -= sender.Damage;
         UIHelper.Instance.SetMonster(this);
         UIHelper.Instance.SetMonsterHp(currentHp, maxHp);
@@ -158,7 +158,8 @@ public class Monster : MonoBehaviour
         }
     }
 
-    private void MovedOnHit(AttackInfoSender sender)
+    //FIXME: 피격시 밀림 변수 세팅함수의 이름을 정하면 수정요망
+    private void SetMovedOnHit(AttackInfoSender sender)
     {
         Vector3 direction = Vector3.zero;
 
@@ -171,5 +172,28 @@ public class Monster : MonoBehaviour
         _hitDirection = direction;
         _hitSpeed = sender.HorizontalExtraMoveValue;
         _hitDuration = sender.HorizontalExtraMoveDuration;
+
+        StartCoroutine("MovedOnHit");
+    }
+
+    //FIXME: 피격시 밀림 함수의 이름을 정하면 수정요망
+    IEnumerator MovedOnHit()
+    {
+        _hitDuration -= Time.deltaTime;
+
+        if (_hitDuration <= 0.0f)
+        {
+            Debug.Log("1");
+            StopCoroutine("MovedOnHit");
+            yield break;
+        }
+          
+        else
+        {
+            transform.position += _hitDirection * Time.deltaTime * _hitSpeed;
+        }
+
+        yield return null;
+        StartCoroutine("MovedOnHit");
     }
 }
