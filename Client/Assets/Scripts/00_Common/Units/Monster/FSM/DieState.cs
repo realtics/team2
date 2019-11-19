@@ -20,6 +20,8 @@ public class DieState : FSMState<Monster>
     public override void EnterState(Monster monster)
     {
         monster.animator.SetBool("isDie", true);
+        monster.InactiveHitBox();
+      
         //TODO : 아이템 드랍
     }
 
