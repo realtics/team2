@@ -1,0 +1,3031 @@
+fileFormatVersion: 2
+guid: ee3102463c472d245826c6ceb3c906fd
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -8879513007446197393
+    second: SwordmanSkillIcon_0
+  - first:
+      213: -7148338151372308546
+    second: SwordmanSkillIcon_1
+  - first:
+      213: -6216664152752087276
+    second: SwordmanSkillIcon_2
+  - first:
+      213: -5674502642539143760
+    second: SwordmanSkillIcon_3
+  - first:
+      213: -7326156580254034821
+    second: SwordmanSkillIcon_4
+  - first:
+      213: 3697152521412798758
+    second: SwordmanSkillIcon_5
+  - first:
+      213: 8386632162593170988
+    second: SwordmanSkillIcon_6
+  - first:
+      213: -8921050836014444988
+    second: SwordmanSkillIcon_7
+  - first:
+      213: 7294400773212941350
+    second: SwordmanSkillIcon_8
+  - first:
+      213: -6395123849881938496
+    second: SwordmanSkillIcon_9
+  - first:
+      213: 167401901637163222
+    second: SwordmanSkillIcon_10
+  - first:
+      213: -7971685171504116465
+    second: SwordmanSkillIcon_11
+  - first:
+      213: 833162618673938393
+    second: SwordmanSkillIcon_12
+  - first:
+      213: -5824128559286666686
+    second: SwordmanSkillIcon_13
+  - first:
+      213: 4355938224676686903
+    second: SwordmanSkillIcon_14
+  - first:
+      213: 2698092259655403352
+    second: SwordmanSkillIcon_15
+  - first:
+      213: 780057760043147377
+    second: SwordmanSkillIcon_16
+  - first:
+      213: -769443925085769342
+    second: SwordmanSkillIcon_17
+  - first:
+      213: -4891497782657650414
+    second: SwordmanSkillIcon_18
+  - first:
+      213: 5123391559363634674
+    second: SwordmanSkillIcon_19
+  - first:
+      213: 6058815412016940312
+    second: SwordmanSkillIcon_20
+  - first:
+      213: -3313891733857257295
+    second: SwordmanSkillIcon_21
+  - first:
+      213: -2344967740388805958
+    second: SwordmanSkillIcon_22
+  - first:
+      213: -3087706943544057854
+    second: SwordmanSkillIcon_23
+  - first:
+      213: 7631913301939453952
+    second: SwordmanSkillIcon_24
+  - first:
+      213: 1211776503465146177
+    second: SwordmanSkillIcon_25
+  - first:
+      213: -5996171783014025193
+    second: SwordmanSkillIcon_26
+  - first:
+      213: -4555737873464754286
+    second: SwordmanSkillIcon_27
+  - first:
+      213: -8272468417981698105
+    second: SwordmanSkillIcon_28
+  - first:
+      213: -6946019008079045077
+    second: SwordmanSkillIcon_29
+  - first:
+      213: 4159494804702370142
+    second: SwordmanSkillIcon_30
+  - first:
+      213: 916865494504215998
+    second: SwordmanSkillIcon_31
+  - first:
+      213: -371681329928688402
+    second: SwordmanSkillIcon_32
+  - first:
+      213: 246866106221775457
+    second: SwordmanSkillIcon_33
+  - first:
+      213: 1260023733543913243
+    second: SwordmanSkillIcon_34
+  - first:
+      213: 8618320328248081452
+    second: SwordmanSkillIcon_35
+  - first:
+      213: 888849508588427237
+    second: SwordmanSkillIcon_36
+  - first:
+      213: 3883678198627901939
+    second: SwordmanSkillIcon_37
+  - first:
+      213: -2707564846967448135
+    second: SwordmanSkillIcon_38
+  - first:
+      213: 731803859347398485
+    second: SwordmanSkillIcon_39
+  - first:
+      213: 187744675336011074
+    second: SwordmanSkillIcon_40
+  - first:
+      213: 2197803765741208450
+    second: SwordmanSkillIcon_41
+  - first:
+      213: 2287298515319913450
+    second: SwordmanSkillIcon_42
+  - first:
+      213: 5036531278642178003
+    second: SwordmanSkillIcon_43
+  - first:
+      213: 7149158958471174740
+    second: SwordmanSkillIcon_44
+  - first:
+      213: 1724112189578591977
+    second: SwordmanSkillIcon_45
+  - first:
+      213: -2693275393091538490
+    second: SwordmanSkillIcon_46
+  - first:
+      213: 3206348129271289710
+    second: SwordmanSkillIcon_47
+  - first:
+      213: 2595423243712372479
+    second: SwordmanSkillIcon_48
+  - first:
+      213: 8539752539942531505
+    second: SwordmanSkillIcon_49
+  - first:
+      213: -1931619349839962041
+    second: SwordmanSkillIcon_50
+  - first:
+      213: 4408471924756345413
+    second: SwordmanSkillIcon_51
+  - first:
+      213: 5778919406861899744
+    second: SwordmanSkillIcon_52
+  - first:
+      213: 4564041890633125322
+    second: SwordmanSkillIcon_53
+  - first:
+      213: 8744671858160363062
+    second: SwordmanSkillIcon_54
+  - first:
+      213: -4841570256368751915
+    second: SwordmanSkillIcon_55
+  - first:
+      213: -975345648396589705
+    second: SwordmanSkillIcon_56
+  - first:
+      213: -6190187400150543193
+    second: SwordmanSkillIcon_57
+  - first:
+      213: 187458550791499352
+    second: SwordmanSkillIcon_58
+  - first:
+      213: -3696864127051367700
+    second: SwordmanSkillIcon_59
+  - first:
+      213: -3291607468095628691
+    second: SwordmanSkillIcon_60
+  - first:
+      213: 1050578710293120650
+    second: SwordmanSkillIcon_61
+  - first:
+      213: 8747566501688106972
+    second: SwordmanSkillIcon_62
+  - first:
+      213: 420193624020253575
+    second: SwordmanSkillIcon_63
+  - first:
+      213: 4442706649311835917
+    second: SwordmanSkillIcon_64
+  - first:
+      213: 9044888532388259369
+    second: SwordmanSkillIcon_65
+  - first:
+      213: 509434134406297071
+    second: SwordmanSkillIcon_66
+  - first:
+      213: 9013974737148081268
+    second: SwordmanSkillIcon_67
+  - first:
+      213: 3865699505494632252
+    second: SwordmanSkillIcon_68
+  - first:
+      213: -353168909953256430
+    second: SwordmanSkillIcon_69
+  - first:
+      213: 8158057100322926401
+    second: SwordmanSkillIcon_70
+  - first:
+      213: -989528909433827491
+    second: SwordmanSkillIcon_71
+  - first:
+      213: 2594577466882508322
+    second: SwordmanSkillIcon_72
+  - first:
+      213: -3963628415480690443
+    second: SwordmanSkillIcon_73
+  - first:
+      213: -2849874615911119256
+    second: SwordmanSkillIcon_74
+  - first:
+      213: -7871554784178722352
+    second: SwordmanSkillIcon_75
+  - first:
+      213: 5635633120675207376
+    second: SwordmanSkillIcon_76
+  - first:
+      213: 7768293455420419596
+    second: SwordmanSkillIcon_77
+  - first:
+      213: 4597555762294039555
+    second: SwordmanSkillIcon_78
+  - first:
+      213: 2709491422378370008
+    second: SwordmanSkillIcon_79
+  - first:
+      213: 170654923400940094
+    second: SwordmanSkillIcon_80
+  - first:
+      213: 1188950999018922862
+    second: SwordmanSkillIcon_81
+  - first:
+      213: 8433413222944308893
+    second: SwordmanSkillIcon_82
+  - first:
+      213: -4349022973296383948
+    second: SwordmanSkillIcon_83
+  - first:
+      213: 191245489369444179
+    second: SwordmanSkillIcon_84
+  - first:
+      213: 3765760274599153775
+    second: SwordmanSkillIcon_85
+  - first:
+      213: -5485458998481560375
+    second: SwordmanSkillIcon_86
+  - first:
+      213: 4155650876347872813
+    second: SwordmanSkillIcon_87
+  - first:
+      213: 6253284904047405826
+    second: SwordmanSkillIcon_88
+  - first:
+      213: -9143512809936495851
+    second: SwordmanSkillIcon_89
+  - first:
+      213: 4582143943128189661
+    second: SwordmanSkillIcon_90
+  - first:
+      213: 90072195398410431
+    second: SwordmanSkillIcon_91
+  - first:
+      213: 3016888260045311307
+    second: SwordmanSkillIcon_92
+  - first:
+      213: 7814555032913344712
+    second: SwordmanSkillIcon_93
+  - first:
+      213: 2281097501038025230
+    second: SwordmanSkillIcon_94
+  - first:
+      213: 8379231064865714931
+    second: SwordmanSkillIcon_95
+  - first:
+      213: 4809257314628615031
+    second: SwordmanSkillIcon_96
+  - first:
+      213: 591196899322153834
+    second: SwordmanSkillIcon_97
+  - first:
+      213: 7322831998531348187
+    second: SwordmanSkillIcon_98
+  - first:
+      213: 8855095967862314657
+    second: SwordmanSkillIcon_99
+  - first:
+      213: 2391660703528719849
+    second: SwordmanSkillIcon_100
+  - first:
+      213: 4907043417965373666
+    second: SwordmanSkillIcon_101
+  - first:
+      213: 7954741522795938532
+    second: SwordmanSkillIcon_102
+  - first:
+      213: -7882250294525439172
+    second: SwordmanSkillIcon_103
+  - first:
+      213: 8214849686998313570
+    second: SwordmanSkillIcon_104
+  - first:
+      213: -4667369813945170503
+    second: SwordmanSkillIcon_105
+  - first:
+      213: 3306519234637373413
+    second: SwordmanSkillIcon_106
+  - first:
+      213: -606432846606484121
+    second: SwordmanSkillIcon_107
+  - first:
+      213: 6893965068726543760
+    second: SwordmanSkillIcon_108
+  - first:
+      213: 3861738903817682696
+    second: SwordmanSkillIcon_109
+  - first:
+      213: -3399128656549618909
+    second: SwordmanSkillIcon_110
+  - first:
+      213: 8494912127777585216
+    second: SwordmanSkillIcon_111
+  - first:
+      213: 460227359695379424
+    second: SwordmanSkillIcon_112
+  - first:
+      213: -4464104272275295409
+    second: SwordmanSkillIcon_113
+  - first:
+      213: 5734804280565654818
+    second: SwordmanSkillIcon_114
+  - first:
+      213: -2048430466591269629
+    second: SwordmanSkillIcon_115
+  - first:
+      213: 5021813543557488669
+    second: SwordmanSkillIcon_116
+  - first:
+      213: -96804808483196130
+    second: SwordmanSkillIcon_117
+  - first:
+      213: -5172457110601065919
+    second: SwordmanSkillIcon_118
+  - first:
+      213: 3614049331134122105
+    second: SwordmanSkillIcon_119
+  - first:
+      213: 7871859776660330365
+    second: SwordmanSkillIcon_120
+  externalObjects: {}
+  serializedVersion: 10
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 544
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f386a2b104ecc124f94d037710ae8586
+      internalID: -8879513007446197393
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_1
+      rect:
+        serializedVersion: 2
+        x: 46
+        y: 544
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 61d118184395cdf4eaaa98c100444e21
+      internalID: -7148338151372308546
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_2
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 544
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7e6be8705a1bf00458b9094764ef585d
+      internalID: -6216664152752087276
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_3
+      rect:
+        serializedVersion: 2
+        x: 152
+        y: 544
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7811c9eb0d5167a469b5bf1fd92ec194
+      internalID: -5674502642539143760
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_4
+      rect:
+        serializedVersion: 2
+        x: 204
+        y: 544
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b6216b19d078dea4d891d4eb3eaf20c3
+      internalID: -7326156580254034821
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_5
+      rect:
+        serializedVersion: 2
+        x: 260
+        y: 544
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 55ad3adb8657d564c9b68da93d851acd
+      internalID: 3697152521412798758
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_6
+      rect:
+        serializedVersion: 2
+        x: 307
+        y: 544
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a208fcdc4c662cc4abf07a5f38685525
+      internalID: 8386632162593170988
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_7
+      rect:
+        serializedVersion: 2
+        x: 358
+        y: 544
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 67722844b98705747a6d85bd463ab6cb
+      internalID: -8921050836014444988
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_8
+      rect:
+        serializedVersion: 2
+        x: 405
+        y: 544
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7ec0e352c8a56ad4ba0b010db7b98fba
+      internalID: 7294400773212941350
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_9
+      rect:
+        serializedVersion: 2
+        x: 456
+        y: 544
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 560405c6a3d0b3347998f6538581c756
+      internalID: -6395123849881938496
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_10
+      rect:
+        serializedVersion: 2
+        x: 510
+        y: 544
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c35be6d1e302fb04b9a12d2c11af9f8b
+      internalID: 167401901637163222
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_11
+      rect:
+        serializedVersion: 2
+        x: 566
+        y: 544
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 45e6bbea3d0b58c498f8fa7a671657c7
+      internalID: -7971685171504116465
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_12
+      rect:
+        serializedVersion: 2
+        x: 622
+        y: 544
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2ed19e1c1fead624ca14b9deb4b480bc
+      internalID: 833162618673938393
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_13
+      rect:
+        serializedVersion: 2
+        x: 735
+        y: 544
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 78c1ee62822cf224bad29dca32d4d3d7
+      internalID: -5824128559286666686
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_14
+      rect:
+        serializedVersion: 2
+        x: 774
+        y: 544
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 178be68a42112944280acd9d7b149f27
+      internalID: 4355938224676686903
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_15
+      rect:
+        serializedVersion: 2
+        x: 814
+        y: 544
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2bd391fbd1bf4ab4088cba3150e120a8
+      internalID: 2698092259655403352
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_16
+      rect:
+        serializedVersion: 2
+        x: 858
+        y: 544
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bbabf798e06e395458b9f63f2882abc5
+      internalID: 780057760043147377
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_17
+      rect:
+        serializedVersion: 2
+        x: 900
+        y: 544
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d4829716ddbebd4468f64b0a87d9e2f3
+      internalID: -769443925085769342
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_18
+      rect:
+        serializedVersion: 2
+        x: 735
+        y: 502
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 57893ef357fa7ba43b3b271993a0f603
+      internalID: -4891497782657650414
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_19
+      rect:
+        serializedVersion: 2
+        x: 774
+        y: 502
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: de1e44452a6bcbd46bd2c0d8cffeca60
+      internalID: 5123391559363634674
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_20
+      rect:
+        serializedVersion: 2
+        x: 814
+        y: 502
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2b736e7a7dffad2448e39c42821cc0d8
+      internalID: 6058815412016940312
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_21
+      rect:
+        serializedVersion: 2
+        x: 858
+        y: 502
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ad5c59c7f2d57b248bbb57ec724dc71e
+      internalID: -3313891733857257295
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_22
+      rect:
+        serializedVersion: 2
+        x: 900
+        y: 502
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bc70ac86e91ef1241b3900fe1a6dd238
+      internalID: -2344967740388805958
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_23
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 455
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: affcecfaa029e6244bdacf8a760adc17
+      internalID: -3087706943544057854
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_24
+      rect:
+        serializedVersion: 2
+        x: 46
+        y: 455
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 74643b6090da2724e8521fb01d07c060
+      internalID: 7631913301939453952
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_25
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 455
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1eaa7ee8e0590724dba656b3032e0d30
+      internalID: 1211776503465146177
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_26
+      rect:
+        serializedVersion: 2
+        x: 152
+        y: 455
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3779c784065473342bcfaee4a02640b9
+      internalID: -5996171783014025193
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_27
+      rect:
+        serializedVersion: 2
+        x: 204
+        y: 455
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fbbe4fd2bfffcd44f8d9dfa700e745ae
+      internalID: -4555737873464754286
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_28
+      rect:
+        serializedVersion: 2
+        x: 260
+        y: 455
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 86fac02f3502dfb4fa88b8c8bce69e3e
+      internalID: -8272468417981698105
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_29
+      rect:
+        serializedVersion: 2
+        x: 307
+        y: 455
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 53079e9576c414d438b5b7e8f52126d4
+      internalID: -6946019008079045077
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_30
+      rect:
+        serializedVersion: 2
+        x: 358
+        y: 455
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e0312d81813ad7644a09fbce98dc9067
+      internalID: 4159494804702370142
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_31
+      rect:
+        serializedVersion: 2
+        x: 405
+        y: 455
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a3bacdcea63549d4bb9fa27d7257a3ee
+      internalID: 916865494504215998
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_32
+      rect:
+        serializedVersion: 2
+        x: 454
+        y: 455
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 70981262288cd2e4aa61650c0c1900dd
+      internalID: -371681329928688402
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_33
+      rect:
+        serializedVersion: 2
+        x: 510
+        y: 455
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3929d8b5f06f3e841a8be503c3dc1049
+      internalID: 246866106221775457
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_34
+      rect:
+        serializedVersion: 2
+        x: 566
+        y: 455
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 212ab16547b374a4e8b0879e8639d7b2
+      internalID: 1260023733543913243
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_35
+      rect:
+        serializedVersion: 2
+        x: 622
+        y: 455
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 338eb91b4fdaafa4f8c24defef30731b
+      internalID: 8618320328248081452
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_36
+      rect:
+        serializedVersion: 2
+        x: 670
+        y: 455
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c7822d9ff80eb664190f63306b747caf
+      internalID: 888849508588427237
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_37
+      rect:
+        serializedVersion: 2
+        x: 735
+        y: 462
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b347e9646eb285a40b578d87bea23111
+      internalID: 3883678198627901939
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_38
+      rect:
+        serializedVersion: 2
+        x: 774
+        y: 462
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 25cd517c12c45204588aeb6a3724df56
+      internalID: -2707564846967448135
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_39
+      rect:
+        serializedVersion: 2
+        x: 814
+        y: 462
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 58c90bf945293374b9ffed1e089874e2
+      internalID: 731803859347398485
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_40
+      rect:
+        serializedVersion: 2
+        x: 858
+        y: 462
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1ba55cb9c3a88a94c9d35e10e02dc208
+      internalID: 187744675336011074
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_41
+      rect:
+        serializedVersion: 2
+        x: 900
+        y: 462
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6906116f9f3db8b49af645dcdc4949b2
+      internalID: 2197803765741208450
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_42
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 413
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fbf03b50f34a16b43814f7c6580b8805
+      internalID: 2287298515319913450
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_43
+      rect:
+        serializedVersion: 2
+        x: 46
+        y: 413
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fa4d89e6d92cb67488468918dd7c8c57
+      internalID: 5036531278642178003
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_44
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 413
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3bbf41466924cbd46be80784a3209cf5
+      internalID: 7149158958471174740
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_45
+      rect:
+        serializedVersion: 2
+        x: 151
+        y: 412
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 975119e8be96d6a468114b45096c5ee1
+      internalID: 1724112189578591977
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_46
+      rect:
+        serializedVersion: 2
+        x: 201
+        y: 412
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 40d926fae187564419654163fa44d03a
+      internalID: -2693275393091538490
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_47
+      rect:
+        serializedVersion: 2
+        x: 257
+        y: 412
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4430b3d5234d24b488e5462849944da6
+      internalID: 3206348129271289710
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_48
+      rect:
+        serializedVersion: 2
+        x: 307
+        y: 413
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5818dcadcd3dc674196181307754943c
+      internalID: 2595423243712372479
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_49
+      rect:
+        serializedVersion: 2
+        x: 735
+        y: 417
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aed5b7abd174ef149a33b69afa56e4a3
+      internalID: 8539752539942531505
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_50
+      rect:
+        serializedVersion: 2
+        x: 774
+        y: 417
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b5cf00caf2ca1c54798ae06d55a8b766
+      internalID: -1931619349839962041
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_51
+      rect:
+        serializedVersion: 2
+        x: 814
+        y: 417
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 79e269996d542fa4fa4a9291470e35dc
+      internalID: 4408471924756345413
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_52
+      rect:
+        serializedVersion: 2
+        x: 858
+        y: 417
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 854ca7f1df7c6c04298a0549486aee49
+      internalID: 5778919406861899744
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_53
+      rect:
+        serializedVersion: 2
+        x: 735
+        y: 377
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b51909f4fd8a0de4685e2d4ed70c3227
+      internalID: 4564041890633125322
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_54
+      rect:
+        serializedVersion: 2
+        x: 774
+        y: 377
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: df967d793a09a0a418cb70dc8823e3f6
+      internalID: 8744671858160363062
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_55
+      rect:
+        serializedVersion: 2
+        x: 814
+        y: 377
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0af1e053b0a2dc84a9dcc142e349589d
+      internalID: -4841570256368751915
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_56
+      rect:
+        serializedVersion: 2
+        x: 858
+        y: 377
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bc9448e589ef90b4eb5bee87d3a7675a
+      internalID: -975345648396589705
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_57
+      rect:
+        serializedVersion: 2
+        x: 900
+        y: 377
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7c5de05c0e0495049bcc736a6b0c260e
+      internalID: -6190187400150543193
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_58
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 320
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c8470e911b293ef44b6cb33cebd258b0
+      internalID: 187458550791499352
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_59
+      rect:
+        serializedVersion: 2
+        x: 46
+        y: 320
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a9d9cc51d20236f46a77d16140788629
+      internalID: -3696864127051367700
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_60
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 320
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1a1acb9b3984c544da2485a368aff463
+      internalID: -3291607468095628691
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_61
+      rect:
+        serializedVersion: 2
+        x: 152
+        y: 320
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e3945e68dee5fa34186588749b3ce285
+      internalID: 1050578710293120650
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_62
+      rect:
+        serializedVersion: 2
+        x: 204
+        y: 320
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fecac488013997a4b9a29df8dcb8065c
+      internalID: 8747566501688106972
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_63
+      rect:
+        serializedVersion: 2
+        x: 260
+        y: 320
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f88b9f413d75416488f523787f7562d5
+      internalID: 420193624020253575
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_64
+      rect:
+        serializedVersion: 2
+        x: 307
+        y: 320
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8aed5f4eaaeec1d498f6bf1ee73f78b1
+      internalID: 4442706649311835917
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_65
+      rect:
+        serializedVersion: 2
+        x: 358
+        y: 320
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 190179fdeea7363419ce4cf0e345b541
+      internalID: 9044888532388259369
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_66
+      rect:
+        serializedVersion: 2
+        x: 405
+        y: 320
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 35ccba6042cdcd0468505a7f861f7039
+      internalID: 509434134406297071
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_67
+      rect:
+        serializedVersion: 2
+        x: 456
+        y: 320
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6e9031fdfab0dad478afbc459b5f7739
+      internalID: 9013974737148081268
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_68
+      rect:
+        serializedVersion: 2
+        x: 510
+        y: 320
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b5d78e2083999324db684ae1af4a48cc
+      internalID: 3865699505494632252
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_69
+      rect:
+        serializedVersion: 2
+        x: 735
+        y: 329
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7b1819a011112ea4595d48a545a82aee
+      internalID: -353168909953256430
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_70
+      rect:
+        serializedVersion: 2
+        x: 774
+        y: 329
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ac1b75811b21b3d4992b1b89b309926a
+      internalID: 8158057100322926401
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_71
+      rect:
+        serializedVersion: 2
+        x: 814
+        y: 329
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 239e270f7cb69ec42a811d89d4fe8005
+      internalID: -989528909433827491
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_72
+      rect:
+        serializedVersion: 2
+        x: 858
+        y: 329
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1ff366c3f92e5044c9a7c28ff4b2743b
+      internalID: 2594577466882508322
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_73
+      rect:
+        serializedVersion: 2
+        x: 900
+        y: 329
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fce7acb1e329ebb4790c665298c5ae91
+      internalID: -3963628415480690443
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_74
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 273
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a33ac704d76bf8b4eaf5211243e34f9e
+      internalID: -2849874615911119256
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_75
+      rect:
+        serializedVersion: 2
+        x: 46
+        y: 273
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e4434b870cba57646a342a11847452dc
+      internalID: -7871554784178722352
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_76
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 273
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1877fb96d4e73474e84bac46d9655ce0
+      internalID: 5635633120675207376
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_77
+      rect:
+        serializedVersion: 2
+        x: 151
+        y: 274
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 342efcad709a6ce4db59d3a6c03c38ea
+      internalID: 7768293455420419596
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_78
+      rect:
+        serializedVersion: 2
+        x: 201
+        y: 274
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fff009b3b67536941b5a1a271695439f
+      internalID: 4597555762294039555
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_79
+      rect:
+        serializedVersion: 2
+        x: 257
+        y: 274
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 48a7f609d4b064347ac0d064f97c8b38
+      internalID: 2709491422378370008
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_80
+      rect:
+        serializedVersion: 2
+        x: 305
+        y: 275
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b0b4c89c31bc8394eb522d54fae222b4
+      internalID: 170654923400940094
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_81
+      rect:
+        serializedVersion: 2
+        x: 357
+        y: 276
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 16819e555022ce14aa9c0c67f7c37e26
+      internalID: 1188950999018922862
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_82
+      rect:
+        serializedVersion: 2
+        x: 404
+        y: 279
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 04bb8cf92b787ca488fd5ba514a47bc9
+      internalID: 8433413222944308893
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_83
+      rect:
+        serializedVersion: 2
+        x: 455
+        y: 279
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cacbde0bace69ef4e93af9d431f273cb
+      internalID: -4349022973296383948
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_84
+      rect:
+        serializedVersion: 2
+        x: 735
+        y: 280
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5c1ff3808d99d994ea14550042bdbcc8
+      internalID: 191245489369444179
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_85
+      rect:
+        serializedVersion: 2
+        x: 774
+        y: 280
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 382070748eb3fd14aa5d1f7aabb25bc1
+      internalID: 3765760274599153775
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_86
+      rect:
+        serializedVersion: 2
+        x: 814
+        y: 280
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 571ece91388eb834782d394a712f0322
+      internalID: -5485458998481560375
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_87
+      rect:
+        serializedVersion: 2
+        x: 859
+        y: 280
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cb2d11dbc82a277459cd7f5ea93995c8
+      internalID: 4155650876347872813
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_88
+      rect:
+        serializedVersion: 2
+        x: 900
+        y: 280
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ab0e9f0801dadee47ba28f5380b9a554
+      internalID: 6253284904047405826
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_89
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 189
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 501cc0943834f9b498b62f08df67126d
+      internalID: -9143512809936495851
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_90
+      rect:
+        serializedVersion: 2
+        x: 46
+        y: 189
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 54b30066a6168e34998a55cd854a20c9
+      internalID: 4582143943128189661
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_91
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 189
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: adf57485ae257eb4890fa67deee3027c
+      internalID: 90072195398410431
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_92
+      rect:
+        serializedVersion: 2
+        x: 152
+        y: 189
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c2791179d84cc694f9ad449512e5d844
+      internalID: 3016888260045311307
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_93
+      rect:
+        serializedVersion: 2
+        x: 204
+        y: 189
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3cccdeed9e4161c49af93aec80289511
+      internalID: 7814555032913344712
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_94
+      rect:
+        serializedVersion: 2
+        x: 260
+        y: 189
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f9cddeb96fb01944a97f4d4ae771b42b
+      internalID: 2281097501038025230
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_95
+      rect:
+        serializedVersion: 2
+        x: 307
+        y: 189
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ec2319a5816633c42a7f9e4eb28007e3
+      internalID: 8379231064865714931
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_96
+      rect:
+        serializedVersion: 2
+        x: 358
+        y: 189
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 62f76378c6f90d342aafb4cb391cfc90
+      internalID: 4809257314628615031
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_97
+      rect:
+        serializedVersion: 2
+        x: 405
+        y: 189
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 22334c832cde4d2439021c273fd7689c
+      internalID: 591196899322153834
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_98
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 147
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 517af0333986b7a498f45a1de765f1be
+      internalID: 7322831998531348187
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_99
+      rect:
+        serializedVersion: 2
+        x: 46
+        y: 147
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dd6cb96414f3be249ad8ce05ba438eb9
+      internalID: 8855095967862314657
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_100
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 147
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d11c77c4ee4c8ee4f9c8d26b257c00ad
+      internalID: 2391660703528719849
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_101
+      rect:
+        serializedVersion: 2
+        x: 151
+        y: 149
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b48d14c762e20044882d80e2ea727e58
+      internalID: 4907043417965373666
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_102
+      rect:
+        serializedVersion: 2
+        x: 201
+        y: 149
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1ae8d3f7d7f542f4c846b04a07a6d519
+      internalID: 7954741522795938532
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_103
+      rect:
+        serializedVersion: 2
+        x: 257
+        y: 149
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e5f8655c9a219d0479c07a3e6e684e1a
+      internalID: -7882250294525439172
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_104
+      rect:
+        serializedVersion: 2
+        x: 307
+        y: 149
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 03ba130d41f95c545802f3818803f203
+      internalID: 8214849686998313570
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_105
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 66
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7a59db910ca2e0749b080b526db9b571
+      internalID: -4667369813945170503
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_106
+      rect:
+        serializedVersion: 2
+        x: 46
+        y: 66
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f7b20425e06861747bc9db8175551f8f
+      internalID: 3306519234637373413
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_107
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 66
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7e836d527f8ddf4439b1446e4a4bd74b
+      internalID: -606432846606484121
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_108
+      rect:
+        serializedVersion: 2
+        x: 152
+        y: 66
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 07a1c3d5113128348b4aaf21c73eefd9
+      internalID: 6893965068726543760
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_109
+      rect:
+        serializedVersion: 2
+        x: 204
+        y: 66
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2111e0eb29a54734b972519e38b5a796
+      internalID: 3861738903817682696
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_110
+      rect:
+        serializedVersion: 2
+        x: 260
+        y: 66
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ed9a7784d43df6f4b974b6905b59b7f7
+      internalID: -3399128656549618909
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_111
+      rect:
+        serializedVersion: 2
+        x: 307
+        y: 66
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0214ccf92c3fbd945ae7fd368278fe4f
+      internalID: 8494912127777585216
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_112
+      rect:
+        serializedVersion: 2
+        x: 358
+        y: 66
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5bb640afe13e9624992068a40f3cbf08
+      internalID: 460227359695379424
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_113
+      rect:
+        serializedVersion: 2
+        x: 405
+        y: 66
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9d3f955e5ee5eae499b43dcebe7241fe
+      internalID: -4464104272275295409
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_114
+      rect:
+        serializedVersion: 2
+        x: 456
+        y: 66
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ebc094be260e5b64f9a2b299ce2435b0
+      internalID: 5734804280565654818
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_115
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 24
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f173128dca614c74fbca192eb6b0d5f1
+      internalID: -2048430466591269629
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_116
+      rect:
+        serializedVersion: 2
+        x: 46
+        y: 24
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 649d6cfedef7851449a72eccf76b40c2
+      internalID: 5021813543557488669
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_117
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 24
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bfc24d25d8349554bbc620dce715d71a
+      internalID: -96804808483196130
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_118
+      rect:
+        serializedVersion: 2
+        x: 151
+        y: 24
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8e72d36c662186d41a38c316f55c1235
+      internalID: -5172457110601065919
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_119
+      rect:
+        serializedVersion: 2
+        x: 206
+        y: 24
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 18499a162af3f9c42a2ee56fb8370fdd
+      internalID: 3614049331134122105
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwordmanSkillIcon_120
+      rect:
+        serializedVersion: 2
+        x: 257
+        y: 24
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 43b28be1919372b409746388b5ceedaa
+      internalID: 7871859776660330365
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

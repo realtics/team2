@@ -4,14 +4,16 @@ using UnityEngine;
 
 public class CharacterStat : MonoBehaviour
 {
+    private BaseUnit _unit;
     private float _maxHp = 1000.0f;
     [SerializeField]
     private float _hp;
     private float _maxMp = 1000.0f;
     [SerializeField]
     private float _mp;
-    private float _attackDamage = 10.0f;
+    private float _attackDamage = 100.0f;
     private float _defense = 1.0f;
+    [SerializeField]
     private float _attackSpeed = 100.0f;
     private UIPlayerInfo _uiPlayerInfo;
 
@@ -21,6 +23,7 @@ public class CharacterStat : MonoBehaviour
     public float Hp { get { return _hp; } }
     public float MaxMp { get { return _maxMp; } }
     public float Mp { get { return _mp; } }
+    public float AttackSpeed { get { return _attackSpeed; } }
 
     void Start()
     {
@@ -57,5 +60,10 @@ public class CharacterStat : MonoBehaviour
     private void SetDie()
     {
         GameManager.Instance.GameOver();
+    }
+
+    public void SetUnit(BaseUnit unit)
+    {
+        _unit = unit;
     }
 }
