@@ -29,9 +29,6 @@ public class HitState : FSMState<Monster>
 
     public override void UpdateState(Monster monster)
     {
-        //FIXME : 삭제해야함
-        monster.InactiveSmashHitBox();
-
         if (IsHitRecoveryTimeEnd())
         {
             monster.animator.SetBool("isHit", false);
