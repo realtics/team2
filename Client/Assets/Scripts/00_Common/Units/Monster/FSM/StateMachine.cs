@@ -15,6 +15,11 @@ public class StateMachine<T>
         _previousState = null;
     }
 
+    public void RestartState()
+    {
+        _currentState.EnterState(_owner);
+    }
+
     // 상태 변경
     public void ChangeState(FSMState<T> newState)
     {
