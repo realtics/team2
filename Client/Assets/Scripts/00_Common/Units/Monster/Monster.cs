@@ -96,8 +96,8 @@ public class Monster : MonoBehaviour
         currentHp -= damage;
         UIHelper.Instance.SetMonster(this);
         UIHelper.Instance.SetMonsterHp(currentHp,maxHp);
-       
-        _state.ChangeState(HitState.GetInstance);
+
+        ChangeState(HitState.GetInstance);
     }
 
     public void OnHit(AttackInfoSender sender)
