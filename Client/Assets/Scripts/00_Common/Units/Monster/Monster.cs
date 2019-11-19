@@ -23,6 +23,9 @@ public class Monster : MonoBehaviour
     private StateMachine<Monster> _state = null;
 
     private Transform _smashHitBox;
+    private Transform _hitBox;
+
+    private bool _isDead = false;
 
     private void Awake()
     {
@@ -32,7 +35,7 @@ public class Monster : MonoBehaviour
     private void Start()
     {
         _smashHitBox = transform.Find("SmashHitBox");
-
+        _hitBox = transform.Find("HitBox");
         ResetState();
     }
 
@@ -42,13 +45,13 @@ public class Monster : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (currentHp <= 0 && !_isDead)
+        {
+            _state.ChangeState(DieState.GetInstance);
+            _isDead = true;
+        }
+ 
         _state.Update();
-    }
-
-    // 상태변경
-    public void ChangeState(FSMState<Monster> state)
-    {
-        _state.ChangeState(state);
     }
 
     private void OnTriggerStay2D(Collider2D other)
@@ -61,6 +64,12 @@ public class Monster : MonoBehaviour
         {
             return;
         }
+    }
+
+    // 상태변경
+    public void ChangeState(FSMState<Monster> state)
+    {
+        _state.ChangeState(state);
     }
 
     public bool CheckRange()
@@ -99,5 +108,10 @@ public class Monster : MonoBehaviour
     public void InactiveSmashHitBox()
     {
         _smashHitBox.gameObject.SetActive(false);
+    }
+
+    public void InactiveHitBox()
+    {
+        _hitBox.gameObject.SetActive(false);
     }
 }
