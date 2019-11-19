@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Monster : MonoBehaviour
 {
-    public string monsterName = "testMonser";
+    public string monsterName = "testMonster";
     public int monsterLevel = 99;
 
     public float currentHp = 200.0f;
@@ -99,9 +99,20 @@ public class Monster : MonoBehaviour
         _state.ChangeState(HitState.GetInstance);
     }
 
+    public void OnHit(AttackInfoSender sender)
+    {
+        //SetHit(sender.StunDuration);
+        //StopAttack();
+
+        currentHp -= sender.Damage;
+        UIHelper.Instance.SetMonster(this);
+        UIHelper.Instance.SetMonsterHp(currentHp, maxHp);
+
+        _state.ChangeState(HitState.GetInstance);
+    }
+
     public void ActiveSmashHitBox()
     {
-        //_smashAttackTimer = 0.0f;
         _smashHitBox.gameObject.SetActive(true);
     }
 
