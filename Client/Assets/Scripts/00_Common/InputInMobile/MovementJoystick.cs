@@ -34,7 +34,7 @@ public class MovementJoystick : MonoBehaviour
     {
         _stick = transform.GetChild(0);
         _initPos = _stick.GetComponent<RectTransform>().position;
-        _radius = GetComponent<RectTransform>().sizeDelta.x / 6.0f;
+        _radius = GetComponent<RectTransform>().sizeDelta.x / 3.0f;
         _stickDirection = JoystickDirection.None;
         _oldDirection = _stickDirection;
         _dirVec = Vector2.zero;
@@ -54,12 +54,12 @@ public class MovementJoystick : MonoBehaviour
         Vector3 touchPos = data.position;
         _dirVec = CalcStickDirection((touchPos - _initPos).normalized);
         _dirVec = _dirVec.normalized;
-        _stick.position = _initPos + (_dirVec * _radius);
+        _stick.localPosition = _dirVec * _radius;
     }
 
     public void DragEnd()
     {
-        _stick.position = _initPos;
+        _stick.localPosition = _initPos;
         _stickDirection = JoystickDirection.None;
         _dirVec = Vector3.zero;
     }
