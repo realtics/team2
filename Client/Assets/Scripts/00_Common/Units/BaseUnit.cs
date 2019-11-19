@@ -313,18 +313,6 @@ public class BaseUnit : MonoBehaviour
         return _animator.GetCurrentAnimatorStateInfo(0).normalizedTime <= 0.95f;
     }
 
-    public virtual void OnHit(float damage)
-    {
-        SetHit(0.0f);
-        StopAttack();
-        _stat.OnHitDamage(damage);
-    }
-
-    public virtual void OnHit(float damage, Transform attacker)
-    {
-        OnHit(damage);
-    }
-
     public virtual void OnHit(AttackInfoSender sender)
     {
         SetHit(sender.StunDuration);

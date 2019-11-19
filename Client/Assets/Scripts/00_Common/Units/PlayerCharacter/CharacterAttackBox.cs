@@ -23,8 +23,6 @@ public class CharacterAttackBox : MonoBehaviour
         if (Mathf.Abs(_unit.transform.position.y - other.transform.position.y) > AttackRange)
             return;
 
-        AttackInfoSender sender = new AttackInfoSender();
-        sender.Damage = _unit.Stat.AttackDamage;
 
         other.transform.root.GetComponent<Monster>().OnHit(_unit.Stat.AttackDamage);
 

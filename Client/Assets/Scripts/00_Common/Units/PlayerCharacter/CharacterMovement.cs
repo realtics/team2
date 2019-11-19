@@ -144,25 +144,6 @@ public class CharacterMovement : BaseUnit
         return true;
     }
 
-    public override void OnHit(float damage)
-    {
-        base.OnHit(damage);
-        SetHit();
-        _animator.SetBool("IsHit", true);
-    }
-
-    public override void OnHit(float damage, Transform attacker)
-    {
-        OnHit(damage);
-
-        if (attacker.position.x > transform.position.x)
-            SetFlipX(false);
-        else
-            SetFlipX(true);
-
-        MoveUnit(-1.0f, 0.1f, ExtraMoveDirection.Horizontal);
-    }
-
     public override void OnHit(AttackInfoSender sender)
     {
         base.OnHit(sender);
