@@ -29,15 +29,8 @@ public class UIGameResult : MonoBehaviour
         _countDown.text = time.ToString();
     }
     // ToDo. 클릭시에 GameManager에서 UI를 호출해서 Sprite 변경 및 임시 아이템 띄우기.
-    public void OnClickResultBox(int index)
+    public void OpenResultBox(int index)
     {
         _resultBox[index].sprite = _openResultBox.sprite;
-    }
-    public void AllOpenResultBox()
-    {
-        for(int i = 0; i < _resultBox.Length; i++)
-        {
-            _resultBox[i].sprite = _openResultBox.sprite;
-        }
     }
 }
