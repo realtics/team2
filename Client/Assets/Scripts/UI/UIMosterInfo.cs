@@ -30,7 +30,7 @@ public class UIMosterInfo : MonoBehaviour
     void Start()
     {
         // Hack.. 테스트용.몬스터 정보 받아오면 지울 예정.,
-        _hpBar.Initialize(_hp, _hp);
+        _hpBar.SetStat(_hp, _hp);
     }
 
     void Update()

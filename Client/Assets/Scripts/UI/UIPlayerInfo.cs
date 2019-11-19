@@ -7,6 +7,7 @@ public class UIPlayerInfo : MonoBehaviour
     private UIPlayerStat _hpBar;
     private UIPlayerStat _mpBar;
     private Text _level;
+    private CharacterStat characterStat;
 
     void Awake()
     {
@@ -18,14 +19,23 @@ public class UIPlayerInfo : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        CharacterStat characterStat = FindObjectOfType<CharacterStat>();
-        _hpBar.Initialize(characterStat.Hp, characterStat.MaxHp);
-        _mpBar.Initialize(characterStat.Mp, characterStat.MaxMp);
+        characterStat = FindObjectOfType<CharacterStat>();
+        _hpBar.SetStat(characterStat.Hp, characterStat.MaxHp);
+        _mpBar.SetStat(characterStat.Mp, characterStat.MaxMp);
     }
 
     // Update is called once per frame
     void Update()
     {
+        
+    }
 
+    private void SetPlayerHp(float value, float maxValue)
+    {
+        _hpBar.SetStat(value, maxValue);
+    }
+    private void SetPlayerMp(float value, float maxValue)
+    {
+        _mpBar.SetStat(value, maxValue);
     }
 }
