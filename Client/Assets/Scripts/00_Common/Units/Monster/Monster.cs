@@ -69,6 +69,7 @@ public class Monster : MonoBehaviour
     // 상태변경
     public void ChangeState(FSMState<Monster> state)
     {
+        InactiveSmashHitBox();
         _state.ChangeState(state);
     }
 

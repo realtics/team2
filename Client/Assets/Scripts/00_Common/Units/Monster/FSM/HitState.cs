@@ -23,7 +23,7 @@ public class HitState : FSMState<Monster>
 
 
     public override void EnterState(Monster monster)
-    { 
+    {
         monster.animator.SetBool("isHit", true);
     }
 
