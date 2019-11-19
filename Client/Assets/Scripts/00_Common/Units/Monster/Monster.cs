@@ -30,14 +30,11 @@ public class Monster : MonoBehaviour
     private bool _isAttack;
     private bool _isHit;
 
-    //FIXME: 피격시 밀림 변수 테스트중
-    private Vector3 _hitDirection;
-    private float _hitSpeed;
-    private float _hitDuration;
-    private float _hitTime;
+    //피격시 넉백관련 변수
+    private Vector3 _knockBackDirection;
+    private float _knockBackSpeed;
+    private float _knockBackDuration;
        
-
-
     //properties
     public bool IsAttack { get { return _isAttack; } set { _isAttack = value; } }
     public bool IsHit { get { return _isHit; } set { _isHit = value; } }
@@ -115,7 +112,7 @@ public class Monster : MonoBehaviour
         //SetHit(sender.StunDuration);
         //StopAttack();
 
-        SetMovedOnHit(sender);
+        SetKnockbackValue(sender);
         currentHp -= sender.Damage;
         UIHelper.Instance.SetMonster(this);
         UIHelper.Instance.SetMonsterHp(currentHp, maxHp);
@@ -158,8 +155,8 @@ public class Monster : MonoBehaviour
         }
     }
 
-    //FIXME: 피격시 밀림 변수 세팅함수의 이름을 정하면 수정요망
-    private void SetMovedOnHit(AttackInfoSender sender)
+    //FIXME: 경직도 생성시 이름변경 혹은 새함수 만들어야함
+    private void SetKnockbackValue(AttackInfoSender sender)
     {
         Vector3 direction = Vector3.zero;
 
@@ -169,31 +166,31 @@ public class Monster : MonoBehaviour
         else
             direction = Vector3.right;
 
-        _hitDirection = direction;
-        _hitSpeed = sender.HorizontalExtraMoveValue;
-        _hitDuration = sender.HorizontalExtraMoveDuration;
+        _knockBackDirection = direction;
+        _knockBackSpeed = sender.HorizontalExtraMoveValue;
+        _knockBackDuration = sender.HorizontalExtraMoveDuration;
 
-        StartCoroutine("MovedOnHit");
+        StartCoroutine("Knockback");
     }
 
-    //FIXME: 피격시 밀림 함수의 이름을 정하면 수정요망
-    IEnumerator MovedOnHit()
+    IEnumerator Knockback()
     {
-        _hitDuration -= Time.deltaTime;
+        _knockBackDuration -= Time.deltaTime;
 
-        if (_hitDuration <= 0.0f)
+        if (_knockBackDuration <= 0.0f)
         {
-            Debug.Log("1");
-            StopCoroutine("MovedOnHit");
+            StopCoroutine("Knockback");
             yield break;
         }
           
         else
         {
-            transform.position += _hitDirection * Time.deltaTime * _hitSpeed;
+            transform.position += _knockBackDirection * Time.deltaTime * _knockBackSpeed;
         }
 
         yield return null;
-        StartCoroutine("MovedOnHit");
+        StartCoroutine("Knockback");
     }
+
+    //TODO : 공중공격피격시 띄움 판정함수
 }
