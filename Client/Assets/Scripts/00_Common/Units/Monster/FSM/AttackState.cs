@@ -12,7 +12,6 @@ public class AttackState : FSMState<Monster>
             return instance;
         }
     }
-    private float _attackTimer = 0f;
 
     static AttackState() { }
     private AttackState() { }
@@ -20,8 +19,6 @@ public class AttackState : FSMState<Monster>
 
     public override void EnterState(Monster monster)
     {
-        //Debug.Log("Enter AttackState");
-   
         if (monster.target == null)
         {
             return;
@@ -42,7 +39,6 @@ public class AttackState : FSMState<Monster>
 
     public override void ExitState(Monster monster)
     {
-        //Debug.Log("Exit AttacState");
         monster.animator.SetBool("isAttacking", false);
     }
 }

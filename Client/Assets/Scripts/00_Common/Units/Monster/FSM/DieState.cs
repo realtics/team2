@@ -16,11 +16,11 @@ public class DieState : FSMState<Monster>
     static DieState() { }
     private DieState() { }
 
-    //TODO: Monster.cs로 이전
 
     public override void EnterState(Monster monster)
     {
-      
+        monster.animator.SetBool("isDie", true);
+        //TODO : 아이템 드랍
     }
 
     public override void UpdateState(Monster monster)

@@ -30,7 +30,6 @@ public class MoveState : FSMState<Monster>
     
     public override void EnterState(Monster monster)
     {
-        //Debug.Log("Enter MoveState");
         _currentTime = _resetTime;
     }
 
@@ -96,8 +95,7 @@ public class MoveState : FSMState<Monster>
     }
 
     public override void ExitState(Monster monster)
-    {
-        //Debug.Log("Exit AttacState");
+    { 
         _moveMentState = MovementState.Idle;
         monster.animator.SetBool("isMoving", false);
     }

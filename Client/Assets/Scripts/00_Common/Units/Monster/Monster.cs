@@ -11,7 +11,6 @@ public class Monster : MonoBehaviour
     public float maxHp = 200.0f;
 
     public float attackRange =3.8f;
-    public float attackSpeed = 1.5f;
 
     public float chaseCancleTime = 5.0f;
     public float chaseTime = 0;
@@ -24,9 +23,6 @@ public class Monster : MonoBehaviour
     private StateMachine<Monster> _state = null;
 
     private Transform _smashHitBox;
-    private float _smashAttackTimer;
-    private float _smashAttackTime = 0.5f;
-
 
     private void Awake()
     {
@@ -42,23 +38,11 @@ public class Monster : MonoBehaviour
 
     private void Update()
     {
-        //FIXME : 플레이어 공격 판정 완료시 삭제
-        TestHitKeyInput();
     }
 
     private void FixedUpdate()
     {
         _state.Update();
-
-        //TODO : 공격박스 제거 방식 변경 전
-        //if (IsActiveSmashHitBox())
-        //{
-        //    _smashAttackTimer += Time.deltaTime;
-        //    if (_smashAttackTimer >= _smashAttackTime)
-        //    {
-        //        InactiveSmashHitBox();
-        //    }
-        //}
     }
 
     // 상태변경
@@ -71,11 +55,7 @@ public class Monster : MonoBehaviour
     {
         if (other.transform.tag == "Player")
         {
-            //Debug.Log("Player Detect.");
             target = other.transform.root;
-
-            //TODO: 피격
-           
         }
         else
         {
@@ -103,11 +83,6 @@ public class Monster : MonoBehaviour
 
     public void OnHit(float damage)
     {
-        Debug.Log("OnHit");
-
-        //TODO : UI와 상호작용
-        //FIXME : 간단한 테스트후 수정
-
         currentHp -= damage;
         UIHelper.Instance.SetMonster(this);
         UIHelper.Instance.SetMonsterHp(currentHp,maxHp);
@@ -124,20 +99,5 @@ public class Monster : MonoBehaviour
     public void InactiveSmashHitBox()
     {
         _smashHitBox.gameObject.SetActive(false);
-    }
-
-    private bool IsActiveSmashHitBox()
-    {
-        if (_smashHitBox.gameObject.activeSelf == true)
-            return true;
-        else
-            return false;
-    }
-
-    //FIXME : 플레이어 공격판정 완료시, 삭제
-    private void TestHitKeyInput()
-    {
-        if (Input.GetKeyDown(KeyCode.Y))
-            OnHit(5.0f);
     }
 }

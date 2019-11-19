@@ -23,9 +23,7 @@ public class HitState : FSMState<Monster>
 
 
     public override void EnterState(Monster monster)
-    {
-        //Debug.Log("Enter HitState");
-
+    { 
         monster.animator.SetBool("isHit", true);
     }
 
@@ -40,11 +38,9 @@ public class HitState : FSMState<Monster>
 
     public override void ExitState(Monster monster)
     {
-        //Debug.Log("Exit AttacState");
         _currentTime = 0.0f;
     }
 
-    //FiXME : 애니메이션 이벤트 사용으로 인해 쓰이지않음, 추후 경직도 추가시 재사용
     private bool IsHitRecoveryTimeEnd()
     {
         _currentTime += Time.deltaTime;

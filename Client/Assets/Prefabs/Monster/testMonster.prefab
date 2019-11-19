@@ -108,8 +108,8 @@ GameObject:
   - component: {fileID: 4127798058618418207}
   - component: {fileID: 4127798058618418206}
   - component: {fileID: 4127798058618418205}
-  - component: {fileID: 1283702879}
   - component: {fileID: 829045832864292645}
+  - component: {fileID: 1283702879}
   - component: {fileID: 1724810926}
   m_Layer: 0
   m_Name: SpriteAnimator
@@ -200,19 +200,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &1283702879
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4127798058618418200}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 07977fa0d10651641b23300a1a2b3527, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  effect: {fileID: 6582171582866420938, guid: a2407be955ae9154ab27b2e478cfbaf7, type: 3}
 --- !u!50 &829045832864292645
 Rigidbody2D:
   serializedVersion: 4
@@ -234,6 +221,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &1283702879
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4127798058618418200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07977fa0d10651641b23300a1a2b3527, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effect: {fileID: 6582171582866420938, guid: a2407be955ae9154ab27b2e478cfbaf7, type: 3}
 --- !u!114 &1724810926
 MonoBehaviour:
   m_ObjectHideFlags: 0
