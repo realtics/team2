@@ -24,7 +24,7 @@ public class UIHelper : MonoBehaviour
         _monsterInfo = GameObject.Find("MonsterInfo").GetComponent<UIMosterInfo>();
 
         _gameOver = GameObject.Find("GameOver").GetComponent<UIGameOver>();
-        _gameResult = GameObject.Find("GameResult").GetComponent<UIGameResult>();
+        //_gameResult = GameObject.Find("GameResult").GetComponent<UIGameResult>();
     }
 
     // Use this for initialization
@@ -32,9 +32,12 @@ public class UIHelper : MonoBehaviour
     {
         _instance = this;
 
-        _monsterInfo.gameObject.SetActive(false);
-        _gameOver.gameObject.SetActive(false);
-        _gameResult.gameObject.SetActive(false);
+        if(_monsterInfo != null)
+            _monsterInfo.gameObject.SetActive(false);
+        if (_gameOver != null)
+            _gameOver.gameObject.SetActive(false);
+        if (_gameResult != null)
+            _gameResult.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
