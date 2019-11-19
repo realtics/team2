@@ -27,6 +27,11 @@ public class Monster : MonoBehaviour
 
     private bool _isDead = false;
 
+    private bool _isAttack;
+
+    //properties
+    public bool IsAttack { get { return _isAttack; } set { _isAttack = value; } }
+
     private void Awake()
     {
         animator = GetComponentInChildren<Animator>();
@@ -69,7 +74,6 @@ public class Monster : MonoBehaviour
     // 상태변경
     public void ChangeState(FSMState<Monster> state)
     {
-        InactiveSmashHitBox();
         _state.ChangeState(state);
     }
 
