@@ -21,7 +21,10 @@ public class DieState : FSMState<Monster>
     {
         monster.animator.SetBool("isDie", true);
         monster.InactiveHitBox();
-      
+
+        //FIXME : 보스몬스터 구분시 변경
+        if (monster.name == "testMonster")
+            GameManager.Instance.NoticeGameClear();
         //TODO : 아이템 드랍
     }
 
