@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
 
     private bool _playerChooseResult = false;
 
-    private GameObject _dungenClearMenu;
+    private GameObject _dungeonClearMenu;
 
     private PlayerState _playerState;
 
@@ -43,8 +43,8 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _dungenClearMenu = GameObject.Find("DungenClearMenu");
-        _dungenClearMenu.SetActive(false);
+        _dungeonClearMenu = GameObject.Find("DungeonClearMenu");
+        _dungeonClearMenu.SetActive(false);
 
         _playerState = PlayerState.Alive;
         _instance = this;
@@ -59,8 +59,8 @@ public class GameManager : MonoBehaviour
         }
         if (_countOver && _playerState == PlayerState.Alive)
         {
-            if(!_dungenClearMenu.activeSelf)
-                _dungenClearMenu.SetActive(true);
+            if(!_dungeonClearMenu.activeSelf)
+                _dungeonClearMenu.SetActive(true);
         }
     }
 

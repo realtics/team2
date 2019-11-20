@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-public class DungenManager : MonoBehaviour
+public class DungeonManager : MonoBehaviour
 {
     [SerializeField]
     private Potal[] _potals;
