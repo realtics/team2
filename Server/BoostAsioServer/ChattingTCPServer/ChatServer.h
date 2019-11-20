@@ -22,7 +22,7 @@ private:
 	std::deque< int > _SessionQueue;
 private:
 	bool PostAccept();
-	void handle_accept(Session* pSession, const boost::system::error_code& error);
+	void HandleAccept(Session* pSession, const boost::system::error_code& error);
 
 public:
 	ChatServer(boost::asio::io_context& io_service);

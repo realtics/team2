@@ -27,9 +27,9 @@ private:
 	bool _bIsLogin;
 private:
 	void PostReceive();
-	void handle_connect(const boost::system::error_code& error);
-	void handle_write(const boost::system::error_code& error, size_t bytes_transferred);
-	void handle_receive(const boost::system::error_code& error, size_t bytes_transferred);
+	void HandleConnect(const boost::system::error_code& error);
+	void HandleWrite(const boost::system::error_code& error, size_t bytes_transferred);
+	void HandleReceive(const boost::system::error_code& error, size_t bytes_transferred);
 	void ProcessPacket(const char* pData);
 public:
 	ChatClient(boost::asio::io_context& io_context);

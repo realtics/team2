@@ -11,8 +11,8 @@ class ChatServer;
 class Session
 {
 private:
-	void handleWrite(const boost::system::error_code& error, size_t bytes_transferred);
-	void handleReceive(const boost::system::error_code& error, size_t bytes_transferred);
+	void HandleWrite(const boost::system::error_code& error, size_t bytes_transferred);
+	void HandleReceive(const boost::system::error_code& error, size_t bytes_transferred);
 
 	int _nSessionID;
 	boost::asio::ip::tcp::socket _Socket;
@@ -36,7 +36,6 @@ public:
 	void Init();
 	void PostReceive();
 	void PostSend(const bool bImmediately, const int packetSize, char* pData);
-
 
 	int SessionID() { return _nSessionID; }
 	boost::asio::ip::tcp::socket& Socket() { return _Socket; }
