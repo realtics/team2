@@ -6,6 +6,8 @@ public class CharacterAttackBox : MonoBehaviour
 {
     private const float AttackRange = 0.8f;
     private CharacterStat _stat;
+
+    [SerializeField]
     private AttackInfoSender _sender;
 
     void Start()
@@ -14,9 +16,6 @@ public class CharacterAttackBox : MonoBehaviour
 
         _sender.Attacker = transform.root;
         _sender.Damage = _stat.AttackDamage;
-        _sender.HorizontalExtraMoveDuration = 0.2f;
-        _sender.HorizontalExtraMoveValue = -2.0f;
-        _sender.StunDuration = 1.0f;
     }
 
     void Update()
