@@ -247,7 +247,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efca241d36d50144c8a671ef50081592, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monsterName: Goblin
+  monsterName: Goblin3
   monsterLevel: 5
   currentHp: 600
   maxHp: 600
@@ -497,6 +497,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6326781507318192179, guid: 968b8146c23a87141894d489ae10aac2,
+        type: 3}
+      propertyPath: threshold
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6326781507318192179, guid: 968b8146c23a87141894d489ae10aac2,
+        type: 3}
+      propertyPath: slope
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 968b8146c23a87141894d489ae10aac2, type: 3}
