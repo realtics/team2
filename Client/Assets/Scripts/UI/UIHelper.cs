@@ -32,9 +32,12 @@ public class UIHelper : MonoBehaviour
     {
         _instance = this;
 
-        _monsterInfo.gameObject.SetActive(false);
-        _gameOver.gameObject.SetActive(false);
-        _gameResult.gameObject.SetActive(false);
+        if(_monsterInfo != null)
+            _monsterInfo.gameObject.SetActive(false);
+        if (_gameOver != null)
+            _gameOver.gameObject.SetActive(false);
+        if (_gameResult != null)
+            _gameResult.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -68,9 +71,13 @@ public class UIHelper : MonoBehaviour
     {
         _gameResult.SetTime(time);
     }
+    public void OpenResultBox(int index)
+    {
+        _gameResult.OpenResultBox(index);
+    }
     public void GameResultEnd()
     {
-        _gameResult.AllOpenResultBox();
+        
     }
 
     public void SetMonsterHp(float CurrentHp, float MaxHp)
