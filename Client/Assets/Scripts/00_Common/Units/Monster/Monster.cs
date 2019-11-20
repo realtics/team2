@@ -37,9 +37,22 @@ public class Monster : MonoBehaviour
         Left = 1,
         Right = 2,
     }
+    private MovementStateInfo _moveMentState;
     private float _randomMoveResetTime;
     private float _randomMoveCurrentTime;
-    private MovementStateInfo _moveMentState;
+   
+
+    //HitState Value
+    public enum HitMotion
+    {
+        HitMotion0 = 0,
+        HitMotion1 = 1,
+        HitMotionEnd = 2
+    }
+    private HitMotion _currentHitMotion;
+    private float _hitRecoveryResetTime;
+    private float _hitRecoveryCurrentTime;
+   
 
     //KnockBakc Value
     private Vector3 _knockBackDirection;
@@ -49,9 +62,15 @@ public class Monster : MonoBehaviour
     //properties
     public bool IsAttack { get { return _isAttack; } set { _isAttack = value; } }
     public bool IsHit { get { return _isHit; } set { _isHit = value; } }
+
+    public MovementStateInfo MovementState { get { return _moveMentState; } set { _moveMentState = value; } }
     public float RandomMoveResetTime { get { return _randomMoveResetTime; } set { _randomMoveResetTime = value; } }
     public float RandomMoveCurrentTime { get { return _randomMoveCurrentTime; } set { _randomMoveCurrentTime = value; } }
-    public MovementStateInfo MovementState { get { return _moveMentState; } set { _moveMentState = value;  } }
+   
+    public HitMotion CurrentHitMotion { get { return _currentHitMotion; } set { _currentHitMotion = value; } }
+    public float HitRecoveryResetTime { get { return _hitRecoveryResetTime; } set { _hitRecoveryResetTime = value; } }
+    public float HitRecoveryCurrentTime { get { return _hitRecoveryCurrentTime; } set { _hitRecoveryCurrentTime = value; } }
+
 
     private void Awake()
     {
@@ -123,9 +142,6 @@ public class Monster : MonoBehaviour
 
     public void OnHit(AttackInfoSender sender)
     {
-        //SetHit(sender.StunDuration);
-        //StopAttack();
-
         SetKnockbackValue(sender);
         currentHp -= sender.Damage;
         UIHelper.Instance.SetMonster(this);
@@ -169,7 +185,7 @@ public class Monster : MonoBehaviour
         }
     }
 
-    //FIXME: 경직도 생성시 이름변경 혹은 새함수 만들어야함
+    //FIXME: AttackInofoSender 의 값중 넉백관련만 인자로 받게 고쳐야함
     private void SetKnockbackValue(AttackInfoSender sender)
     {
         Vector3 direction = Vector3.zero;
@@ -183,6 +199,7 @@ public class Monster : MonoBehaviour
         _knockBackDirection = direction;
         _knockBackSpeed = sender.HorizontalExtraMoveValue;
         _knockBackDuration = sender.HorizontalExtraMoveDuration;
+        _hitRecoveryResetTime = sender.StunDuration;
 
         StartCoroutine("Knockback");
     }
