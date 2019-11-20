@@ -15,7 +15,7 @@ public class CharacterAttackBox : MonoBehaviour
         _sender = new AttackInfoSender(transform.root);
         _sender.Damage = _stat.AttackDamage;
         _sender.HorizontalExtraMoveDuration = 0.2f;
-        _sender.HorizontalExtraMoveValue = -2.0f;
+        _sender.HorizontalExtraMoveValue = -15.0f;
         _sender.StunDuration = 1.0f;
     }
 

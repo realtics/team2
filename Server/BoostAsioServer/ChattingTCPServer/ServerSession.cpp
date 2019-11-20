@@ -104,59 +104,6 @@ void Session::handleReceive(const boost::system::error_code& error, size_t bytes
 		int nReadData = 0;
 
 
-///////////////////
-		std::string stringReceiveBuffer;
-		stringReceiveBuffer = _ReceiveBuffer.data();
-		std::cout << stringReceiveBuffer << std::endl;
-
-		boost::property_tree::ptree ptRecv;
-		std::istringstream is(stringReceiveBuffer);
-		boost::property_tree::read_json(is, ptRecv);
-
-		boost::property_tree::ptree& children = ptRecv.get_child("header");
-		int headerIndex = children.get<int>("packetIndex");
-		int packetSize = children.get<int>("packetSize");
-
-		float jsonCharacterMoveX = ptRecv.get<float>("characterMoveX");
-		float jsonCharacterMoveY = ptRecv.get<float>("characterMoveY");
-		//std::string jsonString = ptRecv.get<std::string>("String");
-
-
-
-
-////////////////
-		PACKET_CHARACTER_MOVE packetCharacterMove;
-		packetCharacterMove.header.packetIndex = RES_IN;
-		packetCharacterMove.header.packetSize = sizeof(PACKET_CHARACTER_MOVE);
-		packetCharacterMove.characterMoveX = 2;
-		packetCharacterMove.characterMoveY = 1;
-		//packetCharacterMove.characterMoveY = "string";
-
-		//{"header":{"packetIndex":1,"packetSize":??},"characterMoveX":1,"characterMoveY":2}
-		//{"header":{"packetIndex":1,"packetSize":??},"characterMoveX":1,"String":"string"}
-		
-
-
-
-
-		boost::property_tree::ptree ptSend;
-		boost::property_tree::ptree ptSendHeader;
-		ptSendHeader.put<int>("packetIndex", packetCharacterMove.header.packetIndex);
-		ptSendHeader.put<int>("packetSize", packetCharacterMove.header.packetSize);
-		ptSend.add_child("header", ptSendHeader);
-		ptSend.put<float>("characterMoveX", packetCharacterMove.characterMoveX);
-		ptSend.put<float>("characterMoveY", packetCharacterMove.characterMoveY);
-		//ptSend.put<std::string>("String", packetCharacterMove.string);
-
-		std::string stringRecv;
-		std::ostringstream os(stringRecv);
-		boost::property_tree::write_json(os, ptSend, false);
-		std::string sendStr = os.str();
-		std::cout << sendStr << std::endl;
-		PostSend(false, std::strlen(sendStr.c_str()), (char*)sendStr.c_str());
-
-
-
 		while (nPacketData > 0)
 		{
 			if (nPacketData < sizeof(PACKET_HEADER))
@@ -175,8 +122,6 @@ void Session::handleReceive(const boost::system::error_code& error, size_t bytes
 			}
 			else
 			{
-				nPacketData = 0;
-				_nPacketBufferMark = 0;
 				break;
 			}
 		}

@@ -192,7 +192,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _hp: 0
   _mp: 0
-  _attackSpeed: 100
 --- !u!1 &4668375787703239335
 GameObject:
   m_ObjectHideFlags: 0
