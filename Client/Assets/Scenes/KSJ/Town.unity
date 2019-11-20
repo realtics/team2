@@ -905,6 +905,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameOver
       objectReference: {fileID: 0}
+    - target: {fileID: 322670426628092969, guid: 095e3bee2e9fe194eb78e34b3e37139f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 322670426628092968, guid: 095e3bee2e9fe194eb78e34b3e37139f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1620,11 +1625,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: MonsterInfo
-      objectReference: {fileID: 0}
-    - target: {fileID: 6528332689625396477, guid: 6b24f3ed6a2956147ba3725b280083d7,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6528332689625396476, guid: 6b24f3ed6a2956147ba3725b280083d7,
         type: 3}
