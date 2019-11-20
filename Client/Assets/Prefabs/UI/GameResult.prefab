@@ -118,7 +118,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
-        m_MethodName: OnClickResultBox
+        m_MethodName: 
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -141,7 +141,7 @@ GameObject:
   - component: {fileID: 1801744680141474049}
   - component: {fileID: 1801744680141474051}
   m_Layer: 5
-  m_Name: GameResult 1
+  m_Name: GameResult
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -218,10 +218,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _resultBox:
-  - {fileID: 1801744680022982233}
-  - {fileID: 1801744681428205346}
-  - {fileID: 1801744680287631467}
-  - {fileID: 1801744681367889877}
+  - {fileID: 1801744680022982239}
+  - {fileID: 1801744681428205344}
+  - {fileID: 1801744680287631465}
+  - {fileID: 1801744681367889883}
   _openResultBox: {fileID: 1801744681624673102}
   _countDown: {fileID: 1801744681800825040}
 --- !u!1 &1801744680287631465
@@ -342,7 +342,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
-        m_MethodName: OnClickResultBox
+        m_MethodName: 
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -470,7 +470,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
-        m_MethodName: OnClickResultBox
+        m_MethodName: 
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -598,7 +598,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
-        m_MethodName: OnClickResultBox
+        m_MethodName: 
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
