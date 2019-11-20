@@ -24,10 +24,10 @@ public class UIGameResult : MonoBehaviour
 
         for (int i = 0; i < _resultBox.Length; i++)
         {
-            int j = i;
+            int localCopy = i;
             _resultBoxImage[i] = _resultBox[i].GetComponent<Image>();
             _resultBoxButton[i] = _resultBox[i].GetComponent<Button>();
-            _resultBoxButton[i].onClick.AddListener(() => { GameManager.Instance.OnClickResultBox(j); });
+            _resultBoxButton[i].onClick.AddListener(() => { GameManager.Instance.OnClickResultBox(localCopy); });
         }
     }
 
