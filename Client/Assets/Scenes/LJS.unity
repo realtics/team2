@@ -809,6 +809,21 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5955886557323474264, guid: f596280910a5da744b6ad8c35450f807,
+        type: 3}
+      propertyPath: _sender._horizontalExtraMoveDuration
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5955886557323474264, guid: f596280910a5da744b6ad8c35450f807,
+        type: 3}
+      propertyPath: _sender._horizontalExtraMoveValue
+      value: -2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5955886557323474264, guid: f596280910a5da744b6ad8c35450f807,
+        type: 3}
+      propertyPath: _sender._stunDuration
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f596280910a5da744b6ad8c35450f807, type: 3}
 --- !u!1001 &593718141
@@ -1753,6 +1768,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: testMonster
       objectReference: {fileID: 0}
+    - target: {fileID: 4127798058604522680, guid: 1062798e89fa7ff48b49faaa1a382347,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4127798058604522687, guid: 1062798e89fa7ff48b49faaa1a382347,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1808,30 +1828,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6134038880612843575, guid: 1062798e89fa7ff48b49faaa1a382347,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 365751213, guid: 1062798e89fa7ff48b49faaa1a382347, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2174660144196710705, guid: 1062798e89fa7ff48b49faaa1a382347,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1783622071817495763, guid: 1062798e89fa7ff48b49faaa1a382347,
-        type: 3}
-      propertyPath: m_Offset.y
-      value: 0.3397556
-      objectReference: {fileID: 0}
-    - target: {fileID: 1783622071817495763, guid: 1062798e89fa7ff48b49faaa1a382347,
-        type: 3}
-      propertyPath: m_Size.y
-      value: 0.7130612
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1062798e89fa7ff48b49faaa1a382347, type: 3}
 --- !u!1001 &7760290856777661961
@@ -1845,11 +1841,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Goblin
-      objectReference: {fileID: 0}
-    - target: {fileID: 1020073003416927019, guid: 9e770ae2b90bf63409cba0581ffbe468,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1020073003416927020, guid: 9e770ae2b90bf63409cba0581ffbe468,
         type: 3}
