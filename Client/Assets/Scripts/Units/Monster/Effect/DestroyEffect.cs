@@ -21,7 +21,5 @@ public class DestroyEffect : MonoBehaviour
             gameObject.SetActive(false);
             _currentTime = 0.0f;
         }
-           
-           // Destroy(this.gameObject);
     }
 }

@@ -14,7 +14,7 @@ public class AnimationEffectEvent : MonoBehaviour
     {
         _monster = transform.root.GetComponent<Monster>();
 
-        _smashEffectPivot = transform.parent.Find("SmashEffectPivot");
+        _smashEffectPivot = transform.root.Find("SmashEffectPivot");
         _smashEffect = _smashEffectPivot.GetChild(0).gameObject.transform;
     }
     private void OnSmashEffect()
@@ -23,19 +23,8 @@ public class AnimationEffectEvent : MonoBehaviour
         {
             Vector3 SmashEffectPos = _smashEffectPivot.position;
 
-            FlipEffect();
-            //Instantiate(effect, SmashEffectPos, Quaternion.Euler(Vector3.zero));
             _smashEffect.gameObject.SetActive(true);
         }
-    }
-    
-    private void FlipEffect()
-    {
-        if (transform.parent.localScale.x > 0)
-            _smashEffect.GetComponent<SpriteRenderer>().flipX = false;
-
-        else
-            _smashEffect.GetComponent<SpriteRenderer>().flipX = true;
     }
 
     public void OnSmashAttackBox()

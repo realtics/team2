@@ -247,7 +247,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efca241d36d50144c8a671ef50081592, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monsterName: Goblin3
+  monsterName: Goblin2
   monsterLevel: 5
   currentHp: 600
   maxHp: 600
