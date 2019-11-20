@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-enum PlayerState
+enum GameState
 { 
-    Alive,
-    Die
+    Dungeon,
+    Die,
+    Result
 }
 enum SceneIndex
 {
@@ -29,7 +30,7 @@ public class GameManager : MonoBehaviour
 
     private GameObject _dungeonClearMenu;
 
-    private PlayerState _playerState;
+    private GameState _playerState;
 
     private static GameManager _instance;
     public static GameManager Instance
@@ -46,21 +47,20 @@ public class GameManager : MonoBehaviour
         _dungeonClearMenu = GameObject.Find("DungeonClearMenu");
         _dungeonClearMenu.SetActive(false);
 
-        _playerState = PlayerState.Alive;
+        _playerState = GameState.Dungeon;
         _instance = this;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(_countOver && _playerState == PlayerState.Die)
+        if(_countOver && _playerState == GameState.Die)
         {
             Invoke("CountOver", 1f);
         }
-        if (_countOver && _playerState == PlayerState.Alive)
+        if (_countOver && _playerState == GameState.Dungeon)
         {
-            if(!_dungeonClearMenu.activeSelf)
-                _dungeonClearMenu.SetActive(true);
+            Invoke("Clear", 1f);
         }
     }
 
@@ -69,11 +69,17 @@ public class GameManager : MonoBehaviour
         MoveToScene((int)SceneIndex.MainMenu);
     }
 
+    public void Clear()
+    {
+        UIHelper.Instance.SetGameResult(false);
+        _dungeonClearMenu.SetActive(true);
+    }
+
     public void GameOver()
     {
-        if (_playerState == PlayerState.Alive)
+        if (_playerState == GameState.Dungeon)
         {
-            _playerState = PlayerState.Die;
+            _playerState = GameState.Die;
             UIHelper.Instance.SetGameOver(true, _coin);
             _countDown = _maxDieCountDown;
             UIHelper.Instance.GameOverSetTime(_countDown);
@@ -93,7 +99,7 @@ public class GameManager : MonoBehaviour
     public void DieCountOver()
     {
         _countDown = _maxDieCountDown;
-        _playerState = PlayerState.Alive;
+        _playerState = GameState.Dungeon;
     }
 
     public void GameResult()
@@ -146,8 +152,11 @@ public class GameManager : MonoBehaviour
             }
             else
             {
-                UIHelper.Instance.SetGameResult(false);
                 _countOver = true;
+                if(!_playerChooseResult)
+                {
+                    UIHelper.Instance.OpenResultBox(0);
+                }
                 StopCoroutine(ResultSecondCountdown());
                 
             }
