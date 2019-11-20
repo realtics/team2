@@ -390,6 +390,21 @@ MonoBehaviour:
     _verticalExtraMoveDuration: 0
     _verticalExtraMoveValue: 0
     _stunDuration: 0.5
+--- !u!114 &8917905186618086786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7066271342005098954}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee206c0ccd87a8b499a371b5bfa22355, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: {r: 0, g: 0, b: 0, a: 1}
+  threshold: 0.2
+  slope: 0
 --- !u!1 &8854073493097922824
 GameObject:
   m_ObjectHideFlags: 0
@@ -493,6 +508,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6582171582866420980, guid: a2407be955ae9154ab27b2e478cfbaf7,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 03f9308632d6bef4bb6194b1d7ef5fed, type: 2}
     - target: {fileID: 6582171582866420982, guid: a2407be955ae9154ab27b2e478cfbaf7,
         type: 3}
       propertyPath: _deleteTime
@@ -500,6 +520,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a2407be955ae9154ab27b2e478cfbaf7, type: 3}
+--- !u!1 &7066271342005098954 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6582171582866420938, guid: a2407be955ae9154ab27b2e478cfbaf7,
+    type: 3}
+  m_PrefabInstance: {fileID: 4127798057298357504}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7066271342005098997 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6582171582866420981, guid: a2407be955ae9154ab27b2e478cfbaf7,
