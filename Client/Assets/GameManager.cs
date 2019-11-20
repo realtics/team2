@@ -155,7 +155,7 @@ public class GameManager : MonoBehaviour
                 _countOver = true;
                 if(!_playerChooseResult)
                 {
-                    UIHelper.Instance.OpenResultBox(0);
+                    OnClickResultBox(0);
                 }
                 StopCoroutine(ResultSecondCountdown());
                 
