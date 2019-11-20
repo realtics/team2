@@ -12,25 +12,15 @@ public class MoveState : FSMState<Monster>
             return instance;
         }
     }
-
     static MoveState() { }
     private MoveState() { }
 
-    private enum MovementState
-    {
-        Idle = 0,
-        Left = 1,
-        Right = 2,
-    }
+    private const float InitialResetTime = 3.0f;
 
-    private float _resetTime = 3f;
-    private float _currentTime;
-
-    private MovementState _moveMentState;
-    
     public override void EnterState(Monster monster)
     {
-        _currentTime = _resetTime;
+        monster.RandomMoveResetTime = InitialResetTime;
+        monster.RandomMoveCurrentTime = monster.RandomMoveResetTime;
     }
 
     public override void UpdateState(Monster monster)
@@ -74,14 +64,14 @@ public class MoveState : FSMState<Monster>
 
             //FIXME :: 함수화
             Vector3 direction = Vector3.zero;
-
-            if (_moveMentState == MovementState.Left)
+           
+            if (monster.MovementState == Monster.MovementStateInfo.Left)
             {
                 direction = Vector3.left;
                 monster.transform.localScale = new Vector3(1, 1, 1);
             }
 
-            else if (_moveMentState == MovementState.Right)
+            else if (monster.MovementState == Monster.MovementStateInfo.Right)
             {
                 direction = Vector3.right;
                 monster.transform.localScale = new Vector3(-1, 1, 1);
@@ -92,26 +82,26 @@ public class MoveState : FSMState<Monster>
     }
 
     public override void ExitState(Monster monster)
-    { 
-        _moveMentState = MovementState.Idle;
+    {
+        monster.MovementState = Monster.MovementStateInfo.Idle;
         monster.animator.SetBool("isMoving", false);
     }
 
     private void SetRandDirection(Monster monster)
     {
-        _currentTime += Time.smoothDeltaTime;
-        if (_currentTime >= _resetTime)
+        monster.RandomMoveCurrentTime += Time.smoothDeltaTime;
+        if (monster.RandomMoveCurrentTime >= monster.RandomMoveResetTime)
         {
-            _moveMentState = (MovementState) Random.Range((int)MovementState.Idle, (int)MovementState.Right+1);
-            Debug.Log(monster.name + "  : " + _moveMentState);
+            monster.MovementState = (Monster.MovementStateInfo) Random.Range((int)Monster.MovementStateInfo.Idle, (int)Monster.MovementStateInfo.Right+1);
+            Debug.Log(monster.name + "  : " + monster.MovementState);
 
-            if (_moveMentState == MovementState.Idle)
+            if (monster.MovementState == Monster.MovementStateInfo.Idle)
                 monster.animator.SetBool("isMoving", false);
             else
                 monster.animator.SetBool("isMoving", true);
 
-            _resetTime = Random.Range(1f, 4f);
-            _currentTime = 0f;
+            monster.RandomMoveCurrentTime = Random.Range(1f, 4f);
+            monster.RandomMoveCurrentTime = 0f;
         }
     }
 }
