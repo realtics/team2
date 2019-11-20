@@ -149,8 +149,15 @@ public class GameManager : MonoBehaviour
                 UIHelper.Instance.SetGameResult(false);
                 _countOver = true;
                 StopCoroutine(ResultSecondCountdown());
+                
             }
             yield return new WaitForSeconds(1);
         }
+    }
+
+    //TODO : 보스몬스터 죽었을 시 알리기
+    public void NoticeGameClear()
+    {
+        Debug.Log("Clear!");
     }
 }
