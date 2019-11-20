@@ -1502,11 +1502,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerInfo
       objectReference: {fileID: 0}
-    - target: {fileID: 4997678237776853771, guid: f63803091ffa0924b85bfc7e38b8019e,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4997678237776853772, guid: f63803091ffa0924b85bfc7e38b8019e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1625,6 +1620,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: MonsterInfo
+      objectReference: {fileID: 0}
+    - target: {fileID: 6528332689625396477, guid: 6b24f3ed6a2956147ba3725b280083d7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6528332689625396476, guid: 6b24f3ed6a2956147ba3725b280083d7,
         type: 3}
