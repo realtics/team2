@@ -30,7 +30,18 @@ public class Monster : MonoBehaviour
     private bool _isAttack;
     private bool _isHit;
 
-    //피격시 넉백관련 변수
+    //MoveState Value
+    public enum MovementStateInfo
+    {
+        Idle = 0,
+        Left = 1,
+        Right = 2,
+    }
+    private float _randomMoveResetTime;
+    private float _randomMoveCurrentTime;
+    private MovementStateInfo _moveMentState;
+
+    //KnockBakc Value
     private Vector3 _knockBackDirection;
     private float _knockBackSpeed;
     private float _knockBackDuration;
@@ -38,6 +49,9 @@ public class Monster : MonoBehaviour
     //properties
     public bool IsAttack { get { return _isAttack; } set { _isAttack = value; } }
     public bool IsHit { get { return _isHit; } set { _isHit = value; } }
+    public float RandomMoveResetTime { get { return _randomMoveResetTime; } set { _randomMoveResetTime = value; } }
+    public float RandomMoveCurrentTime { get { return _randomMoveCurrentTime; } set { _randomMoveCurrentTime = value; } }
+    public MovementStateInfo MovementState { get { return _moveMentState; } set { _moveMentState = value;  } }
 
     private void Awake()
     {
