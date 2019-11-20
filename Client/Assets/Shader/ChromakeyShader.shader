@@ -10,6 +10,7 @@
 		SubShader{
 			Tags {"Queue" = "Transparent" "IgnoreProjector" = "True" "RenderType" = "Transparent"}
 			LOD 100
+			Cull Off // Backspace Culling option
 
 			Lighting Off
 			ZWrite Off
@@ -21,7 +22,7 @@
 					#pragma vertex vert_img
 					#pragma fragment frag
 					#pragma fragmentoption ARB_precision_hint_fastest
-
+					//#include "UnitySprites.cginc"
 					sampler2D _MainTex;
 					float3 _keyingColor;
 					float _thresh; // 0.8
