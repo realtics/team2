@@ -4,12 +4,24 @@ using UnityEngine;
 
 public class DestroyEffect : MonoBehaviour
 {
-    public float deleteTime;
+   [SerializeField]
+    private float _deleteTime;
+    private float _currentTime;
+
+    private void Awake()
+    {
+        _currentTime = 0.0f;
+    }
 
     private void Update()
     {
-        deleteTime -= Time.deltaTime;
-        if (deleteTime <= 0)
-            Destroy(this.gameObject);
+        _currentTime += Time.deltaTime;
+        if (_currentTime >= _deleteTime && gameObject.activeSelf == true)
+        {
+            gameObject.SetActive(false);
+            _currentTime = 0.0f;
+        }
+           
+           // Destroy(this.gameObject);
     }
 }

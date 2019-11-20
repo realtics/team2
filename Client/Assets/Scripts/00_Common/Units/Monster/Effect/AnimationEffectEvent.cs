@@ -4,16 +4,18 @@ using UnityEngine;
 
 public class AnimationEffectEvent : MonoBehaviour
 {
-    public GameObject effect;
+    //public GameObject effect;
     private Monster _monster;
 
     private Transform _smashEffectPivot;
+    private Transform _smashEffect;
 
     private void Start()
     {
-        _monster = transform.GetComponentInParent<Monster>();
+        _monster = transform.root.GetComponent<Monster>();
 
-        _smashEffectPivot = transform.parent.Find("SmashEffectPivot"); 
+        _smashEffectPivot = transform.parent.Find("SmashEffectPivot");
+        _smashEffect = _smashEffectPivot.GetChild(0).gameObject.transform;
     }
     private void OnSmashEffect()
     {
@@ -22,17 +24,18 @@ public class AnimationEffectEvent : MonoBehaviour
             Vector3 SmashEffectPos = _smashEffectPivot.position;
 
             FlipEffect();
-            Instantiate(effect, SmashEffectPos, Quaternion.Euler(Vector3.zero));
+            //Instantiate(effect, SmashEffectPos, Quaternion.Euler(Vector3.zero));
+            _smashEffect.gameObject.SetActive(true);
         }
     }
     
     private void FlipEffect()
     {
         if (transform.parent.localScale.x > 0)
-            effect.GetComponent<SpriteRenderer>().flipX = false;
+            _smashEffect.GetComponent<SpriteRenderer>().flipX = false;
 
         else
-            effect.GetComponent<SpriteRenderer>().flipX = true;
+            _smashEffect.GetComponent<SpriteRenderer>().flipX = true;
     }
 
     public void OnSmashAttackBox()
