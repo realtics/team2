@@ -1,10 +1,10 @@
 ﻿Shader "Custom/ChromaKey" {
 
 	Properties{
-		_MainTex("Base (RGB)", 2D) = "white" {}
-		_thresh("Threshold", Range(0, 16)) = 0.8
-		_slope("Slope", Range(0, 1)) = 0.2
-		_keyingColor("Key Colour", Color) = (1,1,1,1)
+		[PerRendererData]_MainTex("Base (RGB)", 2D) = "white" {}
+		[PerRendererData]_thresh("Threshold", Range(0, 16)) = 0.8
+		[PerRendererData]_slope("Slope", Range(0, 1)) = 0.2
+		[PerRendererData]_keyingColor("Key Colour", Color) = (1,1,1,1)
 	}
 
 		SubShader{
