@@ -13,6 +13,7 @@ public struct MonsterInfo
 public enum MonsterSnapShot
 {
     Goblin,
+    Tau,
     Calvary
 }
 
