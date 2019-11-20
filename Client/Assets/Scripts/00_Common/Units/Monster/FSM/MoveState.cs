@@ -99,7 +99,7 @@ public class MoveState : FSMState<Monster>
             else
                 monster.animator.SetBool("isMoving", true);
 
-            monster.RandomMoveCurrentTime = Random.Range(1f, 4f);
+            monster.RandomMoveResetTime = Random.Range(1f, 4f);
             monster.RandomMoveCurrentTime = 0f;
         }
     }
