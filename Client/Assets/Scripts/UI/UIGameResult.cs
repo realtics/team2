@@ -31,12 +31,6 @@ public class UIGameResult : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void SetTime(int time)
     {
         _countDown.text = time.ToString();

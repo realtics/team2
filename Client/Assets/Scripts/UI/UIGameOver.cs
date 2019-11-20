@@ -7,7 +7,9 @@ public class UIGameOver : MonoBehaviour
     [SerializeField]
     private Text _remainCoin;
     [SerializeField]
-    private Text _countDown;
+    private Image _countDown;
+    [SerializeField]
+    private Sprite[] _countDownSprite;
 
     private int _coin;
     private int _time;
@@ -27,28 +29,6 @@ public class UIGameOver : MonoBehaviour
         }
     }
 
-    //private void OnEnable()
-    //{
-    //    StartCoroutine(SecondCountdown());
-    //}
-    //private void OnDisable()
-    //{
-    //    _time = _maxTime;
-    //    StopCoroutine(SecondCountdown());
-    //}
-    // Use this for initialization
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
-
     public void SetUIActive(bool active)
     {
         gameObject.SetActive(active);
@@ -57,6 +37,7 @@ public class UIGameOver : MonoBehaviour
     public void SetTime(int time)
     {
         _time = time;
-        _countDown.text = _time.ToString();
+        if (_time != _maxTime)
+            _countDown.sprite = _countDownSprite[_time];
     }
 }
