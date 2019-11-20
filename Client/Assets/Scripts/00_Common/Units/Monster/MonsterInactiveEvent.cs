@@ -30,4 +30,9 @@ public class MonsterInactiveEvent : MonoBehaviour
     {
         isDead = true;
     }
+
+    private void InactiveMonsterImmediately()
+    {
+        _monster.SetActive(false);
+    }
 }
