@@ -23,8 +23,8 @@ public class CharacterMovement : BaseUnit
 
     private void CheckAttackEnd()
     {
-        if (!IsAttack)
-            return;
+        //if (!IsAttack)
+        //    return;
 
         AnimatorStateInfo animStateInfo = _animator.GetCurrentAnimatorStateInfo(0);
 
@@ -45,6 +45,8 @@ public class CharacterMovement : BaseUnit
             return;
 
         base.StopAttack();
+        StopSkill();
+
         _animator.SetBool("IsAttack", false);
         _animator.SetBool("NextAttack", false);
     }
@@ -62,6 +64,9 @@ public class CharacterMovement : BaseUnit
 
     public void SetNextAttack()
     {
+        if (!IsAttack)
+            return;
+
         AnimatorStateInfo animStateInfo = _animator.GetCurrentAnimatorStateInfo(0);
         if (!animStateInfo.IsTag("Attack"))
             return;
@@ -173,6 +178,22 @@ public class CharacterMovement : BaseUnit
         base.StopHit();
         _animator.SetBool("IsHit", false);
         _animator.SetBool("IsAttack", false);
+    }
+
+    public override bool SetSkill()
+    {
+        if (!base.SetSkill())
+            return false;
+
+        _animator.SetBool("OnSkill", true);
+
+        return true;
+    }
+
+    public override void StopSkill()
+    {
+        base.StopSkill();
+        _animator.SetBool("OnSkill", false);
     }
 
     IEnumerator CoSetFalseNextAttack()

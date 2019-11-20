@@ -12,7 +12,7 @@ public class JingongchamAttackBox : MonoBehaviour
     void Start()
     {
         _sender.Attacker = FindObjectOfType<PlayerCharacter>().transform;
-        _sender.Damage = 100.0f;
+        _sender.Damage = 1.0f;
         _sender.HorizontalExtraMoveDuration = 0.1f;
         _sender.HorizontalExtraMoveValue = -10.0f;
         _sender.StunDuration = 1.0f;

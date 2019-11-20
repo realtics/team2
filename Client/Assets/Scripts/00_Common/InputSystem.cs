@@ -43,6 +43,9 @@ public class InputSystem : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.X))
             _pc.SetAttack();
 
+        if (Input.GetKeyDown(KeyCode.Z))
+            _pc.SetSkill();
+
         if (Input.GetKey(KeyCode.LeftShift))
             _pc.SetRun();
         else

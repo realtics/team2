@@ -50,6 +50,8 @@ public class BaseUnit : MonoBehaviour
 
     private float _extraMoveDuration;
 
+    private bool _onSkill;
+
 
     // properties
     public bool IsGround { get { return !(_height > 0.0f); } }
@@ -63,6 +65,7 @@ public class BaseUnit : MonoBehaviour
     public float Forward { get { return _avatar.transform.localScale.x < 0 ? -1 : 1; } }
     public float CurAnimTime { get { return _animator.GetCurrentAnimatorStateInfo(0).normalizedTime; } }
     public bool IsInTranstion { get { return _animator.IsInTransition(0); } }
+    public bool OnSkill { get { return _onSkill; } }
 
     public Vector3 OriginPos { get { return _avatar.position; } }
     public CharacterStat Stat { get { return _stat; } }
@@ -250,6 +253,9 @@ public class BaseUnit : MonoBehaviour
         {
             if (_isAttack)
                 return false;
+
+            if (_onSkill)
+                return false;
         }
 
         return true;
@@ -258,6 +264,9 @@ public class BaseUnit : MonoBehaviour
     public bool IsAttackable()
     {
         if (_isHit)
+            return false;
+
+        if (_onSkill)
             return false;
 
         return true;
@@ -338,5 +347,22 @@ public class BaseUnit : MonoBehaviour
         }
 
         _animator.speed = _stat.AttackSpeed / 100.0f;
+    }
+
+    public virtual bool SetSkill()
+    {
+        if (!IsAttackable())
+            return false;
+
+        if (!IsGround)
+            return false;
+
+        _onSkill = true;
+        return true;
+    }
+
+    public virtual void StopSkill()
+    {
+        _onSkill = false;
     }
 }

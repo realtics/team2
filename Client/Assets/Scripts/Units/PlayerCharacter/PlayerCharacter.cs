@@ -55,4 +55,9 @@ public class PlayerCharacter : MonoBehaviour
     {
         _movement.SetAttack();
     }
+
+    public void SetSkill()
+    {
+        _movement.SetSkill();
+    }
 }
