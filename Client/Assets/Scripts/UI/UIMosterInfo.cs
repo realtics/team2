@@ -4,10 +4,18 @@ using UnityEditor;
 
 public struct MonsterInfo
 {
+    public MonsterSnapShot index;
     public string name;
     public int level;
     public float currentHp;
 }
+
+public enum MonsterSnapShot
+{
+    Goblin,
+    Calvary
+}
+
 
 public class UIMosterInfo : MonoBehaviour
 {
@@ -15,9 +23,13 @@ public class UIMosterInfo : MonoBehaviour
     private Text _name;
     private Text _level;
     private Text _multiple;
+    private Image _snapShot;
 
     // temp value.
     private int _hp = 200;
+
+    [SerializeField]
+    private Sprite[] _mosterSnapShot;
 
     void Awake()
     {
@@ -25,6 +37,7 @@ public class UIMosterInfo : MonoBehaviour
         _name = transform.Find("Name").transform.Find("MosterName").GetComponent<Text>();
         _level = transform.Find("Level").transform.Find("MosterLevel").GetComponent<Text>();
         _multiple = transform.Find("Hp").transform.Find("HpMultple").GetComponent<Text>();
+        _snapShot = transform.Find("Mask").transform.Find("MonsterSnapShot").GetComponent<Image>();
     }
 
     void Start()
@@ -49,6 +62,7 @@ public class UIMosterInfo : MonoBehaviour
         _name.text = info.name;
         _level.text = "Lv." + info.level;
         _hpBar.CurrentValue = info.currentHp;
+        _snapShot.sprite = _mosterSnapShot[(int)info.index];
     }
     public void CheckDieMonster()
     {
