@@ -4,17 +4,11 @@ using System.Collections;
 
 public class UIPlayerInfo : MonoBehaviour
 {
+    [SerializeField]
     private UIPlayerStat _hpBar;
+    [SerializeField]
     private UIPlayerStat _mpBar;
-    private Text _level;
     private CharacterStat characterStat;
-
-    void Awake()
-    {
-        _hpBar = transform.Find("Hp").transform.Find("PlayerHpBar").GetComponent<UIPlayerStat>();
-        _mpBar = transform.Find("Mp").transform.Find("PlayerMpBar").GetComponent<UIPlayerStat>();
-
-    }
 
     // Use this for initialization
     void Start()
