@@ -25,7 +25,9 @@ public class GameManager : MonoBehaviour
     private bool _countOver;
     private float _currentTime = 0.0f;
 
-    private CharacterStat _playerStat;
+    private bool _playerChooseResult = false;
+
+    private GameObject _dungenClearMenu;
 
     private PlayerState _playerState;
 
@@ -41,7 +43,8 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        _dungenClearMenu = GameObject.Find("DungenClearMenu");
+        _dungenClearMenu.SetActive(false);
 
         _playerState = PlayerState.Alive;
         _instance = this;
@@ -50,9 +53,14 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(_countOver)
+        if(_countOver && _playerState == PlayerState.Die)
         {
             Invoke("CountOver", 1f);
+        }
+        if (_countOver && _playerState == PlayerState.Alive)
+        {
+            if(!_dungenClearMenu.activeSelf)
+                _dungenClearMenu.SetActive(true);
         }
     }
 
@@ -95,6 +103,14 @@ public class GameManager : MonoBehaviour
         UIHelper.Instance.GameResultSetTime(_countDown);
         StartCoroutine(ResultSecondCountdown());
     }
+    public void OnClickResultBox(int index)
+    {
+        if(!_playerChooseResult)
+        {
+            UIHelper.Instance.OpenResultBox(index);
+            _playerChooseResult = true;
+        }
+    }
 
     public void MoveToScene(int Scene)
     {
@@ -130,9 +146,8 @@ public class GameManager : MonoBehaviour
             }
             else
             {
-                //UIHelper.Instance.SetGameResult(false);
-                UIHelper.Instance.GameResultEnd();
-                //_countOver = true;
+                UIHelper.Instance.SetGameResult(false);
+                _countOver = true;
                 StopCoroutine(ResultSecondCountdown());
             }
             yield return new WaitForSeconds(1);
