@@ -12,7 +12,7 @@ public class CharacterAttackBox : MonoBehaviour
     {
         _stat = transform.root.GetComponent<CharacterStat>();
 
-        _sender = new AttackInfoSender(transform.root);
+        _sender.Attacker = transform.root;
         _sender.Damage = _stat.AttackDamage;
         _sender.HorizontalExtraMoveDuration = 0.2f;
         _sender.HorizontalExtraMoveValue = -2.0f;

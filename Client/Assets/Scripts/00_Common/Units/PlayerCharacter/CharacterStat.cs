@@ -11,6 +11,7 @@ public class CharacterStat : MonoBehaviour
     private float _maxMp = 1000.0f;
     [SerializeField]
     private float _mp;
+    [SerializeField]
     private float _attackDamage = 100.0f;
     private float _defense = 1.0f;
     [SerializeField]
