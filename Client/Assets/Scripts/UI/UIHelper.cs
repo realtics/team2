@@ -24,7 +24,7 @@ public class UIHelper : MonoBehaviour
         _monsterInfo = GameObject.Find("MonsterInfo").GetComponent<UIMosterInfo>();
 
         _gameOver = GameObject.Find("GameOver").GetComponent<UIGameOver>();
-        //_gameResult = GameObject.Find("GameResult").GetComponent<UIGameResult>();
+        _gameResult = GameObject.Find("GameResult").GetComponent<UIGameResult>();
     }
 
     // Use this for initialization
@@ -71,9 +71,13 @@ public class UIHelper : MonoBehaviour
     {
         _gameResult.SetTime(time);
     }
+    public void OpenResultBox(int index)
+    {
+        _gameResult.OpenResultBox(index);
+    }
     public void GameResultEnd()
     {
-        _gameResult.AllOpenResultBox();
+        
     }
 
     public void SetMonsterHp(float CurrentHp, float MaxHp)

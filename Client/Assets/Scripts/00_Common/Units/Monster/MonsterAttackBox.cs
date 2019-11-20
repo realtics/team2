@@ -6,16 +6,14 @@ public class MonsterAttackBox : MonoBehaviour
 {
     private const float AttackRange = 0.8f;
     private Monster _monster;
+    [SerializeField]
     private AttackInfoSender _sender;
 
     void Start()
     {
         _monster = transform.root.GetComponent<Monster>();
-        _sender = new AttackInfoSender(transform.root);
+        _sender.Attacker = transform.root;
         _sender.Damage = 10.0f;
-        _sender.HorizontalExtraMoveDuration = 0.2f;
-        _sender.HorizontalExtraMoveValue = -15.0f;
-        _sender.StunDuration = 1.0f;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
