@@ -93,7 +93,6 @@ public class MoveState : FSMState<Monster>
         if (monster.RandomMoveCurrentTime >= monster.RandomMoveResetTime)
         {
             monster.MovementState = (Monster.MovementStateInfo) Random.Range((int)Monster.MovementStateInfo.Idle, (int)Monster.MovementStateInfo.Right+1);
-            Debug.Log(monster.name + "  : " + monster.MovementState);
 
             if (monster.MovementState == Monster.MovementStateInfo.Idle)
                 monster.animator.SetBool("isMoving", false);
