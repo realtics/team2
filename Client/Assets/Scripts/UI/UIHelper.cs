@@ -75,10 +75,6 @@ public class UIHelper : MonoBehaviour
     {
         _gameResult.OpenResultBox(index);
     }
-    public void GameResultEnd()
-    {
-        
-    }
 
     public void SetMonsterHp(float CurrentHp, float MaxHp)
     {
