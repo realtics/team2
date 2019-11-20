@@ -17,22 +17,9 @@ public class HitState : FSMState<Monster>
     static HitState() { }
     private HitState() { }
 
-    private enum HitMotion
-    {
-        HitMotion0 = 0,
-        HitMotion1 = 1,
-        HitMotionEnd = 2
-    }
-
-    //TODO: Monster.cs로 이전
-    private float _hitRecoveryTime = 1.0f;
-    private float _currentTime = 0.0f;
-
-    private HitMotion _currentHitMotion;
-
     public override void EnterState(Monster monster)
     {
-        _currentTime = 0.0f;
+        monster.HitRecoveryCurrentTime = 0.0f;
         monster.IsHit = true;
         monster.animator.SetBool("isHit", true);
 
@@ -41,7 +28,7 @@ public class HitState : FSMState<Monster>
 
     public override void UpdateState(Monster monster)
     {
-        if (IsHitRecoveryTimeEnd())
+        if (IsHitRecoveryTimeEnd(monster))
         {
             monster.ChangeState(MoveState.Instance);
         }
@@ -49,33 +36,34 @@ public class HitState : FSMState<Monster>
 
     public override void ExitState(Monster monster)
     {
-        //_currentTime = 0.0f;
         monster.IsHit = false;
         monster.animator.SetBool("isHit", false);
-        monster.animator.SetInteger("hitMotion", (int)HitMotion.HitMotionEnd);
+        monster.animator.SetInteger("hitMotion", (int)Monster.HitMotion.HitMotionEnd);
     }
 
-    private bool IsHitRecoveryTimeEnd()
+    //FIXME : 이함수가 여기있는 것이 옳은지 판단 후 위치 이동해야함
+    private bool IsHitRecoveryTimeEnd(Monster monster)
     {
-        _currentTime += Time.deltaTime;
-        if (_currentTime >= _hitRecoveryTime)
+        monster.HitRecoveryCurrentTime += Time.deltaTime;
+        if (monster.HitRecoveryCurrentTime >= monster.HitRecoveryResetTime)
         {
             return true;
         }
         return false;
     }
 
+    //FIXME : 이함수가 여기있는 것이 옳은지 판단 후 위치 이동해야함
     private void SetHitMotion(Monster monster)
     {
-        if ((HitMotion)monster.animator.GetInteger("hitMotion") == HitMotion.HitMotionEnd)
-            _currentHitMotion = HitMotion.HitMotion0;
+        if ((Monster.HitMotion)monster.animator.GetInteger("hitMotion") == Monster.HitMotion.HitMotionEnd)
+            monster.CurrentHitMotion = Monster.HitMotion.HitMotion0;
 
-        else if ((HitMotion)monster.animator.GetInteger("hitMotion") == HitMotion.HitMotion0)
-            _currentHitMotion = HitMotion.HitMotion1;
+        else if ((Monster.HitMotion)monster.animator.GetInteger("hitMotion") == Monster.HitMotion.HitMotion0)
+            monster.CurrentHitMotion = Monster.HitMotion.HitMotion1;
 
-        else if ((HitMotion)monster.animator.GetInteger("hitMotion") == HitMotion.HitMotion1)
-            _currentHitMotion = HitMotion.HitMotion0;
+        else if ((Monster.HitMotion)monster.animator.GetInteger("hitMotion") == Monster.HitMotion.HitMotion1)
+            monster.CurrentHitMotion = Monster.HitMotion.HitMotion0;
 
-        monster.animator.SetInteger("hitMotion", (int)_currentHitMotion);
+        monster.animator.SetInteger("hitMotion", (int)monster.CurrentHitMotion);
     }
 }
