@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: GoblinAnimatorController
+  m_Controller: {fileID: 9100000, guid: e61ba160ccb47b341b02d4714822e91b, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: a9dbff7ca59f77f46aa648f8e33c829a, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: fcd160764ac738e4cb78f25aaded8a59, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: d7685a89c7c40474894442a6a2e40f22, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 7b7cda10823edb24eba758242914bf0a, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: ac06bde19200fa840844e3ab63aa5e59, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 54a39d2e5662431418a1efd60eaef1f7, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 44f3c64ae16e0b34886fd26fd48de6ed, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 8dd70b8eb6263e84d8692a5d20d5c404, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 40f930bde77bd974abe5148f152abc53, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 6330c0463a2e71548ba214cebab04042, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 0f276feed65ff7b478877916b3e6f629, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: cd58a63c9179e64418ae0c67eb7d0874, type: 2}
