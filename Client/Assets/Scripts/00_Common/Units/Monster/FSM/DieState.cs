@@ -5,7 +5,7 @@ using UnityEngine;
 public class DieState : FSMState<Monster>
 {
     static readonly DieState instance = new DieState();
-    public static DieState GetInstance
+    public static DieState Instance
     {
         get
         {

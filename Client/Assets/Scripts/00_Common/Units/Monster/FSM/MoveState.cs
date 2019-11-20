@@ -5,7 +5,7 @@ using UnityEngine;
 public class MoveState : FSMState<Monster>
 {
     static readonly MoveState instance = new MoveState();
-    public static MoveState GetInstance
+    public static MoveState Instance
     {
         get
         {
@@ -65,7 +65,7 @@ public class MoveState : FSMState<Monster>
             }
             else
             {
-               monster.ChangeState(AttackState.GetInstance);
+               monster.ChangeState(AttackState.Instance);
             }
         }
         else

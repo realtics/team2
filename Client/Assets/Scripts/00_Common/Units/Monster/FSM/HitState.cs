@@ -6,7 +6,7 @@ using UnityEngine;
 public class HitState : FSMState<Monster>
 {
     static readonly HitState instance = new HitState();
-    public static HitState GetInstance
+    public static HitState Instance
     {
         get
         {
@@ -43,7 +43,7 @@ public class HitState : FSMState<Monster>
     {
         if (IsHitRecoveryTimeEnd())
         {
-            monster.ChangeState(MoveState.GetInstance);
+            monster.ChangeState(MoveState.Instance);
         }
     }
 

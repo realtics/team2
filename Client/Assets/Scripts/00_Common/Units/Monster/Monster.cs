@@ -59,7 +59,7 @@ public class Monster : MonoBehaviour
     {
         if (currentHp <= 0 && !_isDead)
         {
-            _state.ChangeState(DieState.GetInstance);
+            _state.ChangeState(DieState.Instance);
             _isDead = true;
         }
 
@@ -102,7 +102,7 @@ public class Monster : MonoBehaviour
     public void ResetState()
     {
         _state = new StateMachine<Monster>();
-        _state.InitialSetting(this, MoveState.GetInstance);
+        _state.InitialSetting(this, MoveState.Instance);
 
         target = null;
     }
@@ -118,7 +118,7 @@ public class Monster : MonoBehaviour
         UIHelper.Instance.SetMonsterHp(currentHp, maxHp);
 
         if (!_isHit)
-            _state.ChangeState(HitState.GetInstance);
+            _state.ChangeState(HitState.Instance);
 
         else
             _state.RestartState();

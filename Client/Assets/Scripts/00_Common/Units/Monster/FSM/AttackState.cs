@@ -5,7 +5,7 @@ using UnityEngine;
 public class AttackState : FSMState<Monster>
 {
     static readonly AttackState instance = new AttackState();
-    public static AttackState GetInstance
+    public static AttackState Instance
     {
         get
         {
@@ -35,7 +35,7 @@ public class AttackState : FSMState<Monster>
         {
             monster.animator.SetBool("isAttacking", false);
            
-            monster.ChangeState(MoveState.GetInstance);
+            monster.ChangeState(MoveState.Instance);
         }
     }
 
