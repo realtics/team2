@@ -43,9 +43,12 @@ public class UIStat : MonoBehaviour
     // Update is called once per frame
     protected virtual void Update()
     {
+        // hack lerp bug.
+        // 한곳에서 UI를 처리하니 몬스터마다 체력 뜨는게 들쭉날쭉함.
         if(_currentFill != _content.fillAmount)
         {
-            _content.fillAmount = Mathf.Lerp(_content.fillAmount, _currentFill, Time.deltaTime * _lerpSpeed);
+            //_content.fillAmount = Mathf.Lerp(_content.fillAmount, _currentFill, Time.deltaTime * _lerpSpeed);
+            _content.fillAmount =  _currentFill;
         }
     }
     public virtual void SetStat(float currentValue,float maxValue)
