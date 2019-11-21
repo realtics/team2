@@ -5,17 +5,17 @@ using UnityEngine;
 
 public class HitState : FSMState<Monster>
 {
-    static readonly HitState instance = new HitState();
-    public static HitState Instance
-    {
-        get
-        {
-            return instance;
-        }
-    }
+    //static readonly HitState instance = new HitState();
+    //public static HitState Instance
+    //{
+    //    get
+    //    {
+    //        return instance;
+    //    }
+    //}
 
-    static HitState() { }
-    private HitState() { }
+    //static HitState() { }
+    //private HitState() { }
 
     public override void EnterState(Monster monster)
     {
@@ -30,7 +30,8 @@ public class HitState : FSMState<Monster>
     {
         if (IsHitRecoveryTimeEnd(monster))
         {
-            monster.ChangeState(MoveState.Instance);
+            //monster.ChangeState(MoveState.Instance);
+            monster.ChangeState(monster._moveState);
         }
     }
 

@@ -22,6 +22,11 @@ public class Monster : MonoBehaviour
 
     private StateMachine<Monster> _state = null;
 
+    public AttackState _attackState = new AttackState();
+    public MoveState _moveState = new MoveState();
+    public HitState _hitState = new HitState();
+    public DieState _dieState = new DieState();
+
     private Transform _smashHitBox;
     private Transform _hitBox;
 
@@ -97,7 +102,8 @@ public class Monster : MonoBehaviour
     {
         if (currentHp <= 0 && !_isDead)
         {
-            _state.ChangeState(DieState.Instance);
+            //_state.ChangeState(DieState.Instance);
+            _state.ChangeState(_dieState);
             _isDead = true;
         }
 
@@ -139,7 +145,8 @@ public class Monster : MonoBehaviour
     public void ResetState()
     {
         _state = new StateMachine<Monster>();
-        _state.InitialSetting(this, MoveState.Instance);
+        //_state.InitialSetting(this, MoveState.Instance);
+        _state.InitialSetting(this, _moveState);
 
         target = null;
     }
@@ -148,11 +155,13 @@ public class Monster : MonoBehaviour
     {
         SetKnockbackValue(sender);
         currentHp -= sender.Damage;
+
         UIHelper.Instance.SetMonster(this);
         UIHelper.Instance.SetMonsterHp(currentHp, maxHp);
 
         if (!_isHit)
-            _state.ChangeState(HitState.Instance);
+            _state.ChangeState(_hitState);
+        //_state.ChangeState(HitState.Instance);
 
         else
             _state.RestartState();

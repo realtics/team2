@@ -4,17 +4,17 @@ using UnityEngine;
 
 public class AttackState : FSMState<Monster>
 {
-    static readonly AttackState instance = new AttackState();
-    public static AttackState Instance
-    {
-        get
-        {
-            return instance;
-        }
-    }
+    //static readonly AttackState instance = new AttackState();
+    //public static AttackState Instance
+    //{
+    //    get
+    //    {
+    //        return instance;
+    //    }
+    //}
 
-    static AttackState() { }
-    private AttackState() { }
+    //static AttackState() { }
+    //private AttackState() { }
 
     public override void EnterState(Monster monster)
     {
@@ -33,8 +33,9 @@ public class AttackState : FSMState<Monster>
         if (monster.animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f)
         {
             monster.animator.SetBool("isAttacking", false);
-           
-            monster.ChangeState(MoveState.Instance);
+
+            //monster.ChangeState(MoveState.Instance);
+            monster.ChangeState(monster._moveState);
         }
     }
 

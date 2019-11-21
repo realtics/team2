@@ -4,17 +4,17 @@ using UnityEngine;
 
 public class DieState : FSMState<Monster>
 {
-    static readonly DieState instance = new DieState();
-    public static DieState Instance
-    {
-        get
-        {
-            return instance;
-        }
-    }
+    //static readonly DieState instance = new DieState();
+    //public static DieState Instance
+    //{
+    //    get
+    //    {
+    //        return instance;
+    //    }
+    //}
 
-    static DieState() { }
-    private DieState() { }
+    //static DieState() { }
+    //private DieState() { }
 
     public override void EnterState(Monster monster)
     {

@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class MoveState : FSMState<Monster>
 {
-    static readonly MoveState instance = new MoveState();
-    public static MoveState Instance
-    {
-        get
-        {
-            return instance;
-        }
-    }
-    static MoveState() { }
-    private MoveState() { }
+    //static readonly MoveState instance = new MoveState();
+    //public static MoveState Instance
+    //{
+    //    get
+    //    {
+    //        return instance;
+    //    }
+    //}
+    //static MoveState() { }
+    //private MoveState() { }
 
     private const float InitialResetTime = 3.0f;
 
@@ -55,7 +55,8 @@ public class MoveState : FSMState<Monster>
             }
             else
             {
-               monster.ChangeState(AttackState.Instance);
+                //monster.ChangeState(AttackState.Instance);
+                monster.ChangeState(monster._attackState);
             }
         }
         else
