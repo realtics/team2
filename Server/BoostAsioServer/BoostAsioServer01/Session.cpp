@@ -197,27 +197,23 @@ void Session::HandleReceive(const boost::system::error_code& error, size_t bytes
 
 void Session::Deserialization(char* jsonData)
 {
-	std::cout << jsonData << std::endl;
+	std::cout << "[클라->서버 JSON] " << jsonData << std::endl;
 
 	boost::property_tree::ptree ptRecv;
-	std::istringstream is(jsonData);
-	boost::property_tree::read_json(is, ptRecv);
+	std::istringstream iss(jsonData);
+	boost::property_tree::read_json(iss, ptRecv);
 
 	boost::property_tree::ptree& children = ptRecv.get_child("header");
 	short packetIndex = children.get<short>("packetIndex");
 	short packetSize = children.get<short>("packetSize");
 
-	//{"header":{"packetIndex":7,"packetSize":45}}
-
 	switch (packetIndex)
 	{
 	case PACKET_INDEX::NEW_LOGIN:
-		char newLogin[MAX_RECEIVE_BUFFER_LEN] = { 0 };
-		newLogin[0] = packetIndex;
-		newLogin[1] = '\0';
-		newLogin[2] = packetSize;
-		newLogin[3] = '\0';
-		memcpy(&_packetBuffer[_packetBufferMark], newLogin, packetSize);
+		PACKET_HEADER packet;
+		packet.packetIndex = packetIndex;
+		packet.packetSize = packetSize;
+		memcpy(&_packetBuffer[_packetBufferMark], (char*)&packet, sizeof(packet));
 		
 	break;
 

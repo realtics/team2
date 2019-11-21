@@ -136,13 +136,34 @@ void AsioServer::ProcessPacket(const int nSessionID, const char* pData)
 		PACKET_NEW_LOGIN* pPacket = (PACKET_NEW_LOGIN*)pData;
 		PACKET_NEW_LOGIN_SUCSESS SendPkt;
 		
-		std::cout << nSessionID << " 클라이언트 로그인 성공" << std::endl;
+		std::cout << nSessionID << "번 클라이언트 로그인 성공" << std::endl;
 
-		SendPkt.Init();
+		SendPkt.packetIndex = PACKET_INDEX::NEW_LOGIN_SUCSESS;
+		SendPkt.packetSize = 10;
 		SendPkt.isSuccess = true;
-		SendPkt.sessionID = nSessionID;
+		SendPkt.sessionID = nSessionID + 1000;	// C#에 전송 시 SessionID를 0을 보내지 않기 위해서 1000을 더하고 있음
 
-		_sessionList[nSessionID]->PostSend(false, SendPkt.packetSize, (char*)&SendPkt);
+		boost::property_tree::ptree ptSend;
+		boost::property_tree::ptree ptSendHeader;
+		ptSendHeader.put<short>("packetIndex", SendPkt.packetIndex);
+		ptSendHeader.put<short>("packetSize", SendPkt.packetSize);
+		ptSend.add_child("header", ptSendHeader);
+		ptSend.put<bool>("isSuccess", SendPkt.isSuccess);
+		ptSend.put<int>("sessionID", SendPkt.sessionID);
+
+		std::string stringRecv;
+		std::ostringstream oss(stringRecv);
+		boost::property_tree::write_json(oss, ptSend, false);
+		std::string sendStr = oss.str();
+		std::cout << "[서버->클라 JSON] " << sendStr << std::endl;
+
+		_sessionList[nSessionID]->PostSend(false, std::strlen(sendStr.c_str()), (char*)sendStr.c_str());
+
+		//SendPkt.Init();
+		//SendPkt.isSuccess = true;
+		//SendPkt.sessionID = nSessionID;
+
+		//_sessionList[nSessionID]->PostSend(false, SendPkt.packetSize, (char*)&SendPkt);
 
 	}
 	break;

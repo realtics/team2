@@ -39,6 +39,13 @@ public struct PACKET_NEW_LOGIN
     public PACKET_HEADER header;
 };
 
+public struct PACKET_NEW_LOGIN_SUCSESS
+{
+    public PACKET_HEADER header;
+    public bool isSuccess;
+    public int sessionID;
+}
+
 
 public class NetworkManager : MonoBehaviour
 {
@@ -55,7 +62,7 @@ public class NetworkManager : MonoBehaviour
 
     private Socket _sock = null;
     private bool _isLogin = false;
-
+    private int _step = 0;
     private int _myId;
     private Dictionary<int,Character> _characters;
 
@@ -70,15 +77,17 @@ public class NetworkManager : MonoBehaviour
 
         CreateSocket();
 
-        if(IsLogin == false)
+        _step = 1;
+        if (IsLogin == false)
         {
             NewLogin();
+
+            NewLoginSucsess();
         }
 
         // 내 캐릭터를 생성하는 로직
         // 서버에서 내가 접속했다고 알려주면 Id를 받고 내 Id로 설정한다.
-        JoinNewPlayer(1);
-        SetMyId(1);
+        JoinNewPlayer(MyId);
     }
 
     void Update()
@@ -87,7 +96,7 @@ public class NetworkManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             // 새로운 플레이어의 Id를 넣어주고 생성함.
-            JoinNewPlayer(2);
+            JoinNewPlayer(MyId);
         }
 
         // 서버가 어떤 플레이어가 움직였다 라고 알림
@@ -113,23 +122,75 @@ public class NetworkManager : MonoBehaviour
 
     private void NewLogin()
     {
-        string _jsonData;
-        char _endNullValue = '\0';
-
-        var _packHeader = new PACKET_HEADER { packetIndex = (short)PACKET_INDEX.NEW_LOGIN, 
+        string jsonData;
+        char endNullValue = '\0';
+        _step = 2;
+        var packHeader = new PACKET_HEADER { packetIndex = (short)PACKET_INDEX.NEW_LOGIN, 
                                              packetSize = 45 };
-        var _packData = new PACKET_NEW_LOGIN { header = _packHeader };
-        _jsonData = JsonConvert.SerializeObject(_packData);
-        _jsonData += _endNullValue;
+        _step = 11;
 
-        byte[] _sendByte = new byte[128];
-        _sendByte = Encoding.UTF8.GetBytes(_jsonData);
-        _sock.Send(_sendByte);
+        var packData = new PACKET_NEW_LOGIN { header = packHeader };
+        _step = 12;
+
+        jsonData = JsonConvert.SerializeObject(packData);
+        _step = 13;
+
+        jsonData += endNullValue;
+        _step = 14;
+
+        byte[] sendByte = new byte[128];
+        _step = 15;
+
+        sendByte = Encoding.UTF8.GetBytes(jsonData);
+        _step = 16;
+
+        //TODO 1-0: JSON 헤더에 패킷 사이즈 체크 하는것을 foreach로 하고 있는데, 더 좋은 방법 있다면 개선
+        //TODO 1-1: 패킷 사이즈를 담아 보내는 것이 현재 상태에선 크게 중요하진 않으므로, 코드만 남겨두고 나중에 활용
+        //int jsonDataSize = 0;
+        //foreach (byte b in _sendByte)
+        //{
+        //    jsonDataSize++;
+        //    if (b == '\0')
+        //        break;
+        //}
+        //Debug.Log(jsonData);
+        //Debug.Log(jsonDataSize);
+        _step = 9;
+
+        int resultSize = _sock.Send(sendByte);
+        _step = 3;
+    }
+
+    private void NewLoginSucsess()
+    {
+        _step = 4;
+        byte[] recvBuf = new byte[128];
+        int socketRecive = _sock.Receive(recvBuf);
+        Debug.Log(socketRecive);
+
+        _step = 5;
+        string recvData = Encoding.UTF8.GetString(recvBuf, 0, socketRecive);
+        int bufLen = recvBuf.Length;
+        Debug.Log(recvData);
+
+        var Jsondata = JsonConvert.DeserializeObject<PACKET_NEW_LOGIN_SUCSESS>(recvData);
+        if (Jsondata.header.packetIndex == (short)PACKET_INDEX.NEW_LOGIN_SUCSESS)
+        {
+            Debug.Log("접속 성공 여부 : " + Jsondata.isSuccess);
+            Debug.Log("접속 ID : " + Jsondata.sessionID);
+
+            SetIsLogin(Jsondata.isSuccess);
+            SetMyId(Jsondata.sessionID);
+        }
     }
 
     public void SetMyId(int id)
     {
         _myId = id;
+    }
+    public void SetIsLogin(bool isLogin)
+    {
+        _isLogin = isLogin;
     }
 
     public void JoinNewPlayer(int id)
@@ -181,5 +242,10 @@ public class NetworkManager : MonoBehaviour
             return;
 
         movePlayer.StopMove(movePlayer.transform.position);
+    }
+
+    private void OnGUI()
+    {
+        GUI.Label(new Rect(0, 100, 100, 100), _isLogin.ToString() + _step.ToString() + " test " + MyId.ToString());
     }
 }
