@@ -90,7 +90,7 @@ public class UIHelper : MonoBehaviour
         monsterInfo.name = monster.monsterName;
         monsterInfo.level = monster.monsterLevel;
         monsterInfo.currentHp = monster.currentHp;
-        monsterInfo.index = MonsterSnapShot.Calvary;
+        monsterInfo.index = (MonsterSnapShot)monster.monsterType;
 
         _monsterInfo.SetMonster(monsterInfo);
     }

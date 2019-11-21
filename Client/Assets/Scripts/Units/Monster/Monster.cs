@@ -30,6 +30,14 @@ public class Monster : MonoBehaviour
     private bool _isAttack;
     private bool _isHit;
 
+    public enum MonsterType
+    {
+        Goblin,
+        Tau,
+        Calvary
+    }
+    public MonsterType monsterType = MonsterType.Goblin;
+
     //MoveState Value
     public enum MovementStateInfo
     {
