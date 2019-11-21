@@ -278,6 +278,8 @@ public class BaseUnit : MonoBehaviour
             return false;
         if (IsAttack)
             return false;
+        if (OnSkill)
+            return false;
 
         return true;
     }

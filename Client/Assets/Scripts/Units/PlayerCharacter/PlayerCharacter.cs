@@ -29,10 +29,7 @@ public class PlayerCharacter : MonoBehaviour
 
     private void SetFlipX(bool flip)
     {
-        if (_movement.IsAttack)
-            return;
-
-        if (_movement.IsHit)
+        if (!_movement.IsMovable())
             return;
 
         if (_movement.IsInTranstion)
