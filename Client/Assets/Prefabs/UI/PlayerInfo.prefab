@@ -717,6 +717,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _hpBar: {fileID: 4997678236982135437}
   _mpBar: {fileID: 4997678237603896081}
+  characterStat: {fileID: 0}
 --- !u!1 &4997678237907802720
 GameObject:
   m_ObjectHideFlags: 0

@@ -28,8 +28,6 @@ public class GameManager : MonoBehaviour
 
     private bool _playerChooseResult = false;
 
-    private GameObject _dungeonClearMenu;
-
     private GameState _playerState;
 
     private static GameManager _instance;
@@ -44,9 +42,6 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _dungeonClearMenu = GameObject.Find("DungeonClearMenu");
-        _dungeonClearMenu.SetActive(false);
-
         _playerState = GameState.Dungeon;
         _instance = this;
     }
@@ -56,11 +51,11 @@ public class GameManager : MonoBehaviour
     {
         if(_countOver && _playerState == GameState.Die)
         {
-            Invoke("CountOver", 1f);
+            Invoke(nameof(CountOver), 1f);
         }
         if (_countOver && _playerState == GameState.Dungeon)
         {
-            Invoke("Clear", 1f);
+            Invoke(nameof(GameClear), 1f);
         }
     }
 
@@ -69,10 +64,10 @@ public class GameManager : MonoBehaviour
         MoveToScene((int)SceneIndex.MainMenu);
     }
 
-    public void Clear()
+    public void GameClear()
     {
         UIHelper.Instance.SetGameResult(false);
-        _dungeonClearMenu.SetActive(true);
+        UIHelper.Instance.SetDungeonClearMenu(true);
     }
 
     public void GameOver()

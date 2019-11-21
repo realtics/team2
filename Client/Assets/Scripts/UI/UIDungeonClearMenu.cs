@@ -15,8 +15,6 @@ public class UIDungeonClearMenu : MonoBehaviour
     [SerializeField]
     private Button[] _menuButton;
 
-
-
     // Start is called before the first frame update
     void Start()
     {

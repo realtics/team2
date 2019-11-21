@@ -20,10 +20,15 @@ public enum MonsterSnapShot
 
 public class UIMosterInfo : MonoBehaviour
 {
+    [SerializeField]
     private UIMonsterStat _hpBar;
+    [SerializeField]
     private Text _name;
+    [SerializeField]
     private Text _level;
+    [SerializeField]
     private Text _multiple;
+    [SerializeField]
     private Image _snapShot;
 
     // temp value.
@@ -31,15 +36,6 @@ public class UIMosterInfo : MonoBehaviour
 
     [SerializeField]
     private Sprite[] _mosterSnapShot;
-
-    void Awake()
-    {
-        _hpBar = transform.Find("Hp").transform.Find("MosterHpBar").GetComponent<UIMonsterStat>();
-        _name = transform.Find("Name").transform.Find("MosterName").GetComponent<Text>();
-        _level = transform.Find("Level").transform.Find("MosterLevel").GetComponent<Text>();
-        _multiple = transform.Find("Hp").transform.Find("HpMultple").GetComponent<Text>();
-        _snapShot = transform.Find("Mask").transform.Find("MonsterSnapShot").GetComponent<Image>();
-    }
 
     void Start()
     {

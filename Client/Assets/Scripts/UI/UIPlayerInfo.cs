@@ -8,12 +8,12 @@ public class UIPlayerInfo : MonoBehaviour
     private UIPlayerStat _hpBar;
     [SerializeField]
     private UIPlayerStat _mpBar;
+    [SerializeField]
     private CharacterStat characterStat;
 
     // Use this for initialization
     void Start()
     {
-        characterStat = FindObjectOfType<CharacterStat>();
         _hpBar.SetStat(characterStat.Hp, characterStat.MaxHp);
         _mpBar.SetStat(characterStat.Mp, characterStat.MaxMp);
     }
