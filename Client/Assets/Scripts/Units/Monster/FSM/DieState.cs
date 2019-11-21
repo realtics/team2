@@ -23,7 +23,7 @@ public class DieState : FSMState<Monster>
 
         //FIXME : 보스몬스터 구분시 변경
         if (monster.name == "testMonster")
-            GameManager.Instance.NoticeGameClear();
+            DungeonGameManager.Instance.NoticeGameClear();
         //TODO : 아이템 드랍
     }
 

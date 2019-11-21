@@ -4,47 +4,32 @@ using UnityEditor;
 
 public struct MonsterInfo
 {
-    public MonsterSnapShot index;
+    public Monster.MonsterType index;
     public string name;
     public int level;
     public float currentHp;
+    public float maxHp;
 }
-
-public enum MonsterSnapShot
-{
-    Goblin,
-    Tau,
-    Calvary
-}
-
 
 public class UIMosterInfo : MonoBehaviour
 {
+    [SerializeField]
     private UIMonsterStat _hpBar;
+    [SerializeField]
     private Text _name;
+    [SerializeField]
     private Text _level;
+    [SerializeField]
     private Text _multiple;
+    [SerializeField]
     private Image _snapShot;
-
-    // temp value.
-    private int _hp = 200;
 
     [SerializeField]
     private Sprite[] _mosterSnapShot;
 
-    void Awake()
-    {
-        _hpBar = transform.Find("Hp").transform.Find("MosterHpBar").GetComponent<UIMonsterStat>();
-        _name = transform.Find("Name").transform.Find("MosterName").GetComponent<Text>();
-        _level = transform.Find("Level").transform.Find("MosterLevel").GetComponent<Text>();
-        _multiple = transform.Find("Hp").transform.Find("HpMultple").GetComponent<Text>();
-        _snapShot = transform.Find("Mask").transform.Find("MonsterSnapShot").GetComponent<Image>();
-    }
-
     void Start()
     {
-        // Hack.. 테스트용.몬스터 정보 받아오면 지울 예정.,
-        _hpBar.SetStat(_hp, _hp);
+
     }
 
     void Update()
@@ -53,16 +38,15 @@ public class UIMosterInfo : MonoBehaviour
     }
     public void SetHp(float CurrentHp, float MaxHp)
     {
-        _hpBar.CurrentValue = CurrentHp;
         _hpBar.MaxValue = MaxHp;
+        _hpBar.CurrentValue = CurrentHp;
     }
-    // ToDo.
-    // MonsterInfo 말고 GameObject로 받아서 처리 할 예정, Monster GameObject가 만들어 질 때 까지 대기.
+
     public void SetMonster(MonsterInfo info)
     {
         _name.text = info.name;
         _level.text = "Lv." + info.level;
-        _hpBar.CurrentValue = info.currentHp;
+        SetHp(info.currentHp, info.maxHp);
         _snapShot.sprite = _mosterSnapShot[(int)info.index];
     }
     public void CheckDieMonster()

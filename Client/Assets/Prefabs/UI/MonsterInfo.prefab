@@ -289,6 +289,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8670f5499e49ab248950cf5688b676fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _hpBar: {fileID: 6528332689765710295}
+  _name: {fileID: 6528332689580855669}
+  _level: {fileID: 6528332691241420146}
+  _multiple: {fileID: 6528332689530179228}
+  _snapShot: {fileID: 6528332690909199495}
   _mosterSnapShot:
   - {fileID: 21300000, guid: 45895ecdf7a2fb34cbc5f97df715fecf, type: 3}
   - {fileID: 21300000, guid: 3a17035c23fa03e45850d53a9a8a2ef6, type: 3}

@@ -27,7 +27,7 @@ public class UIGameResult : MonoBehaviour
             int localCopy = i;
             _resultBoxImage[i] = _resultBox[i].GetComponent<Image>();
             _resultBoxButton[i] = _resultBox[i].GetComponent<Button>();
-            _resultBoxButton[i].onClick.AddListener(() => { GameManager.Instance.OnClickResultBox(localCopy); });
+            _resultBoxButton[i].onClick.AddListener(() => { DungeonGameManager.Instance.OnClickResultBox(localCopy); });
         }
     }
 

@@ -15,7 +15,7 @@ enum SceneIndex
     Dungen
 }
 
-public class GameManager : MonoBehaviour
+public class DungeonGameManager : MonoBehaviour
 {
     [SerializeField]
     private int _coin;
@@ -26,14 +26,16 @@ public class GameManager : MonoBehaviour
     private bool _countOver;
     private float _currentTime = 0.0f;
 
-    private bool _playerChooseResult = false;
+    private const float _delayResult = 2.0f;
+    private const float _delayClear = 2.0f;
+    private const float _delayDie = 1.0f;
 
-    private GameObject _dungeonClearMenu;
+    private bool _playerChooseResult = false;
 
     private GameState _playerState;
 
-    private static GameManager _instance;
-    public static GameManager Instance
+    private static DungeonGameManager _instance;
+    public static DungeonGameManager Instance
     {
         get
         {
@@ -44,9 +46,6 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _dungeonClearMenu = GameObject.Find("DungeonClearMenu");
-        _dungeonClearMenu.SetActive(false);
-
         _playerState = GameState.Dungeon;
         _instance = this;
     }
@@ -56,11 +55,11 @@ public class GameManager : MonoBehaviour
     {
         if(_countOver && _playerState == GameState.Die)
         {
-            Invoke("CountOver", 1f);
+            Invoke(nameof(CountOver), _delayDie);
         }
         if (_countOver && _playerState == GameState.Dungeon)
         {
-            Invoke("Clear", 1f);
+            Invoke(nameof(GameClear), _delayClear);
         }
     }
 
@@ -69,10 +68,10 @@ public class GameManager : MonoBehaviour
         MoveToScene((int)SceneIndex.MainMenu);
     }
 
-    public void Clear()
+    public void GameClear()
     {
         UIHelper.Instance.SetGameResult(false);
-        _dungeonClearMenu.SetActive(true);
+        UIHelper.Instance.SetDungeonClearMenu(true);
     }
 
     public void GameOver()
@@ -164,9 +163,8 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    //TODO : 보스몬스터 죽었을 시 알리기
     public void NoticeGameClear()
     {
-        GameResult();
+        Invoke(nameof(GameResult), _delayResult);
     }
 }

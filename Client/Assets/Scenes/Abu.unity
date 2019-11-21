@@ -1020,6 +1020,30 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &597595567 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 500129711, guid: 9d859b47ccc167d4d8ac96a29092c5d3,
+    type: 3}
+  m_PrefabInstance: {fileID: 567281450}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cd71e593fcdf6a4682d0846391802c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &616905578 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1801744680141474051, guid: 41abd85db332e1048bc47b99b8aec411,
+    type: 3}
+  m_PrefabInstance: {fileID: 1720116949}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9aaa30035dc4a324d8cc691859dfce8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &936408228
 GameObject:
   m_ObjectHideFlags: 0
@@ -1049,6 +1073,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d269085b4b6ebd140b1e3905732a20f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playerInfo: {fileID: 1556782716}
+  _monsterInfo: {fileID: 1994338258}
+  _gameOver: {fileID: 1251060808}
+  _gameResult: {fileID: 616905578}
+  _dungeonClearMenu: {fileID: 597595567}
 --- !u!4 &936408230
 Transform:
   m_ObjectHideFlags: 0
@@ -1220,6 +1249,30 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1008375319}
   m_CullTransparentMesh: 0
+--- !u!114 &1113090220 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1109627757, guid: f596280910a5da744b6ad8c35450f807,
+    type: 3}
+  m_PrefabInstance: {fileID: 6685791061667434522}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c33b795c87bdc8648af87eb5557f5f26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1251060808 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 322670426628092975, guid: 095e3bee2e9fe194eb78e34b3e37139f,
+    type: 3}
+  m_PrefabInstance: {fileID: 1281173192}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56fe8cfe3d76e42469b389a43f31bbfb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1281173192
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1456,6 +1509,11 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 4997678237776853775, guid: f63803091ffa0924b85bfc7e38b8019e,
+        type: 3}
+      propertyPath: characterStat
+      value: 
+      objectReference: {fileID: 1113090220}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f63803091ffa0924b85bfc7e38b8019e, type: 3}
 --- !u!1 &1348751747
@@ -1915,6 +1973,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1062798e89fa7ff48b49faaa1a382347, type: 3}
+--- !u!114 &1556782716 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4997678237776853775, guid: f63803091ffa0924b85bfc7e38b8019e,
+    type: 3}
+  m_PrefabInstance: {fileID: 1338361525}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b639fa108d41f6f479bf654f6b42dfe2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1570950446
 GameObject:
   m_ObjectHideFlags: 0
@@ -2762,6 +2832,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1906314038}
   m_CullTransparentMesh: 0
+--- !u!114 &1994338258 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6528332689625396473, guid: 6b24f3ed6a2956147ba3725b280083d7,
+    type: 3}
+  m_PrefabInstance: {fileID: 1401275482}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8670f5499e49ab248950cf5688b676fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &2002408174 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4997678237776853772, guid: f63803091ffa0924b85bfc7e38b8019e,

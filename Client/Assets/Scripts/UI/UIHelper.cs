@@ -11,21 +11,16 @@ public class UIHelper : MonoBehaviour
             return _instance;       
         }
     }
-
+    [SerializeField]
     private UIPlayerInfo _playerInfo;
+    [SerializeField]
     private UIMosterInfo _monsterInfo;
-
+    [SerializeField]
     private UIGameOver _gameOver;
+    [SerializeField]
     private UIGameResult _gameResult;
-
-    void Awake()
-    {
-        _playerInfo = GameObject.Find("PlayerInfo").GetComponent<UIPlayerInfo>();
-        _monsterInfo = GameObject.Find("MonsterInfo").GetComponent<UIMosterInfo>();
-
-        _gameOver = GameObject.Find("GameOver").GetComponent<UIGameOver>();
-        _gameResult = GameObject.Find("GameResult").GetComponent<UIGameResult>();
-    }
+    [SerializeField]
+    private UIDungeonClearMenu _dungeonClearMenu;
 
     // Use this for initialization
     void Start()
@@ -38,16 +33,14 @@ public class UIHelper : MonoBehaviour
             _gameOver.gameObject.SetActive(false);
         if (_gameResult != null)
             _gameResult.gameObject.SetActive(false);
+        if (_dungeonClearMenu != null)
+            _dungeonClearMenu.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-        // hack Test.
-        if(Input.GetKeyDown(KeyCode.V))
-        {
-            GameManager.Instance.GameResult();
-        }
+
     }
     public void SetGameOver(bool isActive)
     {
@@ -66,6 +59,10 @@ public class UIHelper : MonoBehaviour
     public void SetGameResult(bool isActive)
     {
         _gameResult.gameObject.SetActive(isActive);
+    }
+    public void SetDungeonClearMenu(bool isActive)
+    {
+        _dungeonClearMenu.gameObject.SetActive(isActive);
     }
     public void GameResultSetTime(int time)
     {
@@ -90,8 +87,8 @@ public class UIHelper : MonoBehaviour
         monsterInfo.name = monster.monsterName;
         monsterInfo.level = monster.monsterLevel;
         monsterInfo.currentHp = monster.currentHp;
-        monsterInfo.index = (MonsterSnapShot)monster.monsterType;
-
+        monsterInfo.maxHp = monster.maxHp;
+        monsterInfo.index = monster.monsterType;
         _monsterInfo.SetMonster(monsterInfo);
     }
 }

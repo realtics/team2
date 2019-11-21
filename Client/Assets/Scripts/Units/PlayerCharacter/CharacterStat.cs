@@ -60,7 +60,7 @@ public class CharacterStat : MonoBehaviour
 
     private void SetDie()
     {
-        GameManager.Instance.GameOver();
+        DungeonGameManager.Instance.GameOver();
     }
 
     public void SetUnit(BaseUnit unit)
