@@ -26,6 +26,10 @@ public class GameManager : MonoBehaviour
     private bool _countOver;
     private float _currentTime = 0.0f;
 
+    private const float _delayResult = 2.0f;
+    private const float _delayClear = 2.0f;
+    private const float _delayDie = 1.0f;
+
     private bool _playerChooseResult = false;
 
     private GameState _playerState;
@@ -51,11 +55,11 @@ public class GameManager : MonoBehaviour
     {
         if(_countOver && _playerState == GameState.Die)
         {
-            Invoke(nameof(CountOver), 1f);
+            Invoke(nameof(CountOver), _delayDie);
         }
         if (_countOver && _playerState == GameState.Dungeon)
         {
-            Invoke(nameof(GameClear), 1f);
+            Invoke(nameof(GameClear), _delayClear);
         }
     }
 
@@ -162,6 +166,6 @@ public class GameManager : MonoBehaviour
     //TODO : 보스몬스터 죽었을 시 알리기
     public void NoticeGameClear()
     {
-        GameResult();
+        Invoke(nameof(GameResult), _delayResult);
     }
 }
