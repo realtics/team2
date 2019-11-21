@@ -23,7 +23,6 @@ public class StateMachine<T>
     // 상태 변경
     public void ChangeState(FSMState<T> newState)
     {
-        // 같은 상태를 변환하려 한다면 나감
         if (newState == _currentState)
         {
             return;
@@ -31,7 +30,6 @@ public class StateMachine<T>
 
         _previousState = _currentState;
 
-        // 현재 상태가 있다면 종료
         if (_currentState != null)
         {
             _currentState.ExitState(_owner);
@@ -39,21 +37,18 @@ public class StateMachine<T>
 
         _currentState = newState;
 
-        // 새로 적용된 상태가 null이 아니면 실행
         if (_currentState != null)
         {
             _currentState.EnterState(_owner);
         }
     }
 
-    // 초기상태설정
     public void InitialSetting(T owner, FSMState<T> initialState)
     {
         _owner = owner;
         ChangeState(initialState);
     }
 
-    // 상태 업데이트
     public void Update()
     {
         if (_currentState != null)
@@ -62,7 +57,6 @@ public class StateMachine<T>
         }
     }
 
-    // 이전 상태로 회귀
     public void StateRevert()
     {
         if (_previousState != null)

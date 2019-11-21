@@ -16,7 +16,6 @@ public class DieState : FSMState<Monster>
     static DieState() { }
     private DieState() { }
 
-
     public override void EnterState(Monster monster)
     {
         monster.animator.SetBool("isDie", true);
