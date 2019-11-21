@@ -49,13 +49,12 @@ public class UIMonsterStat : UIStat
     }
     public void ResetStat()
     {
-        _content.fillAmount = 1.0f;
+        _content.fillAmount = _currentValue / _maxValue;
     }
     public bool IsDie()
     {
         if (CurrentValue <= 0)
         {
-            ResetStat();
             return true;
         }
         return false;
