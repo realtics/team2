@@ -112,20 +112,32 @@ SpriteAtlas:
     - {fileID: 2800000, guid: 90266476ebc72fe4abe44aa0d6cda4e4, type: 3}
     - {fileID: 2800000, guid: 926ccdef037523642ab6035ed941726a, type: 3}
     - {fileID: 2800000, guid: 6ddcbc4544e67b140bc2275a25f17ed0, type: 3}
-    totalSpriteSurfaceArea: 17500000
+    - {fileID: 2800000, guid: c8a01db6d6b61c148850dc8c9ead88a9, type: 3}
+    - {fileID: 2800000, guid: 49db6f212b9ed794eb9a0993a6a39e01, type: 3}
+    - {fileID: 2800000, guid: 304dbf50e10ce394790487dbfb4caa44, type: 3}
+    - {fileID: 2800000, guid: d43595d67cc37d64089a25a1ed62631d, type: 3}
+    - {fileID: 2800000, guid: 7a0f075da0277154e88dd18c3ee22102, type: 3}
+    - {fileID: 2800000, guid: dbb055aed586ab64693db05c05ceb3ff, type: 3}
+    - {fileID: 2800000, guid: e02332ee5838ff5478213bcfd3ef4764, type: 3}
+    - {fileID: 2800000, guid: a98c6fa627d87bd44be8f6d1ec69a101, type: 3}
+    - {fileID: 2800000, guid: e79a4012abcb5494e88a73bc03339ecd, type: 3}
+    totalSpriteSurfaceArea: 19750000
     bindAsDefault: 1
     storedHash:
       serializedVersion: 2
-      Hash: cd688736faeac2b556b3cf873268bcb8
+      Hash: 91b38ff9f9b5fb4de025931409938672
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
   - {fileID: 21300000, guid: a546f200969c51f4991d74a6487bfe32, type: 3}
   - {fileID: 21300000, guid: 56b11900bce220741b33e787b4bbe523, type: 3}
   - {fileID: 21300000, guid: 66d3dd00c65b5334ca728234ee0ae0df, type: 3}
+  - {fileID: 21300000, guid: 304dbf50e10ce394790487dbfb4caa44, type: 3}
   - {fileID: 21300000, guid: 7381d3b045c861243bc794d1e6fbdc38, type: 3}
   - {fileID: 21300000, guid: be4054b093ac0f045a72e825adb904a0, type: 3}
+  - {fileID: 21300000, guid: 49db6f212b9ed794eb9a0993a6a39e01, type: 3}
   - {fileID: 21300000, guid: 1247c371ed025d742b33ea10e4e8a232, type: 3}
   - {fileID: 21300000, guid: 130ef991b7d6e474ca16df9fafc6a5da, type: 3}
+  - {fileID: 21300000, guid: e79a4012abcb5494e88a73bc03339ecd, type: 3}
   - {fileID: 21300000, guid: a6b593528c6553949a5df6f1a6d2c10c, type: 3}
   - {fileID: 21300000, guid: ea157d52b20f63f44b1a95634804a893, type: 3}
   - {fileID: 21300000, guid: 7b3f41a2202bca14494a1c863b14c872, type: 3}
@@ -147,6 +159,9 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 9dbd7f4641d407f4e9710de0a41568a7, type: 3}
   - {fileID: 21300000, guid: 35eabc561e0bb7f47ae8d7c615a9a020, type: 3}
   - {fileID: 21300000, guid: 90266476ebc72fe4abe44aa0d6cda4e4, type: 3}
+  - {fileID: 21300000, guid: a98c6fa627d87bd44be8f6d1ec69a101, type: 3}
+  - {fileID: 21300000, guid: c8a01db6d6b61c148850dc8c9ead88a9, type: 3}
+  - {fileID: 21300000, guid: d43595d67cc37d64089a25a1ed62631d, type: 3}
   - {fileID: 21300000, guid: d1b35fd638a6e6e4eb1e478bd5e05aa0, type: 3}
   - {fileID: 21300000, guid: 609d18e65f88f42429dff76bb9bf8914, type: 3}
   - {fileID: 21300000, guid: 42b3a827ec8b5544ebc70a8466fae716, type: 3}
@@ -176,6 +191,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: c04f18cc8cdfd0d44ab5481a15685446, type: 3}
   - {fileID: 21300000, guid: cda02cec05ced7743818ec411ba69d46, type: 3}
   - {fileID: 21300000, guid: 12b3da4d84bd7904299292086657e08a, type: 3}
+  - {fileID: 21300000, guid: 7a0f075da0277154e88dd18c3ee22102, type: 3}
   - {fileID: 21300000, guid: 5ce82a7dc1a38aa4dbd15f9e3827ccff, type: 3}
   - {fileID: 21300000, guid: d19216ad7e86e8a42a66821f5737c198, type: 3}
   - {fileID: 21300000, guid: fb863cad850f778469e6a595635e5eb0, type: 3}
@@ -184,6 +200,8 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 6c1b4dfd8c3ed1345987dc9e16659104, type: 3}
   - {fileID: 21300000, guid: 34d6c42e357f7ad4fa54b7076c58d755, type: 3}
   - {fileID: 21300000, guid: 4ed71b7edf1614044850226138309c3e, type: 3}
+  - {fileID: 21300000, guid: dbb055aed586ab64693db05c05ceb3ff, type: 3}
+  - {fileID: 21300000, guid: e02332ee5838ff5478213bcfd3ef4764, type: 3}
   - {fileID: 21300000, guid: 0e06943f0b7cd6a489e1a1b14a6bed0b, type: 3}
   - {fileID: 21300000, guid: 783c094f4201d7b4b9c891471d5fbc6f, type: 3}
   - {fileID: 21300000, guid: ca0d699f22b3dd5439eaa4275c668d5a, type: 3}
@@ -193,10 +211,13 @@ SpriteAtlas:
   - m_swordman_walk_7
   - m_swordman_attack2_9
   - m_swordman_attack2_2
+  - m_swordman_skill1_3
   - m_swordman_attack1_8
   - m_swordman_walk_3
+  - m_swordman_skill1_2
   - m_swordman_attack3_7
   - m_swordman_attack3_4
+  - m_swordman_skill1_9
   - m_swordman_attack1_10
   - m_swordman_jumpattack_1
   - m_swordman_attack3_2
@@ -218,6 +239,9 @@ SpriteAtlas:
   - m_swordman_run_2
   - m_swordman_run_5
   - m_swordman_hit_2
+  - m_swordman_skill1_8
+  - m_swordman_skill1_1
+  - m_swordman_skill1_4
   - m_swordman_jumpdown_4
   - m_swordman_idle_4
   - m_swordman_jumpdown_2
@@ -247,6 +271,7 @@ SpriteAtlas:
   - m_swordman_jumpattack_4
   - m_swordman_jumpattack_2
   - m_swordman_run_1
+  - m_swordman_skill1_5
   - m_swordman_run_3
   - m_swordman_walk_2
   - m_swordman_attack2_8
@@ -255,6 +280,8 @@ SpriteAtlas:
   - m_swordman_jumpattack_6
   - m_swordman_run_6
   - m_swordman_attack3_3
+  - m_swordman_skill1_6
+  - m_swordman_skill1_7
   - m_swordman_attack2_5
   - m_swordman_attack3_6
   - m_swordman_attack3_5

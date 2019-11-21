@@ -59,7 +59,7 @@ public class MovementJoystick : MonoBehaviour
 
     public void DragEnd()
     {
-        _stick.localPosition = _initPos;
+        _stick.localPosition = Vector3.zero;
         _stickDirection = JoystickDirection.None;
         _dirVec = Vector3.zero;
     }
