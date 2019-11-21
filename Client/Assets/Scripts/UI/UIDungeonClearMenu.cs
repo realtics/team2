@@ -18,9 +18,9 @@ public class UIDungeonClearMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _menuButton[(int)DungenClearMenu.Retry].onClick.AddListener(() => { GameManager.Instance.MoveToScene((int)SceneIndex.Dungen); });
-        _menuButton[(int)DungenClearMenu.OtherDugeon].onClick.AddListener(() => { GameManager.Instance.MoveToScene((int)SceneIndex.Dungen); });
-        _menuButton[(int)DungenClearMenu.Retrun].onClick.AddListener(() => { GameManager.Instance.MoveToScene((int)SceneIndex.MainMenu); });
+        _menuButton[(int)DungenClearMenu.Retry].onClick.AddListener(() => { DungeonGameManager.Instance.MoveToScene((int)SceneIndex.Dungen); });
+        _menuButton[(int)DungenClearMenu.OtherDugeon].onClick.AddListener(() => { DungeonGameManager.Instance.MoveToScene((int)SceneIndex.Dungen); });
+        _menuButton[(int)DungenClearMenu.Retrun].onClick.AddListener(() => { DungeonGameManager.Instance.MoveToScene((int)SceneIndex.MainMenu); });
         
     }
 

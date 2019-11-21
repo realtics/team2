@@ -15,7 +15,7 @@ enum SceneIndex
     Dungen
 }
 
-public class GameManager : MonoBehaviour
+public class DungeonGameManager : MonoBehaviour
 {
     [SerializeField]
     private int _coin;
@@ -34,8 +34,8 @@ public class GameManager : MonoBehaviour
 
     private GameState _playerState;
 
-    private static GameManager _instance;
-    public static GameManager Instance
+    private static DungeonGameManager _instance;
+    public static DungeonGameManager Instance
     {
         get
         {
