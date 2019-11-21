@@ -49,7 +49,6 @@ public class Monster : MonoBehaviour
     private float _randomMoveResetTime;
     private float _randomMoveCurrentTime;
    
-
     //HitState Value
     public enum HitMotion
     {
@@ -61,7 +60,6 @@ public class Monster : MonoBehaviour
     private float _hitRecoveryResetTime;
     private float _hitRecoveryCurrentTime;
    
-
     //KnockBakc Value
     private Vector3 _knockBackDirection;
     private float _knockBackSpeed;
@@ -78,7 +76,6 @@ public class Monster : MonoBehaviour
     public HitMotion CurrentHitMotion { get { return _currentHitMotion; } set { _currentHitMotion = value; } }
     public float HitRecoveryResetTime { get { return _hitRecoveryResetTime; } set { _hitRecoveryResetTime = value; } }
     public float HitRecoveryCurrentTime { get { return _hitRecoveryCurrentTime; } set { _hitRecoveryCurrentTime = value; } }
-
 
     private void Awake()
     {
@@ -124,7 +121,6 @@ public class Monster : MonoBehaviour
         }
     }
 
-    // 상태변경
     public void ChangeState(FSMState<Monster> state)
     {
         _state.ChangeState(state);

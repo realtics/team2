@@ -16,7 +16,6 @@ public class AttackState : FSMState<Monster>
     static AttackState() { }
     private AttackState() { }
 
-
     public override void EnterState(Monster monster)
     {
         if (monster.target == null)
