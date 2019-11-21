@@ -88,7 +88,7 @@ public class UIHelper : MonoBehaviour
         monsterInfo.level = monster.monsterLevel;
         monsterInfo.currentHp = monster.currentHp;
         monsterInfo.maxHp = monster.maxHp;
-        monsterInfo.index = (MonsterSnapShot)monster.monsterType;
+        monsterInfo.index = monster.monsterType;
         _monsterInfo.SetMonster(monsterInfo);
     }
 }

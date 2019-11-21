@@ -4,20 +4,12 @@ using UnityEditor;
 
 public struct MonsterInfo
 {
-    public MonsterSnapShot index;
+    public Monster.MonsterType index;
     public string name;
     public int level;
     public float currentHp;
     public float maxHp;
 }
-
-public enum MonsterSnapShot
-{
-    Goblin,
-    Tau,
-    Calvary
-}
-
 
 public class UIMosterInfo : MonoBehaviour
 {
