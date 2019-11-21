@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class JingongchamAttackBox : MonoBehaviour
 {
-    private float _aliveTime = 5.0f;
+    private float _aliveTime = 1.0f;
     private AttackInfoSender _sender;
 
     public float Forward { get { return transform.localScale.x > 0.0f ? 1.0f : -1.0f; } }
@@ -12,7 +12,7 @@ public class JingongchamAttackBox : MonoBehaviour
     void Start()
     {
         _sender.Attacker = FindObjectOfType<PlayerCharacter>().transform;
-        _sender.Damage = 1.0f;
+        _sender.Damage = 50.0f;
         _sender.HorizontalExtraMoveDuration = 0.1f;
         _sender.HorizontalExtraMoveValue = -10.0f;
         _sender.StunDuration = 1.0f;
@@ -33,7 +33,7 @@ public class JingongchamAttackBox : MonoBehaviour
         if (_aliveTime <= 0.0f)
         {
             gameObject.SetActive(false);
-            _aliveTime = 5.0f;
+            _aliveTime = 1.0f;
         }
     }
 
