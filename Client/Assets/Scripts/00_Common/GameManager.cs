@@ -163,7 +163,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    //TODO : 보스몬스터 죽었을 시 알리기
     public void NoticeGameClear()
     {
         Invoke(nameof(GameResult), _delayResult);
