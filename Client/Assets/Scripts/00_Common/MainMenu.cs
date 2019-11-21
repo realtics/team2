@@ -8,6 +8,6 @@ public class MainMenu : MonoBehaviour
     public void GameStart()
     {
         // scene Town
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene((int)SceneIndex.Dungen);
     }
 }

@@ -9,9 +9,10 @@ enum GameState
     Die,
     Result
 }
-enum SceneIndex
+public enum SceneIndex
 {
     MainMenu,
+    Lobby,
     Dungen
 }
 
