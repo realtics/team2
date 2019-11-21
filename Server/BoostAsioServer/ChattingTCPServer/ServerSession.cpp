@@ -121,6 +121,7 @@ void Session::HandleReceive(const boost::system::error_code& error, size_t bytes
 		float jsonCharacterMoveY = ptRecv.get<float>("characterMoveY");
 		//std::string jsonString = ptRecv.get<std::string>("String");
 
+
 		std::cout << "클라에서 보낸 json 값 추출 : ";
 		std::cout << "headerIndex:" << headerIndex << ", ";
 		std::cout << "packetSize:" << packetSize << ", ";
