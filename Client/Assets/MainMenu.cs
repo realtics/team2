@@ -10,9 +10,4 @@ public class MainMenu : MonoBehaviour
         // scene Town
         SceneManager.LoadScene(1);
     }
-
-    public void GameQuit()
-    {
-        Application.Quit();
-    }
 }

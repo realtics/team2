@@ -32,14 +32,14 @@ void ChatClient::PostReceive()
 	_Socket.async_read_some
 	(
 		boost::asio::buffer(_ReceiveBuffer),
-							boost::bind(&ChatClient::handle_receive,
+							boost::bind(&ChatClient::HandleReceive,
 										this,
 										boost::asio::placeholders::error,
 										boost::asio::placeholders::bytes_transferred)
 	);
 }
 
-void ChatClient::handle_connect(const boost::system::error_code& error)
+void ChatClient::HandleConnect(const boost::system::error_code& error)
 {
 	if (!error)
 	{
@@ -54,7 +54,7 @@ void ChatClient::handle_connect(const boost::system::error_code& error)
 	}
 }
 
-void ChatClient::handle_write(const boost::system::error_code& error, size_t bytes_transferred)
+void ChatClient::HandleWrite(const boost::system::error_code& error, size_t bytes_transferred)
 {
 	EnterCriticalSection(&_lock);			// ∂Ù Ω√¿€
 
@@ -77,7 +77,7 @@ void ChatClient::handle_write(const boost::system::error_code& error, size_t byt
 	}
 }
 
-void ChatClient::handle_receive(const boost::system::error_code& error, size_t bytes_transferred)
+void ChatClient::HandleReceive(const boost::system::error_code& error, size_t bytes_transferred)
 {
 	if (error)
 	{
@@ -164,7 +164,7 @@ void ChatClient::Connect(boost::asio::ip::tcp::endpoint endpoint)
 	_nPacketBufferMark = 0;
 
 	_Socket.async_connect(endpoint,
-							boost::bind(&ChatClient::handle_connect,
+							boost::bind(&ChatClient::HandleConnect,
 										this,
 										boost::asio::placeholders::error)
 	);
@@ -200,7 +200,7 @@ void ChatClient::PostSend(const bool bImmediately, const int packetSize, char* p
 	{
 		boost::asio::async_write(_Socket,
 								boost::asio::buffer(pSendData, packetSize),
-								boost::bind(&ChatClient::handle_write,
+								boost::bind(&ChatClient::HandleWrite,
 											this,
 											boost::asio::placeholders::error,
 											boost::asio::placeholders::bytes_transferred)

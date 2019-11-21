@@ -14,7 +14,7 @@ bool ChatServer::PostAccept()
 	_SessionQueue.pop_front();
 
 	_acceptor.async_accept(_SessionList[nSessionID]->Socket(),
-		boost::bind(&ChatServer::handle_accept,
+		boost::bind(&ChatServer::HandleAccept,
 			this,
 			_SessionList[nSessionID],
 			boost::asio::placeholders::error)
@@ -23,7 +23,7 @@ bool ChatServer::PostAccept()
 	return true;
 }
 
-void ChatServer::handle_accept(Session* pSession, const boost::system::error_code& error)
+void ChatServer::HandleAccept(Session* pSession, const boost::system::error_code& error)
 {
 	if (!error)
 	{
@@ -93,6 +93,7 @@ void ChatServer::CloseSession(const int nSessionID)
 void ChatServer::ProcessPacket(const int nSessionID, const char* pData)
 {
 	PACKET_HEADER* pheader = (PACKET_HEADER*)pData;
+	std::cout << "패킷사이즈 : " << pheader->packetSize << std::endl;
 
 	switch (pheader->packetIndex)
 	{

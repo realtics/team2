@@ -72,30 +72,12 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("소켓생성 실패");
         }
-        //sock.Connect(new IPEndPoint(IPAddress.Parse("192.168.1.119"), 31452));
         sock.Connect(new IPEndPoint(IPAddress.Parse("127.0.0.1"), 31452));
 
 
 
-        //
-        Vector3 objectPos = this.gameObject.transform.position;
-
-        var packckHeader = new PACKET_HEADER { packetIndex = 1, packetSize = 10 };
-        var packckCharacterMove = new PACKET_CHARACTER_MOVE { header = packckHeader, characterMoveX = objectPos.x, characterMoveY = objectPos.y };
-        string json;
-        json = JsonConvert.SerializeObject(packckCharacterMove);
-        char charNull = '\0';
-        json += charNull;
-        byte[] sendBuf = new byte[512];
-        sendBuf = Encoding.UTF8.GetBytes(json);
-        sock.Send(sendBuf);
 
 
-        byte[] recvBuf = new byte[512];
-        int socketRecive = sock.Receive(recvBuf);
-        Debug.Log("recv");
-
-        string recvData = Encoding.UTF8.GetString(recvBuf, 0, socketRecive);
     }
 
     // Update is called once per frame
@@ -125,7 +107,6 @@ public class PlayerController : MonoBehaviour
 
 
 
-
         }
         else
         {
@@ -143,25 +124,39 @@ public class PlayerController : MonoBehaviour
 
 
 
-            //
+
+            //서버에 보내기
             Vector3 objectPos = this.gameObject.transform.position;
 
-            var packckHeader = new PACKET_HEADER { packetIndex = 1, packetSize = 10 };
+            var packckHeader = new PACKET_HEADER { packetIndex = 3, packetSize = 10 };
             var packckCharacterMove = new PACKET_CHARACTER_MOVE { header = packckHeader, characterMoveX = objectPos.x, characterMoveY = objectPos.y };
             string json;
             json = JsonConvert.SerializeObject(packckCharacterMove);
             char charNull = '\0';
             json += charNull;
-            byte[] sendBuf = new byte[512];
+            byte[] sendBuf = new byte[128];
             sendBuf = Encoding.UTF8.GetBytes(json);
             sock.Send(sendBuf);
 
 
-            byte[] recvBuf = new byte[512];
+            //서버에서 받는것 처리
+            byte[] recvBuf = new byte[128];
             int socketRecive = sock.Receive(recvBuf);
             Debug.Log("recv");
+            Debug.Log(socketRecive);    //91
 
             string recvData = Encoding.UTF8.GetString(recvBuf, 0, socketRecive);
+            //int bufLen = Encoding.Default.GetBytes(bufRecv);
+            int bufLen = recvBuf.Length;
+            Debug.Log(recvData);    //{"header":{"packetIndex":"3","packetSize":"12"},"characterMoveX":"2","characterMoveY":"1"}
+
+            var data2 = JsonConvert.DeserializeObject<TempPacket>(recvData);
+            if (data2.header.packetIndex == 3)
+            {
+                var packetTemp = JsonConvert.DeserializeObject<PACKET_CHARACTER_MOVE>(recvData);
+                Debug.Log(packetTemp.characterMoveX);
+                Debug.Log(packetTemp.characterMoveY);
+            }
         }
     }
 

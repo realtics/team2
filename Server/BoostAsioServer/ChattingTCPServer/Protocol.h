@@ -24,11 +24,17 @@ const short REQ_IN = 1;
 const short RES_IN = 2;
 // PKT_RES_IN
 
-const short REQ_CHAT = 6;
+const short REQ_CHAT = 5;
 // PKT_REQ_CHAT
 
-const short NOTICE_CHAT = 7;
+const short NOTICE_CHAT = 6;
 // PKT_NOTICE_CHAT
+
+const short CHARACTER_MOVE = 7;
+// PKT_CHARACTER_MOVE
+
+const short NOTICE_CHARACTER_MOVE = 8;
+// PKT_NOTICE_CHARACTER_MOVE
 
 struct PKT_REQ_IN : public PACKET_HEADER
 {
@@ -77,5 +83,31 @@ struct PKT_NOTICE_CHAT : public PACKET_HEADER
 		packetSize = sizeof(PKT_NOTICE_CHAT);
 		memset(characterName, 0, MAX_NAME_LEN);
 		memset(userMessage, 0, MAX_MESSAGE_LEN);
+	}
+};
+
+struct PKT_CHARACTER_MOVE : public PACKET_HEADER
+{
+	int characterMoveX;
+	int	characterMoveY;
+
+	void Init()
+	{
+		packetIndex = CHARACTER_MOVE;
+		packetSize = sizeof(PKT_CHARACTER_MOVE);
+	}
+};
+
+struct PKT_NOTICE_CHARACTER_MOVE : public PACKET_HEADER
+{
+	char characterName[MAX_NAME_LEN];
+	int characterMoveX;
+	int	characterMoveY;
+
+	void Init()
+	{
+		packetIndex = NOTICE_CHARACTER_MOVE;
+		packetSize = sizeof(PKT_NOTICE_CHARACTER_MOVE);
+		memset(characterName, 0, MAX_NAME_LEN);
 	}
 };

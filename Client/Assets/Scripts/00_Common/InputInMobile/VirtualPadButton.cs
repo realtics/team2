@@ -8,6 +8,7 @@ public enum VirtualPadButtonType
     Attack,
     Jump,
     Run,
+    Skill,
 }
 
 public class VirtualPadButton : MonoBehaviour
@@ -49,6 +50,9 @@ public class VirtualPadButton : MonoBehaviour
                     _pc.StopRun();
                     _isRun = false;
                 }
+                break;
+            case VirtualPadButtonType.Skill:
+                _pc.SetSkill();
                 break;
         }
     }

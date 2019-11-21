@@ -75,10 +75,6 @@ public class UIHelper : MonoBehaviour
     {
         _gameResult.OpenResultBox(index);
     }
-    public void GameResultEnd()
-    {
-        
-    }
 
     public void SetMonsterHp(float CurrentHp, float MaxHp)
     {
@@ -94,6 +90,7 @@ public class UIHelper : MonoBehaviour
         monsterInfo.name = monster.monsterName;
         monsterInfo.level = monster.monsterLevel;
         monsterInfo.currentHp = monster.currentHp;
+        monsterInfo.index = MonsterSnapShot.Calvary;
 
         _monsterInfo.SetMonster(monsterInfo);
     }

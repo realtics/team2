@@ -28,7 +28,7 @@ void Session::PostReceive()
 	_Socket.async_read_some
 	(
 		boost::asio::buffer(_ReceiveBuffer),
-							boost::bind(&Session::handleReceive,
+							boost::bind(&Session::HandleReceive,
 										this,
 										boost::asio::placeholders::error,
 										boost::asio::placeholders::bytes_transferred)
@@ -59,14 +59,14 @@ void Session::PostSend(const bool bImmediately, const int packetSize, char* pDat
 
 	boost::asio::async_write(_Socket,
 							boost::asio::buffer(pSendData, packetSize),
-							boost::bind(&Session::handleWrite,
+							boost::bind(&Session::HandleWrite,
 										this,
 										boost::asio::placeholders::error,
 										boost::asio::placeholders::bytes_transferred)
 	);
 }
 
-void Session::handleWrite(const boost::system::error_code& error, size_t bytes_transferred)
+void Session::HandleWrite(const boost::system::error_code& error, size_t bytes_transferred)
 {
 	delete[] _SendDataQueue.front();
 	_SendDataQueue.pop_front();
@@ -81,7 +81,7 @@ void Session::handleWrite(const boost::system::error_code& error, size_t bytes_t
 	}
 }
 
-void Session::handleReceive(const boost::system::error_code& error, size_t bytes_transferred)
+void Session::HandleReceive(const boost::system::error_code& error, size_t bytes_transferred)
 {
 	if (error)
 	{
@@ -121,12 +121,16 @@ void Session::handleReceive(const boost::system::error_code& error, size_t bytes
 		float jsonCharacterMoveY = ptRecv.get<float>("characterMoveY");
 		//std::string jsonString = ptRecv.get<std::string>("String");
 
+		std::cout << "클라에서 보낸 json 값 추출 : ";
+		std::cout << "headerIndex:" << headerIndex << ", ";
+		std::cout << "packetSize:" << packetSize << ", ";
+		std::cout << "X:" << jsonCharacterMoveX << ", ";
+		std::cout << "Y:" << jsonCharacterMoveY << std::endl;
 
 
-
-////////////////
+////////////////클라에 json 형태로 보내기
 		PACKET_CHARACTER_MOVE packetCharacterMove;
-		packetCharacterMove.header.packetIndex = RES_IN;
+		packetCharacterMove.header.packetIndex = 3;
 		packetCharacterMove.header.packetSize = sizeof(PACKET_CHARACTER_MOVE);
 		packetCharacterMove.characterMoveX = 2;
 		packetCharacterMove.characterMoveY = 1;
@@ -135,10 +139,6 @@ void Session::handleReceive(const boost::system::error_code& error, size_t bytes
 		//{"header":{"packetIndex":1,"packetSize":??},"characterMoveX":1,"characterMoveY":2}
 		//{"header":{"packetIndex":1,"packetSize":??},"characterMoveX":1,"String":"string"}
 		
-
-
-
-
 		boost::property_tree::ptree ptSend;
 		boost::property_tree::ptree ptSendHeader;
 		ptSendHeader.put<int>("packetIndex", packetCharacterMove.header.packetIndex);
