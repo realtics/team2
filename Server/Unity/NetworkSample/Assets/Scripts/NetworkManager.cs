@@ -106,7 +106,7 @@ public class NetworkManager : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.X))
         {
-            ThisIsStopPaket();
+            ThisIsStopPacket();
         }
     }
 
@@ -213,7 +213,7 @@ public class NetworkManager : MonoBehaviour
         movePlayer.SetMoveDirectionAndMove(Vector3.left);
     }
 
-    private void ThisIsStopPaket()
+    private void ThisIsStopPacket()
     {
         // 이것도 위의 함수와 동일함
         // MoveEnd 패킷이 왔고 마지막 좌표가 담겨있다고 가정
@@ -227,8 +227,9 @@ public class NetworkManager : MonoBehaviour
         movePlayer.StopMove(movePlayer.transform.position);
     }
 
+
     private void OnGUI()
     {
-        GUI.Label(new Rect(0, 100, 100, 100), _isLogin.ToString() + ", " + MyId.ToString());
+        GUI.Label(new Rect(0, 0, 100, 100), _isLogin.ToString() + ", " + MyId.ToString());
     }
 }
