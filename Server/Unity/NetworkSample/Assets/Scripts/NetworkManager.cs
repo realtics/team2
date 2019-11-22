@@ -229,6 +229,6 @@ public class NetworkManager : MonoBehaviour
 
     private void OnGUI()
     {
-        GUI.Label(new Rect(0, 100, 100, 100), _isLogin.ToString() + _step.ToString() + " test " + MyId.ToString());
+        GUI.Label(new Rect(0, 100, 100, 100), _isLogin.ToString() + ", " + MyId.ToString());
     }
 }
