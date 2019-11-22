@@ -62,7 +62,6 @@ public class NetworkManager : MonoBehaviour
 
     private Socket _sock = null;
     private bool _isLogin = false;
-    private int _step = 0;
     private int _myId;
     private Dictionary<int,Character> _characters;
 
@@ -72,12 +71,13 @@ public class NetworkManager : MonoBehaviour
 
     void Start()
     {
+        Screen.SetResolution(960, 540, false);
+
         _instance = this;
         _characters = new Dictionary<int, Character>();
 
         CreateSocket();
 
-        _step = 1;
         if (IsLogin == false)
         {
             NewLogin();
@@ -124,26 +124,14 @@ public class NetworkManager : MonoBehaviour
     {
         string jsonData;
         char endNullValue = '\0';
-        _step = 2;
+
         var packHeader = new PACKET_HEADER { packetIndex = (short)PACKET_INDEX.NEW_LOGIN, 
                                              packetSize = 45 };
-        _step = 11;
-
         var packData = new PACKET_NEW_LOGIN { header = packHeader };
-        _step = 12;
-
         jsonData = JsonConvert.SerializeObject(packData);
-        _step = 13;
-
         jsonData += endNullValue;
-        _step = 14;
-
         byte[] sendByte = new byte[128];
-        _step = 15;
-
         sendByte = Encoding.UTF8.GetBytes(jsonData);
-        _step = 16;
-
         //TODO 1-0: JSON 헤더에 패킷 사이즈 체크 하는것을 foreach로 하고 있는데, 더 좋은 방법 있다면 개선
         //TODO 1-1: 패킷 사이즈를 담아 보내는 것이 현재 상태에선 크게 중요하진 않으므로, 코드만 남겨두고 나중에 활용
         //int jsonDataSize = 0;
@@ -155,20 +143,15 @@ public class NetworkManager : MonoBehaviour
         //}
         //Debug.Log(jsonData);
         //Debug.Log(jsonDataSize);
-        _step = 9;
-
         int resultSize = _sock.Send(sendByte);
-        _step = 3;
     }
 
     private void NewLoginSucsess()
     {
-        _step = 4;
         byte[] recvBuf = new byte[128];
         int socketRecive = _sock.Receive(recvBuf);
         Debug.Log(socketRecive);
 
-        _step = 5;
         string recvData = Encoding.UTF8.GetString(recvBuf, 0, socketRecive);
         int bufLen = recvBuf.Length;
         Debug.Log(recvData);
