@@ -9,13 +9,16 @@ public class UIPlayerInfo : MonoBehaviour
     [SerializeField]
     private UIPlayerStat _mpBar;
     [SerializeField]
-    private CharacterStat characterStat;
+    private CharacterStat _characterStat;
 
     // Use this for initialization
     void Start()
     {
-        _hpBar.SetStat(characterStat.Hp, characterStat.MaxHp);
-        _mpBar.SetStat(characterStat.Mp, characterStat.MaxMp);
+        if (_characterStat != null)
+        {
+            _hpBar.SetStat(_characterStat.Hp, _characterStat.MaxHp);
+            _mpBar.SetStat(_characterStat.Mp, _characterStat.MaxMp);
+        }
     }
 
     // Update is called once per frame

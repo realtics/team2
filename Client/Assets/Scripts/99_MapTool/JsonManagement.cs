@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using Newtonsoft.Json;
 
 public class JsonData
 {
@@ -17,7 +18,28 @@ public class JsonData
     }
 
 }
+public class ObjectInfo
+{
+    public string filePath;
+    public Vector3 position;
+}
 
+public class Potalinfo
+{
+    public ObjectInfo potal;
+    public Vector3 transportPosition;
+    public string FilePathNextDungeon;
+}
+
+public class DungeonInfo
+{
+    public List<ObjectInfo> objectinfos;
+
+    public Vector3 PlayerStartPosition;
+
+    public List<Potalinfo> potalinfos;
+
+}
 public class JsonManagement
 {
     List<JsonData> _objectList;
