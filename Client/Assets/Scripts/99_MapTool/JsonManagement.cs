@@ -6,53 +6,69 @@ using System.IO;
 using System.Text;
 using Newtonsoft.Json;
 
-public class JsonData
-{
-    public string filePath;
-    public Vector3 position;
-
-    public JsonData(string path, Vector3 pos)
-    {
-        filePath = path;
-        position = pos;
-    }
-
-}
-public class ObjectInfo
-{
-    public string filePath;
-    public Vector3 position;
-}
-
-public class Potalinfo
-{
-    public ObjectInfo potal;
-    public Vector3 transportPosition;
-    public string FilePathNextDungeon;
-}
-
 public class DungeonInfo
 {
-    public List<ObjectInfo> objectinfos;
+    public string filePath;
 
+    public class ObjectInfo
+    {
+        public string filePath;
+        public Vector3 position;
+    }
+
+    public class Potalinfo
+    {
+        public string filePath;
+        public Vector3 position;
+        public Vector3 transportPosition;
+        public string FilePathNextDungeon;
+    }
+
+
+    public List<ObjectInfo> objectinfos;
+    public List<Potalinfo> potalinfos;
     public Vector3 PlayerStartPosition;
 
-    public List<Potalinfo> potalinfos;
-
+    public DungeonInfo()
+    {
+        objectinfos = new List<ObjectInfo>();
+        potalinfos = new List<Potalinfo>();
+    }
 }
+
+public class JsonData
+{
+    List<DungeonInfo> _dungeonObjectList;
+
+    public JsonData()
+    {
+        _dungeonObjectList = new List<DungeonInfo>();
+    }
+
+    public void Add(DungeonInfo dungeonInfo)
+    {
+        _dungeonObjectList.Add(dungeonInfo);
+    }
+
+    public void Clear()
+    {
+        _dungeonObjectList.Clear();
+    }
+}
+
 public class JsonManagement
 {
-    List<JsonData> _objectList;
+    JsonData jsonData = new JsonData();
 
 
     public JsonManagement()
     {
-        _objectList = new List<JsonData>();
+        jsonData = new JsonData();
     }
 
     public void JsonSave()
     {
-        _objectList.Clear();
+        jsonData.Clear();
 
         foreach (GameObject obj in GameObject.FindGameObjectsWithTag("FieldObject"))
         {
@@ -60,9 +76,9 @@ public class JsonManagement
             AddObject(obj);
         }
 
-        string jsonData = ObjectToJson(_objectList[0]);
+        string strJsonData = ObjectToJson(jsonData);
 
-        CreateJsonFile(Application.dataPath, "Test1", jsonData);
+        CreateJsonFile(Application.dataPath, "Test1", strJsonData);
     }
     public T JsonLoad<T>(string fileName)
     {
@@ -73,43 +89,33 @@ public class JsonManagement
         string jsonData = Encoding.UTF8.GetString(data);
         return JsonUtility.FromJson<T>(jsonData);
     }
-    public JsonData GetObject(int index)
-    {
-        return _objectList[index];
-    }
-    //public JsonData FindObject(string objectName)
-    //{
-    //    // ing..
 
-    //    foreach(JsonData item in _ObjectList)
-    //    {
-    //        //item._filePath
-    //    }
-
-    //    return null;
-    //}
     public void InstObject()
     {
-        foreach (JsonData data in _objectList)
-        {
-            //GameObject obj = (GameObject)Resources.Load(data._filePath);
-            GameObject obj = (GameObject)Resources.Load("Object\\StoneBar");
-            obj.transform.position = data.position;
+        //foreach (JsonData data in jsonData)
+        //{
+        //    GameObject obj = (GameObject)Resources.Load(data._filePath);
+        //    obj.transform.position = data.position;
 
-            GameObject.Instantiate(obj);
+        //    GameObject.Instantiate(obj);
 
-        }
+        //}
     }
 
     public void AddObject(GameObject obj)
     {
-        //Object parentObject = PrefabUtility.GetCorrespondingObjectFromOriginalSource(obj);
-        //string path = AssetDatabase.GetAssetPath(parentObject);
-        string path = "Object\\far2Background";
-        Debug.Log(path);
+        Object parentObject = PrefabUtility.GetCorrespondingObjectFromOriginalSource(obj);
+        string path = AssetDatabase.GetAssetPath(parentObject);
+        //string path = "Object\\far2Background";
+        //Debug.Log(path);
 
-        JsonData data = new JsonData(path, obj.transform.position);
-        _objectList.Add(data);
+        DungeonInfo dungeonInfo = new DungeonInfo();
+
+        //dungeonInfo.objectinfos.Add( );
+        //dungeonInfo.potalinfos.Add();
+
+
+        jsonData.Add(dungeonInfo);
     }
 
     private string ObjectToJson(object obj)
