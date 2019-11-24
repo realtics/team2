@@ -34,22 +34,22 @@ public class JsonManagement
     {
         foreach (JsonData data in _ObjectList)
         {
-            //GameObject obj = (GameObject)Resources.Load(data._filePath);
-            GameObject obj = (GameObject)Resources.Load("Object\\StoneBar");
-            obj.transform.position = data.position;
+            ////GameObject obj = (GameObject)Resources.Load(data._filePath);
+            //GameObject obj = (GameObject)Resources.Load("Object\\StoneBar");
+            //obj.transform.position = data.position;
 
-            GameObject.Instantiate(obj);
+            //GameObject.Instantiate(obj);
             
         }
     }
 
     public void AddObject(GameObject obj)
     {
-        Object parentObject = PrefabUtility.GetCorrespondingObjectFromSource(obj);
-        string path = AssetDatabase.GetAssetPath(parentObject);
-        Debug.Log(path);
+        //Object parentObject = PrefabUtility.GetCorrespondingObjectFromSource(obj);
+        //string path = AssetDatabase.GetAssetPath(parentObject);
+        //Debug.Log(path);
 
-        JsonData data = new JsonData(path, obj.transform.position);
-        _ObjectList.Add(data);
+        //JsonData data = new JsonData(path, obj.transform.position);
+        //_ObjectList.Add(data);
     }
 }
