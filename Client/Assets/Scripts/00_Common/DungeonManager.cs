@@ -10,19 +10,19 @@ public class DungeonManager : MonoBehaviour
     private Potal _currentPotal;
     private ARROW _arrow;
 
-    private JsonManagement _jsonManagement;
+    //private JsonManagement _jsonManagement;
 
     // Start is called before the first frame update
     void Start()
     {
         FIndPotals();
-        _jsonManagement = new JsonManagement();
+        //_jsonManagement = new JsonManagement();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(FindActiveCurrentPotal())
+        if (FindActiveCurrentPotal())
         {
             DestroyAllFieldObject();
 
@@ -30,12 +30,6 @@ public class DungeonManager : MonoBehaviour
 
             TeardownPotals();
         }
-    }
-    public void SaveDungen()
-    {
-        // Test.. 
-        _jsonManagement.JsonSave();
-        
     }
     private void LoadPotalDungeon()
     {
@@ -47,7 +41,7 @@ public class DungeonManager : MonoBehaviour
 
     private void FIndPotals()
     {
-       _potals = FindObjectsOfType<Potal>();
+        _potals = FindObjectsOfType<Potal>();
     }
     private bool FindActiveCurrentPotal()
     {
@@ -71,6 +65,6 @@ public class DungeonManager : MonoBehaviour
     }
     private void DestroyAllFieldObject()
     {
-        
+
     }
 }

@@ -6,17 +6,28 @@ using UnityEditor;
 
 public class MyWindows : MonoBehaviour
 {
-    //static JsonManagement _jsonManagement = new JsonManagement();
+    static JsonManagement _jsonManagement = new JsonManagement();
     // Add a menu item named "Do Something" to MyMenu in the menu bar.
+
+    [MenuItem("MapTool/AddDungeon")]
+    static void Add()
+    {
+        _jsonManagement.AddDungeon();
+    }
+    [MenuItem("MapTool/ClearDungeonData")]
+    static void Clear()
+    {
+        _jsonManagement.JsonClear();
+    }
     [MenuItem("MapTool/Save")]
     static void Save()
     {
-        //_jsonManagement.JsonSave();
+        _jsonManagement.JsonSave();
     }
     [MenuItem("MapTool/Load")]
     static void Load()
     {
-        Debug.Log("Doing Something...");
+        var jsonData = _jsonManagement.JsonLoad<DungeonJsonData>("Test2");
     }
     [MenuItem("MapTool/Custom Object")]
     static void InstObject()
