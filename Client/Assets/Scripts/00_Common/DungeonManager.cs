@@ -39,10 +39,10 @@ public class DungeonManager : MonoBehaviour
     }
     private void LoadPotalDungeon()
     {
-        JsonData data = _jsonManagement.JsonLoad<JsonData>(_currentPotal.crossDungenName);
-        GameObject obj = (GameObject)Resources.Load(data.filePath);
-        obj.transform.position = data.position;
-        Instantiate(obj);
+        //JsonData data = _jsonManagement.JsonLoad<JsonData>(_currentPotal.crossDungenName);
+        //GameObject obj = (GameObject)Resources.Load(data.filePath);
+        //obj.transform.position = data.position;
+        //Instantiate(obj);
     }
 
     private void FIndPotals()
