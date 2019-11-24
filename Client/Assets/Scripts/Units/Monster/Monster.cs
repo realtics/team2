@@ -53,7 +53,7 @@ public class Monster : MonoBehaviour
     private MovementStateInfo _moveMentState;
     private float _randomMoveResetTime;
     private float _randomMoveCurrentTime;
-   
+
     //HitState Value
     public enum HitMotion
     {
@@ -64,12 +64,12 @@ public class Monster : MonoBehaviour
     private HitMotion _currentHitMotion;
     private float _hitRecoveryResetTime;
     private float _hitRecoveryCurrentTime;
-   
+
     //KnockBakc Value
     private Vector3 _knockBackDirection;
     private float _knockBackSpeed;
     private float _knockBackDuration;
-       
+
     //properties
     public bool IsAttack { get { return _isAttack; } set { _isAttack = value; } }
     public bool IsHit { get { return _isHit; } set { _isHit = value; } }
@@ -77,7 +77,7 @@ public class Monster : MonoBehaviour
     public MovementStateInfo MovementState { get { return _moveMentState; } set { _moveMentState = value; } }
     public float RandomMoveResetTime { get { return _randomMoveResetTime; } set { _randomMoveResetTime = value; } }
     public float RandomMoveCurrentTime { get { return _randomMoveCurrentTime; } set { _randomMoveCurrentTime = value; } }
-   
+
     public HitMotion CurrentHitMotion { get { return _currentHitMotion; } set { _currentHitMotion = value; } }
     public float HitRecoveryResetTime { get { return _hitRecoveryResetTime; } set { _hitRecoveryResetTime = value; } }
     public float HitRecoveryCurrentTime { get { return _hitRecoveryCurrentTime; } set { _hitRecoveryCurrentTime = value; } }
@@ -106,12 +106,6 @@ public class Monster : MonoBehaviour
             _state.ChangeState(_dieState);
             _isDead = true;
         }
-
-        if (_isHit)
-        {
-            
-        }
-
         _state.Update();
     }
 
@@ -226,7 +220,7 @@ public class Monster : MonoBehaviour
             StopCoroutine("Knockback");
             yield break;
         }
-          
+
         else
         {
             transform.position += _knockBackDirection * Time.deltaTime * _knockBackSpeed;
@@ -237,4 +231,83 @@ public class Monster : MonoBehaviour
     }
 
     //TODO : 공중공격피격시 띄움 판정함수
+
+
+    //AttackState
+    public virtual void EnterAttackState()
+    {
+        if (target == null)
+        {
+            return;
+        }
+
+        IsAttack = true;
+
+        FlipImage();
+        animator.SetBool("isAttacking", true);
+    }
+
+    public virtual void UpdateAttackState()
+    {
+        BaseAttack();
+    }
+
+    public virtual void ExitAttackState()
+    {
+        animator.SetBool("isAttacking", false);
+        IsAttack = false;
+        InactiveSmashHitBox();
+    }
+
+    protected void BaseAttack()
+    {
+        if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f)
+        {
+            ChangeState(_moveState);
+        }
+    }
+
+    //DieState
+    public virtual void EnterDieState()
+    {
+        animator.SetBool("isDie", true);
+        InactiveHitBox();
+
+        //FIXME : 보스몬스터 구분시 변경
+        if (name == "testMonster")
+            DungeonGameManager.Instance.NoticeGameClear();
+        //TODO : 아이템 드랍
+    }
+
+    public virtual void UpdateDieState()
+    {
+        //nothing
+    }
+
+    public virtual void ExitDieState()
+    {
+        //nothing
+    }
+
+    //HitState
+    public virtual void EnterHitState()
+    {
+        animator.SetBool("isDie", true);
+        InactiveHitBox();
+
+        //FIXME : 보스몬스터 구분시 변경
+        if (name == "testMonster")
+            DungeonGameManager.Instance.NoticeGameClear();
+        //TODO : 아이템 드랍
+    }
+
+    public virtual void UpdateHitState()
+    {
+        //nothing
+    }
+
+    public virtual void ExitHitState()
+    {
+        //nothing
+    }
 }
