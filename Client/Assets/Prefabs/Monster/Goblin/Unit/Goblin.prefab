@@ -257,6 +257,7 @@ MonoBehaviour:
   moveSpeed: 1
   target: {fileID: 0}
   animator: {fileID: 0}
+  monsterType: 0
 --- !u!1 &5602223285510543003
 GameObject:
   m_ObjectHideFlags: 0
@@ -428,11 +429,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4399117813266526049}
     m_Modifications:
-    - target: {fileID: -2117571780441203377, guid: 968b8146c23a87141894d489ae10aac2,
-        type: 3}
-      propertyPath: _deleteTime
-      value: 0.3
-      objectReference: {fileID: 0}
     - target: {fileID: 2180975827898659131, guid: 968b8146c23a87141894d489ae10aac2,
         type: 3}
       propertyPath: m_Name
@@ -497,6 +493,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -2117571780441203377, guid: 968b8146c23a87141894d489ae10aac2,
+        type: 3}
+      propertyPath: _deleteTime
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 6326781507318192179, guid: 968b8146c23a87141894d489ae10aac2,
         type: 3}
