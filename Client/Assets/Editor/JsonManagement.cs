@@ -67,34 +67,6 @@ public class DungeonJsonData
     public DungeonInfo[] DungeonInfos;
 }
 
-
-public class JVector3
-{
-    [JsonProperty("x")]
-    public float x;
-    [JsonProperty("y")]
-    public float y;
-    [JsonProperty("z")]
-    public float z;
-
-    public JVector3()
-    {
-        x = y = z = 0f;
-    }
-
-    public JVector3(Vector3 v)
-    {
-        x = v.x;
-        y = v.y;
-        z = v.z;
-    }
-
-    public JVector3(float f)
-    {
-        x = y = z = f;
-    }
-}
-
 public class JsonManagement
 {
     JsonData jsonData = new JsonData();
@@ -105,6 +77,7 @@ public class JsonManagement
         setting.Formatting = Formatting.Indented;
         setting.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
     }
+
     public void JsonSave()
     {
         DungeonJsonData dungeonJson = new DungeonJsonData();
@@ -113,6 +86,7 @@ public class JsonManagement
         string strJsonData = JsonConvert.SerializeObject(dungeonJson, setting);
         CreateJsonFile(Application.dataPath, "Test2", strJsonData);
     }
+
     public void JsonClear()
     {
         jsonData.dungeonObjectList.Clear();
@@ -138,7 +112,6 @@ public class JsonManagement
         jsonData.dungeonObjectList.Add(dungeonInfo);
     }
 
-
     public T JsonLoad<T>(string fileName)
     {
         FileStream fileStream = new FileStream(string.Format("{0}/{1}.json", Application.dataPath + "\\Map\\", fileName), FileMode.Open);
@@ -146,7 +119,15 @@ public class JsonManagement
         fileStream.Read(data, 0, data.Length);
         fileStream.Close();
         string jsonData = Encoding.UTF8.GetString(data);
-        return JsonUtility.FromJson<T>(jsonData);
+        return JsonConvert.DeserializeObject<T>(jsonData);
+    }
+
+    private void CreateJsonFile(string createPath, string fileName, string jsonData)
+    {
+        FileStream fileStream = new FileStream(string.Format("{0}/{1}.json", Application.dataPath + "\\Map\\", fileName), FileMode.Create);
+        byte[] data = Encoding.UTF8.GetBytes(jsonData);
+        fileStream.Write(data, 0, data.Length);
+        fileStream.Close();
     }
 
     public void InstObject()
@@ -159,25 +140,6 @@ public class JsonManagement
         //    GameObject.Instantiate(obj);
 
         //}
-    }
-
-
-    private string ObjectToJson(object obj)
-    {
-        return JsonUtility.ToJson(obj);
-    }
-
-    private T JsonToOject<T>(string jsonData)
-    {
-        return JsonUtility.FromJson<T>(jsonData);
-    }
-
-    private void CreateJsonFile(string createPath, string fileName, string jsonData)
-    {
-        FileStream fileStream = new FileStream(string.Format("{0}/{1}.json", createPath, fileName), FileMode.Create);
-        byte[] data = Encoding.UTF8.GetBytes(jsonData);
-        fileStream.Write(data, 0, data.Length);
-        fileStream.Close();
     }
 }
 
