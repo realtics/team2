@@ -1,139 +1,167 @@
-﻿using UnityEngine;
-using UnityEditor;
-using System.Collections;
-using System.Collections.Generic;
-using System.IO;
-using System.Text;
-using Newtonsoft.Json;
+﻿//using UnityEngine;
+//using UnityEditor;
+//using System.Collections;
+//using System.Collections.Generic;
+//using System.IO;
+//using System.Text;
+//using Newtonsoft.Json;
 
-public class DungeonInfo
-{
-    public string filePath;
+//public class ObjectInfo
+//{
+//    public string filePath;
+//    public Vector3 position;
+//}
 
-    public class ObjectInfo
-    {
-        public string filePath;
-        public Vector3 position;
-    }
+//public class Potalinfo
+//{
+//    public string filePath;
+//    public Vector3 position;
+//    public Vector3 transportPosition;
+//    public string FilePathNextDungeon;
+//}
 
-    public class Potalinfo
-    {
-        public string filePath;
-        public Vector3 position;
-        public Vector3 transportPosition;
-        public string FilePathNextDungeon;
-    }
+//public class DungeonInfo
+//{
+//    public List<ObjectInfo> objectinfos;
+//    public List<Potalinfo> potalinfos;
+//    public Vector3 PlayerStartPosition;
 
+//    public DungeonInfo()
+//    {
+//        objectinfos = new List<ObjectInfo>();
+//        potalinfos = new List<Potalinfo>();
+//    }
 
-    public List<ObjectInfo> objectinfos;
-    public List<Potalinfo> potalinfos;
-    public Vector3 PlayerStartPosition;
+//    public void AddObject(GameObject obj)
+//    {
+//        Object parentObject = PrefabUtility.GetCorrespondingObjectFromOriginalSource(obj);
+//        string path = AssetDatabase.GetAssetPath(parentObject);
 
-    public DungeonInfo()
-    {
-        objectinfos = new List<ObjectInfo>();
-        potalinfos = new List<Potalinfo>();
-    }
-}
+//        ObjectInfo objectInfo = new ObjectInfo();
+//        objectInfo.filePath = path;
+//        objectInfo.position = obj.transform.position;
 
-public class JsonData
-{
-    List<DungeonInfo> _dungeonObjectList;
+//        objectinfos.Add(objectInfo);
+//    }
 
-    public JsonData()
-    {
-        _dungeonObjectList = new List<DungeonInfo>();
-    }
+//    public void AddPotal(GameObject obj)
+//    {
+//        Object parentObject = PrefabUtility.GetCorrespondingObjectFromOriginalSource(obj);
+//        string path = AssetDatabase.GetAssetPath(parentObject);
 
-    public void Add(DungeonInfo dungeonInfo)
-    {
-        _dungeonObjectList.Add(dungeonInfo);
-    }
+//        Potalinfo potalinfo = new Potalinfo();
+//        potalinfo.filePath = path;
+//        potalinfo.position = obj.transform.position;
 
-    public void Clear()
-    {
-        _dungeonObjectList.Clear();
-    }
-}
+//        // 임시 데이터.
+//        potalinfo.transportPosition = obj.transform.position;
+//        potalinfo.FilePathNextDungeon = "Test1.json";
 
-public class JsonManagement
-{
-    JsonData jsonData = new JsonData();
+//        potalinfos.Add(potalinfo);
 
+//    }
+//}
 
-    public JsonManagement()
-    {
-        jsonData = new JsonData();
-    }
+//public class JsonData
+//{
+//    List<DungeonInfo> _dungeonObjectList;
 
-    public void JsonSave()
-    {
-        jsonData.Clear();
+//    public JsonData()
+//    {
+//        _dungeonObjectList = new List<DungeonInfo>();
+//    }
 
-        foreach (GameObject obj in GameObject.FindGameObjectsWithTag("FieldObject"))
-        {
-            //Debug.Log(obj.name);
-            AddObject(obj);
-        }
+//    public void Add(DungeonInfo dungeonInfo)
+//    {
+//        _dungeonObjectList.Add(dungeonInfo);
+//    }
 
-        string strJsonData = ObjectToJson(jsonData);
+//    public void Clear()
+//    {
+//        _dungeonObjectList.Clear();
+//    }
+//}
 
-        CreateJsonFile(Application.dataPath, "Test1", strJsonData);
-    }
-    public T JsonLoad<T>(string fileName)
-    {
-        FileStream fileStream = new FileStream(string.Format("{0}/{1}.json", Application.dataPath+"\\Map\\", fileName), FileMode.Open);
-        byte[] data = new byte[fileStream.Length];
-        fileStream.Read(data, 0, data.Length);
-        fileStream.Close();
-        string jsonData = Encoding.UTF8.GetString(data);
-        return JsonUtility.FromJson<T>(jsonData);
-    }
+//public class JsonManagement
+//{
+//    public static JsonManagement instance;
 
-    public void InstObject()
-    {
-        //foreach (JsonData data in jsonData)
-        //{
-        //    GameObject obj = (GameObject)Resources.Load(data._filePath);
-        //    obj.transform.position = data.position;
+//    JsonData jsonData = new JsonData();
 
-        //    GameObject.Instantiate(obj);
+//    public JsonManagement()
+//    {
+//        jsonData = new JsonData();
+//    }
 
-        //}
-    }
+//    public void JsonSave()
+//    {
+//        string strJsonData = ObjectToJson(jsonData);
 
-    public void AddObject(GameObject obj)
-    {
-        Object parentObject = PrefabUtility.GetCorrespondingObjectFromOriginalSource(obj);
-        string path = AssetDatabase.GetAssetPath(parentObject);
-        //string path = "Object\\far2Background";
-        //Debug.Log(path);
+//        CreateJsonFile(Application.dataPath, "Test2", strJsonData);
+//    }
+//    public void JsonClear()
+//    {
+//        jsonData.Clear();
+//    }
 
-        DungeonInfo dungeonInfo = new DungeonInfo();
+//    public void AddDungeon()
+//    {
+//        DungeonInfo dungeonInfo = new DungeonInfo();
+//        foreach (GameObject obj in GameObject.FindGameObjectsWithTag("FieldObject"))
+//        {
+//            dungeonInfo.AddObject(obj);
+//        }
 
-        //dungeonInfo.objectinfos.Add( );
-        //dungeonInfo.potalinfos.Add();
+//        foreach (GameObject obj in GameObject.FindGameObjectsWithTag("PotalObject"))
+//        {
+//            dungeonInfo.AddPotal(obj);
+//        }
 
+//        // 임시 데이터.
+//        //GameObject.FindGameObjectsWithTag("PlayerStart");
+//        dungeonInfo.PlayerStartPosition = new Vector3(0, 0, 0);
 
-        jsonData.Add(dungeonInfo);
-    }
+//        jsonData.Add(dungeonInfo);
+//    }
+//    public T JsonLoad<T>(string fileName)
+//    {
+//        FileStream fileStream = new FileStream(string.Format("{0}/{1}.json", Application.dataPath+"\\Map\\", fileName), FileMode.Open);
+//        byte[] data = new byte[fileStream.Length];
+//        fileStream.Read(data, 0, data.Length);
+//        fileStream.Close();
+//        string jsonData = Encoding.UTF8.GetString(data);
+//        return JsonUtility.FromJson<T>(jsonData);
+//    }
 
-    private string ObjectToJson(object obj)
-    {
-        return JsonUtility.ToJson(obj);
-    }
+//    public void InstObject()
+//    {
+//        //foreach (JsonData data in jsonData)
+//        //{
+//        //    GameObject obj = (GameObject)Resources.Load(data._filePath);
+//        //    obj.transform.position = data.position;
 
-    private T JsonToOject<T>(string jsonData)
-    {
-        return JsonUtility.FromJson<T>(jsonData);
-    }
+//        //    GameObject.Instantiate(obj);
 
-    private void CreateJsonFile(string createPath, string fileName, string jsonData)
-    {
-        FileStream fileStream = new FileStream(string.Format("{0}/{1}.json", createPath, fileName), FileMode.Create);
-        byte[] data = Encoding.UTF8.GetBytes(jsonData);
-        fileStream.Write(data, 0, data.Length);
-        fileStream.Close();
-    }
-}
+//        //}
+//    }
+
+ 
+//    private string ObjectToJson(object obj)
+//    {
+//        return JsonUtility.ToJson(obj);
+//    }
+
+//    private T JsonToOject<T>(string jsonData)
+//    {
+//        return JsonUtility.FromJson<T>(jsonData);
+//    }
+
+//    private void CreateJsonFile(string createPath, string fileName, string jsonData)
+//    {
+//        FileStream fileStream = new FileStream(string.Format("{0}/{1}.json", createPath, fileName), FileMode.Create);
+//        byte[] data = Encoding.UTF8.GetBytes(jsonData);
+//        fileStream.Write(data, 0, data.Length);
+//        fileStream.Close();
+//    }
+//}
 

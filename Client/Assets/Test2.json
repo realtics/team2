@@ -1,0 +1,115 @@
+{
+  "DungeonInfos": [
+    {
+      "objectinfos": [
+        {
+          "filePath": "Assets/Resources/Object/StoneBar.prefab",
+          "position": {
+            "x": -3.61,
+            "y": -1.17,
+            "z": 0.0,
+            "normalized": {
+              "x": -0.9512855,
+              "y": -0.308311373,
+              "z": 0.0,
+              "magnitude": 1.0,
+              "sqrMagnitude": 0.99999994
+            },
+            "magnitude": 3.794865,
+            "sqrMagnitude": 14.4009991
+          }
+        },
+        {
+          "filePath": "Assets/Resources/Object/StoneBar.prefab",
+          "position": {
+            "x": 2.89,
+            "y": 1.54,
+            "z": 0.0,
+            "normalized": {
+              "x": 0.882522,
+              "y": 0.4702712,
+              "z": 0.0,
+              "magnitude": 1.0,
+              "sqrMagnitude": 1.0
+            },
+            "magnitude": 3.27470613,
+            "sqrMagnitude": 10.7237005
+          }
+        }
+      ],
+      "potalinfos": [
+        {
+          "filePath": "Assets/Resources/Object/StoneBar.prefab",
+          "position": {
+            "x": -3.61,
+            "y": -1.17,
+            "z": 0.0,
+            "normalized": {
+              "x": -0.9512855,
+              "y": -0.308311373,
+              "z": 0.0,
+              "magnitude": 1.0,
+              "sqrMagnitude": 0.99999994
+            },
+            "magnitude": 3.794865,
+            "sqrMagnitude": 14.4009991
+          },
+          "transportPosition": {
+            "x": -3.61,
+            "y": -1.17,
+            "z": 0.0,
+            "normalized": {
+              "x": -0.9512855,
+              "y": -0.308311373,
+              "z": 0.0,
+              "magnitude": 1.0,
+              "sqrMagnitude": 0.99999994
+            },
+            "magnitude": 3.794865,
+            "sqrMagnitude": 14.4009991
+          },
+          "FilePathNextDungeon": "Test1.json"
+        },
+        {
+          "filePath": "Assets/Resources/Object/StoneBar.prefab",
+          "position": {
+            "x": 2.89,
+            "y": 1.54,
+            "z": 0.0,
+            "normalized": {
+              "x": 0.882522,
+              "y": 0.4702712,
+              "z": 0.0,
+              "magnitude": 1.0,
+              "sqrMagnitude": 1.0
+            },
+            "magnitude": 3.27470613,
+            "sqrMagnitude": 10.7237005
+          },
+          "transportPosition": {
+            "x": 2.89,
+            "y": 1.54,
+            "z": 0.0,
+            "normalized": {
+              "x": 0.882522,
+              "y": 0.4702712,
+              "z": 0.0,
+              "magnitude": 1.0,
+              "sqrMagnitude": 1.0
+            },
+            "magnitude": 3.27470613,
+            "sqrMagnitude": 10.7237005
+          },
+          "FilePathNextDungeon": "Test1.json"
+        }
+      ],
+      "PlayerStartPosition": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "magnitude": 0.0,
+        "sqrMagnitude": 0.0
+      }
+    }
+  ]
+}
