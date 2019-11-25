@@ -34,12 +34,11 @@ public class Tauarmy : BaseMonster
 
     public override void UpdateAttackState()
     {
-        base.UpdateAttackState();
         if (_currentAttackMotion == TauarmyAttackMotion.AttackMotion2)
         {
             transform.position += _forwardDirection * Time.deltaTime * (_moveSpeed*3);
         }
-        
+        base.UpdateAttackState();
     }
 
     public override void ExitAttackState()
