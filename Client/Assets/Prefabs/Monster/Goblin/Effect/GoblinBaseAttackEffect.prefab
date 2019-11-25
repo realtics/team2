@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -2117571780441203377}
   - component: {fileID: 6326781507318192179}
   m_Layer: 0
-  m_Name: goblinSmashEffect
+  m_Name: GoblinBaseAttackEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -71,7 +71,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 101
   m_Sprite: {fileID: 21300000, guid: 89d4130cadcee734ab84072e3ea5eabb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -114,7 +114,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91a71d3e566804d4180ff11b290ba1ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _deleteTime: 0
+  _deleteTime: 0.3
 --- !u!114 &6326781507318192179
 MonoBehaviour:
   m_ObjectHideFlags: 0

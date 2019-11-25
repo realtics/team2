@@ -1895,7 +1895,7 @@ PrefabInstance:
     - target: {fileID: 4127798058604522687, guid: 1062798e89fa7ff48b49faaa1a382347,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 23.2
+      value: 26.71
       objectReference: {fileID: 0}
     - target: {fileID: 4127798058604522687, guid: 1062798e89fa7ff48b49faaa1a382347,
         type: 3}
@@ -1950,7 +1950,7 @@ PrefabInstance:
     - target: {fileID: 7066271342005098954, guid: 1062798e89fa7ff48b49faaa1a382347,
         type: 3}
       propertyPath: m_Name
-      value: CalvarySmashEffect
+      value: CalvaryBaseAttackEffect
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1062798e89fa7ff48b49faaa1a382347, type: 3}
@@ -2038,12 +2038,12 @@ PrefabInstance:
     - target: {fileID: 2568930803070071787, guid: b9e4e00062790fe42afe46f52f3b1801,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 7.03
+      value: 16.43
       objectReference: {fileID: 0}
     - target: {fileID: 2568930803070071787, guid: b9e4e00062790fe42afe46f52f3b1801,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -8.77
+      value: -5.33
       objectReference: {fileID: 0}
     - target: {fileID: 2568930803070071787, guid: b9e4e00062790fe42afe46f52f3b1801,
         type: 3}
