@@ -16,6 +16,6 @@ public class DieState : FSMState<Monster>
 
     public override void ExitState(Monster monster)
     {
-        monster.EnterDieState();
+        monster.ExitDieState();
     }
 }

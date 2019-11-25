@@ -172,7 +172,7 @@ GameObject:
   - component: {fileID: 1020073003416927020}
   - component: {fileID: 1020073003416927022}
   - component: {fileID: 1020073003416926992}
-  - component: {fileID: 1020073003416927021}
+  - component: {fileID: 4683341297758660005}
   m_Layer: 0
   m_Name: Goblin
   m_TagString: Untagged
@@ -235,7 +235,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &1020073003416927021
+--- !u!114 &4683341297758660005
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -244,7 +244,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1020073003416927019}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: efca241d36d50144c8a671ef50081592, type: 3}
+  m_Script: {fileID: 11500000, guid: 2decde5f0c379d549ad25131bddce8f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _monsterType: 0
@@ -252,7 +252,7 @@ MonoBehaviour:
   _monsterLevel: 5
   _currentHp: 0
   _maxHp: 600
-  _attackRange: 1.5
+  _attackRange: 1.2
   _chaseCancleTime: 1
   _chaseTime: 0
   _moveSpeed: 1

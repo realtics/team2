@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 4127798058604522687}
   - component: {fileID: 4127798058604522685}
   - component: {fileID: 4127798058604522627}
-  - component: {fileID: 4127798058604522686}
+  - component: {fileID: 2027343449210597697}
   m_Layer: 0
-  m_Name: testMonster
+  m_Name: Calvary
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -74,7 +74,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &4127798058604522686
+--- !u!114 &2027343449210597697
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -83,15 +83,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 4127798058604522680}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: efca241d36d50144c8a671ef50081592, type: 3}
+  m_Script: {fileID: 11500000, guid: 9b8cdc8dc0ced434dbae51543f99b043, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _monsterType: 2
   _monsterName: "\uCE7C\uBC14\uB9AC"
   _monsterLevel: 105
   _currentHp: 0
-  _maxHp: 1000
-  _attackRange: 3.8
+  _maxHp: 2000
+  _attackRange: 3.2
   _chaseCancleTime: 5
   _chaseTime: 0
   _moveSpeed: 2.5
@@ -193,7 +193,7 @@ Animator:
   m_GameObject: {fileID: 4127798058618418200}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: e61ba160ccb47b341b02d4714822e91b, type: 2}
+  m_Controller: {fileID: 22100000, guid: 8451b051d95e9974e8bc6076c25a0141, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

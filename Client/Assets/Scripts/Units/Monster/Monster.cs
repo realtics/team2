@@ -266,11 +266,6 @@ public class Monster : MonoBehaviour
     {
         _animator.SetBool("isDie", true);
         InactiveHitBox();
-
-        //FIXME : 보스몬스터 구분시 변경
-        if (name == "testMonster")
-            DungeonGameManager.Instance.NoticeGameClear();
-        //TODO : 아이템 드랍
     }
 
     public virtual void UpdateDieState()
@@ -308,7 +303,7 @@ public class Monster : MonoBehaviour
         _animator.SetInteger("hitMotion", (int)HitMotion.HitMotionEnd);
     }
 
-    private bool IsHitRecoveryTimeEnd()
+    protected bool IsHitRecoveryTimeEnd()
     {
         _hitRecoveryCurrentTime += Time.deltaTime;
         if (_hitRecoveryCurrentTime >= _hitRecoveryResetTime)
@@ -318,7 +313,7 @@ public class Monster : MonoBehaviour
         return false;
     }
 
-    private void SetHitMotion()
+    protected void SetHitMotion()
     {
         if ((HitMotion)_animator.GetInteger("hitMotion") == HitMotion.HitMotionEnd)
             _currentHitMotion = HitMotion.HitMotion0;
@@ -403,7 +398,7 @@ public class Monster : MonoBehaviour
         _animator.SetBool("isMoving", false);
     }
 
-    private void SetRandDirection()
+    protected void SetRandDirection()
     {
         _randomMoveCurrentTime += Time.smoothDeltaTime;
         if (_randomMoveCurrentTime >= _randomMoveResetTime)
