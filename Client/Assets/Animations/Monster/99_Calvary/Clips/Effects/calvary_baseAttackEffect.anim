@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: goblin_attack
+  m_Name: calvary_baseAttackEffect
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -20,18 +20,20 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: 21300000, guid: 6cda845293c1f3a47bc305bcb67c0210, type: 3}
-    - time: 0.2857143
-      value: {fileID: 21300000, guid: 2441ca12f34226a4886f6db75f4bf851, type: 3}
-    - time: 0.5714286
-      value: {fileID: 21300000, guid: f3be15c76acff8240b1dfb6cb3e3de48, type: 3}
-    - time: 0.85714287
-      value: {fileID: 21300000, guid: 7d37645ae6ff35648951f8cfcb30b201, type: 3}
+      value: {fileID: 21300000, guid: 3cee9497d04615242bef548f9fb84dd2, type: 3}
+    - time: 0.083333336
+      value: {fileID: 21300000, guid: 75941c68722491b4d89d89bc35ed7c56, type: 3}
+    - time: 0.16666667
+      value: {fileID: 21300000, guid: 829d6b007f0d64d4996452b8ba4643dc, type: 3}
+    - time: 0.25
+      value: {fileID: 21300000, guid: 1dff9fb012cf123459cee7220ac51106, type: 3}
+    - time: 0.33333334
+      value: {fileID: 21300000, guid: 8781c7f095f15814197dcc8788d57422, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
     script: {fileID: 0}
-  m_SampleRate: 7
+  m_SampleRate: 12
   m_WrapMode: 0
   m_Bounds:
     m_Center: {x: 0, y: 0, z: 0}
@@ -46,21 +48,22 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: 21300000, guid: 6cda845293c1f3a47bc305bcb67c0210, type: 3}
-    - {fileID: 21300000, guid: 2441ca12f34226a4886f6db75f4bf851, type: 3}
-    - {fileID: 21300000, guid: f3be15c76acff8240b1dfb6cb3e3de48, type: 3}
-    - {fileID: 21300000, guid: 7d37645ae6ff35648951f8cfcb30b201, type: 3}
+    - {fileID: 21300000, guid: 3cee9497d04615242bef548f9fb84dd2, type: 3}
+    - {fileID: 21300000, guid: 75941c68722491b4d89d89bc35ed7c56, type: 3}
+    - {fileID: 21300000, guid: 829d6b007f0d64d4996452b8ba4643dc, type: 3}
+    - {fileID: 21300000, guid: 1dff9fb012cf123459cee7220ac51106, type: 3}
+    - {fileID: 21300000, guid: 8781c7f095f15814197dcc8788d57422, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 1
+    m_StopTime: 0.4166667
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
     m_HasAdditiveReferencePose: 0
-    m_LoopTime: 0
+    m_LoopTime: 1
     m_LoopBlend: 0
     m_LoopBlendOrientation: 0
     m_LoopBlendPositionY: 0
@@ -74,25 +77,4 @@ AnimationClip:
   m_EulerEditorCurves: []
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
-  m_Events:
-  - time: 0.5714286
-    functionName: OnSmashEffect
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
-  - time: 0.5714286
-    functionName: OnBaseAttackBox
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
-  - time: 0.85714287
-    functionName: OffBaseAttackBox
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
+  m_Events: []
