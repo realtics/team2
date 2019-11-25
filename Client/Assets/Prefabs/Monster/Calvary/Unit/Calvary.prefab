@@ -96,7 +96,7 @@ MonoBehaviour:
   _chaseTime: 0
   _moveSpeed: 2.5
   _target: {fileID: 0}
-  _smashHitBox: {fileID: 5101124502921087084}
+  _baseAttackBox: {fileID: 5101124502921087084}
   _hitBox: {fileID: 5112109842577077389}
 --- !u!1 &4127798058618418200
 GameObject:
@@ -235,8 +235,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07977fa0d10651641b23300a1a2b3527, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _smashEffectPivot: {fileID: 751022365849352434}
-  _smashEffect: {fileID: 7066271342005098997}
+  _baseAttackEffectPivot: {fileID: 751022365849352434}
+  _baseAttackEffect: {fileID: 7066271342005098997}
 --- !u!114 &1724810926
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -330,7 +330,7 @@ GameObject:
   - component: {fileID: 365751213}
   - component: {fileID: 365751214}
   m_Layer: 0
-  m_Name: SmashHitBox
+  m_Name: BaseAttackBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -419,7 +419,7 @@ GameObject:
   m_Component:
   - component: {fileID: 751022365849352434}
   m_Layer: 0
-  m_Name: SmashEffectPivot
+  m_Name: BaseAttackEffectPivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -450,7 +450,7 @@ PrefabInstance:
     - target: {fileID: 6582171582866420938, guid: a2407be955ae9154ab27b2e478cfbaf7,
         type: 3}
       propertyPath: m_Name
-      value: testEffect
+      value: CalvaryBaseAttackEffect
       objectReference: {fileID: 0}
     - target: {fileID: 6582171582866420938, guid: a2407be955ae9154ab27b2e478cfbaf7,
         type: 3}

@@ -35,7 +35,7 @@ public class BaseMonster : MonoBehaviour
     [SerializeField]
     protected Transform _target = null;
     [SerializeField]
-    protected Transform _smashHitBox;
+    protected Transform _baseAttackBox;
     [SerializeField]
     protected Transform _hitBox;
     protected Animator _animator;
@@ -155,14 +155,14 @@ public class BaseMonster : MonoBehaviour
             _state.RestartState();
     }
 
-    public void ActiveSmashHitBox()
+    public void ActiveBaseAttackBox()
     {
-        _smashHitBox.gameObject.SetActive(true);
+        _baseAttackBox.gameObject.SetActive(true);
     }
 
-    public void InactiveSmashHitBox()
+    public void InactiveBaseAttackHitBox()
     {
-        _smashHitBox.gameObject.SetActive(false);
+        _baseAttackBox.gameObject.SetActive(false);
     }
 
     public void InactiveHitBox()
@@ -250,7 +250,7 @@ public class BaseMonster : MonoBehaviour
     {
         _animator.SetBool("isAttacking", false);
         IsAttack = false;
-        InactiveSmashHitBox();
+        InactiveBaseAttackHitBox();
     }
 
     protected void BaseAttack()

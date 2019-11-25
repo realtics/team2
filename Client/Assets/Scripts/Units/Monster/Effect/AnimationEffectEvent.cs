@@ -7,34 +7,36 @@ public class AnimationEffectEvent : MonoBehaviour
     //public GameObject effect;
     private BaseMonster _monster;
     [SerializeField]
-    private Transform _smashEffectPivot;
+    private Transform _baseAttackEffectPivot;
     [SerializeField]
-    private Transform _smashEffect;
+    private Transform _baseAttackEffect;
 
     private void Start()
     {
         _monster = transform.root.GetComponent<BaseMonster>();
     }
+
     private void OnSmashEffect()
     {
         if (_monster.IsAttack)
         {
-            Vector3 SmashEffectPos = _smashEffectPivot.position;
+            //FIXME : 오브젝트풀링 적용시 사용
+            //Vector3 SmashEffectPos = _baseAttackEffectPivot.position;
 
-            _smashEffect.gameObject.SetActive(true);
+            _baseAttackEffect.gameObject.SetActive(true);
         }
     }
 
-    public void OnSmashAttackBox()
+    public void OnBaseAttackBox()
     {
         if (_monster.IsAttack)
         {
-            _monster.ActiveSmashHitBox();
+            _monster.ActiveBaseAttackBox();
         }
     }
 
-    public void OffSmashAttackBox()
+    public void OffBaseAttackBox()
     {
-        _monster.InactiveSmashHitBox();
+        _monster.InactiveBaseAttackHitBox();
     }
 }

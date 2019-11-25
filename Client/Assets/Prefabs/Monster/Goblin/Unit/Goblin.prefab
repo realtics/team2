@@ -137,8 +137,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07977fa0d10651641b23300a1a2b3527, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _smashEffectPivot: {fileID: 4399117813266526049}
-  _smashEffect: {fileID: 8500111770145094817}
+  _baseAttackEffectPivot: {fileID: 4399117813266526049}
+  _baseAttackEffect: {fileID: 8500111770145094817}
 --- !u!114 &3990440556722671933
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -259,7 +259,7 @@ MonoBehaviour:
   _chaseTime: 0
   _moveSpeed: 1
   _target: {fileID: 0}
-  _smashHitBox: {fileID: 8190413016591622143}
+  _baseAttackBox: {fileID: 8190413016591622143}
   _hitBox: {fileID: 8183383958140969758}
 --- !u!1 &5602223285510543003
 GameObject:
@@ -271,7 +271,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4399117813266526049}
   m_Layer: 0
-  m_Name: SmashEffectPivot
+  m_Name: BaseAttackEffectPivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -304,7 +304,7 @@ GameObject:
   - component: {fileID: 3990440556504693822}
   - component: {fileID: 3990440556504693821}
   m_Layer: 0
-  m_Name: SmashHitBox
+  m_Name: BaseAttackBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -435,7 +435,7 @@ PrefabInstance:
     - target: {fileID: 2180975827898659131, guid: 968b8146c23a87141894d489ae10aac2,
         type: 3}
       propertyPath: m_Name
-      value: goblinSmashEffect
+      value: GoblinBaseAttackEffect
       objectReference: {fileID: 0}
     - target: {fileID: 2180975827898659131, guid: 968b8146c23a87141894d489ae10aac2,
         type: 3}
