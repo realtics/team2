@@ -235,6 +235,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07977fa0d10651641b23300a1a2b3527, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _smashEffectPivot: {fileID: 751022365849352434}
+  _smashEffect: {fileID: 7066271342005098997}
 --- !u!114 &1724810926
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -78,7 +78,7 @@ public class UIHelper : MonoBehaviour
         _monsterInfo.SetHp(CurrentHp, MaxHp);
     }
     // Todo.
-    public void SetMonster(Monster monster)
+    public void SetMonster(BaseMonster monster)
     {
         _monsterInfo.gameObject.SetActive(true);
         

@@ -5,13 +5,13 @@ using UnityEngine;
 public class MonsterAttackBox : MonoBehaviour
 {
     private const float AttackRange = 0.8f;
-    private Monster _monster;
+    private BaseMonster _monster;
     [SerializeField]
     private AttackInfoSender _sender;
 
     void Start()
     {
-        _monster = transform.root.GetComponent<Monster>();
+        _monster = transform.root.GetComponent<BaseMonster>();
         _sender.Attacker = transform.root;
         _sender.Damage = 10.0f;
     }

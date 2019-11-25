@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Monster : MonoBehaviour
+public class BaseMonster : MonoBehaviour
 {
     //values for UIHelper 
     public enum MonsterTypeInfo
@@ -41,11 +41,11 @@ public class Monster : MonoBehaviour
     protected Animator _animator;
    
 
-    private StateMachine<Monster> _state = null;
-    private FSMState<Monster> _attackState = new AttackState();
-    private FSMState<Monster> _moveState = new MoveState();
-    private FSMState<Monster> _hitState = new HitState();
-    private FSMState<Monster> _dieState = new DieState();
+    private StateMachine<BaseMonster> _state = null;
+    private FSMState<BaseMonster> _attackState = new AttackState();
+    private FSMState<BaseMonster> _moveState = new MoveState();
+    private FSMState<BaseMonster> _hitState = new HitState();
+    private FSMState<BaseMonster> _dieState = new DieState();
 
     private bool _isDead = false;
     private bool _isAttack;
@@ -118,14 +118,14 @@ public class Monster : MonoBehaviour
         }
     }
 
-    protected void ChangeState(FSMState<Monster> state)
+    protected void ChangeState(FSMState<BaseMonster> state)
     {
         _state.ChangeState(state);
     }
 
     protected void SetInitialState()
     {
-        _state = new StateMachine<Monster>();
+        _state = new StateMachine<BaseMonster>();
         _state.InitialSetting(this, _moveState);
 
         _target = null;

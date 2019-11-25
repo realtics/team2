@@ -2,19 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AttackState : FSMState<Monster>
+public class AttackState : FSMState<BaseMonster>
 {
-    public override void EnterState(Monster monster)
+    public override void EnterState(BaseMonster monster)
     {
         monster.EnterAttackState();
     }
 
-    public override void UpdateState(Monster monster)
+    public override void UpdateState(BaseMonster monster)
     {
         monster.UpdateAttackState();
     }
 
-    public override void ExitState(Monster monster)
+    public override void ExitState(BaseMonster monster)
     {
         monster.ExitAttackState();
     }

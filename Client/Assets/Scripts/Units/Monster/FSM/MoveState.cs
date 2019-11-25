@@ -2,22 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MoveState : FSMState<Monster>
+public class MoveState : FSMState<BaseMonster>
 {
    
     private const float InitialResetTime = 3.0f;
 
-    public override void EnterState(Monster monster)
+    public override void EnterState(BaseMonster monster)
     {
         monster.EnterMoveState();
     }
 
-    public override void UpdateState(Monster monster)
+    public override void UpdateState(BaseMonster monster)
     {
         monster.UpdateMoveState();
     }
 
-    public override void ExitState(Monster monster)
+    public override void ExitState(BaseMonster monster)
     {
         monster.ExitMoveState();
     }

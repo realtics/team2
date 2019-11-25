@@ -5,17 +5,15 @@ using UnityEngine;
 public class AnimationEffectEvent : MonoBehaviour
 {
     //public GameObject effect;
-    private Monster _monster;
-
+    private BaseMonster _monster;
+    [SerializeField]
     private Transform _smashEffectPivot;
+    [SerializeField]
     private Transform _smashEffect;
 
     private void Start()
     {
-        _monster = transform.root.GetComponent<Monster>();
-
-        _smashEffectPivot = transform.root.Find("SmashEffectPivot");
-        _smashEffect = _smashEffectPivot.GetChild(0).gameObject.transform;
+        _monster = transform.root.GetComponent<BaseMonster>();
     }
     private void OnSmashEffect()
     {

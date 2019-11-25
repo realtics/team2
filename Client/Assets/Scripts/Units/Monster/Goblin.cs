@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Goblin : Monster
+public class Goblin : BaseMonster
 { 
     protected override void Start()
     {

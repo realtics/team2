@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Calvary : Monster
+public class Calvary : BaseMonster
 {
     protected override void Start()
     {

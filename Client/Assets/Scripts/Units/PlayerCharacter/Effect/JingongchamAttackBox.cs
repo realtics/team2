@@ -47,6 +47,6 @@ public class JingongchamAttackBox : MonoBehaviour
         if (!other.tag.Contains("Monster"))
             return;
 
-        other.transform.root.GetComponent<Monster>().OnHit(_sender);
+        other.transform.root.GetComponent<BaseMonster>().OnHit(_sender);
     }
 }
