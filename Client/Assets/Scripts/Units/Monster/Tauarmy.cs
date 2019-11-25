@@ -12,6 +12,9 @@ public class Tauarmy : BaseMonster
     }
     private TauarmyAttackMotion _currentAttackMotion;
 
+    [SerializeField]
+    private Transform _rushAttackBox;
+
     protected override void Start()
     {
         base.Start();
@@ -20,6 +23,16 @@ public class Tauarmy : BaseMonster
     protected override void FixedUpdate()
     {
         base.FixedUpdate();
+    }
+
+    public void ActiveRushAttackBox()
+    {
+        _rushAttackBox.gameObject.SetActive(true);
+    }
+
+    public void InactiveRushAttackBox()
+    {
+        _rushAttackBox.gameObject.SetActive(false);
     }
 
     //AttackState
@@ -44,6 +57,7 @@ public class Tauarmy : BaseMonster
     public override void ExitAttackState()
     {
         base.ExitAttackState();
+        InactiveRushAttackBox();
     }
 
     //MoveState

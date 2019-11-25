@@ -160,7 +160,7 @@ public class BaseMonster : MonoBehaviour
         _baseAttackBox.gameObject.SetActive(true);
     }
 
-    public void InactiveBaseAttackHitBox()
+    public void InactiveBaseAttackBox()
     {
         _baseAttackBox.gameObject.SetActive(false);
     }
@@ -262,7 +262,7 @@ public class BaseMonster : MonoBehaviour
     {
         _animator.SetBool("isAttacking", false);
         IsAttack = false;
-        InactiveBaseAttackHitBox();
+        InactiveBaseAttackBox();
     }
 
     //DieState
