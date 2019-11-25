@@ -7,70 +7,14 @@ using System.Text;
 using Newtonsoft.Json;
 
 
-public class ObjectInfo
-{
-    public string filePath { get; set; }
-    public Vector3 position { get; set; }
-}
-
-public class Potalinfo
-{
-    public string filePath { get; set; }
-    public Vector3 position { get; set; }
-    public Vector3 transportPosition { get; set; }
-    public string FilePathNextDungeon { get; set; }
-}
-
-public class DungeonInfo
-{
-    public List<ObjectInfo> objectinfos = new List<ObjectInfo>();
-    public List<Potalinfo> potalinfos = new List<Potalinfo>();
-    public Vector3 PlayerStartPosition { get; set; }
-
-    public void AddObject(GameObject obj)
-    {
-        Object parentObject = PrefabUtility.GetCorrespondingObjectFromOriginalSource(obj);
-        string path = AssetDatabase.GetAssetPath(parentObject);
-
-        ObjectInfo objectInfo = new ObjectInfo();
-        objectInfo.filePath = path;
-        objectInfo.position = obj.transform.position;
-
-        objectinfos.Add(objectInfo);
-    }
-
-    public void AddPotal(GameObject obj)
-    {
-        Object parentObject = PrefabUtility.GetCorrespondingObjectFromOriginalSource(obj);
-        string path = AssetDatabase.GetAssetPath(parentObject);
-
-        Potalinfo potalinfo = new Potalinfo();
-        potalinfo.filePath = path;
-        potalinfo.position = obj.transform.position;
-
-        // 임시 데이터.
-        potalinfo.transportPosition = obj.transform.position;
-        potalinfo.FilePathNextDungeon = "Test1.json";
-
-        potalinfos.Add(potalinfo);
-
-    }
-}
-
-public class JsonData
-{
-    public List<DungeonInfo> dungeonObjectList = new List<DungeonInfo>();
-}
-
-public class DungeonJsonData
-{ 
-    public DungeonInfo[] DungeonInfos;
-}
-
 public class JsonManagement
 {
     JsonData jsonData = new JsonData();
     JsonSerializerSettings setting = new JsonSerializerSettings();
+
+    private const string _objectTag = "FieldObject";
+    private const string _potalTag = "Potal";
+
     public JsonManagement()
     {
         jsonData = new JsonData();
@@ -95,16 +39,15 @@ public class JsonManagement
     public void AddDungeon()
     {
         DungeonInfo dungeonInfo = new DungeonInfo();
-        foreach (GameObject obj in GameObject.FindGameObjectsWithTag("FieldObject"))
+        foreach (GameObject obj in GameObject.FindGameObjectsWithTag(_objectTag))
         {
             dungeonInfo.AddObject(obj);
         }
 
-        foreach (GameObject obj in GameObject.FindGameObjectsWithTag("FieldObject"))
+        foreach (GameObject obj in GameObject.FindGameObjectsWithTag(_potalTag))
         {
             dungeonInfo.AddPotal(obj);
         }
-
         // 임시 데이터.
         //GameObject.FindGameObjectsWithTag("PlayerStart");
         dungeonInfo.PlayerStartPosition = new Vector3(0, 0, 0);
@@ -124,22 +67,9 @@ public class JsonManagement
 
     private void CreateJsonFile(string createPath, string fileName, string jsonData)
     {
-        FileStream fileStream = new FileStream(string.Format("{0}/{1}.json", Application.dataPath + "\\Map\\", fileName), FileMode.Create);
+        FileStream fileStream = new FileStream(string.Format("{0}/{1}.json", Application.dataPath, fileName), FileMode.Create);
         byte[] data = Encoding.UTF8.GetBytes(jsonData);
         fileStream.Write(data, 0, data.Length);
         fileStream.Close();
     }
-
-    public void InstObject()
-    {
-        //foreach (JsonData data in jsonData)
-        //{
-        //    GameObject obj = (GameObject)Resources.Load(data._filePath);
-        //    obj.transform.position = data.position;
-
-        //    GameObject.Instantiate(obj);
-
-        //}
-    }
 }
-

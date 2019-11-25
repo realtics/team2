@@ -122,6 +122,7 @@ public class DungeonGameManager : MonoBehaviour
     {
         SceneManager.LoadScene(Scene);
     }
+
     IEnumerator DieSecondCountdown()
     {
         while (true)

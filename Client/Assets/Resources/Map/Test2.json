@@ -1,0 +1,77 @@
+{
+  "DungeonInfos": [
+    {
+      "objectinfos": [
+        {
+          "filePath": "Object/StoneBar",
+          "position": {
+            "x": 2.89,
+            "y": 1.54,
+            "z": 0.0,
+            "normalized": {
+              "x": 0.882522,
+              "y": 0.4702712,
+              "z": 0.0,
+              "magnitude": 1.0,
+              "sqrMagnitude": 1.0
+            },
+            "magnitude": 3.27470613,
+            "sqrMagnitude": 10.7237005
+          }
+        },
+        {
+          "filePath": "Object/StoneBar",
+          "position": {
+            "x": -3.61,
+            "y": -1.17,
+            "z": 0.0,
+            "normalized": {
+              "x": -0.9512855,
+              "y": -0.308311373,
+              "z": 0.0,
+              "magnitude": 1.0,
+              "sqrMagnitude": 0.99999994
+            },
+            "magnitude": 3.794865,
+            "sqrMagnitude": 14.4009991
+          }
+        }
+      ],
+      "potalinfos": [
+        {
+          "filePath": "Object/Potal",
+          "position": {
+            "x": 0.28,
+            "y": 3.08,
+            "z": 0.0,
+            "normalized": {
+              "x": 0.09053575,
+              "y": 0.99589324,
+              "z": 0.0,
+              "magnitude": 1.0,
+              "sqrMagnitude": 1.00000012
+            },
+            "magnitude": 3.092701,
+            "sqrMagnitude": 9.564799
+          },
+          "transportPosition": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0,
+            "magnitude": 0.0,
+            "sqrMagnitude": 0.0
+          },
+          "Arrow": 2,
+          "NextDungeonIndex": 0
+        }
+      ],
+      "PlayerStartPosition": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "magnitude": 0.0,
+        "sqrMagnitude": 0.0
+      }
+    }
+  ]
+}
