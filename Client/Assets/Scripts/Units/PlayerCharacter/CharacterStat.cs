@@ -25,6 +25,7 @@ public class CharacterStat : MonoBehaviour
     public float MaxMp { get { return _maxMp; } }
     public float Mp { get { return _mp; } }
     public float AttackSpeed { get { return _attackSpeed; } }
+    public BaseUnit Unit { get { return _unit; } }
 
     void Start()
     {

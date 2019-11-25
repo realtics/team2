@@ -2,10 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class CharacterMovement : BaseUnit
 {
     private bool _nextAttack;
     private CharacterAnimController _animController;
+    private Dictionary<SwordmanSkillType, CharacterSkill> _equiredSkill;
+    private SwordmanSkillType _usedSkill;
+
+    public CharacterSkill UsedSkill { get { return _equiredSkill[_usedSkill]; } }
 
     protected override void Start()
     {
@@ -14,6 +19,9 @@ public class CharacterMovement : BaseUnit
         _animator.SetBool("IsGround", true);
         _animator.SetBool("NextAttack", false);
         _animController = GetComponentInChildren<CharacterAnimController>();
+
+        _equiredSkill = new Dictionary<SwordmanSkillType, CharacterSkill>();
+        _equiredSkill.Add(SwordmanSkillType.Jingongcham, SwordmanSkillManager.Instance.GetSkill(_stat, SwordmanSkillType.Jingongcham));
     }
 
     override protected void Update()
@@ -185,6 +193,7 @@ public class CharacterMovement : BaseUnit
         if (!base.SetSkill())
             return false;
 
+        _usedSkill = SwordmanSkillType.Jingongcham;
         _animator.SetBool("OnSkill", true);
 
         return true;
@@ -200,5 +209,10 @@ public class CharacterMovement : BaseUnit
     {
         yield return new WaitForEndOfFrame();
         _animator.SetBool("NextAttack", false);
+    }
+
+    public override void OnSkill()
+    {
+        UsedSkill.OnSkill();
     }
 }

@@ -1258,8 +1258,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1100765975}
+  - component: {fileID: 1100765976}
   m_Layer: 0
-  m_Name: ObjectPool
+  m_Name: SwordmanEffectManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1279,6 +1280,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1100765976
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1100765974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e309ca2d6310b2f4aa00475e92ed9c32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _skillBodys:
+  - type: 1
+    effect: {fileID: 8467314183276299524, guid: fe356b9be93e61b4eaee401d0d359b7a,
+      type: 3}
 --- !u!114 &1113090220 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1109627757, guid: f596280910a5da744b6ad8c35450f807,

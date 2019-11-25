@@ -65,7 +65,7 @@ public class BaseUnit : MonoBehaviour
     public float Forward { get { return _avatar.transform.localScale.x < 0 ? -1 : 1; } }
     public float CurAnimTime { get { return _animator.GetCurrentAnimatorStateInfo(0).normalizedTime; } }
     public bool IsInTranstion { get { return _animator.IsInTransition(0); } }
-    public bool OnSkill { get { return _onSkill; } }
+    public bool IsOnSkill { get { return _onSkill; } }
 
     public Vector3 OriginPos { get { return _avatar.position; } }
     public CharacterStat Stat { get { return _stat; } }
@@ -278,7 +278,7 @@ public class BaseUnit : MonoBehaviour
             return false;
         if (IsAttack)
             return false;
-        if (OnSkill)
+        if (IsOnSkill)
             return false;
 
         return true;
@@ -366,5 +366,10 @@ public class BaseUnit : MonoBehaviour
     public virtual void StopSkill()
     {
         _onSkill = false;
+    }
+
+    public virtual void OnSkill()
+    {
+
     }
 }
