@@ -79,7 +79,7 @@ SpriteAtlas:
   - goblin_die_3
   - goblin_walk_1
   - goblin_attack_3
-  - Goblin_Idle_1
+  - goblin_idle_1
   - goblin_die_2
   - goblin_walk_5
   - goblin_attack_4
