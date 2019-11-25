@@ -118,7 +118,7 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0.6666667
-    functionName: OnSmashAttackBox
+    functionName: OnBaseAttackBox
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
@@ -132,7 +132,7 @@ AnimationClip:
     intParameter: 0
     messageOptions: 0
   - time: 0.8888889
-    functionName: OffSmashAttackBox
+    functionName: OffBaseAttackBox
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
@@ -146,14 +146,14 @@ AnimationClip:
     intParameter: 0
     messageOptions: 0
   - time: 1.6666666
-    functionName: OnSmashAttackBox
+    functionName: OnBaseAttackBox
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 1.8888888
-    functionName: OffSmashAttackBox
+    functionName: OffBaseAttackBox
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

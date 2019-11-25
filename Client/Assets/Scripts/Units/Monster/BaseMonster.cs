@@ -35,11 +35,11 @@ public class BaseMonster : MonoBehaviour
     [SerializeField]
     protected Transform _target = null;
     [SerializeField]
-    protected Transform _smashHitBox;
+    protected Transform _baseAttackBox;
     [SerializeField]
     protected Transform _hitBox;
     protected Animator _animator;
-   
+    protected Vector3 _forwardDirection;
 
     private StateMachine<BaseMonster> _state = null;
     private FSMState<BaseMonster> _attackState = new AttackState();
@@ -52,7 +52,7 @@ public class BaseMonster : MonoBehaviour
     private bool _isHit;
 
     //values for MoveState 
-    public enum MovementStateInfo
+    private enum MovementStateInfo
     {
         Idle = 0,
         Left = 1,
@@ -64,7 +64,7 @@ public class BaseMonster : MonoBehaviour
     private const float InitialResetTime = 3.0f;
 
     //values for HitState
-    public enum HitMotion
+    private enum HitMotion
     {
         HitMotion0 = 0,
         HitMotion1 = 1,
@@ -155,19 +155,28 @@ public class BaseMonster : MonoBehaviour
             _state.RestartState();
     }
 
-    public void ActiveSmashHitBox()
+    public void ActiveBaseAttackBox()
     {
-        _smashHitBox.gameObject.SetActive(true);
+        _baseAttackBox.gameObject.SetActive(true);
     }
 
-    public void InactiveSmashHitBox()
+    public void InactiveBaseAttackHitBox()
     {
-        _smashHitBox.gameObject.SetActive(false);
+        _baseAttackBox.gameObject.SetActive(false);
     }
 
     public void InactiveHitBox()
     {
         _hitBox.gameObject.SetActive(false);
+    }
+
+  
+    protected void SetForwardDirection()
+    {
+        if (transform.localScale.x > 0)
+            _forwardDirection = Vector3.left;
+        else
+            _forwardDirection = Vector3.right;
     }
 
     public void FlipImage()
@@ -243,22 +252,17 @@ public class BaseMonster : MonoBehaviour
 
     public virtual void UpdateAttackState()
     {
-        BaseAttack();
+        if (_animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f)
+        {
+            ChangeState(_moveState);
+        }
     }
 
     public virtual void ExitAttackState()
     {
         _animator.SetBool("isAttacking", false);
         IsAttack = false;
-        InactiveSmashHitBox();
-    }
-
-    protected void BaseAttack()
-    {
-        if (_animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f)
-        {
-            ChangeState(_moveState);
-        }
+        InactiveBaseAttackHitBox();
     }
 
     //DieState

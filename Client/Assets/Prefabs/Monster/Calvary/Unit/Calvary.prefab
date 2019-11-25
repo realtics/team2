@@ -88,7 +88,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _monsterType: 2
   _monsterName: "\uCE7C\uBC14\uB9AC"
-  _monsterLevel: 105
+  _monsterLevel: 99
   _currentHp: 0
   _maxHp: 2000
   _attackRange: 3
@@ -96,7 +96,7 @@ MonoBehaviour:
   _chaseTime: 0
   _moveSpeed: 2.5
   _target: {fileID: 0}
-  _smashHitBox: {fileID: 5101124502921087084}
+  _baseAttackBox: {fileID: 5101124502921087084}
   _hitBox: {fileID: 5112109842577077389}
 --- !u!1 &4127798058618418200
 GameObject:
@@ -109,7 +109,6 @@ GameObject:
   - component: {fileID: 4127798058618418207}
   - component: {fileID: 4127798058618418206}
   - component: {fileID: 4127798058618418205}
-  - component: {fileID: 829045832864292645}
   - component: {fileID: 1283702879}
   - component: {fileID: 1724810926}
   - component: {fileID: 1348258601}
@@ -202,27 +201,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!50 &829045832864292645
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4127798058618418200}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!114 &1283702879
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -235,8 +213,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07977fa0d10651641b23300a1a2b3527, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _smashEffectPivot: {fileID: 751022365849352434}
-  _smashEffect: {fileID: 7066271342005098997}
+  _baseAttackEffectPivot: {fileID: 751022365849352434}
+  _baseAttackEffect: {fileID: 7066271342005098997}
 --- !u!114 &1724810926
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -330,7 +308,7 @@ GameObject:
   - component: {fileID: 365751213}
   - component: {fileID: 365751214}
   m_Layer: 0
-  m_Name: SmashHitBox
+  m_Name: BaseAttackBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -419,7 +397,7 @@ GameObject:
   m_Component:
   - component: {fileID: 751022365849352434}
   m_Layer: 0
-  m_Name: SmashEffectPivot
+  m_Name: BaseAttackEffectPivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -450,7 +428,7 @@ PrefabInstance:
     - target: {fileID: 6582171582866420938, guid: a2407be955ae9154ab27b2e478cfbaf7,
         type: 3}
       propertyPath: m_Name
-      value: testEffect
+      value: CalvaryBaseAttackEffect
       objectReference: {fileID: 0}
     - target: {fileID: 6582171582866420938, guid: a2407be955ae9154ab27b2e478cfbaf7,
         type: 3}

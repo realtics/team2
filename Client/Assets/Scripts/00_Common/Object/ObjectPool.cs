@@ -1,21 +1,26 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
-public class ObjectPool<T> : MonoBehaviour where T : MonoBehaviour
+[Serializable]
+public class ObjectPool
 {
-    [SerializeField]
-    private GameObject _originalObject;
-    private List<T> _spawnedObjects;
+    public ObjectPoolType poolType;
+    public GameObject pooledObject;
 
-    private void Awake()
+    private List<GameObject> _spawnedObjects;
+
+    public void CreatePool(ObjectPoolType type, GameObject prefab)
     {
-        _spawnedObjects = new List<T>();
+        _spawnedObjects = new List<GameObject>();
+        poolType = type;
+        pooledObject = prefab;
     }
-    public T GetObject()
+
+    public GameObject GetObject()
     {
-        T obj = FindRestObject();
+        GameObject obj = FindRestObject();
 
         if (obj == null)
         {
@@ -28,9 +33,9 @@ public class ObjectPool<T> : MonoBehaviour where T : MonoBehaviour
         return obj;
     }
 
-    public T GetObject(Vector3 position)
+    public GameObject GetObject(Vector3 position)
     {
-        T obj = GetObject();
+        GameObject obj = GetObject();
 
         if (obj == null)
             return null;
@@ -40,9 +45,9 @@ public class ObjectPool<T> : MonoBehaviour where T : MonoBehaviour
         return obj;
     }
 
-    public T GetObject(Transform parent, Vector3 position)
+    public GameObject GetObject(Transform parent, Vector3 position)
     {
-        T obj = GetObject();
+        GameObject obj = GetObject();
 
         if (obj == null)
             return null;
@@ -53,32 +58,27 @@ public class ObjectPool<T> : MonoBehaviour where T : MonoBehaviour
         return obj;
     }
 
-    private T CreateObject()
+    private GameObject CreateObject()
     {
-        if (_originalObject == null)
+        if (pooledObject == null)
         {
             Debug.LogError("생성 할 프리팹이 없습니다.");
             return null;
         }
 
-        GameObject newObject = Instantiate(_originalObject);
-        T obj = newObject.GetComponent<T>();
+        GameObject newObject = GameObject.Instantiate(pooledObject);
 
-        if (obj == null)
-        {
-            Debug.LogError("생성 된 프리팹에 " + obj.ToString() + "이 없습니다.");
-            Destroy(newObject);
+        if (newObject == null)
             return null;
-        }
 
-        _spawnedObjects.Add(obj);
+        _spawnedObjects.Add(newObject);
 
-        return obj;
+        return newObject;
     }
 
-    private T FindRestObject()
+    private GameObject FindRestObject()
     {
-        foreach (T obj in _spawnedObjects)
+        foreach (GameObject obj in _spawnedObjects)
         {
             if (obj.gameObject.activeInHierarchy)
                 continue;

@@ -8,15 +8,10 @@ public class JingongchamAttackBox : MonoBehaviour
     private AttackInfoSender _sender;
 
     public float Forward { get { return transform.localScale.x > 0.0f ? 1.0f : -1.0f; } }
-    // Start is called before the first frame update
+    public AttackInfoSender InfoSender { get { return _sender; } set { _sender = value; } }
+
     void Start()
     {
-        _sender.Attacker = FindObjectOfType<PlayerCharacter>().transform;
-        _sender.Damage = 50.0f;
-        _sender.HorizontalExtraMoveDuration = 0.1f;
-        _sender.HorizontalExtraMoveValue = -10.0f;
-        _sender.StunDuration = 1.0f;
-
     }
 
     // Update is called once per frame
