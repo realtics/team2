@@ -30,6 +30,7 @@ public class DungeonInfo
     {
         Object parentObject = PrefabUtility.GetCorrespondingObjectFromOriginalSource(obj);
         string path = AssetDatabase.GetAssetPath(parentObject);
+        path = ResourcesLoadSubstringFilePath(path);
 
         ObjectInfo objectInfo = new ObjectInfo();
         objectInfo.filePath = path;
@@ -44,17 +45,30 @@ public class DungeonInfo
 
         Object parentObject = PrefabUtility.GetCorrespondingObjectFromOriginalSource(obj);
         string path = AssetDatabase.GetAssetPath(parentObject);
+        path = ResourcesLoadSubstringFilePath(path);
 
         Potalinfo potalinfo = new Potalinfo();
         potalinfo.filePath = path;
         potalinfo.position = obj.transform.position;
         potalinfo.Arrow = potal.arrow;
 
-        // 임시 데이터.
         potalinfo.transportPosition = potal.transportPosition;
         potalinfo.NextDungeonIndex = potal.nextDungenIndex;
 
         potalinfos.Add(potalinfo);
+    }
+
+    string ResourcesLoadSubstringFilePath(string FilePath)
+    {
+        int FilePos = FilePath.LastIndexOf("Resources/") + 10;
+        string DirectoryFile = FilePath.Substring(FilePos);
+        int TagPos = DirectoryFile.IndexOf('/');
+        if (TagPos > 0)
+        {
+            string Tagname = DirectoryFile.Remove(TagPos);
+        }
+        DirectoryFile = DirectoryFile.Remove(DirectoryFile.LastIndexOf('.'));
+        return DirectoryFile;
     }
 }
 public class JsonData
@@ -105,41 +119,62 @@ public class DungeonLoader : MonoBehaviour
 
     public DungeonJsonData dungeonData;
 
+    //private List<List<GameObject>> _dungeonGameObject;
+    private Dictionary<int,List<GameObject>> _dungeonGameObject;
+
     private void Start()
     {
         _instance = this;
+        _dungeonGameObject = new Dictionary<int, List<GameObject>>();
     }
 
-    public void Loader()
+    public void Loader(string dungeonName)
     {
-        dungeonData = JsonLoad<DungeonJsonData>("Test2");
+        dungeonData = JsonLoad<DungeonJsonData>(dungeonName);
     }
 
     public void Instantiate(int index)
     {
-        DungeonInfo dungeon = dungeonData.DungeonInfos[index];
-        
-        foreach ( var item in dungeon.objectinfos)
+        if (_dungeonGameObject.ContainsKey(index) == false)
         {
-            var obj = GameObject.Instantiate<GameObject>(ObjectCache.instance.LoadResourceFromCache(item.filePath));
-            obj.transform.position = item.position;
+            List<GameObject> objects = new List<GameObject>();
+            _dungeonGameObject.Add(index, objects);
+
+            DungeonInfo dungeon = dungeonData.DungeonInfos[index];
+
+            foreach (var item in dungeon.objectinfos)
+            {
+                var obj = GameObject.Instantiate<GameObject>(ObjectCache.instance.LoadResourceFromCache(item.filePath));
+                obj.transform.position = item.position;
+                _dungeonGameObject[index].Add(obj);
+            }
+            foreach (var item in dungeon.potalinfos)
+            {
+                var obj = GameObject.Instantiate<GameObject>(ObjectCache.instance.LoadResourceFromCache(item.filePath));
+                obj.transform.position = item.position;
+                Potal potal = obj.GetComponent<Potal>();
+                potal.arrow = item.Arrow;
+                potal.nextDungenIndex = item.NextDungeonIndex;
+                potal.transportPosition = item.transportPosition;
+                _dungeonGameObject[index].Add(obj);
+            }
+            ObjectCache.instance.ClearCache();
         }
-        foreach (var item in dungeon.potalinfos)
+        else
         {
-            var obj = GameObject.Instantiate<GameObject>(ObjectCache.instance.LoadResourceFromCache(item.filePath));
-            obj.transform.position = item.position;
-            Potal potal = obj.GetComponent<Potal>();
-            potal.arrow = item.Arrow;
-            potal.nextDungenIndex = item.NextDungeonIndex;
-            potal.transportPosition = item.transportPosition;
+            foreach(var item in _dungeonGameObject[index])
+            {
+                item.gameObject.SetActive(true);
+            }
         }
-        ObjectCache.instance.ClearCache();
     }
 
-    public void Test()
+    
+
+    public void Test(int index)
     {
-        Loader();
-        Instantiate(0);
+        Loader("Test2");
+        Instantiate(index);
     }
 
     public T JsonLoad<T>(string fileName)
