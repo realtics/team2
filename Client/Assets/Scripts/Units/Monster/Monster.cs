@@ -4,57 +4,66 @@ using UnityEngine;
 
 public class Monster : MonoBehaviour
 {
-    public string monsterName = "testMonster";
-    public int monsterLevel = 99;
-
-    public float currentHp = 200.0f;
-    public float maxHp = 200.0f;
-
-    public float attackRange = 3.8f;
-
-    public float chaseCancleTime = 5.0f;
-    public float chaseTime = 0;
-
-    public float moveSpeed = 2.5f;
-
-    public Transform target = null;
-    public Animator animator = null;
-
-    private StateMachine<Monster> _state = null;
-
-    public AttackState _attackState = new AttackState();
-    public MoveState _moveState = new MoveState();
-    public HitState _hitState = new HitState();
-    public DieState _dieState = new DieState();
-
-    private Transform _smashHitBox;
-    private Transform _hitBox;
-
-    private bool _isDead = false;
-
-    private bool _isAttack;
-    private bool _isHit;
-
-    public enum MonsterType
+    //values for UIHelper 
+    public enum MonsterTypeInfo
     {
         Goblin,
         Tau,
         Calvary
     }
-    public MonsterType monsterType = MonsterType.Goblin;
+    [SerializeField]
+    protected MonsterTypeInfo _monsterType;
+    [SerializeField]
+    protected string _monsterName;
+    [SerializeField]
+    protected int _monsterLevel;
+    [SerializeField]
+    protected float _currentHp;
+    [SerializeField]
+    protected float _maxHp;
+    [SerializeField]
 
-    //MoveState Value
+    //values for MonsterControl
+    protected float _attackRange;
+    [SerializeField]
+    protected float _chaseCancleTime;
+    [SerializeField]
+    protected float _chaseTime = 0.0f;
+    [SerializeField]
+    public float _moveSpeed;
+
+    [SerializeField]
+    protected Transform _target = null;
+    [SerializeField]
+    protected Transform _smashHitBox;
+    [SerializeField]
+    protected Transform _hitBox;
+    protected Animator _animator;
+   
+
+    private StateMachine<Monster> _state = null;
+    private FSMState<Monster> _attackState = new AttackState();
+    private FSMState<Monster> _moveState = new MoveState();
+    private FSMState<Monster> _hitState = new HitState();
+    private FSMState<Monster> _dieState = new DieState();
+
+    private bool _isDead = false;
+    private bool _isAttack;
+    private bool _isHit;
+
+    //values for MoveState 
     public enum MovementStateInfo
     {
         Idle = 0,
         Left = 1,
         Right = 2,
     }
-    private MovementStateInfo _moveMentState;
+    private MovementStateInfo _movementState;
     private float _randomMoveResetTime;
     private float _randomMoveCurrentTime;
-   
-    //HitState Value
+    private const float InitialResetTime = 3.0f;
+
+    //values for HitState
     public enum HitMotion
     {
         HitMotion0 = 0,
@@ -64,54 +73,36 @@ public class Monster : MonoBehaviour
     private HitMotion _currentHitMotion;
     private float _hitRecoveryResetTime;
     private float _hitRecoveryCurrentTime;
-   
-    //KnockBakc Value
+
+    //values for KnockBack
     private Vector3 _knockBackDirection;
     private float _knockBackSpeed;
     private float _knockBackDuration;
-       
+
     //properties
+    public MonsterTypeInfo MonsterType { get { return _monsterType; } }
+    public string MonsterName { get { return _monsterName; } }
+    public int MonsterLevel { get { return _monsterLevel; } }
+    public float CurrentHp { get { return _currentHp; } }
+    public float MaxHp { get { return _maxHp; } }
+
     public bool IsAttack { get { return _isAttack; } set { _isAttack = value; } }
     public bool IsHit { get { return _isHit; } set { _isHit = value; } }
 
-    public MovementStateInfo MovementState { get { return _moveMentState; } set { _moveMentState = value; } }
-    public float RandomMoveResetTime { get { return _randomMoveResetTime; } set { _randomMoveResetTime = value; } }
-    public float RandomMoveCurrentTime { get { return _randomMoveCurrentTime; } set { _randomMoveCurrentTime = value; } }
-   
-    public HitMotion CurrentHitMotion { get { return _currentHitMotion; } set { _currentHitMotion = value; } }
-    public float HitRecoveryResetTime { get { return _hitRecoveryResetTime; } set { _hitRecoveryResetTime = value; } }
-    public float HitRecoveryCurrentTime { get { return _hitRecoveryCurrentTime; } set { _hitRecoveryCurrentTime = value; } }
-
-    private void Awake()
+    protected virtual void Start()
     {
-        animator = GetComponentInChildren<Animator>();
+        _animator = GetComponentInChildren<Animator>();
+        _currentHp = MaxHp;
+        SetInitialState();
     }
 
-    private void Start()
+    protected virtual void FixedUpdate()
     {
-        _smashHitBox = transform.Find("SmashHitBox");
-        _hitBox = transform.Find("HitBox");
-        ResetState();
-    }
-
-    private void Update()
-    {
-    }
-
-    private void FixedUpdate()
-    {
-        if (currentHp <= 0 && !_isDead)
+        if (_currentHp <= 0 && !_isDead)
         {
-            //_state.ChangeState(DieState.Instance);
             _state.ChangeState(_dieState);
             _isDead = true;
         }
-
-        if (_isHit)
-        {
-            
-        }
-
         _state.Update();
     }
 
@@ -119,7 +110,7 @@ public class Monster : MonoBehaviour
     {
         if (other.transform.tag == "Player")
         {
-            target = other.transform.root;
+            _target = other.transform.root;
         }
         else
         {
@@ -127,42 +118,39 @@ public class Monster : MonoBehaviour
         }
     }
 
-    public void ChangeState(FSMState<Monster> state)
+    protected void ChangeState(FSMState<Monster> state)
     {
         _state.ChangeState(state);
     }
 
-    public bool CheckRange()
+    protected void SetInitialState()
     {
-        if ((Mathf.Abs(target.position.x - transform.position.x) < attackRange) &&
-            (Mathf.Abs(target.position.y - transform.position.y) < attackRange / 4))
+        _state = new StateMachine<Monster>();
+        _state.InitialSetting(this, _moveState);
+
+        _target = null;
+    }
+
+    protected bool CheckRange()
+    {
+        if ((Mathf.Abs(_target.position.x - transform.position.x) < _attackRange) &&
+            (Mathf.Abs(_target.position.y - transform.position.y) < _attackRange / 4))
         {
             return true;
         }
         return false;
     }
 
-    public void ResetState()
-    {
-        _state = new StateMachine<Monster>();
-        //_state.InitialSetting(this, MoveState.Instance);
-        _state.InitialSetting(this, _moveState);
-
-        target = null;
-    }
-
     public void OnHit(AttackInfoSender sender)
     {
         SetKnockbackValue(sender);
-        currentHp -= sender.Damage;
+        _currentHp -= sender.Damage;
 
         UIHelper.Instance.SetMonster(this);
-        UIHelper.Instance.SetMonsterHp(currentHp, maxHp);
+        UIHelper.Instance.SetMonsterHp(_currentHp, _maxHp);
 
         if (!_isHit)
             _state.ChangeState(_hitState);
-        //_state.ChangeState(HitState.Instance);
-
         else
             _state.RestartState();
     }
@@ -184,10 +172,10 @@ public class Monster : MonoBehaviour
 
     public void FlipImage()
     {
-        if (target == null)
+        if (_target == null)
             return;
 
-        if ((target.position.x - transform.position.x) > 0)
+        if ((_target.position.x - transform.position.x) > 0)
         {
             transform.localScale = new Vector3(-1, 1, 1);
         }
@@ -199,7 +187,7 @@ public class Monster : MonoBehaviour
     }
 
     //FIXME: AttackInofoSender 의 값중 넉백관련만 인자로 받게 고쳐야함
-    private void SetKnockbackValue(AttackInfoSender sender)
+    protected void SetKnockbackValue(AttackInfoSender sender)
     {
         Vector3 direction = Vector3.zero;
 
@@ -226,7 +214,7 @@ public class Monster : MonoBehaviour
             StopCoroutine("Knockback");
             yield break;
         }
-          
+
         else
         {
             transform.position += _knockBackDirection * Time.deltaTime * _knockBackSpeed;
@@ -237,4 +225,199 @@ public class Monster : MonoBehaviour
     }
 
     //TODO : 공중공격피격시 띄움 판정함수
+
+
+    //AttackState
+    public virtual void EnterAttackState()
+    {
+        if (_target == null)
+        {
+            return;
+        }
+
+        IsAttack = true;
+
+        FlipImage();
+        _animator.SetBool("isAttacking", true);
+    }
+
+    public virtual void UpdateAttackState()
+    {
+        BaseAttack();
+    }
+
+    public virtual void ExitAttackState()
+    {
+        _animator.SetBool("isAttacking", false);
+        IsAttack = false;
+        InactiveSmashHitBox();
+    }
+
+    protected void BaseAttack()
+    {
+        if (_animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f)
+        {
+            ChangeState(_moveState);
+        }
+    }
+
+    //DieState
+    public virtual void EnterDieState()
+    {
+        _animator.SetBool("isDie", true);
+        InactiveHitBox();
+
+        //FIXME : 보스몬스터 구분시 변경
+        if (name == "testMonster")
+            DungeonGameManager.Instance.NoticeGameClear();
+        //TODO : 아이템 드랍
+    }
+
+    public virtual void UpdateDieState()
+    {
+        //nothing
+    }
+
+    public virtual void ExitDieState()
+    {
+        //nothing
+    }
+
+    //HitState
+    public virtual void EnterHitState()
+    {
+        _hitRecoveryCurrentTime = 0.0f;
+        IsHit = true;
+        _animator.SetBool("isHit", true);
+
+        SetHitMotion();
+    }
+
+    public virtual void UpdateHitState()
+    {
+        if (IsHitRecoveryTimeEnd())
+        {
+            ChangeState(_moveState);
+        }
+    }
+
+    public virtual void ExitHitState()
+    {
+        IsHit = false;
+        _animator.SetBool("isHit", false);
+        _animator.SetInteger("hitMotion", (int)HitMotion.HitMotionEnd);
+    }
+
+    private bool IsHitRecoveryTimeEnd()
+    {
+        _hitRecoveryCurrentTime += Time.deltaTime;
+        if (_hitRecoveryCurrentTime >= _hitRecoveryResetTime)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    private void SetHitMotion()
+    {
+        if ((HitMotion)_animator.GetInteger("hitMotion") == HitMotion.HitMotionEnd)
+            _currentHitMotion = HitMotion.HitMotion0;
+
+        else if ((HitMotion)_animator.GetInteger("hitMotion") == HitMotion.HitMotion0)
+            _currentHitMotion = HitMotion.HitMotion1;
+
+        else if ((HitMotion)_animator.GetInteger("hitMotion") == HitMotion.HitMotion1)
+            _currentHitMotion = HitMotion.HitMotion0;
+
+        _animator.SetInteger("hitMotion", (int)_currentHitMotion);
+    }
+
+    //MoveState
+    public virtual void EnterMoveState()
+    {
+        _randomMoveResetTime = InitialResetTime;
+        _randomMoveCurrentTime = _randomMoveResetTime;
+    }
+
+    public virtual void UpdateMoveState()
+    {
+        if (_target != null)
+        {
+            _animator.SetBool("isMoving", true);
+            if (!CheckRange())
+            {
+                //FIXME : 추적시간 초과 함수화
+                _chaseTime += Time.deltaTime;
+                if (_chaseTime >= _chaseCancleTime)
+                {
+                    _target = null;
+                    _chaseTime = 0.0f;
+                    return;
+                }
+
+                //FIXME : 추적 함수화
+                Vector3 direction = _target.position - transform.position;
+                direction.Normalize();
+
+                FlipImage();
+
+                direction.x *= _moveSpeed;
+                direction.y *= (_moveSpeed / 2);
+
+                if ((Mathf.Abs(_target.position.x - transform.position.x) <= _attackRange))
+                    direction.x = 0;
+
+                transform.position += direction * Time.smoothDeltaTime;
+            }
+            else
+            {
+                ChangeState(_attackState);
+            }
+        }
+        else
+        {
+            SetRandDirection();
+
+            //FIXME :: 함수화
+            Vector3 direction = Vector3.zero;
+
+            if (_movementState == MovementStateInfo.Left)
+            {
+                direction = Vector3.left;
+                transform.localScale = new Vector3(1, 1, 1);
+            }
+
+            else if (_movementState == MovementStateInfo.Right)
+            {
+                direction = Vector3.right;
+                transform.localScale = new Vector3(-1, 1, 1);
+            }
+
+            transform.position += direction * Time.smoothDeltaTime * (_moveSpeed / 3f);
+        }
+    }
+
+    public virtual void ExitMoveState()
+    {
+        _movementState = MovementStateInfo.Idle;
+        _animator.SetBool("isMoving", false);
+    }
+
+    private void SetRandDirection()
+    {
+        _randomMoveCurrentTime += Time.smoothDeltaTime;
+        if (_randomMoveCurrentTime >= _randomMoveResetTime)
+        {
+            _movementState = (MovementStateInfo)Random.Range((int)MovementStateInfo.Idle, (int)MovementStateInfo.Right + 1);
+
+            if (_movementState == MovementStateInfo.Idle)
+                _animator.SetBool("isMoving", false);
+            else
+                _animator.SetBool("isMoving", true);
+
+            _randomMoveResetTime = Random.Range(1f, 4f);
+            _randomMoveCurrentTime = 0f;
+        }
+    }
+
 }

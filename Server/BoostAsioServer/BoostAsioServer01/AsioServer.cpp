@@ -157,8 +157,20 @@ void AsioServer::ProcessPacket(const int nSessionID, const char* pData)
 		std::string sendStr = oss.str();
 		std::cout << "[서버->클라 JSON] " << sendStr << std::endl;
 
-		_sessionList[nSessionID]->PostSend(false, std::strlen(sendStr.c_str()), (char*)sendStr.c_str());
+		size_t nTotalSessionCount = _sessionList.size();
 
+		for (size_t i = 0; i < nTotalSessionCount; ++i)
+		{
+			if (_sessionList[i]->Socket().is_open())
+			{
+				_sessionList[i]->PostSend(false, std::strlen(sendStr.c_str()), (char*)sendStr.c_str());
+			}
+		}
+
+		//////
+		//_sessionList[nSessionID]->PostSend(false, std::strlen(sendStr.c_str()), (char*)sendStr.c_str());
+
+		//////
 		//SendPkt.Init();
 		//SendPkt.isSuccess = true;
 		//SendPkt.sessionID = nSessionID;

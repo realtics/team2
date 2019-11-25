@@ -15,7 +15,7 @@ public class Potal : MonoBehaviour
     private SpriteRenderer _spriteRenderer;
 
     public ARROW arrow;
-    public string crossDungenName;
+    public string NextDungenName;
 
     private bool _isPlayerEnter;
     public bool IsPlayerEnter { get { return _isPlayerEnter; } }
@@ -35,11 +35,6 @@ public class Potal : MonoBehaviour
         _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (!_isPotalBlock)

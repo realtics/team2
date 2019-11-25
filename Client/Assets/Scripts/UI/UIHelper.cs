@@ -84,11 +84,12 @@ public class UIHelper : MonoBehaviour
         
         //FIXME :  현재체력, 최대체력 구분
         MonsterInfo monsterInfo;
-        monsterInfo.name = monster.monsterName;
-        monsterInfo.level = monster.monsterLevel;
-        monsterInfo.currentHp = monster.currentHp;
-        monsterInfo.maxHp = monster.maxHp;
-        monsterInfo.index = monster.monsterType;
+        monsterInfo.name = monster.MonsterName;
+        monsterInfo.level = monster.MonsterLevel;
+        monsterInfo.currentHp = monster.CurrentHp;
+        monsterInfo.maxHp = monster.MaxHp;
+        monsterInfo.index = monster.MonsterType;
         _monsterInfo.SetMonster(monsterInfo);
+
     }
 }

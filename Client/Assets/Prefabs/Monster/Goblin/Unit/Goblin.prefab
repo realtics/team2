@@ -30,7 +30,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1020073003363705739}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.04, y: -0.01, z: 0.5419922}
+  m_LocalPosition: {x: -0.04, y: -0.01, z: 0}
   m_LocalScale: {x: 2.1, y: 2.1, z: 1}
   m_Children: []
   m_Father: {fileID: 1020073003416927020}
@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 7d37645ae6ff35648951f8cfcb30b201, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 68742b5889d7f9d4a9cae5571590d4ac, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
   m_FlipY: 0
@@ -247,16 +247,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efca241d36d50144c8a671ef50081592, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monsterName: Goblin
-  monsterLevel: 5
-  currentHp: 600
-  maxHp: 600
-  attackRange: 1.5
-  chaseCancleTime: 2
-  chaseTime: 0
-  moveSpeed: 1
-  target: {fileID: 0}
-  animator: {fileID: 0}
+  _monsterType: 0
+  _monsterName: "\uACE0\uBE14\uB9B0"
+  _monsterLevel: 5
+  _currentHp: 0
+  _maxHp: 600
+  _attackRange: 1.5
+  _chaseCancleTime: 1
+  _chaseTime: 0
+  _moveSpeed: 1
+  _target: {fileID: 0}
+  _smashHitBox: {fileID: 8190413016591622143}
+  _hitBox: {fileID: 8183383958140969758}
 --- !u!1 &5602223285510543003
 GameObject:
   m_ObjectHideFlags: 0
@@ -428,11 +430,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4399117813266526049}
     m_Modifications:
-    - target: {fileID: -2117571780441203377, guid: 968b8146c23a87141894d489ae10aac2,
-        type: 3}
-      propertyPath: _deleteTime
-      value: 0.3
-      objectReference: {fileID: 0}
     - target: {fileID: 2180975827898659131, guid: 968b8146c23a87141894d489ae10aac2,
         type: 3}
       propertyPath: m_Name
@@ -497,6 +494,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -2117571780441203377, guid: 968b8146c23a87141894d489ae10aac2,
+        type: 3}
+      propertyPath: _deleteTime
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 6326781507318192179, guid: 968b8146c23a87141894d489ae10aac2,
         type: 3}

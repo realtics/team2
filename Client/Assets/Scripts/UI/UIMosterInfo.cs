@@ -4,7 +4,7 @@ using UnityEditor;
 
 public struct MonsterInfo
 {
-    public Monster.MonsterType index;
+    public Monster.MonsterTypeInfo index;
     public string name;
     public int level;
     public float currentHp;
