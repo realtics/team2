@@ -119,21 +119,22 @@ public class DungeonLoader : MonoBehaviour
 
     public DungeonJsonData dungeonData;
 
-    //private List<List<GameObject>> _dungeonGameObject;
     private Dictionary<int,List<GameObject>> _dungeonGameObject;
 
+    private int _currentDungeonIndex;
+    private const int _startDungeonIndex = 0;
     private void Start()
     {
         _instance = this;
         _dungeonGameObject = new Dictionary<int, List<GameObject>>();
     }
 
-    public void Loader(string dungeonName)
+    private void LoaderDungeon(string dungeonName)
     {
         dungeonData = JsonLoad<DungeonJsonData>(dungeonName);
     }
 
-    public void Instantiate(int index)
+    private void Instantiate(int index)
     {
         if (_dungeonGameObject.ContainsKey(index) == false)
         {
@@ -162,19 +163,39 @@ public class DungeonLoader : MonoBehaviour
         }
         else
         {
-            foreach(var item in _dungeonGameObject[index])
-            {
-                item.gameObject.SetActive(true);
-            }
+            DungeonSetActive(true, index);
+        }
+    }
+    private void DungeonSetActive(bool active,int index)
+    {
+        foreach (var item in _dungeonGameObject[index])
+        {
+            item.gameObject.SetActive(active);
         }
     }
 
-    
-
-    public void Test(int index)
+    public void ChangeDungeon(int index)
     {
-        Loader("Test2");
+        DungeonSetActive(false, _currentDungeonIndex);
         Instantiate(index);
+        _currentDungeonIndex = index;
+    }
+
+    public void Loader(string dungeonName)
+    {
+        _currentDungeonIndex = _startDungeonIndex;
+        LoaderDungeon(dungeonName);
+        Instantiate(_currentDungeonIndex);
+    }
+
+    // Test..
+    public void TestLoader(string dungeonName)
+    {
+        Loader(dungeonName);
+    }
+    public void TestChangeDungeon(int index)
+    {
+        ChangeDungeon(index);
     }
 
     public T JsonLoad<T>(string fileName)
