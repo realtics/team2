@@ -24,6 +24,7 @@ private:
 	bool PostAccept();
 	void HandleAccept(Session* pSession, const boost::system::error_code& error);
 
+	int _PlayerID;
 public:
 	AsioServer(boost::asio::io_context& io_context);
 	~AsioServer();

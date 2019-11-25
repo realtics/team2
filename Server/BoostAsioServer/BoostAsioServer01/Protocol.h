@@ -96,7 +96,7 @@ struct PACKET_NEW_LOGIN : public PACKET_HEADER
 struct PACKET_NEW_LOGIN_SUCSESS : public PACKET_HEADER
 {
 	bool isSuccess;
-	int sessionID;
+	int playerID;
 
 	void Init()
 	{

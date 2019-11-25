@@ -5,7 +5,7 @@ using UnityEngine;
 using System.Runtime.InteropServices;
 using System.Net;
 using System.Net.Sockets;
-
+using System.Threading;
 using System.Text;
 using System;
 
@@ -34,6 +34,11 @@ public struct PACKET_HEADER
     public short packetSize;
 };
 
+public struct PACKET_HEADER_BODY
+{
+    public PACKET_HEADER header;
+};
+
 public struct PACKET_NEW_LOGIN
 {
     public PACKET_HEADER header;
@@ -43,9 +48,15 @@ public struct PACKET_NEW_LOGIN_SUCSESS
 {
     public PACKET_HEADER header;
     public bool isSuccess;
-    public int sessionID;
+    public int playerID;
 }
 
+public class StateObject    // 데이터를 수신하기 위한 상태 객체
+{
+    public Socket WorkSocket = null;                // 클라이언트 소켓
+    public const int BufferSize = 256;              // 수신 버퍼의 크기
+    public byte[] Buffer = new byte[BufferSize];    // 수신 버퍼
+}
 
 public class NetworkManager : MonoBehaviour
 {
@@ -57,15 +68,22 @@ public class NetworkManager : MonoBehaviour
             return _instance;
         }
     }
-
+    
     public GameObject playerPrefab;
 
+
+    private static ManualResetEvent connectDone = new ManualResetEvent(false);
+    private static ManualResetEvent sendDone = new ManualResetEvent(false);
+    private static ManualResetEvent receiveDone = new ManualResetEvent(false);
+
+    public int _DebugTestMessage;
+
     private Socket _sock = null;
-    private byte[] _buffer;
 
     private bool _isLogin = false;
     private int _myId;
     private Dictionary<int,Character> _characters;
+    private List<CharacterSpawnData> _spawnCharacters;
 
     public bool IsLogin { get { return _isLogin; } }
     public bool LoginSuccess { set { _isLogin = true; } }
@@ -73,6 +91,7 @@ public class NetworkManager : MonoBehaviour
 
     void Start()
     {
+        _spawnCharacters = new List<CharacterSpawnData>();
         Screen.SetResolution(960, 540, false);
 
         _instance = this;
@@ -86,7 +105,7 @@ public class NetworkManager : MonoBehaviour
 
             NewLoginSucsess();
 
-            StartReceiving();
+            Receive(_sock);
         }
 
         // 내 캐릭터를 생성하는 로직
@@ -96,7 +115,6 @@ public class NetworkManager : MonoBehaviour
 
     void Update()
     {
-
 
         // 서버에서 새로운 플레이어가 접속했다고 알려주는 역할임
         if (Input.GetKeyDown(KeyCode.Space))
@@ -113,6 +131,16 @@ public class NetworkManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.X))
         {
             ThisIsStopPacket();
+        }
+
+        if (_spawnCharacters.Count > 0)
+        {
+            GameObject newPlayer =  Instantiate(playerPrefab);
+            Character spawnedPlayer = newPlayer.GetComponent<Character>();
+            spawnedPlayer.SetId(_spawnCharacters[0].id);
+            newPlayer.transform.position = Vector3.zero;
+            _characters.Add(_spawnCharacters[0].id, spawnedPlayer);
+            _spawnCharacters.RemoveAt(0);
         }
     }
 
@@ -136,7 +164,7 @@ public class NetworkManager : MonoBehaviour
         var packData = new PACKET_NEW_LOGIN { header = packHeader };
         jsonData = JsonConvert.SerializeObject(packData);
         jsonData += endNullValue;
-        byte[] sendByte = new byte[128];
+        byte[] sendByte = new byte[256];
         sendByte = Encoding.UTF8.GetBytes(jsonData);
         //TODO 1-0: JSON 헤더에 패킷 사이즈 체크 하는것을 foreach로 하고 있는데, 더 좋은 방법 있다면 개선
         //TODO 1-1: 패킷 사이즈를 담아 보내는 것이 현재 상태에선 크게 중요하진 않으므로, 코드만 남겨두고 나중에 활용
@@ -154,7 +182,7 @@ public class NetworkManager : MonoBehaviour
 
     private void NewLoginSucsess()
     {
-        byte[] recvBuf = new byte[128];
+        byte[] recvBuf = new byte[256];
         int socketReceive = _sock.Receive(recvBuf);
         Debug.Log(socketReceive);
 
@@ -166,104 +194,102 @@ public class NetworkManager : MonoBehaviour
         if (Jsondata.header.packetIndex == (short)PACKET_INDEX.NEW_LOGIN_SUCSESS)
         {
             Debug.Log("접속 성공 여부 : " + Jsondata.isSuccess);
-            Debug.Log("접속 ID : " + Jsondata.sessionID);
+            Debug.Log("접속 ID : " + Jsondata.playerID);
 
             SetIsLogin(Jsondata.isSuccess);
-            SetMyId(Jsondata.sessionID);
+            SetMyId(Jsondata.playerID);
         }
         
     }
 
-    public void StartReceiving()
+    private void Receive(Socket sock)
     {
         try
         {
-            _buffer = new byte[128];
-            _sock.BeginReceive(_buffer, 0, _buffer.Length, SocketFlags.None, ReceiveCallback, null);
+            StateObject state = new StateObject();
+            state.WorkSocket = sock;
+
+            // 데이터 수신 시작
+            sock.BeginReceive(state.Buffer, 0, StateObject.BufferSize, 0,
+                                new AsyncCallback(ReceiveCallback), state);
         }
-        catch { }
+        catch (Exception e)
+        {
+            Debug.Log(e.ToString());
+        }
     }
 
-    private void ReceiveCallback(IAsyncResult AR)
+    private void ReceiveCallback(IAsyncResult ar)
     {
         try
         {
-            // 클라이언트가 서버에서 연결을 끊을 때 바이트가 1보다 작은 경우 발생합니다.
-            // 현재 클라이언트에서 연결 끊기 기능을 실행합니다.
-            if (_sock.EndReceive(AR) > 1)
+            StateObject state = (StateObject)ar.AsyncState;
+            Socket client = state.WorkSocket;
+            
+            int bytesRead;
+            
+            try
             {
-                //// 수신 한 처음 4 바이트 (int 32)를 Int32 (이것은 다가오는 데이터의 크기)로 변환합니다.
-                //_buffer = new byte[BitConverter.ToInt32(_buffer, 0)];
-                //// 다음으로 이 데이터를 이전에 받은 크기로 버퍼에 수신합니다.
-                //_sock.Receive(_buffer, _buffer.Length, SocketFlags.None);
-                //// 전송 한 데이터로 변환하기 위해 모든 것을 수신했을 때.
-                //// 예를 들어 string, int 등 ...이 예제에서는 문자열을 보내고 받는 구현 만 사용합니다.
+                bytesRead = client.EndReceive(ar);
+            } catch
+            {
+                return;
+            }
+            
+            if (bytesRead > 0)
+            {
+                string recvData = Encoding.UTF8.GetString(state.Buffer, 0, bytesRead);
 
-                //// 바이트를 문자열로 변환하여 메시지 상자에 출력
-                //string data = Encoding.Default.GetString(_buffer);
-                //Debug.Log(data);
-                //// 이제 소켓에서 데이터가 올 때까지 기다렸다가 다시 시작해야합니다.
-                //StartReceiving();
+                Debug.Log("recvData = " + recvData);
+                int bufLen = recvData.Length;
+                Debug.Log("buflen = " + bufLen);
 
-
-
-                //◆ 이 부분 코드 잘못 됨 수정 (byte 문제)
-                //ader":{"packetIndex":"8","packetSize":"10"},"isSuccess":"true","sessionID":"1002"}
-                _buffer = new byte[128];
-                int socketReceive = _sock.Receive(_buffer, _buffer.Length, SocketFlags.None);
-                Debug.Log(socketReceive);
-
-                //string data = Encoding.Default.GetString(_buffer);
-                string recvData = Encoding.UTF8.GetString(_buffer, 0, socketReceive);
-                Debug.Log(recvData);
-                int bufLen = _buffer.Length;
-                Debug.Log(bufLen);
-
-                var JsonData = JsonConvert.DeserializeObject<PACKET_HEADER>(recvData);
+                var JsonData = JsonConvert.DeserializeObject<PACKET_HEADER_BODY>(recvData);
                 Debug.Log(JsonData);
-                
-                ProcessPacket(JsonData.packetIndex, recvData);
+
+                ProcessPacket(JsonData.header.packetIndex, recvData);
 
 
-                StartReceiving();
+                // 수신 대기
+                client.BeginReceive(state.Buffer, 0, StateObject.BufferSize, 0,
+                                    new AsyncCallback(ReceiveCallback), state);
             }
             else
             {
-                //Disconnect();
+                receiveDone.Set();
             }
         }
-        catch
+        catch (Exception e)
         {
-            // 실행이 발생하면 소켓이 연결되어 있는지 확인한 다음 다시 '수신 시작' 할 수 있습니다.
-            if (!_sock.Connected)
-            {
-                //Disconnect();
-            }
-            else
-            {
-                StartReceiving();
-            }
+            Debug.LogError(e.ToString());
         }
     }
+
 
     private void ProcessPacket(short packetIndex, string JsonData)
     {
         switch(packetIndex)
         {
-        case (short)PACKET_INDEX.NEW_LOGIN:
-            {
+            case (short)PACKET_INDEX.NEW_LOGIN:
+                {
                     Debug.Log("packet Index NEW_LOGIN 7");
-            }
-            break;
-        case (short)PACKET_INDEX.NEW_LOGIN_SUCSESS:
-            {
-                    Debug.Log("packet Index NEW_LOGIN_SUCSESS 8");
                 }
             break;
-        default:
-            {
+            case (short)PACKET_INDEX.NEW_LOGIN_SUCSESS:
+                {
+                    var Json = JsonConvert.DeserializeObject<PACKET_NEW_LOGIN_SUCSESS>(JsonData);
+                    
+                    Debug.Log("접속 ID : " + Json.playerID + ", 접속 성공 여부 : " + Json.isSuccess);
 
-            }
+
+                    _DebugTestMessage = Json.playerID;
+                    JoinNewPlayer(Json.playerID);
+                }
+                break;
+            default:
+                {
+
+                }
             break;
         }
     }
@@ -280,18 +306,20 @@ public class NetworkManager : MonoBehaviour
 
     public void JoinNewPlayer(int id)
     {
-        Character newPlayer;
-        
+        CharacterSpawnData newPlayer = new CharacterSpawnData();
+
         // Instantiate는 게임 오브젝트를 씬에 생성하는 함수
         // 코스트가 커서 자주 사용하면 좋지 않아 보통은 ObjectPool을 사용한다.
         // 생성 된 캐릭터에게 자신의 Id를 알려준다.
         // 패킷을 보낼 때 어떤 플레이어가 보냈는지 알려주기 위해 고유 Id를 함께 넘겨줘야한다.
 
-        newPlayer = Instantiate(playerPrefab).GetComponent<Character>();
-        newPlayer.transform.position = Vector3.zero;
-        newPlayer.SetId(id);
+        //newPlayer = Instantiate(playerPrefab).GetComponent<Character>();
 
-        _characters.Add(id, newPlayer);
+        newPlayer.position = Vector3.zero; // 접속한 애 포지션 
+        newPlayer.id = id;
+
+        //_characters.Add(id, newPlayer);
+        _spawnCharacters.Add(newPlayer);
     }
 
     // 원래는 패킷마다 핸들러를 만들어 사용해야함
@@ -333,5 +361,7 @@ public class NetworkManager : MonoBehaviour
     private void OnGUI()
     {
         GUI.Label(new Rect(0, 0, 100, 100), _isLogin.ToString() + ", " + MyId.ToString());
+
+        GUI.Label(new Rect(0, 100, 100, 100), "접속자 : " + _DebugTestMessage);
     }
 }

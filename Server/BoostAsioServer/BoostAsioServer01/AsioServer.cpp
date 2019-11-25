@@ -4,6 +4,7 @@ AsioServer::AsioServer(boost::asio::io_context& io_context)
 	: _acceptor(io_context, boost::asio::ip::tcp::endpoint(boost::asio::ip::tcp::v4(), PORT_NUMBER))
 {
 	_isAccepting = false;
+	_PlayerID = 0;
 }
 
 AsioServer::~AsioServer()
@@ -46,6 +47,8 @@ bool AsioServer::PostAccept()
 
 	_isAccepting = true;
 	int nSessionID = _sessionQueue.front();
+	
+	_PlayerID = nSessionID + 1000; // PlayerID는 1000부터 시작
 
 	_sessionQueue.pop_front();
 
@@ -135,13 +138,13 @@ void AsioServer::ProcessPacket(const int nSessionID, const char* pData)
 	{
 		PACKET_NEW_LOGIN* pPacket = (PACKET_NEW_LOGIN*)pData;
 		PACKET_NEW_LOGIN_SUCSESS SendPkt;
-		
-		std::cout << nSessionID << "번 클라이언트 로그인 성공" << std::endl;
+
+		std::cout << _PlayerID << "번 클라이언트 로그인 성공" << std::endl;
 
 		SendPkt.packetIndex = PACKET_INDEX::NEW_LOGIN_SUCSESS;
 		SendPkt.packetSize = 10;
 		SendPkt.isSuccess = true;
-		SendPkt.sessionID = nSessionID + 1000;	// C#에 전송 시 SessionID를 0을 보내지 않기 위해서 1000을 더하고 있음
+		SendPkt.playerID = _PlayerID;
 
 		boost::property_tree::ptree ptSend;
 		boost::property_tree::ptree ptSendHeader;
@@ -149,7 +152,7 @@ void AsioServer::ProcessPacket(const int nSessionID, const char* pData)
 		ptSendHeader.put<short>("packetSize", SendPkt.packetSize);
 		ptSend.add_child("header", ptSendHeader);
 		ptSend.put<bool>("isSuccess", SendPkt.isSuccess);
-		ptSend.put<int>("sessionID", SendPkt.sessionID);
+		ptSend.put<int>("playerID", SendPkt.playerID);
 
 		std::string stringRecv;
 		std::ostringstream oss(stringRecv);

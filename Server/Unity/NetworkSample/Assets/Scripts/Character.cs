@@ -2,6 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+public struct CharacterSpawnData
+{
+    public int id;
+    public Vector3 position;
+}
 public class Character : MonoBehaviour
 {
     [SerializeField]
@@ -15,7 +21,7 @@ public class Character : MonoBehaviour
     private Vector3 _oldDirection;
 
     public bool IsMine { get { return _id == NetworkManager.Instance.MyId; } }
-
+    public int Id { get { return _id; } }
     void Start()
     {
         _rigidBody = GetComponent<Rigidbody>();
