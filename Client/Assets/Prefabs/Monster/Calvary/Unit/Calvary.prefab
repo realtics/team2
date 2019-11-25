@@ -88,7 +88,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _monsterType: 2
   _monsterName: "\uCE7C\uBC14\uB9AC"
-  _monsterLevel: 105
+  _monsterLevel: 99
   _currentHp: 0
   _maxHp: 2000
   _attackRange: 3

@@ -4,6 +4,14 @@ using UnityEngine;
 
 public class Tauarmy : BaseMonster
 {
+    private enum TauAttackMotion
+    {
+        AttackMotion1 = 0,
+        AttackMotion2 = 1,
+        AttacknMotionEnd = 2
+    }
+    private TauAttackMotion _currentAttackMotion;
+
     protected override void Start()
     {
         base.Start();
@@ -17,6 +25,16 @@ public class Tauarmy : BaseMonster
     //AttackState
     public override void EnterAttackState()
     {
+        if (_target == null)
+        {
+            return;
+        }
+
+        IsAttack = true;
+
+        FlipImage();
+        _animator.SetBool("isAttacking", true);
+
         base.EnterAttackState();
     }
 

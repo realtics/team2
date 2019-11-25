@@ -52,7 +52,7 @@ public class BaseMonster : MonoBehaviour
     private bool _isHit;
 
     //values for MoveState 
-    public enum MovementStateInfo
+    private enum MovementStateInfo
     {
         Idle = 0,
         Left = 1,
@@ -64,7 +64,7 @@ public class BaseMonster : MonoBehaviour
     private const float InitialResetTime = 3.0f;
 
     //values for HitState
-    public enum HitMotion
+    private enum HitMotion
     {
         HitMotion0 = 0,
         HitMotion1 = 1,
