@@ -91,7 +91,7 @@ MonoBehaviour:
   _monsterLevel: 105
   _currentHp: 0
   _maxHp: 2000
-  _attackRange: 3.2
+  _attackRange: 3
   _chaseCancleTime: 5
   _chaseTime: 0
   _moveSpeed: 2.5
