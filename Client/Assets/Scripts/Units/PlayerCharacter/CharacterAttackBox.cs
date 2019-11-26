@@ -24,7 +24,7 @@ public class CharacterAttackBox : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (!other.tag.Contains("Monster"))
+        if (!other.tag.Contains("MonsterHitBox"))
             return;
 
         if (Mathf.Abs(_stat.transform.position.y - other.transform.position.y) > AttackRange)
