@@ -61,6 +61,7 @@ public class CharacterStat : MonoBehaviour
 
     private void SetDie()
     {
+        _unit.SetDie();
         DungeonGameManager.Instance.GameOver();
     }
 

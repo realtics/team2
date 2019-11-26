@@ -399,4 +399,9 @@ public class BaseUnit : MonoBehaviour
     {
 
     }
+
+    public virtual void SetDie()
+    {
+        SetAirHitHeight(0.2f);
+    }
 }

@@ -6,16 +6,23 @@ using UnityEngine;
 [Serializable]
 public class ObjectPool
 {
-    public ObjectPoolType poolType;
+    private string _poolName;
     public GameObject pooledObject;
+    public int initObjectCount;
 
-    private List<GameObject> _spawnedObjects;
+    private List<GameObject> _spawnedObjects = new List<GameObject>();
 
-    public void CreatePool(ObjectPoolType type, GameObject prefab)
+    public string PoolName { get { return _poolName; } }
+
+    public void Start()
     {
-        _spawnedObjects = new List<GameObject>();
-        poolType = type;
+        _poolName = pooledObject.name;
+    }
+
+    public void CreatePool(GameObject prefab)
+    {
         pooledObject = prefab;
+        _poolName = pooledObject.name;
     }
 
     public GameObject GetObject()
@@ -58,7 +65,7 @@ public class ObjectPool
         return obj;
     }
 
-    private GameObject CreateObject()
+    public GameObject CreateObject()
     {
         if (pooledObject == null)
         {
@@ -70,6 +77,8 @@ public class ObjectPool
 
         if (newObject == null)
             return null;
+
+        newObject.SetActive(false);
 
         _spawnedObjects.Add(newObject);
 

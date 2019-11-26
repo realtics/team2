@@ -3,16 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[Serializable]
-public enum ObjectPoolType
-{
-    Jingongcham = 1,
-}
-
 public class ObjectPoolManager : MonoBehaviour
 {
     [SerializeField]
-    private List<ObjectPool> _pools;
+    private List<ObjectPool> _pools = new List<ObjectPool>();
 
     private static ObjectPoolManager _instance;
     public static ObjectPoolManager Instance
@@ -26,44 +20,50 @@ public class ObjectPoolManager : MonoBehaviour
     private void Awake()
     {
         _instance = this;
-        _pools = new List<ObjectPool>();
     }
 
     private void Start()
     {
-        
+        foreach (ObjectPool pool in _pools)
+        {
+            pool.Start();
+            for (int i = 0; i < pool.initObjectCount; i++)
+            {
+                pool.CreateObject();
+            }
+        }
     }
 
-    public bool CreatePool(ObjectPoolType poolType, GameObject prefab)
+    public bool CreatePool(GameObject prefab)
     {
         foreach (ObjectPool pool in _pools)
         {
-            if (pool.poolType == poolType)
+            if (pool.PoolName == prefab.name)
                 return false;
         }
 
         ObjectPool newPool = new ObjectPool();
 
-        newPool.CreatePool(poolType, prefab);
+        newPool.CreatePool(prefab);
         _pools.Add(newPool);
 
         return true;
     }
 
-    public GameObject GetRestObject(ObjectPoolType type)
+    public GameObject GetRestObject(GameObject effectObject)
     {
-        ObjectPool pool = FindPool(type);
+        ObjectPool pool = FindPool(effectObject.name);
 
         return pool.GetObject();
     }
 
-    private ObjectPool FindPool(ObjectPoolType type)
+    private ObjectPool FindPool(string prefabName)
     {
         ObjectPool findedPool = null;
 
         foreach (ObjectPool pool in _pools)
         {
-            if (pool.poolType != type)
+            if (pool.PoolName != prefabName)
                 continue;
 
             findedPool = pool;

@@ -13,7 +13,7 @@ public enum SwordmanSkillIndex
 public struct SwordmanSkillBody
 {
     public SwordmanSkillIndex type;
-    public GameObject effect;
+    public GameObject effectPrefab;
 }
 
 public class SwordmanSkillManager : MonoBehaviour
@@ -38,7 +38,7 @@ public class SwordmanSkillManager : MonoBehaviour
 
     private void Start()
     {
-        ObjectPoolManager.Instance.CreatePool(ObjectPoolType.Jingongcham, FindSkillEffect(SwordmanSkillIndex.Jingongcham));
+        //ObjectPoolManager.Instance.CreatePool(FindSkillEffect(SwordmanSkillIndex.Jingongcham));
     }
 
     private void Update()
@@ -54,7 +54,7 @@ public class SwordmanSkillManager : MonoBehaviour
         {
             case SwordmanSkillIndex.Jingongcham:
                 SwordmanSkillJingongcham jingongcham = new SwordmanSkillJingongcham();
-                jingongcham.SetCreateEffect(stat, FindSkillEffect(type), 10.0f, 2);
+                jingongcham.SetCreateEffect(stat, FindSkillEffect(type), 10.0f, 1);
                 skill = jingongcham;
                 break;
         }
@@ -62,7 +62,7 @@ public class SwordmanSkillManager : MonoBehaviour
         return skill;
     }
 
-    private GameObject FindSkillEffect(SwordmanSkillIndex type)
+    public GameObject FindSkillEffect(SwordmanSkillIndex type)
     {
         GameObject effect = null;
 
@@ -71,7 +71,7 @@ public class SwordmanSkillManager : MonoBehaviour
             if (body.type != type)
                 continue;
 
-            effect = body.effect;
+            effect = body.effectPrefab;
         }
 
         return effect;
