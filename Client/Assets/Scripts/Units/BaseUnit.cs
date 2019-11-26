@@ -242,6 +242,7 @@ public class BaseUnit : MonoBehaviour
         _jumpState = UnitJumpState.None;
         _height = 0.0f;
         _jumpValue = 0.0f;
+        StopExtraMove();
         StopAttack();
 
         return true;
@@ -324,11 +325,16 @@ public class BaseUnit : MonoBehaviour
 
         if (_extraMoveDuration <= 0.0f)
         {
-            _extraSpeedHorizontal = 0.0f;
-            _extraSpeedVertical = 0.0f;
-            _extraMoveDuration = 0.0f;
+            StopExtraMove();
             return;
         }
+    }
+
+    private void StopExtraMove()
+    {
+        _extraSpeedHorizontal = 0.0f;
+        _extraSpeedVertical = 0.0f;
+        _extraMoveDuration = 0.0f;
     }
 
     public virtual void SetHit(float stunDuration)

@@ -43,4 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f20155898967a9444b9b38e7f456eeeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _pools: []
+  _pools:
+  - pooledObject: {fileID: 8467314183276299524, guid: fe356b9be93e61b4eaee401d0d359b7a,
+      type: 3}
+    initObjectCount: 3

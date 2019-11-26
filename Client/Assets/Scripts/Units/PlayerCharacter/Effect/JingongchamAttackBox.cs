@@ -39,7 +39,7 @@ public class JingongchamAttackBox : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (!other.tag.Contains("Monster"))
+        if (!other.tag.Contains("MonsterHitBox"))
             return;
 
         other.transform.root.GetComponent<BaseMonster>().OnHit(_sender);

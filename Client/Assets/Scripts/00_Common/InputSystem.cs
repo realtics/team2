@@ -55,8 +55,8 @@ public class InputSystem : MonoBehaviour
         {
             AttackInfoSender sender = new AttackInfoSender();
             sender.Attacker = transform;
-            sender.ExtraHeightValue = 0.2f;
-            sender.HorizontalExtraMoveDuration = 0.2f;
+            sender.ExtraHeightValue = 0.1f;
+            sender.HorizontalExtraMoveDuration = 10.0f;
             sender.HorizontalExtraMoveValue = -10.0f;
             sender.StunDuration = 2.0f;
             _pc.SetTest(sender);
