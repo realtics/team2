@@ -345,11 +345,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _sender:
-    _horizontalExtraMoveDuration: 0.5
-    _horizontalExtraMoveValue: -3
+    _horizontalExtraMoveDuration: 0.1
+    _horizontalExtraMoveValue: -2
     _verticalExtraMoveDuration: 0
     _verticalExtraMoveValue: 0
-    _extraHeightValue: 0.1
+    _extraHeightValue: 0
     _stunDuration: 0.1
 --- !u!1 &8615815165003328142
 GameObject:

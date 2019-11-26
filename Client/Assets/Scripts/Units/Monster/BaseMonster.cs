@@ -61,7 +61,6 @@ public class BaseMonster : MonoBehaviour
     protected Vector3 _originPos;
     private float _height;
     private float _jumpValue;
-    private const float JumpGravity = 0.01f;
 
     //values for MoveState 
     private enum MovementStateInfo
@@ -166,7 +165,6 @@ public class BaseMonster : MonoBehaviour
 
             if (IsGround)
                 StartCoroutine("AerialProcess");
-           
         }
             
         _currentHp -= sender.Damage;
@@ -264,7 +262,7 @@ public class BaseMonster : MonoBehaviour
         _avatar.localPosition = groundPos;
 
         _height += _jumpValue;
-        _jumpValue -= JumpGravity;
+        _jumpValue -= Time.deltaTime/2;
 
         if (_height <= 0.0f)
         {
