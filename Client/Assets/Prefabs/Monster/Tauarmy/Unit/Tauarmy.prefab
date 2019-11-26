@@ -391,7 +391,7 @@ GameObject:
   - component: {fileID: 8071827096671705865}
   m_Layer: 0
   m_Name: HitBox
-  m_TagString: Monster
+  m_TagString: MonsterHitBox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -349,7 +349,7 @@ MonoBehaviour:
     _horizontalExtraMoveValue: -3
     _verticalExtraMoveDuration: 0
     _verticalExtraMoveValue: 0
-    _extraHeightValue: 0.5
+    _extraHeightValue: 0
     _stunDuration: 0.1
 --- !u!1 &8615815165003328142
 GameObject:
@@ -420,7 +420,7 @@ GameObject:
   - component: {fileID: 6740281104454915022}
   m_Layer: 0
   m_Name: HitBox
-  m_TagString: Monster
+  m_TagString: MonsterHitBox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
