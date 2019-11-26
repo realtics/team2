@@ -6,8 +6,11 @@ public class SwordmanSkillJingongcham : CharacterSkill
 {
     private JingongchamAttackBox _attackBox;
 
-    public override void OnSkill()
+    public override bool OnSkill()
     {
+        if (!base.OnSkill())
+            return false;
+
         GameObject effect = ObjectPoolManager.Instance.GetRestObject(ObjectPoolType.Jingongcham);
         _attackBox = effect.GetComponent<JingongchamAttackBox>();
         Vector3 effectPos = _sender.Attacker.transform.position;
@@ -31,6 +34,8 @@ public class SwordmanSkillJingongcham : CharacterSkill
         effect.transform.localScale = flipScale;
 
         _attackBox.InfoSender = _sender;
+
+        return true;
     }
 
     protected override void SetAttackInfo(CharacterStat stat)

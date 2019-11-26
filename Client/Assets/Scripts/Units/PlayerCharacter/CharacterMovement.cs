@@ -24,9 +24,18 @@ public class CharacterMovement : BaseUnit
         _equiredSkill.Add(SwordmanSkillType.Jingongcham, SwordmanSkillManager.Instance.GetSkill(_stat, SwordmanSkillType.Jingongcham));
     }
 
-    override protected void Update()
+    protected override void Update()
     {
         CheckAttackEnd();
+        SkillCoolTimeUpdate();
+    }
+
+    private void SkillCoolTimeUpdate()
+    {
+        foreach (CharacterSkill skill in _equiredSkill.Values)
+        {
+            skill.UpdateCoolTime();
+        }
     }
 
     private void CheckAttackEnd()
@@ -190,11 +199,21 @@ public class CharacterMovement : BaseUnit
 
     public override bool SetSkill()
     {
+        _usedSkill = SwordmanSkillType.Jingongcham;
+
+        if (!UsedSkill.UsableSkill)
+        {
+            Debug.Log("현재 쿨타임입니다. : " + UsedSkill.CurrentCoolTime + "초 남았습니다.");
+
+            _usedSkill = SwordmanSkillType.None;
+            return false;
+        }
+
         if (!base.SetSkill())
             return false;
 
-        _usedSkill = SwordmanSkillType.Jingongcham;
         _animator.SetBool("OnSkill", true);
+        _animator.SetInteger("SkillMotion", UsedSkill.MotionIndex);
 
         return true;
     }

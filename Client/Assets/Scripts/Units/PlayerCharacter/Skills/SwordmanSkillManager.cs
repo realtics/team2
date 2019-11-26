@@ -5,6 +5,7 @@ using UnityEngine;
 
 public enum SwordmanSkillType
 {
+    None = 0,
     Jingongcham = 1,
 }
 
@@ -53,7 +54,7 @@ public class SwordmanSkillManager : MonoBehaviour
         {
             case SwordmanSkillType.Jingongcham:
                 SwordmanSkillJingongcham jingongcham = new SwordmanSkillJingongcham();
-                jingongcham.SetCreateEffect(stat, FindSkillEffect(type));
+                jingongcham.SetCreateEffect(stat, FindSkillEffect(type), 10.0f, 2);
                 skill = jingongcham;
                 break;
         }
