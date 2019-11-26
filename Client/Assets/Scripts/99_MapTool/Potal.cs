@@ -15,7 +15,8 @@ public class Potal : MonoBehaviour
     private SpriteRenderer _spriteRenderer;
 
     public ARROW arrow;
-    public string NextDungenName;
+    public int nextDungenIndex;
+    public Vector3 transportPosition;
 
     private bool _isPlayerEnter;
     public bool IsPlayerEnter { get { return _isPlayerEnter; } }

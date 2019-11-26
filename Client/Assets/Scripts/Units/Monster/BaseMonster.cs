@@ -39,7 +39,7 @@ public class BaseMonster : MonoBehaviour
     [SerializeField]
     protected Transform _hitBox;
     protected Animator _animator;
-   
+    protected Vector3 _forwardDirection;
 
     private StateMachine<BaseMonster> _state = null;
     private FSMState<BaseMonster> _attackState = new AttackState();
@@ -160,7 +160,7 @@ public class BaseMonster : MonoBehaviour
         _baseAttackBox.gameObject.SetActive(true);
     }
 
-    public void InactiveBaseAttackHitBox()
+    public void InactiveBaseAttackBox()
     {
         _baseAttackBox.gameObject.SetActive(false);
     }
@@ -168,6 +168,15 @@ public class BaseMonster : MonoBehaviour
     public void InactiveHitBox()
     {
         _hitBox.gameObject.SetActive(false);
+    }
+
+  
+    protected void SetForwardDirection()
+    {
+        if (transform.localScale.x > 0)
+            _forwardDirection = Vector3.left;
+        else
+            _forwardDirection = Vector3.right;
     }
 
     public void FlipImage()
@@ -243,22 +252,17 @@ public class BaseMonster : MonoBehaviour
 
     public virtual void UpdateAttackState()
     {
-        BaseAttack();
+        if (_animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f)
+        {
+            ChangeState(_moveState);
+        }
     }
 
     public virtual void ExitAttackState()
     {
         _animator.SetBool("isAttacking", false);
         IsAttack = false;
-        InactiveBaseAttackHitBox();
-    }
-
-    protected void BaseAttack()
-    {
-        if (_animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f)
-        {
-            ChangeState(_moveState);
-        }
+        InactiveBaseAttackBox();
     }
 
     //DieState

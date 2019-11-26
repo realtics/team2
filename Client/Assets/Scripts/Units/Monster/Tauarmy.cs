@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class Tauarmy : BaseMonster
 {
-    private enum TauAttackMotion
+    private enum TauarmyAttackMotion
     {
         AttackMotion1 = 0,
         AttackMotion2 = 1,
         AttacknMotionEnd = 2
     }
-    private TauAttackMotion _currentAttackMotion;
+    private TauarmyAttackMotion _currentAttackMotion;
+
+    [SerializeField]
+    private Transform _rushAttackBox;
 
     protected override void Start()
     {
@@ -22,30 +25,39 @@ public class Tauarmy : BaseMonster
         base.FixedUpdate();
     }
 
+    public void ActiveRushAttackBox()
+    {
+        _rushAttackBox.gameObject.SetActive(true);
+    }
+
+    public void InactiveRushAttackBox()
+    {
+        _rushAttackBox.gameObject.SetActive(false);
+    }
+
     //AttackState
     public override void EnterAttackState()
-    {
-        if (_target == null)
-        {
-            return;
-        }
-
-        IsAttack = true;
-
-        FlipImage();
-        _animator.SetBool("isAttacking", true);
-
+    { 
         base.EnterAttackState();
+        _currentAttackMotion = (TauarmyAttackMotion)Random.Range((int)TauarmyAttackMotion.AttackMotion1, (int)TauarmyAttackMotion.AttacknMotionEnd);
+        _animator.SetInteger("attackMotion", (int)_currentAttackMotion);
+        SetForwardDirection();
+
     }
 
     public override void UpdateAttackState()
     {
+        if (_currentAttackMotion == TauarmyAttackMotion.AttackMotion2)
+        {
+            transform.position += _forwardDirection * Time.deltaTime * (_moveSpeed*3);
+        }
         base.UpdateAttackState();
     }
 
     public override void ExitAttackState()
     {
         base.ExitAttackState();
+        InactiveRushAttackBox();
     }
 
     //MoveState

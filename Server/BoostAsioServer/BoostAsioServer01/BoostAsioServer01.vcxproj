@@ -20,7 +20,7 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
-    <ProjectGuid>{0A04DC2C-5474-494B-A268-D57320FDDE60}</ProjectGuid>
+    <ProjectGuid>{14D10F82-A9D2-480B-A750-161B2E98ACF8}</ProjectGuid>
     <RootNamespace>BoostAsioServer01</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>

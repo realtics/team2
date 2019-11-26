@@ -1,0 +1,53 @@
+{
+  "DungeonInfos": [
+    {
+      "objectinfos": [
+        {
+          "filePath": "Object/far2Background",
+          "position": {
+            "x": 4.81,
+            "y": 1.87,
+            "z": 0.0,
+            "normalized": {
+              "x": 0.932041049,
+              "y": 0.362352759,
+              "z": 0.0,
+              "magnitude": 1.0,
+              "sqrMagnitude": 1.0
+            },
+            "magnitude": 5.160717,
+            "sqrMagnitude": 26.633
+          }
+        }
+      ],
+      "potalinfos": [
+        {
+          "filePath": "Object/Potal",
+          "position": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0,
+            "magnitude": 0.0,
+            "sqrMagnitude": 0.0
+          },
+          "transportPosition": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0,
+            "magnitude": 0.0,
+            "sqrMagnitude": 0.0
+          },
+          "Arrow": 0,
+          "NextDungeonIndex": 1
+        }
+      ],
+      "PlayerStartPosition": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "magnitude": 0.0,
+        "sqrMagnitude": 0.0
+      }
+    }
+  ]
+}
