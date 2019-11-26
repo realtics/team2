@@ -19,9 +19,7 @@ public enum SceneIndex
 public class GameManager : MonoBehaviour
 {
     [SerializeField]
-    private int _coin;
-
-    private bool _playerChooseResult = false;
+    protected int _coin;
 
     private GameState _playerState;
 

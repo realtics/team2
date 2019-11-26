@@ -151,6 +151,7 @@ public class MapLoader : MonoBehaviour
 
     private Dictionary<int,List<GameObject>> _dungeonGameObject;
 
+    private string _dungeonName;
     private int _currentDungeonIndex;
     private const int _startDungeonIndex = 0;
     private void Awake()
@@ -230,21 +231,15 @@ public class MapLoader : MonoBehaviour
         _currentDungeonIndex = index;
     }
 
-    public void Loader(string dungeonName)
+    public void Loader()
     {
-        LoaderDungeon(dungeonName);
+        LoaderDungeon(_dungeonName);
         _currentDungeonIndex = _startDungeonIndex;
         Instantiate(_currentDungeonIndex);
     }
-
-    // Test..
-    public void TestLoader(string dungeonName)
+    public void SetMap(string dungeonName)
     {
-        Loader(dungeonName);
-    }
-    public void TestChangeDungeon(int index)
-    {
-        ChangeDungeon(index);
+        _dungeonName = dungeonName;
     }
 
     public T JsonLoad<T>(string fileName)

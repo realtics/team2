@@ -3,9 +3,6 @@ using System.Collections;
 
 public class DungeonGameManager : GameManager
 {
-    [SerializeField]
-    private int _coin;
-
     private int _countDown;
     private const int _maxDieCountDown = 10;
     private const int _maxResultCountDown = 4;
@@ -34,6 +31,7 @@ public class DungeonGameManager : GameManager
     {
         _playerState = GameState.Dungeon;
         _instance = this;
+        MapLoader.instacne.Loader();
     }
 
     // Update is called once per frame
