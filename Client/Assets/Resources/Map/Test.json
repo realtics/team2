@@ -1,0 +1,142 @@
+{
+  "DungeonInfos": [
+    {
+      "objectinfos": [
+        {
+          "filePath": "Object/Dungeon",
+          "position": {
+            "x": 10.29,
+            "y": -6.59,
+            "z": 0.0,
+            "normalized": {
+              "x": 0.842107832,
+              "y": -0.539309144,
+              "z": 0.0,
+              "magnitude": 1.0,
+              "sqrMagnitude": 0.99999994
+            },
+            "magnitude": 12.2193375,
+            "sqrMagnitude": 149.3122
+          }
+        },
+        {
+          "filePath": "Object/StoneBar",
+          "position": {
+            "x": 5.97,
+            "y": -5.2,
+            "z": 0.0,
+            "normalized": {
+              "x": 0.7540614,
+              "y": -0.6568039,
+              "z": 0.0,
+              "magnitude": 1.0,
+              "sqrMagnitude": 0.99999994
+            },
+            "magnitude": 7.91712666,
+            "sqrMagnitude": 62.6808968
+          }
+        }
+      ],
+      "potalTransportinfos": [
+        {
+          "filePath": "Object/PotalTransport",
+          "position": {
+            "x": 8.22,
+            "y": -2.07,
+            "z": 0.0,
+            "normalized": {
+              "x": 0.969724655,
+              "y": -0.244200721,
+              "z": 0.0,
+              "normalized": {
+                "x": 0.9697247,
+                "y": -0.244200736,
+                "z": 0.0,
+                "magnitude": 1.0,
+                "sqrMagnitude": 1.0
+              },
+              "magnitude": 0.99999994,
+              "sqrMagnitude": 0.9999999
+            },
+            "magnitude": 8.476633,
+            "sqrMagnitude": 71.8533
+          },
+          "transportPosition": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0,
+            "magnitude": 0.0,
+            "sqrMagnitude": 0.0
+          },
+          "arrow": 3,
+          "nextIndex": 1
+        }
+      ],
+      "potalSceneInfos": [],
+      "PlayerStartPosition": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "magnitude": 0.0,
+        "sqrMagnitude": 0.0
+      }
+    },
+    {
+      "objectinfos": [
+        {
+          "filePath": "Object/StoneBar",
+          "position": {
+            "x": -6.54,
+            "y": -5.35,
+            "z": 0.0,
+            "normalized": {
+              "x": -0.77401,
+              "y": -0.633173347,
+              "z": 0.0,
+              "magnitude": 1.0,
+              "sqrMagnitude": 1.0
+            },
+            "magnitude": 8.449503,
+            "sqrMagnitude": 71.3941
+          }
+        }
+      ],
+      "potalTransportinfos": [
+        {
+          "filePath": "Object/PotalTransport",
+          "position": {
+            "x": -8.17,
+            "y": -2.37,
+            "z": 0.0,
+            "normalized": {
+              "x": -0.960407138,
+              "y": -0.278600335,
+              "z": 0.0,
+              "magnitude": 1.0,
+              "sqrMagnitude": 1.0
+            },
+            "magnitude": 8.506809,
+            "sqrMagnitude": 72.3658
+          },
+          "transportPosition": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0,
+            "magnitude": 0.0,
+            "sqrMagnitude": 0.0
+          },
+          "arrow": 2,
+          "nextIndex": 0
+        }
+      ],
+      "potalSceneInfos": [],
+      "PlayerStartPosition": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "magnitude": 0.0,
+        "sqrMagnitude": 0.0
+      }
+    }
+  ]
+}

@@ -1,22 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.SceneManagement;
+﻿using UnityEngine;
+using System.Collections;
 
-enum GameState
-{ 
-    Dungeon,
-    Die,
-    Result
-}
-public enum SceneIndex
-{
-    MainMenu,
-    Lobby,
-    Dungen
-}
-
-public class DungeonGameManager : MonoBehaviour
+public class DungeonGameManager : GameManager
 {
     [SerializeField]
     private int _coin;
@@ -54,7 +39,7 @@ public class DungeonGameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(_countOver && _playerState == GameState.Die)
+        if (_countOver && _playerState == GameState.Die)
         {
             Invoke(nameof(CountOver), _delayDie);
         }
@@ -88,7 +73,7 @@ public class DungeonGameManager : MonoBehaviour
     }
     public void UseCoin()
     {
-        if(_coin > 0)
+        if (_coin > 0)
         {
             _coin -= 1;
             _countDown = _maxDieCountDown;
@@ -111,18 +96,12 @@ public class DungeonGameManager : MonoBehaviour
     }
     public void OnClickResultBox(int index)
     {
-        if(!_playerChooseResult)
+        if (!_playerChooseResult)
         {
             UIHelper.Instance.OpenResultBox(index);
             _playerChooseResult = true;
         }
     }
-
-    public void MoveToScene(int Scene)
-    {
-        SceneManager.LoadScene(Scene);
-    }
-
     IEnumerator DieSecondCountdown()
     {
         while (true)
@@ -154,12 +133,12 @@ public class DungeonGameManager : MonoBehaviour
             else
             {
                 _countOver = true;
-                if(!_playerChooseResult)
+                if (!_playerChooseResult)
                 {
                     OnClickResultBox(0);
                 }
                 StopCoroutine(ResultSecondCountdown());
-                
+
             }
             yield return new WaitForSeconds(1);
         }

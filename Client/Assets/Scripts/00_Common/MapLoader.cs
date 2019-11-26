@@ -11,19 +11,30 @@ public class ObjectInfo
     public Vector3 position { get; set; }
 }
 
-public class Potalinfo
+public class PotalTransportinfo
 {
     public string filePath { get; set; }
     public Vector3 position { get; set; }
     public Vector3 transportPosition { get; set; }
-    public ARROW Arrow { get; set; }
-    public int NextDungeonIndex { get; set; }
+    public ARROW arrow { get; set; }
+    public int nextIndex { get; set; }
+}
+
+public class PotalSceneInfo
+{
+    public string filePath { get; set; }
+    public Vector3 position { get; set; }
+    public Vector3 transportPosition { get; set; }
+    public ARROW arrow { get; set; }
+    public string nextDataName { get; set; }
 }
 
 public class DungeonInfo
 {
     public List<ObjectInfo> objectinfos = new List<ObjectInfo>();
-    public List<Potalinfo> potalinfos = new List<Potalinfo>();
+    public List<PotalTransportinfo> potalTransportinfos = new List<PotalTransportinfo>();
+    public List<PotalSceneInfo> potalSceneInfos = new List<PotalSceneInfo>();
+
     public Vector3 PlayerStartPosition { get; set; }
 
     public void AddObject(GameObject obj)
@@ -39,23 +50,42 @@ public class DungeonInfo
         objectinfos.Add(objectInfo);
     }
 
-    public void AddPotal(GameObject obj)
+    public void AddPotalTransport(GameObject obj)
     {
-        Potal potal = obj.GetComponent<Potal>();
+        PotalTransport potal = obj.GetComponent<PotalTransport>();
 
         Object parentObject = PrefabUtility.GetCorrespondingObjectFromOriginalSource(obj);
         string path = AssetDatabase.GetAssetPath(parentObject);
         path = ResourcesLoadSubstringFilePath(path);
 
-        Potalinfo potalinfo = new Potalinfo();
-        potalinfo.filePath = path;
-        potalinfo.position = obj.transform.position;
-        potalinfo.Arrow = potal.arrow;
+        PotalTransportinfo potalTransportinfo = new PotalTransportinfo();
+        potalTransportinfo.filePath = path;
+        potalTransportinfo.position = obj.transform.position;
+        potalTransportinfo.arrow = potal.arrow;
 
-        potalinfo.transportPosition = potal.transportPosition;
-        potalinfo.NextDungeonIndex = potal.nextDungenIndex;
+        potalTransportinfo.transportPosition = potal.transportPosition;
+        potalTransportinfo.nextIndex = potal.nextIndex;
 
-        potalinfos.Add(potalinfo);
+        potalTransportinfos.Add(potalTransportinfo);
+    }
+
+    public void AddPotalScene(GameObject obj)
+    {
+        PotalScene potal = obj.GetComponent<PotalScene>();
+
+        Object parentObject = PrefabUtility.GetCorrespondingObjectFromOriginalSource(obj);
+        string path = AssetDatabase.GetAssetPath(parentObject);
+        path = ResourcesLoadSubstringFilePath(path);
+
+        PotalSceneInfo potalSceneInfo = new PotalSceneInfo();
+        potalSceneInfo.filePath = path;
+        potalSceneInfo.position = obj.transform.position;
+        potalSceneInfo.arrow = potal.arrow;
+        
+        potalSceneInfo.transportPosition = potal.transportPosition;
+        potalSceneInfo.nextDataName = potal.nextSceneName;
+
+        potalSceneInfos.Add(potalSceneInfo);
     }
 
     string ResourcesLoadSubstringFilePath(string FilePath)
@@ -106,10 +136,10 @@ public class ObjectCache : ScriptableSingleton<ObjectCache>
     }
 }
 
-public class DungeonLoader : MonoBehaviour
+public class MapLoader : MonoBehaviour
 {
-    private static DungeonLoader _instance;
-    public static DungeonLoader instacne
+    private static MapLoader _instance;
+    public static MapLoader instacne
     {
         get
         {
@@ -123,6 +153,11 @@ public class DungeonLoader : MonoBehaviour
 
     private int _currentDungeonIndex;
     private const int _startDungeonIndex = 0;
+    private void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
+
     private void Start()
     {
         _instance = this;
@@ -149,16 +184,30 @@ public class DungeonLoader : MonoBehaviour
                 obj.transform.position = item.position;
                 _dungeonGameObject[index].Add(obj);
             }
-            foreach (var item in dungeon.potalinfos)
+            foreach (var item in dungeon.potalTransportinfos)
             {
                 var obj = GameObject.Instantiate<GameObject>(ObjectCache.instance.LoadResourceFromCache(item.filePath));
                 obj.transform.position = item.position;
-                Potal potal = obj.GetComponent<Potal>();
-                potal.arrow = item.Arrow;
-                potal.nextDungenIndex = item.NextDungeonIndex;
+                PotalTransport potal = obj.GetComponent<PotalTransport>();
+                potal.arrow = item.arrow;
+                potal.nextIndex = item.nextIndex;
                 potal.transportPosition = item.transportPosition;
+
                 _dungeonGameObject[index].Add(obj);
             }
+            foreach (var item in dungeon.potalSceneInfos)
+            {
+                var obj = GameObject.Instantiate<GameObject>(ObjectCache.instance.LoadResourceFromCache(item.filePath));
+                obj.transform.position = item.position;
+                PotalScene potal = obj.GetComponent<PotalScene>();
+                potal.arrow = item.arrow;
+                potal.nextSceneName = item.nextDataName;
+                potal.transportPosition = item.transportPosition;
+
+                _dungeonGameObject[index].Add(obj);
+            }
+
+
             ObjectCache.instance.ClearCache();
         }
         else
@@ -183,8 +232,8 @@ public class DungeonLoader : MonoBehaviour
 
     public void Loader(string dungeonName)
     {
-        _currentDungeonIndex = _startDungeonIndex;
         LoaderDungeon(dungeonName);
+        _currentDungeonIndex = _startDungeonIndex;
         Instantiate(_currentDungeonIndex);
     }
 

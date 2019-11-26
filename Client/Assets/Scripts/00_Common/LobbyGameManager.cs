@@ -2,17 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LobbyGameManager : MonoBehaviour
+public class LobbyGameManager : GameManager
 {
-    // Start is called before the first frame update
-    void Start()
+    private static LobbyGameManager _instance;
+    public static LobbyGameManager Instance
     {
-        
+        get
+        {
+            return _instance;
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    void Start()
     {
-        
+        _instance = this;
     }
 }
