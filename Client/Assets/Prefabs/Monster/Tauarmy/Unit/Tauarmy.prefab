@@ -71,7 +71,7 @@ GameObject:
   - component: {fileID: 1144951007954270210}
   m_Layer: 0
   m_Name: Tauarmy
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -159,6 +159,7 @@ MonoBehaviour:
   _target: {fileID: 0}
   _baseAttackBox: {fileID: 6639602415026870072}
   _hitBox: {fileID: 6638185263794367449}
+  _avatar: {fileID: 2568930803150547787}
   _rushAttackBox: {fileID: 7749031719042090271}
 --- !u!1 &2568930803150547788
 GameObject:
@@ -376,6 +377,7 @@ MonoBehaviour:
     _horizontalExtraMoveValue: -3
     _verticalExtraMoveDuration: 0
     _verticalExtraMoveValue: 0
+    _extraHeightValue: 0
     _stunDuration: 0.5
 --- !u!1 &6123188132498424516
 GameObject:
@@ -540,6 +542,7 @@ MonoBehaviour:
     _horizontalExtraMoveValue: -10
     _verticalExtraMoveDuration: 0
     _verticalExtraMoveValue: 0
+    _extraHeightValue: 0
     _stunDuration: 0.4
 --- !u!1001 &100382000865523081
 PrefabInstance:
