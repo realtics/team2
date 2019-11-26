@@ -9,19 +9,36 @@ public class CharacterSkill
     private int _motionIndex;
     protected CharacterStat _stat;
     protected AttackInfoSender _sender;
+    protected float _coolTime;
+    protected float _initCoolTime;
 
     public int MotionIndex { get { return _motionIndex; } }
+    public bool UsableSkill { get { return _coolTime <= 0.0f; } }
+    public float CurrentCoolTime { get { return _coolTime; } }
 
-    public virtual void OnSkill()
+    public void UpdateCoolTime()
     {
+        if (_coolTime <= 0.0f)
+            return;
 
+        _coolTime -= Time.deltaTime;
     }
 
-    public void SetCreateEffect(CharacterStat stat, GameObject effect, int motion = 1)
+    public virtual bool OnSkill()
+    {
+        if (!UsableSkill)
+            return false;
+
+        _coolTime = _initCoolTime;
+        return true;
+    }
+
+    public void SetCreateEffect(CharacterStat stat, GameObject effect, float coolTime, int motion = 1)
     {
         _stat = stat;
         _motionIndex = motion;
         _effect = effect;
+        _initCoolTime = coolTime;
         SetAttackInfo(_stat);
     }
 
