@@ -71,7 +71,7 @@ GameObject:
   - component: {fileID: 2027343449210597697}
   m_Layer: 0
   m_Name: Calvary
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -158,6 +158,7 @@ MonoBehaviour:
   _target: {fileID: 0}
   _baseAttackBox: {fileID: 5101124502921087084}
   _hitBox: {fileID: 5112109842577077389}
+  _avatar: {fileID: 4127798058618418207}
 --- !u!1 &4127798058618418200
 GameObject:
   m_ObjectHideFlags: 0
@@ -311,7 +312,7 @@ GameObject:
   - component: {fileID: 7704160847158494301}
   m_Layer: 0
   m_Name: HitBox
-  m_TagString: Monster
+  m_TagString: MonsterHitBox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -431,6 +432,7 @@ MonoBehaviour:
     _horizontalExtraMoveValue: -15
     _verticalExtraMoveDuration: 0
     _verticalExtraMoveValue: 0
+    _extraHeightValue: 0.1
     _stunDuration: 0.5
 --- !u!114 &8917905186618086786
 MonoBehaviour:

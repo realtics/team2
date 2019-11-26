@@ -54,6 +54,14 @@ public class BaseMonster : MonoBehaviour
     private bool _isDead = false;
     private bool _isAttack;
     private bool _isHit;
+    private bool _isAerialHit;
+
+    [SerializeField]
+    protected Transform _avatar;
+    protected Vector3 _originPos;
+    private float _height;
+    private float _jumpValue;
+    private const float JumpGravity = 0.01f;
 
     //values for MoveState 
     private enum MovementStateInfo
@@ -90,6 +98,7 @@ public class BaseMonster : MonoBehaviour
     public float CurrentHp { get { return _currentHp; } }
     public float MaxHp { get { return _maxHp; } }
 
+    public bool IsGround { get { return !(_height > 0.0f); } }
     public bool IsAttack { get { return _isAttack; } set { _isAttack = value; } }
     public bool IsHit { get { return _isHit; } set { _isHit = value; } }
 
@@ -98,6 +107,7 @@ public class BaseMonster : MonoBehaviour
         _animator = GetComponentInChildren<Animator>();
         _currentHp = MaxHp;
         _baseAttackCurrentTime = _baseAttackResetTime;
+        _originPos = _avatar.localPosition;
         SetInitialState();
     }
 
@@ -149,6 +159,16 @@ public class BaseMonster : MonoBehaviour
     public void OnHit(AttackInfoSender sender)
     {
         SetKnockbackValue(sender);
+
+        if (sender.ExtraHeightValue > 0.0f)
+        {
+            _jumpValue = sender.ExtraHeightValue;
+
+            if (IsGround)
+                StartCoroutine("AerialProcess");
+           
+        }
+            
         _currentHp -= sender.Damage;
 
         UIHelper.Instance.SetMonster(this);
@@ -232,9 +252,30 @@ public class BaseMonster : MonoBehaviour
         {
             transform.position += _knockBackDirection * Time.deltaTime * _knockBackSpeed;
         }
-
+      
         yield return null;
         StartCoroutine("Knockback");
+    }
+
+    IEnumerator AerialProcess()
+    {
+        Vector3 groundPos = _originPos;
+        groundPos.y += _height;
+        _avatar.localPosition = groundPos;
+
+        _height += _jumpValue;
+        _jumpValue -= JumpGravity;
+
+        if (_height <= 0.0f)
+        {
+            _height = 0.0f;
+            _jumpValue = 0.0f;
+            StopCoroutine("AerialProcess");
+            yield break;
+        }
+
+        yield return null;
+        StartCoroutine("AerialProcess");
     }
 
     //TODO : 공중공격피격시 띄움 판정함수
