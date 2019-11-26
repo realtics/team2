@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum SwordmanSkillType
+public enum SwordmanSkillIndex
 {
     None = 0,
     Jingongcham = 1,
@@ -12,7 +12,7 @@ public enum SwordmanSkillType
 [Serializable]
 public struct SwordmanSkillBody
 {
-    public SwordmanSkillType type;
+    public SwordmanSkillIndex type;
     public GameObject effect;
 }
 
@@ -38,7 +38,7 @@ public class SwordmanSkillManager : MonoBehaviour
 
     private void Start()
     {
-        ObjectPoolManager.Instance.CreatePool(ObjectPoolType.Jingongcham, FindSkillEffect(SwordmanSkillType.Jingongcham));
+        ObjectPoolManager.Instance.CreatePool(ObjectPoolType.Jingongcham, FindSkillEffect(SwordmanSkillIndex.Jingongcham));
     }
 
     private void Update()
@@ -46,13 +46,13 @@ public class SwordmanSkillManager : MonoBehaviour
         
     }
 
-    public CharacterSkill GetSkill(CharacterStat stat, SwordmanSkillType type)
+    public CharacterSkill GetSkill(CharacterStat stat, SwordmanSkillIndex type)
     {
         CharacterSkill skill = null;
 
         switch (type)
         {
-            case SwordmanSkillType.Jingongcham:
+            case SwordmanSkillIndex.Jingongcham:
                 SwordmanSkillJingongcham jingongcham = new SwordmanSkillJingongcham();
                 jingongcham.SetCreateEffect(stat, FindSkillEffect(type), 10.0f, 2);
                 skill = jingongcham;
@@ -62,7 +62,7 @@ public class SwordmanSkillManager : MonoBehaviour
         return skill;
     }
 
-    private GameObject FindSkillEffect(SwordmanSkillType type)
+    private GameObject FindSkillEffect(SwordmanSkillIndex type)
     {
         GameObject effect = null;
 
