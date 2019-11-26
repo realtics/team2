@@ -13,8 +13,9 @@ public class LobbyGameManager : GameManager
         }
     }
 
-    void Start()
+    protected override void Start()
     {
+        base.Start();
         _instance = this;
     }
 }

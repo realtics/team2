@@ -10,6 +10,11 @@ public class ObjectInfo
     public string filePath { get; set; }
     public Vector3 position { get; set; }
 }
+public class MonsterInfo
+{
+    public string filePath { get; set; }
+    public Vector3 position { get; set; }
+}
 
 public class PotalTransportinfo
 {
@@ -29,9 +34,11 @@ public class PotalSceneInfo
     public string nextDataName { get; set; }
 }
 
+
 public class DungeonInfo
 {
     public List<ObjectInfo> objectinfos = new List<ObjectInfo>();
+    public List<MonsterInfo> monsterInfos = new List<MonsterInfo>();
     public List<PotalTransportinfo> potalTransportinfos = new List<PotalTransportinfo>();
     public List<PotalSceneInfo> potalSceneInfos = new List<PotalSceneInfo>();
 
@@ -48,6 +55,19 @@ public class DungeonInfo
         objectInfo.position = obj.transform.position;
 
         objectinfos.Add(objectInfo);
+    }
+
+    public void AddMonster(GameObject obj)
+    {
+        Object parentObject = PrefabUtility.GetCorrespondingObjectFromOriginalSource(obj);
+        string path = AssetDatabase.GetAssetPath(parentObject);
+        path = ResourcesLoadSubstringFilePath(path);
+
+        MonsterInfo monsterInfo = new MonsterInfo();
+        monsterInfo.filePath = path;
+        monsterInfo.position = obj.transform.position;
+
+        monsterInfos.Add(monsterInfo);
     }
 
     public void AddPotalTransport(GameObject obj)
@@ -185,6 +205,15 @@ public class MapLoader : MonoBehaviour
                 obj.transform.position = item.position;
                 _dungeonGameObject[index].Add(obj);
             }
+
+            // ToDo. _MonsterManagerMent 
+            foreach (var item in dungeon.monsterInfos)
+            {
+                var obj = GameObject.Instantiate<GameObject>(ObjectCache.instance.LoadResourceFromCache(item.filePath));
+                obj.transform.position = item.position;
+                _dungeonGameObject[index].Add(obj);
+            }
+
             foreach (var item in dungeon.potalTransportinfos)
             {
                 var obj = GameObject.Instantiate<GameObject>(ObjectCache.instance.LoadResourceFromCache(item.filePath));

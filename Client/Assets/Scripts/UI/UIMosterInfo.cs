@@ -2,7 +2,7 @@
 using UnityEngine.UI;
 using UnityEditor;
 
-public struct MonsterInfo
+public struct UIMonsterInfo
 {
     public BaseMonster.MonsterTypeInfo index;
     public string name;
@@ -42,7 +42,7 @@ public class UIMosterInfo : MonoBehaviour
         _hpBar.CurrentValue = CurrentHp;
     }
 
-    public void SetMonster(MonsterInfo info)
+    public void SetMonster(UIMonsterInfo info)
     {
         _name.text = info.name;
         _level.text = "Lv." + info.level;

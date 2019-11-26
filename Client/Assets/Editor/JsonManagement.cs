@@ -13,6 +13,7 @@ public class JsonManagement
     JsonSerializerSettings setting = new JsonSerializerSettings();
 
     private const string _objectTag = "FieldObject";
+    private const string _monsterTag = "Monster";
     private const string _potalSceneTag = "PotalScene";
     private const string _potalTranportTag = "PotalTransport"; 
 
@@ -44,7 +45,10 @@ public class JsonManagement
         {
             dungeonInfo.AddObject(obj);
         }
-
+        foreach (GameObject obj in GameObject.FindGameObjectsWithTag(_monsterTag))
+        {
+            dungeonInfo.AddMonster(obj);
+        }
         foreach (GameObject obj in GameObject.FindGameObjectsWithTag(_potalTranportTag))
         {
             dungeonInfo.AddPotalTransport(obj);

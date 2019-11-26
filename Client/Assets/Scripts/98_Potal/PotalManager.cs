@@ -5,6 +5,16 @@ using UnityEditor;
 
 public class PotalManager : MonoBehaviour
 {
+
+    private static PotalManager _instance;
+    public static PotalManager instance
+    {
+        get
+        {
+            return _instance;
+        }
+    }
+  
     [SerializeField]
     private Potal[] _potals;
     private Potal _currentPotal;
@@ -12,17 +22,23 @@ public class PotalManager : MonoBehaviour
 
     void Start()
     {
+        _instance = this;
         FIndPotals();
     }
 
-    void FixedUpdate()
+    //void FixedUpdate()
+    //{
+    //    if (FindActiveCurrentPotal())
+    //    {
+    //        _currentPotal.Enter();
+    //        ResetPotals();
+    //        FIndPotals();
+    //    }
+    //}
+
+    public void PotalEnter()
     {
-        if (FindActiveCurrentPotal())
-        {
-            _currentPotal.Enter();
-            ResetPotals();
-            FIndPotals();
-        }
+        ResetPotals();
     }
 
     private void FIndPotals()

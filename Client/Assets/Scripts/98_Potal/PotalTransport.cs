@@ -20,6 +20,7 @@ public class PotalTransport : Potal
 
     public override void Enter()
     {
+        base.Enter();
         MapLoader.instacne.ChangeDungeon(_nextIndex);
     }
 }

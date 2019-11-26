@@ -83,7 +83,7 @@ public class UIHelper : MonoBehaviour
         _monsterInfo.gameObject.SetActive(true);
         
         //FIXME :  현재체력, 최대체력 구분
-        MonsterInfo monsterInfo;
+        UIMonsterInfo monsterInfo;
         monsterInfo.name = monster.MonsterName;
         monsterInfo.level = monster.MonsterLevel;
         monsterInfo.currentHp = monster.CurrentHp;

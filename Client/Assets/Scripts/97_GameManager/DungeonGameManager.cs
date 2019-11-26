@@ -15,7 +15,11 @@ public class DungeonGameManager : GameManager
 
     private bool _playerChooseResult = false;
 
-    private GameState _playerState;
+    [SerializeField]
+    protected GameState _playerState;
+
+    [SerializeField]
+    private Cinemachine.CinemachineConfiner _cinemachine;
 
     private static DungeonGameManager _instance;
     public static DungeonGameManager Instance
@@ -27,11 +31,13 @@ public class DungeonGameManager : GameManager
     }
 
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
-        _playerState = GameState.Dungeon;
+        base.Start();
         _instance = this;
         MapLoader.instacne.Loader();
+
+        
     }
 
     // Update is called once per frame

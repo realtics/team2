@@ -10,6 +10,7 @@ TagManager:
   - Monster
   - PotalTransport
   - PotalScene
+  - CameraCollider
   layers:
   - Default
   - TransparentFX
