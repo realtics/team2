@@ -1,6 +1,6 @@
 #include "AsioServer.h"
 
-const int MAX_SESSION_COUNT = 50;
+const int MAX_SESSION_COUNT = 40;
 
 int main()
 {

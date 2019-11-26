@@ -24,7 +24,7 @@ private:
 	bool PostAccept();
 	void HandleAccept(Session* pSession, const boost::system::error_code& error);
 
-	int _PlayerID;
+	int _userID;
 public:
 	AsioServer(boost::asio::io_context& io_context);
 	~AsioServer();
@@ -33,4 +33,6 @@ public:
 	void Start();
 	void CloseSession(const int nSessionID);
 	void ProcessPacket(const int nSessionID, const char* pData);
+
+	std::vector< Session* > GetSessionList() { return _sessionList; }
 };

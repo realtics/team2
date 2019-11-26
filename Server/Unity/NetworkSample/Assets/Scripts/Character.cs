@@ -20,7 +20,7 @@ public class Character : MonoBehaviour
     private Vector3 _moveDirection;
     private Vector3 _oldDirection;
 
-    public bool IsMine { get { return _id == NetworkManager.Instance.MyId; } }
+    public bool IsMine { get { return _id == NetworkManager.Instance.GetMyId; } }
     public int Id { get { return _id; } }
     void Start()
     {

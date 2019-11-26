@@ -30,7 +30,9 @@ private:
 	void HandleReceive(const boost::system::error_code& error, size_t bytes_transferred);
 
 	void Deserialization(char* jsonData);
-	std::string Serialization(PACKET_INDEX packetIndex);
+	//std::string Serialization(PACKET_INDEX packetIndex);
+
+	void ConcurrentUsers();
 public:
 	Session(int nSessionID, boost::asio::io_context& io_context, AsioServer* pServer);
 	~Session();

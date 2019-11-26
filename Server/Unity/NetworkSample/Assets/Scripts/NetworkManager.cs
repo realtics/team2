@@ -11,46 +11,6 @@ using System;
 
 using Newtonsoft.Json;
 
-
-enum PACKET_INDEX
-{
-    REQ_IN = 1,
-    RES_IN = 2,
-    REQ_CHAT = 5,
-    NOTICE_CHAT = 6,
-
-    NEW_LOGIN = 7,
-    NEW_LOGIN_SUCSESS = 8,
-
-    JOIN_PLAYER = 2001,
-
-    PLAYER_MOVE_START = 3001,
-    PLAYER_MOVE_END = 3002,
-};
-
-public struct PACKET_HEADER
-{
-    public short packetIndex;
-    public short packetSize;
-};
-
-public struct PACKET_HEADER_BODY
-{
-    public PACKET_HEADER header;
-};
-
-public struct PACKET_NEW_LOGIN
-{
-    public PACKET_HEADER header;
-};
-
-public struct PACKET_NEW_LOGIN_SUCSESS
-{
-    public PACKET_HEADER header;
-    public bool isSuccess;
-    public int playerID;
-}
-
 public class StateObject    // 데이터를 수신하기 위한 상태 객체
 {
     public Socket WorkSocket = null;                // 클라이언트 소켓
@@ -80,14 +40,24 @@ public class NetworkManager : MonoBehaviour
 
     private Socket _sock = null;
 
-    private bool _isLogin = false;
-    private int _myId;
+    private int _myId;      // 실행한 클라이언트의 ID
+    public int GetMyId { get { return _myId; } }
+    public void SetMyId(int id) { _myId = id; }
+
+    private bool _isLogin = false;      // 로그인 여부
+    public bool GetIsLogin { get { return _isLogin; } }
+    public void SetIsLogin(bool isLogin) { _isLogin = isLogin; }
+    public bool LoginSuccess { set { _isLogin = true; } }
+
+    private int _totalUser;     // 전체 유저 수
+    public void SetTotalUser(int totalUser) { _totalUser = totalUser; }
+
+    private string _UserList;       // 유저 리스트
+    public void SetUserList(string userList) { _UserList = userList; }
+
+
     private Dictionary<int,Character> _characters;
     private List<CharacterSpawnData> _spawnCharacters;
-
-    public bool IsLogin { get { return _isLogin; } }
-    public bool LoginSuccess { set { _isLogin = true; } }
-    public int MyId { get { return _myId; } }
 
     void Start()
     {
@@ -99,18 +69,13 @@ public class NetworkManager : MonoBehaviour
 
         CreateSocket();
 
-        if (IsLogin == false)
+        if (GetIsLogin == false)
         {
             NewLogin();
-
-            NewLoginSucsess();
 
             Receive(_sock);
         }
 
-        // 내 캐릭터를 생성하는 로직
-        // 서버에서 내가 접속했다고 알려주면 Id를 받고 내 Id로 설정한다.
-        JoinNewPlayer(MyId);
     }
 
     void Update()
@@ -120,7 +85,7 @@ public class NetworkManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             // 새로운 플레이어의 Id를 넣어주고 생성함.
-            JoinNewPlayer(MyId);
+            JoinNewPlayer(GetMyId);
         }
 
         // 서버가 어떤 플레이어가 움직였다 라고 알림
@@ -135,7 +100,7 @@ public class NetworkManager : MonoBehaviour
 
         if (_spawnCharacters.Count > 0)
         {
-            GameObject newPlayer =  Instantiate(playerPrefab);
+            GameObject newPlayer = Instantiate(playerPrefab);
             Character spawnedPlayer = newPlayer.GetComponent<Character>();
             spawnedPlayer.SetId(_spawnCharacters[0].id);
             newPlayer.transform.position = Vector3.zero;
@@ -178,28 +143,6 @@ public class NetworkManager : MonoBehaviour
         //Debug.Log(jsonData);
         //Debug.Log(jsonDataSize);
         int resultSize = _sock.Send(sendByte);
-    }
-
-    private void NewLoginSucsess()
-    {
-        byte[] recvBuf = new byte[256];
-        int socketReceive = _sock.Receive(recvBuf);
-        Debug.Log(socketReceive);
-
-        string recvData = Encoding.UTF8.GetString(recvBuf, 0, socketReceive);
-        int bufLen = recvBuf.Length;
-        Debug.Log(recvData);
-
-        var Jsondata = JsonConvert.DeserializeObject<PACKET_NEW_LOGIN_SUCSESS>(recvData);
-        if (Jsondata.header.packetIndex == (short)PACKET_INDEX.NEW_LOGIN_SUCSESS)
-        {
-            Debug.Log("접속 성공 여부 : " + Jsondata.isSuccess);
-            Debug.Log("접속 ID : " + Jsondata.playerID);
-
-            SetIsLogin(Jsondata.isSuccess);
-            SetMyId(Jsondata.playerID);
-        }
-        
     }
 
     private void Receive(Socket sock)
@@ -265,25 +208,34 @@ public class NetworkManager : MonoBehaviour
         }
     }
 
-
     private void ProcessPacket(short packetIndex, string JsonData)
     {
         switch(packetIndex)
         {
-            case (short)PACKET_INDEX.NEW_LOGIN:
-                {
-                    Debug.Log("packet Index NEW_LOGIN 7");
-                }
-            break;
             case (short)PACKET_INDEX.NEW_LOGIN_SUCSESS:
                 {
                     var Json = JsonConvert.DeserializeObject<PACKET_NEW_LOGIN_SUCSESS>(JsonData);
-                    
-                    Debug.Log("접속 ID : " + Json.playerID + ", 접속 성공 여부 : " + Json.isSuccess);
 
+                    // 내 캐릭터를 생성하는 로직
+                    // 서버에서 내가 접속했다고 알려주면 Id를 받고 내 Id로 설정한다.
+                    if (GetMyId == 0)
+                    {
+                        SetIsLogin(Json.isSuccess);
+                        SetMyId(Json.userID);
+                        JoinNewPlayer(Json.userID);
+                        Debug.Log("접속 ID : " + Json.userID + ", 접속 성공 여부 : " + Json.isSuccess);
+                    }
+                    _DebugTestMessage = Json.userID;
+                }
+                break;
+            case (short)PACKET_INDEX.CONCURRENT_USERS:
+                {
+                    var Json = JsonConvert.DeserializeObject<PACKET_CONCURRENT_USERS>(JsonData);
+                    Debug.Log(Json.totalUsers);
+                    Debug.Log(Json.concurrentUsers);
+                    SetTotalUser(Json.totalUsers);
+                    //SetUserList(Json.concurrentUsersList);
 
-                    _DebugTestMessage = Json.playerID;
-                    JoinNewPlayer(Json.playerID);
                 }
                 break;
             default:
@@ -295,14 +247,7 @@ public class NetworkManager : MonoBehaviour
     }
 
 
-    public void SetMyId(int id)
-    {
-        _myId = id;
-    }
-    public void SetIsLogin(bool isLogin)
-    {
-        _isLogin = isLogin;
-    }
+
 
     public void JoinNewPlayer(int id)
     {
@@ -360,8 +305,8 @@ public class NetworkManager : MonoBehaviour
 
     private void OnGUI()
     {
-        GUI.Label(new Rect(0, 0, 100, 100), _isLogin.ToString() + ", " + MyId.ToString());
+        GUI.Label(new Rect(0, 0, 100, 100), _isLogin.ToString() + ", " + GetMyId.ToString());
 
-        GUI.Label(new Rect(0, 100, 100, 100), "접속자 : " + _DebugTestMessage);
+        GUI.Label(new Rect(0, 20, 100, 100), "Last접속 : " + _DebugTestMessage);
     }
 }

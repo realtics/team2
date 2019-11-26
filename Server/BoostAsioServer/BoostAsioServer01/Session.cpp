@@ -1,7 +1,6 @@
 #include "Session.h"
 #include "AsioServer.h"
 
-
 Session::Session(int nSessionID, boost::asio::io_context& io_context, AsioServer* pServer)
 	: _socket(io_context)
 	, _sessionID(nSessionID)
@@ -87,7 +86,7 @@ void Session::HandleReceive(const boost::system::error_code& error, size_t bytes
 	{
 		if (error == boost::asio::error::eof)
 		{
-			std::cout << "클라이언트와 연결이 끊어졌습니다" << std::endl;
+			std::cout << "클라이언트와 연결이 끊어졌습니다. ";
 		}
 		else
 		{
@@ -95,6 +94,8 @@ void Session::HandleReceive(const boost::system::error_code& error, size_t bytes
 		}
 
 		_pServer->CloseSession(_sessionID);
+
+		ConcurrentUsers();
 	}
 	else
 	{
@@ -103,6 +104,9 @@ void Session::HandleReceive(const boost::system::error_code& error, size_t bytes
 		
 		int nPacketData = _packetBufferMark + bytes_transferred;
 		int nReadData = 0;
+
+		// TODO : ConcurrentUsers 위치 수정 할 것
+		ConcurrentUsers();
 
 		while (nPacketData > 0)
 		{
@@ -139,6 +143,8 @@ void Session::HandleReceive(const boost::system::error_code& error, size_t bytes
 
 		PostReceive();
 	}
+
+	
 }
 
 void Session::Deserialization(char* jsonData)
@@ -164,6 +170,103 @@ void Session::Deserialization(char* jsonData)
 	break;
 
 	}
-
 }
 
+void Session::ConcurrentUsers()
+{
+	PACKET_CONCURRENT_USERS concurrentUsers;
+	concurrentUsers.packetIndex = PACKET_INDEX::CONCURRENT_USERS;
+	concurrentUsers.packetSize = sizeof(PACKET_CONCURRENT_USERS);
+
+	std::vector< Session* > _sessionList = _pServer->GetSessionList();
+	int totalUsers = 0;
+	std::string userList = "";
+
+	for (size_t i = 0; i < _sessionList.size(); ++i)
+	{
+		if (_sessionList[i]->Socket().is_open())
+		{
+			totalUsers++;
+			
+			int PlayerNum = i + FIRST_USER_INDEX;
+
+			userList += std::to_string(PlayerNum);
+			userList += ",";
+		}
+	}
+	
+	if (totalUsers > 0)
+	{
+		// 마지막 , 없애기
+		int endPlayerList = userList.size() - 1;
+		
+		userList.replace(endPlayerList, endPlayerList, "");
+	}
+	concurrentUsers.Init();
+
+	concurrentUsers.totalUsers = totalUsers;
+	concurrentUsers.concurrentUsersList = userList;
+	
+	boost::property_tree::ptree ptSendHeader;
+	ptSendHeader.put<short>("packetIndex", concurrentUsers.packetIndex);
+	ptSendHeader.put<short>("packetSize", concurrentUsers.packetSize);
+	
+	boost::property_tree::ptree ptSend;
+	ptSend.add_child("header", ptSendHeader);
+	ptSend.put<int>("totalUsers", concurrentUsers.totalUsers);
+	ptSend.put<std::string>("concurrentUsers", concurrentUsers.concurrentUsersList);
+
+	std::cout << "접속 유저 : " << concurrentUsers.totalUsers << std::endl;
+	std::cout << "유저 리스트 : " << concurrentUsers.concurrentUsersList << std::endl;
+
+	std::string stringRecv;
+	std::ostringstream oss(stringRecv);
+	boost::property_tree::write_json(oss, ptSend, false);
+	std::string sendStr = oss.str();
+	std::cout << sendStr << std::endl;
+	//PostSend(false, std::strlen(sendStr.c_str()), (char*)sendStr.c_str());
+
+	for (size_t i = 0; i < _sessionList.size(); ++i)
+	{
+		if (_sessionList[i]->Socket().is_open())
+		{
+			PostSend(false, std::strlen(sendStr.c_str()), (char*)sendStr.c_str());
+		}
+	}
+
+
+	//ptSend.put<std::string>("String", packetCharacterMove.string);
+
+	//std::string stringRecv;
+	//std::ostringstream os(stringRecv);
+	//boost::property_tree::write_json(os, ptSend, false);
+	//std::string sendStr = os.str();
+	//std::cout << sendStr << std::endl;
+	//PostSend(false, std::strlen(sendStr.c_str()), (char*)sendStr.c_str());
+
+	//PACKET_CHARACTER_MOVE  packetCharacterMove;
+	//	packetCharacterMove.header.packetIndex = PACKET_INDEX::RES_IN;
+	//	packetCharacterMove.header.packetSize = sizeof(PACKET_CHARACTER_MOVE);
+	//	packetCharacterMove.characterMoveX = 2;
+	//	packetCharacterMove.characterMoveY = 1;
+	//	//packetCharacterMove.characterMoveY = "string";
+
+	//	//{"header":{"packetIndex":1,"packetSize":??},"characterMoveX":1,"characterMoveY":2}
+	//	//{"header":{"packetIndex":1,"packetSize":??},"characterMoveX":1,"String":"string"}
+
+	//	boost::property_tree::ptree ptSend;
+	//	boost::property_tree::ptree ptSendHeader;
+	//	ptSendHeader.put<int>("packetIndex", packetCharacterMove.header.packetIndex);
+	//	ptSendHeader.put<int>("packetSize", packetCharacterMove.header.packetSize);
+	//	ptSend.add_child("header", ptSendHeader);
+	//	ptSend.put<float>("characterMoveX", packetCharacterMove.characterMoveX);
+	//	ptSend.put<float>("characterMoveY", packetCharacterMove.characterMoveY);
+	//	//ptSend.put<std::string>("String", packetCharacterMove.string);
+
+	//	std::string stringRecv;
+	//	std::ostringstream os(stringRecv);
+	//	boost::property_tree::write_json(os, ptSend, false);
+	//	std::string sendStr = os.str();
+	//	std::cout << sendStr << std::endl;
+	//	PostSend(false, std::strlen(sendStr.c_str()), (char*)sendStr.c_str());
+}

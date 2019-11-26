@@ -4,7 +4,7 @@ AsioServer::AsioServer(boost::asio::io_context& io_context)
 	: _acceptor(io_context, boost::asio::ip::tcp::endpoint(boost::asio::ip::tcp::v4(), PORT_NUMBER))
 {
 	_isAccepting = false;
-	_PlayerID = 0;
+	_userID = 0;
 }
 
 AsioServer::~AsioServer()
@@ -48,8 +48,6 @@ bool AsioServer::PostAccept()
 	_isAccepting = true;
 	int nSessionID = _sessionQueue.front();
 	
-	_PlayerID = nSessionID + 1000; // PlayerID는 1000부터 시작
-
 	_sessionQueue.pop_front();
 
 	_acceptor.async_accept(_sessionList[nSessionID]->Socket(),
@@ -64,9 +62,12 @@ bool AsioServer::PostAccept()
 
 void AsioServer::HandleAccept(Session* pSession, const boost::system::error_code& error)
 {
+	_userID = pSession->SessionID() + FIRST_USER_INDEX;
+
 	if (!error)
 	{
-		std::cout << "클라이언트 접속 성공. SessionID: " << pSession->SessionID() << std::endl;
+		//std::cout << "클라이언트 접속 성공. SessionID: " << pSession->SessionID() << std::endl;
+		std::cout << "\"" << _userID << "\"번 클라이언트 서버 접속 성공" << std::endl;
 
 		pSession->Init();
 		pSession->PostReceive();
@@ -81,7 +82,9 @@ void AsioServer::HandleAccept(Session* pSession, const boost::system::error_code
 
 void AsioServer::CloseSession(const int nSessionID)
 {
-	std::cout << "클라이언트 접속 종료. 세션 ID: " << nSessionID << std::endl;
+	_userID = nSessionID + FIRST_USER_INDEX;
+	//std::cout << "클라이언트 접속 종료. 세션 ID: " << nSessionID << std::endl;
+	std::cout << "\"" << _userID << "\"번 클라이언트 접속 종료" << std::endl;
 
 	_sessionList[nSessionID]->Socket().close();
 
@@ -138,13 +141,11 @@ void AsioServer::ProcessPacket(const int nSessionID, const char* pData)
 	{
 		PACKET_NEW_LOGIN* pPacket = (PACKET_NEW_LOGIN*)pData;
 		PACKET_NEW_LOGIN_SUCSESS SendPkt;
+		SendPkt.Init();
+		std::cout << "\"" << _userID << "\"번 클라이언트 로그인 성공" << std::endl;
 
-		std::cout << _PlayerID << "번 클라이언트 로그인 성공" << std::endl;
-
-		SendPkt.packetIndex = PACKET_INDEX::NEW_LOGIN_SUCSESS;
-		SendPkt.packetSize = 10;
 		SendPkt.isSuccess = true;
-		SendPkt.playerID = _PlayerID;
+		SendPkt.userID = _userID;
 
 		boost::property_tree::ptree ptSend;
 		boost::property_tree::ptree ptSendHeader;
@@ -152,7 +153,7 @@ void AsioServer::ProcessPacket(const int nSessionID, const char* pData)
 		ptSendHeader.put<short>("packetSize", SendPkt.packetSize);
 		ptSend.add_child("header", ptSendHeader);
 		ptSend.put<bool>("isSuccess", SendPkt.isSuccess);
-		ptSend.put<int>("playerID", SendPkt.playerID);
+		ptSend.put<int>("userID", SendPkt.userID);
 
 		std::string stringRecv;
 		std::ostringstream oss(stringRecv);
@@ -169,7 +170,7 @@ void AsioServer::ProcessPacket(const int nSessionID, const char* pData)
 				_sessionList[i]->PostSend(false, std::strlen(sendStr.c_str()), (char*)sendStr.c_str());
 			}
 		}
-
+		
 		//////
 		//_sessionList[nSessionID]->PostSend(false, std::strlen(sendStr.c_str()), (char*)sendStr.c_str());
 

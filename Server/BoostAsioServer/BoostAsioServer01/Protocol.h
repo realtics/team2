@@ -1,8 +1,11 @@
 #pragma once 
+
 const unsigned short PORT_NUMBER = 31452;
 const int MAX_RECEIVE_BUFFER_LEN = 512;
 const int MAX_NAME_LEN = 13;
 const int MAX_MESSAGE_LEN = 129;
+
+const int FIRST_USER_INDEX = 100;		// 첫번째 유저 Index (클라이언트에 알려줄 index)
 
 enum PACKET_INDEX
 {
@@ -14,10 +17,12 @@ enum PACKET_INDEX
 	NEW_LOGIN = 7,
 	NEW_LOGIN_SUCSESS = 8,
 
-	JOIN_PLAYER = 2001,
+	CONCURRENT_USERS = 10,
 
-	PLAYER_MOVE_START = 3001,
-	PLAYER_MOVE_END = 3002,
+	JOIN_PLAYER = 20,
+
+	PLAYER_MOVE_START = 30,
+	PLAYER_MOVE_END = 31,
 };
 
 struct PACKET_HEADER
@@ -26,11 +31,9 @@ struct PACKET_HEADER
 	short packetSize;
 };
 
-struct PACKET_CHARACTER_MOVE
+struct PACKET_HEADER_BODY
 {
 	PACKET_HEADER header;
-	float characterMoveX;
-	float characterMoveY;
 };
 
 struct PKT_REQ_IN : public PACKET_HEADER
@@ -96,11 +99,23 @@ struct PACKET_NEW_LOGIN : public PACKET_HEADER
 struct PACKET_NEW_LOGIN_SUCSESS : public PACKET_HEADER
 {
 	bool isSuccess;
-	int playerID;
+	int userID;
 
 	void Init()
 	{
 		packetIndex = PACKET_INDEX::NEW_LOGIN_SUCSESS;
 		packetSize = sizeof(PACKET_NEW_LOGIN_SUCSESS);
+	}
+};
+
+struct PACKET_CONCURRENT_USERS : public PACKET_HEADER
+{
+	int totalUsers;
+	std::string concurrentUsersList;
+
+	void Init()
+	{
+		packetIndex = PACKET_INDEX::CONCURRENT_USERS;
+		packetSize = sizeof(PACKET_CONCURRENT_USERS);
 	}
 };
