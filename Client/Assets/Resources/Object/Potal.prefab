@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6120200165185843851}
   - component: {fileID: 2635741745352491381}
-  - component: {fileID: 2352067361093946857}
   - component: {fileID: 1990998773528034660}
+  - component: {fileID: 4024645828485721318}
   m_Layer: 0
   m_Name: Potal
   m_TagString: Potal
@@ -82,21 +82,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &2352067361093946857
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2565058414384437464}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01bea08403e58de46985bd8cdc1cf2d9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  arrow: 0
-  crossDungenName: 
-  IsPlayerEnter: 0
 --- !u!61 &1990998773528034660
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -123,3 +108,17 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.39, y: 1.84}
   m_EdgeRadius: 0
+--- !u!114 &4024645828485721318
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2565058414384437464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8ac41941f08b444891c1706383a888a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  arrow: 0
+  transportPosition: {x: 0, y: 0, z: 0}

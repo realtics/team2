@@ -444,10 +444,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 240451106}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d786d1152a33bef46bae7a827b05fe59, type: 3}
+  m_Script: {fileID: 11500000, guid: 5a550649261ec7b408216a4fb56a69bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _coin: 5
+  _coin: 0
 --- !u!4 &240451108
 Transform:
   m_ObjectHideFlags: 0
@@ -488,7 +488,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 305781319}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30d17fa5d4371cf42b8548c0c78daef6, type: 3}
+  m_Script: {fileID: 11500000, guid: 8619bd5a057cd484980a3b10856d7d00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _potals: []

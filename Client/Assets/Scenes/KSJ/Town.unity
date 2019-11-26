@@ -181,6 +181,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: _nextSceneName
+      value: Test
+      objectReference: {fileID: 0}
     - target: {fileID: 4811459823582425236, guid: 47e5e75da91777b4781035749ce7abec,
         type: 3}
       propertyPath: m_Name
@@ -241,7 +245,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4811459823582425237, guid: 47e5e75da91777b4781035749ce7abec,
+    - target: {fileID: 1294762513733870720, guid: 47e5e75da91777b4781035749ce7abec,
         type: 3}
       propertyPath: _nextSceneName
       value: Test
@@ -487,7 +491,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1065136198}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30d17fa5d4371cf42b8548c0c78daef6, type: 3}
+  m_Script: {fileID: 11500000, guid: 8619bd5a057cd484980a3b10856d7d00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _potals: []
@@ -531,7 +535,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1119895327}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ed76c627105549438234afad3ad781f, type: 3}
+  m_Script: {fileID: 11500000, guid: 1f80a94b7ed82c847836785b2ed61249, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _coin: 0

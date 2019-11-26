@@ -50,7 +50,7 @@ public class Potal : MonoBehaviour
     }
     public virtual void Enter()
     {
-
+        _isPotalBlock = true;
     }
 
 }

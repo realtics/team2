@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4315294788207725787}
   - component: {fileID: 5447201639316356901}
   - component: {fileID: 8407414515777880884}
-  - component: {fileID: 5518241230242571915}
+  - component: {fileID: 8278931280511660904}
   m_Layer: 0
   m_Name: PotalTransport
   m_TagString: PotalTransport
@@ -108,7 +108,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.39, y: 1.84}
   m_EdgeRadius: 0
---- !u!114 &5518241230242571915
+--- !u!114 &8278931280511660904
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -117,7 +117,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5518241230242571912}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 98d9449a204680d408aa2fd962dcc586, type: 3}
+  m_Script: {fileID: 11500000, guid: 973c57ea8733f29439e07431eec26830, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   arrow: 0

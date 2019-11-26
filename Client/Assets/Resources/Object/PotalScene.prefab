@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4811459823582425232}
   - component: {fileID: 4811459823582425235}
   - component: {fileID: 4811459823582425234}
-  - component: {fileID: 4811459823582425237}
+  - component: {fileID: 1294762513733870720}
   m_Layer: 0
   m_Name: PotalScene
   m_TagString: PotalScene
@@ -108,7 +108,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.39, y: 1.84}
   m_EdgeRadius: 0
---- !u!114 &4811459823582425237
+--- !u!114 &1294762513733870720
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -117,7 +117,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4811459823582425236}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9fd89f7795a5344e8c1ec30a8e30202, type: 3}
+  m_Script: {fileID: 11500000, guid: 104e41e65bc799f4e99132b8f16a7920, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   arrow: 0
