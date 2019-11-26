@@ -859,7 +859,7 @@ PrefabInstance:
     - target: {fileID: 5955886557323474264, guid: f596280910a5da744b6ad8c35450f807,
         type: 3}
       propertyPath: _sender._horizontalExtraMoveDuration
-      value: 0.2
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 5955886557323474264, guid: f596280910a5da744b6ad8c35450f807,
         type: 3}
@@ -874,7 +874,7 @@ PrefabInstance:
     - target: {fileID: 5955886557323474264, guid: f596280910a5da744b6ad8c35450f807,
         type: 3}
       propertyPath: _sender._extraHeightValue
-      value: 0
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 5955886557323474264, guid: f596280910a5da744b6ad8c35450f807,
         type: 3}
