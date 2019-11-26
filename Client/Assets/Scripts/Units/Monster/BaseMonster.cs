@@ -30,7 +30,11 @@ public class BaseMonster : MonoBehaviour
     [SerializeField]
     protected float _chaseTime = 0.0f;
     [SerializeField]
-    public float _moveSpeed;
+    protected float _moveSpeed;
+    [SerializeField]
+    protected float _baseAttackResetTime;
+    [SerializeField]
+    protected float _baseAttackCurrentTime;
 
     [SerializeField]
     protected Transform _target = null;
@@ -93,6 +97,7 @@ public class BaseMonster : MonoBehaviour
     {
         _animator = GetComponentInChildren<Animator>();
         _currentHp = MaxHp;
+        _baseAttackCurrentTime = _baseAttackResetTime;
         SetInitialState();
     }
 
@@ -170,7 +175,6 @@ public class BaseMonster : MonoBehaviour
         _hitBox.gameObject.SetActive(false);
     }
 
-  
     protected void SetForwardDirection()
     {
         if (transform.localScale.x > 0)
@@ -243,7 +247,6 @@ public class BaseMonster : MonoBehaviour
         {
             return;
         }
-
         IsAttack = true;
 
         FlipImage();
@@ -252,9 +255,14 @@ public class BaseMonster : MonoBehaviour
 
     public virtual void UpdateAttackState()
     {
-        if (_animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f)
+        if (_animator.GetCurrentAnimatorStateInfo(0).fullPathHash != Animator.StringToHash("Base Layer.Walk") &&
+            _animator.GetCurrentAnimatorStateInfo(0).fullPathHash != Animator.StringToHash("Base Layer.Idle"))
         {
-            ChangeState(_moveState);
+            if (_animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f)
+            {
+                ChangeState(_moveState);
+                StartCheckBaseAttackTime();
+            }
         }
     }
 
@@ -263,6 +271,33 @@ public class BaseMonster : MonoBehaviour
         _animator.SetBool("isAttacking", false);
         IsAttack = false;
         InactiveBaseAttackBox();
+    }
+
+    protected virtual bool IsAttackable()
+    {
+        if (_baseAttackCurrentTime >= _baseAttackResetTime)
+            return true;
+        
+        else
+            return false;
+    }
+
+    IEnumerator CheckBaseAttackTime()
+    {
+        _baseAttackCurrentTime += Time.deltaTime;
+
+        if (_baseAttackCurrentTime >= _baseAttackResetTime)
+        {
+            StopCoroutine("CheckBaseAttackTime");
+            yield break;
+        }
+        yield return null;
+        StartCoroutine("CheckBaseAttackTime");
+    }
+    protected void StartCheckBaseAttackTime()
+    {
+        _baseAttackCurrentTime = 0.0f;
+        StartCoroutine("CheckBaseAttackTime");
     }
 
     //DieState
@@ -281,7 +316,7 @@ public class BaseMonster : MonoBehaviour
     {
         //nothing
     }
-
+   
     //HitState
     public virtual void EnterHitState()
     {
@@ -370,7 +405,10 @@ public class BaseMonster : MonoBehaviour
             }
             else
             {
-                ChangeState(_attackState);
+                if(IsAttackable())
+                    ChangeState(_attackState);
+                else
+                    _animator.SetBool("isMoving", false);
             }
         }
         else
@@ -418,5 +456,4 @@ public class BaseMonster : MonoBehaviour
             _randomMoveCurrentTime = 0f;
         }
     }
-
 }
