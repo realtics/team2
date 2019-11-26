@@ -1,0 +1,289 @@
+{
+  "DungeonInfos": [
+    {
+      "objectinfos": [
+        {
+          "filePath": "Dungeon/Dungeon",
+          "position": {
+            "x": 10.4365978,
+            "y": -4.621197,
+            "z": -4.17578125,
+            "normalized": {
+              "x": 0.858709753,
+              "y": -0.3802261,
+              "z": -0.343577862,
+              "magnitude": 1.0,
+              "sqrMagnitude": 1.00000012
+            },
+            "magnitude": 12.1538134,
+            "sqrMagnitude": 147.715179
+          }
+        }
+      ],
+      "monsterInfos": [
+        {
+          "filePath": "Monster/Tauarmy/Unit/Tauarmy",
+          "position": {
+            "x": 5.49,
+            "y": -2.72,
+            "z": 0.0,
+            "normalized": {
+              "x": 0.8960534,
+              "y": -0.443946332,
+              "z": 0.0,
+              "magnitude": 1.0,
+              "sqrMagnitude": 1.0
+            },
+            "magnitude": 6.126867,
+            "sqrMagnitude": 37.5384979
+          }
+        }
+      ],
+      "potalTransportinfos": [
+        {
+          "filePath": "Object/PotalTransport",
+          "position": {
+            "x": 8.12,
+            "y": -1.26,
+            "z": 0.0,
+            "normalized": {
+              "x": 0.988173842,
+              "y": -0.15333733,
+              "z": 0.0,
+              "normalized": {
+                "x": 0.9881739,
+                "y": -0.153337345,
+                "z": 0.0,
+                "magnitude": 1.0,
+                "sqrMagnitude": 1.0
+              },
+              "magnitude": 0.99999994,
+              "sqrMagnitude": 0.9999999
+            },
+            "magnitude": 8.217177,
+            "sqrMagnitude": 67.5219955
+          },
+          "transportPosition": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0,
+            "magnitude": 0.0,
+            "sqrMagnitude": 0.0
+          },
+          "arrow": 0,
+          "nextIndex": 1
+        }
+      ],
+      "potalSceneInfos": [],
+      "PlayerStartPosition": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "magnitude": 0.0,
+        "sqrMagnitude": 0.0
+      }
+    },
+    {
+      "objectinfos": [
+        {
+          "filePath": "Dungeon/Dungeon",
+          "position": {
+            "x": 10.4365978,
+            "y": -4.621197,
+            "z": -4.17578125,
+            "normalized": {
+              "x": 0.858709753,
+              "y": -0.3802261,
+              "z": -0.343577862,
+              "magnitude": 1.0,
+              "sqrMagnitude": 1.00000012
+            },
+            "magnitude": 12.1538134,
+            "sqrMagnitude": 147.715179
+          }
+        }
+      ],
+      "monsterInfos": [
+        {
+          "filePath": "Monster/Tauarmy/Unit/Tauarmy",
+          "position": {
+            "x": 5.49,
+            "y": -2.72,
+            "z": 0.0,
+            "normalized": {
+              "x": 0.8960534,
+              "y": -0.443946332,
+              "z": 0.0,
+              "magnitude": 1.0,
+              "sqrMagnitude": 1.0
+            },
+            "magnitude": 6.126867,
+            "sqrMagnitude": 37.5384979
+          }
+        },
+        {
+          "filePath": "Monster/Tauarmy/Unit/Tauarmy",
+          "position": {
+            "x": 3.16,
+            "y": -5.1,
+            "z": 0.0,
+            "normalized": {
+              "x": 0.5266989,
+              "y": -0.850051939,
+              "z": 0.0,
+              "magnitude": 1.0,
+              "sqrMagnitude": 1.0
+            },
+            "magnitude": 5.99963331,
+            "sqrMagnitude": 35.9955978
+          }
+        }
+      ],
+      "potalTransportinfos": [
+        {
+          "filePath": "Object/PotalTransport",
+          "position": {
+            "x": -8.11,
+            "y": -1.65,
+            "z": 0.0,
+            "normalized": {
+              "x": -0.9799247,
+              "y": -0.199368164,
+              "z": 0.0,
+              "magnitude": 1.0,
+              "sqrMagnitude": 1.0
+            },
+            "magnitude": 8.276146,
+            "sqrMagnitude": 68.49459
+          },
+          "transportPosition": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0,
+            "magnitude": 0.0,
+            "sqrMagnitude": 0.0
+          },
+          "arrow": 0,
+          "nextIndex": 0
+        },
+        {
+          "filePath": "Object/PotalTransport",
+          "position": {
+            "x": 8.22,
+            "y": -1.65,
+            "z": 0.0,
+            "normalized": {
+              "x": 0.980442762,
+              "y": -0.1968042,
+              "z": 0.0,
+              "normalized": {
+                "x": 0.9804428,
+                "y": -0.196804211,
+                "z": 0.0,
+                "magnitude": 1.0,
+                "sqrMagnitude": 1.0
+              },
+              "magnitude": 0.99999994,
+              "sqrMagnitude": 0.9999999
+            },
+            "magnitude": 8.383967,
+            "sqrMagnitude": 70.2909
+          },
+          "transportPosition": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0,
+            "magnitude": 0.0,
+            "sqrMagnitude": 0.0
+          },
+          "arrow": 0,
+          "nextIndex": 2
+        }
+      ],
+      "potalSceneInfos": [],
+      "PlayerStartPosition": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "magnitude": 0.0,
+        "sqrMagnitude": 0.0
+      }
+    },
+    {
+      "objectinfos": [
+        {
+          "filePath": "Dungeon/LargeDungeon",
+          "position": {
+            "x": 10.4365978,
+            "y": -4.621197,
+            "z": -4.17578125,
+            "normalized": {
+              "x": 0.858709753,
+              "y": -0.3802261,
+              "z": -0.343577862,
+              "magnitude": 1.0,
+              "sqrMagnitude": 1.00000012
+            },
+            "magnitude": 12.1538134,
+            "sqrMagnitude": 147.715179
+          }
+        }
+      ],
+      "monsterInfos": [
+        {
+          "filePath": "Monster/Calvary/Unit/Calvary",
+          "position": {
+            "x": 17.39,
+            "y": -4.18,
+            "z": 0.0,
+            "normalized": {
+              "x": 0.972306,
+              "y": -0.233711272,
+              "z": 0.0,
+              "magnitude": 1.0,
+              "sqrMagnitude": 0.99999994
+            },
+            "magnitude": 17.8853149,
+            "sqrMagnitude": 319.8845
+          }
+        }
+      ],
+      "potalTransportinfos": [
+        {
+          "filePath": "Object/PotalTransport",
+          "position": {
+            "x": -8.11,
+            "y": -1.65,
+            "z": 0.0,
+            "normalized": {
+              "x": -0.9799247,
+              "y": -0.199368164,
+              "z": 0.0,
+              "magnitude": 1.0,
+              "sqrMagnitude": 1.0
+            },
+            "magnitude": 8.276146,
+            "sqrMagnitude": 68.49459
+          },
+          "transportPosition": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0,
+            "magnitude": 0.0,
+            "sqrMagnitude": 0.0
+          },
+          "arrow": 0,
+          "nextIndex": 1
+        }
+      ],
+      "potalSceneInfos": [],
+      "PlayerStartPosition": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "magnitude": 0.0,
+        "sqrMagnitude": 0.0
+      }
+    }
+  ]
+}
