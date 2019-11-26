@@ -1879,7 +1879,7 @@ PrefabInstance:
     - target: {fileID: 4127798058604522680, guid: 1062798e89fa7ff48b49faaa1a382347,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4127798058604522687, guid: 1062798e89fa7ff48b49faaa1a382347,
         type: 3}
@@ -3140,24 +3140,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1857849419541559141, guid: 72f0cddf4c0177847b2d5ace72cfe991,
         type: 3}
-      propertyPath: _pools.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1857849419541559141, guid: 72f0cddf4c0177847b2d5ace72cfe991,
-        type: 3}
-      propertyPath: _pools.Array.data[0].poolType
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1857849419541559141, guid: 72f0cddf4c0177847b2d5ace72cfe991,
-        type: 3}
-      propertyPath: _pools.Array.data[0].pooledObject
-      value: 
-      objectReference: {fileID: 8467314183276299524, guid: fe356b9be93e61b4eaee401d0d359b7a,
-        type: 3}
-    - target: {fileID: 1857849419541559141, guid: 72f0cddf4c0177847b2d5ace72cfe991,
-        type: 3}
       propertyPath: _pools.Array.data[0].initObjectCount
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 72f0cddf4c0177847b2d5ace72cfe991, type: 3}

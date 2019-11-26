@@ -55,10 +55,10 @@ public class InputSystem : MonoBehaviour
         {
             AttackInfoSender sender = new AttackInfoSender();
             sender.Attacker = transform;
-            sender.ExtraHeightValue = 0.1f;
+            sender.ExtraHeightValue = 0.2f;
             sender.HorizontalExtraMoveDuration = 10.0f;
-            sender.HorizontalExtraMoveValue = -10.0f;
-            sender.StunDuration = 2.0f;
+            sender.HorizontalExtraMoveValue = -15.0f;
+            sender.StunDuration = 0.5f;
             _pc.SetTest(sender);
         }
     }
