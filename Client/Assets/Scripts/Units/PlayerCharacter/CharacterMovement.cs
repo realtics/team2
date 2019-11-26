@@ -7,8 +7,8 @@ public class CharacterMovement : BaseUnit
 {
     private bool _nextAttack;
     private CharacterAnimController _animController;
-    private Dictionary<SwordmanSkillType, CharacterSkill> _equiredSkills;
-    private SwordmanSkillType _usedSkill;
+    private Dictionary<SwordmanSkillIndex, CharacterSkill> _equiredSkills;
+    private SwordmanSkillIndex _usedSkill;
 
     public CharacterSkill UsedSkill { get { return _equiredSkills[_usedSkill]; } }
 
@@ -20,8 +20,8 @@ public class CharacterMovement : BaseUnit
         _animator.SetBool("NextAttack", false);
         _animController = GetComponentInChildren<CharacterAnimController>();
 
-        _equiredSkills = new Dictionary<SwordmanSkillType, CharacterSkill>();
-        _equiredSkills.Add(SwordmanSkillType.Jingongcham, SwordmanSkillManager.Instance.GetSkill(_stat, SwordmanSkillType.Jingongcham));
+        _equiredSkills = new Dictionary<SwordmanSkillIndex, CharacterSkill>();
+        _equiredSkills.Add(SwordmanSkillIndex.Jingongcham, SwordmanSkillManager.Instance.GetSkill(_stat, SwordmanSkillIndex.Jingongcham));
     }
 
     protected override void Update()
@@ -184,6 +184,7 @@ public class CharacterMovement : BaseUnit
     {
         if (!base.OnHit(sender))
             return false;
+
         _animator.SetBool("IsHit", true);
 
         if (sender.Attacker.position.x > transform.position.x)
@@ -219,13 +220,13 @@ public class CharacterMovement : BaseUnit
 
     public override bool SetSkill()
     {
-        _usedSkill = SwordmanSkillType.Jingongcham;
+        _usedSkill = SwordmanSkillIndex.Jingongcham;
 
         if (!UsedSkill.UsableSkill)
         {
             Debug.Log("현재 쿨타임입니다. : " + UsedSkill.CurrentCoolTime + "초 남았습니다.");
 
-            _usedSkill = SwordmanSkillType.None;
+            _usedSkill = SwordmanSkillIndex.None;
             return false;
         }
 

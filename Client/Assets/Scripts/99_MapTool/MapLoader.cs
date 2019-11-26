@@ -241,6 +241,17 @@ public class MapLoader : MonoBehaviour
     {
         _dungeonName = dungeonName;
     }
+    public void TestChangeDungeon(int index)
+    {
+        ChangeDungeon(index);
+    }
+
+    public void TestLoader(string dungeonName)
+    {
+        LoaderDungeon(dungeonName);
+        _currentDungeonIndex = _startDungeonIndex;
+        Instantiate(_currentDungeonIndex);
+    }
 
     public T JsonLoad<T>(string fileName)
     {
