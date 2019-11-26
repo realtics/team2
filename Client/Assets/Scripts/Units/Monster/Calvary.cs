@@ -66,9 +66,9 @@ public class Calvary : BaseMonster
     public override void EnterDieState()
     {
         base.EnterDieState();
-        DungeonGameManager.Instance.NoticeGameClear();
-    }
 
+        DungeonGameManager.Instance.NoticeBossDie();
+    }
     public override void UpdateDieState()
     {
         base.UpdateDieState();
@@ -79,3 +79,6 @@ public class Calvary : BaseMonster
         base.ExitDieState();
     }
 }
+
+//옵저버패턴
+

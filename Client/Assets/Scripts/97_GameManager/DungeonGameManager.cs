@@ -142,7 +142,7 @@ public class DungeonGameManager : GameManager
         }
     }
 
-    public void NoticeGameClear()
+    public void NoticeBossDie()
     {
         Invoke(nameof(GameResult), _delayResult);
     }
