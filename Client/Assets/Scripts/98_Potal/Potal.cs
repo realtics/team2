@@ -37,8 +37,6 @@ public class Potal : MonoBehaviour
                 PlayerEnterPotal();
             }
         }
-
-
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
@@ -59,5 +57,4 @@ public class Potal : MonoBehaviour
     {
         PotalManager.instance.PotalEnter();
     }
-
 }

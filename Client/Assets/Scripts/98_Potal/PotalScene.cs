@@ -20,7 +20,6 @@ public class PotalScene : Potal
     public override void Enter()
     {
         MapLoader.instacne.SetMap(_nextSceneName);
-        LobbyGameManager.Instance.MoveToScene(4);        
-        //LobbyGameManager.Instance.MoveToScene((int)SceneIndex.Dungen);        
+        LobbyGameManager.Instance.MoveToScene(4);             
     }
 }

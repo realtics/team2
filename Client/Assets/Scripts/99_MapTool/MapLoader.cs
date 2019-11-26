@@ -255,6 +255,7 @@ public class MapLoader : MonoBehaviour
 
     public void ChangeDungeon(int index)
     {
+        GetGameManager().FadeOut();
         DungeonSetActive(false, _currentDungeonIndex);
         Instantiate(index);
         _currentDungeonIndex = index;
@@ -262,6 +263,7 @@ public class MapLoader : MonoBehaviour
 
     public void Loader()
     {
+        GetGameManager().FadeOut();
         LoaderDungeon(_dungeonName);
         _currentDungeonIndex = _startDungeonIndex;
         Instantiate(_currentDungeonIndex);
@@ -270,6 +272,31 @@ public class MapLoader : MonoBehaviour
     {
         _dungeonName = dungeonName;
     }
+
+    public T JsonLoad<T>(string fileName)
+    {
+        string path = string.Format("{0}/{1}", "Map", fileName);
+        TextAsset textAsset = Resources.Load(path) as TextAsset;
+        string dungeonText = textAsset.text;
+        return JsonConvert.DeserializeObject<T>(dungeonText);
+    }
+
+    private GameManager GetGameManager()
+    {
+        if(DungeonGameManager.Instance != null)
+        {
+            return DungeonGameManager.Instance;
+        }
+        else if(LobbyGameManager.Instance != null)
+        {
+            return LobbyGameManager.Instance;
+        }
+        return null;
+    }
+
+
+
+
     public void TestChangeDungeon(int index)
     {
         ChangeDungeon(index);
@@ -280,13 +307,5 @@ public class MapLoader : MonoBehaviour
         LoaderDungeon(dungeonName);
         _currentDungeonIndex = _startDungeonIndex;
         Instantiate(_currentDungeonIndex);
-    }
-
-    public T JsonLoad<T>(string fileName)
-    {
-        string path = string.Format("{0}/{1}", "Map", fileName);
-        TextAsset textAsset = Resources.Load(path) as TextAsset;
-        string dungeonText = textAsset.text;
-        return JsonConvert.DeserializeObject<T>(dungeonText);
     }
 }
