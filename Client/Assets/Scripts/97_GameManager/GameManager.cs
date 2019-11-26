@@ -35,13 +35,11 @@ public class GameManager : MonoBehaviour
 
     protected virtual void Start()
     {
-        StartCoroutine(Fadeoutplay());
+        FadeOut();
     }
-
 
     public void MoveToScene(int Scene)
     {
-        FadeIn();
         LoadScene(Scene);
     }
 
@@ -49,6 +47,13 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene(Scene);
     }
+
+    public void FadeOut()
+    {
+        FadeIn();
+        StartCoroutine(Fadeoutplay());
+    }
+
     private void FadeIn()
     {
         Color fadecolor = _fadeOut.color;
