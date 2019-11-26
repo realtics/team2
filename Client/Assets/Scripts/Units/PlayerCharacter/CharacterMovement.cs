@@ -7,10 +7,10 @@ public class CharacterMovement : BaseUnit
 {
     private bool _nextAttack;
     private CharacterAnimController _animController;
-    private Dictionary<SwordmanSkillType, CharacterSkill> _equiredSkill;
+    private Dictionary<SwordmanSkillType, CharacterSkill> _equiredSkills;
     private SwordmanSkillType _usedSkill;
 
-    public CharacterSkill UsedSkill { get { return _equiredSkill[_usedSkill]; } }
+    public CharacterSkill UsedSkill { get { return _equiredSkills[_usedSkill]; } }
 
     protected override void Start()
     {
@@ -20,8 +20,8 @@ public class CharacterMovement : BaseUnit
         _animator.SetBool("NextAttack", false);
         _animController = GetComponentInChildren<CharacterAnimController>();
 
-        _equiredSkill = new Dictionary<SwordmanSkillType, CharacterSkill>();
-        _equiredSkill.Add(SwordmanSkillType.Jingongcham, SwordmanSkillManager.Instance.GetSkill(_stat, SwordmanSkillType.Jingongcham));
+        _equiredSkills = new Dictionary<SwordmanSkillType, CharacterSkill>();
+        _equiredSkills.Add(SwordmanSkillType.Jingongcham, SwordmanSkillManager.Instance.GetSkill(_stat, SwordmanSkillType.Jingongcham));
     }
 
     protected override void Update()
@@ -32,7 +32,7 @@ public class CharacterMovement : BaseUnit
 
     private void SkillCoolTimeUpdate()
     {
-        foreach (CharacterSkill skill in _equiredSkill.Values)
+        foreach (CharacterSkill skill in _equiredSkills.Values)
         {
             skill.UpdateCoolTime();
         }
@@ -114,6 +114,16 @@ public class CharacterMovement : BaseUnit
         return true;
     }
 
+    public override bool SetAirHitHeight(float power)
+    {
+        if (!base.SetAirHitHeight(power))
+            return false;
+
+        _animator.SetBool("IsGround", false);
+        _animator.SetBool("IsAirHit", true);
+        return true;
+    }
+
     protected override bool SetJumpDown()
     {
         if (!base.SetJumpDown())
@@ -159,6 +169,9 @@ public class CharacterMovement : BaseUnit
 
     public override bool SetAxis(float horizontal, float vertical)
     {
+        if (_animator.GetCurrentAnimatorStateInfo(0).IsTag("Hit"))
+            return false;
+
         if (!base.SetAxis(horizontal, vertical))
             return false;
 
@@ -167,9 +180,10 @@ public class CharacterMovement : BaseUnit
         return true;
     }
 
-    public override void OnHit(AttackInfoSender sender)
+    public override bool OnHit(AttackInfoSender sender)
     {
-        base.OnHit(sender);
+        if (!base.OnHit(sender))
+            return false;
         _animator.SetBool("IsHit", true);
 
         if (sender.Attacker.position.x > transform.position.x)
@@ -182,6 +196,11 @@ public class CharacterMovement : BaseUnit
 
         if (sender.VerticalExtraMoveDuration > 0.0f)
             MoveUnit(sender.VerticalExtraMoveValue, sender.VerticalExtraMoveDuration, ExtraMoveDirection.Vertical);
+
+        if (sender.ExtraHeightValue > 0.0f)
+            SetAirHitHeight(sender.ExtraHeightValue);
+
+        return true;
     }
 
     public override void SetHit(float stunDuration)
@@ -194,6 +213,7 @@ public class CharacterMovement : BaseUnit
     {
         base.StopHit();
         _animator.SetBool("IsHit", false);
+        _animator.SetBool("IsAirHit", false);
         _animator.SetBool("IsAttack", false);
     }
 

@@ -50,5 +50,16 @@ public class InputSystem : MonoBehaviour
             _pc.SetRun();
         else
             _pc.StopRun();
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            AttackInfoSender sender = new AttackInfoSender();
+            sender.Attacker = transform;
+            sender.ExtraHeightValue = 0.2f;
+            sender.HorizontalExtraMoveDuration = 0.2f;
+            sender.HorizontalExtraMoveValue = -10.0f;
+            sender.StunDuration = 2.0f;
+            _pc.SetTest(sender);
+        }
     }
 }

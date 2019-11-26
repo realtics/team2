@@ -57,4 +57,9 @@ public class PlayerCharacter : MonoBehaviour
     {
         _movement.SetSkill();
     }
+
+    public void SetTest(AttackInfoSender sender)
+    {
+        _movement.OnHit(sender);
+    }
 }
