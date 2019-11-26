@@ -46,6 +46,7 @@ public class BaseUnit : MonoBehaviour
 
     private float _height;
     private bool _isHit;
+    private bool _isAirHit;
     private float _hitRecoveryTime;
 
     private float _extraMoveDuration;
@@ -62,6 +63,7 @@ public class BaseUnit : MonoBehaviour
     public bool IsJumpUp { get { return _jumpState == UnitJumpState.JumpUp; } }
     public bool IsJumpDown { get { return _jumpState == UnitJumpState.JumpDown; } }
     public bool IsHit { get { return _isHit; } }
+    public bool IsAirHit { get { return _isAirHit; } }
     public float Forward { get { return _avatar.transform.localScale.x < 0 ? -1 : 1; } }
     public float CurAnimTime { get { return _animator.GetCurrentAnimatorStateInfo(0).normalizedTime; } }
     public bool IsInTranstion { get { return _animator.IsInTransition(0); } }
@@ -111,6 +113,9 @@ public class BaseUnit : MonoBehaviour
 
         if (_hitRecoveryTime <= 0.0f)
         {
+            if (!IsGround)
+                return;
+
             StopHit();
         }
     }
@@ -199,9 +204,24 @@ public class BaseUnit : MonoBehaviour
         if (!IsJupable())
             return false;
 
-        _jumpState = UnitJumpState.JumpUp;
-        _jumpValue = JumpPower;
+        SetJumpPower(JumpPower);
         return true;
+    }
+
+    public virtual bool SetAirHitHeight(float power)
+    {
+        if (_isAirHit)
+            return false;
+
+        SetJumpPower(power);
+        _isAirHit = true;
+        return true;
+    }
+
+    public void SetJumpPower(float power)
+    {
+        _jumpState = UnitJumpState.JumpUp;
+        _jumpValue = power;
     }
 
     protected virtual bool SetJumpDown()
@@ -221,6 +241,7 @@ public class BaseUnit : MonoBehaviour
 
         _jumpState = UnitJumpState.None;
         _height = 0.0f;
+        _jumpValue = 0.0f;
         StopAttack();
 
         return true;
@@ -318,6 +339,7 @@ public class BaseUnit : MonoBehaviour
     public virtual void StopHit()
     {
         _isHit = false;
+        _isAirHit = false;
         _hitRecoveryTime = 0.0f;
     }
 
@@ -326,11 +348,16 @@ public class BaseUnit : MonoBehaviour
         return _animator.GetCurrentAnimatorStateInfo(0).normalizedTime <= 0.95f;
     }
 
-    public virtual void OnHit(AttackInfoSender sender)
+    public virtual bool OnHit(AttackInfoSender sender)
     {
+        if (_isAirHit)
+            return false;
+
         SetHit(sender.StunDuration);
         StopAttack();
         _stat.OnHitDamage(sender);
+
+        return true;
     }
 
     protected void SetRecoveryTime(float time)
