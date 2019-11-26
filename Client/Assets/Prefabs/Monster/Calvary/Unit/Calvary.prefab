@@ -153,6 +153,8 @@ MonoBehaviour:
   _chaseCancleTime: 5
   _chaseTime: 0
   _moveSpeed: 2.5
+  _baseAttackResetTime: 1
+  _baseAttackCurrentTime: 0
   _target: {fileID: 0}
   _baseAttackBox: {fileID: 5101124502921087084}
   _hitBox: {fileID: 5112109842577077389}
