@@ -32,6 +32,8 @@ public class Potal : MonoBehaviour
         if (!_isPotalBlock)
         {
             PlayerEnterPotal();
+            // hack. 테스트용 끝나고 지워.
+            collision.gameObject.transform.position = new Vector3(0, 0, 0);
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
@@ -50,7 +52,7 @@ public class Potal : MonoBehaviour
     }
     public virtual void Enter()
     {
-        _isPotalBlock = true;
+
     }
 
 }
