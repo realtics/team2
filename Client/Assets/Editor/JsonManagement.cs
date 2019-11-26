@@ -13,7 +13,8 @@ public class JsonManagement
     JsonSerializerSettings setting = new JsonSerializerSettings();
 
     private const string _objectTag = "FieldObject";
-    private const string _potalTag = "Potal";
+    private const string _potalSceneTag = "PotalScene";
+    private const string _potalTranportTag = "PotalTransport"; 
 
     public JsonManagement()
     {
@@ -44,10 +45,16 @@ public class JsonManagement
             dungeonInfo.AddObject(obj);
         }
 
-        foreach (GameObject obj in GameObject.FindGameObjectsWithTag(_potalTag))
+        foreach (GameObject obj in GameObject.FindGameObjectsWithTag(_potalTranportTag))
         {
-            dungeonInfo.AddPotal(obj);
+            dungeonInfo.AddPotalTransport(obj);
         }
+
+        foreach (GameObject obj in GameObject.FindGameObjectsWithTag(_potalSceneTag))
+        {
+            dungeonInfo.AddPotalScene(obj);
+        }
+
         // 임시 데이터.
         //GameObject.FindGameObjectsWithTag("PlayerStart");
         dungeonInfo.PlayerStartPosition = new Vector3(0, 0, 0);

@@ -3,32 +3,39 @@
     {
       "objectinfos": [
         {
-          "filePath": "Object/far2Background",
+          "filePath": "Object/StoneBar",
           "position": {
-            "x": 4.81,
-            "y": 1.87,
+            "x": -7.44,
+            "y": -5.55,
             "z": 0.0,
             "normalized": {
-              "x": 0.932041049,
-              "y": 0.362352759,
+              "x": -0.8015487,
+              "y": -0.5979295,
               "z": 0.0,
               "magnitude": 1.0,
               "sqrMagnitude": 1.0
             },
-            "magnitude": 5.160717,
-            "sqrMagnitude": 26.633
+            "magnitude": 9.282031,
+            "sqrMagnitude": 86.156105
           }
         }
       ],
-      "potalinfos": [
+      "potalTransportinfos": [
         {
-          "filePath": "Object/Potal",
+          "filePath": "Object/PotalTransport",
           "position": {
-            "x": 0.0,
-            "y": 0.0,
+            "x": 8.21,
+            "y": -2.2,
             "z": 0.0,
-            "magnitude": 0.0,
-            "sqrMagnitude": 0.0
+            "normalized": {
+              "x": 0.9659218,
+              "y": -0.2588341,
+              "z": 0.0,
+              "magnitude": 1.0,
+              "sqrMagnitude": 1.0
+            },
+            "magnitude": 8.499653,
+            "sqrMagnitude": 72.2441
           },
           "transportPosition": {
             "x": 0.0,
@@ -37,8 +44,120 @@
             "magnitude": 0.0,
             "sqrMagnitude": 0.0
           },
-          "Arrow": 0,
-          "NextDungeonIndex": 1
+          "arrow": 0,
+          "nextIndex": 1
+        }
+      ],
+      "potalSceneInfos": [
+        {
+          "filePath": "Object/PotalScene",
+          "position": {
+            "x": 0.0,
+            "y": 1.9,
+            "z": 0.0,
+            "normalized": {
+              "x": 0.0,
+              "y": 1.0,
+              "z": 0.0,
+              "magnitude": 1.0,
+              "sqrMagnitude": 1.0
+            },
+            "magnitude": 1.9,
+            "sqrMagnitude": 3.61
+          },
+          "transportPosition": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0,
+            "magnitude": 0.0,
+            "sqrMagnitude": 0.0
+          },
+          "arrow": 0,
+          "nextDataName": "Test2"
+        }
+      ],
+      "PlayerStartPosition": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "magnitude": 0.0,
+        "sqrMagnitude": 0.0
+      }
+    },
+    {
+      "objectinfos": [
+        {
+          "filePath": "Object/StoneBar",
+          "position": {
+            "x": 7.71,
+            "y": -4.91,
+            "z": 0.0,
+            "normalized": {
+              "x": 0.8434813,
+              "y": -0.5371586,
+              "z": 0.0,
+              "magnitude": 1.0,
+              "sqrMagnitude": 1.00000012
+            },
+            "magnitude": 9.140689,
+            "sqrMagnitude": 83.5522
+          }
+        }
+      ],
+      "potalTransportinfos": [
+        {
+          "filePath": "Object/PotalTransport",
+          "position": {
+            "x": -8.17,
+            "y": -2.2,
+            "z": 0.0,
+            "normalized": {
+              "x": -0.965604365,
+              "y": -0.260015875,
+              "z": 0.0,
+              "magnitude": 1.0,
+              "sqrMagnitude": 1.0
+            },
+            "magnitude": 8.461022,
+            "sqrMagnitude": 71.5889
+          },
+          "transportPosition": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0,
+            "magnitude": 0.0,
+            "sqrMagnitude": 0.0
+          },
+          "arrow": 0,
+          "nextIndex": 0
+        }
+      ],
+      "potalSceneInfos": [
+        {
+          "filePath": "Object/PotalScene",
+          "position": {
+            "x": 0.0,
+            "y": 1.9,
+            "z": 0.0,
+            "normalized": {
+              "x": 0.0,
+              "y": 1.0,
+              "z": 0.0,
+              "magnitude": 1.0,
+              "sqrMagnitude": 1.0
+            },
+            "magnitude": 1.9,
+            "sqrMagnitude": 3.61
+          },
+          "transportPosition": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0,
+            "magnitude": 0.0,
+            "sqrMagnitude": 0.0
+          },
+          "arrow": 0,
+          "nextDataName": "Test2"
         }
       ],
       "PlayerStartPosition": {

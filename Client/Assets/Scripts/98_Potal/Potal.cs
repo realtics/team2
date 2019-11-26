@@ -12,10 +12,7 @@ public enum ARROW
 
 public class Potal : MonoBehaviour
 {
-    private SpriteRenderer _spriteRenderer;
-
     public ARROW arrow;
-    public int nextDungenIndex;
     public Vector3 transportPosition;
 
     private bool _isPlayerEnter;
@@ -28,12 +25,6 @@ public class Potal : MonoBehaviour
         _isPotalBlock = false;
         _isPlayerEnter = false;
         
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -52,9 +43,14 @@ public class Potal : MonoBehaviour
         _isPlayerEnter = true;
     }
     
-    public void Teardown()
+    public void Reset()
     {
         _isPotalBlock = false;
         _isPlayerEnter = false;
     }
+    public virtual void Enter()
+    {
+        _isPotalBlock = true;
+    }
+
 }

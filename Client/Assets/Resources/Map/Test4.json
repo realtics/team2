@@ -1,0 +1,144 @@
+{
+  "DungeonInfos": [
+    {
+      "objectinfos": [
+        {
+          "filePath": "Object/StoneBar",
+          "position": {
+            "x": -5.03,
+            "y": 2.4,
+            "z": 0.0,
+            "normalized": {
+              "x": -0.9025286,
+              "y": 0.430629939,
+              "z": 0.0,
+              "magnitude": 1.0,
+              "sqrMagnitude": 1.0
+            },
+            "magnitude": 5.57323074,
+            "sqrMagnitude": 31.0609016
+          }
+        },
+        {
+          "filePath": "Object/StoneBar",
+          "position": {
+            "x": -5.06,
+            "y": 0.13,
+            "z": 0.0,
+            "normalized": {
+              "x": -0.9996701,
+              "y": 0.0256832223,
+              "z": 0.0,
+              "normalized": {
+                "x": -0.999670148,
+                "y": 0.0256832242,
+                "z": 0.0,
+                "magnitude": 1.0,
+                "sqrMagnitude": 1.0
+              },
+              "magnitude": 0.99999994,
+              "sqrMagnitude": 0.99999994
+            },
+            "magnitude": 5.06167,
+            "sqrMagnitude": 25.6204987
+          }
+        },
+        {
+          "filePath": "Object/StoneBar",
+          "position": {
+            "x": -5.1,
+            "y": -2.25,
+            "z": 0.0,
+            "normalized": {
+              "x": -0.914917767,
+              "y": -0.4036402,
+              "z": 0.0,
+              "normalized": {
+                "x": -0.9149178,
+                "y": -0.40364024,
+                "z": 0.0,
+                "magnitude": 1.0,
+                "sqrMagnitude": 1.00000012
+              },
+              "magnitude": 0.99999994,
+              "sqrMagnitude": 0.99999994
+            },
+            "magnitude": 5.574271,
+            "sqrMagnitude": 31.0724983
+          }
+        }
+      ],
+      "potalinfos": [],
+      "PlayerStartPosition": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "magnitude": 0.0,
+        "sqrMagnitude": 0.0
+      }
+    },
+    {
+      "objectinfos": [
+        {
+          "filePath": "Object/StoneBar",
+          "position": {
+            "x": 5.31,
+            "y": -1.94,
+            "z": 0.0,
+            "normalized": {
+              "x": 0.939275861,
+              "y": -0.343162954,
+              "z": 0.0,
+              "magnitude": 1.0,
+              "sqrMagnitude": 0.99999994
+            },
+            "magnitude": 5.653291,
+            "sqrMagnitude": 31.9597
+          }
+        },
+        {
+          "filePath": "Object/StoneBar",
+          "position": {
+            "x": 5.28,
+            "y": 0.44,
+            "z": 0.0,
+            "normalized": {
+              "x": 0.9965458,
+              "y": 0.0830454752,
+              "z": 0.0,
+              "magnitude": 1.0,
+              "sqrMagnitude": 1.00000012
+            },
+            "magnitude": 5.2983017,
+            "sqrMagnitude": 28.0720024
+          }
+        },
+        {
+          "filePath": "Object/StoneBar",
+          "position": {
+            "x": 3.62,
+            "y": -0.71,
+            "z": 0.0,
+            "normalized": {
+              "x": 0.981303751,
+              "y": -0.192465648,
+              "z": 0.0,
+              "magnitude": 1.0,
+              "sqrMagnitude": 1.00000012
+            },
+            "magnitude": 3.68896985,
+            "sqrMagnitude": 13.6085
+          }
+        }
+      ],
+      "potalinfos": [],
+      "PlayerStartPosition": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "magnitude": 0.0,
+        "sqrMagnitude": 0.0
+      }
+    }
+  ]
+}

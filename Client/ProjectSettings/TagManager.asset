@@ -8,6 +8,8 @@ TagManager:
   - Potal
   - PlayerHitBox
   - Monster
+  - PotalTransport
+  - PotalScene
   layers:
   - Default
   - TransparentFX

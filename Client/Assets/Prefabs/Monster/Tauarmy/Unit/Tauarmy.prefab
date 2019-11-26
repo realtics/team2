@@ -154,6 +154,8 @@ MonoBehaviour:
   _chaseCancleTime: 3
   _chaseTime: 0
   _moveSpeed: 1.5
+  _baseAttackResetTime: 1.5
+  _baseAttackCurrentTime: 0
   _target: {fileID: 0}
   _baseAttackBox: {fileID: 6639602415026870072}
   _hitBox: {fileID: 6638185263794367449}
@@ -342,7 +344,7 @@ BoxCollider2D:
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_UsedByEffector: 1
+  m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 1.6013681, y: 0.44167852}
   m_SpriteTilingProperty:
@@ -505,10 +507,10 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -1.2265807, y: 1.679497}
+  m_Offset: {x: -1.2265807, y: 1.8558748}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -519,7 +521,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.2307913, y: 3.138144}
+  m_Size: {x: 2.2307913, y: 2.1680655}
   m_EdgeRadius: 0
 --- !u!114 &2472127036108729485
 MonoBehaviour:
@@ -534,8 +536,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _sender:
-    _horizontalExtraMoveDuration: 0.1
-    _horizontalExtraMoveValue: -13
+    _horizontalExtraMoveDuration: 0.15
+    _horizontalExtraMoveValue: -10
     _verticalExtraMoveDuration: 0
     _verticalExtraMoveValue: 0
     _stunDuration: 0.4

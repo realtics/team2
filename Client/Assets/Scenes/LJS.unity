@@ -198,7 +198,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 34223262}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.088829994, y: -4.639138, z: -10}
+  m_LocalPosition: {x: 0.08644676, y: -4.639146, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1804,7 +1804,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1828477994}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.771206, y: -4.806965, z: -10}
+  m_LocalPosition: {x: -4.7710743, y: -4.806965, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1482920773}
@@ -1950,6 +1950,11 @@ PrefabInstance:
     - target: {fileID: 1020073003416927020, guid: 9e770ae2b90bf63409cba0581ffbe468,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4683341297758660005, guid: 9e770ae2b90bf63409cba0581ffbe468,
+        type: 3}
+      propertyPath: _baseAttackCurrentTime
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
