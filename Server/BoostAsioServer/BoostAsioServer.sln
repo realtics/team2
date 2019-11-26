@@ -13,7 +13,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ChattingTCPServer", "Chatti
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "exam_ChattingTCPServer", "exam_ChattingTCPServer\exam_ChattingTCPServer.vcxproj", "{9BADC858-DD45-4A84-B01E-C378010D01DA}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BoostAsioServer01", "BoostAsioServer01\BoostAsioServer01.vcxproj", "{0A04DC2C-5474-494B-A268-D57320FDDE60}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BoostAsioServer01", "BoostAsioServer01\BoostAsioServer01.vcxproj", "{14D10F82-A9D2-480B-A750-161B2E98ACF8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -63,14 +63,14 @@ Global
 		{9BADC858-DD45-4A84-B01E-C378010D01DA}.Release|x64.Build.0 = Release|x64
 		{9BADC858-DD45-4A84-B01E-C378010D01DA}.Release|x86.ActiveCfg = Release|Win32
 		{9BADC858-DD45-4A84-B01E-C378010D01DA}.Release|x86.Build.0 = Release|Win32
-		{0A04DC2C-5474-494B-A268-D57320FDDE60}.Debug|x64.ActiveCfg = Debug|x64
-		{0A04DC2C-5474-494B-A268-D57320FDDE60}.Debug|x64.Build.0 = Debug|x64
-		{0A04DC2C-5474-494B-A268-D57320FDDE60}.Debug|x86.ActiveCfg = Debug|Win32
-		{0A04DC2C-5474-494B-A268-D57320FDDE60}.Debug|x86.Build.0 = Debug|Win32
-		{0A04DC2C-5474-494B-A268-D57320FDDE60}.Release|x64.ActiveCfg = Release|x64
-		{0A04DC2C-5474-494B-A268-D57320FDDE60}.Release|x64.Build.0 = Release|x64
-		{0A04DC2C-5474-494B-A268-D57320FDDE60}.Release|x86.ActiveCfg = Release|Win32
-		{0A04DC2C-5474-494B-A268-D57320FDDE60}.Release|x86.Build.0 = Release|Win32
+		{14D10F82-A9D2-480B-A750-161B2E98ACF8}.Debug|x64.ActiveCfg = Debug|x64
+		{14D10F82-A9D2-480B-A750-161B2E98ACF8}.Debug|x64.Build.0 = Debug|x64
+		{14D10F82-A9D2-480B-A750-161B2E98ACF8}.Debug|x86.ActiveCfg = Debug|Win32
+		{14D10F82-A9D2-480B-A750-161B2E98ACF8}.Debug|x86.Build.0 = Debug|Win32
+		{14D10F82-A9D2-480B-A750-161B2E98ACF8}.Release|x64.ActiveCfg = Release|x64
+		{14D10F82-A9D2-480B-A750-161B2E98ACF8}.Release|x64.Build.0 = Release|x64
+		{14D10F82-A9D2-480B-A750-161B2E98ACF8}.Release|x86.ActiveCfg = Release|Win32
+		{14D10F82-A9D2-480B-A750-161B2E98ACF8}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
