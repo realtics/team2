@@ -269,6 +269,7 @@ public class BaseMonster : MonoBehaviour
         if (_height <= 0.0f)
         {
             _height = 0.0f;
+            _avatar.localPosition = _originPos;
             _jumpValue = 0.0f;
             StopCoroutine("AerialProcess");
             yield break;

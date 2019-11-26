@@ -10,6 +10,7 @@ TagManager:
   - Monster
   - PotalTransport
   - PotalScene
+  - MonsterHitBox
   layers:
   - Default
   - TransparentFX
