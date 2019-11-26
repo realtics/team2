@@ -428,11 +428,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _sender:
-    _horizontalExtraMoveDuration: 0.2
+    _horizontalExtraMoveDuration: 10
     _horizontalExtraMoveValue: -15
     _verticalExtraMoveDuration: 0
     _verticalExtraMoveValue: 0
-    _extraHeightValue: 0.1
+    _extraHeightValue: 0.2
     _stunDuration: 0.5
 --- !u!114 &8917905186618086786
 MonoBehaviour:

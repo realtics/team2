@@ -859,20 +859,34 @@ PrefabInstance:
     - target: {fileID: 5955886557323474264, guid: f596280910a5da744b6ad8c35450f807,
         type: 3}
       propertyPath: _sender._horizontalExtraMoveDuration
-      value: 0.2
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 5955886557323474264, guid: f596280910a5da744b6ad8c35450f807,
         type: 3}
       propertyPath: _sender._horizontalExtraMoveValue
-      value: -2
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 5955886557323474264, guid: f596280910a5da744b6ad8c35450f807,
         type: 3}
       propertyPath: _sender._stunDuration
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5955886557323474264, guid: f596280910a5da744b6ad8c35450f807,
+        type: 3}
+      propertyPath: _sender._extraHeightValue
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5955886557323474264, guid: f596280910a5da744b6ad8c35450f807,
+        type: 3}
+      propertyPath: _sender._verticalExtraMoveValue
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4668375787703239335, guid: f596280910a5da744b6ad8c35450f807,
         type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1953510168, guid: f596280910a5da744b6ad8c35450f807, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -1867,7 +1881,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2091745807}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16ab5953135d9e44b940391b35927ac8, type: 3}
+  m_Script: {fileID: 11500000, guid: 5a550649261ec7b408216a4fb56a69bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _coin: 0
@@ -1952,11 +1966,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4683341297758660005, guid: 9e770ae2b90bf63409cba0581ffbe468,
-        type: 3}
-      propertyPath: _baseAttackCurrentTime
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9e770ae2b90bf63409cba0581ffbe468, type: 3}
 --- !u!1001 &8149529976857889390
@@ -1970,6 +1979,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Calvary
+      objectReference: {fileID: 0}
+    - target: {fileID: 4127798058604522680, guid: 1062798e89fa7ff48b49faaa1a382347,
+        type: 3}
+      propertyPath: m_TagString
+      value: Monster
       objectReference: {fileID: 0}
     - target: {fileID: 4127798058604522687, guid: 1062798e89fa7ff48b49faaa1a382347,
         type: 3}
