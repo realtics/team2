@@ -9,7 +9,7 @@ AsioServer::AsioServer(boost::asio::io_context& io_context)
 
 AsioServer::~AsioServer()
 {
-	for (size_t i = 0; i < _sessionList.size(); ++i)
+	for (size_t i = 0; i < _sessionList.size(); i++)
 	{
 		if (_sessionList[i]->Socket().is_open())
 		{
@@ -20,9 +20,9 @@ AsioServer::~AsioServer()
 	}
 }
 
-void AsioServer::Init(const int nMaxSessionCount)
+void AsioServer::Init(const int maxSessionCount)
 {
-	for (int i = 0; i < nMaxSessionCount; ++i)
+	for (int i = 0; i < maxSessionCount; i++)
 	{
 		Session* pSession = new Session(i, (boost::asio::io_context&)_acceptor.get_executor().context(), this);
 		_sessionList.push_back(pSession);
@@ -46,14 +46,14 @@ bool AsioServer::PostAccept()
 	}
 
 	_isAccepting = true;
-	int nSessionID = _sessionQueue.front();
+	int sessionID = _sessionQueue.front();
 	
 	_sessionQueue.pop_front();
 
-	_acceptor.async_accept(_sessionList[nSessionID]->Socket(),
+	_acceptor.async_accept(_sessionList[sessionID]->Socket(),
 							boost::bind(&AsioServer::HandleAccept,
 								this,
-								_sessionList[nSessionID],
+								_sessionList[sessionID],
 								boost::asio::placeholders::error)
 	);
 
@@ -80,40 +80,41 @@ void AsioServer::HandleAccept(Session* pSession, const boost::system::error_code
 	}
 }
 
-void AsioServer::CloseSession(const int nSessionID)
+void AsioServer::CloseSession(const int sessionID)
 {
-	_userID = nSessionID + FIRST_USER_INDEX;
-	//std::cout << "클라이언트 접속 종료. 세션 ID: " << nSessionID << std::endl;
+	_userID = sessionID + FIRST_USER_INDEX;
 	std::cout << "\"" << _userID << "\"번 클라이언트 접속 종료" << std::endl;
 
-	_sessionList[nSessionID]->Socket().close();
+	_sessionList[sessionID]->Socket().close();
 
-	_sessionQueue.push_back(nSessionID);
+	_sessionQueue.push_back(sessionID);
 
 	if (_isAccepting == false)
 	{
 		PostAccept();
 	}
+
+	ConcurrentUser();	//유저가 접속 종료 하면 클라이언트에게 갱신된 정보를 보냄
 }
 
-void AsioServer::ProcessPacket(const int nSessionID, const char* pData)
+void AsioServer::ProcessPacket(const int sessionID, const char* pData)
 {
-	PACKET_HEADER* pheader = (PACKET_HEADER*)pData;
+	PACKET_HEADER* pHeader = (PACKET_HEADER*)pData;
 
-	switch (pheader->packetIndex)
+	switch (pHeader->packetIndex)
 	{
 	case PACKET_INDEX::REQ_IN:
 	{
 		PKT_REQ_IN* pPacket = (PKT_REQ_IN*)pData;
-		_sessionList[nSessionID]->SetName(pPacket->characterName);
+		_sessionList[sessionID]->SetName(pPacket->characterName);
 
-		std::cout << "클라이언트 로그인 성공 Name: " << _sessionList[nSessionID]->GetName() << std::endl;
+		std::cout << "클라이언트 로그인 성공 Name: " << _sessionList[sessionID]->GetName() << std::endl;
 
 		PKT_RES_IN SendPkt;
 		SendPkt.Init();
 		SendPkt.isSuccess = true;
 
-		_sessionList[nSessionID]->PostSend(false, SendPkt.packetSize, (char*)&SendPkt);
+		_sessionList[sessionID]->PostSend(false, SendPkt.packetSize, (char*)&SendPkt);
 	}
 	break;
 	case PACKET_INDEX::REQ_CHAT:
@@ -122,12 +123,12 @@ void AsioServer::ProcessPacket(const int nSessionID, const char* pData)
 
 		PKT_NOTICE_CHAT SendPkt;
 		SendPkt.Init();
-		strncpy_s(SendPkt.characterName, MAX_NAME_LEN, _sessionList[nSessionID]->GetName(), MAX_NAME_LEN - 1);
+		strncpy_s(SendPkt.characterName, MAX_NAME_LEN, _sessionList[sessionID]->GetName(), MAX_NAME_LEN - 1);
 		strncpy_s(SendPkt.userMessage, MAX_MESSAGE_LEN, pPacket->userMessage, MAX_MESSAGE_LEN - 1);
 
-		size_t nTotalSessionCount = _sessionList.size();
+		size_t totalSessionCount = _sessionList.size();
 
-		for (size_t i = 0; i < nTotalSessionCount; ++i)
+		for (size_t i = 0; i < totalSessionCount; i++)
 		{
 			if (_sessionList[i]->Socket().is_open())
 			{
@@ -136,11 +137,11 @@ void AsioServer::ProcessPacket(const int nSessionID, const char* pData)
 		}
 	}
 	break;
-
-	case PACKET_INDEX::NEW_LOGIN:
+	case PACKET_INDEX::REQ_NEW_LOGIN:
 	{
-		PACKET_NEW_LOGIN* pPacket = (PACKET_NEW_LOGIN*)pData;
-		PACKET_NEW_LOGIN_SUCSESS SendPkt;
+		PKT_REQ_NEW_LOGIN* pPacket = (PKT_REQ_NEW_LOGIN*)pData;
+
+		PKT_RES_NEW_LOGIN_SUCSESS SendPkt;
 		SendPkt.Init();
 		std::cout << "\"" << _userID << "\"번 클라이언트 로그인 성공" << std::endl;
 
@@ -161,30 +162,86 @@ void AsioServer::ProcessPacket(const int nSessionID, const char* pData)
 		std::string sendStr = oss.str();
 		std::cout << "[서버->클라 JSON] " << sendStr << std::endl;
 
-		size_t nTotalSessionCount = _sessionList.size();
+		size_t totalSessionCount = _sessionList.size();
 
-		for (size_t i = 0; i < nTotalSessionCount; ++i)
+		for (size_t i = 0; i < totalSessionCount; i++)
 		{
 			if (_sessionList[i]->Socket().is_open())
 			{
 				_sessionList[i]->PostSend(false, std::strlen(sendStr.c_str()), (char*)sendStr.c_str());
 			}
 		}
-		
-		//////
-		//_sessionList[nSessionID]->PostSend(false, std::strlen(sendStr.c_str()), (char*)sendStr.c_str());
-
-		//////
-		//SendPkt.Init();
-		//SendPkt.isSuccess = true;
-		//SendPkt.sessionID = nSessionID;
-
-		//_sessionList[nSessionID]->PostSend(false, SendPkt.packetSize, (char*)&SendPkt);
-
 	}
 	break;
-
+	case PACKET_INDEX::REQ_CONCURRENT_USER:
+	{
+		ConcurrentUser();
+	}
+	break;
 	}
 
 	return;
+}
+
+void AsioServer::ConcurrentUser()
+{
+	PKT_RES_CONCURRENT_USER_LIST concurrentUser;
+	concurrentUser.packetIndex = PACKET_INDEX::RES_CONCURRENT_USER_LIST;
+	concurrentUser.packetSize = sizeof(PKT_RES_CONCURRENT_USER_LIST);
+
+	int totalUser = 0;
+	std::string userList = "";
+
+	for (size_t i = 0; i < _sessionList.size(); i++)
+	{
+		if (_sessionList[i]->Socket().is_open())
+		{
+			totalUser++;
+
+			int playerNum = i + FIRST_USER_INDEX;
+
+			userList += std::to_string(playerNum);
+			userList += ",";
+		}
+	}
+
+	if (totalUser > 0)
+	{
+		// 마지막 , 없애기
+		int endPlayerList = userList.size() - 1;
+
+		userList.replace(endPlayerList, endPlayerList, "");
+	}
+	concurrentUser.Init();
+
+	concurrentUser.totalUser = totalUser;
+	concurrentUser.concurrentUserList = userList;
+
+	boost::property_tree::ptree ptSendHeader;
+	ptSendHeader.put<short>("packetIndex", concurrentUser.packetIndex);
+	ptSendHeader.put<short>("packetSize", concurrentUser.packetSize);
+
+	boost::property_tree::ptree ptSend;
+	ptSend.add_child("header", ptSendHeader);
+	ptSend.put<int>("totalUser", concurrentUser.totalUser);
+	ptSend.put<std::string>("concurrentUser", concurrentUser.concurrentUserList);
+
+	std::cout << "접속 유저 : " << concurrentUser.totalUser << std::endl;
+	std::cout << "유저 리스트 : " << concurrentUser.concurrentUserList << std::endl;
+
+	std::string stringRecv;
+	std::ostringstream oss(stringRecv);
+	boost::property_tree::write_json(oss, ptSend, false);
+	std::string sendStr = oss.str();
+	std::cout << sendStr << std::endl;
+
+	size_t totalSessionCount = _sessionList.size();
+
+	for (size_t i = 0; i < totalSessionCount; i++)
+	{
+		if (_sessionList[i]->Socket().is_open())
+		{
+			_sessionList[i]->PostSend(false, std::strlen(sendStr.c_str()), (char*)sendStr.c_str());
+		}
+	}
 }

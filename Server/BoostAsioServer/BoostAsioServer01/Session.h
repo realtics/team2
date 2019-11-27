@@ -31,10 +31,8 @@ private:
 
 	void Deserialization(char* jsonData);
 	//std::string Serialization(PACKET_INDEX packetIndex);
-
-	void ConcurrentUsers();
 public:
-	Session(int nSessionID, boost::asio::io_context& io_context, AsioServer* pServer);
+	Session(int sessionID, boost::asio::io_context& io_context, AsioServer* pServer);
 	~Session();
 
 	void Init();

@@ -9,20 +9,27 @@ const int FIRST_USER_INDEX = 100;		// 첫번째 유저 Index (클라이언트에 알려줄 ind
 
 enum PACKET_INDEX
 {
+	// REQ : 클라->서버, 클라에서 서버에 어떤 값을 요청
+	// RES : 서버->클라, 서버가 어떤 값으로 응답
+	// NOTICE : 서버->모든 클라, 서버에 붙은 모든 클라이언트에 응답
+
 	REQ_IN = 1,
 	RES_IN = 2,
 	REQ_CHAT = 5,
 	NOTICE_CHAT = 6,
 	
-	NEW_LOGIN = 7,
-	NEW_LOGIN_SUCSESS = 8,
+	REQ_NEW_LOGIN = 100,
+	RES_NEW_LOGIN_SUCSESS = 101,
 
-	CONCURRENT_USERS = 10,
+	REQ_CONCURRENT_USER = 110,
+	RES_CONCURRENT_USER_LIST = 111,
 
-	JOIN_PLAYER = 20,
+	JOIN_PLAYER = 120,
 
-	PLAYER_MOVE_START = 30,
-	PLAYER_MOVE_END = 31,
+	REQ_PLAYER_MOVE_START = 130,
+	RES_PLAYER_MOVE_START = 131,
+	REQ_PLAYER_MOVE_END = 132,
+	RES_PLAYER_MOVE_END = 133,
 };
 
 struct PACKET_HEADER
@@ -87,35 +94,47 @@ struct PKT_NOTICE_CHAT : public PACKET_HEADER
 };
 
 
-struct PACKET_NEW_LOGIN : public PACKET_HEADER
+struct PKT_REQ_NEW_LOGIN : public PACKET_HEADER
 {
 	void Init()
 	{
-		packetIndex = PACKET_INDEX::NEW_LOGIN;
-		packetSize = sizeof(PACKET_NEW_LOGIN);
+		packetIndex = PACKET_INDEX::REQ_NEW_LOGIN;
+		packetSize = sizeof(PKT_REQ_NEW_LOGIN);
 	}
 };
 
-struct PACKET_NEW_LOGIN_SUCSESS : public PACKET_HEADER
+struct PKT_RES_NEW_LOGIN_SUCSESS : public PACKET_HEADER
 {
 	bool isSuccess;
 	int userID;
 
 	void Init()
 	{
-		packetIndex = PACKET_INDEX::NEW_LOGIN_SUCSESS;
-		packetSize = sizeof(PACKET_NEW_LOGIN_SUCSESS);
+		packetIndex = PACKET_INDEX::RES_NEW_LOGIN_SUCSESS;
+		packetSize = sizeof(PKT_RES_NEW_LOGIN_SUCSESS);
+		isSuccess = false;
+		userID = 0;
 	}
 };
 
-struct PACKET_CONCURRENT_USERS : public PACKET_HEADER
+struct PKT_REQ_CONCURRENT_USER : public PACKET_HEADER
 {
-	int totalUsers;
-	std::string concurrentUsersList;
+	void Init()
+	{
+		packetIndex = PACKET_INDEX::REQ_CONCURRENT_USER;
+		packetSize = sizeof(PKT_REQ_CONCURRENT_USER);
+	}
+};
+
+struct PKT_RES_CONCURRENT_USER_LIST : public PACKET_HEADER
+{
+	int totalUser;
+	std::string concurrentUserList;
 
 	void Init()
 	{
-		packetIndex = PACKET_INDEX::CONCURRENT_USERS;
-		packetSize = sizeof(PACKET_CONCURRENT_USERS);
+		packetIndex = PACKET_INDEX::RES_CONCURRENT_USER_LIST;
+		packetSize = sizeof(PKT_RES_CONCURRENT_USER_LIST);
+		totalUser = 0;
 	}
 };

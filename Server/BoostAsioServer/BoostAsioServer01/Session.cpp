@@ -1,9 +1,9 @@
 #include "Session.h"
 #include "AsioServer.h"
 
-Session::Session(int nSessionID, boost::asio::io_context& io_context, AsioServer* pServer)
+Session::Session(int sessionID, boost::asio::io_context& io_context, AsioServer* pServer)
 	: _socket(io_context)
-	, _sessionID(nSessionID)
+	, _sessionID(sessionID)
 	, _pServer(pServer)
 {
 }
@@ -28,9 +28,9 @@ void Session::PostReceive()
 	(
 		boost::asio::buffer(_receiveBuffer),
 							boost::bind(&Session::HandleReceive,
-								this,
-								boost::asio::placeholders::error,
-								boost::asio::placeholders::bytes_transferred)
+							this,
+							boost::asio::placeholders::error,
+							boost::asio::placeholders::bytes_transferred)
 
 	);
 }
@@ -94,62 +94,57 @@ void Session::HandleReceive(const boost::system::error_code& error, size_t bytes
 		}
 
 		_pServer->CloseSession(_sessionID);
-
-		ConcurrentUsers();
 	}
 	else
 	{
 		Deserialization(_receiveBuffer.data());
 		//memcpy(&_packetBuffer[_packetBufferMark], _receiveBuffer.data(), bytes_transferred);
 		
-		int nPacketData = _packetBufferMark + bytes_transferred;
-		int nReadData = 0;
+		int packetData = _packetBufferMark + bytes_transferred;
+		int readData = 0;
 
-		// TODO : ConcurrentUsers 위치 수정 할 것
-		ConcurrentUsers();
+		PACKET_HEADER* pHeader = (PACKET_HEADER*)&_packetBuffer[readData];
 
-		while (nPacketData > 0)
+		while (packetData > 0)
 		{
-			if (nPacketData < sizeof(PACKET_HEADER))
+			if (packetData < sizeof(PACKET_HEADER))
 			{
 				break;
 			}
 
-			PACKET_HEADER* pHeader = (PACKET_HEADER*)&_packetBuffer[nReadData];
-
-			if (pHeader->packetSize <= nPacketData)
+			if (pHeader->packetSize <= packetData)
 			{
-				_pServer->ProcessPacket(_sessionID, &_packetBuffer[nReadData]);
+				_pServer->ProcessPacket(_sessionID, &_packetBuffer[readData]);
 
-				nPacketData -= pHeader->packetSize;
-				nReadData += pHeader->packetSize;
+				packetData -= pHeader->packetSize;
+				readData += pHeader->packetSize;
 			}
 			else
 			{
-				nPacketData = 0;
+				packetData = 0;
 				_packetBufferMark = 0;
 				break;
 			}
 		}
 
-		if (nPacketData > 0)
+		if (packetData > 0)
 		{
 			char TempBuffer[MAX_RECEIVE_BUFFER_LEN] = { 0, };
-			memcpy(&TempBuffer[0], &_packetBuffer[nReadData], nPacketData);
-			memcpy(&_packetBuffer[0], &TempBuffer[0], nPacketData);
+			memcpy(&TempBuffer[0], &_packetBuffer[readData], packetData);
+			memcpy(&_packetBuffer[0], &TempBuffer[0], packetData);
 		}
 
-		_packetBufferMark = nPacketData;
+		_packetBufferMark = packetData;
 
 		PostReceive();
 	}
-
-	
 }
 
 void Session::Deserialization(char* jsonData)
 {
-	std::cout << "[클라->서버 JSON] " << jsonData << std::endl;
+	short packetSize = strlen(jsonData) + 1;
+
+	std::cout << "[클라->서버 JSON][Size:" << packetSize << "] " << jsonData << std::endl;
 
 	boost::property_tree::ptree ptRecv;
 	std::istringstream iss(jsonData);
@@ -157,116 +152,30 @@ void Session::Deserialization(char* jsonData)
 
 	boost::property_tree::ptree& children = ptRecv.get_child("header");
 	short packetIndex = children.get<short>("packetIndex");
-	short packetSize = children.get<short>("packetSize");
-
+	//short packetSize = children.get<short>("packetSize");
+	
 	switch (packetIndex)
 	{
-	case PACKET_INDEX::NEW_LOGIN:
+	case PACKET_INDEX::REQ_NEW_LOGIN:
+	{
 		PACKET_HEADER packet;
 		packet.packetIndex = packetIndex;
 		packet.packetSize = packetSize;
 		memcpy(&_packetBuffer[_packetBufferMark], (char*)&packet, sizeof(packet));
-		
+	}
 	break;
-
-	}
-}
-
-void Session::ConcurrentUsers()
-{
-	PACKET_CONCURRENT_USERS concurrentUsers;
-	concurrentUsers.packetIndex = PACKET_INDEX::CONCURRENT_USERS;
-	concurrentUsers.packetSize = sizeof(PACKET_CONCURRENT_USERS);
-
-	std::vector< Session* > _sessionList = _pServer->GetSessionList();
-	int totalUsers = 0;
-	std::string userList = "";
-
-	for (size_t i = 0; i < _sessionList.size(); ++i)
+	case PACKET_INDEX::REQ_CONCURRENT_USER:
 	{
-		if (_sessionList[i]->Socket().is_open())
-		{
-			totalUsers++;
-			
-			int PlayerNum = i + FIRST_USER_INDEX;
-
-			userList += std::to_string(PlayerNum);
-			userList += ",";
-		}
+		PACKET_HEADER packet;
+		packet.packetIndex = packetIndex;
+		packet.packetSize = packetSize;
+		memcpy(&_packetBuffer[_packetBufferMark], (char*)&packet, sizeof(packet));
 	}
-	
-	if (totalUsers > 0)
+	break;
+	default:
 	{
-		// 마지막 , 없애기
-		int endPlayerList = userList.size() - 1;
-		
-		userList.replace(endPlayerList, endPlayerList, "");
+		std::cout << "Index가 존재 하지 않는 Packet : " << packetIndex << std::endl;
 	}
-	concurrentUsers.Init();
-
-	concurrentUsers.totalUsers = totalUsers;
-	concurrentUsers.concurrentUsersList = userList;
-	
-	boost::property_tree::ptree ptSendHeader;
-	ptSendHeader.put<short>("packetIndex", concurrentUsers.packetIndex);
-	ptSendHeader.put<short>("packetSize", concurrentUsers.packetSize);
-	
-	boost::property_tree::ptree ptSend;
-	ptSend.add_child("header", ptSendHeader);
-	ptSend.put<int>("totalUsers", concurrentUsers.totalUsers);
-	ptSend.put<std::string>("concurrentUsers", concurrentUsers.concurrentUsersList);
-
-	std::cout << "접속 유저 : " << concurrentUsers.totalUsers << std::endl;
-	std::cout << "유저 리스트 : " << concurrentUsers.concurrentUsersList << std::endl;
-
-	std::string stringRecv;
-	std::ostringstream oss(stringRecv);
-	boost::property_tree::write_json(oss, ptSend, false);
-	std::string sendStr = oss.str();
-	std::cout << sendStr << std::endl;
-	//PostSend(false, std::strlen(sendStr.c_str()), (char*)sendStr.c_str());
-
-	for (size_t i = 0; i < _sessionList.size(); ++i)
-	{
-		if (_sessionList[i]->Socket().is_open())
-		{
-			PostSend(false, std::strlen(sendStr.c_str()), (char*)sendStr.c_str());
-		}
+	break;
 	}
-
-
-	//ptSend.put<std::string>("String", packetCharacterMove.string);
-
-	//std::string stringRecv;
-	//std::ostringstream os(stringRecv);
-	//boost::property_tree::write_json(os, ptSend, false);
-	//std::string sendStr = os.str();
-	//std::cout << sendStr << std::endl;
-	//PostSend(false, std::strlen(sendStr.c_str()), (char*)sendStr.c_str());
-
-	//PACKET_CHARACTER_MOVE  packetCharacterMove;
-	//	packetCharacterMove.header.packetIndex = PACKET_INDEX::RES_IN;
-	//	packetCharacterMove.header.packetSize = sizeof(PACKET_CHARACTER_MOVE);
-	//	packetCharacterMove.characterMoveX = 2;
-	//	packetCharacterMove.characterMoveY = 1;
-	//	//packetCharacterMove.characterMoveY = "string";
-
-	//	//{"header":{"packetIndex":1,"packetSize":??},"characterMoveX":1,"characterMoveY":2}
-	//	//{"header":{"packetIndex":1,"packetSize":??},"characterMoveX":1,"String":"string"}
-
-	//	boost::property_tree::ptree ptSend;
-	//	boost::property_tree::ptree ptSendHeader;
-	//	ptSendHeader.put<int>("packetIndex", packetCharacterMove.header.packetIndex);
-	//	ptSendHeader.put<int>("packetSize", packetCharacterMove.header.packetSize);
-	//	ptSend.add_child("header", ptSendHeader);
-	//	ptSend.put<float>("characterMoveX", packetCharacterMove.characterMoveX);
-	//	ptSend.put<float>("characterMoveY", packetCharacterMove.characterMoveY);
-	//	//ptSend.put<std::string>("String", packetCharacterMove.string);
-
-	//	std::string stringRecv;
-	//	std::ostringstream os(stringRecv);
-	//	boost::property_tree::write_json(os, ptSend, false);
-	//	std::string sendStr = os.str();
-	//	std::cout << sendStr << std::endl;
-	//	PostSend(false, std::strlen(sendStr.c_str()), (char*)sendStr.c_str());
 }
