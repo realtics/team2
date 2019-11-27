@@ -260,7 +260,7 @@ PrefabInstance:
     - target: {fileID: 1294762513733870720, guid: 47e5e75da91777b4781035749ce7abec,
         type: 3}
       propertyPath: _nextSceneName
-      value: TestDungeon
+      value: Test7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 47e5e75da91777b4781035749ce7abec, type: 3}
