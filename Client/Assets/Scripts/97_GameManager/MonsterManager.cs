@@ -18,7 +18,7 @@ public class MonsterManager : MonoBehaviour
 
     private int _monsterCount;
 
-    void Start()
+    void Awake()
     {
         _Instance = this;
     }
