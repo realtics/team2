@@ -4,52 +4,45 @@ using System.Collections.Generic;
 
 public class MonsterManager : MonoBehaviour
 {
-    private static MonsterManager _Instance;
+    private static MonsterManager _instance;
     public static MonsterManager Instance
     {
         get
         {
-            return _Instance;
+            return _instance;
         }
     }
     [SerializeField]
-    private List<BaseMonster> monsterList = new List<BaseMonster>();
-    [SerializeField]
-    private int _monsterCount;
+    private List<BaseMonster> _monsterList = new List<BaseMonster>();
 
     void Awake()
     {
-        _Instance = this;
+        _instance = this;
     }
 
-    void Update()
+    public void AddMonster(GameObject prefab, Vector3 position)
     {
-
-    }
-
-    public void AddMonster(GameObject obj, Vector3 position)
-    {
-        GameObject spawnMonster = ObjectPoolManager.Instance.GetRestObject(obj);
+        GameObject spawnMonster = ObjectPoolManager.Instance.GetRestObject(prefab);
         spawnMonster.transform.position = position;
-        monsterList.Add(spawnMonster.GetComponent<BaseMonster>());
+        _monsterList.Add(spawnMonster.GetComponent<BaseMonster>());
     }
 
     public bool IsExistMonster()
     {
-        if (monsterList.Count > 0)
+        if (_monsterList.Count > 0)
             return true;
-        else
-            return false;
+
+        return false;
     }
 
     public void ReceiveMonsterDie(BaseMonster monster)
     {
         monster.InactiveMonster();
         monster.ResetMonster();
-        monsterList.Remove(monster);
+        _monsterList.Remove(monster);
 
         //FIXME : 포탈을 여는 주체가 몬스터매니저가 할일인가
-        if (monsterList.Count == 0)
+        if (_monsterList.Count == 0)
             PotalManager.instance.ResetPotals();
     }
 }
