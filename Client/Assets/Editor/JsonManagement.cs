@@ -59,9 +59,15 @@ public class JsonManagement
             dungeonInfo.AddPotalScene(obj);
         }
 
-        // 임시 데이터.
-        //GameObject.FindGameObjectsWithTag("PlayerStart");
-        dungeonInfo.PlayerStartPosition = new Vector3(0, 0, 0);
+        GameObject spotObject = GameObject.FindGameObjectWithTag("PlayerStartSpot");
+        if (spotObject != null)
+        {
+            dungeonInfo.PlayerStartPosition = spotObject.transform.position;
+        }
+        else
+        {
+            dungeonInfo.PlayerStartPosition = new Vector3(0, 0, 0);
+        }
 
         jsonData.dungeonObjectList.Add(dungeonInfo);
     }

@@ -20,7 +20,7 @@ public class PotalTransportinfo
 {
     public string filePath { get; set; }
     public Vector3 position { get; set; }
-    public Vector3 transportPosition { get; set; }
+    public Vector3[] spotPosition { get; set; }
     public ARROW arrow { get; set; }
     public int nextIndex { get; set; }
 }
@@ -83,7 +83,12 @@ public class DungeonInfo
         potalTransportinfo.position = obj.transform.position;
         potalTransportinfo.arrow = potal.arrow;
 
-        potalTransportinfo.transportPosition = potal.transportPosition;
+        potalTransportinfo.spotPosition = new Vector3[potal.spotGatePosition.Length];
+        for(int i = 0; i < potal.spotGatePosition.Length; ++i)
+        {
+            potalTransportinfo.spotPosition[i] = potal.spotGatePosition[i].position;
+        }
+
         potalTransportinfo.nextIndex = potal.nextIndex;
 
         potalTransportinfos.Add(potalTransportinfo);
@@ -101,8 +106,7 @@ public class DungeonInfo
         potalSceneInfo.filePath = path;
         potalSceneInfo.position = obj.transform.position;
         potalSceneInfo.arrow = potal.arrow;
-        
-        potalSceneInfo.transportPosition = potal.transportPosition;
+       
         potalSceneInfo.nextDataName = potal.nextSceneName;
 
         potalSceneInfos.Add(potalSceneInfo);
@@ -221,7 +225,11 @@ public class MapLoader : MonoBehaviour
                 PotalTransport potal = obj.GetComponent<PotalTransport>();
                 potal.arrow = item.arrow;
                 potal.nextIndex = item.nextIndex;
-                potal.transportPosition = item.transportPosition;
+
+                for(int i = 0; i < item.spotPosition.Length; i++)
+                {
+                    potal.spotGatePosition[i].position = item.spotPosition[i];
+                }
 
                 _dungeonGameObject[index].Add(obj);
             }
@@ -232,7 +240,6 @@ public class MapLoader : MonoBehaviour
                 PotalScene potal = obj.GetComponent<PotalScene>();
                 potal.arrow = item.arrow;
                 potal.nextSceneName = item.nextDataName;
-                potal.transportPosition = item.transportPosition;
 
                 _dungeonGameObject[index].Add(obj);
             }
@@ -242,10 +249,10 @@ public class MapLoader : MonoBehaviour
         }
         else
         {
-            DungeonSetActive(true, index);
+            RoomSetActive(true, index);
         }
     }
-    private void DungeonSetActive(bool active,int index)
+    private void RoomSetActive(bool active,int index)
     {
         foreach (var item in _dungeonGameObject[index])
         {
@@ -253,20 +260,61 @@ public class MapLoader : MonoBehaviour
         }
     }
 
-    public void ChangeDungeon(int index)
+    public void ChangeRoom(int index, ARROW arrow)
     {
-        GetGameManager().FadeOut();
-        DungeonSetActive(false, _currentDungeonIndex);
+        GameManager gameManager = GetGameManager();
+        gameManager.FadeOut();
+
+        RoomSetActive(false, _currentDungeonIndex);
         Instantiate(index);
         _currentDungeonIndex = index;
-    }
 
+        PotalManager potalManager = PotalManager.instance;
+        potalManager.FIndPotals();
+        potalManager.BlockPotals();
+        
+        gameManager.MoveToPlayer(potalManager.FindGetArrowPotalPosition(FlipArrow(arrow)));
+    }
+    private ARROW FlipArrow(ARROW arrow)
+    {
+        switch(arrow)
+        {
+            case ARROW.UP:
+                {
+                    return ARROW.DOWN;
+                }
+            case ARROW.DOWN:
+                {
+                    return ARROW.UP;
+                }
+            case ARROW.LEFT:
+                {
+                    return ARROW.RIGHT;
+                }
+            case ARROW.RIGHT:
+                {
+                    return ARROW.LEFT;
+                }
+            default:
+                {
+                    return ARROW.NULL;
+                }
+        }
+    }
+     
     public void Loader()
     {
-        GetGameManager().FadeOut();
+        const int startDungeonIndex = 0;
+
+        GameManager gameManager = GetGameManager();
+        gameManager.FadeOut();
+
         LoaderDungeon(_dungeonName);
         _currentDungeonIndex = _startDungeonIndex;
         Instantiate(_currentDungeonIndex);
+
+        gameManager.MoveToPlayer(dungeonData.DungeonInfos[startDungeonIndex].PlayerStartPosition);
+
     }
     public void SetMap(string dungeonName)
     {
@@ -292,17 +340,5 @@ public class MapLoader : MonoBehaviour
             return LobbyGameManager.Instance;
         }
         return null;
-    }
-
-    public void TestChangeDungeon(int index)
-    {
-        ChangeDungeon(index);
-    }
-
-    public void TestLoader(string dungeonName)
-    {
-        LoaderDungeon(dungeonName);
-        _currentDungeonIndex = _startDungeonIndex;
-        Instantiate(_currentDungeonIndex);
     }
 }

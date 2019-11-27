@@ -7,32 +7,28 @@ public enum ARROW
     UP = 0,
     DOWN,
     LEFT,
-    RIGHT
+    RIGHT,
+    NULL
 }
 
 public class Potal : MonoBehaviour
 {
     public ARROW arrow;
-    public Vector3 transportPosition;
 
-    private bool _isPlayerEnter;
-    public bool IsPlayerEnter { get { return _isPlayerEnter; } }
+    protected bool _isPotalBlock;
+    private bool _isFirstTranportPotalBlock;
 
-    private bool _isPotalBlock;
-
-    public Potal()
+    private void Start()
     {
         _isPotalBlock = false;
-        _isPlayerEnter = false;
-        
+        _isFirstTranportPotalBlock = false;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.tag == "Player")
         {
-
-            if (!_isPotalBlock)
+            if (!_isPotalBlock && !_isFirstTranportPotalBlock)
             {
                 PlayerEnterPotal();
             }
@@ -40,18 +36,39 @@ public class Potal : MonoBehaviour
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        _isPotalBlock = false;
+        _isFirstTranportPotalBlock = false;
     }
     private void PlayerEnterPotal()
     {
         Enter();
-        _isPlayerEnter = true;
     }
-    
+
+    public void Block()
+    {
+        _isPotalBlock = true;
+    }
+    public void FirstTranportPotalBlock()
+    {
+        _isFirstTranportPotalBlock = true;
+    }
+
+    public bool IsArrowPotal(ARROW potalArrow)
+    {
+        if (arrow == potalArrow)
+            return true;
+        else
+            return false;
+    }
+
+    public virtual Vector3 GetPlayerSpotPosition()
+    {
+        return Vector3.zero;
+    }
+
     public void Reset()
     {
         _isPotalBlock = false;
-        _isPlayerEnter = false;
+        _isFirstTranportPotalBlock = false;
     }
     public virtual void Enter()
     {

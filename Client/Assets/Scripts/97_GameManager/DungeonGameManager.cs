@@ -1,8 +1,18 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+enum PartyNumber
+{ 
+    p1 = 0,
+    p2,
+    p3,
+    p4
+}
+
+
 public class DungeonGameManager : GameManager
 {
+    private PartyNumber _myPartyNumber = PartyNumber.p1;
     private int _countDown;
     private const int _maxDieCountDown = 10;
     private const int _maxResultCountDown = 4;
@@ -17,9 +27,6 @@ public class DungeonGameManager : GameManager
 
     [SerializeField]
     protected GameState _playerState;
-
-    [SerializeField]
-    private Cinemachine.CinemachineConfiner _cinemachine;
 
     private static DungeonGameManager _instance;
     public static DungeonGameManager Instance
@@ -37,7 +44,7 @@ public class DungeonGameManager : GameManager
         _instance = this;
         MapLoader.instacne.Loader();
 
-        
+        _myPartyNumber = 0;
     }
 
     // Update is called once per frame

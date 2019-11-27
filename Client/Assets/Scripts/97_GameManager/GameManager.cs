@@ -21,8 +21,12 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField]
     protected int _coin;
+
     [SerializeField]
     private Image _fadeOut;
+
+    [SerializeField]
+    protected Cinemachine.CinemachineConfiner _cinemachine;
 
     public float FadeTime = 3f; // Fade효과 재생시간
 
@@ -33,9 +37,12 @@ public class GameManager : MonoBehaviour
 
     private bool _isFadeOutPlaying = false;
 
+    protected GameObject _player;
+
     protected virtual void Start()
     {
         FadeOut();
+        _player = GameObject.FindObjectOfType<PlayerCharacter>().gameObject;
     }
 
     public void MoveToScene(int Scene)
@@ -46,6 +53,11 @@ public class GameManager : MonoBehaviour
     private void LoadScene(int Scene)
     {
         SceneManager.LoadScene(Scene);
+    }
+
+    public void MoveToPlayer(Vector3 position)
+    {
+        _player.transform.position = position;
     }
 
     public void FadeOut()
