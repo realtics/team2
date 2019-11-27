@@ -5,15 +5,18 @@
     REQ_CHAT = 5,
     NOTICE_CHAT = 6,
 
-    NEW_LOGIN = 7,
-    NEW_LOGIN_SUCSESS = 8,
+    REQ_NEW_LOGIN = 100,
+    RES_NEW_LOGIN_SUCSESS = 101,
 
-    CONCURRENT_USERS = 10,
+    REQ_CONCURRENT_USER = 110,
+    RES_CONCURRENT_USER_LIST = 111,
 
-    JOIN_PLAYER = 20,
+    JOIN_PLAYER = 120,
 
-    PLAYER_MOVE_START = 30,
-    PLAYER_MOVE_END = 31,
+    REQ_PLAYER_MOVE_START = 130,
+    RES_PLAYER_MOVE_START = 131,
+    REQ_PLAYER_MOVE_END = 132,
+    RES_PLAYER_MOVE_END = 133,
 };
 
 public struct PACKET_HEADER
@@ -27,21 +30,32 @@ public struct PACKET_HEADER_BODY
     public PACKET_HEADER header;
 };
 
-public struct PACKET_NEW_LOGIN
+public struct PKT_REQ_NEW_LOGIN
 {
     public PACKET_HEADER header;
 };
 
-public struct PACKET_NEW_LOGIN_SUCSESS
+public struct PKT_RES_NEW_LOGIN_SUCSESS
 {
     public PACKET_HEADER header;
     public bool isSuccess;
     public int userID;
-}
+};
 
-public struct PACKET_CONCURRENT_USERS
+public struct PKT_REQ_CONCURRENT_USER
 {
     public PACKET_HEADER header;
-    public int totalUsers;
-    public string concurrentUsers;
+};
+
+public struct PKT_RES_CONCURRENT_USER_LIST
+{
+    public PACKET_HEADER header;
+    public int totalUser;
+    public string concurrentUser;
+};
+
+public struct PKT_REQ_PLAYER_MOVE_START
+{
+    public PACKET_HEADER header;
+    
 }

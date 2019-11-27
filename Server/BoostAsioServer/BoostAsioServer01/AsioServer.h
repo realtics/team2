@@ -29,10 +29,12 @@ public:
 	AsioServer(boost::asio::io_context& io_context);
 	~AsioServer();
 
-	void Init(const int nMaxSessionCount);
+	void Init(const int maxSessionCount);
 	void Start();
-	void CloseSession(const int nSessionID);
-	void ProcessPacket(const int nSessionID, const char* pData);
+	void CloseSession(const int sessionID);
+	void ProcessPacket(const int sessionID, const char* pData);
+
+	void ConcurrentUser();
 
 	std::vector< Session* > GetSessionList() { return _sessionList; }
 };

@@ -13,9 +13,13 @@ using Newtonsoft.Json;
 
 public class StateObject    // 데이터를 수신하기 위한 상태 객체
 {
-    public Socket WorkSocket = null;                // 클라이언트 소켓
-    public const int BufferSize = 256;              // 수신 버퍼의 크기
-    public byte[] Buffer = new byte[BufferSize];    // 수신 버퍼
+    public Socket WorkSocket = null;                    // 클라이언트 소켓
+    public const int BufferSize = 256;                  // 수신 버퍼의 크기
+    public byte[] RecvBuffer = new byte[BufferSize];    // 수신 버퍼
+    public void ClearRecvBuffer()
+    {
+        Array.Clear(RecvBuffer, 0, RecvBuffer.Length);
+    }
 }
 
 public class NetworkManager : MonoBehaviour
@@ -31,23 +35,25 @@ public class NetworkManager : MonoBehaviour
     
     public GameObject playerPrefab;
 
-
-    private static ManualResetEvent connectDone = new ManualResetEvent(false);
-    private static ManualResetEvent sendDone = new ManualResetEvent(false);
-    private static ManualResetEvent receiveDone = new ManualResetEvent(false);
-
-    public int _DebugTestMessage;
-
+    //// 신호를 받을 때 수동으로 재설정 되어야 하는 스레드 동기화 이벤트
+    //private static ManualResetEvent _connectDone = new ManualResetEvent(false);
+    //private static ManualResetEvent _sendDone = new ManualResetEvent(false);
+    //private static ManualResetEvent _receiveDone = new ManualResetEvent(false);
+    //private static String _response = String.Empty; // 서버 응답
+    
     private Socket _sock = null;
+
 
     private int _myId;      // 실행한 클라이언트의 ID
     public int GetMyId { get { return _myId; } }
     public void SetMyId(int id) { _myId = id; }
 
+
     private bool _isLogin = false;      // 로그인 여부
     public bool GetIsLogin { get { return _isLogin; } }
     public void SetIsLogin(bool isLogin) { _isLogin = isLogin; }
     public bool LoginSuccess { set { _isLogin = true; } }
+
 
     private int _totalUser;     // 전체 유저 수
     public void SetTotalUser(int totalUser) { _totalUser = totalUser; }
@@ -56,17 +62,26 @@ public class NetworkManager : MonoBehaviour
     public void SetUserList(string userList) { _UserList = userList; }
 
 
+    private bool _isConcurrentUserList = false;     // 유저리스트 여부
+    public bool GetIsConcurrentUserList { get { return _isConcurrentUserList; } }
+    public void SetIsConcurrentUserList(bool isConcurrentUserList) { _isConcurrentUserList = isConcurrentUserList; }
+
+
+    public string DebugMsg01;
+    public int DebugMsg02;
+    public int DebugMsg03;
+
     private Dictionary<int,Character> _characters;
     private List<CharacterSpawnData> _spawnCharacters;
-
+    
     void Start()
     {
-        _spawnCharacters = new List<CharacterSpawnData>();
         Screen.SetResolution(960, 540, false);
-
+        
         _instance = this;
+        _spawnCharacters = new List<CharacterSpawnData>();
         _characters = new Dictionary<int, Character>();
-
+        
         CreateSocket();
 
         if (GetIsLogin == false)
@@ -80,6 +95,11 @@ public class NetworkManager : MonoBehaviour
 
     void Update()
     {
+        if (GetIsConcurrentUserList == false)
+        {
+            ConcurrentUser();
+        }
+
 
         // 서버에서 새로운 플레이어가 접속했다고 알려주는 역할임
         if (Input.GetKeyDown(KeyCode.Space))
@@ -119,16 +139,171 @@ public class NetworkManager : MonoBehaviour
         _sock.Connect(new IPEndPoint(IPAddress.Parse("127.0.0.1"), 31452));
     }
 
+    private void ConnectCallback(IAsyncResult ar)
+    {
+        try
+        {
+            _sock = (Socket)ar.AsyncState;
+            _sock.EndConnect(ar);
+
+            Debug.Log("소켓 연결 : " + _sock.RemoteEndPoint.ToString());
+            //_connectDone.Set();
+        }
+        catch (Exception e)
+        {
+            Debug.LogError(e.ToString());
+        }
+    }
+
+    private void Receive(Socket sock)
+    {
+        try
+        {
+            StateObject state = new StateObject();
+            state.WorkSocket = sock;
+
+            // 데이터 수신 시작
+            sock.BeginReceive(state.RecvBuffer, 0, StateObject.BufferSize, 0,
+                                new AsyncCallback(ReceiveCallback), state);
+        }
+        catch (Exception e)
+        {
+            Debug.Log(e.ToString());
+        }
+    }
+
+    private void ReceiveCallback(IAsyncResult ar)
+    {
+        try
+        {
+            StateObject state = (StateObject)ar.AsyncState;
+            _sock = state.WorkSocket;
+            
+            int bytesRead = 0;
+            
+            try
+            {
+                bytesRead = _sock.EndReceive(ar);
+            } catch
+            {
+                return;
+            }
+            
+            if (bytesRead > 0)
+            {
+                string recvData = Encoding.UTF8.GetString(state.RecvBuffer, 0, bytesRead);
+                int bufLen = recvData.Length;
+                Debug.Log("recvData[" + bufLen + "]= " + recvData);
+
+                var JsonData = JsonConvert.DeserializeObject<PACKET_HEADER_BODY>(recvData);
+                ProcessPacket(JsonData.header.packetIndex, recvData);
+
+                // 수신 대기
+                _sock.BeginReceive(state.RecvBuffer, 0, StateObject.BufferSize, 0,
+                                    new AsyncCallback(ReceiveCallback), state);
+            }
+            else
+            {
+                //_receiveDone.Set();
+            }
+        }
+        catch (Exception e)
+        {
+            Debug.LogError(e.ToString());
+        }
+    }
+
+    private void ProcessPacket(short packetIndex, string JsonData)
+    {
+        switch(packetIndex)
+        {
+            case (short)PACKET_INDEX.RES_NEW_LOGIN_SUCSESS:
+                {
+                    var Json = JsonConvert.DeserializeObject<PKT_RES_NEW_LOGIN_SUCSESS>(JsonData);
+
+                    // 내 캐릭터를 생성하는 로직
+                    // 서버에서 내가 접속했다고 알려주면 Id를 받고 내 Id로 설정한다.
+                    if (GetMyId == 0)
+                    {
+                        SetIsLogin(Json.isSuccess);
+                        SetMyId(Json.userID);
+                        JoinNewPlayer(Json.userID);
+                        Debug.Log("접속 ID : " + Json.userID + ", 접속 성공 여부 : " + Json.isSuccess);
+                    }
+                }
+                break;
+            case (short)PACKET_INDEX.RES_CONCURRENT_USER_LIST:
+                {
+                    var Json = JsonConvert.DeserializeObject<PKT_RES_CONCURRENT_USER_LIST>(JsonData);
+                    Debug.Log(Json.totalUser);
+                    Debug.Log(Json.concurrentUser);
+                    SetTotalUser(Json.totalUser);
+                    //SetUserList(Json.concurrentUserList);
+                    DebugMsg01 = Json.concurrentUser;
+                    DebugMsg02 = Json.totalUser;
+
+                    string[] splitText = Json.concurrentUser.Split(',');
+                    for(int i = 0; i < splitText.Length; i++)
+                    {
+                        Debug.Log(splitText[i]);
+                        
+                        int userId = Int32.Parse(splitText[i]);
+
+                        if (GetMyId != userId)
+                            JoinNewPlayer(userId);
+                    }
+
+                    SetIsConcurrentUserList(true);
+                }
+                break;
+            default:
+                {
+                    Debug.LogError("Index가 존재 하지 않는 Packet");
+                }
+            break;
+        }
+    }
+
+    private void Send(Socket client, String data)
+    {
+        byte[] byteData = Encoding.UTF8.GetBytes(data);
+
+        client.BeginSend(byteData, 0, byteData.Length, 0,
+                        new AsyncCallback(SendCallback), client);
+    }
+
+    private void SendCallback(IAsyncResult ar)
+    {
+        try
+        {
+            _sock = (Socket)ar.AsyncState;
+
+            int bytesSend = _sock.EndSend(ar);
+            Debug.Log("서버에 "+ bytesSend + " bytes 보냄");
+
+            //_sendDone.Set();
+        }
+        catch (Exception e)
+        {
+            Debug.LogError(e.ToString());
+        }
+    }
+
     private void NewLogin()
     {
         string jsonData;
         char endNullValue = '\0';
 
-        var packHeader = new PACKET_HEADER { packetIndex = (short)PACKET_INDEX.NEW_LOGIN, 
-                                             packetSize = 45 };
-        var packData = new PACKET_NEW_LOGIN { header = packHeader };
+        var packHeader = new PACKET_HEADER
+        {
+            packetIndex = (short)PACKET_INDEX.REQ_NEW_LOGIN,
+            packetSize = 8
+        };
+        var packData = new PKT_REQ_NEW_LOGIN { header = packHeader };
+
         jsonData = JsonConvert.SerializeObject(packData);
         jsonData += endNullValue;
+
         byte[] sendByte = new byte[256];
         sendByte = Encoding.UTF8.GetBytes(jsonData);
         //TODO 1-0: JSON 헤더에 패킷 사이즈 체크 하는것을 foreach로 하고 있는데, 더 좋은 방법 있다면 개선
@@ -143,111 +318,54 @@ public class NetworkManager : MonoBehaviour
         //Debug.Log(jsonData);
         //Debug.Log(jsonDataSize);
         int resultSize = _sock.Send(sendByte);
+        Debug.Log("Send 길이 = " + resultSize);
     }
 
-    private void Receive(Socket sock)
+    private void ConcurrentUser()
     {
-        try
-        {
-            StateObject state = new StateObject();
-            state.WorkSocket = sock;
+        string jsonData;
+        char endNullValue = '\0';
 
-            // 데이터 수신 시작
-            sock.BeginReceive(state.Buffer, 0, StateObject.BufferSize, 0,
-                                new AsyncCallback(ReceiveCallback), state);
-        }
-        catch (Exception e)
+        var packHeader = new PACKET_HEADER
         {
-            Debug.Log(e.ToString());
-        }
+            packetIndex = (short)PACKET_INDEX.REQ_CONCURRENT_USER,
+            packetSize = 8
+        };
+        var packData = new PKT_REQ_CONCURRENT_USER { header = packHeader };
+
+        jsonData = JsonConvert.SerializeObject(packData);
+        jsonData += endNullValue;
+
+        byte[] sendByte = new byte[256];
+        sendByte = Encoding.UTF8.GetBytes(jsonData);
+        
+        SetIsConcurrentUserList(true);
+
+        int resultSize = _sock.Send(sendByte);
+        Debug.Log("Send 길이 = " + resultSize);
     }
 
-    private void ReceiveCallback(IAsyncResult ar)
+    private void MoveStart()
     {
-        try
+        string jsonData;
+        char endNullValue = '\0';
+
+        var packHeader = new PACKET_HEADER
         {
-            StateObject state = (StateObject)ar.AsyncState;
-            Socket client = state.WorkSocket;
-            
-            int bytesRead;
-            
-            try
-            {
-                bytesRead = client.EndReceive(ar);
-            } catch
-            {
-                return;
-            }
-            
-            if (bytesRead > 0)
-            {
-                string recvData = Encoding.UTF8.GetString(state.Buffer, 0, bytesRead);
+            packetIndex = (short)PACKET_INDEX.REQ_CONCURRENT_USER,
+            packetSize = 8
+        };
+        var packData = new PKT_REQ_CONCURRENT_USER { header = packHeader };
 
-                Debug.Log("recvData = " + recvData);
-                int bufLen = recvData.Length;
-                Debug.Log("buflen = " + bufLen);
+        jsonData = JsonConvert.SerializeObject(packData);
+        jsonData += endNullValue;
 
-                var JsonData = JsonConvert.DeserializeObject<PACKET_HEADER_BODY>(recvData);
-                Debug.Log(JsonData);
+        byte[] sendByte = new byte[256];
+        sendByte = Encoding.UTF8.GetBytes(jsonData);
 
-                ProcessPacket(JsonData.header.packetIndex, recvData);
-
-
-                // 수신 대기
-                client.BeginReceive(state.Buffer, 0, StateObject.BufferSize, 0,
-                                    new AsyncCallback(ReceiveCallback), state);
-            }
-            else
-            {
-                receiveDone.Set();
-            }
-        }
-        catch (Exception e)
-        {
-            Debug.LogError(e.ToString());
-        }
+        int resultSize = _sock.Send(sendByte);
+        Debug.Log("Send 길이 = " + resultSize);
     }
-
-    private void ProcessPacket(short packetIndex, string JsonData)
-    {
-        switch(packetIndex)
-        {
-            case (short)PACKET_INDEX.NEW_LOGIN_SUCSESS:
-                {
-                    var Json = JsonConvert.DeserializeObject<PACKET_NEW_LOGIN_SUCSESS>(JsonData);
-
-                    // 내 캐릭터를 생성하는 로직
-                    // 서버에서 내가 접속했다고 알려주면 Id를 받고 내 Id로 설정한다.
-                    if (GetMyId == 0)
-                    {
-                        SetIsLogin(Json.isSuccess);
-                        SetMyId(Json.userID);
-                        JoinNewPlayer(Json.userID);
-                        Debug.Log("접속 ID : " + Json.userID + ", 접속 성공 여부 : " + Json.isSuccess);
-                    }
-                    _DebugTestMessage = Json.userID;
-                }
-                break;
-            case (short)PACKET_INDEX.CONCURRENT_USERS:
-                {
-                    var Json = JsonConvert.DeserializeObject<PACKET_CONCURRENT_USERS>(JsonData);
-                    Debug.Log(Json.totalUsers);
-                    Debug.Log(Json.concurrentUsers);
-                    SetTotalUser(Json.totalUsers);
-                    //SetUserList(Json.concurrentUsersList);
-
-                }
-                break;
-            default:
-                {
-
-                }
-            break;
-        }
-    }
-
-
-
 
     public void JoinNewPlayer(int id)
     {
@@ -284,8 +402,8 @@ public class NetworkManager : MonoBehaviour
             Debug.LogError("그런 플레이어는 존재하지 않아요! id = " + 1);
             return;
         }
-
-        movePlayer.SetMoveDirectionAndMove(Vector3.left);
+        
+        movePlayer.SetMoveDirectionAndMove(Vector3.zero, Vector3.left);
     }
 
     private void ThisIsStopPacket()
@@ -305,8 +423,12 @@ public class NetworkManager : MonoBehaviour
 
     private void OnGUI()
     {
-        GUI.Label(new Rect(0, 0, 100, 100), _isLogin.ToString() + ", " + GetMyId.ToString());
+        GUI.Label(new Rect(0, 0, 500, 100), "접속여부:" + _isLogin.ToString() + ", 유저:" + GetMyId.ToString());
 
-        GUI.Label(new Rect(0, 20, 100, 100), "Last접속 : " + _DebugTestMessage);
+        GUI.Label(new Rect(0, 30, 960, 100), "접속자 리스트 : " + DebugMsg01);
+
+        GUI.Label(new Rect(0, 15, 300, 100), "동시접속자 수 : " + DebugMsg02);
     }
+
+
 }

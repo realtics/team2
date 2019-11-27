@@ -54,7 +54,7 @@ public class Character : MonoBehaviour
 
         if (_moveDirection != Vector3.zero)
         {
-            SetMoveDirectionAndMove(_moveDirection);
+            SetMoveDirectionAndMove(transform.position, _moveDirection);
             SendPacketMoveStart();
         }
         else
@@ -73,9 +73,11 @@ public class Character : MonoBehaviour
         if (_oldDirection == _moveDirection)
             return;
 
-        // SendPacket ( MoveStart, _moveDirection); 
+        // SendPacket ( MoveStart, _moveDirection);
         Debug.Log("SendMoveStart");
         _oldDirection = _moveDirection;
+
+        
     }
 
     private void SendPacketMoveEnd()
@@ -87,6 +89,8 @@ public class Character : MonoBehaviour
 
         StopMove(transform.position);
     }
+
+
 
     private void FixedUpdate()
     {
@@ -105,8 +109,9 @@ public class Character : MonoBehaviour
     }
 
     // 서버로부터 받은 MoveStart와 같은 패킷의 MoveDirection을 세팅한다.
-    public void SetMoveDirectionAndMove(Vector3 dir)
+    public void SetMoveDirectionAndMove(Vector3 pos, Vector3 dir)
     {
+        transform.position = pos;
         _moveDirection = dir;
         _isMoving = true;
 
