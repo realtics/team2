@@ -13,19 +13,16 @@ public class MonsterManager : MonoBehaviour
         }
     }
 
-    //public Dictionary<int, List<GameObject>> monster = new Dictionary<int, List<GameObject>>();
     public List<GameObject> monster = new List<GameObject>();
     public List<GameObject> deleteMonster = new List<GameObject>();
 
     private int _monsterCount;
 
-    // Use this for initialization
     void Start()
     {
         _Instance = this;
     }
 
-    // Update is called once per frame
     void Update()
     {
 
