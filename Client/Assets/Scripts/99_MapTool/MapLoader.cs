@@ -193,6 +193,10 @@ public class MapLoader : MonoBehaviour
     {
         dungeonData = JsonLoad<DungeonJsonData>(dungeonName);
     }
+    private void LoaderMonster()
+    {
+
+    }
 
     private void Instantiate(int index)
     {
@@ -213,9 +217,10 @@ public class MapLoader : MonoBehaviour
             // ToDo. _MonsterManagerMent 
             foreach (var item in dungeon.monsterInfos)
             {
-                var obj = GameObject.Instantiate<GameObject>(ObjectCache.instance.LoadResourceFromCache(item.filePath));
-                obj.transform.position = item.position;
-                _dungeonGameObject[index].Add(obj);
+                //var obj = GameObject.Instantiate<GameObject>(ObjectCache.instance.LoadResourceFromCache(item.filePath));           
+                //obj.transform.position = item.position;
+                //_dungeonGameObject[index].Add(obj);
+                MonsterManager.Instance.AddMonster(ObjectCache.instance.LoadResourceFromCache(item.filePath), item.position);
             }
 
             foreach (var item in dungeon.potalTransportinfos)

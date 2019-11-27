@@ -55,7 +55,7 @@ public class PotalManager : MonoBehaviour
             _potals[i].Block();
         }
     }
-    private void ResetPotals()
+    public void ResetPotals()
     {
         for (int i = 0; i < _potals.Length; i++)
         {
