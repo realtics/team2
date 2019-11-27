@@ -21,9 +21,9 @@ public class BaseMonster : MonoBehaviour
     protected float _currentHp;
     [SerializeField]
     protected float _maxHp;
-    [SerializeField]
 
     //values for MonsterControl
+    [SerializeField]
     protected float _attackRange;
     [SerializeField]
     protected float _chaseCancleTime;
@@ -50,11 +50,14 @@ public class BaseMonster : MonoBehaviour
     private FSMState<BaseMonster> _moveState = new MoveState();
     private FSMState<BaseMonster> _hitState = new HitState();
     private FSMState<BaseMonster> _dieState = new DieState();
+    private FSMState<BaseMonster> _downRecoveryState = new DownRecoveryState();
 
     private bool _isDead = false;
     private bool _isAttack;
     private bool _isHit;
     private bool _isAerialHit;
+    private bool _isDown;
+    private bool _isDownRecovery;
 
     [SerializeField]
     protected Transform _avatar;
@@ -155,32 +158,6 @@ public class BaseMonster : MonoBehaviour
         return false;
     }
 
-    public void OnHit(AttackInfoSender sender)
-    {
-        SetKnockbackValue(sender);
-
-        if (sender.ExtraHeightValue > 0.0f)
-        {
-            _isAerialHit = true;
-            _animator.SetBool("isAaerial", true);
-
-            _jumpValue = sender.ExtraHeightValue;
-
-            if (IsGround)
-                StartCoroutine("AerialProcess");
-        }
-            
-        _currentHp -= sender.Damage;
-
-        UIHelper.Instance.SetMonster(this);
-        UIHelper.Instance.SetMonsterHp(_currentHp, _maxHp);
-
-        if (!_isHit)
-            _state.ChangeState(_hitState);
-        else
-            _state.RestartState();
-    }
-
     public void ActiveBaseAttackBox()
     {
         _baseAttackBox.gameObject.SetActive(true);
@@ -220,8 +197,26 @@ public class BaseMonster : MonoBehaviour
         }
     }
 
+    public void OnHit(AttackInfoSender sender)
+    {
+        if (sender.HorizontalExtraMoveDuration > 0)
+            SetKnockbackValue(sender);
+        if (sender.ExtraHeightValue > 0)
+            SetAerialValue(sender);
+
+        _currentHp -= sender.Damage;
+
+        UIHelper.Instance.SetMonster(this);
+        UIHelper.Instance.SetMonsterHp(_currentHp, _maxHp);
+
+        if (!_isHit)
+            _state.ChangeState(_hitState);
+        else
+            _state.RestartState();
+    }
+
     //FIXME: AttackInofoSender 의 값중 넉백관련만 인자로 받게 고쳐야함
-    protected void SetKnockbackValue(AttackInfoSender sender)
+    protected virtual void SetKnockbackValue(AttackInfoSender sender)
     {
         Vector3 direction = Vector3.zero;
 
@@ -253,9 +248,21 @@ public class BaseMonster : MonoBehaviour
         {
             transform.position += _knockBackDirection * Time.deltaTime * _knockBackSpeed;
         }
-      
+
         yield return null;
         StartCoroutine("Knockback");
+    }
+
+    protected virtual void SetAerialValue(AttackInfoSender sender)
+    {
+        _isAerialHit = true;
+        _isDown = true;
+        _animator.SetBool("isAaerial", true);
+
+        _jumpValue = sender.ExtraHeightValue;
+
+        if (IsGround)
+            StartCoroutine("AerialProcess");
     }
 
     IEnumerator AerialProcess()
@@ -265,7 +272,7 @@ public class BaseMonster : MonoBehaviour
         _avatar.localPosition = groundPos;
 
         _height += _jumpValue;
-        _jumpValue -= Time.deltaTime/2;
+        _jumpValue -= Time.deltaTime / 2;
 
         if (_height <= 0.0f)
         {
@@ -298,8 +305,8 @@ public class BaseMonster : MonoBehaviour
 
     public virtual void UpdateAttackState()
     {
-        if (_animator.GetCurrentAnimatorStateInfo(0).fullPathHash != Animator.StringToHash("Base Layer.Walk") &&
-            _animator.GetCurrentAnimatorStateInfo(0).fullPathHash != Animator.StringToHash("Base Layer.Idle"))
+        
+        if (!_animator.IsInTransition(0))
         {
             if (_animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f)
             {
@@ -320,7 +327,7 @@ public class BaseMonster : MonoBehaviour
     {
         if (_baseAttackCurrentTime >= _baseAttackResetTime)
             return true;
-        
+
         else
             return false;
     }
@@ -359,7 +366,7 @@ public class BaseMonster : MonoBehaviour
     {
         //nothing
     }
-   
+
     //HitState
     public virtual void EnterHitState()
     {
@@ -374,13 +381,21 @@ public class BaseMonster : MonoBehaviour
     {
         if (_isAerialHit)
         {
-           
+
         }
         else
         {
             if (IsHitRecoveryTimeEnd())
             {
-                ChangeState(_moveState);
+                if (_isDown)
+                {
+                    _isDown = false;
+                    ChangeState(_downRecoveryState);
+                }
+                else
+                {
+                    ChangeState(_moveState);
+                }
             }
         }
     }
@@ -414,6 +429,30 @@ public class BaseMonster : MonoBehaviour
             _currentHitMotion = HitMotion.HitMotion0;
 
         _animator.SetInteger("hitMotion", (int)_currentHitMotion);
+    }
+
+    //DownRecoveryState
+    public virtual void EnterDownRecoveryState()
+    {
+        _isDownRecovery = true;
+        _animator.SetBool("isDownRecovery", true);
+    }
+
+    public virtual void UpdateDownRecoveryState()
+    {
+        if (!_animator.IsInTransition(0))
+        {
+            if (_animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f)
+            {
+                ChangeState(_moveState);
+            }
+        }
+    }
+
+    public virtual void ExitDownRecoveryState()
+    {
+        _isDownRecovery = false;
+        _animator.SetBool("isDownRecovery", false);
     }
 
     //MoveState
@@ -455,7 +494,7 @@ public class BaseMonster : MonoBehaviour
             }
             else
             {
-                if(IsAttackable())
+                if (IsAttackable())
                     ChangeState(_attackState);
                 else
                     _animator.SetBool("isMoving", false);

@@ -78,6 +78,13 @@ public class Calvary : BaseMonster
     {
         base.ExitDieState();
     }
+
+    protected override void SetAerialValue(AttackInfoSender sender)
+    {
+        //FIXME : 컴포넌트화?
+        //this monster don't have aerialvalue
+        return;
+    }
 }
 
 //옵저버패턴
