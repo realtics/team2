@@ -34,14 +34,22 @@ public class MonsterManager : MonoBehaviour
         monsterList.Add(spawnMonster.GetComponent<BaseMonster>());
     }
 
-    public void ClearMonsterList()
+    public bool IsExistMonster()
     {
-        monsterList.Clear();
+        if (monsterList.Count > 0)
+            return true;
+        else
+            return false;
     }
 
     public void ReceiveMonsterDie(BaseMonster monster)
     {
-
+        monster.InactiveMonster();
+        monster.ResetMonster();
         monsterList.Remove(monster);
+
+        //FIXME : 포탈을 여는 주체가 몬스터매니저가 할일인가
+        if (monsterList.Count == 0)
+            PotalManager.instance.ResetPotals();
     }
 }
