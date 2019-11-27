@@ -3,79 +3,129 @@
     {
       "objectinfos": [
         {
-          "filePath": "Object/StoneBar",
+          "filePath": "Dungeon/LorienAndForceAltar",
           "position": {
-            "x": -7.44,
-            "y": -5.55,
-            "z": 0.0,
+            "x": 3.82,
+            "y": -9.45,
+            "z": -4.17578125,
             "normalized": {
-              "x": -0.8015487,
-              "y": -0.5979295,
-              "z": 0.0,
+              "x": 0.346797228,
+              "y": -0.857914567,
+              "z": -0.3790967,
               "magnitude": 1.0,
               "sqrMagnitude": 1.0
             },
-            "magnitude": 9.282031,
-            "sqrMagnitude": 86.156105
+            "magnitude": 11.0150824,
+            "sqrMagnitude": 121.332047
+          }
+        }
+      ],
+      "monsterInfos": [
+        {
+          "filePath": "Monster/Tauarmy/Unit/Tauarmy",
+          "position": {
+            "x": -2.18,
+            "y": -10.28,
+            "z": 0.0,
+            "normalized": {
+              "x": -0.207449019,
+              "y": -0.9782458,
+              "z": 0.0,
+              "normalized": {
+                "x": -0.207449034,
+                "y": -0.978245854,
+                "z": 0.0,
+                "magnitude": 1.0,
+                "sqrMagnitude": 1.0
+              },
+              "magnitude": 0.99999994,
+              "sqrMagnitude": 0.99999994
+            },
+            "magnitude": 10.508606,
+            "sqrMagnitude": 110.430794
           }
         }
       ],
       "potalTransportinfos": [
         {
-          "filePath": "Object/PotalTransport",
+          "filePath": "Object/PotalTransport Side",
           "position": {
-            "x": 8.21,
-            "y": -2.2,
+            "x": 5.93,
+            "y": -7.23,
             "z": 0.0,
             "normalized": {
-              "x": 0.9659218,
-              "y": -0.2588341,
+              "x": 0.6341691,
+              "y": -0.773194432,
               "z": 0.0,
               "magnitude": 1.0,
-              "sqrMagnitude": 1.0
+              "sqrMagnitude": 1.00000012
             },
-            "magnitude": 8.499653,
-            "sqrMagnitude": 72.2441
+            "magnitude": 9.350818,
+            "sqrMagnitude": 87.4378
           },
-          "transportPosition": {
-            "x": 0.0,
-            "y": 0.0,
-            "z": 0.0,
-            "magnitude": 0.0,
-            "sqrMagnitude": 0.0
-          },
-          "arrow": 0,
+          "spotPosition": [
+            {
+              "x": 7.89,
+              "y": -7.85,
+              "z": 0.0,
+              "normalized": {
+                "x": 0.708901465,
+                "y": -0.705307543,
+                "z": 0.0,
+                "magnitude": 1.0,
+                "sqrMagnitude": 1.0
+              },
+              "magnitude": 11.1298962,
+              "sqrMagnitude": 123.874596
+            },
+            {
+              "x": 5.93,
+              "y": -7.23,
+              "z": 0.0,
+              "normalized": {
+                "x": 0.6341691,
+                "y": -0.773194432,
+                "z": 0.0,
+                "magnitude": 1.0,
+                "sqrMagnitude": 1.00000012
+              },
+              "magnitude": 9.350818,
+              "sqrMagnitude": 87.4378
+            },
+            {
+              "x": 5.93,
+              "y": -7.23,
+              "z": 0.0,
+              "normalized": {
+                "x": 0.6341691,
+                "y": -0.773194432,
+                "z": 0.0,
+                "magnitude": 1.0,
+                "sqrMagnitude": 1.00000012
+              },
+              "magnitude": 9.350818,
+              "sqrMagnitude": 87.4378
+            },
+            {
+              "x": 5.93,
+              "y": -7.23,
+              "z": 0.0,
+              "normalized": {
+                "x": 0.6341691,
+                "y": -0.773194432,
+                "z": 0.0,
+                "magnitude": 1.0,
+                "sqrMagnitude": 1.00000012
+              },
+              "magnitude": 9.350818,
+              "sqrMagnitude": 87.4378
+            }
+          ],
+          "arrow": 3,
           "nextIndex": 1
         }
       ],
-      "potalSceneInfos": [
-        {
-          "filePath": "Object/PotalScene",
-          "position": {
-            "x": 0.0,
-            "y": 1.9,
-            "z": 0.0,
-            "normalized": {
-              "x": 0.0,
-              "y": 1.0,
-              "z": 0.0,
-              "magnitude": 1.0,
-              "sqrMagnitude": 1.0
-            },
-            "magnitude": 1.9,
-            "sqrMagnitude": 3.61
-          },
-          "transportPosition": {
-            "x": 0.0,
-            "y": 0.0,
-            "z": 0.0,
-            "magnitude": 0.0,
-            "sqrMagnitude": 0.0
-          },
-          "arrow": 0,
-          "nextDataName": "Test2"
-        }
-      ],
+      "potalSceneInfos": [],
       "PlayerStartPosition": {
         "x": 0.0,
         "y": 0.0,
@@ -87,79 +137,122 @@
     {
       "objectinfos": [
         {
-          "filePath": "Object/StoneBar",
+          "filePath": "Dungeon/Dungeon",
           "position": {
-            "x": 7.71,
-            "y": -4.91,
+            "x": 5.3,
+            "y": -9.4,
+            "z": -4.17578125,
+            "normalized": {
+              "x": 0.458043218,
+              "y": -0.812378466,
+              "z": -0.360884577,
+              "magnitude": 1.0,
+              "sqrMagnitude": 1.0
+            },
+            "magnitude": 11.570961,
+            "sqrMagnitude": 133.887146
+          }
+        }
+      ],
+      "monsterInfos": [
+        {
+          "filePath": "Monster/Goblin/Unit/Goblin",
+          "position": {
+            "x": 0.07,
+            "y": -9.26,
             "z": 0.0,
             "normalized": {
-              "x": 0.8434813,
-              "y": -0.5371586,
+              "x": 0.00755917933,
+              "y": -0.999971449,
               "z": 0.0,
               "magnitude": 1.0,
-              "sqrMagnitude": 1.00000012
+              "sqrMagnitude": 1.0
             },
-            "magnitude": 9.140689,
-            "sqrMagnitude": 83.5522
+            "magnitude": 9.260264,
+            "sqrMagnitude": 85.7525
           }
         }
       ],
       "potalTransportinfos": [
         {
-          "filePath": "Object/PotalTransport",
+          "filePath": "Object/PotalTransport Side",
           "position": {
-            "x": -8.17,
-            "y": -2.2,
+            "x": -14.18,
+            "y": -7.23,
             "z": 0.0,
             "normalized": {
-              "x": -0.965604365,
-              "y": -0.260015875,
+              "x": -0.89088124,
+              "y": -0.454236329,
               "z": 0.0,
               "magnitude": 1.0,
               "sqrMagnitude": 1.0
             },
-            "magnitude": 8.461022,
-            "sqrMagnitude": 71.5889
+            "magnitude": 15.9168243,
+            "sqrMagnitude": 253.3453
           },
-          "transportPosition": {
-            "x": 0.0,
-            "y": 0.0,
-            "z": 0.0,
-            "magnitude": 0.0,
-            "sqrMagnitude": 0.0
-          },
-          "arrow": 0,
+          "spotPosition": [
+            {
+              "x": -12.22,
+              "y": -7.85,
+              "z": 0.0,
+              "normalized": {
+                "x": -0.8413574,
+                "y": -0.5404792,
+                "z": 0.0,
+                "magnitude": 1.0,
+                "sqrMagnitude": 1.0
+              },
+              "magnitude": 14.5241489,
+              "sqrMagnitude": 210.950912
+            },
+            {
+              "x": -14.18,
+              "y": -7.23,
+              "z": 0.0,
+              "normalized": {
+                "x": -0.89088124,
+                "y": -0.454236329,
+                "z": 0.0,
+                "magnitude": 1.0,
+                "sqrMagnitude": 1.0
+              },
+              "magnitude": 15.9168243,
+              "sqrMagnitude": 253.3453
+            },
+            {
+              "x": -14.18,
+              "y": -7.23,
+              "z": 0.0,
+              "normalized": {
+                "x": -0.89088124,
+                "y": -0.454236329,
+                "z": 0.0,
+                "magnitude": 1.0,
+                "sqrMagnitude": 1.0
+              },
+              "magnitude": 15.9168243,
+              "sqrMagnitude": 253.3453
+            },
+            {
+              "x": -14.18,
+              "y": -7.23,
+              "z": 0.0,
+              "normalized": {
+                "x": -0.89088124,
+                "y": -0.454236329,
+                "z": 0.0,
+                "magnitude": 1.0,
+                "sqrMagnitude": 1.0
+              },
+              "magnitude": 15.9168243,
+              "sqrMagnitude": 253.3453
+            }
+          ],
+          "arrow": 2,
           "nextIndex": 0
         }
       ],
-      "potalSceneInfos": [
-        {
-          "filePath": "Object/PotalScene",
-          "position": {
-            "x": 0.0,
-            "y": 1.9,
-            "z": 0.0,
-            "normalized": {
-              "x": 0.0,
-              "y": 1.0,
-              "z": 0.0,
-              "magnitude": 1.0,
-              "sqrMagnitude": 1.0
-            },
-            "magnitude": 1.9,
-            "sqrMagnitude": 3.61
-          },
-          "transportPosition": {
-            "x": 0.0,
-            "y": 0.0,
-            "z": 0.0,
-            "magnitude": 0.0,
-            "sqrMagnitude": 0.0
-          },
-          "arrow": 0,
-          "nextDataName": "Test2"
-        }
-      ],
+      "potalSceneInfos": [],
       "PlayerStartPosition": {
         "x": 0.0,
         "y": 0.0,

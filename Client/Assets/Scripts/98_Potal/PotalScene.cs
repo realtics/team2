@@ -20,7 +20,7 @@ public class PotalScene : Potal
     public override void Enter()
     {
         MapLoader.instacne.SetMap(_nextSceneName);
-        LobbyGameManager.Instance.MoveToScene(4);             
+        LobbyGameManager.Instance.MoveToScene(1);             
     }
     public override Vector3 GetPlayerSpotPosition()
     {
