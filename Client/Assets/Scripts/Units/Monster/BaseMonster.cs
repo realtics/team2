@@ -115,7 +115,7 @@ public class BaseMonster : MonoBehaviour
 
     protected virtual void FixedUpdate()
     {
-        if (_currentHp <= 0 && !_isDead)
+        if (_currentHp <= 0 && !_isDead &&!_isAerialHit)
         {
             _state.ChangeState(_dieState);
             _isDead = true;
@@ -256,7 +256,6 @@ public class BaseMonster : MonoBehaviour
     protected virtual void SetAerialValue(AttackInfoSender sender)
     {
         _isAerialHit = true;
-        _isDown = true;
         _animator.SetBool("isAaerial", true);
 
         _jumpValue = sender.ExtraHeightValue;
@@ -278,7 +277,12 @@ public class BaseMonster : MonoBehaviour
         {
             _isAerialHit = false;
             _animator.SetBool("isAaerial", false);
+
             _animator.SetInteger("hitMotion", (int)HitMotion.HitMotionEnd);
+
+            _isDown = true;
+            _animator.SetBool("isDown", true);
+
             _height = 0.0f;
             _avatar.localPosition = _originPos;
             _jumpValue = 0.0f;
@@ -390,6 +394,7 @@ public class BaseMonster : MonoBehaviour
                 if (_isDown)
                 {
                     _isDown = false;
+                    _animator.SetBool("isDown", false);
                     ChangeState(_downRecoveryState);
                 }
                 else
