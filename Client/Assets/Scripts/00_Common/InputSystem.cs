@@ -43,8 +43,10 @@ public class InputSystem : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.X))
             _pc.SetAttack();
 
-        if (Input.GetKeyDown(KeyCode.Z))
-            _pc.SetSkill();
+        if (Input.GetKeyDown(KeyCode.A))
+            _pc.SetSkill(SwordmanSkillIndex.Hadouken);
+        if (Input.GetKeyDown(KeyCode.S))
+            _pc.SetSkill(SwordmanSkillIndex.Jingongcham);
 
         if (Input.GetKey(KeyCode.LeftShift))
             _pc.SetRun();

@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class CharacterSkill
 {
-    protected GameObject _effect;
+    protected GameObject _effectPrefab;
+    protected GameObject _instanceEffect;
     private int _motionIndex;
     protected CharacterStat _stat;
     protected AttackInfoSender _sender;
@@ -37,7 +38,7 @@ public class CharacterSkill
     {
         _stat = stat;
         _motionIndex = motion;
-        _effect = effect;
+        _effectPrefab = effect;
         _initCoolTime = coolTime;
         SetAttackInfo(_stat);
     }
@@ -45,5 +46,12 @@ public class CharacterSkill
     protected virtual void SetAttackInfo(CharacterStat stat)
     {
         _sender.Attacker = stat.transform;
+    }
+
+    protected void SetSpriteFlipForward()
+    {
+        Vector3 flipScale = _effectPrefab.transform.localScale;
+        flipScale.x *= _stat.Unit.Forward;
+        _instanceEffect.transform.localScale = flipScale;
     }
 }

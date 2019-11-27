@@ -22,6 +22,7 @@ public class CharacterMovement : BaseUnit
 
         _equiredSkills = new Dictionary<SwordmanSkillIndex, CharacterSkill>();
         _equiredSkills.Add(SwordmanSkillIndex.Jingongcham, SwordmanSkillManager.Instance.GetSkill(_stat, SwordmanSkillIndex.Jingongcham));
+        _equiredSkills.Add(SwordmanSkillIndex.Hadouken, SwordmanSkillManager.Instance.GetSkill(_stat, SwordmanSkillIndex.Hadouken));
     }
 
     protected override void Update()
@@ -218,9 +219,9 @@ public class CharacterMovement : BaseUnit
         _animator.SetBool("IsAttack", false);
     }
 
-    public override bool SetSkill()
+    public override bool SetSkill(SwordmanSkillIndex skill)
     {
-        _usedSkill = SwordmanSkillIndex.Jingongcham;
+        _usedSkill = skill;
 
         if (!UsedSkill.UsableSkill)
         {
@@ -230,7 +231,7 @@ public class CharacterMovement : BaseUnit
             return false;
         }
 
-        if (!base.SetSkill())
+        if (!base.SetSkill(skill))
             return false;
 
         _animator.SetBool("OnSkill", true);

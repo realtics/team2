@@ -53,9 +53,9 @@ public class PlayerCharacter : MonoBehaviour
         _movement.SetAttack();
     }
 
-    public void SetSkill()
+    public void SetSkill(SwordmanSkillIndex skill)
     {
-        _movement.SetSkill();
+        _movement.SetSkill(skill);
     }
 
     public void SetTest(AttackInfoSender sender)

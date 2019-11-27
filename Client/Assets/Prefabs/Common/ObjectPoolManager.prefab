@@ -44,6 +44,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _pools:
-  - pooledObject: {fileID: 8467314183276299524, guid: fe356b9be93e61b4eaee401d0d359b7a,
+  - pooledObjectPrefab: {fileID: 8467314183276299524, guid: fe356b9be93e61b4eaee401d0d359b7a,
       type: 3}
-    initObjectCount: 3
+    initObjectCount: 1
+  - pooledObjectPrefab: {fileID: 4830150782382790155, guid: 94817625890a7654698be49829c78193,
+      type: 3}
+    initObjectCount: 1
+  - pooledObjectPrefab: {fileID: 736230145961218750, guid: af9a42573bed6204d9edf25c995acbc4,
+      type: 3}
+    initObjectCount: 1

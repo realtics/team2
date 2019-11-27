@@ -57,7 +57,7 @@ public class ObjectPoolManager : MonoBehaviour
         return pool.GetObject();
     }
 
-    private ObjectPool FindPool(string prefabName)
+    public ObjectPool FindPool(string prefabName)
     {
         ObjectPool findedPool = null;
 
