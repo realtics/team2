@@ -73,11 +73,10 @@ public class Character : MonoBehaviour
         if (_oldDirection == _moveDirection)
             return;
 
-        // SendPacket ( MoveStart, _moveDirection);
         Debug.Log("SendMoveStart");
         _oldDirection = _moveDirection;
 
-        
+        NetworkManager.Instance.MoveStart(transform.position, _moveDirection);
     }
 
     private void SendPacketMoveEnd()
@@ -86,6 +85,8 @@ public class Character : MonoBehaviour
             return;
 
         Debug.Log("SendMoveEnd");
+
+        NetworkManager.Instance.MoveEnd(transform.position);
 
         StopMove(transform.position);
     }
@@ -117,7 +118,7 @@ public class Character : MonoBehaviour
 
         transform.LookAt(transform.position + _moveDirection);
     }
-
+    
     // MoveEnd와 같은 패킷을 받아 호출하는 함수
     // 인자는 서버로부터 보낸 이 캐릭터의 마지막 좌표
     public void StopMove(Vector3 lastPosition)

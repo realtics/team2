@@ -5,13 +5,14 @@ const int MAX_RECEIVE_BUFFER_LEN = 512;
 const int MAX_NAME_LEN = 13;
 const int MAX_MESSAGE_LEN = 129;
 
+const int MAX_PLAYER_MOVE_LEN = 50;
+
 const int FIRST_USER_INDEX = 100;		// 첫번째 유저 Index (클라이언트에 알려줄 index)
 
 enum PACKET_INDEX
 {
 	// REQ : 클라->서버, 클라에서 서버에 어떤 값을 요청
 	// RES : 서버->클라, 서버가 어떤 값으로 응답
-	// NOTICE : 서버->모든 클라, 서버에 붙은 모든 클라이언트에 응답
 
 	REQ_IN = 1,
 	RES_IN = 2,
@@ -136,5 +137,65 @@ struct PKT_RES_CONCURRENT_USER_LIST : public PACKET_HEADER
 		packetIndex = PACKET_INDEX::RES_CONCURRENT_USER_LIST;
 		packetSize = sizeof(PKT_RES_CONCURRENT_USER_LIST);
 		totalUser = 0;
+	}
+};
+
+struct PKT_REQ_PLAYER_MOVE_START : public PACKET_HEADER
+{
+	int userID;
+	char userPos[MAX_PLAYER_MOVE_LEN];
+	char userDir[MAX_PLAYER_MOVE_LEN];
+	
+	void Init()
+	{
+		packetIndex = PACKET_INDEX::REQ_PLAYER_MOVE_START;
+		packetSize = sizeof(PKT_REQ_PLAYER_MOVE_START);
+		userID = 0;
+		memset(userPos, 0, MAX_PLAYER_MOVE_LEN);
+		memset(userDir, 0, MAX_PLAYER_MOVE_LEN);
+	}
+};
+
+struct PKT_RES_PLAYER_MOVE_START : public PACKET_HEADER
+{
+	int userID;
+	char userPos[MAX_PLAYER_MOVE_LEN];
+	char userDir[MAX_PLAYER_MOVE_LEN];
+	
+	void Init()
+	{
+		packetIndex = PACKET_INDEX::RES_PLAYER_MOVE_START;
+		packetSize = sizeof(PKT_RES_PLAYER_MOVE_START);
+		userID = 0;
+		memset(userPos, 0, MAX_PLAYER_MOVE_LEN);
+		memset(userDir, 0, MAX_PLAYER_MOVE_LEN);
+	}
+};
+
+struct PKT_REQ_PLAYER_MOVE_END : public PACKET_HEADER
+{
+	int userID;
+	char userPos[MAX_PLAYER_MOVE_LEN];
+
+	void Init()
+	{
+		packetIndex = PACKET_INDEX::REQ_PLAYER_MOVE_END;
+		packetSize = sizeof(PKT_REQ_PLAYER_MOVE_START);
+		userID = 0;
+		memset(userPos, 0, MAX_PLAYER_MOVE_LEN);
+	}
+};
+
+struct PKT_RES_PLAYER_MOVE_END : public PACKET_HEADER
+{
+	int userID;
+	char userPos[MAX_PLAYER_MOVE_LEN];
+
+	void Init()
+	{
+		packetIndex = PACKET_INDEX::RES_PLAYER_MOVE_END;
+		packetSize = sizeof(PKT_RES_PLAYER_MOVE_END);
+		userID = 0;
+		memset(userPos, 0, MAX_PLAYER_MOVE_LEN);
 	}
 };

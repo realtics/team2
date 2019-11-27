@@ -144,7 +144,7 @@ void Session::Deserialization(char* jsonData)
 {
 	short packetSize = strlen(jsonData) + 1;
 
-	std::cout << "[클라->서버 JSON][Size:" << packetSize << "] " << jsonData << std::endl;
+	//std::cout << "[클라->서버][Size:" << packetSize << "] " << jsonData << std::endl;
 
 	boost::property_tree::ptree ptRecv;
 	std::istringstream iss(jsonData);
@@ -158,7 +158,7 @@ void Session::Deserialization(char* jsonData)
 	{
 	case PACKET_INDEX::REQ_NEW_LOGIN:
 	{
-		PACKET_HEADER packet;
+		PKT_REQ_NEW_LOGIN packet;
 		packet.packetIndex = packetIndex;
 		packet.packetSize = packetSize;
 		memcpy(&_packetBuffer[_packetBufferMark], (char*)&packet, sizeof(packet));
@@ -166,9 +166,32 @@ void Session::Deserialization(char* jsonData)
 	break;
 	case PACKET_INDEX::REQ_CONCURRENT_USER:
 	{
-		PACKET_HEADER packet;
+		PKT_REQ_CONCURRENT_USER packet;
 		packet.packetIndex = packetIndex;
 		packet.packetSize = packetSize;
+		memcpy(&_packetBuffer[_packetBufferMark], (char*)&packet, sizeof(packet));
+	}
+	break;
+	case PACKET_INDEX::REQ_PLAYER_MOVE_START:
+	{
+		PKT_REQ_PLAYER_MOVE_START packet;
+		packet.Init();
+		packet.packetIndex = packetIndex;
+		packet.packetSize = packetSize;
+		packet.userID = ptRecv.get<int>("userID");
+		strcpy_s(packet.userPos, MAX_PLAYER_MOVE_LEN, ptRecv.get<std::string>("userPos").c_str());
+		strcpy_s(packet.userDir, MAX_PLAYER_MOVE_LEN, ptRecv.get<std::string>("userDir").c_str());
+		memcpy(&_packetBuffer[_packetBufferMark], (char*)&packet, sizeof(packet));
+	}
+	break;
+	case PACKET_INDEX::REQ_PLAYER_MOVE_END:
+	{
+		PKT_REQ_PLAYER_MOVE_END packet;
+		packet.Init();
+		packet.packetIndex = packetIndex;
+		packet.packetSize = packetSize;
+		packet.userID = ptRecv.get<int>("userID");
+		strcpy_s(packet.userPos, MAX_PLAYER_MOVE_LEN, ptRecv.get<std::string>("userPos").c_str());
 		memcpy(&_packetBuffer[_packetBufferMark], (char*)&packet, sizeof(packet));
 	}
 	break;

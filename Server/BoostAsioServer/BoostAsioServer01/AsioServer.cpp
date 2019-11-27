@@ -148,10 +148,11 @@ void AsioServer::ProcessPacket(const int sessionID, const char* pData)
 		SendPkt.isSuccess = true;
 		SendPkt.userID = _userID;
 
-		boost::property_tree::ptree ptSend;
 		boost::property_tree::ptree ptSendHeader;
 		ptSendHeader.put<short>("packetIndex", SendPkt.packetIndex);
 		ptSendHeader.put<short>("packetSize", SendPkt.packetSize);
+
+		boost::property_tree::ptree ptSend;
 		ptSend.add_child("header", ptSendHeader);
 		ptSend.put<bool>("isSuccess", SendPkt.isSuccess);
 		ptSend.put<int>("userID", SendPkt.userID);
@@ -160,7 +161,7 @@ void AsioServer::ProcessPacket(const int sessionID, const char* pData)
 		std::ostringstream oss(stringRecv);
 		boost::property_tree::write_json(oss, ptSend, false);
 		std::string sendStr = oss.str();
-		std::cout << "[서버->클라 JSON] " << sendStr << std::endl;
+		std::cout << "[서버->클라] " << sendStr << std::endl;
 
 		size_t totalSessionCount = _sessionList.size();
 
@@ -178,6 +179,86 @@ void AsioServer::ProcessPacket(const int sessionID, const char* pData)
 		ConcurrentUser();
 	}
 	break;
+	case PACKET_INDEX::REQ_PLAYER_MOVE_START:
+	{
+		PKT_REQ_PLAYER_MOVE_START* pPacket = (PKT_REQ_PLAYER_MOVE_START*)pData;
+
+		PKT_RES_PLAYER_MOVE_START playerMove;
+		playerMove.Init();
+
+		playerMove.userID = pPacket->userID;
+		strcpy_s(playerMove.userPos, MAX_PLAYER_MOVE_LEN, pPacket->userPos);
+		strcpy_s(playerMove.userDir, MAX_PLAYER_MOVE_LEN, pPacket->userDir);
+		
+		boost::property_tree::ptree ptSendHeader;
+		ptSendHeader.put<short>("packetIndex", playerMove.packetIndex);
+		ptSendHeader.put<short>("packetSize", playerMove.packetSize);
+
+		boost::property_tree::ptree ptSend;
+		ptSend.add_child("header", ptSendHeader);
+		ptSend.put<int>("userID", playerMove.userID);
+		ptSend.put<std::string>("userPos", playerMove.userPos);
+		ptSend.put<std::string>("userDir", playerMove.userDir);
+
+		std::string stringRecv;
+		std::ostringstream oss(stringRecv);
+		boost::property_tree::write_json(oss, ptSend, false);
+		std::string sendStr = oss.str();
+		//std::cout << "[서버->클라]" << sendStr << std::endl;
+
+		size_t totalSessionCount = _sessionList.size();
+
+		for (size_t i = 0; i < totalSessionCount; i++)
+		{
+			if (_sessionList[i]->Socket().is_open())
+			{
+				if (_sessionList[i]->SessionID() == (playerMove.userID - FIRST_USER_INDEX))
+					continue;
+
+				_sessionList[i]->PostSend(false, std::strlen(sendStr.c_str()), (char*)sendStr.c_str());
+			}
+		}
+	}
+	break;
+	case PACKET_INDEX::REQ_PLAYER_MOVE_END:
+	{
+		PKT_REQ_PLAYER_MOVE_END* pPacket = (PKT_REQ_PLAYER_MOVE_END*)pData;
+
+		PKT_RES_PLAYER_MOVE_END playerMove;
+		playerMove.Init();
+
+		playerMove.userID = pPacket->userID;
+		strcpy_s(playerMove.userPos, MAX_PLAYER_MOVE_LEN, pPacket->userPos);
+
+		boost::property_tree::ptree ptSendHeader;
+		ptSendHeader.put<short>("packetIndex", playerMove.packetIndex);
+		ptSendHeader.put<short>("packetSize", playerMove.packetSize);
+
+		boost::property_tree::ptree ptSend;
+		ptSend.add_child("header", ptSendHeader);
+		ptSend.put<int>("userID", playerMove.userID);
+		ptSend.put<std::string>("userPos", playerMove.userPos);
+
+		std::string stringRecv;
+		std::ostringstream oss(stringRecv);
+		boost::property_tree::write_json(oss, ptSend, false);
+		std::string sendStr = oss.str();
+		//std::cout << "[서버->클라]" << sendStr << std::endl;
+
+		size_t totalSessionCount = _sessionList.size();
+
+		for (size_t i = 0; i < totalSessionCount; i++)
+		{
+			if (_sessionList[i]->Socket().is_open())
+			{
+				if (_sessionList[i]->SessionID() == (playerMove.userID - FIRST_USER_INDEX))
+					continue;
+
+				_sessionList[i]->PostSend(false, std::strlen(sendStr.c_str()), (char*)sendStr.c_str());
+			}
+		}
+	}
+	break;
 	}
 
 	return;
@@ -185,10 +266,6 @@ void AsioServer::ProcessPacket(const int sessionID, const char* pData)
 
 void AsioServer::ConcurrentUser()
 {
-	PKT_RES_CONCURRENT_USER_LIST concurrentUser;
-	concurrentUser.packetIndex = PACKET_INDEX::RES_CONCURRENT_USER_LIST;
-	concurrentUser.packetSize = sizeof(PKT_RES_CONCURRENT_USER_LIST);
-
 	int totalUser = 0;
 	std::string userList = "";
 
@@ -212,6 +289,8 @@ void AsioServer::ConcurrentUser()
 
 		userList.replace(endPlayerList, endPlayerList, "");
 	}
+
+	PKT_RES_CONCURRENT_USER_LIST concurrentUser;
 	concurrentUser.Init();
 
 	concurrentUser.totalUser = totalUser;
