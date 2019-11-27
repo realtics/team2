@@ -272,9 +272,14 @@ public class MapLoader : MonoBehaviour
         Instantiate(index);
         _currentDungeonIndex = index;
 
+        //FIXME : 리팩토링
         PotalManager potalManager = PotalManager.instance;
         potalManager.FIndPotals();
-        potalManager.BlockPotals();
+
+        if (MonsterManager.Instance.IsExistMonster())
+            potalManager.BlockPotals();
+        else
+            potalManager.ResetPotals();
 
         gameManager.FindCameraCollider();
         gameManager.MoveToPlayer(potalManager.FindGetArrowPotalPosition(FlipArrow(arrow)));
@@ -316,6 +321,15 @@ public class MapLoader : MonoBehaviour
         LoaderDungeon(_dungeonName);
         _currentDungeonIndex = _startDungeonIndex;
         Instantiate(_currentDungeonIndex);
+
+        //FIXME : 리팩토링
+        PotalManager potalManager = PotalManager.instance;
+        potalManager.FIndPotals();
+
+        if (MonsterManager.Instance.IsExistMonster())
+            potalManager.BlockPotals();
+        else
+            potalManager.ResetPotals();
 
         gameManager.FindCameraCollider();
         gameManager.MoveToPlayer(dungeonData.DungeonInfos[startDungeonIndex].PlayerStartPosition);
