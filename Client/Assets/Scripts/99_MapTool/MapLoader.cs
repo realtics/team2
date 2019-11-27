@@ -217,10 +217,18 @@ public class MapLoader : MonoBehaviour
             // ToDo. _MonsterManagerMent 
             foreach (var item in dungeon.monsterInfos)
             {
-                //var obj = GameObject.Instantiate<GameObject>(ObjectCache.instance.LoadResourceFromCache(item.filePath));           
+                //var obj = GameObject.Instantiate<GameObject>(ObjectCache.instance.LoadResourceFromCache(item.filePath));
                 //obj.transform.position = item.position;
                 //_dungeonGameObject[index].Add(obj);
-                MonsterManager.Instance.AddMonster(ObjectCache.instance.LoadResourceFromCache(item.filePath), item.position);
+
+                GameObject obj = ObjectCache.instance.LoadResourceFromCache(item.filePath);
+
+
+                GameObject spawnMonster = ObjectPoolManager.Instance.GetRestObject(obj);
+                spawnMonster.transform.position = item.position;
+
+
+                //MonsterManager.Instance.AddMonster(obj, item.position);
             }
 
             foreach (var item in dungeon.potalTransportinfos)

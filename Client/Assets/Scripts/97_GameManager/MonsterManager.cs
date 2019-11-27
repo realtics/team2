@@ -33,13 +33,15 @@ public class MonsterManager : MonoBehaviour
 
     public void AddMonster(GameObject obj, Vector3 position)
     {
-        monster.Add(obj);
+        GameObject spawnMonster = ObjectPoolManager.Instance.GetRestObject(obj);
+        spawnMonster.transform.position = position;
+       
     }
 
     public void Instantiate(int index)
     {
-        //_monsterCount
-
+        ////_monsterCount
+        //for()
 
     }
     public void RoomMonsterDestroy(int Index)
