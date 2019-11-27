@@ -222,13 +222,7 @@ public class MapLoader : MonoBehaviour
                 //_dungeonGameObject[index].Add(obj);
 
                 GameObject obj = ObjectCache.instance.LoadResourceFromCache(item.filePath);
-
-
-                GameObject spawnMonster = ObjectPoolManager.Instance.GetRestObject(obj);
-                spawnMonster.transform.position = item.position;
-
-
-                //MonsterManager.Instance.AddMonster(obj, item.position);
+                MonsterManager.Instance.AddMonster(obj, item.position);
             }
 
             foreach (var item in dungeon.potalTransportinfos)
