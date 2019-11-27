@@ -4,51 +4,45 @@ using System.Collections.Generic;
 
 public class MonsterManager : MonoBehaviour
 {
-    private static MonsterManager _Instance;
+    private static MonsterManager _instance;
     public static MonsterManager Instance
     {
         get
         {
-            return _Instance;
+            return _instance;
         }
     }
+    [SerializeField]
+    private List<BaseMonster> _monsterList = new List<BaseMonster>();
 
-    //public Dictionary<int, List<GameObject>> monster = new Dictionary<int, List<GameObject>>();
-    public List<GameObject> monster = new List<GameObject>();
-    public List<GameObject> deleteMonster = new List<GameObject>();
-
-    private int _monsterCount;
-
-    // Use this for initialization
-    void Start()
+    void Awake()
     {
-        _Instance = this;
+        _instance = this;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void AddMonster(GameObject prefab, Vector3 position)
     {
-
+        GameObject spawnMonster = ObjectPoolManager.Instance.GetRestObject(prefab);
+        spawnMonster.transform.position = position;
+        _monsterList.Add(spawnMonster.GetComponent<BaseMonster>());
     }
 
-    public void AddMonster(GameObject obj, Vector3 position)
+    public bool IsExistMonster()
     {
-        monster.Add(obj);
+        if (_monsterList.Count > 0)
+            return true;
+
+        return false;
     }
 
-    public void Instantiate(int index)
+    public void ReceiveMonsterDie(BaseMonster monster)
     {
-        //_monsterCount
+        monster.InactiveMonster();
+        monster.ResetMonster();
+        _monsterList.Remove(monster);
 
-
-    }
-    public void RoomMonsterDestroy(int Index)
-    {
-
-    }
-
-    public void ReceiveMonsterDie()
-    {
-
+        //FIXME : 포탈을 여는 주체가 몬스터매니저가 할일인가
+        if (_monsterList.Count == 0)
+            PotalManager.instance.ResetPotals();
     }
 }

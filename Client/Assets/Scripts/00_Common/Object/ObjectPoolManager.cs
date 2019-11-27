@@ -46,10 +46,10 @@ public class ObjectPoolManager : MonoBehaviour
 
         newPool.CreatePool(prefab);
 
-        for (int i = 0; i < initCount; i++)
-        {
+        newPool.initObjectCount = initCount;
+
+        for (int i = 0; i < newPool.initObjectCount; i++)
             newPool.CreateObject();
-        }
 
         _pools.Add(newPool);
 
@@ -58,24 +58,39 @@ public class ObjectPoolManager : MonoBehaviour
 
     public GameObject GetRestObject(GameObject effectObject)
     {
-        ObjectPool pool = FindPool(effectObject.name);
+        ObjectPool pool = FindPool(effectObject);
 
         return pool.GetObject();
     }
 
-    public ObjectPool FindPool(string prefabName)
-    {
-        ObjectPool findedPool = null;
+    //public ObjectPool FindPool(string prefabName)
+    //{
+    //    ObjectPool findedPool = null;
 
+    //    foreach (ObjectPool pool in _pools)
+    //    {
+    //        if (pool.PoolName != prefabName)
+    //            continue;
+
+    //        findedPool = pool;
+    //        break;
+    //    }
+
+    //    return findedPool;
+    //}
+
+    public ObjectPool FindPool(GameObject findPrefab)
+    {
         foreach (ObjectPool pool in _pools)
         {
-            if (pool.PoolName != prefabName)
+            if (pool.PoolName != findPrefab.name)
                 continue;
 
-            findedPool = pool;
-            break;
+            return pool;
         }
 
-        return findedPool;
+        CreatePool(findPrefab, 1);
+
+        return FindPool(findPrefab);
     }
 }

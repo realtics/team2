@@ -121,6 +121,11 @@ public class BaseMonster : MonoBehaviour
             _isDead = true;
         }
         _state.Update();
+
+        if (Input.GetKeyDown(KeyCode.F1))
+        {
+            MonsterManager.Instance.ReceiveMonsterDie(this);
+        }
     }
 
     private void OnTriggerStay2D(Collider2D other)
@@ -166,6 +171,11 @@ public class BaseMonster : MonoBehaviour
     public void InactiveBaseAttackBox()
     {
         _baseAttackBox.gameObject.SetActive(false);
+    }
+
+    public void ActiveHitBox()
+    {
+        _hitBox.gameObject.SetActive(true);
     }
 
     public void InactiveHitBox()
@@ -363,7 +373,14 @@ public class BaseMonster : MonoBehaviour
 
     public virtual void UpdateDieState()
     {
-        //nothing
+        if (_animator.GetCurrentAnimatorStateInfo(0).fullPathHash == Animator.StringToHash("Base Layer.Die"))
+        {
+            if (_animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.5f)
+            {
+                //gameObject.SetActive(false);
+                NoticeDie();
+            }
+        }
     }
 
     public virtual void ExitDieState()
@@ -549,5 +566,25 @@ public class BaseMonster : MonoBehaviour
             _randomMoveResetTime = Random.Range(1f, 4f);
             _randomMoveCurrentTime = 0f;
         }
+    }
+
+    //For MonsterManager
+    public void NoticeDie()
+    {
+        MonsterManager.Instance.ReceiveMonsterDie(this);
+    }
+
+    public void ResetMonster()
+    {
+        _isDead = false;
+        _currentHp = MaxHp;
+        ActiveHitBox();
+        _baseAttackCurrentTime = _baseAttackResetTime;
+        ChangeState(_moveState);
+    }
+
+    public void InactiveMonster()
+    {
+        gameObject.SetActive(false);
     }
 }

@@ -217,10 +217,8 @@ public class MapLoader : MonoBehaviour
             // ToDo. _MonsterManagerMent 
             foreach (var item in dungeon.monsterInfos)
             {
-                //var obj = GameObject.Instantiate<GameObject>(ObjectCache.instance.LoadResourceFromCache(item.filePath));           
-                //obj.transform.position = item.position;
-                //_dungeonGameObject[index].Add(obj);
-                MonsterManager.Instance.AddMonster(ObjectCache.instance.LoadResourceFromCache(item.filePath), item.position);
+                GameObject obj = ObjectCache.instance.LoadResourceFromCache(item.filePath);
+                MonsterManager.Instance.AddMonster(obj, item.position);
             }
 
             foreach (var item in dungeon.potalTransportinfos)
@@ -274,9 +272,14 @@ public class MapLoader : MonoBehaviour
         Instantiate(index);
         _currentDungeonIndex = index;
 
+        //FIXME : 리팩토링
         PotalManager potalManager = PotalManager.instance;
         potalManager.FIndPotals();
-        potalManager.BlockPotals();
+
+        if (MonsterManager.Instance.IsExistMonster())
+            potalManager.BlockPotals();
+        else
+            potalManager.ResetPotals();
 
         gameManager.FindCameraCollider();
         gameManager.MoveToPlayer(potalManager.FindGetArrowPotalPosition(FlipArrow(arrow)));
@@ -318,6 +321,15 @@ public class MapLoader : MonoBehaviour
         LoaderDungeon(_dungeonName);
         _currentDungeonIndex = _startDungeonIndex;
         Instantiate(_currentDungeonIndex);
+
+        //FIXME : 리팩토링
+        PotalManager potalManager = PotalManager.instance;
+        potalManager.FIndPotals();
+
+        if (MonsterManager.Instance.IsExistMonster())
+            potalManager.BlockPotals();
+        else
+            potalManager.ResetPotals();
 
         gameManager.FindCameraCollider();
         gameManager.MoveToPlayer(dungeonData.DungeonInfos[startDungeonIndex].PlayerStartPosition);
