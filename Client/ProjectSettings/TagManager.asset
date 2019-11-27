@@ -12,6 +12,7 @@ TagManager:
   - PotalScene
   - CameraCollider
   - MonsterHitBox
+  - PlayerStartSpot
   layers:
   - Default
   - TransparentFX

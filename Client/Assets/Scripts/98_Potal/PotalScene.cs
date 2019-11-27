@@ -22,4 +22,8 @@ public class PotalScene : Potal
         MapLoader.instacne.SetMap(_nextSceneName);
         LobbyGameManager.Instance.MoveToScene(4);             
     }
+    public override Vector3 GetPlayerSpotPosition()
+    {
+        return Vector3.zero;
+    }
 }

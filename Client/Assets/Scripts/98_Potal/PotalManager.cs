@@ -26,38 +26,35 @@ public class PotalManager : MonoBehaviour
         FIndPotals();
     }
 
-    //void FixedUpdate()
-    //{
-    //    if (FindActiveCurrentPotal())
-    //    {
-    //        _currentPotal.Enter();
-    //        ResetPotals();
-    //        FIndPotals();
-    //    }
-    //}
-
     public void PotalEnter()
     {
         ResetPotals();
     }
 
-    private void FIndPotals()
+    public void FIndPotals()
     {
         _potals = FindObjectsOfType<Potal>();
     }
-    private bool FindActiveCurrentPotal()
+
+    public Vector3 FindGetArrowPotalPosition(ARROW arrow)
     {
         for (int i = 0; i < _potals.Length; i++)
         {
-            if (_potals[i].IsPlayerEnter)
+            if (_potals[i].IsArrowPotal(arrow))
             {
-                _currentPotal = _potals[i];
-                return true;
+                return _potals[i].GetPlayerSpotPosition();
             }
         }
-        return false;
+        return Vector3.zero;
     }
 
+    public void BlockPotals()
+    {
+        for (int i = 0; i < _potals.Length; i++)
+        {
+            _potals[i].Block();
+        }
+    }
     private void ResetPotals()
     {
         for (int i = 0; i < _potals.Length; i++)
