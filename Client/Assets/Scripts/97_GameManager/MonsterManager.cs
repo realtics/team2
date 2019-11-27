@@ -12,10 +12,9 @@ public class MonsterManager : MonoBehaviour
             return _Instance;
         }
     }
-
-    public List<GameObject> monster = new List<GameObject>();
-    public List<GameObject> deleteMonster = new List<GameObject>();
-
+    [SerializeField]
+    private List<BaseMonster> monsterList = new List<BaseMonster>();
+    [SerializeField]
     private int _monsterCount;
 
     void Awake()
@@ -32,22 +31,17 @@ public class MonsterManager : MonoBehaviour
     {
         GameObject spawnMonster = ObjectPoolManager.Instance.GetRestObject(obj);
         spawnMonster.transform.position = position;
-       
+        monsterList.Add(spawnMonster.GetComponent<BaseMonster>());
     }
 
-    public void Instantiate(int index)
+    public void ClearMonsterList()
     {
-        ////_monsterCount
-        //for()
-
-    }
-    public void RoomMonsterDestroy(int Index)
-    {
-
+        monsterList.Clear();
     }
 
-    public void ReceiveMonsterDie()
+    public void ReceiveMonsterDie(BaseMonster monster)
     {
 
+        monsterList.Remove(monster);
     }
 }

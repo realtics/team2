@@ -170,7 +170,6 @@ GameObject:
   - component: {fileID: 2568930803150547785}
   - component: {fileID: 1940574813833944843}
   - component: {fileID: 1940574813402241530}
-  - component: {fileID: 1940574813629928573}
   m_Layer: 0
   m_Name: SpriteAnimator
   m_TagString: Untagged
@@ -289,18 +288,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 48d06c5856586af4b8c3570d7dc496f4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1940574813629928573
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2568930803150547788}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 876f4b6a2fd80dd47a8d31fdbffd1ce2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &5750592454180642659
