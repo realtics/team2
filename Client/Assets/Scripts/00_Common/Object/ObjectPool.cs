@@ -7,7 +7,7 @@ using UnityEngine;
 public class ObjectPool
 {
     private string _poolName;
-    public GameObject pooledObject;
+    public GameObject pooledObjectPrefab;
     public int initObjectCount;
 
     private List<GameObject> _spawnedObjects = new List<GameObject>();
@@ -16,13 +16,13 @@ public class ObjectPool
 
     public void Start()
     {
-        _poolName = pooledObject.name;
+        _poolName = pooledObjectPrefab.name;
     }
 
     public void CreatePool(GameObject prefab)
     {
-        pooledObject = prefab;
-        _poolName = pooledObject.name;
+        pooledObjectPrefab = prefab;
+        _poolName = pooledObjectPrefab.name;
     }
 
     public GameObject GetObject()
@@ -67,13 +67,13 @@ public class ObjectPool
 
     public GameObject CreateObject()
     {
-        if (pooledObject == null)
+        if (pooledObjectPrefab == null)
         {
             Debug.LogError("생성 할 프리팹이 없습니다.");
             return null;
         }
 
-        GameObject newObject = GameObject.Instantiate(pooledObject);
+        GameObject newObject = GameObject.Instantiate(pooledObjectPrefab);
 
         if (newObject == null)
             return null;

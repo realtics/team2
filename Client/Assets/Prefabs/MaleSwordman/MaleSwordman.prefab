@@ -75,6 +75,7 @@ MonoBehaviour:
     _horizontalExtraMoveValue: -2
     _verticalExtraMoveDuration: 0
     _verticalExtraMoveValue: 0
+    _extraHeightValue: 0
     _stunDuration: 1
 --- !u!1 &4668375787229723021
 GameObject:
@@ -354,5 +355,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99d76fa750b99d14481adac06bd08345, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _jingongcham: {fileID: 8467314183276299524, guid: fe356b9be93e61b4eaee401d0d359b7a,
-    type: 3}

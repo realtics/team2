@@ -384,7 +384,7 @@ public class BaseUnit : MonoBehaviour
         _animator.speed = _stat.AttackSpeed / 100.0f;
     }
 
-    public virtual bool SetSkill()
+    public virtual bool SetSkill(SwordmanSkillIndex skill)
     {
         if (!IsAttackable())
             return false;

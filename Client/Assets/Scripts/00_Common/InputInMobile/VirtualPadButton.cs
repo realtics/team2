@@ -52,7 +52,7 @@ public class VirtualPadButton : MonoBehaviour
                 }
                 break;
             case VirtualPadButtonType.Skill:
-                _pc.SetSkill();
+                _pc.SetSkill(SwordmanSkillIndex.Jingongcham);
                 break;
         }
     }

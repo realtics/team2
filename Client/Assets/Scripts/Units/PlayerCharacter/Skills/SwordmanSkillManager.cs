@@ -6,7 +6,8 @@ using UnityEngine;
 public enum SwordmanSkillIndex
 {
     None = 0,
-    Jingongcham = 1,
+    Jingongcham,
+    Hadouken,
 }
 
 [Serializable]
@@ -56,6 +57,11 @@ public class SwordmanSkillManager : MonoBehaviour
                 SwordmanSkillJingongcham jingongcham = new SwordmanSkillJingongcham();
                 jingongcham.SetCreateEffect(stat, FindSkillEffect(type), 10.0f, 1);
                 skill = jingongcham;
+                break;
+            case SwordmanSkillIndex.Hadouken:
+                SwordmanSkillHadouken hadouken = new SwordmanSkillHadouken();
+                hadouken.SetCreateEffect(stat, FindSkillEffect(type), 0.0f, 2);
+                skill = hadouken;
                 break;
         }
 

@@ -11,7 +11,7 @@ public class SwordmanSkillJingongcham : CharacterSkill
         if (!base.OnSkill())
             return false;
 
-        GameObject effect = ObjectPoolManager.Instance.GetRestObject(SwordmanSkillManager.Instance.FindSkillEffect(SwordmanSkillIndex.Jingongcham));
+        GameObject effect = ObjectPoolManager.Instance.GetRestObject(_effectPrefab);
         _attackBox = effect.GetComponent<JingongchamAttackBox>();
         Vector3 effectPos = _sender.Attacker.transform.position;
         effectPos.y += 2.0f;
