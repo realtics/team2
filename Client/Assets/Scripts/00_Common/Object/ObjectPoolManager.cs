@@ -34,7 +34,7 @@ public class ObjectPoolManager : MonoBehaviour
         }
     }
 
-    public bool CreatePool(GameObject prefab)
+    public bool CreatePool(GameObject prefab, int initCount = 0)
     {
         foreach (ObjectPool pool in _pools)
         {
@@ -45,6 +45,12 @@ public class ObjectPoolManager : MonoBehaviour
         ObjectPool newPool = new ObjectPool();
 
         newPool.CreatePool(prefab);
+
+        for (int i = 0; i < initCount; i++)
+        {
+            newPool.CreateObject();
+        }
+
         _pools.Add(newPool);
 
         return true;
