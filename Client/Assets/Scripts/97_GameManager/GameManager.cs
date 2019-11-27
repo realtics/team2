@@ -42,7 +42,15 @@ public class GameManager : MonoBehaviour
     protected virtual void Start()
     {
         FadeOut();
+
+
         _player = GameObject.FindObjectOfType<PlayerCharacter>().gameObject;
+        
+
+    }
+    public void FindCameraCollider()
+    {
+        _cinemachine.m_BoundingShape2D = GameObject.FindGameObjectWithTag("CameraCollider").GetComponent<Collider2D>();
     }
 
     public void MoveToScene(int Scene)

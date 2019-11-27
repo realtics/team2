@@ -272,7 +272,8 @@ public class MapLoader : MonoBehaviour
         PotalManager potalManager = PotalManager.instance;
         potalManager.FIndPotals();
         potalManager.BlockPotals();
-        
+
+        gameManager.FindCameraCollider();
         gameManager.MoveToPlayer(potalManager.FindGetArrowPotalPosition(FlipArrow(arrow)));
     }
     private ARROW FlipArrow(ARROW arrow)
@@ -313,6 +314,7 @@ public class MapLoader : MonoBehaviour
         _currentDungeonIndex = _startDungeonIndex;
         Instantiate(_currentDungeonIndex);
 
+        gameManager.FindCameraCollider();
         gameManager.MoveToPlayer(dungeonData.DungeonInfos[startDungeonIndex].PlayerStartPosition);
 
     }

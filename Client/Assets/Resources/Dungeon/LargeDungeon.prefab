@@ -1098,7 +1098,7 @@ GameObject:
   m_Component:
   - component: {fileID: 847876032611877124}
   m_Layer: 0
-  m_Name: TownCollison
+  m_Name: Collison
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
