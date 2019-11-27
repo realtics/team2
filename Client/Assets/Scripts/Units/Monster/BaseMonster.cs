@@ -173,6 +173,11 @@ public class BaseMonster : MonoBehaviour
         _baseAttackBox.gameObject.SetActive(false);
     }
 
+    public void ActiveHitBox()
+    {
+        _hitBox.gameObject.SetActive(true);
+    }
+
     public void InactiveHitBox()
     {
         _hitBox.gameObject.SetActive(false);
@@ -372,7 +377,8 @@ public class BaseMonster : MonoBehaviour
         {
             if (_animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.5f)
             {
-                gameObject.SetActive(false);
+                //gameObject.SetActive(false);
+                NoticeDie();
             }
         }
     }
@@ -566,5 +572,19 @@ public class BaseMonster : MonoBehaviour
     public void NoticeDie()
     {
         MonsterManager.Instance.ReceiveMonsterDie(this);
+    }
+
+    public void ResetMonster()
+    {
+        _isDead = false;
+        _currentHp = MaxHp;
+        ActiveHitBox();
+        _baseAttackCurrentTime = _baseAttackResetTime;
+        ChangeState(_moveState);
+    }
+
+    public void InactiveMonster()
+    {
+        gameObject.SetActive(false);
     }
 }
