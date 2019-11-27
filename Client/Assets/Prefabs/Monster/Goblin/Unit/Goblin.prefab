@@ -232,7 +232,7 @@ MonoBehaviour:
   _monsterName: "\uACE0\uBE14\uB9B0"
   _monsterLevel: 5
   _currentHp: 0
-  _maxHp: 600
+  _maxHp: 6000
   _attackRange: 1.2
   _chaseCancleTime: 1
   _chaseTime: 0

@@ -161,6 +161,9 @@ public class BaseMonster : MonoBehaviour
 
         if (sender.ExtraHeightValue > 0.0f)
         {
+            _isAerialHit = true;
+            _animator.SetBool("isAaerial", true);
+
             _jumpValue = sender.ExtraHeightValue;
 
             if (IsGround)
@@ -266,6 +269,9 @@ public class BaseMonster : MonoBehaviour
 
         if (_height <= 0.0f)
         {
+            _isAerialHit = false;
+            _animator.SetBool("isAaerial", false);
+            _animator.SetInteger("hitMotion", (int)HitMotion.HitMotionEnd);
             _height = 0.0f;
             _avatar.localPosition = _originPos;
             _jumpValue = 0.0f;
@@ -276,9 +282,6 @@ public class BaseMonster : MonoBehaviour
         yield return null;
         StartCoroutine("AerialProcess");
     }
-
-    //TODO : 공중공격피격시 띄움 판정함수
-
 
     //AttackState
     public virtual void EnterAttackState()
@@ -369,9 +372,16 @@ public class BaseMonster : MonoBehaviour
 
     public virtual void UpdateHitState()
     {
-        if (IsHitRecoveryTimeEnd())
+        if (_isAerialHit)
         {
-            ChangeState(_moveState);
+           
+        }
+        else
+        {
+            if (IsHitRecoveryTimeEnd())
+            {
+                ChangeState(_moveState);
+            }
         }
     }
 
