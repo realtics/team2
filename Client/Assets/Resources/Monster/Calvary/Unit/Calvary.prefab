@@ -433,7 +433,7 @@ MonoBehaviour:
     _verticalExtraMoveDuration: 0
     _verticalExtraMoveValue: 0
     _extraHeightValue: 0.2
-    _stunDuration: 0.5
+    _stunDuration: 2
 --- !u!114 &8917905186618086786
 MonoBehaviour:
   m_ObjectHideFlags: 0
