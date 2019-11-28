@@ -12,6 +12,11 @@ public class Calvary : BaseMonster
     protected override void FixedUpdate()
     {
         base.FixedUpdate();
+        if (Input.GetKeyDown(KeyCode.F2))
+        {
+            //MonsterManager.Instance.ReceiveMonsterDie(this);
+            ChangeDieState();
+        }
     }
 
     //AttackState
@@ -66,9 +71,8 @@ public class Calvary : BaseMonster
     public override void EnterDieState()
     {
         base.EnterDieState();
-
-        DungeonGameManager.Instance.NoticeBossDie();
     }
+
     public override void UpdateDieState()
     {
         base.UpdateDieState();
@@ -85,7 +89,10 @@ public class Calvary : BaseMonster
         //this monster don't have aerialvalue
         return;
     }
-}
 
-//private void Not
+    public override void NoticeDie()
+    {
+        MonsterManager.Instance.ReceiveBossMonsterDie(this);
+    }
+}
 
