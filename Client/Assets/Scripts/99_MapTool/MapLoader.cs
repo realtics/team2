@@ -135,31 +135,6 @@ public class DungeonJsonData
     public DungeonInfo[] DungeonInfos;
 }
 
-public class ObjectCache : ScriptableSingleton<ObjectCache>
-{
-    private Dictionary<string, GameObject> _cache = new Dictionary<string, GameObject>();
-
-    public GameObject LoadResourceFromCache(string path)
-    {
-        GameObject resourceObj = null;
-        _cache.TryGetValue(path, out resourceObj);
-        if(resourceObj == null)
-        {
-            resourceObj = Resources.Load<GameObject>(path);
-            if(resourceObj != null)
-            {
-                _cache.Add(path, resourceObj);
-            }
-        }
-        return resourceObj;
-    }
-    public void ClearCache()
-    {
-        _cache.Clear();
-        Resources.UnloadUnusedAssets();
-    }
-}
-
 public class MapLoader : MonoBehaviour
 {
     private static MapLoader _instance;
@@ -198,6 +173,28 @@ public class MapLoader : MonoBehaviour
 
     }
 
+    private Dictionary<string, GameObject> _cache = new Dictionary<string, GameObject>();
+
+    public GameObject LoadResourceFromCache(string path)
+    {
+        GameObject resourceObj = null;
+        _cache.TryGetValue(path, out resourceObj);
+        if (resourceObj == null)
+        {
+            resourceObj = Resources.Load<GameObject>(path);
+            if (resourceObj != null)
+            {
+                _cache.Add(path, resourceObj);
+            }
+        }
+        return resourceObj;
+    }
+    public void ClearCache()
+    {
+        _cache.Clear();
+        Resources.UnloadUnusedAssets();
+    }
+
     private void Instantiate(int index)
     {
         if (_dungeonGameObject.ContainsKey(index) == false)
@@ -209,7 +206,7 @@ public class MapLoader : MonoBehaviour
 
             foreach (var item in dungeon.objectinfos)
             {
-                var obj = GameObject.Instantiate<GameObject>(ObjectCache.instance.LoadResourceFromCache(item.filePath));
+                var obj = GameObject.Instantiate<GameObject>(LoadResourceFromCache(item.filePath));
                 obj.transform.position = item.position;
                 _dungeonGameObject[index].Add(obj);
             }
@@ -217,13 +214,13 @@ public class MapLoader : MonoBehaviour
             // ToDo. _MonsterManagerMent 
             foreach (var item in dungeon.monsterInfos)
             {
-                GameObject obj = ObjectCache.instance.LoadResourceFromCache(item.filePath);
+                GameObject obj = LoadResourceFromCache(item.filePath);
                 MonsterManager.Instance.AddMonster(obj, item.position);
             }
 
             foreach (var item in dungeon.potalTransportinfos)
             {
-                var obj = GameObject.Instantiate<GameObject>(ObjectCache.instance.LoadResourceFromCache(item.filePath));
+                var obj = GameObject.Instantiate<GameObject>(LoadResourceFromCache(item.filePath));
                 obj.transform.position = item.position;
                 PotalTransport potal = obj.GetComponent<PotalTransport>();
                 potal.arrow = item.arrow;
@@ -238,7 +235,7 @@ public class MapLoader : MonoBehaviour
             }
             foreach (var item in dungeon.potalSceneInfos)
             {
-                var obj = GameObject.Instantiate<GameObject>(ObjectCache.instance.LoadResourceFromCache(item.filePath));
+                var obj = GameObject.Instantiate<GameObject>(LoadResourceFromCache(item.filePath));
                 obj.transform.position = item.position;
                 PotalScene potal = obj.GetComponent<PotalScene>();
                 potal.arrow = item.arrow;
@@ -248,7 +245,7 @@ public class MapLoader : MonoBehaviour
             }
 
 
-            ObjectCache.instance.ClearCache();
+            ClearCache();
         }
         else
         {
