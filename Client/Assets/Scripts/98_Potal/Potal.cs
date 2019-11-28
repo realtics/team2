@@ -20,10 +20,10 @@ public class Potal : MonoBehaviour
 
     protected BoxCollider2D _collider2D;
 
-    private void Start()
+    protected virtual void Start()
     {
-        _isPotalBlock = false;
-        _isFirstTranportPotalBlock = false;
+        //_isPotalBlock = false;
+        //_isFirstTranportPotalBlock = false;
         _collider2D = gameObject.GetComponent<BoxCollider2D>();
     }
 

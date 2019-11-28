@@ -25,9 +25,9 @@ public class PotalTransport : Potal
         }
     }
 
-
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
         PotalBlock();
     }
 
