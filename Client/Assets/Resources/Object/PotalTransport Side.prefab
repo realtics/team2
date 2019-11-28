@@ -336,7 +336,7 @@ MonoBehaviour:
   arrow: 0
   _nextIndex: 0
   LightObject: {fileID: 668381697386178563}
-  BlockObject: {fileID: 1758361636955354157}
+  BlockSprite: {fileID: 17917124637458202}
   spotGatePosition:
   - {fileID: 7936270338457353402}
   - {fileID: 3744028801038035201}

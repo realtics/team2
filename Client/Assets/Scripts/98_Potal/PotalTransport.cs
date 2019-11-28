@@ -9,7 +9,7 @@ public class PotalTransport : Potal
     [SerializeField]
     private GameObject LightObject;
     [SerializeField]
-    private GameObject BlockObject;
+    private SpriteRenderer BlockSprite;
 
     public Transform[] spotGatePosition;
     
@@ -45,12 +45,12 @@ public class PotalTransport : Potal
 
     private void PotalBlock()
     {
-        BlockObject.SetActive(true);
+        BlockSprite.enabled = true;
         LightObject.SetActive(false);
     }
     private void PotalUnBlock()
     {
-        BlockObject.SetActive(false);
+        BlockSprite.enabled = false;
         LightObject.SetActive(true);
     }
 

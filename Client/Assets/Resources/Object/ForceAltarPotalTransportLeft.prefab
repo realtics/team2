@@ -129,7 +129,7 @@ MonoBehaviour:
   arrow: 3
   _nextIndex: 0
   LightObject: {fileID: 7896105970259301058}
-  BlockObject: {fileID: 8986088082005757676}
+  BlockSprite: {fileID: 7272658707956073947}
   spotGatePosition:
   - {fileID: 788482623412291195}
   - {fileID: 6280125971827971008}
