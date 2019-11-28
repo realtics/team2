@@ -8,7 +8,8 @@ public enum VirtualPadButtonType
     Attack,
     Jump,
     Run,
-    Skill,
+    Skill1,
+    Skill2
 }
 
 public class VirtualPadButton : MonoBehaviour
@@ -51,8 +52,11 @@ public class VirtualPadButton : MonoBehaviour
                     _isRun = false;
                 }
                 break;
-            case VirtualPadButtonType.Skill:
+            case VirtualPadButtonType.Skill1:
                 _pc.SetSkill(SwordmanSkillIndex.Jingongcham);
+                break;
+            case VirtualPadButtonType.Skill2:
+                _pc.SetSkill(SwordmanSkillIndex.Hadouken);
                 break;
         }
     }
