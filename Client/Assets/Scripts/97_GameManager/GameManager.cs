@@ -50,6 +50,7 @@ public class GameManager : MonoBehaviour
     }
     public void FindCameraCollider()
     {
+        _cinemachine.InvalidatePathCache();
         _cinemachine.m_BoundingShape2D = GameObject.FindGameObjectWithTag("CameraCollider").GetComponent<Collider2D>();
     }
 
