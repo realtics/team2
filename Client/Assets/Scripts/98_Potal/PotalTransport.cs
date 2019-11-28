@@ -65,5 +65,9 @@ public class PotalTransport : Potal
         // ToDo. Party 플레이시에 변경.
         return spotGatePosition[myPartyNumber].transform.position;
     }
+    public override void SetActiveTransport(bool active)
+    {
+        _collider2D.enabled = active;
+    }
 
 }

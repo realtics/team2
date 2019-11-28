@@ -18,10 +18,13 @@ public class Potal : MonoBehaviour
     protected bool _isPotalBlock;
     private bool _isFirstTranportPotalBlock;
 
+    protected Collider2D _collider2D;
+
     private void Start()
     {
         _isPotalBlock = false;
         _isFirstTranportPotalBlock = false;
+        _collider2D = GetComponent<BoxCollider2D>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -70,6 +73,11 @@ public class Potal : MonoBehaviour
         _isPotalBlock = false;
         _isFirstTranportPotalBlock = false;
     }
+    public virtual void SetActiveTransport(bool active)
+    {
+
+    }
+
     public virtual void Enter()
     {
         PotalManager.instance.PotalEnter();

@@ -62,4 +62,11 @@ public class PotalManager : MonoBehaviour
             _potals[i].Reset();
         }
     }
+    public void InActivePotals()
+    {
+        for (int i = 0; i < _potals.Length; i++)
+        {
+            _potals[i].SetActiveTransport(false);
+        }
+    }
 }
