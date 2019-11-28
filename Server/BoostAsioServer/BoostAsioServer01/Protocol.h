@@ -176,6 +176,7 @@ struct PKT_REQ_PLAYER_MOVE_END : public PACKET_HEADER
 {
 	int userID;
 	char userPos[MAX_PLAYER_MOVE_LEN];
+	char userDir[MAX_PLAYER_MOVE_LEN];
 
 	void Init()
 	{
@@ -183,6 +184,7 @@ struct PKT_REQ_PLAYER_MOVE_END : public PACKET_HEADER
 		packetSize = sizeof(PKT_REQ_PLAYER_MOVE_START);
 		userID = 0;
 		memset(userPos, 0, MAX_PLAYER_MOVE_LEN);
+		memset(userDir, 0, MAX_PLAYER_MOVE_LEN);
 	}
 };
 
@@ -190,6 +192,7 @@ struct PKT_RES_PLAYER_MOVE_END : public PACKET_HEADER
 {
 	int userID;
 	char userPos[MAX_PLAYER_MOVE_LEN];
+	char userDir[MAX_PLAYER_MOVE_LEN];
 
 	void Init()
 	{
@@ -197,5 +200,6 @@ struct PKT_RES_PLAYER_MOVE_END : public PACKET_HEADER
 		packetSize = sizeof(PKT_RES_PLAYER_MOVE_END);
 		userID = 0;
 		memset(userPos, 0, MAX_PLAYER_MOVE_LEN);
+		memset(userDir, 0, MAX_PLAYER_MOVE_LEN);
 	}
 };

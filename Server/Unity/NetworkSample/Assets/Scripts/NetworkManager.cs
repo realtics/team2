@@ -40,11 +40,11 @@ public class NetworkManager : MonoBehaviour
     //private static ManualResetEvent _sendDone = new ManualResetEvent(false);
     //private static ManualResetEvent _receiveDone = new ManualResetEvent(false);
     //private static String _response = String.Empty; // 서버 응답
-    
+
     private Socket _sock = null;
 
 
-    private int _myId;      // 실행한 클라이언트의 ID
+    private int _myId = 0;      // 실행한 클라이언트의 ID
     public int GetMyId { get { return _myId; } }
     public void SetMyId(int id) { _myId = id; }
 
@@ -70,11 +70,14 @@ public class NetworkManager : MonoBehaviour
     public string DebugMsg01;
     public int DebugMsg02;
     public int DebugMsg03;
-
+    
 
     private Dictionary<int,Character> _characters;
     private List<CharacterSpawnData> _spawnCharacters;
-    
+
+    //private bool _isPacketPlayerMoveEnd = false;
+
+
     void Start()
     {
         Screen.SetResolution(960, 540, false);
@@ -139,7 +142,9 @@ public class NetworkManager : MonoBehaviour
             {
                 Debug.Log("소켓 생성 실패");
             }
-            _sock.Connect(new IPEndPoint(IPAddress.Parse("127.0.0.1"), 31452));
+            //_sock.Connect(new IPEndPoint(IPAddress.Parse("127.0.0.1"), 31452));
+            _sock.Connect(new IPEndPoint(IPAddress.Parse("192.168.1.105"), 31452));
+            
         }
         catch (Exception e)
         {
@@ -285,6 +290,8 @@ public class NetworkManager : MonoBehaviour
                     Vector3 vecPos = StringToVector3(userPos);
                     Vector3 vecDir = StringToVector3(userDir);
 
+                    Debug.Log("userPos:" + vecPos.ToString("N5") + ", userDir:" + vecDir.ToString("N5"));
+
                     ReceivedPacketHandler(userID, vecPos, vecDir);
                 }
                 break;
@@ -296,6 +303,7 @@ public class NetworkManager : MonoBehaviour
                     var userPos = desJson.userPos;
 
                     Vector3 vecPos = StringToVector3(userPos);
+                    Debug.Log("userPos:" + vecPos.ToString("N5"));
 
                     ThisIsStopPacket(userID, vecPos);
                 }
@@ -398,18 +406,18 @@ public class NetworkManager : MonoBehaviour
         Debug.Log("ConcurrentUser() = " + resultSize);
     }
 
-    public void MoveStart(Vector3 dir, Vector3 pos)
+    public void MoveStart(Vector3 pos, Vector3 dir)
     {
-        string startDir = dir.ToString("N5");
         string startPos = pos.ToString("N5");
-        
+        string startDir = dir.ToString("N5");
+                
         string jsonData;
         char endNullValue = '\0';
 
         var packHeader = new PACKET_HEADER
         {
             packetIndex = (short)PACKET_INDEX.REQ_PLAYER_MOVE_START,
-            packetSize = 100
+            packetSize = 1
         };
         var packData = new PKT_REQ_PLAYER_MOVE_START
         {
@@ -426,12 +434,13 @@ public class NetworkManager : MonoBehaviour
         sendByte = Encoding.UTF8.GetBytes(jsonData);
 
         int resultSize = _sock.Send(sendByte);
-        Debug.Log("MoveStart() = " + resultSize);
+        Debug.Log("MoveStart - Send");
     }
 
-    public void MoveEnd(Vector3 pos)
+    public void MoveEnd(Vector3 pos, Vector3 dir)
     {
         string EndPos = pos.ToString("N5");
+        string EndDir = dir.ToString("N5");
 
         string jsonData;
         char endNullValue = '\0';
@@ -439,13 +448,14 @@ public class NetworkManager : MonoBehaviour
         var packHeader = new PACKET_HEADER
         {
             packetIndex = (short)PACKET_INDEX.REQ_PLAYER_MOVE_END,
-            packetSize = 100
+            packetSize = 1
         };
         var packData = new PKT_REQ_PLAYER_MOVE_END
         {
             header = packHeader,
             userID = GetMyId,
-            userPos = EndPos
+            userPos = EndPos,
+            userDir = EndDir
         };
 
         jsonData = JsonConvert.SerializeObject(packData);
@@ -455,7 +465,7 @@ public class NetworkManager : MonoBehaviour
         sendByte = Encoding.UTF8.GetBytes(jsonData);
 
         int resultSize = _sock.Send(sendByte);
-        Debug.Log("MoveEnd() = " + resultSize);
+        Debug.Log("MoveEnd - Send");
     }
 
     public void JoinNewPlayer(int id)
@@ -486,7 +496,7 @@ public class NetworkManager : MonoBehaviour
 
         // 무언가 받아온 다음 null 체크는 필수
         // Dictinary에서 받아오는 것이기 때문에
-        if (!_characters.ContainsKey(2))
+        if (!_characters.ContainsKey(userID))
             return;
         // 같은 방식도 괜찮다 둘중에 아무거나 하면 됨
         if (movePlayer == null)

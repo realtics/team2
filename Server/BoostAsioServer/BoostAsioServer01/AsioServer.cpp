@@ -204,7 +204,7 @@ void AsioServer::ProcessPacket(const int sessionID, const char* pData)
 		std::ostringstream oss(stringRecv);
 		boost::property_tree::write_json(oss, ptSend, false);
 		std::string sendStr = oss.str();
-		//std::cout << "[서버->클라]" << sendStr << std::endl;
+		std::cout << "[서버->클라]" << sendStr << std::endl;
 
 		size_t totalSessionCount = _sessionList.size();
 
@@ -229,6 +229,7 @@ void AsioServer::ProcessPacket(const int sessionID, const char* pData)
 
 		playerMove.userID = pPacket->userID;
 		strcpy_s(playerMove.userPos, MAX_PLAYER_MOVE_LEN, pPacket->userPos);
+		strcpy_s(playerMove.userDir, MAX_PLAYER_MOVE_LEN, pPacket->userDir);
 
 		boost::property_tree::ptree ptSendHeader;
 		ptSendHeader.put<short>("packetIndex", playerMove.packetIndex);
@@ -238,12 +239,13 @@ void AsioServer::ProcessPacket(const int sessionID, const char* pData)
 		ptSend.add_child("header", ptSendHeader);
 		ptSend.put<int>("userID", playerMove.userID);
 		ptSend.put<std::string>("userPos", playerMove.userPos);
+		ptSend.put<std::string>("userDir", playerMove.userDir);
 
 		std::string stringRecv;
 		std::ostringstream oss(stringRecv);
 		boost::property_tree::write_json(oss, ptSend, false);
 		std::string sendStr = oss.str();
-		//std::cout << "[서버->클라]" << sendStr << std::endl;
+		std::cout << "[서버->클라]" << sendStr << std::endl;
 
 		size_t totalSessionCount = _sessionList.size();
 

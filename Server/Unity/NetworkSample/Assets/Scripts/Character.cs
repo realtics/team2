@@ -20,6 +20,8 @@ public class Character : MonoBehaviour
     private Vector3 _moveDirection;
     private Vector3 _oldDirection;
 
+    private Vector3 _position;
+
     public bool IsMine { get { return _id == NetworkManager.Instance.GetMyId; } }
     public int Id { get { return _id; } }
     void Start()
@@ -86,12 +88,10 @@ public class Character : MonoBehaviour
 
         Debug.Log("SendMoveEnd");
 
-        NetworkManager.Instance.MoveEnd(transform.position);
+        NetworkManager.Instance.MoveEnd(transform.position, _oldDirection);
 
         StopMove(transform.position);
     }
-
-
 
     private void FixedUpdate()
     {
@@ -101,22 +101,24 @@ public class Character : MonoBehaviour
     private void CharacterMovementProcess()
     {
         if (!_isMoving)
+        {
+            transform.position = _position;
             return;
+        }
 
         // 좌표를 움직이는 함수.
         // 실제 좌표를 때려넣는 식이기 때문에 물리에 영향을 받지 않는다.
         transform.position = Vector3.MoveTowards(transform.position, 
                                                  transform.position + _moveDirection, _speed * Time.deltaTime);
+        transform.LookAt(transform.position + _moveDirection);
     }
 
     // 서버로부터 받은 MoveStart와 같은 패킷의 MoveDirection을 세팅한다.
     public void SetMoveDirectionAndMove(Vector3 pos, Vector3 dir)
     {
-        transform.position = pos;
+        //transform.position = pos;
         _moveDirection = dir;
         _isMoving = true;
-
-        transform.LookAt(transform.position + _moveDirection);
     }
     
     // MoveEnd와 같은 패킷을 받아 호출하는 함수
@@ -125,8 +127,9 @@ public class Character : MonoBehaviour
     {
         // 이렇게 바로 포지션을 넣으면 오차가 많이 발생했을 때 순간이동하는 것 처럼 보일 수 있다.
         // 보간이 필요한 로직
-        transform.position = lastPosition;
+        _position = lastPosition;
         _isMoving = false;
+        _oldDirection = Vector3.zero;
     }
 
     public void SetId(int id)
