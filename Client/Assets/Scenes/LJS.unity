@@ -198,7 +198,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 34223262}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.08859491, y: -4.639139, z: -10}
+  m_LocalPosition: {x: 0.09140825, y: -4.6391296, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -834,6 +834,66 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2975547095651044573, guid: 9d859b47ccc167d4d8ac96a29092c5d3,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2975547095651044573, guid: 9d859b47ccc167d4d8ac96a29092c5d3,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2975547095651044573, guid: 9d859b47ccc167d4d8ac96a29092c5d3,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2975547095651044573, guid: 9d859b47ccc167d4d8ac96a29092c5d3,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4084236474644037129, guid: 9d859b47ccc167d4d8ac96a29092c5d3,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4084236474644037129, guid: 9d859b47ccc167d4d8ac96a29092c5d3,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4084236474644037129, guid: 9d859b47ccc167d4d8ac96a29092c5d3,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4084236474644037129, guid: 9d859b47ccc167d4d8ac96a29092c5d3,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4171215013354993144, guid: 9d859b47ccc167d4d8ac96a29092c5d3,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4171215013354993144, guid: 9d859b47ccc167d4d8ac96a29092c5d3,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4171215013354993144, guid: 9d859b47ccc167d4d8ac96a29092c5d3,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4171215013354993144, guid: 9d859b47ccc167d4d8ac96a29092c5d3,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9d859b47ccc167d4d8ac96a29092c5d3, type: 3}
 --- !u!224 &319988588 stripped
@@ -998,18 +1058,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b639fa108d41f6f479bf654f6b42dfe2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &763337881 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 500129711, guid: 9d859b47ccc167d4d8ac96a29092c5d3,
-    type: 3}
-  m_PrefabInstance: {fileID: 317240787}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6cd71e593fcdf6a4682d0846391802c2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &803520424
 GameObject:
   m_ObjectHideFlags: 0
@@ -1057,7 +1105,7 @@ MonoBehaviour:
   _monsterInfo: {fileID: 142257165}
   _gameOver: {fileID: 826298707}
   _gameResult: {fileID: 1885735865}
-  _dungeonClearMenu: {fileID: 763337881}
+  _dungeonClearMenu: {fileID: 0}
 --- !u!114 &826298707 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 322670426628092975, guid: 095e3bee2e9fe194eb78e34b3e37139f,
@@ -1912,7 +1960,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1828477994}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.771193, y: -4.806965, z: -10}
+  m_LocalPosition: {x: -4.7713485, y: -4.806965, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1482920773}
