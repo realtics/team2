@@ -153,7 +153,7 @@ MonoBehaviour:
   _monsterInfo: {fileID: 2021354922}
   _gameOver: {fileID: 1527902664}
   _gameResult: {fileID: 428955613}
-  _dungeonClearMenu: {fileID: 1328234909}
+  _dungeonClearMenu: {fileID: 299214709}
 --- !u!4 &5090258
 Transform:
   m_ObjectHideFlags: 0
@@ -590,6 +590,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &299214709 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4335272872389664483, guid: 9d859b47ccc167d4d8ac96a29092c5d3,
+    type: 3}
+  m_PrefabInstance: {fileID: 1328234907}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cd71e593fcdf6a4682d0846391802c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &305781319
 GameObject:
   m_ObjectHideFlags: 0
@@ -1269,18 +1281,6 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1328234907}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1328234909 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 500129711, guid: 9d859b47ccc167d4d8ac96a29092c5d3,
-    type: 3}
-  m_PrefabInstance: {fileID: 1328234907}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6cd71e593fcdf6a4682d0846391802c2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1380931567
 GameObject:
   m_ObjectHideFlags: 0
