@@ -144,7 +144,7 @@ void Session::Deserialization(char* jsonData)
 {
 	short packetSize = strlen(jsonData) + 1;
 
-	//std::cout << "[클라->서버][Size:" << packetSize << "] " << jsonData << std::endl;
+	std::cout << "[클라->서버][Size:" << packetSize << "] " << jsonData << std::endl;
 
 	boost::property_tree::ptree ptRecv;
 	std::istringstream iss(jsonData);
@@ -192,6 +192,7 @@ void Session::Deserialization(char* jsonData)
 		packet.packetSize = packetSize;
 		packet.userID = ptRecv.get<int>("userID");
 		strcpy_s(packet.userPos, MAX_PLAYER_MOVE_LEN, ptRecv.get<std::string>("userPos").c_str());
+		strcpy_s(packet.userDir, MAX_PLAYER_MOVE_LEN, ptRecv.get<std::string>("userDir").c_str());
 		memcpy(&_packetBuffer[_packetBufferMark], (char*)&packet, sizeof(packet));
 	}
 	break;

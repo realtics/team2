@@ -75,6 +75,7 @@ public struct PKT_REQ_PLAYER_MOVE_END
     public PACKET_HEADER header;
     public int userID;
     public string userPos;
+    public string userDir;
 }
 
 public struct PKT_RES_PLAYER_MOVE_END
@@ -82,5 +83,6 @@ public struct PKT_RES_PLAYER_MOVE_END
     public PACKET_HEADER header;
     public int userID;
     public string userPos;
+    public string userDir;
 }
 
