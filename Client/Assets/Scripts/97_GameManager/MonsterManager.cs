@@ -35,6 +35,12 @@ public class MonsterManager : MonoBehaviour
         return false;
     }
 
+    public void ChangeAllMonsterDieState()
+    {
+        foreach (BaseMonster monster in _monsterList)
+            monster.ChangeDieState();
+    }
+
     public void ReceiveMonsterDie(BaseMonster monster)
     {
         monster.InactiveMonster();
@@ -44,5 +50,14 @@ public class MonsterManager : MonoBehaviour
         //FIXME : 포탈을 여는 주체가 몬스터매니저가 할일인가
         if (_monsterList.Count == 0)
             PotalManager.instance.ResetPotals();
+    }
+
+    public void ReceiveBossMonsterDie(BaseMonster monster)
+    {
+        ReceiveMonsterDie(monster);
+        DungeonGameManager.Instance.NoticeBossDie();
+       
+        ChangeAllMonsterDieState();
+        PotalManager.instance.InActivePotals();
     }
 }

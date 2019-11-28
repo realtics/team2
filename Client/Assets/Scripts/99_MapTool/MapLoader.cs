@@ -43,87 +43,6 @@ public class DungeonInfo
     public List<PotalSceneInfo> potalSceneInfos = new List<PotalSceneInfo>();
 
     public Vector3 PlayerStartPosition { get; set; }
-
-    public void AddObject(GameObject obj)
-    {
-        Object parentObject = PrefabUtility.GetCorrespondingObjectFromOriginalSource(obj);
-        string path = AssetDatabase.GetAssetPath(parentObject);
-        path = ResourcesLoadSubstringFilePath(path);
-
-        ObjectInfo objectInfo = new ObjectInfo();
-        objectInfo.filePath = path;
-        objectInfo.position = obj.transform.position;
-
-        objectinfos.Add(objectInfo);
-    }
-
-    public void AddMonster(GameObject obj)
-    {
-        Object parentObject = PrefabUtility.GetCorrespondingObjectFromOriginalSource(obj);
-        string path = AssetDatabase.GetAssetPath(parentObject);
-        path = ResourcesLoadSubstringFilePath(path);
-
-        MonsterInfo monsterInfo = new MonsterInfo();
-        monsterInfo.filePath = path;
-        monsterInfo.position = obj.transform.position;
-
-        monsterInfos.Add(monsterInfo);
-    }
-
-    public void AddPotalTransport(GameObject obj)
-    {
-        PotalTransport potal = obj.GetComponent<PotalTransport>();
-
-        Object parentObject = PrefabUtility.GetCorrespondingObjectFromOriginalSource(obj);
-        string path = AssetDatabase.GetAssetPath(parentObject);
-        path = ResourcesLoadSubstringFilePath(path);
-
-        PotalTransportinfo potalTransportinfo = new PotalTransportinfo();
-        potalTransportinfo.filePath = path;
-        potalTransportinfo.position = obj.transform.position;
-        potalTransportinfo.arrow = potal.arrow;
-
-        potalTransportinfo.spotPosition = new Vector3[potal.spotGatePosition.Length];
-        for(int i = 0; i < potal.spotGatePosition.Length; ++i)
-        {
-            potalTransportinfo.spotPosition[i] = potal.spotGatePosition[i].position;
-        }
-
-        potalTransportinfo.nextIndex = potal.nextIndex;
-
-        potalTransportinfos.Add(potalTransportinfo);
-    }
-
-    public void AddPotalScene(GameObject obj)
-    {
-        PotalScene potal = obj.GetComponent<PotalScene>();
-
-        Object parentObject = PrefabUtility.GetCorrespondingObjectFromOriginalSource(obj);
-        string path = AssetDatabase.GetAssetPath(parentObject);
-        path = ResourcesLoadSubstringFilePath(path);
-
-        PotalSceneInfo potalSceneInfo = new PotalSceneInfo();
-        potalSceneInfo.filePath = path;
-        potalSceneInfo.position = obj.transform.position;
-        potalSceneInfo.arrow = potal.arrow;
-       
-        potalSceneInfo.nextDataName = potal.nextSceneName;
-
-        potalSceneInfos.Add(potalSceneInfo);
-    }
-
-    string ResourcesLoadSubstringFilePath(string FilePath)
-    {
-        int FilePos = FilePath.LastIndexOf("Resources/") + 10;
-        string DirectoryFile = FilePath.Substring(FilePos);
-        int TagPos = DirectoryFile.IndexOf('/');
-        if (TagPos > 0)
-        {
-            string Tagname = DirectoryFile.Remove(TagPos);
-        }
-        DirectoryFile = DirectoryFile.Remove(DirectoryFile.LastIndexOf('.'));
-        return DirectoryFile;
-    }
 }
 public class JsonData
 {
@@ -133,31 +52,6 @@ public class JsonData
 public class DungeonJsonData
 {
     public DungeonInfo[] DungeonInfos;
-}
-
-public class ObjectCache : ScriptableSingleton<ObjectCache>
-{
-    private Dictionary<string, GameObject> _cache = new Dictionary<string, GameObject>();
-
-    public GameObject LoadResourceFromCache(string path)
-    {
-        GameObject resourceObj = null;
-        _cache.TryGetValue(path, out resourceObj);
-        if(resourceObj == null)
-        {
-            resourceObj = Resources.Load<GameObject>(path);
-            if(resourceObj != null)
-            {
-                _cache.Add(path, resourceObj);
-            }
-        }
-        return resourceObj;
-    }
-    public void ClearCache()
-    {
-        _cache.Clear();
-        Resources.UnloadUnusedAssets();
-    }
 }
 
 public class MapLoader : MonoBehaviour
@@ -198,6 +92,28 @@ public class MapLoader : MonoBehaviour
 
     }
 
+    private Dictionary<string, GameObject> _cache = new Dictionary<string, GameObject>();
+
+    public GameObject LoadResourceFromCache(string path)
+    {
+        GameObject resourceObj = null;
+        _cache.TryGetValue(path, out resourceObj);
+        if (resourceObj == null)
+        {
+            resourceObj = Resources.Load<GameObject>(path);
+            if (resourceObj != null)
+            {
+                _cache.Add(path, resourceObj);
+            }
+        }
+        return resourceObj;
+    }
+    public void ClearCache()
+    {
+        _cache.Clear();
+        Resources.UnloadUnusedAssets();
+    }
+
     private void Instantiate(int index)
     {
         if (_dungeonGameObject.ContainsKey(index) == false)
@@ -209,7 +125,7 @@ public class MapLoader : MonoBehaviour
 
             foreach (var item in dungeon.objectinfos)
             {
-                var obj = GameObject.Instantiate<GameObject>(ObjectCache.instance.LoadResourceFromCache(item.filePath));
+                var obj = GameObject.Instantiate<GameObject>(LoadResourceFromCache(item.filePath));
                 obj.transform.position = item.position;
                 _dungeonGameObject[index].Add(obj);
             }
@@ -217,13 +133,13 @@ public class MapLoader : MonoBehaviour
             // ToDo. _MonsterManagerMent 
             foreach (var item in dungeon.monsterInfos)
             {
-                GameObject obj = ObjectCache.instance.LoadResourceFromCache(item.filePath);
+                GameObject obj = LoadResourceFromCache(item.filePath);
                 MonsterManager.Instance.AddMonster(obj, item.position);
             }
 
             foreach (var item in dungeon.potalTransportinfos)
             {
-                var obj = GameObject.Instantiate<GameObject>(ObjectCache.instance.LoadResourceFromCache(item.filePath));
+                var obj = GameObject.Instantiate<GameObject>(LoadResourceFromCache(item.filePath));
                 obj.transform.position = item.position;
                 PotalTransport potal = obj.GetComponent<PotalTransport>();
                 potal.arrow = item.arrow;
@@ -238,7 +154,7 @@ public class MapLoader : MonoBehaviour
             }
             foreach (var item in dungeon.potalSceneInfos)
             {
-                var obj = GameObject.Instantiate<GameObject>(ObjectCache.instance.LoadResourceFromCache(item.filePath));
+                var obj = GameObject.Instantiate<GameObject>(LoadResourceFromCache(item.filePath));
                 obj.transform.position = item.position;
                 PotalScene potal = obj.GetComponent<PotalScene>();
                 potal.arrow = item.arrow;
@@ -248,7 +164,7 @@ public class MapLoader : MonoBehaviour
             }
 
 
-            ObjectCache.instance.ClearCache();
+            ClearCache();
         }
         else
         {

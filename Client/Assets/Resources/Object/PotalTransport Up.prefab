@@ -229,7 +229,7 @@ MonoBehaviour:
   arrow: 0
   _nextIndex: 0
   LightObject: {fileID: 668381697386178563}
-  BlockObject: {fileID: 7159247343654977997}
+  BlockSprite: {fileID: 3174233533206340506}
   spotGatePosition:
   - {fileID: 8688108641056251035}
   - {fileID: 4825314371646817658}
@@ -322,11 +322,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4315294788207725787}
     m_Modifications:
-    - target: {fileID: 7492130170146061076, guid: 9c2d4e8d5738b994ca397da28f9ff8cc,
-        type: 3}
-      propertyPath: m_Name
-      value: Spot4p
-      objectReference: {fileID: 0}
     - target: {fileID: 154155083588744305, guid: 9c2d4e8d5738b994ca397da28f9ff8cc,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -381,6 +376,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7492130170146061076, guid: 9c2d4e8d5738b994ca397da28f9ff8cc,
+        type: 3}
+      propertyPath: m_Name
+      value: Spot4p
       objectReference: {fileID: 0}
     - target: {fileID: 8777672459178449133, guid: 9c2d4e8d5738b994ca397da28f9ff8cc,
         type: 3}

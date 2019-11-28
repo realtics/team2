@@ -9,7 +9,7 @@ public class PotalTransport : Potal
     [SerializeField]
     private GameObject LightObject;
     [SerializeField]
-    private GameObject BlockObject;
+    private SpriteRenderer BlockSprite;
 
     public Transform[] spotGatePosition;
     
@@ -25,9 +25,9 @@ public class PotalTransport : Potal
         }
     }
 
-
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
         PotalBlock();
     }
 
@@ -45,12 +45,12 @@ public class PotalTransport : Potal
 
     private void PotalBlock()
     {
-        BlockObject.SetActive(true);
+        BlockSprite.enabled = true;
         LightObject.SetActive(false);
     }
     private void PotalUnBlock()
     {
-        BlockObject.SetActive(false);
+        BlockSprite.enabled = false;
         LightObject.SetActive(true);
     }
 
@@ -64,6 +64,10 @@ public class PotalTransport : Potal
         const int myPartyNumber = 0;
         // ToDo. Party 플레이시에 변경.
         return spotGatePosition[myPartyNumber].transform.position;
+    }
+    public override void SetActiveTransport(bool active)
+    {
+        _collider2D.enabled = active;
     }
 
 }

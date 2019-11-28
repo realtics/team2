@@ -101,7 +101,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.016708583, y: -0.02221942}
+  m_Offset: {x: 0.040656567, y: -0.02221942}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -112,7 +112,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.8619004, y: 2.001813}
+  m_Size: {x: 0.9766307, y: 2.001813}
   m_EdgeRadius: 0
 --- !u!114 &2541383025456858072
 MonoBehaviour:
@@ -129,7 +129,7 @@ MonoBehaviour:
   arrow: 2
   _nextIndex: 0
   LightObject: {fileID: 6406075644442532019}
-  BlockObject: {fileID: 5316102234234274973}
+  BlockSprite: {fileID: 5881637070840876970}
   spotGatePosition:
   - {fileID: 4576547363135163402}
   - {fileID: 7085591702498449841}
@@ -145,6 +145,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9069320202781248450}
   - component: {fileID: 5881637070840876970}
+  - component: {fileID: 7439480413463206218}
   m_Layer: 0
   m_Name: Block
   m_TagString: Untagged
@@ -215,6 +216,32 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!61 &7439480413463206218
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5316102234234274973}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.5035392, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.18, y: 2.59}
+    newSize: {x: 0.5, y: 1.71}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1.3457212, y: 2.59}
+  m_EdgeRadius: 0
 --- !u!1 &6406075644442532019
 GameObject:
   m_ObjectHideFlags: 0
@@ -577,11 +604,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7657073709343276139}
     m_Modifications:
-    - target: {fileID: 7492130170146061076, guid: 9c2d4e8d5738b994ca397da28f9ff8cc,
-        type: 3}
-      propertyPath: m_Name
-      value: Spot4p
-      objectReference: {fileID: 0}
     - target: {fileID: 154155083588744305, guid: 9c2d4e8d5738b994ca397da28f9ff8cc,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -636,6 +658,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7492130170146061076, guid: 9c2d4e8d5738b994ca397da28f9ff8cc,
+        type: 3}
+      propertyPath: m_Name
+      value: Spot4p
       objectReference: {fileID: 0}
     - target: {fileID: 8777672459178449133, guid: 9c2d4e8d5738b994ca397da28f9ff8cc,
         type: 3}

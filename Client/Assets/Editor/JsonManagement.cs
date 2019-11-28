@@ -43,20 +43,20 @@ public class JsonManagement
         DungeonInfo dungeonInfo = new DungeonInfo();
         foreach (GameObject obj in GameObject.FindGameObjectsWithTag(_objectTag))
         {
-            dungeonInfo.AddObject(obj);
+            AddObject(dungeonInfo, obj);
         }
         foreach (GameObject obj in GameObject.FindGameObjectsWithTag(_monsterTag))
         {
-            dungeonInfo.AddMonster(obj);
+            AddMonster(dungeonInfo, obj);
         }
         foreach (GameObject obj in GameObject.FindGameObjectsWithTag(_potalTranportTag))
         {
-            dungeonInfo.AddPotalTransport(obj);
+            AddPotalTransport(dungeonInfo, obj);
         }
 
         foreach (GameObject obj in GameObject.FindGameObjectsWithTag(_potalSceneTag))
         {
-            dungeonInfo.AddPotalScene(obj);
+            AddPotalScene(dungeonInfo, obj);
         }
 
         GameObject spotObject = GameObject.FindGameObjectWithTag("PlayerStartSpot");
@@ -88,5 +88,87 @@ public class JsonManagement
         byte[] data = Encoding.UTF8.GetBytes(jsonData);
         fileStream.Write(data, 0, data.Length);
         fileStream.Close();
+    }
+
+
+    public void AddObject(DungeonInfo dungeonInfo,GameObject obj)
+    {
+        Object parentObject = PrefabUtility.GetCorrespondingObjectFromOriginalSource(obj);
+        string path = AssetDatabase.GetAssetPath(parentObject);
+        path = ResourcesLoadSubstringFilePath(path);
+
+        ObjectInfo objectInfo = new ObjectInfo();
+        objectInfo.filePath = path;
+        objectInfo.position = obj.transform.position;
+
+        dungeonInfo.objectinfos.Add(objectInfo);
+    }
+
+    public void AddMonster(DungeonInfo dungeonInfo, GameObject obj)
+    {
+        Object parentObject = PrefabUtility.GetCorrespondingObjectFromOriginalSource(obj);
+        string path = AssetDatabase.GetAssetPath(parentObject);
+        path = ResourcesLoadSubstringFilePath(path);
+
+        MonsterInfo monsterInfo = new MonsterInfo();
+        monsterInfo.filePath = path;
+        monsterInfo.position = obj.transform.position;
+
+        dungeonInfo.monsterInfos.Add(monsterInfo);
+    }
+
+    public void AddPotalTransport(DungeonInfo dungeonInfo, GameObject obj)
+    {
+        PotalTransport potal = obj.GetComponent<PotalTransport>();
+
+        Object parentObject = PrefabUtility.GetCorrespondingObjectFromOriginalSource(obj);
+        string path = AssetDatabase.GetAssetPath(parentObject);
+        path = ResourcesLoadSubstringFilePath(path);
+
+        PotalTransportinfo potalTransportinfo = new PotalTransportinfo();
+        potalTransportinfo.filePath = path;
+        potalTransportinfo.position = obj.transform.position;
+        potalTransportinfo.arrow = potal.arrow;
+
+        potalTransportinfo.spotPosition = new Vector3[potal.spotGatePosition.Length];
+        for (int i = 0; i < potal.spotGatePosition.Length; ++i)
+        {
+            potalTransportinfo.spotPosition[i] = potal.spotGatePosition[i].position;
+        }
+
+        potalTransportinfo.nextIndex = potal.nextIndex;
+
+        dungeonInfo.potalTransportinfos.Add(potalTransportinfo);
+    }
+
+    public void AddPotalScene(DungeonInfo dungeonInfo, GameObject obj)
+    {
+        PotalScene potal = obj.GetComponent<PotalScene>();
+
+        Object parentObject = PrefabUtility.GetCorrespondingObjectFromOriginalSource(obj);
+        string path = AssetDatabase.GetAssetPath(parentObject);
+        path = ResourcesLoadSubstringFilePath(path);
+
+        PotalSceneInfo potalSceneInfo = new PotalSceneInfo();
+        potalSceneInfo.filePath = path;
+        potalSceneInfo.position = obj.transform.position;
+        potalSceneInfo.arrow = potal.arrow;
+
+        potalSceneInfo.nextDataName = potal.nextSceneName;
+
+        dungeonInfo.potalSceneInfos.Add(potalSceneInfo);
+    }
+
+    string ResourcesLoadSubstringFilePath(string FilePath)
+    {
+        int FilePos = FilePath.LastIndexOf("Resources/") + 10;
+        string DirectoryFile = FilePath.Substring(FilePos);
+        int TagPos = DirectoryFile.IndexOf('/');
+        if (TagPos > 0)
+        {
+            string Tagname = DirectoryFile.Remove(TagPos);
+        }
+        DirectoryFile = DirectoryFile.Remove(DirectoryFile.LastIndexOf('.'));
+        return DirectoryFile;
     }
 }
