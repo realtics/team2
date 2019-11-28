@@ -87,5 +87,5 @@ public class Calvary : BaseMonster
     }
 }
 
-//옵저버패턴
+//private void Not
 

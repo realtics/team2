@@ -124,7 +124,8 @@ public class BaseMonster : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.F1))
         {
-            MonsterManager.Instance.ReceiveMonsterDie(this);
+            //MonsterManager.Instance.ReceiveMonsterDie(this);
+            ChangeState(_dieState);
         }
     }
 
