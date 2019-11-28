@@ -389,6 +389,11 @@ public class BaseMonster : MonoBehaviour
         //nothing
     }
 
+    public void ChangeDieState()
+    {
+        ChangeState(_dieState);
+    }
+
     //HitState
     public virtual void EnterHitState()
     {
@@ -570,7 +575,7 @@ public class BaseMonster : MonoBehaviour
     }
 
     //For MonsterManager
-    public void NoticeDie()
+    public virtual void NoticeDie()
     {
         MonsterManager.Instance.ReceiveMonsterDie(this);
     }
