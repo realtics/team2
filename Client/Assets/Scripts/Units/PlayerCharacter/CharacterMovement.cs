@@ -95,6 +95,9 @@ public class CharacterMovement : BaseUnit
         if (CurAnimTime < 0.5f)
             return;
 
+        if (CurAnimTime >= 0.95f)
+            return;
+
         if (IsInTranstion)
             return;
 
@@ -234,6 +237,9 @@ public class CharacterMovement : BaseUnit
         if (!base.SetSkill(skill))
             return false;
 
+        if (!CheckIsAttack())
+            return false;
+
         _animator.SetBool("OnSkill", true);
         _animator.SetInteger("SkillMotion", UsedSkill.MotionIndex);
 
@@ -255,5 +261,21 @@ public class CharacterMovement : BaseUnit
     public override void OnSkill()
     {
         UsedSkill.OnSkill();
+    }
+
+    private bool CheckIsAttack()
+    {
+        if (!IsAttack)
+            return true;
+
+        //if (CurAnimTime < 0.2f)
+        //    return false;
+
+        if (CurAnimTime >= 0.95f)
+            return false;
+
+        StopAttack();
+
+        return true;
     }
 }
