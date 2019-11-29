@@ -105,7 +105,8 @@ public class CharacterMovement : BaseUnit
 
         _animator.SetBool("NextAttack", true);
         StartCoroutine(CoSetFalseNextAttack());
-    }
+		_animController.OffAttackBox();
+	}
 
     public override bool SetJump()
     {

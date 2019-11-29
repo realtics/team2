@@ -2157,6 +2157,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MaleSwordman
       objectReference: {fileID: 0}
+    - target: {fileID: 1109627757, guid: f596280910a5da744b6ad8c35450f807, type: 3}
+      propertyPath: _attackSpeed
+      value: 140
+      objectReference: {fileID: 0}
     - target: {fileID: 4668375787229723022, guid: f596280910a5da744b6ad8c35450f807,
         type: 3}
       propertyPath: m_LocalPosition.x
