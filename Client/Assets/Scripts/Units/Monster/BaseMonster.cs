@@ -59,6 +59,9 @@ public class BaseMonster : MonoBehaviour
     private bool _isDown;
     private bool _isDownRecovery;
 
+	//FIXME
+	private bool _isTestPower = false;
+
     [SerializeField]
     protected Transform _avatar;
     protected Vector3 _originPos;
@@ -212,9 +215,9 @@ public class BaseMonster : MonoBehaviour
     {
         if (sender.HorizontalExtraMoveDuration > 0)
             SetKnockbackValue(sender);
-        if (sender.ExtraHeightValue > 0)
-            SetAerialValue(sender);
-
+		if (sender.ExtraHeightValue > 0)
+			SetAerialValue(sender);
+		
         _currentHp -= sender.Damage;
 
         UIHelper.Instance.SetMonster(this);
@@ -229,7 +232,8 @@ public class BaseMonster : MonoBehaviour
     //FIXME: AttackInofoSender 의 값중 넉백관련만 인자로 받게 고쳐야함
     protected virtual void SetKnockbackValue(AttackInfoSender sender)
     {
-        Vector3 direction = Vector3.zero;
+		_isTestPower = true;
+		Vector3 direction = Vector3.zero;
 
         if ((sender.Attacker.position.x - transform.position.x) < 0)
             direction = Vector3.left;
@@ -266,7 +270,8 @@ public class BaseMonster : MonoBehaviour
 
     protected virtual void SetAerialValue(AttackInfoSender sender)
     {
-        _isAerialHit = true;
+		_isTestPower = false;
+		_isAerialHit = true;
         _animator.SetBool("isAaerial", true);
 
         _jumpValue = sender.ExtraHeightValue;
@@ -274,12 +279,19 @@ public class BaseMonster : MonoBehaviour
         if (IsGround)
             StartCoroutine("AerialProcess");
     }
+	protected virtual void SetAerialValue(float sender)
+	{
+		_jumpValue =sender;
 
-    IEnumerator AerialProcess()
+		StartCoroutine("AerialProcess");
+	}
+
+	IEnumerator AerialProcess()
     {
         Vector3 groundPos = _originPos;
         groundPos.y += _height;
         _avatar.localPosition = groundPos;
+
 
         _height += _jumpValue;
         _jumpValue -= Time.deltaTime / 2;
@@ -401,6 +413,11 @@ public class BaseMonster : MonoBehaviour
         IsHit = true;
         _animator.SetBool("isHit", true);
 
+		if (_isTestPower && _isAerialHit)
+        {
+			SetAerialValue(-0.05f);
+
+		}
         SetHitMotion();
     }
 
@@ -408,8 +425,9 @@ public class BaseMonster : MonoBehaviour
     {
         if (_isAerialHit)
         {
+			
 
-        }
+		}
         else
         {
             if (IsHitRecoveryTimeEnd())

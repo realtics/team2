@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CharacterAttackBox : MonoBehaviour
 {
-    private const float AttackRange = 0.8f;
+    private const float AttackRange = 1.2f;
     private CharacterStat _stat;
 
     [SerializeField]
@@ -27,7 +27,7 @@ public class CharacterAttackBox : MonoBehaviour
         if (!other.tag.Contains("MonsterHitBox"))
             return;
 
-        if (Mathf.Abs(_stat.transform.position.y - other.transform.position.y) > AttackRange)
+        if (Mathf.Abs(_stat.transform.position.y - other.transform.root.position.y) > AttackRange)
             return;
 
         _sender.Damage = _stat.AttackDamage;
