@@ -8,8 +8,6 @@ enum PartyNumber
     p3,
     p4
 }
-
-
 public class DungeonGameManager : GameManager
 {
     private PartyNumber _myPartyNumber = PartyNumber.p1;

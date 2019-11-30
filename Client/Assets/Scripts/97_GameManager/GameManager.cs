@@ -10,12 +10,6 @@ public enum GameState
     Die,
     Result
 }
-public enum SceneIndex
-{
-    MainMenu,
-    Lobby,
-    Dungen
-}
 
 public class GameManager : MonoBehaviour
 {

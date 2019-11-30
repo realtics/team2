@@ -162,8 +162,6 @@ public class MapLoader : MonoBehaviour
 
                 _dungeonGameObject[index].Add(obj);
             }
-
-
             ClearCache();
         }
         else

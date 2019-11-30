@@ -34,8 +34,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 175.85, y: 79.46}
+  m_AnchoredPosition: {x: 0, y: 6.9}
+  m_SizeDelta: {x: 224, y: 136}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3772565300901331077
 CanvasRenderer:
@@ -63,7 +63,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 9dd19cea1558d294b9512329fe472402, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d83f6e2cb11237345b7f556cf155e24c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -86,7 +86,7 @@ GameObject:
   - component: {fileID: 9105624054805021921}
   - component: {fileID: 9105624054805021934}
   m_Layer: 5
-  m_Name: DungenSlot
+  m_Name: LukeDungenSlot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
