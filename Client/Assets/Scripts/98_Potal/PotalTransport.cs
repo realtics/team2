@@ -57,7 +57,7 @@ public class PotalTransport : Potal
     public override void Enter()
     {
         base.Enter();
-        MapLoader.instacne.ChangeRoom(_nextIndex, arrow);
+        DNFSceneManager.instacne.ChangeRoom(_nextIndex, arrow);
     }
     public override Vector3 GetPlayerSpotPosition()
     {

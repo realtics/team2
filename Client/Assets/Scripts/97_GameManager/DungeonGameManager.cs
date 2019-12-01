@@ -40,7 +40,7 @@ public class DungeonGameManager : GameManager
     {
         base.Start();
         _instance = this;
-        MapLoader.instacne.Loader();
+        DNFSceneManager.instacne.Loader();
 
         _myPartyNumber = 0;
     }
