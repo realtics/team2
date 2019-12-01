@@ -264,7 +264,7 @@ public class BaseMonster : MonoBehaviour
             transform.position += _knockBackDirection * Time.deltaTime * _knockBackSpeed;
         }
 
-        yield return null;
+        yield return new WaitForFixedUpdate();
         StartCoroutine("Knockback");
     }
 
@@ -296,7 +296,7 @@ public class BaseMonster : MonoBehaviour
 
 
         _height += _jumpValue;
-        _jumpValue -= Time.deltaTime/3;
+        _jumpValue -= Time.deltaTime * 0.7f;
 
         if (_height <= 0.0f)
         {
@@ -315,7 +315,7 @@ public class BaseMonster : MonoBehaviour
             yield break;
         }
 
-        yield return null;
+        yield return new WaitForFixedUpdate();
         StartCoroutine("AerialProcess");
     }
 
@@ -370,7 +370,7 @@ public class BaseMonster : MonoBehaviour
             StopCoroutine("CheckBaseAttackTime");
             yield break;
         }
-        yield return null;
+        yield return new WaitForFixedUpdate();
         StartCoroutine("CheckBaseAttackTime");
     }
     protected void StartCheckBaseAttackTime()
@@ -418,7 +418,7 @@ public class BaseMonster : MonoBehaviour
 		if (!_hasAerialPower && _isAerialHit)
         {
             //FIXME : 매직넘버
-            SetAerialValue(0.05f);
+            SetAerialValue(0.1f);
 		}
         SetHitMotion();
     }
