@@ -8,8 +8,6 @@ enum PartyNumber
     p3,
     p4
 }
-
-
 public class DungeonGameManager : GameManager
 {
     private PartyNumber _myPartyNumber = PartyNumber.p1;
@@ -42,8 +40,7 @@ public class DungeonGameManager : GameManager
     {
         base.Start();
         _instance = this;
-        MapLoader.instacne.Loader();
-
+        DNFSceneManager.instacne.Loader();
         _myPartyNumber = 0;
     }
 

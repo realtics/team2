@@ -14,10 +14,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Merge.unity
     guid: 975fa5d26c4e3c34b99e333b9e3b027f
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Abu.unity
     guid: ff33c24bf4a20534dafc06e337a5e58d
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/KSJ/Test.unity
     guid: 8e0089a1a1376844cbdbfcc305143b02
+  - enabled: 1
+    path: Assets/Scenes/LJS.unity
+    guid: c1124a690e588104389817b83e428a7b
   m_configObjects: {}

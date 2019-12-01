@@ -33,7 +33,7 @@ public class SwordmanSkillHadouken : CharacterSkill
         _sender.Damage = stat.AttackDamage * 1.0f;
         _sender.HorizontalExtraMoveDuration = 0.1f;
         _sender.HorizontalExtraMoveValue = -1.0f;
-        _sender.ExtraHeightValue = 0.2f;
+        _sender.ExtraHeightValue = 0.3f;
         _sender.StunDuration = 1.0f;
     }
 }
