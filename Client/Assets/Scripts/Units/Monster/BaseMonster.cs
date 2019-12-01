@@ -296,7 +296,7 @@ public class BaseMonster : MonoBehaviour
 
 
         _height += _jumpValue;
-        _jumpValue -= Time.deltaTime / 2;
+        _jumpValue -= Time.deltaTime/3;
 
         if (_height <= 0.0f)
         {
@@ -418,7 +418,7 @@ public class BaseMonster : MonoBehaviour
 		if (!_hasAerialPower && _isAerialHit)
         {
             //FIXME : 매직넘버
-			SetAerialValue(0.05f);
+            SetAerialValue(0.05f);
 		}
         SetHitMotion();
     }
