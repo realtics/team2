@@ -11,6 +11,9 @@ using System;
 
 using Newtonsoft.Json;
 
+using System;
+using System.IO;
+
 public class StateObject    // 데이터를 수신하기 위한 상태 객체
 {
     public Socket WorkSocket = null;                    // 클라이언트 소켓
@@ -21,6 +24,7 @@ public class StateObject    // 데이터를 수신하기 위한 상태 객체
         Array.Clear(RecvBuffer, 0, RecvBuffer.Length);
     }
 }
+
 
 public class NetworkManager : MonoBehaviour
 {
@@ -40,6 +44,9 @@ public class NetworkManager : MonoBehaviour
     //private static ManualResetEvent _sendDone = new ManualResetEvent(false);
     //private static ManualResetEvent _receiveDone = new ManualResetEvent(false);
     //private static String _response = String.Empty; // 서버 응답
+
+    public string appDataPath;
+    public string appDataPathParent;
 
     private Socket _sock = null;
 
@@ -70,13 +77,24 @@ public class NetworkManager : MonoBehaviour
     public string DebugMsg01;
     public int DebugMsg02;
     public int DebugMsg03;
-    
+
+    public bool DebugMsg10;
+    public int DebugMsg11;
+
+    public bool DebugMsg12;
+    public int DebugMsg13;
+    public List<string> _DebugMsgList01;
+    public bool DebugText = false;
 
     private Dictionary<int,Character> _characters;
     private List<CharacterSpawnData> _spawnCharacters;
 
-    //private bool _isPacketPlayerMoveEnd = false;
-
+    private void Awake()
+    {
+        appDataPath = Application.dataPath;
+        appDataPathParent = System.IO.Directory.GetParent(appDataPath).ToString();
+        //Debug.Log(appDataPathParent);
+    }
 
     void Start()
     {
@@ -85,51 +103,58 @@ public class NetworkManager : MonoBehaviour
         _instance = this;
         _spawnCharacters = new List<CharacterSpawnData>();
         _characters = new Dictionary<int, Character>();
-        
-        CreateSocket();
+
+        DebugLogList("start() start");
 
         if (GetIsLogin == false)
         {
+            CreateSocket();
+
             NewLogin();
 
-            Receive(_sock);
+            NewLoginSucsess();
         }
 
+        Receive(_sock);
+        DebugLogList("start() end");
     }
 
-    void Update()
+    void FixedUpdate()
     {
-        if (GetIsConcurrentUserList == false)
+        if (GetIsLogin == true)
         {
-            ConcurrentUser();
-        }
+            if (GetIsConcurrentUserList == false)
+            {
+                ConcurrentUser();
+            }
 
 
-        //// 서버에서 새로운 플레이어가 접속했다고 알려주는 역할임
-        //if (Input.GetKeyDown(KeyCode.Space))
-        //{
-        //    // 새로운 플레이어의 Id를 넣어주고 생성함.
-        //    JoinNewPlayer(GetMyId);
-        //}
+            //// 서버에서 새로운 플레이어가 접속했다고 알려주는 역할임
+            //if (Input.GetKeyDown(KeyCode.Space))
+            //{
+            //    // 새로운 플레이어의 Id를 넣어주고 생성함.
+            //    JoinNewPlayer(GetMyId);
+            //}
 
-        //// 서버가 어떤 플레이어가 움직였다 라고 알림
-        //if (Input.GetKeyDown(KeyCode.Z))
-        //{
-        //    ReceivedPacketHandler();
-        //}
-        //if (Input.GetKeyDown(KeyCode.X))
-        //{
-        //    ThisIsStopPacket();
-        //}
+            //// 서버가 어떤 플레이어가 움직였다 라고 알림
+            //if (Input.GetKeyDown(KeyCode.Z))
+            //{
+            //    ReceivedPacketHandler();
+            //}
+            //if (Input.GetKeyDown(KeyCode.X))
+            //{
+            //    ThisIsStopPacket();
+            //}
 
-        if (_spawnCharacters.Count > 0)
-        {
-            GameObject newPlayer = Instantiate(playerPrefab);
-            Character spawnedPlayer = newPlayer.GetComponent<Character>();
-            spawnedPlayer.SetId(_spawnCharacters[0].id);
-            newPlayer.transform.position = Vector3.zero;
-            _characters.Add(_spawnCharacters[0].id, spawnedPlayer);
-            _spawnCharacters.RemoveAt(0);
+            if (_spawnCharacters.Count > 0)
+            {
+                GameObject newPlayer = Instantiate(playerPrefab);
+                Character spawnedPlayer = newPlayer.GetComponent<Character>();
+                spawnedPlayer.SetId(_spawnCharacters[0].id);
+                newPlayer.transform.position = Vector3.zero;
+                _characters.Add(_spawnCharacters[0].id, spawnedPlayer);
+                _spawnCharacters.RemoveAt(0);
+            }
         }
     }
 
@@ -137,18 +162,20 @@ public class NetworkManager : MonoBehaviour
     {
         try
         {
+            DebugLogList("socket() start");
             _sock = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.IP);
             if (_sock == null)
             {
                 Debug.Log("소켓 생성 실패");
             }
-            _sock.Connect(new IPEndPoint(IPAddress.Parse("127.0.0.1"), 31452));
-            //_sock.Connect(new IPEndPoint(IPAddress.Parse("192.168.1.105"), 31452));
-            
+            //_sock.Connect(new IPEndPoint(IPAddress.Parse("127.0.0.1"), 31452));
+            _sock.Connect(new IPEndPoint(IPAddress.Parse("192.168.200.168"), 31452));
+            DebugLogList("socket() end");
         }
         catch (Exception e)
         {
             Debug.LogError(e.ToString());
+            DebugLogList("[!!Exception!!] " + e.ToString());
         }
         
     }
@@ -157,15 +184,16 @@ public class NetworkManager : MonoBehaviour
     {
         try
         {
+            DebugLogList("ConnectCallback()");
             _sock = (Socket)ar.AsyncState;
             _sock.EndConnect(ar);
-
             Debug.Log("소켓 연결 : " + _sock.RemoteEndPoint.ToString());
             //_connectDone.Set();
         }
         catch (Exception e)
         {
             Debug.LogError(e.ToString());
+            DebugLogList("[!!Exception!!] " + e.ToString());
         }
     }
 
@@ -173,16 +201,19 @@ public class NetworkManager : MonoBehaviour
     {
         try
         {
+            DebugLogList("Receive() start");
             StateObject state = new StateObject();
             state.WorkSocket = sock;
-
+            
             // 데이터 수신 시작
             sock.BeginReceive(state.RecvBuffer, 0, StateObject.BufferSize, 0,
                                 new AsyncCallback(ReceiveCallback), state);
+            DebugLogList("Receive() end");
         }
         catch (Exception e)
         {
             Debug.Log(e.ToString());
+            DebugLogList("[!!Exception!!] " + e.ToString());
         }
     }
 
@@ -190,6 +221,7 @@ public class NetworkManager : MonoBehaviour
     {
         try
         {
+            DebugLogList("ReceiveCallback() start");
             StateObject state = (StateObject)ar.AsyncState;
             _sock = state.WorkSocket;
             
@@ -198,6 +230,7 @@ public class NetworkManager : MonoBehaviour
             try
             {
                 bytesRead = _sock.EndReceive(ar);
+                DebugLogList("bytesRead : " + bytesRead.ToString());
             } catch
             {
                 return;
@@ -205,119 +238,154 @@ public class NetworkManager : MonoBehaviour
             
             if (bytesRead > 0)
             {
+                DebugLogList("bytesRead > 0");
                 string recvData = Encoding.UTF8.GetString(state.RecvBuffer, 0, bytesRead);
                 int bufLen = recvData.Length;
                 Debug.Log("recvData[" + bufLen + "]= " + recvData);
-
+                
+                DebugLogList(recvData);
+                
                 var JsonData = JsonConvert.DeserializeObject<PACKET_HEADER_BODY>(recvData);
+                
+                DebugLogList("ReceiveCallback - ProcessPacket - start");
                 ProcessPacket(JsonData.header.packetIndex, recvData);
-
+                DebugLogList("ReceiveCallback - ProcessPacket - end");
                 // 수신 대기
                 _sock.BeginReceive(state.RecvBuffer, 0, StateObject.BufferSize, 0,
                                     new AsyncCallback(ReceiveCallback), state);
+                DebugLogList("ReceiveCallback end");
             }
             else
             {
                 //_receiveDone.Set();
+                DebugLogList("bytesRead <= 0");
             }
         }
         catch (Exception e)
         {
             Debug.LogError(e.ToString());
+            DebugLogList("[!!Exception!!] " + e.ToString());
         }
     }
 
     private void ProcessPacket(short packetIndex, string jsonData)
     {
-        switch(packetIndex)
+        DebugLogList("ProcessPacket() start");
+        try
         {
-            case (short)PACKET_INDEX.RES_NEW_LOGIN_SUCSESS:
-                {
-                    var desJson = JsonConvert.DeserializeObject<PKT_RES_NEW_LOGIN_SUCSESS>(jsonData);
+            switch (packetIndex)
+            {
+                case (short)PACKET_INDEX.RES_NEW_LOGIN_SUCSESS:
+                    {
+                        DebugLogList("PACKET_INDEX.RES_NEW_LOGIN_SUCSESS start");
+                        var desJson = JsonConvert.DeserializeObject<PKT_RES_NEW_LOGIN_SUCSESS>(jsonData);
+                        DebugLogList(desJson.header.ToString());
+                        DebugLogList(desJson.header.packetIndex.ToString());
+                        DebugLogList(desJson.header.packetSize.ToString());
+                        DebugLogList(desJson.isSuccess.ToString());
+                        DebugLogList(desJson.userID.ToString());
 
-                    // 내 캐릭터를 생성하는 로직
-                    // 서버에서 내가 접속했다고 알려주면 Id를 받고 내 Id로 설정한다.
-                    if (GetMyId == 0)
-                    {
-                        SetIsLogin(desJson.isSuccess);
-                        SetMyId(desJson.userID);
-                        JoinNewPlayer(desJson.userID);
-                        Debug.Log("접속 ID : " + desJson.userID + ", 접속 성공 여부 : " + desJson.isSuccess);
+                        DebugMsg10 = desJson.isSuccess;
+                        DebugMsg11 = desJson.userID;
+                        // 내 캐릭터를 생성하는 로직
+                        // 서버에서 내가 접속했다고 알려주면 Id를 받고 내 Id로 설정한다.
+                        DebugLogList(GetMyId.ToString());
+                        if (GetMyId == 0)
+                        {
+                            SetIsLogin(desJson.isSuccess);
+                            SetMyId(desJson.userID);
+                            JoinNewPlayer(desJson.userID);
+                            Debug.Log("접속 ID : " + desJson.userID + ", 접속 성공 여부 : " + desJson.isSuccess);
+                        }
+                        else
+                        {
+                            Debug.LogError("접속 ID : " + desJson.userID + ", 접속 성공 여부 : " + desJson.isSuccess);
+                        }
+                        DebugLogList("PACKET_INDEX.RES_NEW_LOGIN_SUCSESS end");
                     }
-                    else
+                    break;
+                case (short)PACKET_INDEX.RES_CONCURRENT_USER_LIST:
                     {
-                        Debug.LogError("접속 ID : " + desJson.userID + ", 접속 성공 여부 : " + desJson.isSuccess);
-                    }
-                }
-                break;
-            case (short)PACKET_INDEX.RES_CONCURRENT_USER_LIST:
-                {
-                    var desJson = JsonConvert.DeserializeObject<PKT_RES_CONCURRENT_USER_LIST>(jsonData);
-                    Debug.Log(desJson.totalUser);
-                    Debug.Log(desJson.concurrentUser);
-                    SetTotalUser(desJson.totalUser);
-                    //SetUserList(Json.concurrentUserList);
-                    DebugMsg01 = desJson.concurrentUser;
-                    DebugMsg02 = desJson.totalUser;
+                        DebugLogList("PACKET_INDEX.RES_CONCURRENT_USER_LIST start");
+                        var desJson = JsonConvert.DeserializeObject<PKT_RES_CONCURRENT_USER_LIST>(jsonData);
 
-                    string[] splitText = desJson.concurrentUser.Split(',');
-                    for(int i = 0; i < splitText.Length; i++)
-                    {
-                        Debug.Log(splitText[i]);
+                        DebugLogList(desJson.ToString());
+                        DebugLogList(desJson.header.ToString());
+                        DebugLogList(desJson.header.packetIndex.ToString());
+                        DebugLogList(desJson.header.packetSize.ToString());
+
+                        Debug.Log(desJson.totalUser);
+                        Debug.Log(desJson.concurrentUser);
+                        SetTotalUser(desJson.totalUser);
+                        //SetUserList(Json.concurrentUserList);
+                        DebugMsg01 = desJson.concurrentUser;
+                        DebugMsg02 = desJson.totalUser;
                         
-                        int userId = Int32.Parse(splitText[i]);
-                        
-                        if (GetMyId == userId)
-                            continue;
+                        string[] splitText = desJson.concurrentUser.Split(',');
+                        for (int i = 0; i < splitText.Length; i++)
+                        {
+                            Debug.Log(splitText[i]);
 
-                        if (_characters.ContainsKey(userId))
-                            continue;
+                            int userId = Int32.Parse(splitText[i]);
 
-                        JoinNewPlayer(userId);
+                            if (GetMyId == userId)
+                                continue;
+
+                            if (_characters.ContainsKey(userId))
+                                continue;
+
+                            JoinNewPlayer(userId);
+                        }
+                        DebugLogList("PACKET_INDEX.RES_CONCURRENT_USER_LIST end");
+                        SetIsConcurrentUserList(true);
                     }
+                    break;
+                case (short)PACKET_INDEX.RES_PLAYER_MOVE_START:
+                    {
+                        var desJson = JsonConvert.DeserializeObject<PKT_RES_PLAYER_MOVE_START>(jsonData);
 
-                    SetIsConcurrentUserList(true);
-                }
-                break;
-            case (short)PACKET_INDEX.RES_PLAYER_MOVE_START:
-                {
-                    var desJson = JsonConvert.DeserializeObject<PKT_RES_PLAYER_MOVE_START>(jsonData);
+                        var userID = desJson.userID;
+                        var userPos = desJson.userPos;
+                        var userDir = desJson.userDir;
 
-                    var userID = desJson.userID;
-                    var userPos = desJson.userPos;
-                    var userDir = desJson.userDir;
+                        Vector3 vecPos = StringToVector3(userPos);
+                        Vector3 vecDir = StringToVector3(userDir);
 
-                    Vector3 vecPos = StringToVector3(userPos);
-                    Vector3 vecDir = StringToVector3(userDir);
+                        //Debug.Log("userPos:" + vecPos.ToString("N5") + ", userDir:" + vecDir.ToString("N5"));
+                        
+                        ReceivedPacketHandler(userID, vecPos, vecDir);
+                    }
+                    break;
+                case (short)PACKET_INDEX.RES_PLAYER_MOVE_END:
+                    {
+                        var desJson = JsonConvert.DeserializeObject<PKT_RES_PLAYER_MOVE_END>(jsonData);
 
-                    Debug.Log("userPos:" + vecPos.ToString("N5") + ", userDir:" + vecDir.ToString("N5"));
+                        var userID = desJson.userID;
+                        var userPos = desJson.userPos;
 
-                    ReceivedPacketHandler(userID, vecPos, vecDir);
-                }
-                break;
-            case (short)PACKET_INDEX.RES_PLAYER_MOVE_END:
-                {
-                    var desJson = JsonConvert.DeserializeObject<PKT_RES_PLAYER_MOVE_END>(jsonData);
-
-                    var userID = desJson.userID;
-                    var userPos = desJson.userPos;
-
-                    Vector3 vecPos = StringToVector3(userPos);
-                    Debug.Log("userPos:" + vecPos.ToString("N5"));
-
-                    ThisIsStopPacket(userID, vecPos);
-                }
-                break;
-            default:
-                {
-                    Debug.LogError("Index가 존재 하지 않는 Packet");
-                }
-            break;
+                        Vector3 vecPos = StringToVector3(userPos);
+                        //Debug.Log("userPos:" + vecPos.ToString("N5"));
+                        
+                        ThisIsStopPacket(userID, vecPos);
+                    }
+                    break;
+                default:
+                    {
+                        Debug.LogError("Index가 존재 하지 않는 Packet");
+                    }
+                    break;
+            }
+        }
+        catch (Exception e)
+        {
+            Debug.LogError(e.ToString());
+            DebugLogList("[!!Exception!!] " + e.ToString());
         }
     }
 
     private void Send(Socket client, String data)
     {
+        DebugLogList("Send(Socket client, String data)");
         try
         { 
             byte[] byteData = Encoding.UTF8.GetBytes(data);
@@ -328,11 +396,13 @@ public class NetworkManager : MonoBehaviour
         catch (Exception e)
         {
             Debug.LogError(e.ToString());
+            DebugLogList("[!!Exception!!] " + e.ToString());
         }
     }
 
     private void SendCallback(IAsyncResult ar)
     {
+        DebugLogList("SendCallback()");
         try
         {
             _sock = (Socket)ar.AsyncState;
@@ -345,11 +415,13 @@ public class NetworkManager : MonoBehaviour
         catch (Exception e)
         {
             Debug.LogError(e.ToString());
+            DebugLogList("[!!Exception!!] " + e.ToString());
         }
     }
 
     private void NewLogin()
     {
+        DebugLogList("NewLogin() start");
         string jsonData;
         char endNullValue = '\0';
 
@@ -359,10 +431,10 @@ public class NetworkManager : MonoBehaviour
             packetSize = 8
         };
         var packData = new PKT_REQ_NEW_LOGIN { header = packHeader };
-
+        DebugLogList(packData.ToString());
         jsonData = JsonConvert.SerializeObject(packData);
         jsonData += endNullValue;
-
+        DebugLogList(jsonData.ToString());
         byte[] sendByte = new byte[256];
         sendByte = Encoding.UTF8.GetBytes(jsonData);
         //TODO 1-0: JSON 헤더에 패킷 사이즈 체크 하는것을 foreach로 하고 있는데, 더 좋은 방법 있다면 개선
@@ -376,14 +448,44 @@ public class NetworkManager : MonoBehaviour
         //}
         //Debug.Log(jsonData);
         //Debug.Log(jsonDataSize);
-
+        
         SetMyId(0);
         int resultSize = _sock.Send(sendByte);
         Debug.Log("NewLogin() = " + resultSize);
+        DebugLogList("NewLogin() end");
+    }
+
+    private void NewLoginSucsess()
+    {
+        DebugLogList("NewLoginSucsess() start");
+        byte[] recvBuf = new byte[256];
+        int socketReceive = _sock.Receive(recvBuf);
+        Debug.Log(socketReceive);
+
+        string recvData = Encoding.UTF8.GetString(recvBuf, 0, socketReceive);
+        int bufLen = recvBuf.Length;
+        Debug.Log(recvData);
+        DebugLogList(recvData);
+
+        var desJson = JsonConvert.DeserializeObject<PKT_RES_NEW_LOGIN_SUCSESS>(recvData);
+        if (desJson.header.packetIndex == (short)PACKET_INDEX.RES_NEW_LOGIN_SUCSESS)
+        {
+            Debug.Log("접속 성공 여부 : " + desJson.isSuccess);
+            Debug.Log("접속 ID : " + desJson.userID);
+
+            if (GetMyId == 0)
+            {
+                SetIsLogin(desJson.isSuccess);
+                SetMyId(desJson.userID);
+                JoinNewPlayer(desJson.userID);
+            }
+        }
+        DebugLogList("NewLoginSucsess() end");
     }
 
     private void ConcurrentUser()
     {
+        DebugLogList("ConcurrentUser() start");
         string jsonData;
         char endNullValue = '\0';
 
@@ -393,17 +495,19 @@ public class NetworkManager : MonoBehaviour
             packetSize = 8
         };
         var packData = new PKT_REQ_CONCURRENT_USER { header = packHeader };
-
+        DebugLogList(packData.ToString());
         jsonData = JsonConvert.SerializeObject(packData);
         jsonData += endNullValue;
-
+        DebugLogList(jsonData.ToString());
         byte[] sendByte = new byte[256];
         sendByte = Encoding.UTF8.GetBytes(jsonData);
         
         SetIsConcurrentUserList(true);
-
+        
         int resultSize = _sock.Send(sendByte);
         Debug.Log("ConcurrentUser() = " + resultSize);
+        DebugLogList("resultSize :" + resultSize.ToString());
+        DebugLogList("ConcurrentUser() end");
     }
 
     public void MoveStart(Vector3 pos, Vector3 dir)
@@ -434,7 +538,7 @@ public class NetworkManager : MonoBehaviour
         sendByte = Encoding.UTF8.GetBytes(jsonData);
 
         int resultSize = _sock.Send(sendByte);
-        Debug.Log("MoveStart - Send");
+        //Debug.Log("MoveStart - Send");
     }
 
     public void MoveEnd(Vector3 pos, Vector3 dir)
@@ -465,11 +569,13 @@ public class NetworkManager : MonoBehaviour
         sendByte = Encoding.UTF8.GetBytes(jsonData);
 
         int resultSize = _sock.Send(sendByte);
-        Debug.Log("MoveEnd - Send");
+        //Debug.Log("MoveEnd - Send");
     }
 
     public void JoinNewPlayer(int id)
     {
+        DebugLogList("JoinNewPlayer start");
+        DebugLogList("ID : " + id.ToString());
         CharacterSpawnData newPlayer = new CharacterSpawnData();
 
         // Instantiate는 게임 오브젝트를 씬에 생성하는 함수
@@ -484,6 +590,7 @@ public class NetworkManager : MonoBehaviour
 
         //_characters.Add(id, newPlayer);
         _spawnCharacters.Add(newPlayer);
+        DebugLogList("JoinNewPlayer end");
     }
 
     // 원래는 패킷마다 핸들러를 만들어 사용해야함
@@ -525,13 +632,48 @@ public class NetworkManager : MonoBehaviour
         movePlayer.StopMove(pos);
     }
 
-
     private void OnGUI()
     {
         GUI.Label(new Rect(0, 0, 500, 100), "접속여부:" + _isLogin.ToString() + ", 유저:" + GetMyId.ToString());
         GUI.Label(new Rect(0, 15, 300, 100), "동시접속자 수 : " + DebugMsg02);
         GUI.Label(new Rect(0, 30, 960, 100), "접속자 리스트 : " + DebugMsg01);
 
+        GUI.Label(new Rect(0, 60, 960, 100), "10 : " + DebugMsg10 + ", 11 : " + DebugMsg11);
+    }
+
+    public int DebugLogListIndex = 0;
+    public void DebugLogList(string logData)
+    {
+        string addLogIndex = "[" + DebugLogListIndex + "]["
+                                + _isLogin.ToString() + "]["
+                                + GetMyId.ToString() + "] "
+                                + logData;
+
+        _DebugMsgList01.Add(addLogIndex);
+        DebugLogListIndex++;
+        DebugLogFileSave();
+    }
+    
+    public void DebugLogFileSave()
+    {
+        if(Directory.Exists(appDataPathParent + "/log") == false)
+        {
+            Directory.CreateDirectory(appDataPathParent + "/log");
+        }
+        string dateTime = DateTime.Now.ToString("yyMMdd-HHmmss");
+        string fileName = appDataPathParent + "/Log/Debug-" + dateTime + "-" + GetMyId.ToString() + ".txt";
+        //Debug.Log(fileName);
+
+        FileStream fs = new FileStream(fileName, FileMode.Create);
+        StreamWriter sw = new StreamWriter(fs);
+
+        for (int i = 0; i < _DebugMsgList01.Count; i++)
+        {
+            sw.WriteLine(_DebugMsgList01[i].ToString());
+        }
+
+        sw.Close();
+        fs.Close();
     }
     
     public Vector3 StringToVector3(string vector)

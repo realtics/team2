@@ -9,7 +9,7 @@ const int MAX_PLAYER_MOVE_LEN = 50;
 
 const int FIRST_USER_INDEX = 100;		// 첫번째 유저 Index (클라이언트에 알려줄 index)
 
-enum PACKET_INDEX
+enum PACKET_INDEX : short
 {
 	// REQ : 클라->서버, 클라에서 서버에 어떤 값을 요청
 	// RES : 서버->클라, 서버가 어떤 값으로 응답
@@ -113,8 +113,8 @@ struct PKT_RES_NEW_LOGIN_SUCSESS : public PACKET_HEADER
 	{
 		packetIndex = PACKET_INDEX::RES_NEW_LOGIN_SUCSESS;
 		packetSize = sizeof(PKT_RES_NEW_LOGIN_SUCSESS);
-		isSuccess = false;
-		userID = 0;
+		isSuccess = true;
+		userID = FIRST_USER_INDEX;
 	}
 };
 

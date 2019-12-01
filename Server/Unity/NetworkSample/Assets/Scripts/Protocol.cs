@@ -1,4 +1,4 @@
-﻿enum PACKET_INDEX
+﻿enum PACKET_INDEX : short
 {
     REQ_IN = 1,
     RES_IN = 2,

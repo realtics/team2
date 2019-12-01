@@ -75,7 +75,7 @@ public class Character : MonoBehaviour
         if (_oldDirection == _moveDirection)
             return;
 
-        Debug.Log("SendMoveStart");
+        //Debug.Log("SendMoveStart");
         _oldDirection = _moveDirection;
 
         NetworkManager.Instance.MoveStart(transform.position, _moveDirection);
@@ -86,7 +86,7 @@ public class Character : MonoBehaviour
         if (!_isMoving)
             return;
 
-        Debug.Log("SendMoveEnd");
+        //Debug.Log("SendMoveEnd");
 
         NetworkManager.Instance.MoveEnd(transform.position, _oldDirection);
 

@@ -55,7 +55,7 @@ void Session::PostSend(const bool bImmediately, const int packetSize, char* pDat
 	{
 		return;
 	}
-
+	
 	boost::asio::async_write(_socket,
 		boost::asio::buffer(pSendData, packetSize),
 							boost::bind(&Session::HandleWrite,

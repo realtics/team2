@@ -161,8 +161,8 @@ void AsioServer::ProcessPacket(const int sessionID, const char* pData)
 		std::ostringstream oss(stringRecv);
 		boost::property_tree::write_json(oss, ptSend, false);
 		std::string sendStr = oss.str();
-		std::cout << "[서버->클라] " << sendStr << std::endl;
-
+		//std::cout << "[서버->클라] " << sendStr << std::endl;
+		
 		size_t totalSessionCount = _sessionList.size();
 
 		for (size_t i = 0; i < totalSessionCount; i++)
@@ -204,7 +204,7 @@ void AsioServer::ProcessPacket(const int sessionID, const char* pData)
 		std::ostringstream oss(stringRecv);
 		boost::property_tree::write_json(oss, ptSend, false);
 		std::string sendStr = oss.str();
-		std::cout << "[서버->클라]" << sendStr << std::endl;
+		//std::cout << "[서버->클라]" << sendStr << std::endl;
 
 		size_t totalSessionCount = _sessionList.size();
 
@@ -245,7 +245,7 @@ void AsioServer::ProcessPacket(const int sessionID, const char* pData)
 		std::ostringstream oss(stringRecv);
 		boost::property_tree::write_json(oss, ptSend, false);
 		std::string sendStr = oss.str();
-		std::cout << "[서버->클라]" << sendStr << std::endl;
+		//std::cout << "[서버->클라]" << sendStr << std::endl;
 
 		size_t totalSessionCount = _sessionList.size();
 
@@ -264,6 +264,14 @@ void AsioServer::ProcessPacket(const int sessionID, const char* pData)
 	}
 
 	return;
+}
+
+// TODO : 사이즈 작업
+short AsioServer::JsonDataSize(std::string jsonData)
+{
+	short JsonAllSize = jsonData.size();
+	//std::cout << "Json 사이즈 : " << packetSize << std::endl;
+	return JsonAllSize;
 }
 
 void AsioServer::ConcurrentUser()
