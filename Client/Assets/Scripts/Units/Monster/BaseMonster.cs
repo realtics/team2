@@ -60,7 +60,7 @@ public class BaseMonster : MonoBehaviour
     private bool _isDownRecovery;
 
 	//FIXME
-	private bool _isTestPower = false;
+	private bool _hasAerialPower = false;
 
     [SerializeField]
     protected Transform _avatar;
@@ -232,7 +232,7 @@ public class BaseMonster : MonoBehaviour
     //FIXME: AttackInofoSender 의 값중 넉백관련만 인자로 받게 고쳐야함
     protected virtual void SetKnockbackValue(AttackInfoSender sender)
     {
-		_isTestPower = true;
+		_hasAerialPower = false;
 		Vector3 direction = Vector3.zero;
 
         if ((sender.Attacker.position.x - transform.position.x) < 0)
@@ -270,7 +270,7 @@ public class BaseMonster : MonoBehaviour
 
     protected virtual void SetAerialValue(AttackInfoSender sender)
     {
-		_isTestPower = false;
+		_hasAerialPower = true;
 		_isAerialHit = true;
         _animator.SetBool("isAaerial", true);
 
@@ -279,12 +279,14 @@ public class BaseMonster : MonoBehaviour
         if (IsGround)
             StartCoroutine("AerialProcess");
     }
+
 	protected virtual void SetAerialValue(float sender)
 	{
-		_jumpValue =sender;
-
-		StartCoroutine("AerialProcess");
+        StopCoroutine("AerialProcess");
+        _jumpValue = sender;
+        StartCoroutine("AerialProcess");
 	}
+   
 
 	IEnumerator AerialProcess()
     {
@@ -413,10 +415,10 @@ public class BaseMonster : MonoBehaviour
         IsHit = true;
         _animator.SetBool("isHit", true);
 
-		if (_isTestPower && _isAerialHit)
+		if (!_hasAerialPower && _isAerialHit)
         {
-			SetAerialValue(-0.05f);
-
+            //FIXME : 매직넘버
+			SetAerialValue(0.05f);
 		}
         SetHitMotion();
     }
