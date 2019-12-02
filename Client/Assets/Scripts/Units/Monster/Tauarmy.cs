@@ -48,8 +48,7 @@ public class Tauarmy : BaseMonster
         _currentAttackMotion = (TauarmyAttackMotion)Random.Range((int)TauarmyAttackMotion.AttackMotion1, (int)TauarmyAttackMotion.AttacknMotionEnd);
         _animator.SetInteger("attackMotion", (int)_currentAttackMotion);
         SetForwardDirection();
-
-    }
+	}
 
     public override void UpdateAttackState()
     {
@@ -64,7 +63,7 @@ public class Tauarmy : BaseMonster
     {
         base.ExitAttackState();
         InactiveRushAttackBox();
-    }
+	}
 
     //MoveState
     public override void EnterMoveState()

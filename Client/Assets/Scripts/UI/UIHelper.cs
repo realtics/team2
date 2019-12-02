@@ -23,7 +23,8 @@ public class UIHelper : MonoBehaviour
     private UIDungeonClearMenu _dungeonClearMenu;
     [SerializeField]
     private UIDungeonSelectMenu _dungeonSelectMenu;
-
+    [SerializeField]
+    private GameObject _dungeonTile;
     // Use this for initialization
     void Start()
     {
@@ -38,7 +39,9 @@ public class UIHelper : MonoBehaviour
         if (_dungeonClearMenu != null)
             _dungeonClearMenu.gameObject.SetActive(false);
         if (_dungeonSelectMenu != null)
-            _dungeonSelectMenu.gameObject.SetActive(false);
+            _dungeonSelectMenu.gameObject.SetActive(false);        
+        if (_dungeonTile != null)
+            _dungeonTile.SetActive(true);
     }
 
     // Update is called once per frame
