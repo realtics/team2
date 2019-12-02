@@ -16,7 +16,7 @@ using System.IO;
 
 enum DefineDefaultValue : short
 {
-	packetSize = 100
+    packetSize = 100
 }
 
 public class StateObject    // 데이터를 수신하기 위한 상태 객체
@@ -73,7 +73,7 @@ public class NetworkManager : MonoBehaviour
             return _instance;
         }
     }
-    
+
     public GameObject playerPrefab;
 
     //// 신호를 받을 때 수동으로 재설정 되어야 하는 스레드 동기화 이벤트
@@ -123,7 +123,7 @@ public class NetworkManager : MonoBehaviour
     public List<string> _DebugMsgList01;
     public bool DebugText = false;
 
-    private Dictionary<int,Character> _characters;
+    private Dictionary<int, Character> _characters;
     private List<CharacterSpawnData> _spawnCharacters;
 
     private void Awake()
@@ -136,7 +136,7 @@ public class NetworkManager : MonoBehaviour
     void Start()
     {
         Screen.SetResolution(960, 540, false);
-        
+
         _instance = this;
         _spawnCharacters = new List<CharacterSpawnData>();
         _characters = new Dictionary<int, Character>();
@@ -205,18 +205,18 @@ public class NetworkManager : MonoBehaviour
             {
                 Debug.Log("소켓 생성 실패");
             }
-			//_sock.Connect(new IPEndPoint(IPAddress.Parse("127.0.0.1"), 31452));
-			//_sock.Connect(new IPEndPoint(IPAddress.Parse("192.168.200.168"), 31452));
-			_sock.Connect(new IPEndPoint(IPAddress.Parse("192.168.1.105"), 31452));
+            //_sock.Connect(new IPEndPoint(IPAddress.Parse("127.0.0.1"), 31452));
+            _sock.Connect(new IPEndPoint(IPAddress.Parse("192.168.200.168"), 31452));
+            //_sock.Connect(new IPEndPoint(IPAddress.Parse("192.168.1.105"), 31452));
 
-			DebugLogList("socket() end");
+            DebugLogList("socket() end");
         }
         catch (Exception e)
         {
             Debug.LogError(e.ToString());
             DebugLogList("[!!Exception!!] " + e.ToString());
         }
-        
+
     }
 
     private void ConnectCallback(IAsyncResult ar)
@@ -242,9 +242,9 @@ public class NetworkManager : MonoBehaviour
         {
             DebugLogList("Receive() start");
             StateObject state = new StateObject();
-			state.ClearRecvBuffer();
+            state.ClearRecvBuffer();
             state.WorkSocket = sock;
-            
+
             // 데이터 수신 시작
             sock.BeginReceive(state.RecvBuffer, 0, StateObject.BufferSize, 0,
                                 new AsyncCallback(ReceiveCallback), state);
@@ -264,37 +264,38 @@ public class NetworkManager : MonoBehaviour
             DebugLogList("ReceiveCallback() start");
             StateObject state = (StateObject)ar.AsyncState;
             _sock = state.WorkSocket;
-            
+
             int bytesRead = 0;
-            
+
             try
             {
                 bytesRead = _sock.EndReceive(ar);
                 DebugLogList("bytesRead : " + bytesRead.ToString());
-            } catch
+            }
+            catch
             {
                 return;
             }
-            
+
             if (bytesRead > 0)
             {
                 DebugLogList("bytesRead > 0");
                 string recvData = Encoding.UTF8.GetString(state.RecvBuffer, 0, bytesRead);
-				DebugLogList(recvData);
-				int bufLen = recvData.Length;
-				Debug.Log("recvData[" + bufLen + "]= " + recvData);
+                DebugLogList(recvData);
+                int bufLen = recvData.Length;
+                Debug.Log("recvData[" + bufLen + "]= " + recvData);
 
-				// 패킷 자르기
-				string recvDataSubstring = recvData.Substring(45, 3);
-				string[] recvDataSplit = recvDataSubstring.Split('"');
-				int recvDataSize = int.Parse(recvDataSplit[0]);
+                // 패킷 자르기
+                string recvDataSubstring = recvData.Substring(45, 3);
+                string[] recvDataSplit = recvDataSubstring.Split('"');
+                int recvDataSize = int.Parse(recvDataSplit[0]);
 
-				string recvDataSubstring2 = recvData.Substring(0, recvDataSize);
-				DebugLogList(recvDataSubstring2);
+                string recvDataSubstring2 = recvData.Substring(0, recvDataSize);
+                DebugLogList(recvDataSubstring2);
 
 
                 var JsonData = JsonConvert.DeserializeObject<PACKET_HEADER_BODY>(recvDataSubstring2);
-                
+
                 DebugLogList("ReceiveCallback - ProcessPacket - start");
                 ProcessPacket(JsonData.header.packetIndex, recvData);
                 DebugLogList("ReceiveCallback - ProcessPacket - end");
@@ -368,7 +369,7 @@ public class NetworkManager : MonoBehaviour
                         //SetUserList(Json.concurrentUserList);
                         DebugMsg01 = desJson.concurrentUser;
                         DebugMsg02 = desJson.totalUser;
-                        
+
                         string[] splitText = desJson.concurrentUser.Split(',');
                         for (int i = 0; i < splitText.Length; i++)
                         {
@@ -400,7 +401,7 @@ public class NetworkManager : MonoBehaviour
                         Vector3 vecDir = StringToVector3(userDir);
 
                         //Debug.Log("userPos:" + vecPos.ToString("N5") + ", userDir:" + vecDir.ToString("N5"));
-                        
+
                         ReceivedPacketHandler(userID, vecPos, vecDir);
                     }
                     break;
@@ -413,7 +414,7 @@ public class NetworkManager : MonoBehaviour
 
                         Vector3 vecPos = StringToVector3(userPos);
                         //Debug.Log("userPos:" + vecPos.ToString("N5"));
-                        
+
                         ThisIsStopPacket(userID, vecPos);
                     }
                     break;
@@ -435,7 +436,7 @@ public class NetworkManager : MonoBehaviour
     {
         DebugLogList("Send(Socket client, String data)");
         try
-        { 
+        {
             byte[] byteData = Encoding.UTF8.GetBytes(data);
 
             client.BeginSend(byteData, 0, byteData.Length, 0,
@@ -456,7 +457,7 @@ public class NetworkManager : MonoBehaviour
             _sock = (Socket)ar.AsyncState;
 
             int bytesSend = _sock.EndSend(ar);
-            Debug.Log("서버에 "+ bytesSend + " bytes 보냄");
+            Debug.Log("서버에 " + bytesSend + " bytes 보냄");
 
             //_sendDone.Set();
         }
@@ -468,7 +469,7 @@ public class NetworkManager : MonoBehaviour
     }
 
 
-	private void NewLogin()
+    private void NewLogin()
     {
         DebugLogList("NewLogin() start");
         string jsonData;
@@ -483,8 +484,8 @@ public class NetworkManager : MonoBehaviour
         DebugLogList(packData.ToString());
         jsonData = JsonConvert.SerializeObject(packData);
 
-		// TODO : JsonUtility 사용시 작업 할 것, 아직 미완성
-		/*{
+        // TODO : JsonUtility 사용시 작업 할 것, 아직 미완성
+        /*{
 			JsonHeader jh = JsonUtility.FromJson<JsonHeader>("{\"packetIndex\":\"" + (short)PACKET_INDEX.REQ_NEW_LOGIN + "\"," +
 															  "\"packetSize\":\"" + 10 + "\"}");
 			JsonNewLogin jnl = new JsonNewLogin();
@@ -494,7 +495,7 @@ public class NetworkManager : MonoBehaviour
 			jsonData = JsonUtility.ToJson(jnl);
 		}*/
 
-		jsonData += endNullValue;
+        jsonData += endNullValue;
         DebugLogList(jsonData.ToString());
         byte[] sendByte = new byte[512];
         sendByte = Encoding.UTF8.GetBytes(jsonData);
@@ -509,7 +510,7 @@ public class NetworkManager : MonoBehaviour
         //}
         //Debug.Log(jsonData);
         //Debug.Log(jsonDataSize);
-        
+
         SetMyId(0);
         int resultSize = _sock.Send(sendByte);
         Debug.Log("NewLogin() = " + resultSize);
@@ -529,7 +530,7 @@ public class NetworkManager : MonoBehaviour
         DebugLogList(recvData);
 
         var desJson = JsonConvert.DeserializeObject<PKT_RES_NEW_LOGIN_SUCSESS>(recvData);
-		if (desJson.header.packetIndex == (short)PACKET_INDEX.RES_NEW_LOGIN_SUCSESS)
+        if (desJson.header.packetIndex == (short)PACKET_INDEX.RES_NEW_LOGIN_SUCSESS)
         {
             Debug.Log("접속 성공 여부 : " + desJson.isSuccess);
             Debug.Log("접속 ID : " + desJson.userID);
@@ -562,9 +563,9 @@ public class NetworkManager : MonoBehaviour
         DebugLogList(jsonData.ToString());
         byte[] sendByte = new byte[512];
         sendByte = Encoding.UTF8.GetBytes(jsonData);
-        
+
         SetIsConcurrentUserList(true);
-        
+
         int resultSize = _sock.Send(sendByte);
         Debug.Log("ConcurrentUser() = " + resultSize);
         DebugLogList("resultSize :" + resultSize.ToString());
@@ -575,7 +576,7 @@ public class NetworkManager : MonoBehaviour
     {
         string startPos = pos.ToString("N5");
         string startDir = dir.ToString("N5");
-                
+
         string jsonData;
         char endNullValue = '\0';
 
@@ -712,13 +713,13 @@ public class NetworkManager : MonoBehaviour
 
         _DebugMsgList01.Add(addLogIndex);
         DebugLogListIndex++;
-		Debug.LogError(DebugLogListIndex + "] " + logData);
+        Debug.LogError(DebugLogListIndex + "] " + logData);
         //DebugLogFileSave();
     }
-    
+
     public void DebugLogFileSave()
     {
-        if(Directory.Exists(appDataPathParent + "/log") == false)
+        if (Directory.Exists(appDataPathParent + "/log") == false)
         {
             Directory.CreateDirectory(appDataPathParent + "/log");
         }
@@ -737,7 +738,7 @@ public class NetworkManager : MonoBehaviour
         sw.Close();
         fs.Close();
     }
-    
+
     public Vector3 StringToVector3(string vector)
     {
         if (vector.StartsWith("(") && vector.EndsWith(")"))
@@ -756,10 +757,9 @@ public class NetworkManager : MonoBehaviour
     }
 
 
-	// TODO : JsonUtility 사용시 작업 할 것, 아직 미완성
-	/*T JsonToOject<T>(string jsonData)
+    // TODO : JsonUtility 사용시 작업 할 것, 아직 미완성
+    /*T JsonToOject<T>(string jsonData)
 	{
 		return JsonUtility.FromJson<T>(jsonData);
 	}*/
 }
-
