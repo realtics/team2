@@ -18,7 +18,6 @@ public class BlacheEffectOffEvent : MonoBehaviour
     }
     private void OnEnable()
     {
-        impulseSource.GenerateImpulse();
     }
 
     // Update is called once per frame
@@ -30,5 +29,11 @@ public class BlacheEffectOffEvent : MonoBehaviour
     private void ClipEvent_OffActive()
     {
         gameObject.SetActive(false);
+    }
+
+    private void ClipEvent_OnCutIn()
+    {
+        impulseSource.GenerateImpulse();
+
     }
 }
