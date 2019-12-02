@@ -62,6 +62,7 @@ public class SpawnManager : MonoBehaviour
         {
             GameObject obj = LoadResourceFromCache(item.filePath);
             MonsterManager.Instance.AddMonster(obj, item.position);
+            
         }
 
         foreach (var item in dungeon.potalTransportinfos)

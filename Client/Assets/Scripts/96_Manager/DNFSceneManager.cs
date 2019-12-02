@@ -47,6 +47,7 @@ public class DNFSceneManager : MonoBehaviour
         SpawnManager.instacne.RoomSetActive(false, _currentDungeonIndex);
         DungeonInfo dungeonInfo = MapLoader.instacne.GetDungeonInfo(index);
         SpawnManager.instacne.Instantiate(dungeonInfo);
+        MapLoader.instacne.AfterInstantiateMonsterDelete(_currentDungeonIndex);
         _currentDungeonIndex = index;
 
         //FIXME : 리팩토링
