@@ -196,8 +196,17 @@ public class NetworkManager : MonoBehaviour
                 if (_spawnCharacters[0].id == _myId)
                 {
                     PlayerCharacter pc = newPlayer.AddComponent<PlayerCharacter>();
-                    FindObjectOfType<InputSystem>().PC = pc;
+                    pc.FindMovement();
+
                     FindObjectOfType<CinemachineVirtualCamera>().Follow = pc.transform;
+
+                    MovementJoystick joystick = FindObjectOfType<MovementJoystick>();
+                    if (joystick != null)
+                        joystick.PC = pc;
+
+                    InputSystem input = FindObjectOfType<InputSystem>();
+                    if (input != null)
+                        input.PC = pc;
                 }
 
                 CharacterMovement spawnedPlayer = newPlayer.GetComponent<CharacterMovement>();

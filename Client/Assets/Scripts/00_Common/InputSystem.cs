@@ -68,4 +68,10 @@ public class InputSystem : MonoBehaviour
             _pc.SetTest(sender);
         }
     }
+
+    public void FindPlayerCharacter()
+    {
+        _pc = FindObjectOfType<PlayerCharacter>();
+        _pc.FindMovement();
+    }
 }

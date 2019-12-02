@@ -110,4 +110,9 @@ public class PlayerCharacter : MonoBehaviour
         Vector3 dir = new Vector3(horizontal, vertical, 0.0f);
         NetworkManager.Instance.MoveEnd(transform.position, dir);
     }
+
+    public void FindMovement()
+    {
+        _movement = GetComponent<CharacterMovement>();
+    }
 }
