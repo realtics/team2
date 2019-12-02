@@ -173,6 +173,7 @@ MonoBehaviour:
   _gameResult: {fileID: 0}
   _dungeonClearMenu: {fileID: 0}
   _dungeonSelectMenu: {fileID: 1375360030}
+  _dungeonTile: {fileID: 0}
 --- !u!4 &89562228
 Transform:
   m_ObjectHideFlags: 0
@@ -1283,7 +1284,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1519216641}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.05000036, y: -2.29, z: -10}
+  m_LocalPosition: {x: -0.05000024, y: -2.29, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 289681352}
@@ -1923,7 +1924,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1963510532}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.07902734, y: -2.2903318, z: -10}
+  m_LocalPosition: {x: -0.08566575, y: -2.2904081, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2309,6 +2310,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1336944431844651679, guid: 86fb9eee594769e44bbd9bbda0425571,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7840884827819738403, guid: 86fb9eee594769e44bbd9bbda0425571,
+        type: 3}
+      propertyPath: _dungeonFileName
+      value: LightTemple
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 86fb9eee594769e44bbd9bbda0425571, type: 3}

@@ -96,6 +96,10 @@ public class MapLoader : MonoBehaviour
     {
         _dungeonName = dungeonName;
     }
+    public void AfterInstantiateMonsterDelete(int index)
+    {
+        dungeonData.DungeonInfos[index].monsterInfos.Clear();
+    }
 
     private T JsonLoad<T>(string fileName)
     {

@@ -19,21 +19,29 @@ public class Calvary : BaseMonster
         }
     }
 
-    //AttackState
-    public override void EnterAttackState()
+	protected override void AddHitEffect()
+	{
+		Vector3 newPos = new Vector3(0, 4.53f+1, 0);
+		HitEffectManager.Instance.AddHitEffect(_avatar.position + _hitBox.right / 2 + _hitBox.up / 2 + newPos, 4.2f);
+	}
+
+	//AttackState
+	public override void EnterAttackState()
     {
         base.EnterAttackState();
-    }
+		_animator.SetFloat("animSpeed", 1.5f);
+	}
 
     public override void UpdateAttackState()
     {
         base.UpdateAttackState();
-    }
+	}
 
     public override void ExitAttackState()
     {
         base.ExitAttackState();
-    }
+		_animator.SetFloat("animSpeed", 1.0f);
+	}
 
     //MoveState
     public override void EnterMoveState()
@@ -54,8 +62,8 @@ public class Calvary : BaseMonster
     //HitState
     public override void EnterHitState()
     {
-        base.EnterHitState();
-    }
+        base.EnterHitState();	
+	}
 
     public override void UpdateHitState()
     {
@@ -65,7 +73,7 @@ public class Calvary : BaseMonster
     public override void ExitHitState()
     {
         base.ExitHitState();
-    }
+	}
 
     //DieState
     public override void EnterDieState()

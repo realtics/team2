@@ -1,0 +1,771 @@
+{
+  "DungeonInfos": [
+    {
+      "objectinfos": [
+        {
+          "filePath": "Dungeon/Dungeon",
+          "position": {
+            "x": 5.31,
+            "y": -8.16,
+            "z": -4.17578125,
+            "normalized": {
+              "x": 0.5012583,
+              "y": -0.770295262,
+              "z": -0.3941893,
+              "normalized": {
+                "x": 0.5012584,
+                "y": -0.7702953,
+                "z": -0.394189328,
+                "magnitude": 1.0,
+                "sqrMagnitude": 1.00000012
+              },
+              "magnitude": 0.99999994,
+              "sqrMagnitude": 0.9999999
+            },
+            "magnitude": 10.59334,
+            "sqrMagnitude": 112.218849
+          }
+        }
+      ],
+      "monsterInfos": [
+        {
+          "filePath": "Monster/Goblin/Unit/Goblin",
+          "position": {
+            "x": -1.71,
+            "y": -8.09,
+            "z": 0.0,
+            "normalized": {
+              "x": -0.20680277,
+              "y": -0.9783827,
+              "z": 0.0,
+              "magnitude": 1.0,
+              "sqrMagnitude": 1.00000012
+            },
+            "magnitude": 8.268748,
+            "sqrMagnitude": 68.3722
+          }
+        },
+        {
+          "filePath": "Monster/Goblin/Unit/Goblin",
+          "position": {
+            "x": -3.45,
+            "y": -7.69,
+            "z": 0.0,
+            "normalized": {
+              "x": -0.409328431,
+              "y": -0.912387133,
+              "z": 0.0,
+              "magnitude": 1.0,
+              "sqrMagnitude": 1.0
+            },
+            "magnitude": 8.42844,
+            "sqrMagnitude": 71.0386047
+          }
+        },
+        {
+          "filePath": "Monster/Goblin/Unit/Goblin",
+          "position": {
+            "x": -4.27,
+            "y": -7.18,
+            "z": 0.0,
+            "normalized": {
+              "x": -0.5111471,
+              "y": -0.8594932,
+              "z": 0.0,
+              "normalized": {
+                "x": -0.511147141,
+                "y": -0.859493256,
+                "z": 0.0,
+                "magnitude": 1.0,
+                "sqrMagnitude": 1.0
+              },
+              "magnitude": 0.99999994,
+              "sqrMagnitude": 0.9999999
+            },
+            "magnitude": 8.35376,
+            "sqrMagnitude": 69.78529
+          }
+        },
+        {
+          "filePath": "Monster/Goblin/Unit/Goblin",
+          "position": {
+            "x": -5.17,
+            "y": -7.73,
+            "z": 0.0,
+            "normalized": {
+              "x": -0.55594033,
+              "y": -0.8312222,
+              "z": 0.0,
+              "magnitude": 1.0,
+              "sqrMagnitude": 0.99999994
+            },
+            "magnitude": 9.29956,
+            "sqrMagnitude": 86.4818039
+          }
+        },
+        {
+          "filePath": "Monster/Goblin/Unit/Goblin",
+          "position": {
+            "x": -2.65,
+            "y": -7.24,
+            "z": 0.0,
+            "normalized": {
+              "x": -0.343721032,
+              "y": -0.9390718,
+              "z": 0.0,
+              "magnitude": 1.0,
+              "sqrMagnitude": 0.99999994
+            },
+            "magnitude": 7.70974064,
+            "sqrMagnitude": 59.4400978
+          }
+        },
+        {
+          "filePath": "Monster/Goblin/Unit/Goblin",
+          "position": {
+            "x": -3.41,
+            "y": -9.16,
+            "z": 0.0,
+            "normalized": {
+              "x": -0.348880023,
+              "y": -0.937167466,
+              "z": 0.0,
+              "normalized": {
+                "x": -0.34888,
+                "y": -0.937167346,
+                "z": 0.0,
+                "normalized": {
+                  "x": -0.348880023,
+                  "y": -0.9371674,
+                  "z": 0.0,
+                  "magnitude": 1.0,
+                  "sqrMagnitude": 1.0
+                },
+                "magnitude": 0.99999994,
+                "sqrMagnitude": 0.9999999
+              },
+              "magnitude": 1.00000012,
+              "sqrMagnitude": 1.00000012
+            },
+            "magnitude": 9.774134,
+            "sqrMagnitude": 95.5337
+          }
+        },
+        {
+          "filePath": "Monster/Goblin/Unit/Goblin",
+          "position": {
+            "x": -4.39,
+            "y": -8.43,
+            "z": 0.0,
+            "normalized": {
+              "x": -0.461882681,
+              "y": -0.8869411,
+              "z": 0.0,
+              "magnitude": 1.0,
+              "sqrMagnitude": 1.00000012
+            },
+            "magnitude": 9.504578,
+            "sqrMagnitude": 90.3370056
+          }
+        },
+        {
+          "filePath": "Monster/Goblin/Unit/Goblin",
+          "position": {
+            "x": -2.65,
+            "y": -8.59,
+            "z": 0.0,
+            "normalized": {
+              "x": -0.2947893,
+              "y": -0.9555623,
+              "z": 0.0,
+              "magnitude": 1.0,
+              "sqrMagnitude": 1.0
+            },
+            "magnitude": 8.989471,
+            "sqrMagnitude": 80.8106
+          }
+        }
+      ],
+      "potalTransportinfos": [
+        {
+          "filePath": "Object/PotalTransport Side",
+          "position": {
+            "x": 1.34,
+            "y": -6.1,
+            "z": 0.0,
+            "normalized": {
+              "x": 0.214556336,
+              "y": -0.976711631,
+              "z": 0.0,
+              "magnitude": 1.0,
+              "sqrMagnitude": 1.0
+            },
+            "magnitude": 6.245446,
+            "sqrMagnitude": 39.0056
+          },
+          "spotPosition": [
+            {
+              "x": -0.52,
+              "y": -8.32,
+              "z": 0.0,
+              "normalized": {
+                "x": -0.0623782836,
+                "y": -0.998052537,
+                "z": 0.0,
+                "normalized": {
+                  "x": -0.0623782873,
+                  "y": -0.9980526,
+                  "z": 0.0,
+                  "magnitude": 1.0,
+                  "sqrMagnitude": 1.0
+                },
+                "magnitude": 0.99999994,
+                "sqrMagnitude": 0.99999994
+              },
+              "magnitude": 8.336234,
+              "sqrMagnitude": 69.4928
+            },
+            {
+              "x": 1.34,
+              "y": -6.1,
+              "z": 0.0,
+              "normalized": {
+                "x": 0.214556336,
+                "y": -0.976711631,
+                "z": 0.0,
+                "magnitude": 1.0,
+                "sqrMagnitude": 1.0
+              },
+              "magnitude": 6.245446,
+              "sqrMagnitude": 39.0056
+            },
+            {
+              "x": 1.34,
+              "y": -6.1,
+              "z": 0.0,
+              "normalized": {
+                "x": 0.214556336,
+                "y": -0.976711631,
+                "z": 0.0,
+                "magnitude": 1.0,
+                "sqrMagnitude": 1.0
+              },
+              "magnitude": 6.245446,
+              "sqrMagnitude": 39.0056
+            },
+            {
+              "x": 1.34,
+              "y": -6.1,
+              "z": 0.0,
+              "normalized": {
+                "x": 0.214556336,
+                "y": -0.976711631,
+                "z": 0.0,
+                "magnitude": 1.0,
+                "sqrMagnitude": 1.0
+              },
+              "magnitude": 6.245446,
+              "sqrMagnitude": 39.0056
+            }
+          ],
+          "arrow": 3,
+          "nextIndex": 1
+        }
+      ],
+      "potalSceneInfos": [],
+      "PlayerStartPosition": {
+        "x": -13.97,
+        "y": -7.14,
+        "z": 0.0,
+        "normalized": {
+          "x": -0.8904404,
+          "y": -0.455099821,
+          "z": 0.0,
+          "magnitude": 1.0,
+          "sqrMagnitude": 0.99999994
+        },
+        "magnitude": 15.6888657,
+        "sqrMagnitude": 246.1405
+      }
+    },
+    {
+      "objectinfos": [
+        {
+          "filePath": "Dungeon/LorienAndForceAltar",
+          "position": {
+            "x": 3.11,
+            "y": -9.43,
+            "z": -4.17578125,
+            "normalized": {
+              "x": 0.288713723,
+              "y": -0.8754246,
+              "z": -0.387654483,
+              "normalized": {
+                "x": 0.288713753,
+                "y": -0.8754247,
+                "z": -0.3876545,
+                "magnitude": 1.0,
+                "sqrMagnitude": 1.0
+              },
+              "magnitude": 0.99999994,
+              "sqrMagnitude": 0.9999999
+            },
+            "magnitude": 10.7719154,
+            "sqrMagnitude": 116.034157
+          }
+        }
+      ],
+      "monsterInfos": [
+        {
+          "filePath": "Monster/Tauarmy/Unit/Tauarmy",
+          "position": {
+            "x": -2.42,
+            "y": -7.22,
+            "z": 0.0,
+            "normalized": {
+              "x": -0.317803234,
+              "y": -0.9481567,
+              "z": 0.0,
+              "magnitude": 1.0,
+              "sqrMagnitude": 1.0
+            },
+            "magnitude": 7.6147747,
+            "sqrMagnitude": 57.9848
+          }
+        },
+        {
+          "filePath": "Monster/Tauarmy/Unit/Tauarmy",
+          "position": {
+            "x": -1.23,
+            "y": -9.49,
+            "z": 0.0,
+            "normalized": {
+              "x": -0.128535,
+              "y": -0.991705,
+              "z": 0.0,
+              "magnitude": 1.0,
+              "sqrMagnitude": 1.0
+            },
+            "magnitude": 9.569378,
+            "sqrMagnitude": 91.573
+          }
+        },
+        {
+          "filePath": "Monster/Tauarmy/Unit/Tauarmy",
+          "position": {
+            "x": -2.73,
+            "y": -11.14,
+            "z": 0.0,
+            "normalized": {
+              "x": -0.2380198,
+              "y": -0.9712603,
+              "z": 0.0,
+              "magnitude": 1.0,
+              "sqrMagnitude": 1.0
+            },
+            "magnitude": 11.4696341,
+            "sqrMagnitude": 131.5525
+          }
+        }
+      ],
+      "potalTransportinfos": [
+        {
+          "filePath": "Object/PotalTransport Side",
+          "position": {
+            "x": -15.16,
+            "y": -10.17,
+            "z": 0.0,
+            "normalized": {
+              "x": -0.830445647,
+              "y": -0.55709976,
+              "z": 0.0,
+              "magnitude": 1.0,
+              "sqrMagnitude": 1.00000012
+            },
+            "magnitude": 18.2552586,
+            "sqrMagnitude": 333.2545
+          },
+          "spotPosition": [
+            {
+              "x": -13.16,
+              "y": -10.37,
+              "z": 0.0,
+              "normalized": {
+                "x": -0.785447657,
+                "y": -0.618928,
+                "z": 0.0,
+                "normalized": {
+                  "x": -0.7854477,
+                  "y": -0.6189281,
+                  "z": 0.0,
+                  "magnitude": 1.0,
+                  "sqrMagnitude": 1.00000012
+                },
+                "magnitude": 0.99999994,
+                "sqrMagnitude": 0.9999999
+              },
+              "magnitude": 16.754776,
+              "sqrMagnitude": 280.7225
+            },
+            {
+              "x": -15.16,
+              "y": -10.17,
+              "z": 0.0,
+              "normalized": {
+                "x": -0.830445647,
+                "y": -0.55709976,
+                "z": 0.0,
+                "magnitude": 1.0,
+                "sqrMagnitude": 1.00000012
+              },
+              "magnitude": 18.2552586,
+              "sqrMagnitude": 333.2545
+            },
+            {
+              "x": -15.16,
+              "y": -10.17,
+              "z": 0.0,
+              "normalized": {
+                "x": -0.830445647,
+                "y": -0.55709976,
+                "z": 0.0,
+                "magnitude": 1.0,
+                "sqrMagnitude": 1.00000012
+              },
+              "magnitude": 18.2552586,
+              "sqrMagnitude": 333.2545
+            },
+            {
+              "x": -15.16,
+              "y": -10.17,
+              "z": 0.0,
+              "normalized": {
+                "x": -0.830445647,
+                "y": -0.55709976,
+                "z": 0.0,
+                "magnitude": 1.0,
+                "sqrMagnitude": 1.00000012
+              },
+              "magnitude": 18.2552586,
+              "sqrMagnitude": 333.2545
+            }
+          ],
+          "arrow": 2,
+          "nextIndex": 0
+        },
+        {
+          "filePath": "Object/ForceAltarPotalTransportLeft",
+          "position": {
+            "x": 1.13,
+            "y": -5.21,
+            "z": 0.0,
+            "normalized": {
+              "x": 0.211962372,
+              "y": -0.9772779,
+              "z": 0.0,
+              "magnitude": 1.0,
+              "sqrMagnitude": 1.00000012
+            },
+            "magnitude": 5.331135,
+            "sqrMagnitude": 28.421
+          },
+          "spotPosition": [
+            {
+              "x": -1.09,
+              "y": -8.25,
+              "z": 0.0,
+              "normalized": {
+                "x": -0.13098295,
+                "y": -0.9913846,
+                "z": 0.0,
+                "magnitude": 1.0,
+                "sqrMagnitude": 1.0
+              },
+              "magnitude": 8.321694,
+              "sqrMagnitude": 69.2506
+            },
+            {
+              "x": 1.13,
+              "y": -5.21,
+              "z": 0.0,
+              "normalized": {
+                "x": 0.211962372,
+                "y": -0.9772779,
+                "z": 0.0,
+                "magnitude": 1.0,
+                "sqrMagnitude": 1.00000012
+              },
+              "magnitude": 5.331135,
+              "sqrMagnitude": 28.421
+            },
+            {
+              "x": 1.13,
+              "y": -5.21,
+              "z": 0.0,
+              "normalized": {
+                "x": 0.211962372,
+                "y": -0.9772779,
+                "z": 0.0,
+                "magnitude": 1.0,
+                "sqrMagnitude": 1.00000012
+              },
+              "magnitude": 5.331135,
+              "sqrMagnitude": 28.421
+            },
+            {
+              "x": 1.13,
+              "y": -5.21,
+              "z": 0.0,
+              "normalized": {
+                "x": 0.211962372,
+                "y": -0.9772779,
+                "z": 0.0,
+                "magnitude": 1.0,
+                "sqrMagnitude": 1.00000012
+              },
+              "magnitude": 5.331135,
+              "sqrMagnitude": 28.421
+            }
+          ],
+          "arrow": 3,
+          "nextIndex": 2
+        }
+      ],
+      "potalSceneInfos": [],
+      "PlayerStartPosition": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "magnitude": 0.0,
+        "sqrMagnitude": 0.0
+      }
+    },
+    {
+      "objectinfos": [
+        {
+          "filePath": "Dungeon/ForceAltar",
+          "position": {
+            "x": 1.97,
+            "y": -6.5,
+            "z": -4.17578125,
+            "normalized": {
+              "x": 0.247085243,
+              "y": -0.8152559,
+              "z": -0.5237431,
+              "magnitude": 1.0,
+              "sqrMagnitude": 1.00000012
+            },
+            "magnitude": 7.972957,
+            "sqrMagnitude": 63.56805
+          }
+        }
+      ],
+      "monsterInfos": [
+        {
+          "filePath": "Monster/Calvary/Unit/Calvary",
+          "position": {
+            "x": 9.07,
+            "y": -7.47,
+            "z": 0.0,
+            "normalized": {
+              "x": 0.771905661,
+              "y": -0.635737062,
+              "z": 0.0,
+              "magnitude": 1.0,
+              "sqrMagnitude": 0.99999994
+            },
+            "magnitude": 11.75014,
+            "sqrMagnitude": 138.0658
+          }
+        },
+        {
+          "filePath": "Monster/Goblin/Unit/Goblin",
+          "position": {
+            "x": -10.67,
+            "y": -10.36,
+            "z": 0.0,
+            "normalized": {
+              "x": -0.717452168,
+              "y": -0.6966077,
+              "z": 0.0,
+              "normalized": {
+                "x": -0.7174522,
+                "y": -0.696607769,
+                "z": 0.0,
+                "magnitude": 1.0,
+                "sqrMagnitude": 1.00000012
+              },
+              "magnitude": 0.99999994,
+              "sqrMagnitude": 0.99999994
+            },
+            "magnitude": 14.8720713,
+            "sqrMagnitude": 221.1785
+          }
+        },
+        {
+          "filePath": "Monster/Goblin/Unit/Goblin",
+          "position": {
+            "x": -6.6,
+            "y": -11.18,
+            "z": 0.0,
+            "normalized": {
+              "x": -0.5083659,
+              "y": -0.861141145,
+              "z": 0.0,
+              "magnitude": 1.0,
+              "sqrMagnitude": 1.0
+            },
+            "magnitude": 12.9827738,
+            "sqrMagnitude": 168.5524
+          }
+        },
+        {
+          "filePath": "Monster/Tauarmy/Unit/Tauarmy",
+          "position": {
+            "x": -8.92,
+            "y": -5.26,
+            "z": 0.0,
+            "normalized": {
+              "x": -0.8613876,
+              "y": -0.507948339,
+              "z": 0.0,
+              "normalized": {
+                "x": -0.8613875,
+                "y": -0.5079483,
+                "z": 0.0,
+                "normalized": {
+                  "x": -0.861387551,
+                  "y": -0.507948339,
+                  "z": 0.0,
+                  "magnitude": 1.0,
+                  "sqrMagnitude": 1.0
+                },
+                "magnitude": 0.99999994,
+                "sqrMagnitude": 0.9999999
+              },
+              "magnitude": 1.00000012,
+              "sqrMagnitude": 1.00000012
+            },
+            "magnitude": 10.3553848,
+            "sqrMagnitude": 107.234
+          }
+        }
+      ],
+      "potalTransportinfos": [
+        {
+          "filePath": "Object/ForceAltarPotalTransportRight",
+          "position": {
+            "x": -14.54,
+            "y": -4.85,
+            "z": 0.0,
+            "normalized": {
+              "x": -0.948618,
+              "y": -0.316423476,
+              "z": 0.0,
+              "normalized": {
+                "x": -0.948618054,
+                "y": -0.3164235,
+                "z": 0.0,
+                "magnitude": 1.0,
+                "sqrMagnitude": 1.0
+              },
+              "magnitude": 0.99999994,
+              "sqrMagnitude": 0.99999994
+            },
+            "magnitude": 15.32756,
+            "sqrMagnitude": 234.9341
+          },
+          "spotPosition": [
+            {
+              "x": -12.48,
+              "y": -7.73,
+              "z": 0.0,
+              "normalized": {
+                "x": -0.8501345,
+                "y": -0.5265657,
+                "z": 0.0,
+                "magnitude": 1.0,
+                "sqrMagnitude": 1.00000012
+              },
+              "magnitude": 14.68003,
+              "sqrMagnitude": 215.5033
+            },
+            {
+              "x": -14.54,
+              "y": -4.85,
+              "z": 0.0,
+              "normalized": {
+                "x": -0.948618,
+                "y": -0.316423476,
+                "z": 0.0,
+                "normalized": {
+                  "x": -0.948618054,
+                  "y": -0.3164235,
+                  "z": 0.0,
+                  "magnitude": 1.0,
+                  "sqrMagnitude": 1.0
+                },
+                "magnitude": 0.99999994,
+                "sqrMagnitude": 0.99999994
+              },
+              "magnitude": 15.32756,
+              "sqrMagnitude": 234.9341
+            },
+            {
+              "x": -14.54,
+              "y": -4.85,
+              "z": 0.0,
+              "normalized": {
+                "x": -0.948618,
+                "y": -0.316423476,
+                "z": 0.0,
+                "normalized": {
+                  "x": -0.948618054,
+                  "y": -0.3164235,
+                  "z": 0.0,
+                  "magnitude": 1.0,
+                  "sqrMagnitude": 1.0
+                },
+                "magnitude": 0.99999994,
+                "sqrMagnitude": 0.99999994
+              },
+              "magnitude": 15.32756,
+              "sqrMagnitude": 234.9341
+            },
+            {
+              "x": -14.54,
+              "y": -4.85,
+              "z": 0.0,
+              "normalized": {
+                "x": -0.948618,
+                "y": -0.316423476,
+                "z": 0.0,
+                "normalized": {
+                  "x": -0.948618054,
+                  "y": -0.3164235,
+                  "z": 0.0,
+                  "magnitude": 1.0,
+                  "sqrMagnitude": 1.0
+                },
+                "magnitude": 0.99999994,
+                "sqrMagnitude": 0.99999994
+              },
+              "magnitude": 15.32756,
+              "sqrMagnitude": 234.9341
+            }
+          ],
+          "arrow": 2,
+          "nextIndex": 1
+        }
+      ],
+      "potalSceneInfos": [],
+      "PlayerStartPosition": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "magnitude": 0.0,
+        "sqrMagnitude": 0.0
+      }
+    }
+  ]
+}
