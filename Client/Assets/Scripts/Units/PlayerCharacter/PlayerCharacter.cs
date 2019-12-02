@@ -5,10 +5,12 @@ using UnityEngine;
 public class PlayerCharacter : MonoBehaviour
 {
     private CharacterMovement _movement;
+    private Vector3 _oldDirection;
 
     private void Start()
     {
         _movement = GetComponent<CharacterMovement>();
+        _oldDirection = Vector3.zero;
     }
 
     public void SetJump()
@@ -23,6 +25,21 @@ public class PlayerCharacter : MonoBehaviour
             SetFlipX(true);
         else if (horizontal > 0.0f)
             SetFlipX(false);
+
+        if (horizontal == 0.0f && vertical == 0.0f)
+        {
+            if (CheckDirection(horizontal, vertical))
+            {
+                SendMoveEnd(horizontal, vertical);
+            }
+        }
+        else
+        {
+            if (CheckDirection(horizontal, vertical))
+            {
+                SendMoveStart(horizontal, vertical);
+            }
+        }
 
         _movement.SetAxis(horizontal, vertical);
     }
@@ -61,5 +78,36 @@ public class PlayerCharacter : MonoBehaviour
     public void SetTest(AttackInfoSender sender)
     {
         _movement.OnHit(sender);
+    }
+
+    private bool CheckDirection(float horizontal, float vertical)
+    {
+        Vector3 dir = new Vector3(horizontal, vertical, 0);
+
+        if (dir != _oldDirection)
+        {
+            _oldDirection = dir;
+            return true;
+        }
+
+        return false;
+    }
+
+    private void SendMoveStart(float horizontal, float vertical)
+    {
+        if (NetworkManager.Instance == null)
+            return;
+
+        Vector3 dir = new Vector3(horizontal, vertical, 0.0f);
+        NetworkManager.Instance.MoveStart(transform.position, dir);
+    }
+
+    private void SendMoveEnd(float horizontal, float vertical)
+    {
+        if (NetworkManager.Instance == null)
+            return;
+
+        Vector3 dir = new Vector3(horizontal, vertical, 0.0f);
+        NetworkManager.Instance.MoveEnd(transform.position, dir);
     }
 }
