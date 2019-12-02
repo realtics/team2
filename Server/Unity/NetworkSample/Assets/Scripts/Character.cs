@@ -102,7 +102,7 @@ public class Character : MonoBehaviour
     {
         if (!_isMoving)
         {
-            transform.position = _position;
+            //transform.position = _position;
             return;
         }
 

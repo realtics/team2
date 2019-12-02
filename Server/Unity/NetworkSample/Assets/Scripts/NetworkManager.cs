@@ -188,7 +188,7 @@ public class NetworkManager : MonoBehaviour
                 GameObject newPlayer = Instantiate(playerPrefab);
                 Character spawnedPlayer = newPlayer.GetComponent<Character>();
                 spawnedPlayer.SetId(_spawnCharacters[0].id);
-                newPlayer.transform.position = Vector3.zero;
+                newPlayer.transform.position = _spawnCharacters[0].position;
                 _characters.Add(_spawnCharacters[0].id, spawnedPlayer);
                 _spawnCharacters.RemoveAt(0);
             }
