@@ -14,10 +14,15 @@ using Newtonsoft.Json;
 using System;
 using System.IO;
 
+enum DefineDefaultValue : short
+{
+	packetSize = 100
+}
+
 public class StateObject    // 데이터를 수신하기 위한 상태 객체
 {
     public Socket WorkSocket = null;                    // 클라이언트 소켓
-    public const int BufferSize = 256;                  // 수신 버퍼의 크기
+    public const int BufferSize = 512;                  // 수신 버퍼의 크기
     public byte[] RecvBuffer = new byte[BufferSize];    // 수신 버퍼
     public void ClearRecvBuffer()
     {
@@ -25,6 +30,38 @@ public class StateObject    // 데이터를 수신하기 위한 상태 객체
     }
 }
 
+// TODO : JsonUtility 사용시 작업 할 것, 아직 미완성
+/*
+[System.Serializable]
+public class JsonHeader
+{
+	public short packetIndex;
+	public short packetSize;
+	public void SetData(short _packetIndex, short _packetSize)
+	{
+		packetIndex = _packetIndex;
+		packetSize = _packetSize;
+	}
+	public string SaveToString()
+	{
+		return JsonUtility.ToJson(this);
+	}
+}
+[System.Serializable]
+public class JsonNewLogin
+{
+	public JsonHeader header;
+
+	public void SetData(JsonHeader _header)
+	{
+		header = _header;
+	}
+
+	public string SaveToString()
+	{
+		return JsonUtility.ToJson(this);
+	}
+}*/
 
 public class NetworkManager : MonoBehaviour
 {
@@ -168,9 +205,11 @@ public class NetworkManager : MonoBehaviour
             {
                 Debug.Log("소켓 생성 실패");
             }
-            //_sock.Connect(new IPEndPoint(IPAddress.Parse("127.0.0.1"), 31452));
-            _sock.Connect(new IPEndPoint(IPAddress.Parse("192.168.200.168"), 31452));
-            DebugLogList("socket() end");
+			//_sock.Connect(new IPEndPoint(IPAddress.Parse("127.0.0.1"), 31452));
+			//_sock.Connect(new IPEndPoint(IPAddress.Parse("192.168.200.168"), 31452));
+			_sock.Connect(new IPEndPoint(IPAddress.Parse("192.168.1.105"), 31452));
+
+			DebugLogList("socket() end");
         }
         catch (Exception e)
         {
@@ -203,6 +242,7 @@ public class NetworkManager : MonoBehaviour
         {
             DebugLogList("Receive() start");
             StateObject state = new StateObject();
+			state.ClearRecvBuffer();
             state.WorkSocket = sock;
             
             // 데이터 수신 시작
@@ -240,12 +280,20 @@ public class NetworkManager : MonoBehaviour
             {
                 DebugLogList("bytesRead > 0");
                 string recvData = Encoding.UTF8.GetString(state.RecvBuffer, 0, bytesRead);
-                int bufLen = recvData.Length;
-                Debug.Log("recvData[" + bufLen + "]= " + recvData);
-                
-                DebugLogList(recvData);
-                
-                var JsonData = JsonConvert.DeserializeObject<PACKET_HEADER_BODY>(recvData);
+				DebugLogList(recvData);
+				int bufLen = recvData.Length;
+				Debug.Log("recvData[" + bufLen + "]= " + recvData);
+
+				// 패킷 자르기
+				string recvDataSubstring = recvData.Substring(45, 3);
+				string[] recvDataSplit = recvDataSubstring.Split('"');
+				int recvDataSize = int.Parse(recvDataSplit[0]);
+
+				string recvDataSubstring2 = recvData.Substring(0, recvDataSize);
+				DebugLogList(recvDataSubstring2);
+
+
+                var JsonData = JsonConvert.DeserializeObject<PACKET_HEADER_BODY>(recvDataSubstring2);
                 
                 DebugLogList("ReceiveCallback - ProcessPacket - start");
                 ProcessPacket(JsonData.header.packetIndex, recvData);
@@ -419,7 +467,8 @@ public class NetworkManager : MonoBehaviour
         }
     }
 
-    private void NewLogin()
+
+	private void NewLogin()
     {
         DebugLogList("NewLogin() start");
         string jsonData;
@@ -433,9 +482,21 @@ public class NetworkManager : MonoBehaviour
         var packData = new PKT_REQ_NEW_LOGIN { header = packHeader };
         DebugLogList(packData.ToString());
         jsonData = JsonConvert.SerializeObject(packData);
-        jsonData += endNullValue;
+
+		// TODO : JsonUtility 사용시 작업 할 것, 아직 미완성
+		/*{
+			JsonHeader jh = JsonUtility.FromJson<JsonHeader>("{\"packetIndex\":\"" + (short)PACKET_INDEX.REQ_NEW_LOGIN + "\"," +
+															  "\"packetSize\":\"" + 10 + "\"}");
+			JsonNewLogin jnl = new JsonNewLogin();
+			jnl.SetData(jh);
+			//string dataJH = jh.SaveToString();
+			jnl = JsonUtility.FromJson<JsonNewLogin>("{\"header\":" + jnl.header + "}");
+			jsonData = JsonUtility.ToJson(jnl);
+		}*/
+
+		jsonData += endNullValue;
         DebugLogList(jsonData.ToString());
-        byte[] sendByte = new byte[256];
+        byte[] sendByte = new byte[512];
         sendByte = Encoding.UTF8.GetBytes(jsonData);
         //TODO 1-0: JSON 헤더에 패킷 사이즈 체크 하는것을 foreach로 하고 있는데, 더 좋은 방법 있다면 개선
         //TODO 1-1: 패킷 사이즈를 담아 보내는 것이 현재 상태에선 크게 중요하진 않으므로, 코드만 남겨두고 나중에 활용
@@ -458,7 +519,7 @@ public class NetworkManager : MonoBehaviour
     private void NewLoginSucsess()
     {
         DebugLogList("NewLoginSucsess() start");
-        byte[] recvBuf = new byte[256];
+        byte[] recvBuf = new byte[512];
         int socketReceive = _sock.Receive(recvBuf);
         Debug.Log(socketReceive);
 
@@ -468,7 +529,7 @@ public class NetworkManager : MonoBehaviour
         DebugLogList(recvData);
 
         var desJson = JsonConvert.DeserializeObject<PKT_RES_NEW_LOGIN_SUCSESS>(recvData);
-        if (desJson.header.packetIndex == (short)PACKET_INDEX.RES_NEW_LOGIN_SUCSESS)
+		if (desJson.header.packetIndex == (short)PACKET_INDEX.RES_NEW_LOGIN_SUCSESS)
         {
             Debug.Log("접속 성공 여부 : " + desJson.isSuccess);
             Debug.Log("접속 ID : " + desJson.userID);
@@ -499,7 +560,7 @@ public class NetworkManager : MonoBehaviour
         jsonData = JsonConvert.SerializeObject(packData);
         jsonData += endNullValue;
         DebugLogList(jsonData.ToString());
-        byte[] sendByte = new byte[256];
+        byte[] sendByte = new byte[512];
         sendByte = Encoding.UTF8.GetBytes(jsonData);
         
         SetIsConcurrentUserList(true);
@@ -534,7 +595,7 @@ public class NetworkManager : MonoBehaviour
         jsonData = JsonConvert.SerializeObject(packData);
         jsonData += endNullValue;
 
-        byte[] sendByte = new byte[256];
+        byte[] sendByte = new byte[512];
         sendByte = Encoding.UTF8.GetBytes(jsonData);
 
         int resultSize = _sock.Send(sendByte);
@@ -565,7 +626,7 @@ public class NetworkManager : MonoBehaviour
         jsonData = JsonConvert.SerializeObject(packData);
         jsonData += endNullValue;
 
-        byte[] sendByte = new byte[256];
+        byte[] sendByte = new byte[512];
         sendByte = Encoding.UTF8.GetBytes(jsonData);
 
         int resultSize = _sock.Send(sendByte);
@@ -651,7 +712,8 @@ public class NetworkManager : MonoBehaviour
 
         _DebugMsgList01.Add(addLogIndex);
         DebugLogListIndex++;
-        DebugLogFileSave();
+		Debug.LogError(DebugLogListIndex + "] " + logData);
+        //DebugLogFileSave();
     }
     
     public void DebugLogFileSave()
@@ -692,4 +754,12 @@ public class NetworkManager : MonoBehaviour
 
         return result;
     }
+
+
+	// TODO : JsonUtility 사용시 작업 할 것, 아직 미완성
+	/*T JsonToOject<T>(string jsonData)
+	{
+		return JsonUtility.FromJson<T>(jsonData);
+	}*/
 }
+

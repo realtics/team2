@@ -163,13 +163,31 @@ void AsioServer::ProcessPacket(const int sessionID, const char* pData)
 		std::string sendStr = oss.str();
 		//std::cout << "[서버->클라] " << sendStr << std::endl;
 		
+		short JsonDataAllPacketSize = JsonDataSize(sendStr);
+
+		boost::property_tree::ptree ptSendHeader2;
+		ptSendHeader2.put<short>("packetIndex", SendPkt.packetIndex);
+		ptSendHeader2.put<short>("packetSize", JsonDataAllPacketSize);
+
+		boost::property_tree::ptree ptSend2;
+		ptSend2.add_child("header", ptSendHeader2);
+		ptSend2.put<bool>("isSuccess", SendPkt.isSuccess);
+		ptSend2.put<int>("userID", SendPkt.userID);
+
+		std::string stringRecv2;
+		std::ostringstream oss2(stringRecv2);
+		boost::property_tree::write_json(oss2, ptSend2, false);
+		std::string sendStr2 = oss2.str();
+		std::cout << "[서버->클라] " << sendStr2 << std::endl;
+
+
 		size_t totalSessionCount = _sessionList.size();
 
 		for (size_t i = 0; i < totalSessionCount; i++)
 		{
 			if (_sessionList[i]->Socket().is_open())
 			{
-				_sessionList[i]->PostSend(false, std::strlen(sendStr.c_str()), (char*)sendStr.c_str());
+				_sessionList[i]->PostSend(false, std::strlen(sendStr2.c_str()), (char*)sendStr2.c_str());
 			}
 		}
 	}
@@ -206,6 +224,24 @@ void AsioServer::ProcessPacket(const int sessionID, const char* pData)
 		std::string sendStr = oss.str();
 		//std::cout << "[서버->클라]" << sendStr << std::endl;
 
+		short JsonDataAllPacketSize = JsonDataSize(sendStr);
+
+		boost::property_tree::ptree ptSendHeader2;
+		ptSendHeader2.put<short>("packetIndex", playerMove.packetIndex);
+		ptSendHeader2.put<short>("packetSize", JsonDataAllPacketSize);
+
+		boost::property_tree::ptree ptSend2;
+		ptSend2.add_child("header", ptSendHeader2);
+		ptSend2.put<int>("userID", playerMove.userID);
+		ptSend2.put<std::string>("userPos", playerMove.userPos);
+		ptSend2.put<std::string>("userDir", playerMove.userDir);
+
+		std::string stringRecv2;
+		std::ostringstream oss2(stringRecv2);
+		boost::property_tree::write_json(oss2, ptSend2, false);
+		std::string sendStr2 = oss2.str();
+		std::cout << "[서버->클라] " << sendStr2 << std::endl;
+
 		size_t totalSessionCount = _sessionList.size();
 
 		for (size_t i = 0; i < totalSessionCount; i++)
@@ -215,7 +251,7 @@ void AsioServer::ProcessPacket(const int sessionID, const char* pData)
 				if (_sessionList[i]->SessionID() == (playerMove.userID - FIRST_USER_INDEX))
 					continue;
 
-				_sessionList[i]->PostSend(false, std::strlen(sendStr.c_str()), (char*)sendStr.c_str());
+				_sessionList[i]->PostSend(false, std::strlen(sendStr2.c_str()), (char*)sendStr2.c_str());
 			}
 		}
 	}
@@ -247,6 +283,24 @@ void AsioServer::ProcessPacket(const int sessionID, const char* pData)
 		std::string sendStr = oss.str();
 		//std::cout << "[서버->클라]" << sendStr << std::endl;
 
+		short JsonDataAllPacketSize = JsonDataSize(sendStr);
+
+		boost::property_tree::ptree ptSendHeader2;
+		ptSendHeader2.put<short>("packetIndex", playerMove.packetIndex);
+		ptSendHeader2.put<short>("packetSize", JsonDataAllPacketSize);
+
+		boost::property_tree::ptree ptSend2;
+		ptSend2.add_child("header", ptSendHeader2);
+		ptSend2.put<int>("userID", playerMove.userID);
+		ptSend2.put<std::string>("userPos", playerMove.userPos);
+		ptSend2.put<std::string>("userDir", playerMove.userDir);
+
+		std::string stringRecv2;
+		std::ostringstream oss2(stringRecv2);
+		boost::property_tree::write_json(oss2, ptSend2, false);
+		std::string sendStr2 = oss2.str();
+		std::cout << "[서버->클라] " << sendStr2 << std::endl;
+
 		size_t totalSessionCount = _sessionList.size();
 
 		for (size_t i = 0; i < totalSessionCount; i++)
@@ -256,7 +310,7 @@ void AsioServer::ProcessPacket(const int sessionID, const char* pData)
 				if (_sessionList[i]->SessionID() == (playerMove.userID - FIRST_USER_INDEX))
 					continue;
 
-				_sessionList[i]->PostSend(false, std::strlen(sendStr.c_str()), (char*)sendStr.c_str());
+				_sessionList[i]->PostSend(false, std::strlen(sendStr2.c_str()), (char*)sendStr2.c_str());
 			}
 		}
 	}
@@ -270,7 +324,7 @@ void AsioServer::ProcessPacket(const int sessionID, const char* pData)
 short AsioServer::JsonDataSize(std::string jsonData)
 {
 	short JsonAllSize = jsonData.size();
-	//std::cout << "Json 사이즈 : " << packetSize << std::endl;
+	std::cout << "Json 사이즈 : " << JsonAllSize << std::endl;
 	return JsonAllSize;
 }
 
@@ -322,7 +376,24 @@ void AsioServer::ConcurrentUser()
 	std::ostringstream oss(stringRecv);
 	boost::property_tree::write_json(oss, ptSend, false);
 	std::string sendStr = oss.str();
-	std::cout << sendStr << std::endl;
+	//std::cout << [서버->클라] " << sendStr << std::endl;
+
+	short JsonDataAllPacketSize = JsonDataSize(sendStr);
+
+	boost::property_tree::ptree ptSendHeader2;
+	ptSendHeader2.put<short>("packetIndex", concurrentUser.packetIndex);
+	ptSendHeader2.put<short>("packetSize", JsonDataAllPacketSize);
+
+	boost::property_tree::ptree ptSend2;
+	ptSend2.add_child("header", ptSendHeader2);
+	ptSend2.put<int>("totalUser", concurrentUser.totalUser);
+	ptSend2.put<std::string>("concurrentUser", concurrentUser.concurrentUserList);
+
+	std::string stringRecv2;
+	std::ostringstream oss2(stringRecv2);
+	boost::property_tree::write_json(oss2, ptSend2, false);
+	std::string sendStr2 = oss2.str();
+	std::cout << "[서버->클라] " << sendStr2 << std::endl;
 
 	size_t totalSessionCount = _sessionList.size();
 
@@ -330,7 +401,7 @@ void AsioServer::ConcurrentUser()
 	{
 		if (_sessionList[i]->Socket().is_open())
 		{
-			_sessionList[i]->PostSend(false, std::strlen(sendStr.c_str()), (char*)sendStr.c_str());
+			_sessionList[i]->PostSend(false, std::strlen(sendStr2.c_str()), (char*)sendStr2.c_str());
 		}
 	}
 }
