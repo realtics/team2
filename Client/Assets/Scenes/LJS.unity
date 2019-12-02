@@ -1251,6 +1251,7 @@ MonoBehaviour:
   _gameResult: {fileID: 1885735865}
   _dungeonClearMenu: {fileID: 0}
   _dungeonSelectMenu: {fileID: 0}
+  _dungeonTile: {fileID: 0}
 --- !u!114 &826298707 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 322670426628092975, guid: 095e3bee2e9fe194eb78e34b3e37139f,
