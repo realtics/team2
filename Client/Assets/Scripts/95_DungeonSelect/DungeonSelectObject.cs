@@ -5,6 +5,9 @@ public class DungeonSelectObject : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        UIHelper.Instance.SetDungeonSelectMenu(true);
+        if (collision.tag == "Player")
+        {
+            UIHelper.Instance.SetDungeonSelectMenu(true);
+        }
     }
 }

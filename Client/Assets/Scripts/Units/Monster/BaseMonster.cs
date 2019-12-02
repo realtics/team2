@@ -213,7 +213,9 @@ public class BaseMonster : MonoBehaviour
 
     public void OnHit(AttackInfoSender sender)
     {
-        if (sender.HorizontalExtraMoveDuration > 0)
+		AddHitEffect();
+
+		if (sender.HorizontalExtraMoveDuration > 0)
             SetKnockbackValue(sender);
 		if (sender.ExtraHeightValue > 0)
 			SetAerialValue(sender);
@@ -228,6 +230,11 @@ public class BaseMonster : MonoBehaviour
         else
             _state.RestartState();
     }
+
+	protected virtual void AddHitEffect()
+	{
+		HitEffectManager.Instance.AddHitEffect(_avatar.position + _hitBox.right / 2 + _hitBox.up / 2, 3);
+	}
 
     //FIXME: AttackInofoSender 의 값중 넉백관련만 인자로 받게 고쳐야함
     protected virtual void SetKnockbackValue(AttackInfoSender sender)
