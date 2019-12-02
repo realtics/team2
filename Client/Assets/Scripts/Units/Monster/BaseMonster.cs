@@ -391,18 +391,19 @@ public class BaseMonster : MonoBehaviour
     {
         _animator.SetBool("isDie", true);
         InactiveHitBox();
+        NoticeDie();
     }
 
     public virtual void UpdateDieState()
     {
-        if (_animator.GetCurrentAnimatorStateInfo(0).fullPathHash == Animator.StringToHash("Base Layer.Die"))
-        {
-            if (_animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.5f)
-            {
-                //gameObject.SetActive(false);
-                NoticeDie();
-            }
-        }
+        //if (_animator.GetCurrentAnimatorStateInfo(0).fullPathHash == Animator.StringToHash("Base Layer.Die"))
+        //{
+        //    if (_animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.5f)
+        //    {
+        //        //gameObject.SetActive(false);
+        //        NoticeDie();
+        //    }
+        //}
     }
 
     public virtual void ExitDieState()

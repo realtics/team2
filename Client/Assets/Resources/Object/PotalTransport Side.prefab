@@ -69,7 +69,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: f54932da51bafe74abf55fabfe9237df, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -169,7 +169,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: f0a7c6639c93c914a806f5e315c10899, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -283,7 +283,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 9f166535b780e724190d115415d60dfe, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -434,6 +434,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4315294788207725787}
     m_Modifications:
+    - target: {fileID: 7492130170146061076, guid: 9c2d4e8d5738b994ca397da28f9ff8cc,
+        type: 3}
+      propertyPath: m_Name
+      value: Spot4p
+      objectReference: {fileID: 0}
     - target: {fileID: 154155083588744305, guid: 9c2d4e8d5738b994ca397da28f9ff8cc,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -488,11 +493,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7492130170146061076, guid: 9c2d4e8d5738b994ca397da28f9ff8cc,
-        type: 3}
-      propertyPath: m_Name
-      value: Spot4p
       objectReference: {fileID: 0}
     - target: {fileID: 8777672459178449133, guid: 9c2d4e8d5738b994ca397da28f9ff8cc,
         type: 3}

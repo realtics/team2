@@ -23,6 +23,7 @@ public class CharacterMovement : BaseUnit
         _equiredSkills = new Dictionary<SwordmanSkillIndex, CharacterSkill>();
         _equiredSkills.Add(SwordmanSkillIndex.Jingongcham, SwordmanSkillManager.Instance.GetSkill(_stat, SwordmanSkillIndex.Jingongcham));
         _equiredSkills.Add(SwordmanSkillIndex.Hadouken, SwordmanSkillManager.Instance.GetSkill(_stat, SwordmanSkillIndex.Hadouken));
+        _equiredSkills.Add(SwordmanSkillIndex.Blache, SwordmanSkillManager.Instance.GetSkill(_stat, SwordmanSkillIndex.Blache));
     }
 
     protected override void Update()

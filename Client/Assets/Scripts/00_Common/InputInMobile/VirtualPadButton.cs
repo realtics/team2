@@ -9,7 +9,8 @@ public enum VirtualPadButtonType
     Jump,
     Run,
     Skill1,
-    Skill2
+    Skill2,
+    SkillBlache,
 }
 
 public class VirtualPadButton : MonoBehaviour
@@ -57,6 +58,9 @@ public class VirtualPadButton : MonoBehaviour
                 break;
             case VirtualPadButtonType.Skill2:
                 _pc.SetSkill(SwordmanSkillIndex.Hadouken);
+                break;
+            case VirtualPadButtonType.SkillBlache:
+                _pc.SetSkill(SwordmanSkillIndex.Blache);
                 break;
         }
     }
