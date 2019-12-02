@@ -15,7 +15,13 @@ public class Tauarmy : BaseMonster
     [SerializeField]
     private Transform _rushAttackBox;
 
-    protected override void Start()
+	protected override void AddHitEffect()
+	{
+		Vector3 newPos = new Vector3(0, 1.2f, 0);
+		HitEffectManager.Instance.AddHitEffect(_avatar.position + _hitBox.right / 2 + _hitBox.up / 2 + newPos,6.0f);
+	}
+
+	protected override void Start()
     {
         base.Start();
     }

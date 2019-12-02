@@ -19,8 +19,14 @@ public class Calvary : BaseMonster
         }
     }
 
-    //AttackState
-    public override void EnterAttackState()
+	protected override void AddHitEffect()
+	{
+		Vector3 newPos = new Vector3(0, 4.53f+1, 0);
+		HitEffectManager.Instance.AddHitEffect(_avatar.position + _hitBox.right / 2 + _hitBox.up / 2 + newPos, 4.2f);
+	}
+
+	//AttackState
+	public override void EnterAttackState()
     {
         base.EnterAttackState();
     }
