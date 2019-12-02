@@ -648,26 +648,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameResult
       objectReference: {fileID: 0}
-    - target: {fileID: 1801744680022982238, guid: 41abd85db332e1048bc47b99b8aec411,
-        type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1801744680022982238, guid: 41abd85db332e1048bc47b99b8aec411,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1801744680022982238, guid: 41abd85db332e1048bc47b99b8aec411,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1801744680022982238, guid: 41abd85db332e1048bc47b99b8aec411,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1801744680141474054, guid: 41abd85db332e1048bc47b99b8aec411,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -773,6 +753,46 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 1801744680022982238, guid: 41abd85db332e1048bc47b99b8aec411,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1801744680022982238, guid: 41abd85db332e1048bc47b99b8aec411,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1801744680022982238, guid: 41abd85db332e1048bc47b99b8aec411,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1801744680022982238, guid: 41abd85db332e1048bc47b99b8aec411,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1801744681428205347, guid: 41abd85db332e1048bc47b99b8aec411,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1801744681428205347, guid: 41abd85db332e1048bc47b99b8aec411,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1801744681428205347, guid: 41abd85db332e1048bc47b99b8aec411,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1801744681428205347, guid: 41abd85db332e1048bc47b99b8aec411,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1801744680287631464, guid: 41abd85db332e1048bc47b99b8aec411,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -809,26 +829,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1801744681367889882, guid: 41abd85db332e1048bc47b99b8aec411,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1801744681428205347, guid: 41abd85db332e1048bc47b99b8aec411,
-        type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1801744681428205347, guid: 41abd85db332e1048bc47b99b8aec411,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1801744681428205347, guid: 41abd85db332e1048bc47b99b8aec411,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1801744681428205347, guid: 41abd85db332e1048bc47b99b8aec411,
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
@@ -1107,6 +1107,12 @@ PrefabInstance:
       propertyPath: _skillBodys.Array.data[2].effectPrefab
       value: 
       objectReference: {fileID: 5148761421375241879, guid: 4ec3600802fa18a408c4c1abe0751902,
+        type: 3}
+    - target: {fileID: 1855183636281469822, guid: 054d6793fda0daf4d96e5d6e2470a476,
+        type: 3}
+      propertyPath: _skillBodys.Array.data[3].effectPrefab
+      value: 
+      objectReference: {fileID: 5784346509610660004, guid: 88c4e49d08d98c144a0069a14df9e142,
         type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 054d6793fda0daf4d96e5d6e2470a476, type: 3}
