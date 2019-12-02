@@ -323,7 +323,7 @@ void AsioServer::ProcessPacket(const int sessionID, const char* pData)
 // TODO : 사이즈 작업
 short AsioServer::JsonDataSize(std::string jsonData)
 {
-	short JsonAllSize = jsonData.size();
+	short JsonAllSize = (short)jsonData.size();
 	std::cout << "Json 사이즈 : " << JsonAllSize << std::endl;
 	return JsonAllSize;
 }

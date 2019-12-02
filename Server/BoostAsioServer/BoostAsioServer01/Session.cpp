@@ -121,6 +121,7 @@ void Session::HandleReceive(const boost::system::error_code& error, size_t bytes
 			}
 			else
 			{
+				Sleep(100);
 				packetData = 0;
 				_packetBufferMark = 0;
 				break;
