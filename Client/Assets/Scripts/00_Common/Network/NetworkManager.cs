@@ -7,6 +7,7 @@ using System;
 
 using Newtonsoft.Json;
 using System.IO;
+using Cinemachine;
 
 enum DefineDefaultValue : short
 {
@@ -196,6 +197,7 @@ public class NetworkManager : MonoBehaviour
                 {
                     PlayerCharacter pc = newPlayer.AddComponent<PlayerCharacter>();
                     FindObjectOfType<InputSystem>().PC = pc;
+                    FindObjectOfType<CinemachineVirtualCamera>().Follow = pc.transform;
                 }
 
                 CharacterMovement spawnedPlayer = newPlayer.GetComponent<CharacterMovement>();
