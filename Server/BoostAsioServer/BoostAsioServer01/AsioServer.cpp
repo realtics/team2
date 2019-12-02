@@ -204,6 +204,15 @@ void AsioServer::ProcessPacket(const int sessionID, const char* pData)
 		ConcurrentUser();
 	}
 	break;
+	case PACKET_INDEX::REQ_USER_EXIT:
+	{
+		PKT_REQ_USER_EXIT* pPacket = (PKT_REQ_USER_EXIT*)pData;
+
+		int exitUser = pPacket->userID;
+
+		UserExit(exitUser);
+	}
+	break;
 	case PACKET_INDEX::REQ_PLAYER_MOVE_START:
 	{
 		PKT_REQ_PLAYER_MOVE_START* pPacket = (PKT_REQ_PLAYER_MOVE_START*)pData;

@@ -173,6 +173,15 @@ void Session::Deserialization(char* jsonData)
 		memcpy(&_packetBuffer[_packetBufferMark], (char*)&packet, sizeof(packet));
 	}
 	break;
+	case PACKET_INDEX::REQ_USER_EXIT:
+	{
+		PKT_REQ_USER_EXIT packet;
+		packet.packetIndex = packetIndex;
+		packet.packetSize = packetSize;
+		packet.userID = ptRecv.get<int>("userID");
+		memcpy(&_packetBuffer[_packetBufferMark], (char*)&packet, sizeof(packet));
+	}
+	break;
 	case PACKET_INDEX::REQ_PLAYER_MOVE_START:
 	{
 		PKT_REQ_PLAYER_MOVE_START packet;

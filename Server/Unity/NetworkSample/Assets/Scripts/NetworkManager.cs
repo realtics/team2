@@ -586,6 +586,33 @@ public class NetworkManager : MonoBehaviour
         DebugLogList("ConcurrentUser() end");
     }
 
+    private void UserExit()
+    {
+        DebugLogList("UserExit() start");
+        string jsonData;
+        char endNullValue = '\0';
+
+        var packHeader = new PACKET_HEADER
+        {
+            packetIndex = (short)PACKET_INDEX.REQ_USER_EXIT,
+            packetSize = 8
+        };
+        var packData = new PKT_REQ_USER_EXIT
+        {
+            header = packHeader,
+            userID = GetMyId
+        };
+        DebugLogList(packData.ToString());
+        jsonData = JsonConvert.SerializeObject(packData);
+        jsonData += endNullValue;
+        DebugLogList(jsonData.ToString());
+        byte[] sendByte = new byte[512];
+        sendByte = Encoding.UTF8.GetBytes(jsonData);
+
+        int resultSize = _sock.Send(sendByte);
+        DebugLogList("UserExit() end");
+    }
+
     public void MoveStart(Vector3 pos, Vector3 dir)
     {
         string startPos = pos.ToString("N4");
