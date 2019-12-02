@@ -40,8 +40,7 @@ public:
 	short JsonDataSize(std::string jsonData);
 
 	void ConcurrentUser();
-
-	
+	void UserExit(int userID);
 
 	std::vector< Session* > GetSessionList() { return _sessionList; }
 };

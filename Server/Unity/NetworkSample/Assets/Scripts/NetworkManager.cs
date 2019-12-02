@@ -396,6 +396,13 @@ public class NetworkManager : MonoBehaviour
                         SetIsConcurrentUserList(true);
                     }
                     break;
+                case (short)PACKET_INDEX.RES_USER_EXIT:
+                    {
+                        var desJson = JsonConvert.DeserializeObject<PKT_RES_USER_EXIT>(jsonData);
+
+                        var userID = desJson.userID;
+                    }
+                    break;
                 case (short)PACKET_INDEX.RES_PLAYER_MOVE_START:
                     {
                         var desJson = JsonConvert.DeserializeObject<PKT_RES_PLAYER_MOVE_START>(jsonData);

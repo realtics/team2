@@ -97,7 +97,8 @@ void AsioServer::CloseSession(const int sessionID)
 	_totalUserPos.erase(_userID);
 	_totalUserDir.erase(_userID);
 
-	ConcurrentUser();	//유저가 접속 종료 하면 클라이언트에게 갱신된 정보를 보냄
+	UserExit(_userID);
+	//ConcurrentUser();	//유저가 접속 종료 하면 클라이언트에게 갱신된 정보를 보냄
 }
 
 void AsioServer::ProcessPacket(const int sessionID, const char* pData)
@@ -435,6 +436,54 @@ void AsioServer::ConcurrentUser()
 	ptSend2.put<std::string>("concurrentUser", concurrentUser.concurrentUserList);
 	ptSend2.put<std::string>("userPos", concurrentUser.userPos);
 	ptSend2.put<std::string>("userDir", concurrentUser.userDir);
+
+	std::string stringRecv2;
+	std::ostringstream oss2(stringRecv2);
+	boost::property_tree::write_json(oss2, ptSend2, false);
+	std::string sendStr2 = oss2.str();
+	std::cout << "[서버->클라] " << sendStr2 << std::endl;
+
+	size_t totalSessionCount = _sessionList.size();
+
+	for (size_t i = 0; i < totalSessionCount; i++)
+	{
+		if (_sessionList[i]->Socket().is_open())
+		{
+			_sessionList[i]->PostSend(false, std::strlen(sendStr2.c_str()), (char*)sendStr2.c_str());
+		}
+	}
+}
+
+void AsioServer::UserExit(int userID)
+{
+	PKT_RES_USER_EXIT userExit;
+	userExit.Init();
+
+	userExit.userID = userID;
+
+	boost::property_tree::ptree ptSendHeader;
+	ptSendHeader.put<short>("packetIndex", userExit.packetIndex);
+	ptSendHeader.put<short>("packetSize", userExit.packetSize);
+
+	boost::property_tree::ptree ptSend;
+	ptSend.add_child("header", ptSendHeader);
+	ptSend.put<int>("userID", userExit.userID);
+
+	std::string stringRecv;
+	std::ostringstream oss(stringRecv);
+	boost::property_tree::write_json(oss, ptSend, false);
+	std::string sendStr = oss.str();
+	//std::cout << [서버->클라] " << sendStr << std::endl;
+
+	short JsonDataAllPacketSize = JsonDataSize(sendStr);
+
+	boost::property_tree::ptree ptSendHeader2;
+	ptSendHeader2.put<short>("packetIndex", userExit.packetIndex);
+	ptSendHeader2.put<short>("packetSize", JsonDataAllPacketSize);
+
+	boost::property_tree::ptree ptSend2;
+	ptSend2.add_child("header", ptSendHeader2);
+	ptSend2.put<int>("userID", userExit.userID);
 
 	std::string stringRecv2;
 	std::ostringstream oss2(stringRecv2);

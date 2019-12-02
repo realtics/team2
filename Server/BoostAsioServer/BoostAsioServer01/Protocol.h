@@ -24,6 +24,7 @@ enum PACKET_INDEX : short
 
 	REQ_CONCURRENT_USER = 110,
 	RES_CONCURRENT_USER_LIST = 111,
+	RES_USER_EXIT = 112,
 
 	JOIN_PLAYER = 120,
 
@@ -139,6 +140,18 @@ struct PKT_RES_CONCURRENT_USER_LIST : public PACKET_HEADER
 		packetIndex = PACKET_INDEX::RES_CONCURRENT_USER_LIST;
 		packetSize = sizeof(PKT_RES_CONCURRENT_USER_LIST);
 		totalUser = 0;
+	}
+};
+
+struct PKT_RES_USER_EXIT : public PACKET_HEADER
+{
+	int userID;
+
+	void Init()
+	{
+		packetIndex = PACKET_INDEX::RES_USER_EXIT;
+		packetSize = sizeof(PKT_RES_USER_EXIT);
+		userID = FIRST_USER_INDEX;
 	}
 };
 
