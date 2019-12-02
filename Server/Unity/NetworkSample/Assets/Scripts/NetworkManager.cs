@@ -324,35 +324,35 @@ public class NetworkManager : MonoBehaviour
         {
             switch (packetIndex)
             {
-                case (short)PACKET_INDEX.RES_NEW_LOGIN_SUCSESS:
-                    {
-                        DebugLogList("PACKET_INDEX.RES_NEW_LOGIN_SUCSESS start");
-                        var desJson = JsonConvert.DeserializeObject<PKT_RES_NEW_LOGIN_SUCSESS>(jsonData);
-                        DebugLogList(desJson.header.ToString());
-                        DebugLogList(desJson.header.packetIndex.ToString());
-                        DebugLogList(desJson.header.packetSize.ToString());
-                        DebugLogList(desJson.isSuccess.ToString());
-                        DebugLogList(desJson.userID.ToString());
+                //case (short)PACKET_INDEX.RES_NEW_LOGIN_SUCSESS:
+                //    {
+                //        DebugLogList("PACKET_INDEX.RES_NEW_LOGIN_SUCSESS start");
+                //        var desJson = JsonConvert.DeserializeObject<PKT_RES_NEW_LOGIN_SUCSESS>(jsonData);
+                //        DebugLogList(desJson.header.ToString());
+                //        DebugLogList(desJson.header.packetIndex.ToString());
+                //        DebugLogList(desJson.header.packetSize.ToString());
+                //        DebugLogList(desJson.isSuccess.ToString());
+                //        DebugLogList(desJson.userID.ToString());
 
-                        DebugMsg10 = desJson.isSuccess;
-                        DebugMsg11 = desJson.userID;
-                        // 내 캐릭터를 생성하는 로직
-                        // 서버에서 내가 접속했다고 알려주면 Id를 받고 내 Id로 설정한다.
-                        DebugLogList(GetMyId.ToString());
-                        if (GetMyId == 0)
-                        {
-                            SetIsLogin(desJson.isSuccess);
-                            SetMyId(desJson.userID);
-                            JoinNewPlayer(desJson.userID);
-                            Debug.Log("접속 ID : " + desJson.userID + ", 접속 성공 여부 : " + desJson.isSuccess);
-                        }
-                        else
-                        {
-                            Debug.LogError("접속 ID : " + desJson.userID + ", 접속 성공 여부 : " + desJson.isSuccess);
-                        }
-                        DebugLogList("PACKET_INDEX.RES_NEW_LOGIN_SUCSESS end");
-                    }
-                    break;
+                //        DebugMsg10 = desJson.isSuccess;
+                //        DebugMsg11 = desJson.userID;
+                //        // 내 캐릭터를 생성하는 로직
+                //        // 서버에서 내가 접속했다고 알려주면 Id를 받고 내 Id로 설정한다.
+                //        DebugLogList(GetMyId.ToString());
+                //        if (GetMyId == 0)
+                //        {
+                //            SetIsLogin(desJson.isSuccess);
+                //            SetMyId(desJson.userID);
+                //            JoinNewPlayer(desJson.userID);
+                //            Debug.Log("접속 ID : " + desJson.userID + ", 접속 성공 여부 : " + desJson.isSuccess);
+                //        }
+                //        else
+                //        {
+                //            Debug.LogError("접속 ID : " + desJson.userID + ", 접속 성공 여부 : " + desJson.isSuccess);
+                //        }
+                //        DebugLogList("PACKET_INDEX.RES_NEW_LOGIN_SUCSESS end");
+                //    }
+                //    break;
                 case (short)PACKET_INDEX.RES_CONCURRENT_USER_LIST:
                     {
                         DebugLogList("PACKET_INDEX.RES_CONCURRENT_USER_LIST start");
