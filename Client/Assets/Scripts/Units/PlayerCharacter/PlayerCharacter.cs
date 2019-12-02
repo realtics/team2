@@ -30,7 +30,7 @@ public class PlayerCharacter : MonoBehaviour
         {
             if (CheckDirection(horizontal, vertical))
             {
-                SendMoveEnd(horizontal, vertical);
+                SendMoveEnd(_movement.Forward, vertical);
             }
         }
         else

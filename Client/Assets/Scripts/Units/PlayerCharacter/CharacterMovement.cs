@@ -12,9 +12,8 @@ public class CharacterMovement : BaseUnit
     private SwordmanSkillIndex _usedSkill;
 
     public CharacterSkill UsedSkill { get { return _equiredSkills[_usedSkill]; } }
-    public int Id { get { return _id; } }
+    public int Id { get { return _id; } set { _id = value; } }
 
-    public void SetId(int id) { _id = id; }
 
     protected override void Start()
     {

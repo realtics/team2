@@ -17,6 +17,7 @@ public struct CharacterSpawnData
 {
     public int id;
     public Vector3 position;
+    public Vector3 direction;
 }
 
 public class StateObject    // 데이터를 수신하기 위한 상태 객체
@@ -128,21 +129,22 @@ public class NetworkManager : MonoBehaviour
 
     private Dictionary<int, CharacterMovement> _characters;
     private List<CharacterSpawnData> _spawnCharacters;
+    private List<int> _exitCharacters;
 
     private void Awake()
     {
+        _instance = this;
         appDataPath = Application.dataPath;
         appDataPathParent = System.IO.Directory.GetParent(appDataPath).ToString();
+        _exitCharacters = new List<int>();
+        _spawnCharacters = new List<CharacterSpawnData>();
+        _characters = new Dictionary<int, CharacterMovement>();
         //Debug.Log(appDataPathParent);
     }
 
     void Start()
     {
         Screen.SetResolution(960, 540, false);
-
-        _instance = this;
-        _spawnCharacters = new List<CharacterSpawnData>();
-        _characters = new Dictionary<int, CharacterMovement>();
 
         DebugLogList("start() start");
 
@@ -197,12 +199,34 @@ public class NetworkManager : MonoBehaviour
                 }
 
                 CharacterMovement spawnedPlayer = newPlayer.GetComponent<CharacterMovement>();
-                spawnedPlayer.SetId(_spawnCharacters[0].id);
+                spawnedPlayer.Id = _spawnCharacters[0].id;
+                spawnedPlayer.SetFlipX(_spawnCharacters[0].direction.x < 0 ? true : false);
                 newPlayer.transform.position = _spawnCharacters[0].position;
                 _characters.Add(_spawnCharacters[0].id, spawnedPlayer);
                 _spawnCharacters.RemoveAt(0);
             }
+
+            ExitUserOff();
         }
+    }
+
+    private void ExitUserOff()
+    {
+        if (_exitCharacters.Count == 0)
+            return;
+
+        int id = _exitCharacters[0];
+
+        CharacterMovement exitUser;
+        _characters.TryGetValue(id, out exitUser);
+
+        if (exitUser == null)
+            return;
+
+        // FIXME(안병욱) : 오브젝트 풀로 수정
+
+        _characters.Remove(id);
+        Destroy(exitUser.gameObject);
     }
 
     private void CreateSocket()
@@ -400,10 +424,18 @@ public class NetworkManager : MonoBehaviour
                             if (_characters.ContainsKey(userId))
                                 continue;
 
-                            JoinNewPlayer(userId, StringToVector3(userPos));
+                            JoinNewPlayer(userId, StringToVector3(userPos), StringToVector3(userDir));
                         }
                         DebugLogList("PACKET_INDEX.RES_CONCURRENT_USER_LIST end");
                         SetIsConcurrentUserList(true);
+                    }
+                    break;
+                case (short)PACKET_INDEX.RES_USER_EXIT:
+                    {
+                        var desJson = JsonConvert.DeserializeObject<PKT_RES_USER_EXIT>(jsonData);
+
+                        var userID = desJson.userID;
+                        _exitCharacters.Add(userID);
                     }
                     break;
                 case (short)PACKET_INDEX.RES_PLAYER_MOVE_START:
@@ -556,7 +588,7 @@ public class NetworkManager : MonoBehaviour
             {
                 SetIsLogin(desJson.isSuccess);
                 SetMyId(desJson.userID);
-                JoinNewPlayer(desJson.userID, Vector3.zero);
+                JoinNewPlayer(desJson.userID, Vector3.zero, Vector3.right);
             }
         }
         DebugLogList("NewLoginSucsess() end");
@@ -657,7 +689,7 @@ public class NetworkManager : MonoBehaviour
         //Debug.Log("MoveEnd - Send");
     }
 
-    public void JoinNewPlayer(int id, Vector3 pos)
+    public void JoinNewPlayer(int id, Vector3 pos, Vector3 dir)
     {
         DebugLogList("JoinNewPlayer start");
         DebugLogList("ID : " + id.ToString());
@@ -671,6 +703,7 @@ public class NetworkManager : MonoBehaviour
         //newPlayer = Instantiate(playerPrefab).GetComponent<Character>();
 
         newPlayer.position = pos; //Vector3.zero; // 접속한 클라 위치
+        newPlayer.direction = dir;
         newPlayer.id = id;
 
         //_characters.Add(id, newPlayer);
@@ -717,14 +750,14 @@ public class NetworkManager : MonoBehaviour
         movePlayer.StopMove(pos);
     }
 
-    private void OnGUI()
-    {
-        GUI.Label(new Rect(0, 0, 500, 100), "접속여부:" + _isLogin.ToString() + ", 유저:" + GetMyId.ToString());
-        GUI.Label(new Rect(0, 15, 300, 100), "동시접속자 수 : " + DebugMsg02);
-        GUI.Label(new Rect(0, 30, 960, 100), "접속자 리스트 : " + DebugMsg01);
+    //private void OnGUI()
+    //{
+    //    GUI.Label(new Rect(0, 0, 500, 100), "접속여부:" + _isLogin.ToString() + ", 유저:" + GetMyId.ToString());
+    //    GUI.Label(new Rect(0, 15, 300, 100), "동시접속자 수 : " + DebugMsg02);
+    //    GUI.Label(new Rect(0, 30, 960, 100), "접속자 리스트 : " + DebugMsg01);
 
-        GUI.Label(new Rect(0, 60, 960, 100), "10 : " + DebugMsg10 + ", 11 : " + DebugMsg11);
-    }
+    //    GUI.Label(new Rect(0, 60, 960, 100), "10 : " + DebugMsg10 + ", 11 : " + DebugMsg11);
+    //}
 
     public int DebugLogListIndex = 0;
     public void DebugLogList(string logData)
@@ -779,6 +812,10 @@ public class NetworkManager : MonoBehaviour
         return result;
     }
 
+    public void DisconnectServer()
+    {
+        _sock.Close();
+    }
 
     // TODO : JsonUtility 사용시 작업 할 것, 아직 미완성
     /*T JsonToOject<T>(string jsonData)

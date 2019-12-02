@@ -10,6 +10,8 @@
 
     REQ_CONCURRENT_USER = 110,
     RES_CONCURRENT_USER_LIST = 111,
+    REQ_USER_EXIT = 112,
+    RES_USER_EXIT = 113,
 
     JOIN_PLAYER = 120,
 
@@ -55,6 +57,17 @@ public struct PKT_RES_CONCURRENT_USER_LIST
     public string userPos;
     public string userDir;
 };
+
+public struct PKT_REQ_USER_EXIT
+{
+    public PACKET_HEADER header;
+    public int userID;
+}
+public struct PKT_RES_USER_EXIT
+{
+    public PACKET_HEADER header;
+    public int userID;
+}
 
 public struct PKT_REQ_PLAYER_MOVE_START
 {
