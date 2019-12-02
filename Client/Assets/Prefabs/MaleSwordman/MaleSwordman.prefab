@@ -200,7 +200,7 @@ MonoBehaviour:
   _hp: 0
   _mp: 0
   _attackDamage: 100
-  _attackSpeed: 140
+  _attackSpeed: 200
 --- !u!1 &4668375787703239335
 GameObject:
   m_ObjectHideFlags: 0
