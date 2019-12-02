@@ -41,7 +41,6 @@ public class DungeonGameManager : GameManager
         base.Start();
         _instance = this;
         DNFSceneManager.instacne.Loader();
-
         _myPartyNumber = 0;
     }
 

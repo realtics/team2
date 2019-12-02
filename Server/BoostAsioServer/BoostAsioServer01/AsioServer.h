@@ -35,8 +35,12 @@ public:
 	void Start();
 	void CloseSession(const int sessionID);
 	void ProcessPacket(const int sessionID, const char* pData);
+	
+	short JsonDataSize(std::string jsonData);
 
 	void ConcurrentUser();
+
+	
 
 	std::vector< Session* > GetSessionList() { return _sessionList; }
 };

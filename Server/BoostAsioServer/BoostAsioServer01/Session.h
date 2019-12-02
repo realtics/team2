@@ -4,6 +4,7 @@
 #include <boost/asio.hpp>
 #include "Protocol.h"
 
+#include <Windows.h>
 //json
 #include <boost/property_tree/ptree.hpp> 
 #include <boost/property_tree/json_parser.hpp>

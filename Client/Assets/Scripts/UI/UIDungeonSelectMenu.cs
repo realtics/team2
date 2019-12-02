@@ -7,7 +7,8 @@ public class UIDungeonSelectMenu : MonoBehaviour
 {
     [SerializeField]
     private List<GameObject> _dungeonSlot;
-
+    [SerializeField]
+    private Button _cancel;
     // Use this for initialization
     void Start()
     {
@@ -16,12 +17,6 @@ public class UIDungeonSelectMenu : MonoBehaviour
             _dungeonSlot[(int)DungenClearMenu.Retrun].GetComponent<Button>().onClick.AddListener(() => 
             { DungeonGameManager.Instance.MoveToScene((int)SceneIndex.Lobby); });
         }
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
+        _cancel.onClick.AddListener(() => { gameObject.SetActive(false); });
     }
 }
