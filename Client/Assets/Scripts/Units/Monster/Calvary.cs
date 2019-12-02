@@ -29,17 +29,19 @@ public class Calvary : BaseMonster
 	public override void EnterAttackState()
     {
         base.EnterAttackState();
-    }
+		_animator.SetFloat("animSpeed", 1.5f);
+	}
 
     public override void UpdateAttackState()
     {
         base.UpdateAttackState();
-    }
+	}
 
     public override void ExitAttackState()
     {
         base.ExitAttackState();
-    }
+		_animator.SetFloat("animSpeed", 1.0f);
+	}
 
     //MoveState
     public override void EnterMoveState()
@@ -60,8 +62,8 @@ public class Calvary : BaseMonster
     //HitState
     public override void EnterHitState()
     {
-        base.EnterHitState();
-    }
+        base.EnterHitState();	
+	}
 
     public override void UpdateHitState()
     {
@@ -71,7 +73,7 @@ public class Calvary : BaseMonster
     public override void ExitHitState()
     {
         base.ExitHitState();
-    }
+	}
 
     //DieState
     public override void EnterDieState()
