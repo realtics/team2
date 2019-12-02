@@ -5,12 +5,16 @@ using UnityEngine;
 
 public class CharacterMovement : BaseUnit
 {
+    private int _id;
     private bool _nextAttack;
     private CharacterAnimController _animController;
     private Dictionary<SwordmanSkillIndex, CharacterSkill> _equiredSkills;
     private SwordmanSkillIndex _usedSkill;
 
     public CharacterSkill UsedSkill { get { return _equiredSkills[_usedSkill]; } }
+    public int Id { get { return _id; } }
+
+    public void SetId(int id) { _id = id; }
 
     protected override void Start()
     {
@@ -279,5 +283,22 @@ public class CharacterMovement : BaseUnit
         StopAttack();
 
         return true;
+    }
+
+    public void SetMoveDirectionAndMove(Vector3 pos, Vector3 dir)
+    {
+        transform.position = pos;
+        SetAxis(dir.x, dir.y);
+
+        if (dir.x < 0.0f)
+            SetFlipX(true);
+        else if (dir.x > 0.0f)
+            SetFlipX(false);
+    }
+
+    public void StopMove(Vector3 pos)
+    {
+        transform.position = pos;
+        SetAxis(0, 0);
     }
 }

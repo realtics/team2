@@ -9,9 +9,11 @@ public class InputSystem : MonoBehaviour
     private float _axisVertical;
     private float _axisHorizontal;
 
+    public PlayerCharacter PC { get { return _pc; } set { _pc = value; } }
+
     private void Awake()
     {
-        //_pc = FindObjectOfType<PlayerCharacter>();
+        _pc = FindObjectOfType<PlayerCharacter>();
     }
 
     private void Update()

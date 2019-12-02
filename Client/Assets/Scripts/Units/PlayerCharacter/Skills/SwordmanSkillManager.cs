@@ -10,6 +10,7 @@ public enum SwordmanSkillIndex
     Hadouken,
     Blache,
     ClearCircle,
+    CutIn,
 }
 
 [Serializable]
