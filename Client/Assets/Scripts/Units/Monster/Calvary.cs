@@ -78,7 +78,18 @@ public class Calvary : BaseMonster
     //DieState
     public override void EnterDieState()
     {
+        // FIXME HACK : (안병욱) 수정해
+        StartCoroutine(TimeScaleSlow());
+        GameObject circle = ObjectPoolManager.Instance.GetRestObject(SwordmanSkillManager.Instance.FindSkillEffect(SwordmanSkillIndex.ClearCircle));
+        Vector3 newPos = transform.root.position;
+        newPos.y += 1.2f;
+        circle.transform.position = newPos;
+
+        print(newPos + " / " + newPos);
+
         base.EnterDieState();
+
+
     }
 
     public override void UpdateDieState()
@@ -101,6 +112,13 @@ public class Calvary : BaseMonster
     public override void NoticeDie()
     {
         MonsterManager.Instance.ReceiveBossMonsterDie(this);
+    }
+
+    private IEnumerator TimeScaleSlow()
+    {
+        Time.timeScale = 0.1f;
+        yield return new WaitForSeconds(0.2f);
+        Time.timeScale = 1.0f;
     }
 }
 

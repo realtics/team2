@@ -9,6 +9,7 @@ public enum SwordmanSkillIndex
     Jingongcham,
     Hadouken,
     Blache,
+    ClearCircle,
 }
 
 [Serializable]
