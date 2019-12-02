@@ -38,7 +38,7 @@ public class ObjectPoolManager : MonoBehaviour
     {
         foreach (ObjectPool pool in _pools)
         {
-            if (pool.PoolName == prefab.name)
+            if (pool.pooledObjectPrefab == prefab)
                 return false;
         }
 
@@ -83,7 +83,7 @@ public class ObjectPoolManager : MonoBehaviour
     {
         foreach (ObjectPool pool in _pools)
         {
-            if (pool.PoolName != findPrefab.name)
+            if (pool.pooledObjectPrefab != findPrefab)
                 continue;
 
             return pool;

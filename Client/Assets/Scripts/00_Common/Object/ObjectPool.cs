@@ -73,6 +73,9 @@ public class ObjectPool
             return null;
         }
 
+        //if (_poolName == null)
+        //    _poolName = pooledObjectPrefab.name;
+
         GameObject newObject = GameObject.Instantiate(pooledObjectPrefab);
 
         if (newObject == null)

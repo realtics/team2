@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class BlacheGroundWaterParameter : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField]
+    private List<Animator> _waters;
+
+    private void Awake()
     {
-        
     }
 
-    // Update is called once per frame
-    void Update()
+    private void ClipEvent_OffWater()
     {
-        
+        foreach (Animator anim in _waters)
+        {
+            anim.SetBool("End", true);
+        }
     }
 }

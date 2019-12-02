@@ -8,6 +8,7 @@ public enum SwordmanSkillIndex
     None = 0,
     Jingongcham,
     Hadouken,
+    Blache,
 }
 
 [Serializable]
@@ -63,7 +64,14 @@ public class SwordmanSkillManager : MonoBehaviour
                 hadouken.SetCreateEffect(stat, FindSkillEffect(type), 0.0f, 2);
                 skill = hadouken;
                 break;
+            case SwordmanSkillIndex.Blache:
+                SwordmanSkillBlache blache = new SwordmanSkillBlache();
+                blache.SetCreateEffect(stat, FindSkillEffect(type), 10.0f, 1);
+                skill = blache;
+                break;
         }
+
+        ObjectPoolManager.Instance.CreatePool(FindSkillEffect(type), 1);
 
         return skill;
     }
