@@ -365,17 +365,24 @@ public class NetworkManager : MonoBehaviour
 
                         Debug.Log(desJson.totalUser);
                         Debug.Log(desJson.concurrentUser);
+                        Debug.Log(desJson.userPos);
+                        Debug.Log(desJson.userDir);
                         SetTotalUser(desJson.totalUser);
                         //SetUserList(Json.concurrentUserList);
                         DebugMsg01 = desJson.concurrentUser;
                         DebugMsg02 = desJson.totalUser;
 
-                        string[] splitText = desJson.concurrentUser.Split(',');
-                        for (int i = 0; i < splitText.Length; i++)
+                        string[] splitConcurrentUser = desJson.concurrentUser.Split(',');
+                        string[] splitUserPos = desJson.userPos.Split('|');
+                        string[] splitUserDir = desJson.userDir.Split('|');
+                        for (int i = 0; i < splitConcurrentUser.Length; i++)
                         {
-                            Debug.Log(splitText[i]);
-
-                            int userId = Int32.Parse(splitText[i]);
+                            Debug.Log(splitConcurrentUser[i]);
+                            Debug.Log(splitUserPos[i]);
+                            Debug.Log(splitUserDir[i]);
+                            int userId = Int32.Parse(splitConcurrentUser[i]);
+                            string userPos = splitUserPos[i];
+                            string userDir = splitUserDir[i];
 
                             if (GetMyId == userId)
                                 continue;
@@ -383,7 +390,7 @@ public class NetworkManager : MonoBehaviour
                             if (_characters.ContainsKey(userId))
                                 continue;
 
-                            JoinNewPlayer(userId);
+                            JoinNewPlayer(userId, StringToVector3(userPos));
                         }
                         DebugLogList("PACKET_INDEX.RES_CONCURRENT_USER_LIST end");
                         SetIsConcurrentUserList(true);
@@ -539,7 +546,7 @@ public class NetworkManager : MonoBehaviour
             {
                 SetIsLogin(desJson.isSuccess);
                 SetMyId(desJson.userID);
-                JoinNewPlayer(desJson.userID);
+                JoinNewPlayer(desJson.userID, Vector3.zero);
             }
         }
         DebugLogList("NewLoginSucsess() end");
@@ -574,8 +581,8 @@ public class NetworkManager : MonoBehaviour
 
     public void MoveStart(Vector3 pos, Vector3 dir)
     {
-        string startPos = pos.ToString("N5");
-        string startDir = dir.ToString("N5");
+        string startPos = pos.ToString("N4");
+        string startDir = dir.ToString("N4");
 
         string jsonData;
         char endNullValue = '\0';
@@ -605,8 +612,8 @@ public class NetworkManager : MonoBehaviour
 
     public void MoveEnd(Vector3 pos, Vector3 dir)
     {
-        string EndPos = pos.ToString("N5");
-        string EndDir = dir.ToString("N5");
+        string EndPos = pos.ToString("N4");
+        string EndDir = dir.ToString("N4");
 
         string jsonData;
         char endNullValue = '\0';
@@ -634,7 +641,7 @@ public class NetworkManager : MonoBehaviour
         //Debug.Log("MoveEnd - Send");
     }
 
-    public void JoinNewPlayer(int id)
+    public void JoinNewPlayer(int id, Vector3 pos)
     {
         DebugLogList("JoinNewPlayer start");
         DebugLogList("ID : " + id.ToString());
@@ -647,7 +654,7 @@ public class NetworkManager : MonoBehaviour
 
         //newPlayer = Instantiate(playerPrefab).GetComponent<Character>();
 
-        newPlayer.position = Vector3.zero; // 접속한 클라 위치
+        newPlayer.position = pos; //Vector3.zero; // 접속한 클라 위치
         newPlayer.id = id;
 
         //_characters.Add(id, newPlayer);

@@ -20,6 +20,9 @@ private:
 
 	std::vector< Session* > _sessionList;
 	std::deque< int > _sessionQueue;
+
+	std::map<int, std::string> _totalUserPos;
+	std::map<int, std::string> _totalUserDir;
 	
 	bool PostAccept();
 	void HandleAccept(Session* pSession, const boost::system::error_code& error);

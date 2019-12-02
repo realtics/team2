@@ -52,6 +52,8 @@ public struct PKT_RES_CONCURRENT_USER_LIST
     public PACKET_HEADER header;
     public int totalUser;
     public string concurrentUser;
+    public string userPos;
+    public string userDir;
 };
 
 public struct PKT_REQ_PLAYER_MOVE_START

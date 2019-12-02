@@ -94,6 +94,9 @@ void AsioServer::CloseSession(const int sessionID)
 		PostAccept();
 	}
 
+	_totalUserPos.erase(_userID);
+	_totalUserDir.erase(_userID);
+
 	ConcurrentUser();	//유저가 접속 종료 하면 클라이언트에게 갱신된 정보를 보냄
 }
 
@@ -148,6 +151,9 @@ void AsioServer::ProcessPacket(const int sessionID, const char* pData)
 		SendPkt.isSuccess = true;
 		SendPkt.userID = _userID;
 
+		_totalUserPos.insert(std::make_pair(_userID, "(0.0000, 0.0000, 0.0000)"));
+		_totalUserDir.insert(std::make_pair(_userID, "(0.0000, 0.0000, 0.0000)"));
+
 		boost::property_tree::ptree ptSendHeader;
 		ptSendHeader.put<short>("packetIndex", SendPkt.packetIndex);
 		ptSendHeader.put<short>("packetSize", SendPkt.packetSize);
@@ -200,14 +206,14 @@ void AsioServer::ProcessPacket(const int sessionID, const char* pData)
 	case PACKET_INDEX::REQ_PLAYER_MOVE_START:
 	{
 		PKT_REQ_PLAYER_MOVE_START* pPacket = (PKT_REQ_PLAYER_MOVE_START*)pData;
-
+		
 		PKT_RES_PLAYER_MOVE_START playerMove;
 		playerMove.Init();
 
 		playerMove.userID = pPacket->userID;
 		strcpy_s(playerMove.userPos, MAX_PLAYER_MOVE_LEN, pPacket->userPos);
 		strcpy_s(playerMove.userDir, MAX_PLAYER_MOVE_LEN, pPacket->userDir);
-		
+
 		boost::property_tree::ptree ptSendHeader;
 		ptSendHeader.put<short>("packetIndex", playerMove.packetIndex);
 		ptSendHeader.put<short>("packetSize", playerMove.packetSize);
@@ -259,6 +265,21 @@ void AsioServer::ProcessPacket(const int sessionID, const char* pData)
 	case PACKET_INDEX::REQ_PLAYER_MOVE_END:
 	{
 		PKT_REQ_PLAYER_MOVE_END* pPacket = (PKT_REQ_PLAYER_MOVE_END*)pData;
+
+		_totalUserPos.erase(pPacket->userID);
+		_totalUserDir.erase(pPacket->userID);
+		_totalUserPos.insert(std::make_pair(pPacket->userID, pPacket->userPos));
+		_totalUserDir.insert(std::make_pair(pPacket->userID, pPacket->userDir));
+		
+
+		for (auto it = _totalUserPos.begin(); it != _totalUserPos.end(); it++)
+		{
+			std::cout << "[pos] " << it->first << " " << it->second << std::endl;
+		}
+		for (auto it = _totalUserDir.begin(); it != _totalUserDir.end(); it++)
+		{
+			std::cout << "[dir] " << it->first << " " << it->second << std::endl;
+		}
 
 		PKT_RES_PLAYER_MOVE_END playerMove;
 		playerMove.Init();
@@ -332,6 +353,8 @@ void AsioServer::ConcurrentUser()
 {
 	int totalUser = 0;
 	std::string userList = "";
+	std::string userPos = "";
+	std::string userDir = "";
 
 	for (size_t i = 0; i < _sessionList.size(); i++)
 	{
@@ -339,19 +362,35 @@ void AsioServer::ConcurrentUser()
 		{
 			totalUser++;
 
-			int playerNum = i + FIRST_USER_INDEX;
+			int userNum = i + FIRST_USER_INDEX;
 
-			userList += std::to_string(playerNum);
+			userList += std::to_string(userNum);
 			userList += ",";
+			if (_totalUserPos.empty() == false)
+			{
+				userPos += _totalUserPos.find(userNum)->second;
+				userPos += "|";
+
+				userDir += _totalUserDir.find(userNum)->second;
+				userDir += "|";
+			}
 		}
 	}
 
 	if (totalUser > 0)
 	{
 		// 마지막 , 없애기
-		int endPlayerList = userList.size() - 1;
+		int endUserList = userList.size() - 1;
+		userList.replace(endUserList, endUserList, "");
 
-		userList.replace(endPlayerList, endPlayerList, "");
+		if (_totalUserPos.empty() == false)
+		{
+			int endUserPos = userPos.size() - 1;
+			userPos.replace(endUserPos, endUserPos, "");
+
+			int endUserDir = userDir.size() - 1;
+			userDir.replace(endUserDir, endUserDir, "");
+		}
 	}
 
 	PKT_RES_CONCURRENT_USER_LIST concurrentUser;
@@ -359,6 +398,8 @@ void AsioServer::ConcurrentUser()
 
 	concurrentUser.totalUser = totalUser;
 	concurrentUser.concurrentUserList = userList;
+	concurrentUser.userPos = userPos;
+	concurrentUser.userDir = userDir;
 
 	boost::property_tree::ptree ptSendHeader;
 	ptSendHeader.put<short>("packetIndex", concurrentUser.packetIndex);
@@ -368,9 +409,13 @@ void AsioServer::ConcurrentUser()
 	ptSend.add_child("header", ptSendHeader);
 	ptSend.put<int>("totalUser", concurrentUser.totalUser);
 	ptSend.put<std::string>("concurrentUser", concurrentUser.concurrentUserList);
+	ptSend.put<std::string>("userPos", concurrentUser.userPos);
+	ptSend.put<std::string>("userDir", concurrentUser.userDir);
 
 	std::cout << "접속 유저 : " << concurrentUser.totalUser << std::endl;
 	std::cout << "유저 리스트 : " << concurrentUser.concurrentUserList << std::endl;
+	std::cout << "유저 Pos : " << concurrentUser.userPos << std::endl;
+	std::cout << "유저 Dir : " << concurrentUser.userDir << std::endl;
 
 	std::string stringRecv;
 	std::ostringstream oss(stringRecv);
@@ -388,6 +433,8 @@ void AsioServer::ConcurrentUser()
 	ptSend2.add_child("header", ptSendHeader2);
 	ptSend2.put<int>("totalUser", concurrentUser.totalUser);
 	ptSend2.put<std::string>("concurrentUser", concurrentUser.concurrentUserList);
+	ptSend2.put<std::string>("userPos", concurrentUser.userPos);
+	ptSend2.put<std::string>("userDir", concurrentUser.userDir);
 
 	std::string stringRecv2;
 	std::ostringstream oss2(stringRecv2);
