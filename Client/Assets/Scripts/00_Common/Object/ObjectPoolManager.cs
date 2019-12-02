@@ -63,6 +63,13 @@ public class ObjectPoolManager : MonoBehaviour
         return pool.GetObject();
     }
 
+    public GameObject GetRestObject(GameObject effectObject, Transform parent)
+    {
+        ObjectPool pool = FindPool(effectObject);
+
+        return pool.GetObject(parent, effectObject.transform.position);
+    }
+
     //public ObjectPool FindPool(string prefabName)
     //{
     //    ObjectPool findedPool = null;
