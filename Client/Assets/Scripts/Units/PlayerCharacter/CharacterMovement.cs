@@ -318,15 +318,24 @@ public class CharacterMovement : BaseUnit
 		if (!_onMoveEndPacket)
 			return;
 
-		transform.position = _moveEndPacket.position;
-		SetAxis(0, 0);
+		Vector3 normal = Vector3.Normalize(_moveEndPacket.position - transform.position);
+		SetAxis(normal.x, normal.y);
 
-		_onMoveEndPacket = false;
+		if (Vector3.Normalize(_moveEndPacket.position - transform.position).x > 0)
+			SetFlipX(false);
+		else
+			SetFlipX(true);
+
+		if (Vector3.SqrMagnitude(_moveEndPacket.position - transform.position) <= 0.01f)
+		{
+			SetAxis(0, 0);
+			_onMoveEndPacket = false;
+		}
 	}
 
     public void SetMoveDirectionAndMove(Vector3 pos, Vector3 dir)
     {
-		_onMoveStartPacket = true;
+		//_onMoveStartPacket = true;
 
 		_moveStartPacket = new CharacterMovePacket();
 		_moveStartPacket.position = pos;
