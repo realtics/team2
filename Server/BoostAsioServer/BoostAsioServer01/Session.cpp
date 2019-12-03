@@ -97,12 +97,13 @@ void Session::HandleReceive(const boost::system::error_code& error, size_t bytes
 	}
 	else
 	{
+		_packetBufferMark = 0;
 		Deserialization(_receiveBuffer.data());
 		//memcpy(&_packetBuffer[_packetBufferMark], _receiveBuffer.data(), bytes_transferred);
 		
 		int packetData = _packetBufferMark + bytes_transferred;
 		int readData = 0;
-
+		std::cout << "packetData : " << packetData << std::endl;
 		PACKET_HEADER* pHeader = (PACKET_HEADER*)&_packetBuffer[readData];
 
 		while (packetData > 0)
