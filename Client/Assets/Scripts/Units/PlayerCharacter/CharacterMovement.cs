@@ -2,6 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public struct CharacterMovePacket
+{
+	public Vector3 position;
+	public Vector3 direction;
+}
 
 public class CharacterMovement : BaseUnit
 {
@@ -11,7 +16,13 @@ public class CharacterMovement : BaseUnit
     private Dictionary<SwordmanSkillIndex, CharacterSkill> _equiredSkills;
     private SwordmanSkillIndex _usedSkill;
 
-    public CharacterSkill UsedSkill { get { return _equiredSkills[_usedSkill]; } }
+	private bool _onMoveStartPacket;
+	private bool _onMoveEndPacket;
+
+	private CharacterMovePacket _moveStartPacket;
+	private CharacterMovePacket _moveEndPacket;
+
+	public CharacterSkill UsedSkill { get { return _equiredSkills[_usedSkill]; } }
     public int Id { get { return _id; } set { _id = value; } }
 
 
@@ -33,7 +44,9 @@ public class CharacterMovement : BaseUnit
     {
         CheckAttackEnd();
         SkillCoolTimeUpdate();
-    }
+		ProcessPacketMoveStart();
+		ProcessPacketMoveEnd();
+	}
 
     private void SkillCoolTimeUpdate()
     {
@@ -284,20 +297,57 @@ public class CharacterMovement : BaseUnit
         return true;
     }
 
+	private void ProcessPacketMoveStart()
+	{
+		if (!_onMoveStartPacket)
+			return;
+
+		transform.position = _moveStartPacket.position;
+		SetAxis(_moveStartPacket.direction.x, _moveStartPacket.direction.y);
+
+		if (_moveStartPacket.direction.x < 0.0f)
+			SetFlipX(true);
+		else if (_moveStartPacket.direction.x > 0.0f)
+			SetFlipX(false);
+
+		_onMoveStartPacket = false;
+	}
+
+	private void ProcessPacketMoveEnd()
+	{
+		if (!_onMoveEndPacket)
+			return;
+
+		Vector3 normal = Vector3.Normalize(_moveEndPacket.position - transform.position);
+		SetAxis(normal.x, normal.y);
+
+		if (Vector3.Normalize(_moveEndPacket.position - transform.position).x > 0)
+			SetFlipX(false);
+		else
+			SetFlipX(true);
+
+		if (Vector3.SqrMagnitude(_moveEndPacket.position - transform.position) <= 0.01f)
+		{
+			SetAxis(0, 0);
+			_onMoveEndPacket = false;
+		}
+	}
+
     public void SetMoveDirectionAndMove(Vector3 pos, Vector3 dir)
     {
-        transform.position = pos;
-        SetAxis(dir.x, dir.y);
+		//_onMoveStartPacket = true;
 
-        if (dir.x < 0.0f)
-            SetFlipX(true);
-        else if (dir.x > 0.0f)
-            SetFlipX(false);
-    }
+		_moveStartPacket = new CharacterMovePacket();
+		_moveStartPacket.position = pos;
+		_moveStartPacket.direction = dir;
+	}
 
     public void StopMove(Vector3 pos)
     {
-        transform.position = pos;
-        SetAxis(0, 0);
-    }
+		_onMoveEndPacket = true;
+
+		_moveEndPacket = new CharacterMovePacket();
+		_moveEndPacket.position = pos;
+		_moveEndPacket.direction = Vector3.zero;
+	}
 }

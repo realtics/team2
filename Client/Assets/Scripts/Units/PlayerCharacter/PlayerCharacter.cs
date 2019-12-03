@@ -99,7 +99,7 @@ public class PlayerCharacter : MonoBehaviour
             return;
 
         Vector3 dir = new Vector3(horizontal, vertical, 0.0f);
-        NetworkManager.Instance.MoveStart(transform.position, dir);
+        //NetworkManager.Instance.MoveStart(transform.position, dir);
     }
 
     private void SendMoveEnd(float horizontal, float vertical)
