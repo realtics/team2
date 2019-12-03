@@ -42,7 +42,7 @@ public class MovementJoystick : MonoBehaviour
         _oldDirection = _stickDirection;
         _dirVec = Vector2.zero;
 
-        FindPlayerCharacter();
+        //FindPlayerCharacter();
     }
 
     // Update is called once per frame
