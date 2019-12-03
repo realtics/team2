@@ -208,8 +208,10 @@ public class NetworkManager : MonoBehaviour
                     if (input != null)
                         input.PC = pc;
                 }
+				else
+					newPlayer.transform.GetChild(0).tag = "UserPlayer";
 
-                CharacterMovement spawnedPlayer = newPlayer.GetComponent<CharacterMovement>();
+				CharacterMovement spawnedPlayer = newPlayer.GetComponent<CharacterMovement>();
                 spawnedPlayer.Id = _spawnCharacters[0].id;
                 spawnedPlayer.SetFlipX(_spawnCharacters[0].direction.x < 0 ? true : false);
                 newPlayer.transform.position = _spawnCharacters[0].position;
@@ -250,11 +252,11 @@ public class NetworkManager : MonoBehaviour
             {
                 Debug.Log("소켓 생성 실패");
             }
-            //_sock.Connect(new IPEndPoint(IPAddress.Parse("127.0.0.1"), 31452));
-            _sock.Connect(new IPEndPoint(IPAddress.Parse("192.168.200.168"), 31452));
-            //_sock.Connect(new IPEndPoint(IPAddress.Parse("192.168.1.105"), 31452));
+			//_sock.Connect(new IPEndPoint(IPAddress.Parse("127.0.0.1"), 31452));
+			//_sock.Connect(new IPEndPoint(IPAddress.Parse("192.168.200.168"), 31452));
+			_sock.Connect(new IPEndPoint(IPAddress.Parse("192.168.1.105"), 31452));
 
-            DebugLogList("socket() end");
+			DebugLogList("socket() end");
         }
         catch (Exception e)
         {

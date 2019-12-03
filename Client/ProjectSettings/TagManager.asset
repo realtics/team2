@@ -13,6 +13,7 @@ TagManager:
   - CameraCollider
   - MonsterHitBox
   - PlayerStartSpot
+  - UserPlayer
   layers:
   - Default
   - TransparentFX
