@@ -425,8 +425,8 @@ void AsioServer::ConcurrentUser()
 
 	std::cout << "立加 蜡历 : " << concurrentUser.totalUser << std::endl;
 	std::cout << "蜡历 府胶飘 : " << concurrentUser.concurrentUserList << std::endl;
-	std::cout << "蜡历 Pos : " << concurrentUser.userPos << std::endl;
-	std::cout << "蜡历 Dir : " << concurrentUser.userDir << std::endl;
+	//std::cout << "蜡历 Pos : " << concurrentUser.userPos << std::endl;
+	//std::cout << "蜡历 Dir : " << concurrentUser.userDir << std::endl;
 
 	std::string stringRecv;
 	std::ostringstream oss(stringRecv);
