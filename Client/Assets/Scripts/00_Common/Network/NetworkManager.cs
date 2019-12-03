@@ -145,7 +145,7 @@ public class NetworkManager : MonoBehaviour
 
     void Start()
     {
-        Screen.SetResolution(960, 540, false);
+        //Screen.SetResolution(960, 540, false);
 
         DebugLogList("start() start");
 
