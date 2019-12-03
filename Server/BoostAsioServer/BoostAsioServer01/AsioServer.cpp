@@ -188,15 +188,16 @@ void AsioServer::ProcessPacket(const int sessionID, const char* pData)
 		std::cout << "[서버->클라] " << sendStr2 << std::endl;
 
 
-		size_t totalSessionCount = _sessionList.size();
+		_sessionList[sessionID]->PostSend(false, std::strlen(sendStr2.c_str()), (char*)sendStr2.c_str());
+		//size_t totalSessionCount = _sessionList.size();
 
-		for (size_t i = 0; i < totalSessionCount; i++)
-		{
-			if (_sessionList[i]->Socket().is_open())
-			{
-				_sessionList[i]->PostSend(false, std::strlen(sendStr2.c_str()), (char*)sendStr2.c_str());
-			}
-		}
+		//for (size_t i = 0; i < totalSessionCount; i++)
+		//{
+		//	if (_sessionList[i]->Socket().is_open())
+		//	{
+		//		_sessionList[i]->PostSend(false, std::strlen(sendStr2.c_str()), (char*)sendStr2.c_str());
+		//	}
+		//}
 	}
 	break;
 	case PACKET_INDEX::REQ_CONCURRENT_USER:
@@ -282,14 +283,14 @@ void AsioServer::ProcessPacket(const int sessionID, const char* pData)
 		_totalUserDir.insert(std::make_pair(pPacket->userID, pPacket->userDir));
 		
 
-		for (auto it = _totalUserPos.begin(); it != _totalUserPos.end(); it++)
-		{
-			std::cout << "[pos] " << it->first << " " << it->second << std::endl;
-		}
-		for (auto it = _totalUserDir.begin(); it != _totalUserDir.end(); it++)
-		{
-			std::cout << "[dir] " << it->first << " " << it->second << std::endl;
-		}
+		//for (auto it = _totalUserPos.begin(); it != _totalUserPos.end(); it++)
+		//{
+		//	std::cout << "[pos] " << it->first << " " << it->second << std::endl;
+		//}
+		//for (auto it = _totalUserDir.begin(); it != _totalUserDir.end(); it++)
+		//{
+		//	std::cout << "[dir] " << it->first << " " << it->second << std::endl;
+		//}
 
 		PKT_RES_PLAYER_MOVE_END playerMove;
 		playerMove.Init();
