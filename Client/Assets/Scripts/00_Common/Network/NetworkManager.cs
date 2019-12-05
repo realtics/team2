@@ -11,7 +11,7 @@ using Cinemachine;
 
 enum DefineDefaultValue : short
 {
-    packetSize = 100
+    packetSize = 10
 }
 
 public struct CharacterSpawnData
@@ -508,8 +508,8 @@ public class NetworkManager : MonoBehaviour
         var packHeader = new PACKET_HEADER
         {
             packetIndex = (short)PACKET_INDEX.REQ_NEW_LOGIN,
-            packetSize = 8
-        };
+            packetSize = (short)DefineDefaultValue.packetSize
+		};
         var packData = new PKT_REQ_NEW_LOGIN { header = packHeader };
         DebugLogList(packData.ToString());
         jsonData = JsonConvert.SerializeObject(packData);
@@ -517,20 +517,31 @@ public class NetworkManager : MonoBehaviour
         DebugLogList(jsonData.ToString());
         byte[] sendByte = new byte[512];
         sendByte = Encoding.UTF8.GetBytes(jsonData);
-        //TODO 1-0: JSON 헤더에 패킷 사이즈 체크 하는것을 foreach로 하고 있는데, 더 좋은 방법 있다면 개선
-        //TODO 1-1: 패킷 사이즈를 담아 보내는 것이 현재 상태에선 크게 중요하진 않으므로, 코드만 남겨두고 나중에 활용
-        //int jsonDataSize = 0;
-        //foreach (byte b in _sendByte)
-        //{
-        //    jsonDataSize++;
-        //    if (b == '\0')
-        //        break;
-        //}
-        //Debug.Log(jsonData);
-        //Debug.Log(jsonDataSize);
+		//TODO 1-0: JSON 헤더에 패킷 사이즈 체크 하는것을 foreach로 하고 있는데, 더 좋은 방법 있다면 개선
+		//TODO 1-1: 패킷 사이즈를 담아 보내는 것이 현재 상태에선 크게 중요하진 않으므로, 코드만 남겨두고 나중에 활용
+		short jsonDataSize = 0;
+		foreach (byte b in sendByte)
+		{
+			jsonDataSize++;
+			if (b == '\0')
+				break;
+		}
+		//Debug.Log(jsonData);
+		//Debug.Log(jsonDataSize);
+		var packHeader2 = new PACKET_HEADER
+		{
+			packetIndex = (short)PACKET_INDEX.REQ_NEW_LOGIN,
+			packetSize = jsonDataSize
+		};
+		var packData2 = new PKT_REQ_NEW_LOGIN { header = packHeader2 };
+		string jsonData2;
+		jsonData2 = JsonConvert.SerializeObject(packData2);
+		jsonData2 += endNullValue;
+		byte[] sendByte2 = new byte[512];
+		sendByte2 = Encoding.UTF8.GetBytes(jsonData2);
 
-        SetMyId(0);
-        int resultSize = _sock.Send(sendByte);
+		SetMyId(0);
+        int resultSize = _sock.Send(sendByte2);
         //Debug.Log("NewLogin() = " + resultSize);
         DebugLogList("NewLogin() end");
     }
@@ -572,8 +583,8 @@ public class NetworkManager : MonoBehaviour
         var packHeader = new PACKET_HEADER
         {
             packetIndex = (short)PACKET_INDEX.REQ_CONCURRENT_USER,
-            packetSize = 8
-        };
+            packetSize = (short)DefineDefaultValue.packetSize
+		};
         var packData = new PKT_REQ_CONCURRENT_USER { header = packHeader };
         DebugLogList(packData.ToString());
         jsonData = JsonConvert.SerializeObject(packData);
@@ -604,8 +615,8 @@ public class NetworkManager : MonoBehaviour
         var packHeader = new PACKET_HEADER
         {
             packetIndex = (short)PACKET_INDEX.REQ_PLAYER_MOVE_START,
-            packetSize = 1
-        };
+            packetSize = (short)DefineDefaultValue.packetSize
+		};
         var packData = new PKT_REQ_PLAYER_MOVE_START
         {
             header = packHeader,
@@ -638,8 +649,8 @@ public class NetworkManager : MonoBehaviour
         var packHeader = new PACKET_HEADER
         {
             packetIndex = (short)PACKET_INDEX.REQ_PLAYER_MOVE_END,
-            packetSize = 1
-        };
+            packetSize = (short)DefineDefaultValue.packetSize
+		};
         var packData = new PKT_REQ_PLAYER_MOVE_END
         {
             header = packHeader,
