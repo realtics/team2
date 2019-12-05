@@ -6,7 +6,8 @@ public enum SceneIndex
 {
     MainMenu,
     Lobby,
-    Dungen
+    Dungen,
+	LobbySingle,
 }
 
 public class DNFSceneManager : MonoBehaviour
