@@ -30,23 +30,8 @@ SpriteAtlas:
       enableTightPacking: 1
     variantMultiplier: 1
     packables:
-    - {fileID: 2800000, guid: 6cda845293c1f3a47bc305bcb67c0210, type: 3}
-    - {fileID: 2800000, guid: 2441ca12f34226a4886f6db75f4bf851, type: 3}
-    - {fileID: 2800000, guid: f3be15c76acff8240b1dfb6cb3e3de48, type: 3}
-    - {fileID: 2800000, guid: 7d37645ae6ff35648951f8cfcb30b201, type: 3}
-    - {fileID: 2800000, guid: 05f9f9a2e3775f04e8664f27999486e3, type: 3}
-    - {fileID: 2800000, guid: 2c904dc8b48173f45a13f9ab386cc113, type: 3}
-    - {fileID: 2800000, guid: e19f3bb7e0cd50346915caa217042a58, type: 3}
-    - {fileID: 2800000, guid: e3ea91dae371b4544af5c20bfdfe6a1e, type: 3}
-    - {fileID: 2800000, guid: 5a1414fc559287946b01641a3c0a8e1f, type: 3}
-    - {fileID: 2800000, guid: 4931ceb7d0c6b8d429caf54bd9c90104, type: 3}
-    - {fileID: 2800000, guid: fde3b1c19c763b64699e934869be8832, type: 3}
-    - {fileID: 2800000, guid: d9bf8dcfb483f7046a98115c6a871515, type: 3}
-    - {fileID: 2800000, guid: 27b90f269a5b2a449a4d9796ef935c9d, type: 3}
-    - {fileID: 2800000, guid: 3ec79f4ae212dd0458e93731ecf429ee, type: 3}
-    - {fileID: 2800000, guid: 9dbbaf37df3d9c04d913f9d55c85bb3a, type: 3}
-    - {fileID: 2800000, guid: 68742b5889d7f9d4a9cae5571590d4ac, type: 3}
-    totalSpriteSurfaceArea: 73053
+    - {fileID: 102900000, guid: 7c258a4d2a03eaf4591b5e2600b59e86, type: 3}
+    totalSpriteSurfaceArea: 118742
     bindAsDefault: 1
     storedHash:
       serializedVersion: 2
@@ -57,6 +42,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 2441ca12f34226a4886f6db75f4bf851, type: 3}
   - {fileID: 21300000, guid: 6cda845293c1f3a47bc305bcb67c0210, type: 3}
   - {fileID: 21300000, guid: 05f9f9a2e3775f04e8664f27999486e3, type: 3}
+  - {fileID: 21300000, guid: f9d5aae3cc8940349b5d0daa6decb104, type: 3}
   - {fileID: 21300000, guid: 27b90f269a5b2a449a4d9796ef935c9d, type: 3}
   - {fileID: 21300000, guid: 9dbbaf37df3d9c04d913f9d55c85bb3a, type: 3}
   - {fileID: 21300000, guid: e19f3bb7e0cd50346915caa217042a58, type: 3}
@@ -64,16 +50,21 @@ SpriteAtlas:
   - {fileID: 21300000, guid: f3be15c76acff8240b1dfb6cb3e3de48, type: 3}
   - {fileID: 21300000, guid: 68742b5889d7f9d4a9cae5571590d4ac, type: 3}
   - {fileID: 21300000, guid: 2c904dc8b48173f45a13f9ab386cc113, type: 3}
+  - {fileID: 21300000, guid: 1dc4fb2a9643baa40a214f8f5fd40361, type: 3}
   - {fileID: 21300000, guid: 3ec79f4ae212dd0458e93731ecf429ee, type: 3}
   - {fileID: 21300000, guid: 7d37645ae6ff35648951f8cfcb30b201, type: 3}
   - {fileID: 21300000, guid: e3ea91dae371b4544af5c20bfdfe6a1e, type: 3}
+  - {fileID: 21300000, guid: 50fab42b9bb5a144dbd5216a6c9d3e34, type: 3}
+  - {fileID: 21300000, guid: 89d4130cadcee734ab84072e3ea5eabb, type: 3}
   - {fileID: 21300000, guid: 5a1414fc559287946b01641a3c0a8e1f, type: 3}
+  - {fileID: 21300000, guid: 387a778d9cadd2e40b61cba34904d3b3, type: 3}
   - {fileID: 21300000, guid: d9bf8dcfb483f7046a98115c6a871515, type: 3}
   m_PackedSpriteNamesToIndex:
   - goblin_walk_2
   - goblin_attack_2
   - goblin_attack_1
   - goblin_die_1
+  - 2
   - goblin_walk_4
   - goblin_walk_6
   - goblin_die_3
@@ -81,10 +72,14 @@ SpriteAtlas:
   - goblin_attack_3
   - goblin_idle_1
   - goblin_die_2
+  - 1
   - goblin_walk_5
   - goblin_attack_4
   - goblin_hit_1
+  - 3
+  - 0
   - goblin_hit_2
+  - goblin_downRecovery_1
   - goblin_walk_3
   m_Tag: GoblinAtlas
   m_IsVariant: 0
