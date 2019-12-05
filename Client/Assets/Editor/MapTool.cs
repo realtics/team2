@@ -18,6 +18,7 @@ public enum ALIGN
 
 public class MapTool : EditorWindow
 {
+
     public static MapTool Instance { get; set; }
 
     static MapTool mapToolWIndow;

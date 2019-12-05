@@ -32,38 +32,6 @@ public class StateObject    // 데이터를 수신하기 위한 상태 객체
     }
 }
 
-// TODO : JsonUtility 사용시 작업 할 것, 아직 미완성
-/*
-[System.Serializable]
-public class JsonHeader
-{
-	public short packetIndex;
-	public short packetSize;
-	public void SetData(short _packetIndex, short _packetSize)
-	{
-		packetIndex = _packetIndex;
-		packetSize = _packetSize;
-	}
-	public string SaveToString()
-	{
-		return JsonUtility.ToJson(this);
-	}
-}
-[System.Serializable]
-public class JsonNewLogin
-{
-	public JsonHeader header;
-
-	public void SetData(JsonHeader _header)
-	{
-		header = _header;
-	}
-
-	public string SaveToString()
-	{
-		return JsonUtility.ToJson(this);
-	}
-}*/
 
 public class NetworkManager : MonoBehaviour
 {
@@ -145,9 +113,9 @@ public class NetworkManager : MonoBehaviour
 
     void Start()
     {
-        //Screen.SetResolution(960, 540, false);
+		//Screen.SetResolution(960, 540, false);
 
-        DebugLogList("start() start");
+		DebugLogList("start() start");
 
         if (GetIsLogin == false)
         {
@@ -545,18 +513,6 @@ public class NetworkManager : MonoBehaviour
         var packData = new PKT_REQ_NEW_LOGIN { header = packHeader };
         DebugLogList(packData.ToString());
         jsonData = JsonConvert.SerializeObject(packData);
-
-        // TODO : JsonUtility 사용시 작업 할 것, 아직 미완성
-        /*{
-			JsonHeader jh = JsonUtility.FromJson<JsonHeader>("{\"packetIndex\":\"" + (short)PACKET_INDEX.REQ_NEW_LOGIN + "\"," +
-															  "\"packetSize\":\"" + 10 + "\"}");
-			JsonNewLogin jnl = new JsonNewLogin();
-			jnl.SetData(jh);
-			//string dataJH = jh.SaveToString();
-			jnl = JsonUtility.FromJson<JsonNewLogin>("{\"header\":" + jnl.header + "}");
-			jsonData = JsonUtility.ToJson(jnl);
-		}*/
-
         jsonData += endNullValue;
         DebugLogList(jsonData.ToString());
         byte[] sendByte = new byte[512];
@@ -830,9 +786,4 @@ public class NetworkManager : MonoBehaviour
         _sock.Close();
     }
 
-    // TODO : JsonUtility 사용시 작업 할 것, 아직 미완성
-    /*T JsonToOject<T>(string jsonData)
-	{
-		return JsonUtility.FromJson<T>(jsonData);
-	}*/
 }

@@ -14,7 +14,6 @@ public class JsonManagement
 
     private const string _objectTag = "FieldObject";
     private const string _monsterTag = "Monster";
-    private const string _potalSceneTag = "PotalScene";
     private const string _potalTranportTag = "PotalTransport"; 
 
     public JsonManagement()
@@ -53,12 +52,6 @@ public class JsonManagement
         {
             AddPotalTransport(dungeonInfo, obj);
         }
-
-        foreach (GameObject obj in GameObject.FindGameObjectsWithTag(_potalSceneTag))
-        {
-            AddPotalScene(dungeonInfo, obj);
-        }
-
         GameObject spotObject = GameObject.FindGameObjectWithTag("PlayerStartSpot");
         if (spotObject != null)
         {
@@ -140,25 +133,6 @@ public class JsonManagement
 
         dungeonInfo.potalTransportinfos.Add(potalTransportinfo);
     }
-
-    public void AddPotalScene(DungeonInfo dungeonInfo, GameObject obj)
-    {
-        PotalScene potal = obj.GetComponent<PotalScene>();
-
-        Object parentObject = PrefabUtility.GetCorrespondingObjectFromOriginalSource(obj);
-        string path = AssetDatabase.GetAssetPath(parentObject);
-        path = ResourcesLoadSubstringFilePath(path);
-
-        PotalSceneInfo potalSceneInfo = new PotalSceneInfo();
-        potalSceneInfo.filePath = path;
-        potalSceneInfo.position = obj.transform.position;
-        potalSceneInfo.arrow = potal.arrow;
-
-        potalSceneInfo.nextDataName = potal.nextSceneName;
-
-        dungeonInfo.potalSceneInfos.Add(potalSceneInfo);
-    }
-
     string ResourcesLoadSubstringFilePath(string FilePath)
     {
         int FilePos = FilePath.LastIndexOf("Resources/") + 10;

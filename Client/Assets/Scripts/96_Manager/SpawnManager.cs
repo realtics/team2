@@ -81,17 +81,6 @@ public class SpawnManager : MonoBehaviour
 
             _dungeonGameObject.Add(obj);
         }
-        foreach (var item in dungeon.potalSceneInfos)
-        {
-            GameObject obj = LoadResourceFromCache(item.filePath);
-            obj = AddObject(obj, item.position);
-
-            PotalScene potal = obj.GetComponent<PotalScene>();
-            potal.arrow = item.arrow;
-            potal.nextSceneName = item.nextDataName;
-
-            _dungeonGameObject.Add(obj);
-        }
         ClearCache();
     }
     public GameObject AddObject(GameObject prefab, Vector3 position)
