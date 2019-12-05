@@ -38,7 +38,6 @@ public class CharacterStat : MonoBehaviour
 
     void Update()
     {
-        
     }
 
     public void OnHitDamage(AttackInfoSender sender)
