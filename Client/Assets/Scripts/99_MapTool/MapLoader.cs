@@ -25,22 +25,11 @@ public class PotalTransportinfo
     public int nextIndex { get; set; }
 }
 
-public class PotalSceneInfo
-{
-    public string filePath { get; set; }
-    public Vector3 position { get; set; }
-    public Vector3 transportPosition { get; set; }
-    public ARROW arrow { get; set; }
-    public string nextDataName { get; set; }
-}
-
-
 public class DungeonInfo
 {
     public List<ObjectInfo> objectinfos = new List<ObjectInfo>();
     public List<MonsterInfo> monsterInfos = new List<MonsterInfo>();
     public List<PotalTransportinfo> potalTransportinfos = new List<PotalTransportinfo>();
-    public List<PotalSceneInfo> potalSceneInfos = new List<PotalSceneInfo>();
 
     public Vector3 PlayerStartPosition { get; set; }
 }
