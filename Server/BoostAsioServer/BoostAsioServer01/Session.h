@@ -2,6 +2,8 @@
 #include <deque>
 #include <boost/bind.hpp>
 #include <boost/asio.hpp>
+#include <boost/lexical_cast.hpp>
+#include <boost/assign.hpp>
 #include "Protocol.h"
 
 #include <Windows.h>
