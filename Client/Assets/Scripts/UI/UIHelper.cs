@@ -11,8 +11,13 @@ public class UIHelper : MonoBehaviour
             return _instance;       
         }
     }
+    [Header("[Common]")]
     [SerializeField]
     private UIPlayerInfo _playerInfo;
+    [Header("[Twon]")]
+    [SerializeField]
+    private UIDungeonSelectMenu _dungeonSelectMenu;
+    [Header("[Dungeon]")]
     [SerializeField]
     private UIMosterInfo _monsterInfo;
     [SerializeField]
@@ -22,9 +27,7 @@ public class UIHelper : MonoBehaviour
     [SerializeField]
     private UIDungeonClearMenu _dungeonClearMenu;
     [SerializeField]
-    private UIDungeonSelectMenu _dungeonSelectMenu;
-    [SerializeField]
-    private GameObject _dungeonTile;
+    private UIMiniMap _miniMap;
     // Use this for initialization
     void Start()
     {
@@ -39,9 +42,9 @@ public class UIHelper : MonoBehaviour
         if (_dungeonClearMenu != null)
             _dungeonClearMenu.gameObject.SetActive(false);
         if (_dungeonSelectMenu != null)
-            _dungeonSelectMenu.gameObject.SetActive(false);        
-        if (_dungeonTile != null)
-            _dungeonTile.SetActive(true);
+            _dungeonSelectMenu.gameObject.SetActive(false);
+        if (_dungeonSelectMenu != null)
+            _dungeonSelectMenu.gameObject.SetActive(true);
     }
 
     // Update is called once per frame
