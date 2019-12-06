@@ -45,3 +45,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _effectPrefab: {fileID: 250908842011196223, guid: 69a5acdf0bca6944ea3e77e6b85d4364,
     type: 3}
+  _HidDamagePrefab: {fileID: 5150396272498270025, guid: 97c88936c554874488f6eb9e6c60254c,
+    type: 3}
