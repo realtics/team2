@@ -77,7 +77,7 @@ MeshRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 107
+  m_SortingOrder: 200
 --- !u!33 &5150396272168900840
 MeshFilter:
   m_ObjectHideFlags: 0
