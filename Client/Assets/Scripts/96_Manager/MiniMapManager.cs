@@ -12,7 +12,7 @@ public class MiniMapManager : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-
+        Initialized();
     }
 
     private void Initialized()
@@ -20,7 +20,9 @@ public class MiniMapManager : MonoBehaviour
         dungeonData = MapLoader.instacne.dungeonData;
         maxNum = dungeonData.DungeonInfos.Length;
 
+        Transform parent = UIHelper.Instance.miniMap.gameObject.transform;
 
+        Instantiate(_tilePrefab, parent);
     }
 
 }

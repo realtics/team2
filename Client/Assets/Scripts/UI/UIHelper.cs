@@ -28,6 +28,15 @@ public class UIHelper : MonoBehaviour
     private UIDungeonClearMenu _dungeonClearMenu;
     [SerializeField]
     private UIMiniMap _miniMap;
+    public UIMiniMap miniMap
+    {
+        get
+        {
+            return _miniMap;
+        }
+    }
+
+
     // Use this for initialization
     void Start()
     {
@@ -43,15 +52,11 @@ public class UIHelper : MonoBehaviour
             _dungeonClearMenu.gameObject.SetActive(false);
         if (_dungeonSelectMenu != null)
             _dungeonSelectMenu.gameObject.SetActive(false);
-        if (_dungeonSelectMenu != null)
-            _dungeonSelectMenu.gameObject.SetActive(true);
+        if (_miniMap != null)
+            _miniMap.gameObject.SetActive(true);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
 
-    }
     public void SetGameOver(bool isActive)
     {
         _gameOver.gameObject.SetActive(isActive);
@@ -91,6 +96,7 @@ public class UIHelper : MonoBehaviour
     {
         _monsterInfo.SetHp(CurrentHp, MaxHp);
     }
+
     // Todo.
     public void SetMonster(BaseMonster monster)
     {
