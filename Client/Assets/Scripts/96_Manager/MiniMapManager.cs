@@ -59,13 +59,14 @@ public class MiniMapManager : MonoBehaviour
  
             mapTile.tile = null;
             _miniMapTiles.Add(mapTile);
+
+            GameObject @object = Instantiate(_tilePrefab, parent);
+            @object.transform.localPosition = new Vector3(-(mapTile.position.x * _tileSize), mapTile.position.y * _tileSize, 0);
         }
 
-        for (int i = 0; i < maxNum; i++)
-        {
-            GameObject @object = Instantiate(_tilePrefab, parent);
-            @object.transform.localPosition = new Vector3( -(i * _tileSize), 0, 0);
-        }
+
+
+        
     }
 
     private MiniMapArrow ConvertMiniMapArrow(ARROW arrow)
