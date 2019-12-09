@@ -35,4 +35,9 @@ public class CharacterAnimController : MonoBehaviour
     {
         _movement.OnSkill();
     }
+
+	public void ClipEvent_StopAttack()
+	{
+
+	}
 }

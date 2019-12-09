@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1020073003363705742}
   - component: {fileID: 3990440557154998220}
   - component: {fileID: 3990440556722671933}
+  - component: {fileID: 8112936347164094788}
   m_Layer: 0
   m_Name: SpriteAnimator
   m_TagString: Untagged
@@ -54,7 +55,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 050aa1e70b483f24181f7f54880de3ca, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -131,6 +132,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48d06c5856586af4b8c3570d7dc496f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8112936347164094788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1020073003363705739}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb6a0c20dba84be42a38f4e212031971, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: {r: 1, g: 0, b: 0, a: 1}
+  outlineSize: 2
 --- !u!1 &1020073003416927019
 GameObject:
   m_ObjectHideFlags: 0
@@ -224,9 +239,9 @@ MonoBehaviour:
   _chaseCancleTime: 1
   _chaseTime: 0
   _moveSpeed: 1
+  _target: {fileID: 0}
   _baseAttackResetTime: 3
   _baseAttackCurrentTime: 0
-  _target: {fileID: 0}
   _baseAttackBox: {fileID: 8190413016591622143}
   _hitBox: {fileID: 8183383958140969758}
   _avatar: {fileID: 1020073003363705740}
