@@ -17,7 +17,6 @@ public class Damage : MonoBehaviour
 
 	public void SetDamage(float damage)
 	{
-		Debug.Log(damage);
 		_hitDamageText.SetText(damage.ToString());
 	}
 }
