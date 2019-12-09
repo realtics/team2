@@ -75,7 +75,6 @@ public class CharacterMovement : BaseUnit
     public override void StopAttack()
     {
         _animController.OffAttackBox();
-
         if (IsInTranstion)
             return;
 
@@ -91,7 +90,8 @@ public class CharacterMovement : BaseUnit
         if (!base.SetAttack())
             return false;
 
-        _animator.SetBool("IsAttack", true);
+		_animator.SetBool("IsMoving", false);
+		_animator.SetBool("IsAttack", true);
         SetNextAttack();
 
         return true;
@@ -112,7 +112,7 @@ public class CharacterMovement : BaseUnit
         if (CurAnimTime < 0.5f)
             return;
 
-        if (CurAnimTime >= 0.95f)
+        if (!IsAnimationPlaying())
             return;
 
         if (IsInTranstion)
@@ -252,12 +252,13 @@ public class CharacterMovement : BaseUnit
             return false;
         }
 
-        if (!base.SetSkill(skill))
+		if (!CheckIsAttack())
+			return false;
+
+		if (!base.SetSkill(skill))
             return false;
 
-        if (!CheckIsAttack())
-            return false;
-
+		_animator.SetBool("IsMoving", false);
         _animator.SetBool("OnSkill", true);
         _animator.SetInteger("SkillMotion", UsedSkill.MotionIndex);
 
@@ -266,7 +267,7 @@ public class CharacterMovement : BaseUnit
 
     public override void StopSkill()
     {
-        base.StopSkill();
+		base.StopSkill();
         _animator.SetBool("OnSkill", false);
     }
 
@@ -286,11 +287,8 @@ public class CharacterMovement : BaseUnit
         if (!IsAttack)
             return true;
 
-        //if (CurAnimTime < 0.2f)
-        //    return false;
-
-        if (CurAnimTime >= 0.95f)
-            return false;
+		if (CurAnimTime < 0.2f)
+			return false;
 
         StopAttack();
 
