@@ -318,7 +318,7 @@ PrefabInstance:
     - target: {fileID: 1857849419541559141, guid: 72f0cddf4c0177847b2d5ace72cfe991,
         type: 3}
       propertyPath: _pools.Array.data[3].initObjectCount
-      value: 10
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1857849419541559141, guid: 72f0cddf4c0177847b2d5ace72cfe991,
         type: 3}
@@ -329,7 +329,7 @@ PrefabInstance:
     - target: {fileID: 1857849419541559141, guid: 72f0cddf4c0177847b2d5ace72cfe991,
         type: 3}
       propertyPath: _pools.Array.data[4].initObjectCount
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1857849419541559141, guid: 72f0cddf4c0177847b2d5ace72cfe991,
         type: 3}
@@ -1060,15 +1060,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Enabled
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1109627757, guid: f596280910a5da744b6ad8c35450f807, type: 3}
-      propertyPath: _attackSpeed
-      value: 200
-      objectReference: {fileID: 0}
-    - target: {fileID: 5955886557323474264, guid: f596280910a5da744b6ad8c35450f807,
-        type: 3}
-      propertyPath: _sender._extraHeightValue
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f596280910a5da744b6ad8c35450f807, type: 3}
