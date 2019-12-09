@@ -14,7 +14,9 @@ public class JsonManagement
 
     private const string _objectTag = "FieldObject";
     private const string _monsterTag = "Monster";
-    private const string _potalTranportTag = "PotalTransport"; 
+    private const string _potalTranportTag = "PotalTransport";
+
+    private Vector2 currentPosition = new Vector2(0,0);
 
     public JsonManagement()
     {
@@ -35,6 +37,7 @@ public class JsonManagement
     public void JsonClear()
     {
         jsonData.dungeonObjectList.Clear();
+        currentPosition.Set(0,0);
     }
 
     public void AddDungeon()
@@ -61,6 +64,11 @@ public class JsonManagement
         {
             dungeonInfo.PlayerStartPosition = new Vector3(0, 0, 0);
         }
+
+        dungeonInfo.position = currentPosition;
+        // Todo 아래 부분을 맵툴 쪽으로 빼서 수동으로 조작하게 끔 해야함.
+        Debug.Log(currentPosition);
+        currentPosition.Set(currentPosition.x + 1, currentPosition.y);
 
         jsonData.dungeonObjectList.Add(dungeonInfo);
     }

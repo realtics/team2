@@ -1,32 +1,46 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
 public enum MiniMapArrow
 {
-    Right = 0,
-    Up,
-    UpRight,
+    Unknown = 0,
+    Right,
     Left,
     LeftRight,
-    UpLeft,
-    UpLeftRight,
     Down,
     DownRight,
-    UpDown,
-    UpDownRight,
     DownLeft,
     DownLeftRight,
+    Up,
+    UpRight,
+    UpLeft,
+    UpLeftRight,
+    UpDown,
+    UpDownRight,
     UpDownLeft,
-    UpDownLeftRight,
-    Unknown
+    UpDownLeftRight
+
+    //Right = 0,
+    //Up,
+    //UpRight,
+    //Left,
+    //LeftRight,
+    //UpLeft,
+    //UpLeftRight,
+    //Down,
+    //DownRight,
+    //UpDown,
+    //UpDownRight,
+    //DownLeft,
+    //DownLeftRight,
+    //UpDownLeft,
+    //UpDownLeftRight,
+    //Unknown
 }
 
-public struct MiniMapTile
-{
-    public MiniMapArrow arrow;
-    public Vector2 position;
-}
+
 
 public class UIMiniMap : MonoBehaviour
 {
@@ -35,20 +49,17 @@ public class UIMiniMap : MonoBehaviour
     [SerializeField]
     private Sprite[] _blinkTiles;
 
-    private List<MiniMapTile> miniMapTiles;
-
-    private const int _rectSize = 72;
     // Use this for initialization
     void Start()
     {
 
     }
 
-    // Update is called once per frame
-    void Update()
+    public void ChangeTileImage(MiniMapTile mapTile)
     {
-
+        mapTile.image.sprite = _tiles[(int)mapTile.arrow];
     }
+
     public void Blinking(bool active)
     {
         if(active)

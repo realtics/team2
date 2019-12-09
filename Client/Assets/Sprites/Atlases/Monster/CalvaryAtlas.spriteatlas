@@ -35,7 +35,7 @@ SpriteAtlas:
     bindAsDefault: 1
     storedHash:
       serializedVersion: 2
-      Hash: 2418887b4d81081eae806596ade16368
+      Hash: 03707255e28efe1216f365ad07618b0c
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
   - {fileID: 21300000, guid: 829d6b007f0d64d4996452b8ba4643dc, type: 3}
@@ -88,50 +88,50 @@ SpriteAtlas:
   m_PackedSpriteNamesToIndex:
   - 2
   - 3
-  - testMonster_idle_2
+  - calvary_idle2
   - 4
-  - testMonster_walk_8
-  - TestMonster_die6
-  - TestMonster_die7
-  - testMonster_attack_ (14)
-  - testMonster_attack_ (15)
-  - testMonster_attack_ (5)
-  - TestMonster_die5
-  - testMonster_attack_ (7)
-  - testMonster_walk_1
-  - TestMonster_die1
-  - TestMonster_hit1
-  - testMonster_walk_2
-  - testMonster_attack_ (16)
-  - TestMonster_hit2
-  - testMonster_attack_ (12)
-  - testMonster_idle_1
-  - testMonster_attack_ (8)
-  - testMonster_idle_6
-  - testMonster_attack_ (10)
-  - TestMonster_die4
-  - testMonster_idle_4
-  - testMonster_walk_3
-  - testMonster_walk_5
-  - testMonster_attack_ (2)
+  - calvary_walk8
+  - calvary_die6
+  - calvary_die7
+  - calvary_attack14
+  - calvary_attack15
+  - calvary_attack5
+  - calvary_die5
+  - calvary_attack7
+  - calvary_walk1
+  - calvary_die1
+  - calvary_hit1
+  - calvary_walk2
+  - calvary_attack16
+  - calvary_hit2
+  - calvary_attack12
+  - calvary_idle1
+  - calvary_attack8
+  - calvary_idle6
+  - calvary_attack10
+  - calvary_die4
+  - calvary_idle4
+  - calvary_walk3
+  - calvary_walk5
+  - calvary_attack2
   - 0
-  - testMonster_attack_ (17)
-  - testMonster_attack_ (3)
+  - calvary_attack17
+  - calvary_attack3
   - 1
-  - testMonster_attack_ (4)
-  - testMonster_walk_6
-  - testMonster_idle_5
-  - testMonster_attack_ (13)
-  - testMonster_walk_4
-  - testMonster_attack_ (9)
-  - testMonster_attack_ (11)
-  - testMonster_idle_3
-  - TestMonster_die2
-  - TestMonster_die8
-  - testMonster_attack_ (18)
-  - testMonster_walk_7
-  - TestMonster_die3
-  - testMonster_attack_ (6)
-  - testMonster_attack_ (1)
+  - calvary_attack4
+  - calvary_walk6
+  - calvary_idle5
+  - calvary_attack13
+  - calvary_walk4
+  - calvary_attack9
+  - calvary_attack11
+  - calvary_idle3
+  - calvary_die2
+  - calvary_die8
+  - calvary_attack18
+  - calvary_walk7
+  - calvary_die3
+  - calvary_attack6
+  - calvary_attack1
   m_Tag: CalvaryAtlas
   m_IsVariant: 0

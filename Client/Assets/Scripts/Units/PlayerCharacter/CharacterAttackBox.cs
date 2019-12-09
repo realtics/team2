@@ -31,7 +31,7 @@ public class CharacterAttackBox : MonoBehaviour
             return;
 
         _sender.Damage = _stat.AttackDamage;
-        other.transform.root.GetComponent<BaseMonster>().OnHit(_sender);
+		other.transform.root.GetComponent<BaseMonster>().OnHit(_sender);
 
     }
 }
