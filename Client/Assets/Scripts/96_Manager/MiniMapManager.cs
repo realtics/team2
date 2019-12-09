@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 public struct MiniMapTile
 {
-    public GameObject tile;
+    public Image image;
     public MiniMapArrow arrow;
     public Vector2 position;
 }
@@ -57,15 +57,16 @@ public class MiniMapManager : MonoBehaviour
 
             mapTile.position = item.position;
  
-            mapTile.tile = Instantiate(_tilePrefab, parent);
+            mapTile.image = Instantiate(_tilePrefab, parent).GetComponent<Image>();
             _miniMapTiles.Add(mapTile);            
         }
 
         foreach (var item in _miniMapTiles)
         {
-            item.tile.transform.localPosition
+            item.image.transform.localPosition
                 = new Vector3((item.position.x - _witdh) * _tileSize,
                 (item.position.y - _height) * _tileSize, 0);
+            UIHelper.Instance.miniMap.ChangeTileImage(item);
         }
     }
     private void MaxWidth(int x)
