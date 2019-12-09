@@ -390,6 +390,11 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 1626823850743516447, guid: 5e237926235dfd04197da1e5f4ba8ff1,
+        type: 3}
+      propertyPath: m_Name
+      value: BlacheButton
+      objectReference: {fileID: 0}
     - target: {fileID: 1454690680794067267, guid: 5e237926235dfd04197da1e5f4ba8ff1,
         type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -403,12 +408,12 @@ PrefabInstance:
     - target: {fileID: 1454690680794067267, guid: 5e237926235dfd04197da1e5f4ba8ff1,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 99.1
+      value: 113.2
       objectReference: {fileID: 0}
     - target: {fileID: 1454690680794067267, guid: 5e237926235dfd04197da1e5f4ba8ff1,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 99.1
+      value: 113.2
       objectReference: {fileID: 0}
     - target: {fileID: 4325559963311149598, guid: 5e237926235dfd04197da1e5f4ba8ff1,
         type: 3}
@@ -421,6 +426,12 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 837421c7a12c3804d823fbc2587a8ba5,
+        type: 3}
+    - target: {fileID: 6821230484387894595, guid: 5e237926235dfd04197da1e5f4ba8ff1,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 0490c1a3abed2b2409e9305fd047cdc4,
         type: 3}
     - target: {fileID: 4325559961642231323, guid: 5e237926235dfd04197da1e5f4ba8ff1,
         type: 3}
