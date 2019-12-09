@@ -13,8 +13,11 @@ public struct MiniMapTile
 public class MiniMapManager : MonoBehaviour
 {
     [SerializeField]
-    private GameObject _tilePrefab;
+    private GameObject _tile;
     private float _tileSize;
+
+    [SerializeField]
+    private GameObject _playerCursor;
 
     private int maxNum;
     private DungeonJsonData dungeonData;
@@ -36,7 +39,7 @@ public class MiniMapManager : MonoBehaviour
         maxNum = dungeonData.DungeonInfos.Length;
         Transform parent = UIHelper.Instance.miniMap.gameObject.transform;
 
-        _tileSize = _tilePrefab.GetComponent<Image>().rectTransform.rect.width;
+        _tileSize = _tile.GetComponent<Image>().rectTransform.rect.width;
 
         
         // 던전 하나의 방향 정보 얻기.
@@ -57,7 +60,7 @@ public class MiniMapManager : MonoBehaviour
 
             mapTile.position = item.position;
  
-            mapTile.image = Instantiate(_tilePrefab, parent).GetComponent<Image>();
+            mapTile.image = Instantiate(_tile, parent).GetComponent<Image>();
             _miniMapTiles.Add(mapTile);            
         }
 

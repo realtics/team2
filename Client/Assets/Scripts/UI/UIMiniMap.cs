@@ -21,23 +21,6 @@ public enum MiniMapArrow
     UpDownRight,
     UpDownLeft,
     UpDownLeftRight
-
-    //Right = 0,
-    //Up,
-    //UpRight,
-    //Left,
-    //LeftRight,
-    //UpLeft,
-    //UpLeftRight,
-    //Down,
-    //DownRight,
-    //UpDown,
-    //UpDownRight,
-    //DownLeft,
-    //DownLeftRight,
-    //UpDownLeft,
-    //UpDownLeftRight,
-    //Unknown
 }
 
 
@@ -48,12 +31,6 @@ public class UIMiniMap : MonoBehaviour
     private Sprite[] _tiles;
     [SerializeField]
     private Sprite[] _blinkTiles;
-
-    // Use this for initialization
-    void Start()
-    {
-
-    }
 
     public void ChangeTileImage(MiniMapTile mapTile)
     {
