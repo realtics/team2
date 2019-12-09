@@ -31,21 +31,24 @@ public class BaseMonster : MonoBehaviour
     protected float _chaseTime = 0.0f;
     [SerializeField]
     protected float _moveSpeed;
-    [SerializeField]
+	[SerializeField]
+	protected Transform _target = null;
+
+	//values for BaseAttack
+	[SerializeField]
     protected float _baseAttackResetTime;
     [SerializeField]
     protected float _baseAttackCurrentTime;
+	[SerializeField]
+	protected Transform _baseAttackBox;
 
-    [SerializeField]
-    protected Transform _target = null;
-    [SerializeField]
-    protected Transform _baseAttackBox;
-    
- [SerializeField]
+	//values for HitEffect
+	[SerializeField]
     protected Transform _hitBox;
 	protected BoxCollider2D _hitBoxCenter;
 	protected float _hitEffectSize;
 
+	//values for sprite & animator
 	protected Animator _animator;
     protected Vector3 _forwardDirection;
 
@@ -56,16 +59,14 @@ public class BaseMonster : MonoBehaviour
     private FSMState<BaseMonster> _dieState = new DieState();
     private FSMState<BaseMonster> _downRecoveryState = new DownRecoveryState();
 
-    private bool _isDead = false;
+	private bool _isDead;
     private bool _isAttack;
     private bool _isHit;
     private bool _isAerialHit;
-    private bool _isDown;
+	private bool _hasAerialPower;
+	private bool _isDown;
     private bool _isDownRecovery;
-
-	//FIXME
-	private bool _hasAerialPower = false;
-
+	
     [SerializeField]
     protected Transform _avatar;
     protected Vector3 _originPos;
