@@ -1,0 +1,11 @@
+●사용자 변수 (변수-값 순서)
+BOOST_ROOT
+C:\boost\boost_1_71_0
+
+MYSQL_ROOT
+C:\Program Files\MySQL\MySQL Server 8.0
+
+
+●시스템 변수
+Path에 추가
+C:\Program Files\MySQL\MySQL Server 8.0\bin
