@@ -16,7 +16,8 @@ public class HitEffectManager : MonoBehaviour
 
 	[SerializeField]
 	private GameObject _effectPrefab;
-
+	[SerializeField]
+	private GameObject _HidDamagePrefab;
 	private void Awake()
 	{
 		_instance = this;
@@ -33,5 +34,8 @@ public class HitEffectManager : MonoBehaviour
 		GameObject hitEffect = ObjectPoolManager.Instance.GetRestObject(_effectPrefab);
 		hitEffect.transform.position = position;
 		hitEffect.transform.localScale = new Vector3(size, size, 0);
+
+		GameObject hitDamage = ObjectPoolManager.Instance.GetRestObject(_HidDamagePrefab);
+		hitDamage.transform.position = position;
 	}
 }
