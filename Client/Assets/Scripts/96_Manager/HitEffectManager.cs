@@ -34,8 +34,12 @@ public class HitEffectManager : MonoBehaviour
 		GameObject hitEffect = ObjectPoolManager.Instance.GetRestObject(_effectPrefab);
 		hitEffect.transform.position = position;
 		hitEffect.transform.localScale = new Vector3(size, size, 0);
+	}
 
+	public void AddHitDamageEffect(Vector3 position, float damage)
+	{
 		GameObject hitDamage = ObjectPoolManager.Instance.GetRestObject(_HidDamagePrefab);
 		hitDamage.transform.position = position;
+		hitDamage.GetComponent<Damage>().SetDamage(damage);
 	}
 }

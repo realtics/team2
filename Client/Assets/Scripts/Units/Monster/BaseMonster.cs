@@ -40,9 +40,13 @@ public class BaseMonster : MonoBehaviour
     protected Transform _target = null;
     [SerializeField]
     protected Transform _baseAttackBox;
-    [SerializeField]
+    
+ [SerializeField]
     protected Transform _hitBox;
-    protected Animator _animator;
+	protected BoxCollider2D _hitBoxCenter;
+	protected float _hitEffectSize;
+
+	protected Animator _animator;
     protected Vector3 _forwardDirection;
 
     private StateMachine<BaseMonster> _state = null;
@@ -107,13 +111,17 @@ public class BaseMonster : MonoBehaviour
     public bool IsAttack { get { return _isAttack; } set { _isAttack = value; } }
     public bool IsHit { get { return _isHit; } set { _isHit = value; } }
 
+	public Vector3 HitBoxCenter { get { return _hitBoxCenter.bounds.center; } }
+
     protected virtual void Start()
     {
         _animator = GetComponentInChildren<Animator>();
         _currentHp = MaxHp;
         _baseAttackCurrentTime = _baseAttackResetTime;
         _originPos = _avatar.localPosition;
-        SetInitialState();
+		_hitBoxCenter = _hitBox.GetComponent<BoxCollider2D>();
+		_hitEffectSize = _hitBoxCenter.size.y + _hitBoxCenter.size.x;
+		SetInitialState();
     }
 
     protected virtual void FixedUpdate()
@@ -214,6 +222,7 @@ public class BaseMonster : MonoBehaviour
     public void OnHit(AttackInfoSender sender)
     {
 		AddHitEffect();
+		AddHitDamageEffect(sender.Damage);
 
 		if (sender.HorizontalExtraMoveDuration > 0)
             SetKnockbackValue(sender);
@@ -231,9 +240,14 @@ public class BaseMonster : MonoBehaviour
             _state.RestartState();
     }
 
-	protected virtual void AddHitEffect()
+	protected void AddHitEffect()
 	{
-		HitEffectManager.Instance.AddHitEffect(_avatar.position + _hitBox.right / 2 + _hitBox.up / 2, 3);
+		HitEffectManager.Instance.AddHitEffect(HitBoxCenter, _hitEffectSize);
+	}
+
+	protected void AddHitDamageEffect(float damage)
+	{
+		HitEffectManager.Instance.AddHitDamageEffect(HitBoxCenter, damage);
 	}
 
     //FIXME: AttackInofoSender 의 값중 넉백관련만 인자로 받게 고쳐야함
