@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
-public enum MiniMapArrow
+public enum MiniMapTileStyle
 {
     Unknown = 0,
     Right,
@@ -34,7 +34,7 @@ public class UIMiniMap : MonoBehaviour
 
     public void ChangeTileImage(MiniMapTile mapTile)
     {
-        mapTile.image.sprite = _tiles[(int)mapTile.arrow];
+        mapTile.image.sprite = _tiles[(int)mapTile.style];
     }
 
     public void Blinking(bool active)
