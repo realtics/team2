@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -48,11 +49,15 @@ public class UIMiniMap : MonoBehaviour
     [SerializeField]
     private Sprite[] _blinkTiles;
 
-    private const int _rectSize = 72;
     // Use this for initialization
     void Start()
     {
 
+    }
+
+    public void ChangeTileImage(MiniMapTile mapTile)
+    {
+        mapTile.image.sprite = _tiles[(int)mapTile.arrow];
     }
 
     public void Blinking(bool active)

@@ -31,22 +31,26 @@ public class BaseMonster : MonoBehaviour
     protected float _chaseTime = 0.0f;
     [SerializeField]
     protected float _moveSpeed;
-    [SerializeField]
+	[SerializeField]
+	protected Transform _target = null;
+
+	//values for BaseAttack
+	[SerializeField]
     protected float _baseAttackResetTime;
     [SerializeField]
     protected float _baseAttackCurrentTime;
+	[SerializeField]
+	protected Transform _baseAttackBox;
 
-    [SerializeField]
-    protected Transform _target = null;
-    [SerializeField]
-    protected Transform _baseAttackBox;
-    
- [SerializeField]
+	//values for HitEffect
+	[SerializeField]
     protected Transform _hitBox;
 	protected BoxCollider2D _hitBoxCenter;
 	protected float _hitEffectSize;
 
+	//values for sprite & animator
 	protected Animator _animator;
+	protected SpriteOutline _superArmorLine;
     protected Vector3 _forwardDirection;
 
     private StateMachine<BaseMonster> _state = null;
@@ -56,16 +60,15 @@ public class BaseMonster : MonoBehaviour
     private FSMState<BaseMonster> _dieState = new DieState();
     private FSMState<BaseMonster> _downRecoveryState = new DownRecoveryState();
 
-    private bool _isDead = false;
+	private bool _isDead;
     private bool _isAttack;
     private bool _isHit;
     private bool _isAerialHit;
-    private bool _isDown;
+	private bool _hasAerialPower;
+	private bool _isDown;
     private bool _isDownRecovery;
-
-	//FIXME
-	private bool _hasAerialPower = false;
-
+	private bool _isSuperArmor;
+	
     [SerializeField]
     protected Transform _avatar;
     protected Vector3 _originPos;
@@ -110,6 +113,7 @@ public class BaseMonster : MonoBehaviour
     public bool IsGround { get { return !(_height > 0.0f); } }
     public bool IsAttack { get { return _isAttack; } set { _isAttack = value; } }
     public bool IsHit { get { return _isHit; } set { _isHit = value; } }
+	public bool IsSuperArmor { get { return _isSuperArmor; } set { _isSuperArmor = value; } }
 
 	public Vector3 HitBoxCenter { get { return _hitBoxCenter.bounds.center; } }
 
@@ -121,12 +125,15 @@ public class BaseMonster : MonoBehaviour
         _originPos = _avatar.localPosition;
 		_hitBoxCenter = _hitBox.GetComponent<BoxCollider2D>();
 		_hitEffectSize = _hitBoxCenter.size.y + _hitBoxCenter.size.x;
+		_superArmorLine = _avatar.GetComponent<SpriteOutline>();
 		SetInitialState();
     }
 
     protected virtual void FixedUpdate()
     {
-        if (_currentHp <= 0 && !_isDead &&!_isAerialHit)
+		SuperArmorProcess();
+
+		if (_currentHp <= 0 && !_isDead &&!_isAerialHit)
         {
             _state.ChangeState(_dieState);
             _isDead = true;
@@ -234,10 +241,13 @@ public class BaseMonster : MonoBehaviour
         UIHelper.Instance.SetMonster(this);
         UIHelper.Instance.SetMonsterHp(_currentHp, _maxHp);
 
-        if (!_isHit)
-            _state.ChangeState(_hitState);
-        else
-            _state.RestartState();
+		if (!_isSuperArmor)
+		{
+			if (!_isHit)
+				_state.ChangeState(_hitState);
+			else
+				_state.RestartState();
+		}
     }
 
 	protected void AddHitEffect()
@@ -339,6 +349,11 @@ public class BaseMonster : MonoBehaviour
         yield return new WaitForFixedUpdate();
         StartCoroutine("AerialProcess");
     }
+
+	protected void SuperArmorProcess()
+	{
+		_superArmorLine.enabled = _isSuperArmor;
+	}
 
     //AttackState
     public virtual void EnterAttackState()
