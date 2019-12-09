@@ -27,6 +27,7 @@ public class PotalTransportinfo
 
 public class DungeonInfo
 {
+    public Vector2 position;
     public List<ObjectInfo> objectinfos = new List<ObjectInfo>();
     public List<MonsterInfo> monsterInfos = new List<MonsterInfo>();
     public List<PotalTransportinfo> potalTransportinfos = new List<PotalTransportinfo>();
