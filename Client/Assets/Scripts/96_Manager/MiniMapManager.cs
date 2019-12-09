@@ -28,7 +28,7 @@ public class MiniMapManager : MonoBehaviour
         for (int i = 0; i < maxNum; i++)
         {
             GameObject @object = Instantiate(_tilePrefab, parent);
-            @object.transform.position = new Vector3(parent.transform.localPosition.x - i * _tileSize, parent.transform.localPosition.y, 0);
+            @object.transform.localPosition = new Vector3( -(i * _tileSize), 0, 0);
             //RectTransform rectTransform = (RectTransform)@object.transform.localPosition;
             //rectTransform.localPosition
 
