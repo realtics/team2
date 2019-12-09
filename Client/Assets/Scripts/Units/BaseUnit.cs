@@ -276,8 +276,8 @@ public class BaseUnit : MonoBehaviour
             if (_isAttack)
                 return false;
 
-            if (_onSkill)
-                return false;
+			if (_onSkill)
+				return false;
         }
 
         return true;
