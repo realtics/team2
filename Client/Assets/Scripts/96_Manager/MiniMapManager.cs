@@ -42,8 +42,8 @@ public class MiniMapManager : MonoBehaviour
         // 던전 하나의 방향 정보 얻기.
         foreach(var item in dungeonData.DungeonInfos)
         {
-            _witdh += (int)item.position.x;
-            _height += (int)item.position.y;
+            MaxWidth((int)item.position.x);
+            MaxHeight((int)item.position.y);
 
             int minimapArrow = 0;
 
@@ -57,18 +57,28 @@ public class MiniMapManager : MonoBehaviour
 
             mapTile.position = item.position;
  
-            mapTile.tile = null;
-            _miniMapTiles.Add(mapTile);
-
-            GameObject @object = Instantiate(_tilePrefab, parent);
-            @object.transform.localPosition = new Vector3(-(mapTile.position.x * _tileSize), mapTile.position.y * _tileSize, 0);
+            mapTile.tile = Instantiate(_tilePrefab, parent);
+            _miniMapTiles.Add(mapTile);            
         }
 
-
-
-        
+        foreach (var item in _miniMapTiles)
+        {
+            item.tile.transform.localPosition
+                = new Vector3((item.position.x - _witdh) * _tileSize,
+                (item.position.y - _height) * _tileSize, 0);
+        }
     }
-
+    private void MaxWidth(int x)
+    {
+        if (_witdh < x)
+            _witdh = x;
+    }
+    private void MaxHeight(int y)
+    {
+        if (_height < y)
+            _height = y;
+    }
+    
     private MiniMapArrow ConvertMiniMapArrow(ARROW arrow)
     {
         switch(arrow)
