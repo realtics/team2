@@ -7,10 +7,13 @@ public class PlayerCharacter : MonoBehaviour
     private CharacterMovement _movement;
     private Vector3 _oldDirection;
 
+	public CharacterMovement Movement { get { return _movement; } }
+
     private void Start()
     {
         _movement = GetComponent<CharacterMovement>();
         _oldDirection = Vector3.zero;
+		PlayerManager.Instance.PlayerCharacter = this;
     }
 
     public void SetJump()

@@ -252,10 +252,10 @@ public class CharacterMovement : BaseUnit
             return false;
         }
 
-        if (!base.SetSkill(skill))
-            return false;
+		if (!CheckIsAttack())
+			return false;
 
-        if (!CheckIsAttack())
+		if (!base.SetSkill(skill))
             return false;
 
 		_animator.SetBool("IsMoving", false);
