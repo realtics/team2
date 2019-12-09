@@ -198,7 +198,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 34223262}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.09262943, y: -4.639126, z: -10}
+  m_LocalPosition: {x: 0.095136166, y: -4.639118, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -513,82 +513,82 @@ PrefabInstance:
     - target: {fileID: 1801744680022982238, guid: 41abd85db332e1048bc47b99b8aec411,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1801744680022982238, guid: 41abd85db332e1048bc47b99b8aec411,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1801744680022982238, guid: 41abd85db332e1048bc47b99b8aec411,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 179
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1801744680022982238, guid: 41abd85db332e1048bc47b99b8aec411,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -50
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1801744681428205347, guid: 41abd85db332e1048bc47b99b8aec411,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1801744681428205347, guid: 41abd85db332e1048bc47b99b8aec411,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1801744681428205347, guid: 41abd85db332e1048bc47b99b8aec411,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 567
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1801744681428205347, guid: 41abd85db332e1048bc47b99b8aec411,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -50
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1801744680287631464, guid: 41abd85db332e1048bc47b99b8aec411,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1801744680287631464, guid: 41abd85db332e1048bc47b99b8aec411,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1801744680287631464, guid: 41abd85db332e1048bc47b99b8aec411,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 955
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1801744680287631464, guid: 41abd85db332e1048bc47b99b8aec411,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -50
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1801744681367889882, guid: 41abd85db332e1048bc47b99b8aec411,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1801744681367889882, guid: 41abd85db332e1048bc47b99b8aec411,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1801744681367889882, guid: 41abd85db332e1048bc47b99b8aec411,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 1343
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1801744681367889882, guid: 41abd85db332e1048bc47b99b8aec411,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -50
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 41abd85db332e1048bc47b99b8aec411, type: 3}
@@ -1257,12 +1257,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerInfo: {fileID: 612484585}
+  _dungeonSelectMenu: {fileID: 0}
   _monsterInfo: {fileID: 142257165}
   _gameOver: {fileID: 826298707}
   _gameResult: {fileID: 1885735865}
   _dungeonClearMenu: {fileID: 0}
-  _dungeonSelectMenu: {fileID: 0}
-  _dungeonTile: {fileID: 0}
+  _miniMap: {fileID: 0}
 --- !u!114 &826298707 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 322670426628092975, guid: 095e3bee2e9fe194eb78e34b3e37139f,
@@ -1293,7 +1293,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &962199365
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2118,7 +2118,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1828477994}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.7714157, y: -4.806965, z: -10}
+  m_LocalPosition: {x: -4.7715545, y: -4.806965, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1482920773}
