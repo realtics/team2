@@ -2497,5 +2497,10 @@ PrefabInstance:
       propertyPath: _dungeonFileName
       value: minimap
       objectReference: {fileID: 0}
+    - target: {fileID: 7840884827199486510, guid: 86fb9eee594769e44bbd9bbda0425571,
+        type: 3}
+      propertyPath: _dungeonFileName
+      value: Force
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 86fb9eee594769e44bbd9bbda0425571, type: 3}

@@ -29,6 +29,8 @@ public class MiniMapManager : MonoBehaviour
 
     [SerializeField]
     private GameObject _playerCursor;
+    [SerializeField]
+    private GameObject _bossCursor;
 
     private DungeonJsonData dungeonData;
 
@@ -64,7 +66,12 @@ public class MiniMapManager : MonoBehaviour
             mapTile.position = item.position;
  
             mapTile.image = Instantiate(_tile, _tilesTransform).GetComponent<Image>();
-            _miniMapTiles.Add(mapTile);            
+            _miniMapTiles.Add(mapTile);          
+            
+            if(item.isBoss)
+            {
+                InitializedBossCursor(item.position);
+            }
         }
 
         movePlayerCursor(dungeonData.DungeonInfos[0].position);
@@ -97,6 +104,12 @@ public class MiniMapManager : MonoBehaviour
         _playerCursor.transform.localPosition
                 = new Vector3((playerPosition.x - _witdh) * _tileSize,
                 (playerPosition.y - _height) * _tileSize, 0);
+    }
+    public void InitializedBossCursor(Vector2 BossPosition)
+    {
+        _bossCursor.transform.localPosition
+                = new Vector3((BossPosition.x - _witdh) * _tileSize,
+                (BossPosition.y - _height) * _tileSize, 0);
     }
 
     private void InitializedMiniTile()
