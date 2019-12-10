@@ -26,9 +26,9 @@ public class CharacterMovement : BaseUnit
     public int Id { get { return _id; } set { _id = value; } }
 
 
-    protected override void Start()
+    protected override void Awake()
     {
-        base.Start();
+        base.Awake();
         _nextAttack = false;
         _animator.SetBool("IsGround", true);
         _animator.SetBool("NextAttack", false);
