@@ -109,6 +109,9 @@ public class CharacterMovement : BaseUnit
         if (animStateInfo.IsName("Attack3"))
             return;
 
+		if (!IsGround)
+			return;
+
         if (CurAnimTime < 0.5f)
             return;
 
