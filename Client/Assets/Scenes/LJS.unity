@@ -1185,6 +1185,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c233edee690a3d9449debd643ea49306, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playerCharacter: {fileID: 0}
 --- !u!4 &627290444
 Transform:
   m_ObjectHideFlags: 0
@@ -2591,6 +2592,21 @@ PrefabInstance:
     - target: {fileID: 6080406183113681298, guid: 1062798e89fa7ff48b49faaa1a382347,
         type: 3}
       propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6080406183113681298, guid: 1062798e89fa7ff48b49faaa1a382347,
+        type: 3}
+      propertyPath: secondColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6080406183113681298, guid: 1062798e89fa7ff48b49faaa1a382347,
+        type: 3}
+      propertyPath: secondColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6080406183113681298, guid: 1062798e89fa7ff48b49faaa1a382347,
+        type: 3}
+      propertyPath: secondColor.b
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
