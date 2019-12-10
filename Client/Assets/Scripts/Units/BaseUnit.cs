@@ -68,6 +68,7 @@ public class BaseUnit : MonoBehaviour
     public float CurAnimTime { get { return _animator.GetCurrentAnimatorStateInfo(0).normalizedTime; } }
     public bool IsInTranstion { get { return _animator.IsInTransition(0); } }
     public bool IsOnSkill { get { return _onSkill; } }
+	public bool IsDie { get { return _stat.Hp <= 0.0f; } }
 
     public Vector3 OriginPos { get { return _avatar.position; } }
     public CharacterStat Stat { get { return _stat; } }
@@ -268,6 +269,9 @@ public class BaseUnit : MonoBehaviour
 
     public bool IsMovable()
     {
+		if (IsDie)
+			return false;
+
         if (_isHit)
             return false;
 
@@ -285,7 +289,10 @@ public class BaseUnit : MonoBehaviour
 
     public bool IsAttackable()
     {
-        if (_isHit)
+		if (IsDie)
+			return false;
+
+		if (_isHit)
             return false;
 
         if (_onSkill)
@@ -296,7 +303,10 @@ public class BaseUnit : MonoBehaviour
 
     public bool IsJupable()
     {
-        if (IsHit)
+		if (IsDie)
+			return false;
+
+		if (IsHit)
             return false;
         if (IsAttack)
             return false;
