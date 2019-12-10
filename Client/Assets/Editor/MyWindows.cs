@@ -14,6 +14,11 @@ public class MyWindows : MonoBehaviour
     {
         _jsonManagement.AddDungeon();
     }
+    [MenuItem("MapTool/SetBossDungeon")]
+    static void SetDungeonBoss()
+    {
+        _jsonManagement.SetDungeonBoss();
+    }
     [MenuItem("MapTool/ClearDungeonData")]
     static void Clear()
     {
@@ -29,9 +34,5 @@ public class MyWindows : MonoBehaviour
     {
         var jsonData = _jsonManagement.JsonLoad<DungeonJsonData>("Test2");
     }
-    [MenuItem("MapTool/Custom Object")]
-    static void InstObject()
-    {
-        //_jsonManagement.InstObject();
-    }
+
 }

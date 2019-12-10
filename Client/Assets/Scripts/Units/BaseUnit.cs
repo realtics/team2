@@ -366,6 +366,9 @@ public class BaseUnit : MonoBehaviour
 
     public virtual bool OnHit(AttackInfoSender sender)
     {
+		if (IsDie)
+			return false;
+
         if (_isAirHit)
             return false;
 
@@ -418,6 +421,7 @@ public class BaseUnit : MonoBehaviour
 
     public virtual void SetDie()
     {
-        SetAirHitHeight(0.2f);
+		MoveUnit(-Forward * 10.0f, 1.2f, ExtraMoveDirection.Horizontal);
+		SetAirHitHeight(0.2f);
     }
 }
