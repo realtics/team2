@@ -14,7 +14,7 @@ public class UIHelper : MonoBehaviour
     [Header("[Common]")]
     [SerializeField]
     private UIPlayerInfo _playerInfo;
-    [Header("[Twon]")]
+    [Header("[Town]")]
     [SerializeField]
     private UIDungeonSelectMenu _dungeonSelectMenu;
     [Header("[Dungeon]")]

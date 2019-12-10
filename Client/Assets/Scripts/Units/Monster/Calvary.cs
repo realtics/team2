@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class Calvary : BaseMonster
 {
-    protected override void Start()
-    {
-        base.Start();
-		base.IsSuperArmor = true;
+    protected override void Awake()
+	{
+		base.Awake();
+		OnSuperArmor();
 	}
 
     protected override void FixedUpdate()

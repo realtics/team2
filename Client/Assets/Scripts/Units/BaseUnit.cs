@@ -75,21 +75,23 @@ public class BaseUnit : MonoBehaviour
 
     protected virtual void Awake()
     {
-        _axisHorizontal = 0.0f;
-        _axisVertical = 0.0f;
-        _speedHorizontal = 3.0f;
-        _speedVertical = 3.0f;
-    }
-
-    protected virtual void Start()
-    {
         _animator = GetComponentInChildren<Animator>();
         _renderer = GetComponentInChildren<SpriteRenderer>();
         _rgdBody = GetComponent<Rigidbody2D>();
         _stat = GetComponent<CharacterStat>();
         _stat.SetUnit(this);
         _originPos = _avatar.localPosition;
-    }
+
+		_axisHorizontal = 0.0f;
+		_axisVertical = 0.0f;
+		_speedHorizontal = 3.0f;
+		_speedVertical = 3.0f;
+	}
+
+	protected virtual void Start()
+	{
+
+	}
 
     protected virtual void Update()
     {

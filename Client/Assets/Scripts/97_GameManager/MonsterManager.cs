@@ -47,7 +47,6 @@ public class MonsterManager : MonoBehaviour
         monster.ResetMonster();
         _monsterList.Remove(monster);
 
-        //FIXME : 포탈을 여는 주체가 몬스터매니저가 할일인가
         if (_monsterList.Count == 0)
             PotalManager.instance.ResetPotals();
     }

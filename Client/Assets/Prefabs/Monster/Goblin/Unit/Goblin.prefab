@@ -145,6 +145,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   color: {r: 1, g: 0, b: 0, a: 1}
+  secondColor: {r: 1, g: 1, b: 0, a: 1}
+  lerpedColor:
+    serializedVersion: 2
+    rgba: 0
+  _currentTime: 0
   outlineSize: 2
 --- !u!1 &1020073003416927019
 GameObject:

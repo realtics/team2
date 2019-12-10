@@ -7,12 +7,4 @@ Temp/
 *.csproj
 *.sln
 *.collabignore
-Client/Assets/Sprites/Monster/01_Tauarmy/Effect/tauarmy_baseAttackEffect.meta
-Client/Assets/Sprites/Atlases/Monster/TestMonsterAtlas.spriteatlas
-Client/Assets/Sprites/Atlases/Monster/TauarmyAtlas.spriteatlas
-Client/Assets/Sprites/Atlases/Monster/GoblinAtlas.spriteatlas
-Client/Assets/Sprites/Atlases/Monster/CalvaryAtlas.spriteatlas
-Client/Assets/Sprites/Atlases/MaleWarriorAtlas.spriteatlas
-Client/Assets/Sprites/Atlases/MaleSwordman.spriteatlas
-Client/Assets/Sprites/Atlases/FemaleWarriorAtlas.spriteatlas
-Client/Assets/Sprites/Atlases/Blache.spriteatlas
+*.spriteatlas

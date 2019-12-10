@@ -9,7 +9,7 @@ public class PlayerCharacter : MonoBehaviour
 
 	public CharacterMovement Movement { get { return _movement; } }
 
-    private void Start()
+    private void Awake()
     {
         _movement = GetComponent<CharacterMovement>();
         _oldDirection = Vector3.zero;
