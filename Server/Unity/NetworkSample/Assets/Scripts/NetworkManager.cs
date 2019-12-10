@@ -75,14 +75,14 @@ public class NetworkManager : MonoBehaviour
     }
 
     public GameObject playerPrefab;
+	
+	//// 신호를 받을 때 수동으로 재설정 되어야 하는 스레드 동기화 이벤트
+	//private static ManualResetEvent _connectDone = new ManualResetEvent(false);
+	//private static ManualResetEvent _sendDone = new ManualResetEvent(false);
+	//private static ManualResetEvent _receiveDone = new ManualResetEvent(false);
+	//private static String _response = String.Empty; // 서버 응답
 
-    //// 신호를 받을 때 수동으로 재설정 되어야 하는 스레드 동기화 이벤트
-    //private static ManualResetEvent _connectDone = new ManualResetEvent(false);
-    //private static ManualResetEvent _sendDone = new ManualResetEvent(false);
-    //private static ManualResetEvent _receiveDone = new ManualResetEvent(false);
-    //private static String _response = String.Empty; // 서버 응답
-
-    public string appDataPath;
+	public string appDataPath;
     public string appDataPathParent;
 
     private Socket _sock = null;
@@ -165,7 +165,7 @@ public class NetworkManager : MonoBehaviour
                 ConcurrentUser();
             }
 
-
+			
             //// 서버에서 새로운 플레이어가 접속했다고 알려주는 역할임
             //if (Input.GetKeyDown(KeyCode.Space))
             //{
@@ -205,8 +205,8 @@ public class NetworkManager : MonoBehaviour
             {
                 Debug.Log("소켓 생성 실패");
             }
-            //_sock.Connect(new IPEndPoint(IPAddress.Parse("127.0.0.1"), 31452));
-            _sock.Connect(new IPEndPoint(IPAddress.Parse("192.168.200.168"), 31452));
+            _sock.Connect(new IPEndPoint(IPAddress.Parse("127.0.0.1"), 31452));
+            //_sock.Connect(new IPEndPoint(IPAddress.Parse("192.168.200.168"), 31452));
             //_sock.Connect(new IPEndPoint(IPAddress.Parse("192.168.1.105"), 31452));
 
             DebugLogList("socket() end");

@@ -22,7 +22,10 @@ AsioServer::~AsioServer()
 
 void AsioServer::Init(const int maxSessionCount)
 {
-	DBMySQL _DBMySQL;
+	DBMySQL _DBMysql;
+	_DBMysql.Init();
+	_DBMysql.DBDataLoginSelectAll();
+	_DBMysql.DBMySQLVersion();
 
 	for (int i = 0; i < maxSessionCount; i++)
 	{
