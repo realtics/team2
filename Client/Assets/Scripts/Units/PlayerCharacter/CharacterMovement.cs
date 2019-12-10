@@ -13,7 +13,7 @@ public class CharacterMovement : BaseUnit
     private int _id;
     private bool _nextAttack;
     private CharacterAnimController _animController;
-    private Dictionary<SwordmanSkillIndex, CharacterSkill> _equiredSkills;
+    private Dictionary<SwordmanSkillIndex, CharacterSkill> _equipSkills;
     private SwordmanSkillIndex _usedSkill;
 
 	private bool _onMoveStartPacket;
@@ -22,7 +22,7 @@ public class CharacterMovement : BaseUnit
 	private CharacterMovePacket _moveStartPacket;
 	private CharacterMovePacket _moveEndPacket;
 
-	public CharacterSkill UsedSkill { get { return _equiredSkills[_usedSkill]; } }
+	public CharacterSkill UsedSkill { get { return _equipSkills[_usedSkill]; } }
     public int Id { get { return _id; } set { _id = value; } }
 
 
@@ -34,10 +34,10 @@ public class CharacterMovement : BaseUnit
         _animator.SetBool("NextAttack", false);
         _animController = GetComponentInChildren<CharacterAnimController>();
 
-        _equiredSkills = new Dictionary<SwordmanSkillIndex, CharacterSkill>();
-        _equiredSkills.Add(SwordmanSkillIndex.Jingongcham, SwordmanSkillManager.Instance.GetSkill(_stat, SwordmanSkillIndex.Jingongcham));
-        _equiredSkills.Add(SwordmanSkillIndex.Hadouken, SwordmanSkillManager.Instance.GetSkill(_stat, SwordmanSkillIndex.Hadouken));
-        _equiredSkills.Add(SwordmanSkillIndex.Blache, SwordmanSkillManager.Instance.GetSkill(_stat, SwordmanSkillIndex.Blache));
+        _equipSkills = new Dictionary<SwordmanSkillIndex, CharacterSkill>();
+        _equipSkills.Add(SwordmanSkillIndex.Jingongcham, SwordmanSkillManager.Instance.GetSkill(_stat, SwordmanSkillIndex.Jingongcham));
+        _equipSkills.Add(SwordmanSkillIndex.Hadouken, SwordmanSkillManager.Instance.GetSkill(_stat, SwordmanSkillIndex.Hadouken));
+        _equipSkills.Add(SwordmanSkillIndex.Blache, SwordmanSkillManager.Instance.GetSkill(_stat, SwordmanSkillIndex.Blache));
     }
 
     protected override void Update()
@@ -50,7 +50,7 @@ public class CharacterMovement : BaseUnit
 
     private void SkillCoolTimeUpdate()
     {
-        foreach (CharacterSkill skill in _equiredSkills.Values)
+        foreach (CharacterSkill skill in _equipSkills.Values)
         {
             skill.UpdateCoolTime();
         }
@@ -357,5 +357,12 @@ public class CharacterMovement : BaseUnit
 		base.SetDie();
 		_animator.SetBool("IsHit", true);
 		_animator.SetBool("IsDie", true);
+	}
+
+	public CharacterSkill GetEquipSkill(SwordmanSkillIndex index)
+	{
+		CharacterSkill skill = null;
+		skill = _equipSkills[index];
+		return skill;
 	}
 }

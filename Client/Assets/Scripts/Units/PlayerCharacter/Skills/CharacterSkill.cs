@@ -16,6 +16,7 @@ public class CharacterSkill
     public int MotionIndex { get { return _motionIndex; } }
     public bool UsableSkill { get { return _coolTime <= 0.0f; } }
     public float CurrentCoolTime { get { return _coolTime; } }
+	public float InitCoolTime { get { return _initCoolTime; } }
 
     public void UpdateCoolTime()
     {
