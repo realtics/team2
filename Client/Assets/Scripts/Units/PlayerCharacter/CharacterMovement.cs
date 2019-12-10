@@ -351,4 +351,11 @@ public class CharacterMovement : BaseUnit
 		_moveEndPacket.position = pos;
 		_moveEndPacket.direction = Vector3.zero;
 	}
+
+	public override void SetDie()
+	{
+		base.SetDie();
+		_animator.SetBool("IsHit", true);
+		_animator.SetBool("IsDie", true);
+	}
 }
