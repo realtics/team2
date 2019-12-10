@@ -45,122 +45,95 @@
         {
           "filePath": "Object/PotalTransport Side",
           "position": {
-            "x": 1.37,
-            "y": -6.35,
+            "x": 1.7654109,
+            "y": -5.242311,
             "z": 0.0,
             "normalized": {
-              "x": 0.210895553,
-              "y": -0.977508545,
+              "x": 0.319150656,
+              "y": -0.947704,
+              "z": 0.0,
+              "magnitude": 1.0,
+              "sqrMagnitude": 1.0
+            },
+            "magnitude": 5.531591,
+            "sqrMagnitude": 30.5985012
+          },
+          "spotPosition": [
+            {
+              "x": -0.434589148,
+              "y": -7.04231071,
               "z": 0.0,
               "normalized": {
-                "x": 0.210895568,
-                "y": -0.9775086,
+                "x": -0.061593987,
+                "y": -0.9981013,
                 "z": 0.0,
                 "magnitude": 1.0,
                 "sqrMagnitude": 1.0
               },
-              "magnitude": 0.99999994,
-              "sqrMagnitude": 0.9999999
+              "magnitude": 7.05570745,
+              "sqrMagnitude": 49.78301
             },
-            "magnitude": 6.49610662,
-            "sqrMagnitude": 42.199398
-          },
-          "spotPosition": [
             {
-              "x": -1.41,
-              "y": -8.35,
+              "x": 1.7654109,
+              "y": -5.242311,
               "z": 0.0,
               "normalized": {
-                "x": -0.166505054,
-                "y": -0.986040652,
+                "x": 0.319150656,
+                "y": -0.947704,
                 "z": 0.0,
                 "magnitude": 1.0,
-                "sqrMagnitude": 1.00000012
+                "sqrMagnitude": 1.0
               },
-              "magnitude": 8.468211,
-              "sqrMagnitude": 71.71061
+              "magnitude": 5.531591,
+              "sqrMagnitude": 30.5985012
             },
             {
-              "x": 1.37,
-              "y": -6.35,
+              "x": 1.7654109,
+              "y": -5.242311,
               "z": 0.0,
               "normalized": {
-                "x": 0.210895553,
-                "y": -0.977508545,
+                "x": 0.319150656,
+                "y": -0.947704,
                 "z": 0.0,
-                "normalized": {
-                  "x": 0.210895568,
-                  "y": -0.9775086,
-                  "z": 0.0,
-                  "magnitude": 1.0,
-                  "sqrMagnitude": 1.0
-                },
-                "magnitude": 0.99999994,
-                "sqrMagnitude": 0.9999999
+                "magnitude": 1.0,
+                "sqrMagnitude": 1.0
               },
-              "magnitude": 6.49610662,
-              "sqrMagnitude": 42.199398
+              "magnitude": 5.531591,
+              "sqrMagnitude": 30.5985012
             },
             {
-              "x": 1.37,
-              "y": -6.35,
+              "x": 1.7654109,
+              "y": -5.242311,
               "z": 0.0,
               "normalized": {
-                "x": 0.210895553,
-                "y": -0.977508545,
+                "x": 0.319150656,
+                "y": -0.947704,
                 "z": 0.0,
-                "normalized": {
-                  "x": 0.210895568,
-                  "y": -0.9775086,
-                  "z": 0.0,
-                  "magnitude": 1.0,
-                  "sqrMagnitude": 1.0
-                },
-                "magnitude": 0.99999994,
-                "sqrMagnitude": 0.9999999
+                "magnitude": 1.0,
+                "sqrMagnitude": 1.0
               },
-              "magnitude": 6.49610662,
-              "sqrMagnitude": 42.199398
-            },
-            {
-              "x": 1.37,
-              "y": -6.35,
-              "z": 0.0,
-              "normalized": {
-                "x": 0.210895553,
-                "y": -0.977508545,
-                "z": 0.0,
-                "normalized": {
-                  "x": 0.210895568,
-                  "y": -0.9775086,
-                  "z": 0.0,
-                  "magnitude": 1.0,
-                  "sqrMagnitude": 1.0
-                },
-                "magnitude": 0.99999994,
-                "sqrMagnitude": 0.9999999
-              },
-              "magnitude": 6.49610662,
-              "sqrMagnitude": 42.199398
+              "magnitude": 5.531591,
+              "sqrMagnitude": 30.5985012
             }
           ],
           "arrow": 3,
           "nextIndex": 1
         }
       ],
+      "isBoss": false,
       "PlayerStartPosition": {
-        "x": -11.15,
-        "y": -7.06,
+        "x": -11.53,
+        "y": -7.21,
         "z": 0.0,
         "normalized": {
-          "x": -0.84487617,
-          "y": -0.534961939,
+          "x": -0.847874343,
+          "y": -0.530197263,
           "z": 0.0,
           "magnitude": 1.0,
           "sqrMagnitude": 1.0
         },
-        "magnitude": 13.1972,
-        "sqrMagnitude": 174.166092
+        "magnitude": 13.5987129,
+        "sqrMagnitude": 184.924988
       }
     },
     {
@@ -208,103 +181,75 @@
         {
           "filePath": "Object/PotalTransport Side",
           "position": {
-            "x": 1.37,
-            "y": -6.35,
+            "x": 1.7654109,
+            "y": -5.242311,
             "z": 0.0,
             "normalized": {
-              "x": 0.210895553,
-              "y": -0.977508545,
+              "x": 0.319150656,
+              "y": -0.947704,
+              "z": 0.0,
+              "magnitude": 1.0,
+              "sqrMagnitude": 1.0
+            },
+            "magnitude": 5.531591,
+            "sqrMagnitude": 30.5985012
+          },
+          "spotPosition": [
+            {
+              "x": -0.434589148,
+              "y": -7.04231071,
               "z": 0.0,
               "normalized": {
-                "x": 0.210895568,
-                "y": -0.9775086,
+                "x": -0.061593987,
+                "y": -0.9981013,
                 "z": 0.0,
                 "magnitude": 1.0,
                 "sqrMagnitude": 1.0
               },
-              "magnitude": 0.99999994,
-              "sqrMagnitude": 0.9999999
+              "magnitude": 7.05570745,
+              "sqrMagnitude": 49.78301
             },
-            "magnitude": 6.49610662,
-            "sqrMagnitude": 42.199398
-          },
-          "spotPosition": [
             {
-              "x": -1.41,
-              "y": -8.35,
+              "x": 1.7654109,
+              "y": -5.242311,
               "z": 0.0,
               "normalized": {
-                "x": -0.166505054,
-                "y": -0.986040652,
+                "x": 0.319150656,
+                "y": -0.947704,
                 "z": 0.0,
                 "magnitude": 1.0,
-                "sqrMagnitude": 1.00000012
+                "sqrMagnitude": 1.0
               },
-              "magnitude": 8.468211,
-              "sqrMagnitude": 71.71061
+              "magnitude": 5.531591,
+              "sqrMagnitude": 30.5985012
             },
             {
-              "x": 1.37,
-              "y": -6.35,
+              "x": 1.7654109,
+              "y": -5.242311,
               "z": 0.0,
               "normalized": {
-                "x": 0.210895553,
-                "y": -0.977508545,
+                "x": 0.319150656,
+                "y": -0.947704,
                 "z": 0.0,
-                "normalized": {
-                  "x": 0.210895568,
-                  "y": -0.9775086,
-                  "z": 0.0,
-                  "magnitude": 1.0,
-                  "sqrMagnitude": 1.0
-                },
-                "magnitude": 0.99999994,
-                "sqrMagnitude": 0.9999999
+                "magnitude": 1.0,
+                "sqrMagnitude": 1.0
               },
-              "magnitude": 6.49610662,
-              "sqrMagnitude": 42.199398
+              "magnitude": 5.531591,
+              "sqrMagnitude": 30.5985012
             },
             {
-              "x": 1.37,
-              "y": -6.35,
+              "x": 1.7654109,
+              "y": -5.242311,
               "z": 0.0,
               "normalized": {
-                "x": 0.210895553,
-                "y": -0.977508545,
+                "x": 0.319150656,
+                "y": -0.947704,
                 "z": 0.0,
-                "normalized": {
-                  "x": 0.210895568,
-                  "y": -0.9775086,
-                  "z": 0.0,
-                  "magnitude": 1.0,
-                  "sqrMagnitude": 1.0
-                },
-                "magnitude": 0.99999994,
-                "sqrMagnitude": 0.9999999
+                "magnitude": 1.0,
+                "sqrMagnitude": 1.0
               },
-              "magnitude": 6.49610662,
-              "sqrMagnitude": 42.199398
-            },
-            {
-              "x": 1.37,
-              "y": -6.35,
-              "z": 0.0,
-              "normalized": {
-                "x": 0.210895553,
-                "y": -0.977508545,
-                "z": 0.0,
-                "normalized": {
-                  "x": 0.210895568,
-                  "y": -0.9775086,
-                  "z": 0.0,
-                  "magnitude": 1.0,
-                  "sqrMagnitude": 1.0
-                },
-                "magnitude": 0.99999994,
-                "sqrMagnitude": 0.9999999
-              },
-              "magnitude": 6.49610662,
-              "sqrMagnitude": 42.199398
+              "magnitude": 5.531591,
+              "sqrMagnitude": 30.5985012
             }
           ],
           "arrow": 3,
@@ -313,88 +258,82 @@
         {
           "filePath": "Object/PotalTransport Side",
           "position": {
-            "x": -14.72,
-            "y": -6.35,
+            "x": -14.14,
+            "y": -6.54,
             "z": 0.0,
             "normalized": {
-              "x": -0.918206751,
-              "y": -0.396101415,
+              "x": -0.907620966,
+              "y": -0.419790715,
               "z": 0.0,
               "magnitude": 1.0,
-              "sqrMagnitude": 0.99999994
+              "sqrMagnitude": 1.00000012
             },
-            "magnitude": 16.0312481,
-            "sqrMagnitude": 257.000916
+            "magnitude": 15.5791912,
+            "sqrMagnitude": 242.711212
           },
           "spotPosition": [
             {
-              "x": -12.3,
-              "y": -8.19,
+              "x": -11.72,
+              "y": -8.44,
               "z": 0.0,
               "normalized": {
-                "x": -0.8323625,
-                "y": -0.5542316,
-                "z": 0.0,
-                "normalized": {
-                  "x": -0.832362533,
-                  "y": -0.554231644,
-                  "z": 0.0,
-                  "magnitude": 1.0,
-                  "sqrMagnitude": 1.00000012
-                },
-                "magnitude": 0.99999994,
-                "sqrMagnitude": 0.99999994
-              },
-              "magnitude": 14.777216,
-              "sqrMagnitude": 218.3661
-            },
-            {
-              "x": -12.24,
-              "y": -8.01,
-              "z": 0.0,
-              "normalized": {
-                "x": -0.8367528,
-                "y": -0.5475809,
+                "x": -0.811481833,
+                "y": -0.584377646,
                 "z": 0.0,
                 "magnitude": 1.0,
                 "sqrMagnitude": 1.0
               },
-              "magnitude": 14.6279764,
-              "sqrMagnitude": 213.977692
+              "magnitude": 14.4427147,
+              "sqrMagnitude": 208.592
             },
             {
-              "x": -14.72,
-              "y": -6.35,
+              "x": -14.14,
+              "y": -6.54,
               "z": 0.0,
               "normalized": {
-                "x": -0.918206751,
-                "y": -0.396101415,
+                "x": -0.907620966,
+                "y": -0.419790715,
                 "z": 0.0,
                 "magnitude": 1.0,
-                "sqrMagnitude": 0.99999994
+                "sqrMagnitude": 1.00000012
               },
-              "magnitude": 16.0312481,
-              "sqrMagnitude": 257.000916
+              "magnitude": 15.5791912,
+              "sqrMagnitude": 242.711212
             },
             {
-              "x": -14.72,
-              "y": -6.35,
+              "x": -14.14,
+              "y": -6.54,
               "z": 0.0,
               "normalized": {
-                "x": -0.918206751,
-                "y": -0.396101415,
+                "x": -0.907620966,
+                "y": -0.419790715,
                 "z": 0.0,
                 "magnitude": 1.0,
-                "sqrMagnitude": 0.99999994
+                "sqrMagnitude": 1.00000012
               },
-              "magnitude": 16.0312481,
-              "sqrMagnitude": 257.000916
+              "magnitude": 15.5791912,
+              "sqrMagnitude": 242.711212
+            },
+            {
+              "x": -14.14,
+              "y": -6.54,
+              "z": 0.0,
+              "normalized": {
+                "x": -0.907620966,
+                "y": -0.419790715,
+                "z": 0.0,
+                "magnitude": 1.0,
+                "sqrMagnitude": 1.00000012
+              },
+              "magnitude": 15.5791912,
+              "sqrMagnitude": 242.711212
             }
           ],
           "arrow": 2,
           "nextIndex": 0
         }
       ],
+      "isBoss": false,
       "PlayerStartPosition": {
         "x": 0.0,
         "y": 0.0,
@@ -454,88 +393,506 @@
         {
           "filePath": "Object/PotalTransport Side",
           "position": {
-            "x": -14.72,
-            "y": -6.35,
+            "x": 1.7654109,
+            "y": -5.242311,
             "z": 0.0,
             "normalized": {
-              "x": -0.918206751,
-              "y": -0.396101415,
+              "x": 0.319150656,
+              "y": -0.947704,
               "z": 0.0,
               "magnitude": 1.0,
-              "sqrMagnitude": 0.99999994
+              "sqrMagnitude": 1.0
             },
-            "magnitude": 16.0312481,
-            "sqrMagnitude": 257.000916
+            "magnitude": 5.531591,
+            "sqrMagnitude": 30.5985012
           },
           "spotPosition": [
             {
-              "x": -12.3,
-              "y": -8.19,
+              "x": -0.434589148,
+              "y": -7.04231071,
               "z": 0.0,
               "normalized": {
-                "x": -0.8323625,
-                "y": -0.5542316,
-                "z": 0.0,
-                "normalized": {
-                  "x": -0.832362533,
-                  "y": -0.554231644,
-                  "z": 0.0,
-                  "magnitude": 1.0,
-                  "sqrMagnitude": 1.00000012
-                },
-                "magnitude": 0.99999994,
-                "sqrMagnitude": 0.99999994
-              },
-              "magnitude": 14.777216,
-              "sqrMagnitude": 218.3661
-            },
-            {
-              "x": -12.24,
-              "y": -8.01,
-              "z": 0.0,
-              "normalized": {
-                "x": -0.8367528,
-                "y": -0.5475809,
+                "x": -0.061593987,
+                "y": -0.9981013,
                 "z": 0.0,
                 "magnitude": 1.0,
                 "sqrMagnitude": 1.0
               },
-              "magnitude": 14.6279764,
-              "sqrMagnitude": 213.977692
+              "magnitude": 7.05570745,
+              "sqrMagnitude": 49.78301
             },
             {
-              "x": -14.72,
-              "y": -6.35,
+              "x": 1.7654109,
+              "y": -5.242311,
               "z": 0.0,
               "normalized": {
-                "x": -0.918206751,
-                "y": -0.396101415,
+                "x": 0.319150656,
+                "y": -0.947704,
                 "z": 0.0,
                 "magnitude": 1.0,
-                "sqrMagnitude": 0.99999994
+                "sqrMagnitude": 1.0
               },
-              "magnitude": 16.0312481,
-              "sqrMagnitude": 257.000916
+              "magnitude": 5.531591,
+              "sqrMagnitude": 30.5985012
             },
             {
-              "x": -14.72,
-              "y": -6.35,
+              "x": 1.7654109,
+              "y": -5.242311,
               "z": 0.0,
               "normalized": {
-                "x": -0.918206751,
-                "y": -0.396101415,
+                "x": 0.319150656,
+                "y": -0.947704,
                 "z": 0.0,
                 "magnitude": 1.0,
-                "sqrMagnitude": 0.99999994
+                "sqrMagnitude": 1.0
               },
-              "magnitude": 16.0312481,
-              "sqrMagnitude": 257.000916
+              "magnitude": 5.531591,
+              "sqrMagnitude": 30.5985012
+            },
+            {
+              "x": 1.7654109,
+              "y": -5.242311,
+              "z": 0.0,
+              "normalized": {
+                "x": 0.319150656,
+                "y": -0.947704,
+                "z": 0.0,
+                "magnitude": 1.0,
+                "sqrMagnitude": 1.0
+              },
+              "magnitude": 5.531591,
+              "sqrMagnitude": 30.5985012
+            }
+          ],
+          "arrow": 3,
+          "nextIndex": 3
+        },
+        {
+          "filePath": "Object/PotalTransport Side",
+          "position": {
+            "x": -14.14,
+            "y": -6.54,
+            "z": 0.0,
+            "normalized": {
+              "x": -0.907620966,
+              "y": -0.419790715,
+              "z": 0.0,
+              "magnitude": 1.0,
+              "sqrMagnitude": 1.00000012
+            },
+            "magnitude": 15.5791912,
+            "sqrMagnitude": 242.711212
+          },
+          "spotPosition": [
+            {
+              "x": -11.72,
+              "y": -8.44,
+              "z": 0.0,
+              "normalized": {
+                "x": -0.811481833,
+                "y": -0.584377646,
+                "z": 0.0,
+                "magnitude": 1.0,
+                "sqrMagnitude": 1.0
+              },
+              "magnitude": 14.4427147,
+              "sqrMagnitude": 208.592
+            },
+            {
+              "x": -14.14,
+              "y": -6.54,
+              "z": 0.0,
+              "normalized": {
+                "x": -0.907620966,
+                "y": -0.419790715,
+                "z": 0.0,
+                "magnitude": 1.0,
+                "sqrMagnitude": 1.00000012
+              },
+              "magnitude": 15.5791912,
+              "sqrMagnitude": 242.711212
+            },
+            {
+              "x": -14.14,
+              "y": -6.54,
+              "z": 0.0,
+              "normalized": {
+                "x": -0.907620966,
+                "y": -0.419790715,
+                "z": 0.0,
+                "magnitude": 1.0,
+                "sqrMagnitude": 1.00000012
+              },
+              "magnitude": 15.5791912,
+              "sqrMagnitude": 242.711212
+            },
+            {
+              "x": -14.14,
+              "y": -6.54,
+              "z": 0.0,
+              "normalized": {
+                "x": -0.907620966,
+                "y": -0.419790715,
+                "z": 0.0,
+                "magnitude": 1.0,
+                "sqrMagnitude": 1.00000012
+              },
+              "magnitude": 15.5791912,
+              "sqrMagnitude": 242.711212
             }
           ],
           "arrow": 2,
           "nextIndex": 1
         }
       ],
+      "isBoss": false,
+      "PlayerStartPosition": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "magnitude": 0.0,
+        "sqrMagnitude": 0.0
+      }
+    },
+    {
+      "position": {
+        "x": 3.0,
+        "y": 0.0,
+        "normalized": {
+          "x": 1.0,
+          "y": 0.0,
+          "magnitude": 1.0,
+          "sqrMagnitude": 1.0
+        },
+        "magnitude": 3.0,
+        "sqrMagnitude": 9.0
+      },
+      "objectinfos": [
+        {
+          "filePath": "Dungeon/Dungeon",
+          "position": {
+            "x": 5.34,
+            "y": -7.91,
+            "z": -4.17578125,
+            "normalized": {
+              "x": 0.5126072,
+              "y": -0.7593114,
+              "z": -0.400849342,
+              "normalized": {
+                "x": 0.512607157,
+                "y": -0.759311259,
+                "z": -0.400849283,
+                "normalized": {
+                  "x": 0.5126072,
+                  "y": -0.7593113,
+                  "z": -0.4008493,
+                  "magnitude": 1.0,
+                  "sqrMagnitude": 1.0
+                },
+                "magnitude": 0.99999994,
+                "sqrMagnitude": 0.9999998
+              },
+              "magnitude": 1.00000012,
+              "sqrMagnitude": 1.00000012
+            },
+            "magnitude": 10.4173336,
+            "sqrMagnitude": 108.520851
+          }
+        }
+      ],
+      "monsterInfos": [],
+      "potalTransportinfos": [
+        {
+          "filePath": "Object/PotalTransport Side",
+          "position": {
+            "x": 1.7654109,
+            "y": -5.242311,
+            "z": 0.0,
+            "normalized": {
+              "x": 0.319150656,
+              "y": -0.947704,
+              "z": 0.0,
+              "magnitude": 1.0,
+              "sqrMagnitude": 1.0
+            },
+            "magnitude": 5.531591,
+            "sqrMagnitude": 30.5985012
+          },
+          "spotPosition": [
+            {
+              "x": -0.434589148,
+              "y": -7.04231071,
+              "z": 0.0,
+              "normalized": {
+                "x": -0.061593987,
+                "y": -0.9981013,
+                "z": 0.0,
+                "magnitude": 1.0,
+                "sqrMagnitude": 1.0
+              },
+              "magnitude": 7.05570745,
+              "sqrMagnitude": 49.78301
+            },
+            {
+              "x": 1.7654109,
+              "y": -5.242311,
+              "z": 0.0,
+              "normalized": {
+                "x": 0.319150656,
+                "y": -0.947704,
+                "z": 0.0,
+                "magnitude": 1.0,
+                "sqrMagnitude": 1.0
+              },
+              "magnitude": 5.531591,
+              "sqrMagnitude": 30.5985012
+            },
+            {
+              "x": 1.7654109,
+              "y": -5.242311,
+              "z": 0.0,
+              "normalized": {
+                "x": 0.319150656,
+                "y": -0.947704,
+                "z": 0.0,
+                "magnitude": 1.0,
+                "sqrMagnitude": 1.0
+              },
+              "magnitude": 5.531591,
+              "sqrMagnitude": 30.5985012
+            },
+            {
+              "x": 1.7654109,
+              "y": -5.242311,
+              "z": 0.0,
+              "normalized": {
+                "x": 0.319150656,
+                "y": -0.947704,
+                "z": 0.0,
+                "magnitude": 1.0,
+                "sqrMagnitude": 1.0
+              },
+              "magnitude": 5.531591,
+              "sqrMagnitude": 30.5985012
+            }
+          ],
+          "arrow": 3,
+          "nextIndex": 4
+        },
+        {
+          "filePath": "Object/PotalTransport Side",
+          "position": {
+            "x": -14.14,
+            "y": -6.54,
+            "z": 0.0,
+            "normalized": {
+              "x": -0.907620966,
+              "y": -0.419790715,
+              "z": 0.0,
+              "magnitude": 1.0,
+              "sqrMagnitude": 1.00000012
+            },
+            "magnitude": 15.5791912,
+            "sqrMagnitude": 242.711212
+          },
+          "spotPosition": [
+            {
+              "x": -11.72,
+              "y": -8.44,
+              "z": 0.0,
+              "normalized": {
+                "x": -0.811481833,
+                "y": -0.584377646,
+                "z": 0.0,
+                "magnitude": 1.0,
+                "sqrMagnitude": 1.0
+              },
+              "magnitude": 14.4427147,
+              "sqrMagnitude": 208.592
+            },
+            {
+              "x": -14.14,
+              "y": -6.54,
+              "z": 0.0,
+              "normalized": {
+                "x": -0.907620966,
+                "y": -0.419790715,
+                "z": 0.0,
+                "magnitude": 1.0,
+                "sqrMagnitude": 1.00000012
+              },
+              "magnitude": 15.5791912,
+              "sqrMagnitude": 242.711212
+            },
+            {
+              "x": -14.14,
+              "y": -6.54,
+              "z": 0.0,
+              "normalized": {
+                "x": -0.907620966,
+                "y": -0.419790715,
+                "z": 0.0,
+                "magnitude": 1.0,
+                "sqrMagnitude": 1.00000012
+              },
+              "magnitude": 15.5791912,
+              "sqrMagnitude": 242.711212
+            },
+            {
+              "x": -14.14,
+              "y": -6.54,
+              "z": 0.0,
+              "normalized": {
+                "x": -0.907620966,
+                "y": -0.419790715,
+                "z": 0.0,
+                "magnitude": 1.0,
+                "sqrMagnitude": 1.00000012
+              },
+              "magnitude": 15.5791912,
+              "sqrMagnitude": 242.711212
+            }
+          ],
+          "arrow": 2,
+          "nextIndex": 2
+        }
+      ],
+      "isBoss": false,
+      "PlayerStartPosition": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "magnitude": 0.0,
+        "sqrMagnitude": 0.0
+      }
+    },
+    {
+      "position": {
+        "x": 4.0,
+        "y": 0.0,
+        "normalized": {
+          "x": 1.0,
+          "y": 0.0,
+          "magnitude": 1.0,
+          "sqrMagnitude": 1.0
+        },
+        "magnitude": 4.0,
+        "sqrMagnitude": 16.0
+      },
+      "objectinfos": [
+        {
+          "filePath": "Dungeon/Dungeon",
+          "position": {
+            "x": 5.34,
+            "y": -7.91,
+            "z": -4.17578125,
+            "normalized": {
+              "x": 0.5126072,
+              "y": -0.7593114,
+              "z": -0.400849342,
+              "normalized": {
+                "x": 0.512607157,
+                "y": -0.759311259,
+                "z": -0.400849283,
+                "normalized": {
+                  "x": 0.5126072,
+                  "y": -0.7593113,
+                  "z": -0.4008493,
+                  "magnitude": 1.0,
+                  "sqrMagnitude": 1.0
+                },
+                "magnitude": 0.99999994,
+                "sqrMagnitude": 0.9999998
+              },
+              "magnitude": 1.00000012,
+              "sqrMagnitude": 1.00000012
+            },
+            "magnitude": 10.4173336,
+            "sqrMagnitude": 108.520851
+          }
+        }
+      ],
+      "monsterInfos": [],
+      "potalTransportinfos": [
+        {
+          "filePath": "Object/PotalTransport Side",
+          "position": {
+            "x": -14.14,
+            "y": -6.54,
+            "z": 0.0,
+            "normalized": {
+              "x": -0.907620966,
+              "y": -0.419790715,
+              "z": 0.0,
+              "magnitude": 1.0,
+              "sqrMagnitude": 1.00000012
+            },
+            "magnitude": 15.5791912,
+            "sqrMagnitude": 242.711212
+          },
+          "spotPosition": [
+            {
+              "x": -11.72,
+              "y": -8.44,
+              "z": 0.0,
+              "normalized": {
+                "x": -0.811481833,
+                "y": -0.584377646,
+                "z": 0.0,
+                "magnitude": 1.0,
+                "sqrMagnitude": 1.0
+              },
+              "magnitude": 14.4427147,
+              "sqrMagnitude": 208.592
+            },
+            {
+              "x": -14.14,
+              "y": -6.54,
+              "z": 0.0,
+              "normalized": {
+                "x": -0.907620966,
+                "y": -0.419790715,
+                "z": 0.0,
+                "magnitude": 1.0,
+                "sqrMagnitude": 1.00000012
+              },
+              "magnitude": 15.5791912,
+              "sqrMagnitude": 242.711212
+            },
+            {
+              "x": -14.14,
+              "y": -6.54,
+              "z": 0.0,
+              "normalized": {
+                "x": -0.907620966,
+                "y": -0.419790715,
+                "z": 0.0,
+                "magnitude": 1.0,
+                "sqrMagnitude": 1.00000012
+              },
+              "magnitude": 15.5791912,
+              "sqrMagnitude": 242.711212
+            },
+            {
+              "x": -14.14,
+              "y": -6.54,
+              "z": 0.0,
+              "normalized": {
+                "x": -0.907620966,
+                "y": -0.419790715,
+                "z": 0.0,
+                "magnitude": 1.0,
+                "sqrMagnitude": 1.00000012
+              },
+              "magnitude": 15.5791912,
+              "sqrMagnitude": 242.711212
+            }
+          ],
+          "arrow": 2,
+          "nextIndex": 3
+        }
+      ],
+      "isBoss": true,
       "PlayerStartPosition": {
         "x": 0.0,
         "y": 0.0,
