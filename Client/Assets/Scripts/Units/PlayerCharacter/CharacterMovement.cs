@@ -35,7 +35,7 @@ public class CharacterMovement : BaseUnit
         _animController = GetComponentInChildren<CharacterAnimController>();
     }
 
-	private void Start()
+	protected override void Start()
 	{
 		_equipSkills = new Dictionary<SwordmanSkillIndex, CharacterSkill>();
 		_equipSkills.Add(SwordmanSkillIndex.Jingongcham, SwordmanSkillManager.Instance.GetSkill(_stat, SwordmanSkillIndex.Jingongcham));

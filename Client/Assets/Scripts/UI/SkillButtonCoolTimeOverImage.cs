@@ -16,8 +16,8 @@ public class SkillButtonCoolTimeOverImage : MonoBehaviour
 
 	private void Start()
 	{
-		if (PlayerManager.Instance.PlayerCharacter != null)
-			_skill = PlayerManager.Instance.PlayerCharacter.Movement.GetEquipSkill(_skillIndex);
+		//if (PlayerManager.Instance.PlayerCharacter != null)
+		//	_skill = PlayerManager.Instance.PlayerCharacter.Movement.GetEquipSkill(_skillIndex);
 	}
 
 	private void Update()
