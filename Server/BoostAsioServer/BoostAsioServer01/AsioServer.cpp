@@ -22,6 +22,8 @@ AsioServer::~AsioServer()
 
 void AsioServer::Init(const int maxSessionCount)
 {
+	DBMySQL _DBMySQL;
+
 	for (int i = 0; i < maxSessionCount; i++)
 	{
 		Session* pSession = new Session(i, (boost::asio::io_context&)_acceptor.get_executor().context(), this);

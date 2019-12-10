@@ -9,3 +9,38 @@ C:\Program Files\MySQL\MySQL Server 8.0
 ●시스템 변수
 Path에 추가
 C:\Program Files\MySQL\MySQL Server 8.0\bin
+
+
+libmysql.dll 에러 시 libmysql.dll 파일을 프로젝트에 넣어주기
+
+●프로젝트 설정 (x64)
+VC++디렉터리 - 포함 디렉터리
+%MYSQL_ROOT%\include;%BOOST_ROOT%;$(VC_IncludePath);$(WindowsSDK_IncludePath);
+
+VC++디렉터리 - 라이브러리 디렉터리
+%MYSQL_ROOT%\lib;%BOOST_ROOT%\libs;$(LibraryPath)
+
+C/C++ - 추가 포함 디렉터리
+%MYSQL_ROOT%\include;%BOOST_ROOT%
+
+링커 - 추가 라이브러리 디렉터리
+%MYSQL_ROOT%lib;%BOOST_ROOT%\stage\lib;
+
+링커 - 입력 - 추가 종속성
+libmysql.lib;%(AdditionalDependencies)
+
+●프로젝트 설정 (x86)
+VC++디렉터리 - 포함 디렉터리
+%MYSQL_ROOT%\include;%BOOST_ROOT%;$(VC_IncludePath);$(WindowsSDK_IncludePath);
+
+VC++디렉터리 - 라이브러리 디렉터리
+%MYSQL_ROOT%\lib;%BOOST_ROOT%\libs;$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);$(NETFXKitsDir)Lib\um\x86
+
+C/C++ - 추가 포함 디렉터리
+%MYSQL_ROOT%\include;%BOOST_ROOT%
+
+링커 - 추가 라이브러리 디렉터리
+%MYSQL_ROOT%lib;%BOOST_ROOT%\stage\lib;
+
+링커 - 입력 - 추가 종속성
+libmysql.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)
