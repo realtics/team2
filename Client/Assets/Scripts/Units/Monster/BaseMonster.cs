@@ -67,7 +67,6 @@ public class BaseMonster : MonoBehaviour
 	private bool _hasAerialPower;
 	private bool _isDown;
 	private bool _isDownRecovery;
-	private bool _isSuperArmor;
 
 	[SerializeField]
 	protected Transform _avatar;
@@ -118,7 +117,7 @@ public class BaseMonster : MonoBehaviour
 	public bool IsGround { get { return !(_height > 0.0f); } }
 	public bool IsAttack { get { return _isAttack; } set { _isAttack = value; } }
 	public bool IsHit { get { return _isHit; } set { _isHit = value; } }
-	public bool IsSuperArmor { get { return _isSuperArmor; } set { _isSuperArmor = value; } }
+	public bool IsSuperArmor { get { return _superArmorLine.enabled; }}
 
 	public Vector3 HitBoxCenter { get { return _hitBoxCenter.bounds.center; } }
 
@@ -134,15 +133,8 @@ public class BaseMonster : MonoBehaviour
 		SetInitialState();
 	}
 
-	protected virtual void Update()
-	{
-		SuperArmorProcess();
-	}
-
 	protected virtual void FixedUpdate()
 	{
-		//SuperArmorProcess();
-
 		if (_currentHp <= 0 && !_isDead && !_isAerialHit)
 		{
 			_state.ChangeState(_dieState);
@@ -150,9 +142,9 @@ public class BaseMonster : MonoBehaviour
 		}
 		_state.Update();
 
+		//치트키
 		if (Input.GetKeyDown(KeyCode.F1))
 		{
-			//MonsterManager.Instance.ReceiveMonsterDie(this);
 			ChangeState(_dieState);
 		}
 	}
@@ -244,7 +236,7 @@ public class BaseMonster : MonoBehaviour
 		_currentHp -= sender.Damage;
 		UIHelper.Instance.SetMonster(this);
 
-		if (!_isSuperArmor)
+		if (!IsSuperArmor)
 		{
 			if (sender.HorizontalExtraMoveDuration > 0)
 				SetKnockbackValue(sender);
@@ -358,26 +350,14 @@ public class BaseMonster : MonoBehaviour
 		StartCoroutine("AerialProcess");
 	}
 
-	protected void SuperArmorProcess()
+	protected void OnSuperArmor()
 	{
-		_superArmorLine.enabled = _isSuperArmor;
+		_superArmorLine.enabled = true;
+	}
 
-		if (_isColorChange)
-		{
-			_superArmorLine.color = Color32.Lerp(_colorYellow, _colorRed, Time.deltaTime);
-			if (_superArmorLine.color == _colorYellow)
-			{
-				_isColorChange = true;
-			}
-		}
-		else
-		{
-			_superArmorLine.color = Color32.Lerp(_colorRed, _colorYellow, Time.deltaTime);
-			if (_superArmorLine.color == _colorRed)
-			{
-				_isColorChange = false;
-			}
-		}
+	protected void OffSuperArmor()
+	{
+		_superArmorLine.enabled = false;
 	}
 
 	//AttackState

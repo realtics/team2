@@ -7,7 +7,7 @@ public class Calvary : BaseMonster
     protected override void Start()
     {
         base.Start();
-		base.IsSuperArmor = true;
+		OnSuperArmor();
 	}
 
     protected override void FixedUpdate()

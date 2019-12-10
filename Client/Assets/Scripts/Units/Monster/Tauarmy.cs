@@ -39,7 +39,8 @@ public class Tauarmy : BaseMonster
     public override void EnterAttackState()
     { 
         base.EnterAttackState();
-		base.IsSuperArmor = true;
+		OnSuperArmor();
+
 		_currentAttackMotion = (TauarmyAttackMotion)Random.Range((int)TauarmyAttackMotion.AttackMotion1, (int)TauarmyAttackMotion.AttacknMotionEnd);
         _animator.SetInteger("attackMotion", (int)_currentAttackMotion);
         SetForwardDirection();
@@ -57,7 +58,7 @@ public class Tauarmy : BaseMonster
     public override void ExitAttackState()
     {
         base.ExitAttackState();
-		base.IsSuperArmor = false;
+		OffSuperArmor();
 		InactiveRushAttackBox();
 	}
 
