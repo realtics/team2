@@ -12,13 +12,23 @@ public struct MiniMapTile
 
 public class MiniMapManager : MonoBehaviour
 {
+    private static MiniMapManager _instance;
+    public static MiniMapManager instance
+    { 
+        get
+        {
+            return _instance;
+        }
+    
+    }
+
+
     [SerializeField]
     private GameObject _tile;
     private float _tileSize;
 
     [SerializeField]
     private GameObject _playerCursor;
-    private Vector2 _playerCurrentPosition;
 
     private DungeonJsonData dungeonData;
 
@@ -32,6 +42,7 @@ public class MiniMapManager : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        _instance = this;
         _miniMapTiles = new List<MiniMapTile>();
         Initialized();
     }
@@ -41,8 +52,6 @@ public class MiniMapManager : MonoBehaviour
         dungeonData = MapLoader.instacne.dungeonData;
 
         _tileSize = _tile.GetComponent<Image>().rectTransform.rect.width;
-
-        _playerCurrentPosition = dungeonData.DungeonInfos[0].position;
 
         foreach (var item in dungeonData.DungeonInfos)
         {
@@ -57,7 +66,9 @@ public class MiniMapManager : MonoBehaviour
             mapTile.image = Instantiate(_tile, _tilesTransform).GetComponent<Image>();
             _miniMapTiles.Add(mapTile);            
         }
-        InitializedPlayerCursor();
+
+        movePlayerCursor(dungeonData.DungeonInfos[0].position);
+
         InitializedMiniTile();
     }
     private void MaxWidth(int x)
@@ -80,12 +91,14 @@ public class MiniMapManager : MonoBehaviour
         }
         return (MiniMapTileStyle)minimapStyle;
     }
-    private void InitializedPlayerCursor()
+
+    public void movePlayerCursor(Vector2 playerPosition)
     {
         _playerCursor.transform.localPosition
-                = new Vector3((_playerCurrentPosition.x - _witdh) * _tileSize,
-                (_playerCurrentPosition.y - _height) * _tileSize, 0);
+                = new Vector3((playerPosition.x - _witdh) * _tileSize,
+                (playerPosition.y - _height) * _tileSize, 0);
     }
+
     private void InitializedMiniTile()
     {
         foreach (var item in _miniMapTiles)
