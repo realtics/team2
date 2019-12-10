@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
-public enum MiniMapArrow
+public enum MiniMapTileStyle
 {
     Unknown = 0,
     Right,
@@ -21,23 +21,6 @@ public enum MiniMapArrow
     UpDownRight,
     UpDownLeft,
     UpDownLeftRight
-
-    //Right = 0,
-    //Up,
-    //UpRight,
-    //Left,
-    //LeftRight,
-    //UpLeft,
-    //UpLeftRight,
-    //Down,
-    //DownRight,
-    //UpDown,
-    //UpDownRight,
-    //DownLeft,
-    //DownLeftRight,
-    //UpDownLeft,
-    //UpDownLeftRight,
-    //Unknown
 }
 
 
@@ -49,15 +32,9 @@ public class UIMiniMap : MonoBehaviour
     [SerializeField]
     private Sprite[] _blinkTiles;
 
-    // Use this for initialization
-    void Start()
-    {
-
-    }
-
     public void ChangeTileImage(MiniMapTile mapTile)
     {
-        mapTile.image.sprite = _tiles[(int)mapTile.arrow];
+        mapTile.image.sprite = _tiles[(int)mapTile.style];
     }
 
     public void Blinking(bool active)

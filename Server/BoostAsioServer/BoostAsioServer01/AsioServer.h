@@ -8,6 +8,7 @@
 #include <vector>
 #include <sstream>
 
+#include "DBMySQL.h"
 #include "Session.h"
 #include "Protocol.h"
 

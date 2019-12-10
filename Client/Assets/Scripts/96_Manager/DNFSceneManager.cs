@@ -60,6 +60,8 @@ public class DNFSceneManager : MonoBehaviour
         else
             potalManager.ResetPotals();
 
+        MiniMapManager.instance.movePlayerCursor(dungeonInfo.position);
+
         gameManager.FindCameraCollider();
         gameManager.MoveToPlayer(potalManager.FindGetArrowPotalPosition(FlipArrow(arrow)));
     }
