@@ -33,14 +33,17 @@ public class CharacterMovement : BaseUnit
         _animator.SetBool("IsGround", true);
         _animator.SetBool("NextAttack", false);
         _animController = GetComponentInChildren<CharacterAnimController>();
-
-        _equipSkills = new Dictionary<SwordmanSkillIndex, CharacterSkill>();
-        _equipSkills.Add(SwordmanSkillIndex.Jingongcham, SwordmanSkillManager.Instance.GetSkill(_stat, SwordmanSkillIndex.Jingongcham));
-        _equipSkills.Add(SwordmanSkillIndex.Hadouken, SwordmanSkillManager.Instance.GetSkill(_stat, SwordmanSkillIndex.Hadouken));
-        _equipSkills.Add(SwordmanSkillIndex.Blache, SwordmanSkillManager.Instance.GetSkill(_stat, SwordmanSkillIndex.Blache));
     }
 
-    protected override void Update()
+	private void Start()
+	{
+		_equipSkills = new Dictionary<SwordmanSkillIndex, CharacterSkill>();
+		_equipSkills.Add(SwordmanSkillIndex.Jingongcham, SwordmanSkillManager.Instance.GetSkill(_stat, SwordmanSkillIndex.Jingongcham));
+		_equipSkills.Add(SwordmanSkillIndex.Hadouken, SwordmanSkillManager.Instance.GetSkill(_stat, SwordmanSkillIndex.Hadouken));
+		_equipSkills.Add(SwordmanSkillIndex.Blache, SwordmanSkillManager.Instance.GetSkill(_stat, SwordmanSkillIndex.Blache));
+	}
+
+	protected override void Update()
     {
         CheckAttackEnd();
         SkillCoolTimeUpdate();
