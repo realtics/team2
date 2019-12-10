@@ -498,6 +498,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8278931280511660904, guid: 1cbf7b58991e91b48ab30e0b4afdcd5d,
+        type: 3}
+      propertyPath: arrow
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8278931280511660904, guid: 1cbf7b58991e91b48ab30e0b4afdcd5d,
+        type: 3}
+      propertyPath: _nextIndex
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7936270338457353402, guid: 1cbf7b58991e91b48ab30e0b4afdcd5d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -521,7 +531,7 @@ GameObject:
   - component: {fileID: 548338130}
   - component: {fileID: 548338129}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: DungeonGameManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -556,7 +566,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &630751242
 GameObject:
@@ -1610,7 +1620,7 @@ Transform:
   m_Children:
   - {fileID: 1573175865}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2095612845
 GameObject:

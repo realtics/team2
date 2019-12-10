@@ -31,7 +31,7 @@ public class DungeonInfo
     public List<ObjectInfo> objectinfos = new List<ObjectInfo>();
     public List<MonsterInfo> monsterInfos = new List<MonsterInfo>();
     public List<PotalTransportinfo> potalTransportinfos = new List<PotalTransportinfo>();
-
+    public bool isBoss;
     public Vector3 PlayerStartPosition { get; set; }
 }
 public class JsonData
