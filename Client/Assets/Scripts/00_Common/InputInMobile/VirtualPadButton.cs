@@ -18,6 +18,16 @@ public class VirtualPadButton : MonoBehaviour
     [SerializeField]
     private VirtualPadButtonType _type;
     private PlayerCharacter _pc;
+	private PlayerCharacter PC
+	{
+		get
+		{
+			if (_pc == null)
+				_pc = PlayerManager.Instance.PlayerCharacter;
+
+			return _pc;
+		}
+	}
     private bool _isRun;
 
     private void Start()
@@ -36,10 +46,10 @@ public class VirtualPadButton : MonoBehaviour
         switch (_type)
         {
             case VirtualPadButtonType.Attack:
-                _pc.SetAttack();
+				PC.SetAttack();
                 break;
             case VirtualPadButtonType.Jump:
-                _pc.SetJump();
+				PC.SetJump();
                 break;
             case VirtualPadButtonType.Run:
                 if (!_isRun)
@@ -49,18 +59,18 @@ public class VirtualPadButton : MonoBehaviour
                 }
                 else
                 {
-                    _pc.StopRun();
+					PC.StopRun();
                     _isRun = false;
                 }
                 break;
             case VirtualPadButtonType.Skill1:
-                _pc.SetSkill(SwordmanSkillIndex.Jingongcham);
+				PC.SetSkill(SwordmanSkillIndex.Jingongcham);
                 break;
             case VirtualPadButtonType.Skill2:
-                _pc.SetSkill(SwordmanSkillIndex.Hadouken);
+				PC.SetSkill(SwordmanSkillIndex.Hadouken);
                 break;
             case VirtualPadButtonType.SkillBlache:
-                _pc.SetSkill(SwordmanSkillIndex.Blache);
+				PC.SetSkill(SwordmanSkillIndex.Blache);
                 break;
         }
     }

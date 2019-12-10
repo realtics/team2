@@ -249,7 +249,6 @@ public class CharacterMovement : BaseUnit
 
         if (!UsedSkill.UsableSkill)
         {
-            Debug.Log("현재 쿨타임입니다. : " + UsedSkill.CurrentCoolTime + "초 남았습니다.");
 
             _usedSkill = SwordmanSkillIndex.None;
             return false;
