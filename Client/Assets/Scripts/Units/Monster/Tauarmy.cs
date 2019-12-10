@@ -15,9 +15,9 @@ public class Tauarmy : BaseMonster
     [SerializeField]
     private Transform _rushAttackBox;
 
-	protected override void Start()
-    {
-        base.Start();
+	protected override void Awake()
+	{
+		base.Awake();
     }
 
     protected override void FixedUpdate()

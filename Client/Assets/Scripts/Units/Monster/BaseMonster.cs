@@ -121,15 +121,8 @@ public class BaseMonster : MonoBehaviour
 
 	public Vector3 HitBoxCenter { get { return _hitBoxCenter.bounds.center; } }
 
-	protected virtual void Start()
+	protected virtual void Awake()
 	{
-		_animator = GetComponentInChildren<Animator>();
-		_currentHp = MaxHp;
-		_baseAttackCurrentTime = _baseAttackResetTime;
-		_originPos = _avatar.localPosition;
-		_hitBoxCenter = _hitBox.GetComponent<BoxCollider2D>();
-		_hitEffectSize = _hitBoxCenter.size.y + _hitBoxCenter.size.x;
-		_superArmorLine = _avatar.GetComponent<SpriteOutline>();
 		SetInitialState();
 	}
 
@@ -168,6 +161,14 @@ public class BaseMonster : MonoBehaviour
 
 	protected void SetInitialState()
 	{
+		_animator = GetComponentInChildren<Animator>();
+		_currentHp = MaxHp;
+		_baseAttackCurrentTime = _baseAttackResetTime;
+		_originPos = _avatar.localPosition;
+		_hitBoxCenter = _hitBox.GetComponent<BoxCollider2D>();
+		_hitEffectSize = _hitBoxCenter.size.y + _hitBoxCenter.size.x;
+		_superArmorLine = _avatar.GetComponent<SpriteOutline>();
+
 		_state = new StateMachine<BaseMonster>();
 		_state.InitialSetting(this, _moveState);
 
@@ -645,8 +646,9 @@ public class BaseMonster : MonoBehaviour
 	{
 		_isDead = false;
 		_currentHp = MaxHp;
-		ActiveHitBox();
 		_baseAttackCurrentTime = _baseAttackResetTime;
+		_chaseTime = 0.0f;
+		ActiveHitBox();
 		ChangeState(_moveState);
 	}
 

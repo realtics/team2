@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Calvary : BaseMonster
 {
-    protected override void Start()
-    {
-        base.Start();
+    protected override void Awake()
+	{
+		base.Awake();
 		OnSuperArmor();
 	}
 

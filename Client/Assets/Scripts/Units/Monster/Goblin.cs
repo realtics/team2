@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Goblin : BaseMonster
 { 
-    protected override void Start()
-    {
-        base.Start();
+    protected override void Awake()
+	{
+        base.Awake();
     }
 
     protected override void FixedUpdate()
