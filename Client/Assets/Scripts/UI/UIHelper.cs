@@ -92,11 +92,6 @@ public class UIHelper : MonoBehaviour
         _gameResult.OpenResultBox(index);
     }
 
-    public void SetMonsterHp(float CurrentHp, float MaxHp)
-    {
-        _monsterInfo.SetHp(CurrentHp, MaxHp);
-    }
-
     // Todo.
     public void SetMonster(BaseMonster monster)
     {

@@ -104,9 +104,9 @@ public class BaseMonster : MonoBehaviour
 	private float _knockBackDuration;
 
 	//values for superArmor Color
-	private Color32 colorRed = Color.red;
-	private Color32 colorYellow = Color.yellow;
-	private Color32 lerpedColor;
+	private Color32 _colorRed = Color.red;
+	private Color32 _colorYellow = Color.yellow;
+	private bool _isColorChange;
 
 	//properties
 	public MonsterTypeInfo MonsterType { get { return _monsterType; } }
@@ -134,9 +134,14 @@ public class BaseMonster : MonoBehaviour
 		SetInitialState();
 	}
 
-	protected virtual void FixedUpdate()
+	protected virtual void Update()
 	{
 		SuperArmorProcess();
+	}
+
+	protected virtual void FixedUpdate()
+	{
+		//SuperArmorProcess();
 
 		if (_currentHp <= 0 && !_isDead && !_isAerialHit)
 		{
@@ -236,6 +241,9 @@ public class BaseMonster : MonoBehaviour
 		AddHitEffect();
 		AddHitDamageEffect(sender.Damage);
 
+		_currentHp -= sender.Damage;
+		UIHelper.Instance.SetMonster(this);
+
 		if (!_isSuperArmor)
 		{
 			if (sender.HorizontalExtraMoveDuration > 0)
@@ -243,16 +251,10 @@ public class BaseMonster : MonoBehaviour
 			if (sender.ExtraHeightValue > 0)
 				SetAerialValue(sender);
 
-			_currentHp -= sender.Damage;
-
-			UIHelper.Instance.SetMonster(this);
-			UIHelper.Instance.SetMonsterHp(_currentHp, _maxHp);
-
-
-			if (!_isHit)
-				_state.ChangeState(_hitState);
-			else
+			if (_isHit)
 				_state.RestartState();
+			else
+				_state.ChangeState(_hitState);
 		}
 	}
 	
@@ -359,6 +361,23 @@ public class BaseMonster : MonoBehaviour
 	protected void SuperArmorProcess()
 	{
 		_superArmorLine.enabled = _isSuperArmor;
+
+		if (_isColorChange)
+		{
+			_superArmorLine.color = Color32.Lerp(_colorYellow, _colorRed, Time.deltaTime);
+			if (_superArmorLine.color == _colorYellow)
+			{
+				_isColorChange = true;
+			}
+		}
+		else
+		{
+			_superArmorLine.color = Color32.Lerp(_colorRed, _colorYellow, Time.deltaTime);
+			if (_superArmorLine.color == _colorRed)
+			{
+				_isColorChange = false;
+			}
+		}
 	}
 
 	//AttackState
