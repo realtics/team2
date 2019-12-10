@@ -2,12 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerManager : MonoBehaviour
+public class PlayerManager
 {
+	private PlayerManager() { }
 	private static PlayerManager _instance;
 	public static PlayerManager Instance
 	{
-		get { return _instance; }
+		get 
+		{
+			if (_instance == null)
+				_instance = new PlayerManager();
+
+			return _instance; 
+		}
 	}
 
 	private PlayerCharacter _playerCharacter;
