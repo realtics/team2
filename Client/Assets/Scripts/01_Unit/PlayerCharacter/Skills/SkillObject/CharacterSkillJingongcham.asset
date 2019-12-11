@@ -20,6 +20,7 @@ MonoBehaviour:
     _verticalExtraMoveValue: 0
     _extraHeightValue: 0
     _stunDuration: 1
+  index: 1
   skillPrefab: {fileID: 8467314183276299524, guid: fe356b9be93e61b4eaee401d0d359b7a,
     type: 3}
   motion: 1

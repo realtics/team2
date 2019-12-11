@@ -13,10 +13,13 @@ public class SwordmanSkillBlache : CharacterSkill
         _instanceEffect.transform.position = _sender.Attacker.position;
         SetSpriteFlipForward();
 
-        Transform canvas = GameObject.Find("CutinParent").transform;
-        GameObject cutin = ObjectPoolManager.Instance.GetRestObject(SwordmanSkillManager.Instance.FindSkillEffect(SwordmanSkillIndex.CutIn), canvas);
-        cutin.transform.localScale = Vector3.one;
-        cutin.transform.localPosition = Vector3.zero;
+		GameObject canvas = GameObject.Find("CutinParent");
+		if (canvas != null)
+		{
+			GameObject cutin = ObjectPoolManager.Instance.GetRestObject(SwordmanSkillManager.Instance.FindSkillEffect(SwordmanSkillIndex.CutIn), canvas.transform);
+			cutin.transform.localScale = Vector3.one;
+			cutin.transform.localPosition = Vector3.zero;
+		}
         return true;
     }
 

@@ -6,6 +6,7 @@ using UnityEngine;
 public class CharacterSkillMetaObject : ScriptableObject
 {
 	public AttackInfoSender AttackInfo;
+	public SwordmanSkillIndex index;
 	public GameObject skillPrefab;
 	public int motion;
 	public float coolTime;
