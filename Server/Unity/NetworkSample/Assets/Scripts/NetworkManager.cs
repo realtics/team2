@@ -16,7 +16,7 @@ using System.IO;
 
 enum DefineDefaultValue : short
 {
-    packetSize = 100
+    packetSize = 10
 }
 
 public class StateObject    // 데이터를 수신하기 위한 상태 객체
@@ -29,39 +29,6 @@ public class StateObject    // 데이터를 수신하기 위한 상태 객체
         Array.Clear(RecvBuffer, 0, RecvBuffer.Length);
     }
 }
-
-// TODO : JsonUtility 사용시 작업 할 것, 아직 미완성
-/*
-[System.Serializable]
-public class JsonHeader
-{
-	public short packetIndex;
-	public short packetSize;
-	public void SetData(short _packetIndex, short _packetSize)
-	{
-		packetIndex = _packetIndex;
-		packetSize = _packetSize;
-	}
-	public string SaveToString()
-	{
-		return JsonUtility.ToJson(this);
-	}
-}
-[System.Serializable]
-public class JsonNewLogin
-{
-	public JsonHeader header;
-
-	public void SetData(JsonHeader _header)
-	{
-		header = _header;
-	}
-
-	public string SaveToString()
-	{
-		return JsonUtility.ToJson(this);
-	}
-}*/
 
 public class NetworkManager : MonoBehaviour
 {
@@ -165,7 +132,7 @@ public class NetworkManager : MonoBehaviour
                 ConcurrentUser();
             }
 
-			
+			 
             //// 서버에서 새로운 플레이어가 접속했다고 알려주는 역할임
             //if (Input.GetKeyDown(KeyCode.Space))
             //{
@@ -485,51 +452,50 @@ public class NetworkManager : MonoBehaviour
 
     private void NewLogin()
     {
-        DebugLogList("NewLogin() start");
-        string jsonData;
-        char endNullValue = '\0';
+		DebugLogList("NewLogin() start");
+		string jsonData;
+		char endNullValue = '\0';
 
-        var packHeader = new PACKET_HEADER
-        {
-            packetIndex = (short)PACKET_INDEX.REQ_NEW_LOGIN,
-            packetSize = 8
-        };
-        var packData = new PKT_REQ_NEW_LOGIN { header = packHeader };
-        DebugLogList(packData.ToString());
-        jsonData = JsonConvert.SerializeObject(packData);
+		var packHeader = new PACKET_HEADER
+		{
+			packetIndex = (short)PACKET_INDEX.REQ_NEW_LOGIN,
+			packetSize = (short)DefineDefaultValue.packetSize
+		};
+		var packData = new PKT_REQ_NEW_LOGIN { header = packHeader };
+		DebugLogList(packData.ToString());
+		jsonData = JsonConvert.SerializeObject(packData);
+		jsonData += endNullValue;
+		DebugLogList(jsonData.ToString());
+		byte[] sendByte = new byte[512];
+		sendByte = Encoding.UTF8.GetBytes(jsonData);
+		//TODO 1-0: JSON 헤더에 패킷 사이즈 체크 하는것을 foreach로 하고 있는데, 더 좋은 방법 있다면 개선
+		//TODO 1-1: 패킷 사이즈를 담아 보내는 것이 현재 상태에선 크게 중요하진 않으므로, 코드만 남겨두고 나중에 활용
+		short jsonDataSize = 0;
+		foreach (byte b in sendByte)
+		{
+			jsonDataSize++;
+			if (b == '\0')
+				break;
+		}
+		//Debug.Log(jsonData);
+		//Debug.Log(jsonDataSize);
+		var packHeader2 = new PACKET_HEADER
+		{
+			packetIndex = (short)PACKET_INDEX.REQ_NEW_LOGIN,
+			packetSize = jsonDataSize
+		};
+		var packData2 = new PKT_REQ_NEW_LOGIN { header = packHeader2 };
+		string jsonData2;
+		jsonData2 = JsonConvert.SerializeObject(packData2);
+		jsonData2 += endNullValue;
+		byte[] sendByte2 = new byte[512];
+		sendByte2 = Encoding.UTF8.GetBytes(jsonData2);
 
-        // TODO : JsonUtility 사용시 작업 할 것, 아직 미완성
-        /*{
-			JsonHeader jh = JsonUtility.FromJson<JsonHeader>("{\"packetIndex\":\"" + (short)PACKET_INDEX.REQ_NEW_LOGIN + "\"," +
-															  "\"packetSize\":\"" + 10 + "\"}");
-			JsonNewLogin jnl = new JsonNewLogin();
-			jnl.SetData(jh);
-			//string dataJH = jh.SaveToString();
-			jnl = JsonUtility.FromJson<JsonNewLogin>("{\"header\":" + jnl.header + "}");
-			jsonData = JsonUtility.ToJson(jnl);
-		}*/
-
-        jsonData += endNullValue;
-        DebugLogList(jsonData.ToString());
-        byte[] sendByte = new byte[512];
-        sendByte = Encoding.UTF8.GetBytes(jsonData);
-        //TODO 1-0: JSON 헤더에 패킷 사이즈 체크 하는것을 foreach로 하고 있는데, 더 좋은 방법 있다면 개선
-        //TODO 1-1: 패킷 사이즈를 담아 보내는 것이 현재 상태에선 크게 중요하진 않으므로, 코드만 남겨두고 나중에 활용
-        //int jsonDataSize = 0;
-        //foreach (byte b in _sendByte)
-        //{
-        //    jsonDataSize++;
-        //    if (b == '\0')
-        //        break;
-        //}
-        //Debug.Log(jsonData);
-        //Debug.Log(jsonDataSize);
-
-        SetMyId(0);
-        int resultSize = _sock.Send(sendByte);
-        Debug.Log("NewLogin() = " + resultSize);
-        DebugLogList("NewLogin() end");
-    }
+		SetMyId(0);
+		int resultSize = _sock.Send(sendByte2);
+		//Debug.Log("NewLogin() = " + resultSize);
+		DebugLogList("NewLogin() end");
+	}
 
     private void NewLoginSucsess()
     {
@@ -612,6 +578,65 @@ public class NetworkManager : MonoBehaviour
         int resultSize = _sock.Send(sendByte);
         DebugLogList("UserExit() end");
     }
+
+	public void CheckBeforeLogin(string id, string pw, string name)
+	{
+		DebugLogList("CheckBeforeLogin() start");
+		string jsonData;
+		char endNullValue = '\0';
+
+		var packHeader = new PACKET_HEADER
+		{
+			packetIndex = (short)PACKET_INDEX.REQ_NEW_LOGIN,
+			packetSize = (short)DefineDefaultValue.packetSize
+		};
+		var packData = new PKT_REQ_CHECK_BEFORE_LOGIN
+		{
+			header = packHeader,
+			userID = id,
+			userPW = pw,
+			userName = name
+		};
+		DebugLogList(packData.ToString());
+		jsonData = JsonConvert.SerializeObject(packData);
+		jsonData += endNullValue;
+		DebugLogList(jsonData.ToString());
+		byte[] sendByte = new byte[512];
+		sendByte = Encoding.UTF8.GetBytes(jsonData);
+		//TODO 1-0: JSON 헤더에 패킷 사이즈 체크 하는것을 foreach로 하고 있는데, 더 좋은 방법 있다면 개선
+		//TODO 1-1: 패킷 사이즈를 담아 보내는 것이 현재 상태에선 크게 중요하진 않으므로, 코드만 남겨두고 나중에 활용
+		short jsonDataSize = 0;
+		foreach (byte b in sendByte)
+		{
+			jsonDataSize++;
+			if (b == '\0')
+				break;
+		}
+		//Debug.Log(jsonData);
+		//Debug.Log(jsonDataSize);
+		var packHeader2 = new PACKET_HEADER
+		{
+			packetIndex = (short)PACKET_INDEX.REQ_NEW_LOGIN,
+			packetSize = jsonDataSize
+		};
+		var packData2 = new PKT_REQ_CHECK_BEFORE_LOGIN
+		{
+			header = packHeader2,
+			userID = id,
+			userPW = pw,
+			userName = name
+		};
+		string jsonData2;
+		jsonData2 = JsonConvert.SerializeObject(packData2);
+		jsonData2 += endNullValue;
+		byte[] sendByte2 = new byte[512];
+		sendByte2 = Encoding.UTF8.GetBytes(jsonData2);
+
+		SetMyId(0);
+		int resultSize = _sock.Send(sendByte2);
+		DebugLogList("CheckBeforeLogin() end");
+	}
+
 
     public void MoveStart(Vector3 pos, Vector3 dir)
     {
@@ -797,10 +822,4 @@ public class NetworkManager : MonoBehaviour
         return result;
     }
 
-
-    // TODO : JsonUtility 사용시 작업 할 것, 아직 미완성
-    /*T JsonToOject<T>(string jsonData)
-	{
-		return JsonUtility.FromJson<T>(jsonData);
-	}*/
 }

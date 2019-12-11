@@ -9,6 +9,10 @@ const int MAX_PLAYER_MOVE_LEN = 50;
 
 const int FIRST_USER_INDEX = 100;		// 첫번째 유저 Index (클라이언트에 알려줄 index)
 
+const int MAX_USER_ID = 50;
+const int MAX_USER_PW = 200;
+const int MAX_USER_NAME = 50;
+
 enum PACKET_INDEX : short
 {
 	// REQ : 클라->서버, 클라에서 서버에 어떤 값을 요청
@@ -19,9 +23,12 @@ enum PACKET_INDEX : short
 	REQ_CHAT = 5,
 	NOTICE_CHAT = 6,
 	
-	REQ_NEW_LOGIN = 100,
-	RES_NEW_LOGIN_SUCSESS = 101,
+	REQ_CHECK_BEFORE_LOGIN = 105, 
+	RES_CHECK_BEFORE_LOGIN = 106,
 
+	REQ_NEW_LOGIN = 107,
+	RES_NEW_LOGIN_SUCSESS = 108,
+	
 	REQ_CONCURRENT_USER = 110,
 	RES_CONCURRENT_USER_LIST = 111,
 	REQ_USER_EXIT = 112,
@@ -96,6 +103,31 @@ struct PKT_NOTICE_CHAT : public PACKET_HEADER
 	}
 };
 
+struct PKT_REQ_CHECK_BEFORE_LOGIN : public PACKET_HEADER
+{
+	char userID[MAX_USER_ID];
+	char userPW[MAX_USER_PW];
+	char userName[MAX_USER_NAME];
+	void Init()
+	{
+		packetIndex = PACKET_INDEX::REQ_CHECK_BEFORE_LOGIN;
+		packetSize = sizeof(PKT_REQ_CHECK_BEFORE_LOGIN);
+		memset(userID, 0, MAX_USER_ID);
+		memset(userPW, 0, MAX_USER_PW);
+		memset(userName, 0, MAX_USER_NAME);
+	}
+};
+
+struct PKT_RES_CHECK_BEFORE_LOGIN : public PACKET_HEADER
+{
+	int checkResult;
+	void Init()
+	{
+		packetIndex = PACKET_INDEX::RES_CHECK_BEFORE_LOGIN;
+		packetSize = sizeof(PKT_RES_CHECK_BEFORE_LOGIN);
+		checkResult = 0;
+	}
+};
 
 struct PKT_REQ_NEW_LOGIN : public PACKET_HEADER
 {

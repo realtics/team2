@@ -14,14 +14,18 @@ public class Login : MonoBehaviour
 	public InputField _password;
 	public Text _name;
 
+	//public string LoginID { get { return _id.text; } }
+	//public string LoginPassword { get { return _password.text; } }
+	//public string LoginName { get { return _name.text; } }
+
 	// 키로 사용하기 위한 암호 정의
-	private static readonly string PASSWORD = "3ds1s334e4dcc7c4yz4554e732983h";
+	private static readonly string PASSWORD = "9g3gbh6zsdfqioq1zdnsgff2nljkc4";
 
 	// 인증키 정의
 	private static readonly string KEY = PASSWORD.Substring(0, 128 / 8);
 
 	// 암호화
-	public static string AESEncrypt128(string plain)
+	private static string AESEncrypt128(string plain)
 	{
 		byte[] plainBytes = Encoding.UTF8.GetBytes(plain);
 
@@ -49,7 +53,7 @@ public class Login : MonoBehaviour
 	}
 
 	// 복호화
-	public static string AESDecrypt128(string encrypt)
+	private static string AESDecrypt128(string encrypt)
 	{
 		byte[] encryptBytes = Convert.FromBase64String(encrypt);
 
@@ -76,27 +80,61 @@ public class Login : MonoBehaviour
 		return plainString;
 	}
 
-	void Start()
-	{
-		string str = "원본 문자 정보";
-		Debug.Log("plain : " + str1);
+	//void Start()
+	//{
+	//	string str = "abcd";
+	//	Debug.Log("plain : " + str);
 
-		string str1 = AESEncrypt128(str1);
-		Debug.Log("AES128 encrypted : " + str1);
+	//	string str1 = AESEncrypt128(str);
+	//	Debug.Log("AES128 encrypted : " + str1);
 
-		string str2 = AESDecrypt128(str2);
-		Debug.Log("AES128 decrypted : " + str2);
-	}
+	//	string str2 = AESDecrypt128(str1);
+	//	Debug.Log("AES128 decrypted : " + str2);
+	//}
 
-
-	void Update()
+	public void OnTouthButtonLogin()
 	{
 		//if (_id.text.Contains("#")) { } //특정 문자 찾기
 
-		Debug.Log(_id.text);
-		Debug.Log(_password.text);
-		Debug.Log(_name.text);
+		if (string.IsNullOrEmpty(_id.text))
+		{
+			// 경고 팝업창 생성
+			Debug.Log("id를 입력 해야합니다");
+			return;
+		}
+		if (string.IsNullOrEmpty(_password.text) || _password == null)
+		{
+			// 경고 팝업창 생성
+			Debug.Log("pw를 입력 해야합니다");
+			return;
+		}
+		if (string.IsNullOrEmpty(_name.text) || _name == null)
+		{
+			// 경고 팝업창 생성
+			Debug.Log("캐릭터명을 입력 해야합니다");
+			return;
+		}
+
+		string EncryptPW = AESEncrypt128(_password.text);
+
+		NetworkManager.Instance.CheckBeforeLogin(_id.text, EncryptPW, _name.text);
 	}
+
+	//void Update()
+	//{
+	//	//Debug.Log(_id.text);
+	//	////Debug.Log(_password.text);
+	//	//Debug.Log(_name.text);
+
+	//	//string str = _password.text;
+	//	//Debug.Log("plain : " + str);
+
+	//	//string str1 = AESEncrypt128(str);
+	//	//Debug.Log("AES128 encrypted : " + str1);
+
+	//	//string str2 = AESDecrypt128(str1);
+	//	//Debug.Log("AES128 decrypted : " + str2);
+	//}
 
 
 }
