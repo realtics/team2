@@ -107,7 +107,7 @@ public class JsonManagement
     {
         Object parentObject = PrefabUtility.GetCorrespondingObjectFromOriginalSource(obj);
         string path = AssetDatabase.GetAssetPath(parentObject);
-        path = ResourcesLoadSubstringFilePath(path);
+        path = GetSubstringResourcesLoadFilePath(path);
 
         ObjectInfo objectInfo = new ObjectInfo();
         objectInfo.filePath = path;
@@ -120,7 +120,7 @@ public class JsonManagement
     {
         Object parentObject = PrefabUtility.GetCorrespondingObjectFromOriginalSource(obj);
         string path = AssetDatabase.GetAssetPath(parentObject);
-        path = ResourcesLoadSubstringFilePath(path);
+        path = GetSubstringResourcesLoadFilePath(path);
 
         MonsterInfo monsterInfo = new MonsterInfo();
         monsterInfo.filePath = path;
@@ -135,7 +135,7 @@ public class JsonManagement
 
         Object parentObject = PrefabUtility.GetCorrespondingObjectFromOriginalSource(obj);
         string path = AssetDatabase.GetAssetPath(parentObject);
-        path = ResourcesLoadSubstringFilePath(path);
+        path = GetSubstringResourcesLoadFilePath(path);
 
         PotalTransportinfo potalTransportinfo = new PotalTransportinfo();
         potalTransportinfo.filePath = path;
@@ -152,10 +152,10 @@ public class JsonManagement
 
         dungeonInfo.potalTransportinfos.Add(potalTransportinfo);
     }
-    string ResourcesLoadSubstringFilePath(string FilePath)
+    string GetSubstringResourcesLoadFilePath(string filePath)
     {
-        int FilePos = FilePath.LastIndexOf("Resources/") + 10;
-        string DirectoryFile = FilePath.Substring(FilePos);
+        int FilePos = filePath.LastIndexOf("Resources/") + 10;
+        string DirectoryFile = filePath.Substring(FilePos);
         int TagPos = DirectoryFile.IndexOf('/');
         if (TagPos > 0)
         {
