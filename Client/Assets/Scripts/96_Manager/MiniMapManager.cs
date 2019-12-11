@@ -22,7 +22,6 @@ public class MiniMapManager : MonoBehaviour
     
     }
 
-
     [SerializeField]
     private GameObject _tile;
     private float _tileSize;

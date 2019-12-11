@@ -88,6 +88,11 @@ public class BaseUnit : MonoBehaviour
 		_speedVertical = 3.0f;
 	}
 
+	protected virtual void Start()
+	{
+
+	}
+
     protected virtual void Update()
     {
         FindObjectsOfType<GameObject>();
