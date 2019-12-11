@@ -8,6 +8,7 @@ public struct AttackInfoSender
 {
     private Transform _attacker;
 
+	[SerializeField] private float _damage;
     [SerializeField] private float _horizontalExtraMoveDuration;
     [SerializeField] private float _horizontalExtraMoveValue;
     [SerializeField] private float _verticalExtraMoveDuration;
@@ -17,7 +18,7 @@ public struct AttackInfoSender
     [SerializeField] private float _stunDuration;
 
     // poroperties
-    public float Damage { get; set; }
+    public float Damage { get { return _damage; } set { _damage = value; } }
     public float HorizontalExtraMoveValue { get { return _horizontalExtraMoveValue; } set { _horizontalExtraMoveValue = value; } }
     public float HorizontalExtraMoveDuration { get { return _horizontalExtraMoveDuration; } set { _horizontalExtraMoveDuration = value; } }
     public float VerticalExtraMoveValue { get { return _verticalExtraMoveValue; } set { _verticalExtraMoveValue = value; } }

@@ -22,6 +22,8 @@ public struct SwordmanSkillBody
 
 public class SwordmanSkillManager : MonoBehaviour
 {
+	[SerializeField]
+	private List<CharacterSkillMetaObject> _skillMetas;
     [SerializeField]
     private List<SwordmanSkillBody> _skillBodys;
 
@@ -68,7 +70,7 @@ public class SwordmanSkillManager : MonoBehaviour
                 break;
             case SwordmanSkillIndex.Blache:
                 SwordmanSkillBlache blache = new SwordmanSkillBlache();
-                blache.SetCreateEffect(stat, FindSkillEffect(type), 10.0f, 1);
+                blache.SetCreateEffect(stat, FindSkillEffect(type), 10.0f, 3);
                 skill = blache;
                 break;
         }
