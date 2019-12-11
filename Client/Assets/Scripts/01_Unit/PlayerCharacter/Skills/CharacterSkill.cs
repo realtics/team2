@@ -35,16 +35,24 @@ public class CharacterSkill
         return true;
     }
 
-    public void SetCreateEffect(CharacterStat stat, GameObject effect, float coolTime, int motion = 1)
-    {
-        _stat = stat;
-        _motionIndex = motion;
-        _effectPrefab = effect;
-        _initCoolTime = coolTime;
-        SetAttackInfo(_stat);
-    }
+	public void SetCreateEffect(CharacterStat stat, GameObject effect, float coolTime, int motion = 1)
+	{
+		_stat = stat;
+		_motionIndex = motion;
+		_effectPrefab = effect;
+		_initCoolTime = coolTime;
+		SetAttackInfo(_stat);
+	}
 
-    protected virtual void SetAttackInfo(CharacterStat stat)
+	public void SetCreateEffect(AttackInfoSender sender, GameObject effectPrefab, float coolTime = 1.0f, int motion = 1)
+	{
+		_sender = sender;
+		_motionIndex = motion;
+		_effectPrefab = effectPrefab;
+		_initCoolTime = coolTime;
+	}
+
+	protected virtual void SetAttackInfo(CharacterStat stat)
     {
         _sender.Attacker = stat.transform;
     }

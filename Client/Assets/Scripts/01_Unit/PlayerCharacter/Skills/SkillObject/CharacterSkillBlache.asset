@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd03e417f491a194b96b1f77a139c8b6, type: 3}
+  m_Name: CharacterSkillBlache
+  m_EditorClassIdentifier: 
+  AttackInfo:
+    _damage: 9999
+    _horizontalExtraMoveDuration: 0
+    _horizontalExtraMoveValue: 0
+    _verticalExtraMoveDuration: 0
+    _verticalExtraMoveValue: 0
+    _extraHeightValue: 0.2
+    _stunDuration: 1
+  index: 3
+  skillPrefab: {fileID: 5148761421375241879, guid: 4ec3600802fa18a408c4c1abe0751902,
+    type: 3}
+  motion: 1
+  coolTime: 20

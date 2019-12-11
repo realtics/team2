@@ -17,11 +17,13 @@ public enum SwordmanSkillIndex
 public struct SwordmanSkillBody
 {
     public SwordmanSkillIndex type;
-    public GameObject effectPrefab;
+    public CharacterSkillMetaObject skillObject;
 }
 
 public class SwordmanSkillManager : MonoBehaviour
 {
+	//[SerializeField]
+	//private List<CharacterSkillMetaObject> _skillMetas;
     [SerializeField]
     private List<SwordmanSkillBody> _skillBodys;
 
@@ -40,10 +42,10 @@ public class SwordmanSkillManager : MonoBehaviour
         _instance = this;
     }
 
-    private void Start()
-    {
-        //ObjectPoolManager.Instance.CreatePool(FindSkillEffect(SwordmanSkillIndex.Jingongcham));
-    }
+	private void Start()
+	{
+		//ObjectPoolManager.Instance.CreatePool(FindSkillEffect(SwordmanSkillIndex.Jingongcham));
+	}
 
     private void Update()
     {
@@ -68,7 +70,7 @@ public class SwordmanSkillManager : MonoBehaviour
                 break;
             case SwordmanSkillIndex.Blache:
                 SwordmanSkillBlache blache = new SwordmanSkillBlache();
-                blache.SetCreateEffect(stat, FindSkillEffect(type), 10.0f, 1);
+                blache.SetCreateEffect(stat, FindSkillEffect(type), 0.0f, 3);
                 skill = blache;
                 break;
         }
