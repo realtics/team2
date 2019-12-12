@@ -13,7 +13,7 @@ public class MonsterAttackBox : MonoBehaviour
     {
         _monster = transform.root.GetComponent<BaseMonster>();
         _sender.Attacker = transform.root;
-        _sender.Damage = 1000f;
+        _sender.Damage = 100f;
     }
 
     private void OnTriggerEnter2D(Collider2D other)

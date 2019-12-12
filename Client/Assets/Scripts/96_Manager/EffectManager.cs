@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class HitEffectManager : MonoBehaviour
+public class EffectManager : MonoBehaviour
 {
-	private static HitEffectManager _instance;
-	public static HitEffectManager Instance
+	private static EffectManager _instance;
+	public static EffectManager Instance
 	{
 		get
 		{
@@ -17,7 +17,12 @@ public class HitEffectManager : MonoBehaviour
 	[SerializeField]
 	private GameObject _effectPrefab;
 	[SerializeField]
-	private GameObject _HidDamagePrefab;
+	private GameObject _hitDamagePrefab;
+	[SerializeField]
+	private GameObject _clearCircle;
+	[SerializeField]
+	private GameObject _cutin;
+
 	private void Awake()
 	{
 		_instance = this;
@@ -26,7 +31,8 @@ public class HitEffectManager : MonoBehaviour
 	// Start is called before the first frame update
 	private void Start()
     {
-		
+		ObjectPoolManager.Instance.CreatePool(_effectPrefab, 5);
+		ObjectPoolManager.Instance.CreatePool(_hitDamagePrefab, 5);
 	}
 
 	public void AddHitEffect(Vector3 position, float size)
@@ -38,8 +44,14 @@ public class HitEffectManager : MonoBehaviour
 
 	public void AddHitDamageEffect(Vector3 position, float damage)
 	{
-		GameObject hitDamage = ObjectPoolManager.Instance.GetRestObject(_HidDamagePrefab);
+		GameObject hitDamage = ObjectPoolManager.Instance.GetRestObject(_hitDamagePrefab);
 		hitDamage.transform.position = position;
 		hitDamage.GetComponent<Damage>().SetDamage(damage);
+	}
+
+	public void SpawnClearCircle(Vector3 position)
+	{
+		GameObject clearCircle = ObjectPoolManager.Instance.GetRestObject(_clearCircle);
+		clearCircle.transform.position = position;
 	}
 }
