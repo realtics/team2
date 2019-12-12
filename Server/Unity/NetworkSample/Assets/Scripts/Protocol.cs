@@ -28,9 +28,7 @@ enum CHECK_BEFORE_LOGIN_RESULT : int
 {
 	RESULT_SUCCESS = 1,
 	RESULT_NO_ID = 2,
-	RESULT_DUPLICATE_ID = 3,
-	RESULT_PW_IS_WRONG = 4,
-	RESULT_DUPLICATE_NAME = 5,
+	RESULT_IS_WRONG_PASSWORD = 3,
 }
 
 public struct PACKET_HEADER
@@ -49,7 +47,6 @@ public struct PKT_REQ_CHECK_BEFORE_LOGIN
 	public PACKET_HEADER header;
 	public string userID;
 	public string userPW;
-	public string userName;
 }
 public struct PKT_RES_CHECK_BEFORE_LOGIN
 {

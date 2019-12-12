@@ -22,7 +22,6 @@ AsioServer::~AsioServer()
 
 void AsioServer::Init(const int maxSessionCount)
 {
-	DBMySQL _DBMysql;
 	_DBMysql.Init();
 	_DBMysql.DBDataLoginSelectAll();
 	_DBMysql.DBMySQLVersion();
@@ -144,6 +143,55 @@ void AsioServer::ProcessPacket(const int sessionID, const char* pData)
 				_sessionList[i]->PostSend(false, SendPkt.packetSize, (char*)&SendPkt);
 			}
 		}
+	}
+	break;
+	case PACKET_INDEX::REQ_CHECK_BEFORE_LOGIN:
+	{
+		PKT_REQ_CHECK_BEFORE_LOGIN* pPacket = (PKT_REQ_CHECK_BEFORE_LOGIN*)pData;
+		
+		PKT_RES_CHECK_BEFORE_LOGIN SendPkt;
+		SendPkt.Init();
+
+		// DB 체크
+		SendPkt.checkResult = _DBMysql.DBLoginCheckUserID(pPacket->userID);
+		std::cout << "ID checkResult = " << SendPkt.checkResult << std::endl;
+
+		if (SendPkt.checkResult == CHECK_BEFORE_LOGIN_RESULT::RESULT_SUCCESS)
+		{
+			SendPkt.checkResult = _DBMysql.DBLoginCheckUserPW(pPacket->userID, pPacket->userPW);
+			std::cout << "PW checkResult = " << SendPkt.checkResult << std::endl;
+		}
+
+		boost::property_tree::ptree ptSendHeader;
+		ptSendHeader.put<short>("packetIndex", SendPkt.packetIndex);
+		ptSendHeader.put<short>("packetSize", SendPkt.packetSize);
+
+		boost::property_tree::ptree ptSend;
+		ptSend.add_child("header", ptSendHeader);
+		ptSend.put<int>("checkResult", SendPkt.checkResult);
+
+		std::string stringRecv;
+		std::ostringstream oss(stringRecv);
+		boost::property_tree::write_json(oss, ptSend, false);
+		std::string sendStr = oss.str();
+		
+		short JsonDataAllPacketSize = JsonDataSize(sendStr);
+
+		boost::property_tree::ptree ptSendHeader2;
+		ptSendHeader2.put<short>("packetIndex", SendPkt.packetIndex);
+		ptSendHeader2.put<short>("packetSize", JsonDataAllPacketSize);
+
+		boost::property_tree::ptree ptSend2;
+		ptSend2.add_child("header", ptSendHeader2);
+		ptSend2.put<int>("checkResult", SendPkt.checkResult);
+
+		std::string stringRecv2;
+		std::ostringstream oss2(stringRecv2);
+		boost::property_tree::write_json(oss2, ptSend2, false);
+		std::string sendStr2 = oss2.str();
+		std::cout << "[서버->클라] " << sendStr2 << std::endl;
+
+		_sessionList[sessionID]->PostSend(false, std::strlen(sendStr2.c_str()), (char*)sendStr2.c_str());
 	}
 	break;
 	case PACKET_INDEX::REQ_NEW_LOGIN:

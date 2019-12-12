@@ -31,11 +31,16 @@ void DBMySQL::Init()
 	mysql_query(&_mysql, "set names euckr");
 }
 
+void DBMySQL::DBMySQLVersion()
+{
+	std::cout << "Connect MySQL version : " << mysql_get_client_info() << std::endl;
+}
+
 void DBMySQL::DBDataLoginSelectAll()
 {
 	mysql_select_db(&_mysql, _dbName);
 
-	const char* tempQuery = "SELECT * FROM login";
+	const char* DBQuery = "SELECT * FROM login";
 
 	if (_pConnection == NULL)
 	{
@@ -43,8 +48,8 @@ void DBMySQL::DBDataLoginSelectAll()
 	}
 	else
 	{
-		int tempState = mysql_query(_pConnection, tempQuery);
-		if (tempState == 0)
+		int DBState = mysql_query(_pConnection, DBQuery);
+		if (DBState == 0)
 		{
 			_pSqlResult = mysql_store_result(_pConnection);
 
@@ -71,7 +76,114 @@ void DBMySQL::DBDataLoginSelectAll()
 	}
 }
 
-void DBMySQL::DBMySQLVersion()	
+int DBMySQL::DBLoginCheckUserID(std::string checkID)
 {
-	std::cout << "Connect MySQL version : " << mysql_get_client_info() << std::endl;
+	mysql_select_db(&_mysql, _dbName);
+	
+	const char* DBQuery1 = "SELECT user_id FROM login WHERE user_ID = \"";
+	const char* DBQuery2 = checkID.c_str();
+	const char* DBQuery3 = "\";";
+
+	char DBQuery[256] = "";
+
+	strcat_s(DBQuery, DBQuery1);
+	strcat_s(DBQuery, DBQuery2);
+	strcat_s(DBQuery, DBQuery3);
+
+	if (_pConnection == NULL)
+	{
+		std::cout << mysql_errno(&_mysql) << " 에러 : " << mysql_error(&_mysql) << std::endl;
+	}
+	else
+	{
+		int DBState = mysql_query(_pConnection, DBQuery);
+		if (DBState == 0)
+		{
+			_pSqlResult = mysql_store_result(_pConnection);
+
+			int fields = mysql_num_fields(_pSqlResult);
+
+			while ((_SqlRow = mysql_fetch_row(_pSqlResult)) != NULL)
+			{
+				for (int i = 0; i < fields; i++)
+				{
+					if (_SqlRow[i] != NULL)
+					{
+						std::cout << _SqlRow[i] << " = " << checkID.c_str() << " 비교" << std::endl;
+
+						if (!strcmp(_SqlRow[i], checkID.c_str()))
+						{
+							return CHECK_BEFORE_LOGIN_RESULT::RESULT_SUCCESS;
+						}
+					}
+					else
+					{
+						return CHECK_BEFORE_LOGIN_RESULT::RESULT_NO_ID;
+					}
+
+					std::cout << "\t";
+				}
+				std::cout << std::endl;
+			}
+			mysql_free_result(_pSqlResult);
+		}
+	}
+
+	return CHECK_BEFORE_LOGIN_RESULT::RESULT_NO_ID;
+}
+
+int DBMySQL::DBLoginCheckUserPW(std::string checkID, std::string checkPW)
+{
+	mysql_select_db(&_mysql, _dbName);
+
+	const char* DBQuery1 = "SELECT user_password FROM login WHERE user_id = \"";
+	const char* DBQuery2 = checkID.c_str();
+	const char* DBQuery3 = "\";";
+
+	char DBQuery[256] = "";
+
+	strcat_s(DBQuery, DBQuery1);
+	strcat_s(DBQuery, DBQuery2);
+	strcat_s(DBQuery, DBQuery3);
+
+	if (_pConnection == NULL)
+	{
+		std::cout << mysql_errno(&_mysql) << " 에러 : " << mysql_error(&_mysql) << std::endl;
+	}
+	else
+	{
+		int DBState = mysql_query(_pConnection, DBQuery);
+		if (DBState == 0)
+		{
+			_pSqlResult = mysql_store_result(_pConnection);
+
+			int fields = mysql_num_fields(_pSqlResult);
+
+			while ((_SqlRow = mysql_fetch_row(_pSqlResult)) != NULL)
+			{
+				for (int i = 0; i < fields; i++)
+				{
+					if (_SqlRow[i] != NULL)
+					{
+						std::cout << _SqlRow[i] << " = " << checkPW.c_str() << " 비교" << std::endl;
+
+						if (!strcmp(_SqlRow[i], checkPW.c_str()))
+						{
+							return CHECK_BEFORE_LOGIN_RESULT::RESULT_SUCCESS;
+						}
+					}
+					else
+					{
+						return CHECK_BEFORE_LOGIN_RESULT::RESULT_IS_WRONG_PASSWORD;
+					}
+
+					std::cout << "\t";
+				}
+				std::cout << std::endl;
+			}
+			mysql_free_result(_pSqlResult);
+		}
+	}
+
+	return CHECK_BEFORE_LOGIN_RESULT::RESULT_IS_WRONG_PASSWORD;
 }

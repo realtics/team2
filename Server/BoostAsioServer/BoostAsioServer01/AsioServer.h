@@ -15,6 +15,8 @@
 class AsioServer
 {
 private:
+	DBMySQL _DBMysql;
+
 	bool _isAccepting;
 
 	boost::asio::ip::tcp::acceptor _acceptor;

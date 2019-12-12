@@ -42,6 +42,13 @@ enum PACKET_INDEX : short
 	RES_PLAYER_MOVE_END = 133,
 };
 
+enum CHECK_BEFORE_LOGIN_RESULT : int
+{
+	RESULT_SUCCESS = 1,
+	RESULT_NO_ID = 2,
+	RESULT_IS_WRONG_PASSWORD = 3,
+};
+
 struct PACKET_HEADER
 {
 	short packetIndex;
@@ -107,14 +114,12 @@ struct PKT_REQ_CHECK_BEFORE_LOGIN : public PACKET_HEADER
 {
 	char userID[MAX_USER_ID];
 	char userPW[MAX_USER_PW];
-	char userName[MAX_USER_NAME];
 	void Init()
 	{
 		packetIndex = PACKET_INDEX::REQ_CHECK_BEFORE_LOGIN;
 		packetSize = sizeof(PKT_REQ_CHECK_BEFORE_LOGIN);
 		memset(userID, 0, MAX_USER_ID);
 		memset(userPW, 0, MAX_USER_PW);
-		memset(userName, 0, MAX_USER_NAME);
 	}
 };
 

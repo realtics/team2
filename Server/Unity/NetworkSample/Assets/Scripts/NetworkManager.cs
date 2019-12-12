@@ -291,35 +291,22 @@ public class NetworkManager : MonoBehaviour
         {
             switch (packetIndex)
             {
-                //case (short)PACKET_INDEX.RES_NEW_LOGIN_SUCSESS:
-                //    {
-                //        DebugLogList("PACKET_INDEX.RES_NEW_LOGIN_SUCSESS start");
-                //        var desJson = JsonConvert.DeserializeObject<PKT_RES_NEW_LOGIN_SUCSESS>(jsonData);
-                //        DebugLogList(desJson.header.ToString());
-                //        DebugLogList(desJson.header.packetIndex.ToString());
-                //        DebugLogList(desJson.header.packetSize.ToString());
-                //        DebugLogList(desJson.isSuccess.ToString());
-                //        DebugLogList(desJson.userID.ToString());
+				case (short)PACKET_INDEX.RES_CHECK_BEFORE_LOGIN:
+					{
+						DebugLogList("PACKET_INDEX.RES_CHECK_BEFORE_LOGIN start");
+						var desJson = JsonConvert.DeserializeObject<PKT_RES_CHECK_BEFORE_LOGIN>(jsonData);
+						Debug.Log(desJson.checkResult);
 
-                //        DebugMsg10 = desJson.isSuccess;
-                //        DebugMsg11 = desJson.userID;
-                //        // 내 캐릭터를 생성하는 로직
-                //        // 서버에서 내가 접속했다고 알려주면 Id를 받고 내 Id로 설정한다.
-                //        DebugLogList(GetMyId.ToString());
-                //        if (GetMyId == 0)
-                //        {
-                //            SetIsLogin(desJson.isSuccess);
-                //            SetMyId(desJson.userID);
-                //            JoinNewPlayer(desJson.userID);
-                //            Debug.Log("접속 ID : " + desJson.userID + ", 접속 성공 여부 : " + desJson.isSuccess);
-                //        }
-                //        else
-                //        {
-                //            Debug.LogError("접속 ID : " + desJson.userID + ", 접속 성공 여부 : " + desJson.isSuccess);
-                //        }
-                //        DebugLogList("PACKET_INDEX.RES_NEW_LOGIN_SUCSESS end");
-                //    }
-                //    break;
+						int checkResult = desJson.checkResult;
+
+						if (checkResult == (int)CHECK_BEFORE_LOGIN_RESULT.RESULT_SUCCESS)
+							Debug.Log("성공");
+						else if (checkResult == (int)CHECK_BEFORE_LOGIN_RESULT.RESULT_NO_ID)
+							Debug.Log("ID가 존재하지 않음");
+						else if (checkResult == (int)CHECK_BEFORE_LOGIN_RESULT.RESULT_IS_WRONG_PASSWORD)
+							Debug.Log("비밀번호가 틀렸음");
+					}
+					break;
                 case (short)PACKET_INDEX.RES_CONCURRENT_USER_LIST:
                     {
                         DebugLogList("PACKET_INDEX.RES_CONCURRENT_USER_LIST start");
@@ -468,8 +455,7 @@ public class NetworkManager : MonoBehaviour
 		DebugLogList(jsonData.ToString());
 		byte[] sendByte = new byte[512];
 		sendByte = Encoding.UTF8.GetBytes(jsonData);
-		//TODO 1-0: JSON 헤더에 패킷 사이즈 체크 하는것을 foreach로 하고 있는데, 더 좋은 방법 있다면 개선
-		//TODO 1-1: 패킷 사이즈를 담아 보내는 것이 현재 상태에선 크게 중요하진 않으므로, 코드만 남겨두고 나중에 활용
+
 		short jsonDataSize = 0;
 		foreach (byte b in sendByte)
 		{
@@ -579,7 +565,7 @@ public class NetworkManager : MonoBehaviour
         DebugLogList("UserExit() end");
     }
 
-	public void CheckBeforeLogin(string id, string pw, string name)
+	public void CheckBeforeLogin(string id, string pw)
 	{
 		DebugLogList("CheckBeforeLogin() start");
 		string jsonData;
@@ -587,15 +573,14 @@ public class NetworkManager : MonoBehaviour
 
 		var packHeader = new PACKET_HEADER
 		{
-			packetIndex = (short)PACKET_INDEX.REQ_NEW_LOGIN,
+			packetIndex = (short)PACKET_INDEX.REQ_CHECK_BEFORE_LOGIN,
 			packetSize = (short)DefineDefaultValue.packetSize
 		};
 		var packData = new PKT_REQ_CHECK_BEFORE_LOGIN
 		{
 			header = packHeader,
 			userID = id,
-			userPW = pw,
-			userName = name
+			userPW = pw
 		};
 		DebugLogList(packData.ToString());
 		jsonData = JsonConvert.SerializeObject(packData);
@@ -603,8 +588,7 @@ public class NetworkManager : MonoBehaviour
 		DebugLogList(jsonData.ToString());
 		byte[] sendByte = new byte[512];
 		sendByte = Encoding.UTF8.GetBytes(jsonData);
-		//TODO 1-0: JSON 헤더에 패킷 사이즈 체크 하는것을 foreach로 하고 있는데, 더 좋은 방법 있다면 개선
-		//TODO 1-1: 패킷 사이즈를 담아 보내는 것이 현재 상태에선 크게 중요하진 않으므로, 코드만 남겨두고 나중에 활용
+
 		short jsonDataSize = 0;
 		foreach (byte b in sendByte)
 		{
@@ -616,15 +600,14 @@ public class NetworkManager : MonoBehaviour
 		//Debug.Log(jsonDataSize);
 		var packHeader2 = new PACKET_HEADER
 		{
-			packetIndex = (short)PACKET_INDEX.REQ_NEW_LOGIN,
+			packetIndex = (short)PACKET_INDEX.REQ_CHECK_BEFORE_LOGIN,
 			packetSize = jsonDataSize
 		};
 		var packData2 = new PKT_REQ_CHECK_BEFORE_LOGIN
 		{
 			header = packHeader2,
 			userID = id,
-			userPW = pw,
-			userName = name
+			userPW = pw
 		};
 		string jsonData2;
 		jsonData2 = JsonConvert.SerializeObject(packData2);

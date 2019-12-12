@@ -158,9 +158,21 @@ void Session::Deserialization(char* jsonData)
 	
 	switch (packetIndex)
 	{
+	case PACKET_INDEX::REQ_CHECK_BEFORE_LOGIN:
+	{
+		PKT_REQ_CHECK_BEFORE_LOGIN packet;
+		packet.Init();
+		packet.packetIndex = packetIndex;
+		packet.packetSize = packetSize;
+		strcpy_s(packet.userID, MAX_USER_ID, ptRecv.get<std::string>("userID").c_str());
+		strcpy_s(packet.userPW, MAX_USER_PW, ptRecv.get<std::string>("userPW").c_str());
+		memcpy(&_packetBuffer[_packetBufferMark], (char*)&packet, sizeof(packet));
+	}
+	break;
 	case PACKET_INDEX::REQ_NEW_LOGIN:
 	{
 		PKT_REQ_NEW_LOGIN packet;
+		packet.Init();
 		packet.packetIndex = packetIndex;
 		packet.packetSize = packetSize;
 		memcpy(&_packetBuffer[_packetBufferMark], (char*)&packet, sizeof(packet));
@@ -169,6 +181,7 @@ void Session::Deserialization(char* jsonData)
 	case PACKET_INDEX::REQ_CONCURRENT_USER:
 	{
 		PKT_REQ_CONCURRENT_USER packet;
+		packet.Init();
 		packet.packetIndex = packetIndex;
 		packet.packetSize = packetSize;
 		memcpy(&_packetBuffer[_packetBufferMark], (char*)&packet, sizeof(packet));
@@ -177,6 +190,7 @@ void Session::Deserialization(char* jsonData)
 	case PACKET_INDEX::REQ_USER_EXIT:
 	{
 		PKT_REQ_USER_EXIT packet;
+		packet.Init();
 		packet.packetIndex = packetIndex;
 		packet.packetSize = packetSize;
 		packet.userID = ptRecv.get<int>("userID");
