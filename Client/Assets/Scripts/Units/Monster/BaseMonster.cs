@@ -253,12 +253,12 @@ public class BaseMonster : MonoBehaviour
 	
 	protected void AddHitEffect()
 	{
-		HitEffectManager.Instance.AddHitEffect(HitBoxCenter, _hitEffectSize);
+		EffectManager.Instance.AddHitEffect(HitBoxCenter, _hitEffectSize);
 	}
 
 	protected void AddHitDamageEffect(float damage)
 	{
-		HitEffectManager.Instance.AddHitDamageEffect(HitBoxCenter, damage);
+		EffectManager.Instance.AddHitDamageEffect(HitBoxCenter, damage);
 	}
 
 	//FIXME: AttackInofoSender 의 값중 넉백관련만 인자로 받게 고쳐야함

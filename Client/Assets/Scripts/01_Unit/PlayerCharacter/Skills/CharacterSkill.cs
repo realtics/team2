@@ -44,8 +44,9 @@ public class CharacterSkill
 		SetAttackInfo(_stat);
 	}
 
-	public void SetCreateEffect(AttackInfoSender sender, GameObject effectPrefab, float coolTime = 1.0f, int motion = 1)
+	public void SetCreateEffect(CharacterStat stat, AttackInfoSender sender, GameObject effectPrefab, float coolTime = 1.0f, int motion = 1)
 	{
+		_stat = stat;
 		_sender = sender;
 		_motionIndex = motion;
 		_effectPrefab = effectPrefab;
