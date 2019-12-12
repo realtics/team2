@@ -20,6 +20,8 @@ public class EffectManager : MonoBehaviour
 	private GameObject _hitDamagePrefab;
 	[SerializeField]
 	private GameObject _clearCircle;
+	[SerializeField]
+	private GameObject _cutin;
 
 	private void Awake()
 	{
