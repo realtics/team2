@@ -89,7 +89,7 @@ public class SwordmanSkillManager : MonoBehaviour
             if (body.type != type)
                 continue;
 
-            effect = body.effectPrefab;
+            effect = body.skillObject.skillPrefab;
         }
 
         return effect;
