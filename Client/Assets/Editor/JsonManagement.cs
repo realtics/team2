@@ -116,7 +116,7 @@ public class JsonManagement
         dungeonInfo.objectinfos.Add(objectInfo);
     }
 
-    public void AddMonster(DungeonInfo dungeonInfo, GameObject obj)
+    public void AddMonster(DungeonInfo dungeonInfo, GameObject obj) 
     {
         Object parentObject = PrefabUtility.GetCorrespondingObjectFromOriginalSource(obj);
         string path = AssetDatabase.GetAssetPath(parentObject);
@@ -144,7 +144,7 @@ public class JsonManagement
 
         potalTransportinfo.spotPosition = new Vector3[potal.spotGatePosition.Length];
         for (int i = 0; i < potal.spotGatePosition.Length; ++i)
-        {
+        { 
             potalTransportinfo.spotPosition[i] = potal.spotGatePosition[i].position;
         }
 
