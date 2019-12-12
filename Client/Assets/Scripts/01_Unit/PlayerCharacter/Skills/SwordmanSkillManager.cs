@@ -13,19 +13,10 @@ public enum SwordmanSkillIndex
     CutIn,
 }
 
-[Serializable]
-public struct SwordmanSkillBody
-{
-    public SwordmanSkillIndex type;
-    public CharacterSkillMetaObject skillObject;
-}
-
 public class SwordmanSkillManager : MonoBehaviour
 {
-	//[SerializeField]
-	//private List<CharacterSkillMetaObject> _skillMetas;
     [SerializeField]
-    private List<SwordmanSkillBody> _skillBodys;
+    private List<CharacterSkillMetaObject> _skillMetas;
 
     private static SwordmanSkillManager _instance;
     public static SwordmanSkillManager Instance
@@ -52,46 +43,47 @@ public class SwordmanSkillManager : MonoBehaviour
         
     }
 
-    public CharacterSkill GetSkill(CharacterStat stat, SwordmanSkillIndex type)
+    public CharacterSkill GetSkill(CharacterStat stat, SwordmanSkillIndex index)
     {
         CharacterSkill skill = null;
+		CharacterSkillMetaObject meta = FindSkillMeta(index);
+		AttackInfoSender sender = meta.AttackInfo;
+		sender.Attacker = stat.transform;
 
-        switch (type)
+		switch (index)
         {
             case SwordmanSkillIndex.Jingongcham:
                 SwordmanSkillJingongcham jingongcham = new SwordmanSkillJingongcham();
-                jingongcham.SetCreateEffect(stat, FindSkillEffect(type), 10.0f, 1);
                 skill = jingongcham;
                 break;
             case SwordmanSkillIndex.Hadouken:
                 SwordmanSkillHadouken hadouken = new SwordmanSkillHadouken();
-                hadouken.SetCreateEffect(stat, FindSkillEffect(type), 0.0f, 2);
                 skill = hadouken;
                 break;
             case SwordmanSkillIndex.Blache:
                 SwordmanSkillBlache blache = new SwordmanSkillBlache();
-                blache.SetCreateEffect(stat, FindSkillEffect(type), 0.0f, 3);
                 skill = blache;
                 break;
         }
 
-        ObjectPoolManager.Instance.CreatePool(FindSkillEffect(type), 1);
+		skill.SetCreateEffect(stat, sender, meta.skillPrefab, meta.coolTime, meta.motion);
+		ObjectPoolManager.Instance.CreatePool(meta.skillPrefab, 1);
 
         return skill;
     }
 
-    public GameObject FindSkillEffect(SwordmanSkillIndex type)
-    {
-        GameObject effect = null;
+	public CharacterSkillMetaObject FindSkillMeta(SwordmanSkillIndex inedx)
+	{
+		CharacterSkillMetaObject skill = null;
 
-        foreach (SwordmanSkillBody body in _skillBodys)
-        {
-            if (body.type != type)
-                continue;
+		foreach (CharacterSkillMetaObject meta in _skillMetas)
+		{
+			if (meta.index != inedx)
+				continue;
 
-            effect = body.skillObject.skillPrefab;
-        }
+			skill = meta;
+		}
 
-        return effect;
-    }
+		return skill;
+	}
 }

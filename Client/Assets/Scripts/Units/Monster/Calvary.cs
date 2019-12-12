@@ -75,12 +75,12 @@ public class Calvary : BaseMonster
     {
         // FIXME HACK : (안병욱) 수정해
         StartCoroutine(TimeScaleSlow());
-        GameObject circle = ObjectPoolManager.Instance.GetRestObject(SwordmanSkillManager.Instance.FindSkillEffect(SwordmanSkillIndex.ClearCircle));
-        Vector3 newPos = transform.root.position;
-        newPos.y += 1.2f;
-        circle.transform.position = newPos;
+        //GameObject circle = ObjectPoolManager.Instance.GetRestObject(SwordmanSkillManager.Instance.FindSkillEffect(SwordmanSkillIndex.ClearCircle));
+        //Vector3 newPos = transform.root.position;
+        //newPos.y += 1.2f;
+        //circle.transform.position = newPos;
 
-        print(newPos + " / " + newPos);
+        //print(newPos + " / " + newPos);
 
         base.EnterDieState();
     }

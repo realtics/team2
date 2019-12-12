@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3290036672774756143}
   - component: {fileID: 3290036672774756142}
   m_Layer: 0
-  m_Name: HitEffectManager
+  m_Name: EffectManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -40,10 +40,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 3290036672774756140}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ecdaf98baa6636b4d868176fc2d03156, type: 3}
+  m_Script: {fileID: 11500000, guid: 738c4c44b5203d042bdc614ce5ad4a91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _effectPrefab: {fileID: 250908842011196223, guid: 69a5acdf0bca6944ea3e77e6b85d4364,
     type: 3}
-  _HidDamagePrefab: {fileID: 5150396272498270025, guid: 97c88936c554874488f6eb9e6c60254c,
+  _hitDamagePrefab: {fileID: 5150396272498270025, guid: 97c88936c554874488f6eb9e6c60254c,
+    type: 3}
+  _clearCircle: {fileID: 5784346509610660004, guid: 88c4e49d08d98c144a0069a14df9e142,
     type: 3}
