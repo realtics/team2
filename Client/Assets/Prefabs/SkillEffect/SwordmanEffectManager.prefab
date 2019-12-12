@@ -43,19 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e309ca2d6310b2f4aa00475e92ed9c32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _skillBodys:
-  - type: 1
-    effectPrefab: {fileID: 8467314183276299524, guid: fe356b9be93e61b4eaee401d0d359b7a,
-      type: 3}
-  - type: 2
-    effectPrefab: {fileID: 4830150782382790155, guid: 94817625890a7654698be49829c78193,
-      type: 3}
-  - type: 3
-    effectPrefab: {fileID: 5148761421375241879, guid: 4ec3600802fa18a408c4c1abe0751902,
-      type: 3}
-  - type: 4
-    effectPrefab: {fileID: 5784346509610660004, guid: 88c4e49d08d98c144a0069a14df9e142,
-      type: 3}
-  - type: 5
-    effectPrefab: {fileID: 2271839019722285728, guid: 64f84d7016819284ca01baaa70a59f80,
-      type: 3}
+  _skillMetas:
+  - {fileID: 11400000, guid: 046d0b903ec51c24cad0a2af9d976f21, type: 2}
+  - {fileID: 11400000, guid: 6e25815ceff19624d87c6b8b1654c151, type: 2}
+  - {fileID: 11400000, guid: 1ec7f237f40c1b247ab6d6d7ac2247a4, type: 2}
