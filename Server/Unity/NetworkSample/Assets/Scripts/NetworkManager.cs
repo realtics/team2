@@ -56,7 +56,7 @@ public class NetworkManager : MonoBehaviour
 
 
     private int _myId = 0;      // 실행한 클라이언트의 ID
-    public int GetMyId { get { return _myId; } }
+    public int MyId { get { return _myId; } }
     public void SetMyId(int id) { _myId = id; }
 
 
@@ -338,7 +338,7 @@ public class NetworkManager : MonoBehaviour
                             string userPos = splitUserPos[i];
                             string userDir = splitUserDir[i];
 
-                            if (GetMyId == userId)
+                            if (MyId == userId)
                                 continue;
 
                             if (_characters.ContainsKey(userId))
@@ -384,6 +384,17 @@ public class NetworkManager : MonoBehaviour
                         //Debug.Log("userPos:" + vecPos.ToString("N5"));
 
                         ThisIsStopPacket(userID, vecPos);
+                    }
+                    break;
+                case (short)PACKET_INDEX.RES_CHATTING:
+                    {
+                        var desJson = JsonConvert.DeserializeObject<PKT_RES_CHATTING>(jsonData);
+
+                        var userID = desJson.userID;
+                        var userName = desJson.userName;
+                        var newChat = desJson.chatMessage;
+
+                        ChatManager.Instance.AddNewChat(userName, newChat);
                     }
                     break;
                 default:
@@ -501,7 +512,7 @@ public class NetworkManager : MonoBehaviour
             Debug.Log("접속 성공 여부 : " + desJson.isSuccess);
             Debug.Log("접속 ID : " + desJson.userID);
 
-            if (GetMyId == 0)
+            if (MyId == 0)
             {
                 SetIsLogin(desJson.isSuccess);
                 SetMyId(desJson.userID);
@@ -552,7 +563,7 @@ public class NetworkManager : MonoBehaviour
         var packData = new PKT_REQ_USER_EXIT
         {
             header = packHeader,
-            userID = GetMyId
+            userID = MyId
         };
         DebugLogList(packData.ToString());
         jsonData = JsonConvert.SerializeObject(packData);
@@ -637,7 +648,7 @@ public class NetworkManager : MonoBehaviour
         var packData = new PKT_REQ_PLAYER_MOVE_START
         {
             header = packHeader,
-            userID = GetMyId,
+            userID = MyId,
             userPos = startPos,
             userDir = startDir
         };
@@ -668,7 +679,7 @@ public class NetworkManager : MonoBehaviour
         var packData = new PKT_REQ_PLAYER_MOVE_END
         {
             header = packHeader,
-            userID = GetMyId,
+            userID = MyId,
             userPos = EndPos,
             userDir = EndDir
         };
@@ -745,7 +756,7 @@ public class NetworkManager : MonoBehaviour
 
     private void OnGUI()
     {
-        GUI.Label(new Rect(0, 0, 500, 100), "접속여부:" + _isLogin.ToString() + ", 유저:" + GetMyId.ToString());
+        GUI.Label(new Rect(0, 0, 500, 100), "접속여부:" + _isLogin.ToString() + ", 유저:" + MyId.ToString());
         GUI.Label(new Rect(0, 15, 300, 100), "동시접속자 수 : " + DebugMsg02);
         GUI.Label(new Rect(0, 30, 960, 100), "접속자 리스트 : " + DebugMsg01);
 
@@ -757,7 +768,7 @@ public class NetworkManager : MonoBehaviour
     {
         string addLogIndex = "[" + DebugLogListIndex + "]["
                                 + _isLogin.ToString() + "]["
-                                + GetMyId.ToString() + "] "
+                                + MyId.ToString() + "] "
                                 + logData;
 
         _DebugMsgList01.Add(addLogIndex);
@@ -773,7 +784,7 @@ public class NetworkManager : MonoBehaviour
             Directory.CreateDirectory(appDataPathParent + "/log");
         }
         string dateTime = DateTime.Now.ToString("yyMMdd-HHmmss");
-        string fileName = appDataPathParent + "/Log/Debug-" + dateTime + "-" + GetMyId.ToString() + ".txt";
+        string fileName = appDataPathParent + "/Log/Debug-" + dateTime + "-" + MyId.ToString() + ".txt";
         //Debug.Log(fileName);
 
         FileStream fs = new FileStream(fileName, FileMode.Create);
@@ -803,6 +814,32 @@ public class NetworkManager : MonoBehaviour
                                     float.Parse(arrayData[2]));
 
         return result;
+    }
+
+    public void SendChat(string chat)
+    {
+        string jsonData;
+        char endNullValue = '\0';
+
+        var packHeader = new PACKET_HEADER
+        {
+            packetIndex = (short)PACKET_INDEX.REQ_CHATTING,
+            packetSize = 1
+        };
+        var packData = new PKT_REQ_CHATTING
+        {
+            header = packHeader,
+            userID = MyId,
+            chatMessage = chat
+        };
+
+        jsonData = JsonConvert.SerializeObject(packData);
+        jsonData += endNullValue;
+
+        byte[] sendByte = new byte[512];
+        sendByte = Encoding.UTF8.GetBytes(jsonData);
+
+        int resultSize = _sock.Send(sendByte);
     }
 
 }
