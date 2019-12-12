@@ -34,7 +34,8 @@ enum PACKET_INDEX : short
 	REQ_USER_EXIT = 112,
 	RES_USER_EXIT = 113,
 
-	JOIN_PLAYER = 120,
+	REQ_CHATTING = 120,
+	RES_CHATTING = 121,
 
 	REQ_PLAYER_MOVE_START = 130,
 	RES_PLAYER_MOVE_START = 131,
@@ -202,6 +203,36 @@ struct PKT_RES_USER_EXIT : public PACKET_HEADER
 		packetIndex = PACKET_INDEX::RES_USER_EXIT;
 		packetSize = sizeof(PKT_RES_USER_EXIT);
 		userID = FIRST_USER_INDEX;
+	}
+};
+
+struct PKT_REQ_CHATTING : public PACKET_HEADER
+{
+	int userID;
+	char chatMessage[MAX_MESSAGE_LEN];
+
+	void Init()
+	{
+		packetIndex = PACKET_INDEX::REQ_CHATTING;
+		packetSize = sizeof(PKT_REQ_CHATTING);
+		userID = FIRST_USER_INDEX;
+		memset(chatMessage, 0, MAX_MESSAGE_LEN);
+	}
+};
+
+struct PKT_RES_CHATTING : public PACKET_HEADER
+{
+	int userID;
+	char userName[MAX_NAME_LEN];
+	char chatMessage[MAX_MESSAGE_LEN];
+
+	void Init()
+	{
+		packetIndex = PACKET_INDEX::REQ_CHATTING;
+		packetSize = sizeof(PKT_REQ_CHATTING);
+		userID = FIRST_USER_INDEX;
+		memset(userName, 0, MAX_NAME_LEN);
+		memset(chatMessage, 0, MAX_MESSAGE_LEN);
 	}
 };
 
