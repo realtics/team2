@@ -5,10 +5,13 @@
     REQ_CHAT = 5,
     NOTICE_CHAT = 6,
 
-    REQ_NEW_LOGIN = 100,
-    RES_NEW_LOGIN_SUCSESS = 101,
+	REQ_CHECK_BEFORE_LOGIN = 105,
+	RES_CHECK_BEFORE_LOGIN = 106,
 
-    REQ_CONCURRENT_USER = 110,
+	REQ_NEW_LOGIN = 107,
+	RES_NEW_LOGIN_SUCSESS = 108,
+
+	REQ_CONCURRENT_USER = 110,
     RES_CONCURRENT_USER_LIST = 111,
     REQ_USER_EXIT = 112,
     RES_USER_EXIT = 113,
@@ -21,6 +24,15 @@
     RES_PLAYER_MOVE_END = 133,
 };
 
+enum CHECK_BEFORE_LOGIN_RESULT : int
+{
+	RESULT_SUCCESS = 1,
+	RESULT_NO_ID = 2,
+	RESULT_DUPLICATE_ID = 3,
+	RESULT_PW_IS_WRONG = 4,
+	RESULT_DUPLICATE_NAME = 5,
+}
+
 public struct PACKET_HEADER
 {
     public short packetIndex;
@@ -31,6 +43,19 @@ public struct PACKET_HEADER_BODY
 {
     public PACKET_HEADER header;
 };
+
+public struct PKT_REQ_CHECK_BEFORE_LOGIN
+{
+	public PACKET_HEADER header;
+	public string userID;
+	public string userPW;
+	public string userName;
+}
+public struct PKT_RES_CHECK_BEFORE_LOGIN
+{
+	public PACKET_HEADER header;
+	public int checkResult;
+}
 
 public struct PKT_REQ_NEW_LOGIN
 {
