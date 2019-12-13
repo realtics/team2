@@ -193,7 +193,7 @@ void Session::Deserialization(char* jsonData)
 		packet.Init();
 		packet.packetIndex = packetIndex;
 		packet.packetSize = packetSize;
-		packet.userID = ptRecv.get<int>("userID");
+		packet.sessionID = ptRecv.get<int>("sessionID");
 		memcpy(&_packetBuffer[_packetBufferMark], (char*)&packet, sizeof(packet));
 	}
 	break;
@@ -203,7 +203,7 @@ void Session::Deserialization(char* jsonData)
 		packet.Init();
 		packet.packetIndex = packetIndex;
 		packet.packetSize = packetSize;
-		packet.userID = ptRecv.get<int>("userID");
+		packet.sessionID = ptRecv.get<int>("sessionID");
 		strcpy_s(packet.userPos, MAX_PLAYER_MOVE_LEN, ptRecv.get<std::string>("userPos").c_str());
 		strcpy_s(packet.userDir, MAX_PLAYER_MOVE_LEN, ptRecv.get<std::string>("userDir").c_str());
 		memcpy(&_packetBuffer[_packetBufferMark], (char*)&packet, sizeof(packet));
@@ -215,7 +215,7 @@ void Session::Deserialization(char* jsonData)
 		packet.Init();
 		packet.packetIndex = packetIndex;
 		packet.packetSize = packetSize;
-		packet.userID = ptRecv.get<int>("userID");
+		packet.sessionID = ptRecv.get<int>("sessionID");
 		strcpy_s(packet.userPos, MAX_PLAYER_MOVE_LEN, ptRecv.get<std::string>("userPos").c_str());
 		strcpy_s(packet.userDir, MAX_PLAYER_MOVE_LEN, ptRecv.get<std::string>("userDir").c_str());
 		memcpy(&_packetBuffer[_packetBufferMark], (char*)&packet, sizeof(packet));
