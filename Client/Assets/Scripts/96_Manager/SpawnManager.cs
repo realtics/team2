@@ -5,8 +5,9 @@ using System.Collections.Generic;
 
 public class SpawnManager : MonoBehaviour
 {
-    [SerializeField]
-    private List<GameObject> _dungeonGameObject;
+    private List<GameObject> _dungeonGameObject = new List<GameObject>();
+
+    private AssetBundleManager _assetBundleManager;
 
     private static SpawnManager _instacne;
     public static SpawnManager instacne
@@ -24,7 +25,7 @@ public class SpawnManager : MonoBehaviour
     void Start()
     {
         _instacne = this;
-        _dungeonGameObject = new List<GameObject>();
+        _assetBundleManager = new AssetBundleManager();
     }
 
     public GameObject LoadResourceFromCache(string path)
@@ -48,7 +49,7 @@ public class SpawnManager : MonoBehaviour
         Resources.UnloadUnusedAssets();
     }
 
-    public void Instantiate(DungeonInfo dungeon)
+    public void Spawn(DungeonInfo dungeon)
     {
         foreach (var item in dungeon.objectinfos)
         {
@@ -81,6 +82,14 @@ public class SpawnManager : MonoBehaviour
 
             _dungeonGameObject.Add(obj);
         }
+
+        //To do AssetBundle.
+        //_assetBundleManager.LoadAssetFromLocalDisk("potal");
+
+        //AddObject(_assetBundleManager.LoadAsset("PotalTransport Up"), Vector3.zero);
+
+        //_assetBundleManager.UnLoadAssetBundle(false);
+
         ClearCache();
     }
     public GameObject AddObject(GameObject prefab, Vector3 position)
