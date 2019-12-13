@@ -30,7 +30,7 @@ private:
 	bool PostAccept();
 	void HandleAccept(Session* pSession, const boost::system::error_code& error);
 
-	int _userID;
+	int _sessionID;
 public:
 	AsioServer(boost::asio::io_context& io_context);
 	~AsioServer();
@@ -43,7 +43,7 @@ public:
 	short JsonDataSize(std::string jsonData);
 
 	void ConcurrentUser();
-	void UserExit(int userID);
+	void UserExit(int sessionID);
 
 	std::vector< Session* > GetSessionList() { return _sessionList; }
 };
