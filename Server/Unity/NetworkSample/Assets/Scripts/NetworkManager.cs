@@ -246,23 +246,28 @@ public class NetworkManager : MonoBehaviour
             if (bytesRead > 0)
             {
                 DebugLogList("bytesRead > 0");
-                string recvData = Encoding.UTF8.GetString(state.RecvBuffer, 0, bytesRead);
-                DebugLogList(recvData);
+				// TODO : 인코딩 해결 할 것
+				//string recvData = Encoding.UTF8.GetString(state.RecvBuffer);
+				
+				string recvData = Encoding.UTF8.GetString(state.RecvBuffer, 0, bytesRead);
+				//string recvData = Encoding.GetEncoding("EUC-KR").GetString(state.RecvBuffer, 0, bytesRead);
+				DebugLogList(recvData);
                 int bufLen = recvData.Length;
                 Debug.Log("recvData[" + bufLen + "]= " + recvData);
 
-                // 패킷 자르기
-                string recvDataSubstring = recvData.Substring(45, 3);
-                string[] recvDataSplit = recvDataSubstring.Split('"');
-                int recvDataSize = int.Parse(recvDataSplit[0]);
+				// TODO : EUC-KR로 한글이 들어 올 경우, 패킷 자르기 시, 서버에서 잰 길이와 클라에서 받는 길이가 다르게 판정됨
+				// 패킷 자르기
+				//string recvDataSubstring = recvData.Substring(45, 3);
+				//string[] recvDataSplit = recvDataSubstring.Split('"');
+				//int recvDataSize = int.Parse(recvDataSplit[0]);
 
-                string recvDataSubstring2 = recvData.Substring(0, recvDataSize);
-                DebugLogList(recvDataSubstring2);
+				//string recvDataSubstring2 = recvData.Substring(0, recvDataSize);
+				//DebugLogList(recvDataSubstring2);
+				//var JsonData = JsonConvert.DeserializeObject<PACKET_HEADER_BODY>(recvDataSubstring2);
 
+				var JsonData = JsonConvert.DeserializeObject<PACKET_HEADER_BODY>(recvData);
 
-                var JsonData = JsonConvert.DeserializeObject<PACKET_HEADER_BODY>(recvDataSubstring2);
-
-                DebugLogList("ReceiveCallback - ProcessPacket - start");
+				DebugLogList("ReceiveCallback - ProcessPacket - start");
                 ProcessPacket(JsonData.header.packetIndex, recvData);
                 DebugLogList("ReceiveCallback - ProcessPacket - end");
                 // 수신 대기
@@ -304,6 +309,9 @@ public class NetworkManager : MonoBehaviour
 							Debug.Log("ID가 존재하지 않음");
 						else if (checkResult == (int)CHECK_BEFORE_LOGIN_RESULT.RESULT_IS_WRONG_PASSWORD)
 							Debug.Log("비밀번호가 틀렸음");
+
+						var sessionID = desJson.sessionID;
+						var userName = desJson.userName;
 					}
 					break;
                 case (short)PACKET_INDEX.RES_CONCURRENT_USER_LIST:

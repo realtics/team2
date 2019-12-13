@@ -160,6 +160,7 @@ void AsioServer::ProcessPacket(const int sessionID, const char* pData)
 		{
 			SendPkt.checkResult = _DBMysql.DBLoginCheckUserPW(pPacket->userID, pPacket->userPW);
 			std::cout << "PW checkResult = " << SendPkt.checkResult << std::endl;
+			SendPkt.userName = _DBMysql.DBLoginGetUserName(pPacket->userID);
 		}
 
 		// json
@@ -170,6 +171,8 @@ void AsioServer::ProcessPacket(const int sessionID, const char* pData)
 		boost::property_tree::ptree ptSend;
 		ptSend.add_child("header", ptSendHeader);
 		ptSend.put<int>("checkResult", SendPkt.checkResult);
+		ptSend.put<int>("sessionID", SendPkt.sessionID);
+		ptSend.put<std::string>("userName", SendPkt.userName);
 
 		std::string stringRecv;
 		std::ostringstream oss(stringRecv);
@@ -185,6 +188,8 @@ void AsioServer::ProcessPacket(const int sessionID, const char* pData)
 		boost::property_tree::ptree ptSend2;
 		ptSend2.add_child("header", ptSendHeader2);
 		ptSend2.put<int>("checkResult", SendPkt.checkResult);
+		ptSend2.put<int>("sessionID", SendPkt.sessionID);
+		ptSend2.put<std::string>("userName", SendPkt.userName);
 
 		std::string stringRecv2;
 		std::ostringstream oss2(stringRecv2);

@@ -30,4 +30,6 @@ public:
 
 	int DBLoginCheckUserID(std::string checkID);
 	int DBLoginCheckUserPW(std::string checkID, std::string checkPW);
+	
+	std::string DBLoginGetUserName(std::string userID);
 };

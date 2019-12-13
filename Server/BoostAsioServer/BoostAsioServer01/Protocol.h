@@ -127,11 +127,16 @@ struct PKT_REQ_CHECK_BEFORE_LOGIN : public PACKET_HEADER
 struct PKT_RES_CHECK_BEFORE_LOGIN : public PACKET_HEADER
 {
 	int checkResult;
+	int sessionID;
+	//char userName[MAX_USER_NAME];
+	std::string userName;
 	void Init()
 	{
 		packetIndex = PACKET_INDEX::RES_CHECK_BEFORE_LOGIN;
 		packetSize = sizeof(PKT_RES_CHECK_BEFORE_LOGIN);
 		checkResult = 0;
+		sessionID = FIRST_SESSION_INDEX;
+		//memset(userName, 0, MAX_USER_NAME);
 	}
 };
 
