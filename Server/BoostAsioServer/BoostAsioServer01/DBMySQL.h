@@ -5,6 +5,7 @@
 #include <iostream>
 #include <winsock2.h>
 #include <mysql.h>
+#include "Protocol.h"
 
 class DBMySQL
 {
@@ -24,8 +25,9 @@ public:
 	~DBMySQL();
 
 	void Init();
-
+	void DBMySQLVersion();
 	void DBDataLoginSelectAll();
 
-	void DBMySQLVersion();
+	int DBLoginCheckUserID(std::string checkID);
+	int DBLoginCheckUserPW(std::string checkID, std::string checkPW);
 };

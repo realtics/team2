@@ -339,35 +339,6 @@ public class NetworkManager : MonoBehaviour
         {
             switch (packetIndex)
             {
-                //case (short)PACKET_INDEX.RES_NEW_LOGIN_SUCSESS:
-                //    {
-                //        DebugLogList("PACKET_INDEX.RES_NEW_LOGIN_SUCSESS start");
-                //        var desJson = JsonConvert.DeserializeObject<PKT_RES_NEW_LOGIN_SUCSESS>(jsonData);
-                //        DebugLogList(desJson.header.ToString());
-                //        DebugLogList(desJson.header.packetIndex.ToString());
-                //        DebugLogList(desJson.header.packetSize.ToString());
-                //        DebugLogList(desJson.isSuccess.ToString());
-                //        DebugLogList(desJson.userID.ToString());
-
-                //        DebugMsg10 = desJson.isSuccess;
-                //        DebugMsg11 = desJson.userID;
-                //        // 내 캐릭터를 생성하는 로직
-                //        // 서버에서 내가 접속했다고 알려주면 Id를 받고 내 Id로 설정한다.
-                //        DebugLogList(GetMyId.ToString());
-                //        if (GetMyId == 0)
-                //        {
-                //            SetIsLogin(desJson.isSuccess);
-                //            SetMyId(desJson.userID);
-                //            JoinNewPlayer(desJson.userID);
-                //            Debug.Log("접속 ID : " + desJson.userID + ", 접속 성공 여부 : " + desJson.isSuccess);
-                //        }
-                //        else
-                //        {
-                //            Debug.LogError("접속 ID : " + desJson.userID + ", 접속 성공 여부 : " + desJson.isSuccess);
-                //        }
-                //        DebugLogList("PACKET_INDEX.RES_NEW_LOGIN_SUCSESS end");
-                //    }
-                //    break;
                 case (short)PACKET_INDEX.RES_CONCURRENT_USER_LIST:
                     {
                         DebugLogList("PACKET_INDEX.RES_CONCURRENT_USER_LIST start");
@@ -395,17 +366,17 @@ public class NetworkManager : MonoBehaviour
                             //Debug.Log(splitConcurrentUser[i]);
                             //Debug.Log(splitUserPos[i]);
                             //Debug.Log(splitUserDir[i]);
-                            int userId = Int32.Parse(splitConcurrentUser[i]);
+                            int sessionID = Int32.Parse(splitConcurrentUser[i]);
                             string userPos = splitUserPos[i];
                             string userDir = splitUserDir[i];
 
-                            if (GetMyId == userId)
+                            if (GetMyId == sessionID)
                                 continue;
 
-                            if (_characters.ContainsKey(userId))
+                            if (_characters.ContainsKey(sessionID))
                                 continue;
 
-                            JoinNewPlayer(userId, StringToVector3(userPos), StringToVector3(userDir));
+                            JoinNewPlayer(sessionID, StringToVector3(userPos), StringToVector3(userDir));
                         }
                         DebugLogList("PACKET_INDEX.RES_CONCURRENT_USER_LIST end");
                         SetIsConcurrentUserList(true);
@@ -415,15 +386,15 @@ public class NetworkManager : MonoBehaviour
                     {
                         var desJson = JsonConvert.DeserializeObject<PKT_RES_USER_EXIT>(jsonData);
 
-                        var userID = desJson.userID;
-                        _exitCharacters.Add(userID);
+                        var sessionID = desJson.sessionID;
+                        _exitCharacters.Add(sessionID);
                     }
                     break;
                 case (short)PACKET_INDEX.RES_PLAYER_MOVE_START:
                     {
                         var desJson = JsonConvert.DeserializeObject<PKT_RES_PLAYER_MOVE_START>(jsonData);
 
-                        var userID = desJson.userID;
+                        var sessionID = desJson.sessionID;
                         var userPos = desJson.userPos;
                         var userDir = desJson.userDir;
 
@@ -432,20 +403,20 @@ public class NetworkManager : MonoBehaviour
 
                         //Debug.Log("userPos:" + vecPos.ToString("N5") + ", userDir:" + vecDir.ToString("N5"));
 
-                        ReceivedPacketHandler(userID, vecPos, vecDir);
+                        ReceivedPacketHandler(sessionID, vecPos, vecDir);
                     }
                     break;
                 case (short)PACKET_INDEX.RES_PLAYER_MOVE_END:
                     {
                         var desJson = JsonConvert.DeserializeObject<PKT_RES_PLAYER_MOVE_END>(jsonData);
 
-                        var userID = desJson.userID;
+                        var sessionID = desJson.sessionID;
                         var userPos = desJson.userPos;
 
                         Vector3 vecPos = StringToVector3(userPos);
                         //Debug.Log("userPos:" + vecPos.ToString("N5"));
 
-                        ThisIsStopPacket(userID, vecPos);
+                        ThisIsStopPacket(sessionID, vecPos);
                     }
                     break;
                 default:
@@ -562,13 +533,13 @@ public class NetworkManager : MonoBehaviour
         if (desJson.header.packetIndex == (short)PACKET_INDEX.RES_NEW_LOGIN_SUCSESS)
         {
             //Debug.Log("접속 성공 여부 : " + desJson.isSuccess);
-            //Debug.Log("접속 ID : " + desJson.userID);
+            //Debug.Log("접속 ID : " + desJson.sessionID);
 
             if (GetMyId == 0)
             {
                 SetIsLogin(desJson.isSuccess);
-                SetMyId(desJson.userID);
-                JoinNewPlayer(desJson.userID, Vector3.zero, Vector3.right);
+                SetMyId(desJson.sessionID);
+                JoinNewPlayer(desJson.sessionID, Vector3.zero, Vector3.right);
             }
         }
         DebugLogList("NewLoginSucsess() end");
@@ -607,7 +578,7 @@ public class NetworkManager : MonoBehaviour
             return;
 
         string startPos = pos.ToString("N4");
-        string startDir = dir.ToString("N4");
+        string startDir = dir.ToString("N1");
 
         string jsonData;
         char endNullValue = '\0';
@@ -620,7 +591,7 @@ public class NetworkManager : MonoBehaviour
         var packData = new PKT_REQ_PLAYER_MOVE_START
         {
             header = packHeader,
-            userID = GetMyId,
+			sessionID = GetMyId,
             userPos = startPos,
             userDir = startDir
         };
@@ -641,7 +612,7 @@ public class NetworkManager : MonoBehaviour
             return;
 
         string EndPos = pos.ToString("N4");
-        string EndDir = dir.ToString("N4");
+        string EndDir = dir.ToString("N1");
 
         string jsonData;
         char endNullValue = '\0';
@@ -654,7 +625,7 @@ public class NetworkManager : MonoBehaviour
         var packData = new PKT_REQ_PLAYER_MOVE_END
         {
             header = packHeader,
-            userID = GetMyId,
+			sessionID = GetMyId,
             userPos = EndPos,
             userDir = EndDir
         };
@@ -692,16 +663,16 @@ public class NetworkManager : MonoBehaviour
     }
 
     // 원래는 패킷마다 핸들러를 만들어 사용해야함
-    private void ReceivedPacketHandler(int userID, Vector3 pos, Vector3 dir)
+    private void ReceivedPacketHandler(int sessionID, Vector3 pos, Vector3 dir)
     {
         // id가 2인 플레이어가 1,0,0 방향벡터로 움직였다고 가정
         CharacterMovement movePlayer;
         //_characters.TryGetValue(2, out movePlayer);
-        _characters.TryGetValue(userID, out movePlayer);
+        _characters.TryGetValue(sessionID, out movePlayer);
 
         // 무언가 받아온 다음 null 체크는 필수
         // Dictinary에서 받아오는 것이기 때문에
-        if (!_characters.ContainsKey(userID))
+        if (!_characters.ContainsKey(sessionID))
             return;
         // 같은 방식도 괜찮다 둘중에 아무거나 하면 됨
         if (movePlayer == null)
@@ -714,16 +685,16 @@ public class NetworkManager : MonoBehaviour
         movePlayer.SetMoveDirectionAndMove(pos, dir);
     }
 
-    private void ThisIsStopPacket(int userID, Vector3 pos)
+    private void ThisIsStopPacket(int sessionID, Vector3 pos)
     {
         // 이것도 위의 함수와 동일함
         // MoveEnd 패킷이 왔고 마지막 좌표가 담겨있다고 가정
 
         CharacterMovement movePlayer;
         //_characters.TryGetValue(2, out movePlayer);
-        _characters.TryGetValue(userID, out movePlayer);
+        _characters.TryGetValue(sessionID, out movePlayer);
 
-        if (!_characters.ContainsKey(userID))
+        if (!_characters.ContainsKey(sessionID))
             return;
 
         //movePlayer.StopMove(movePlayer.transform.position);

@@ -12,7 +12,6 @@ public class Login : MonoBehaviour
 {
 	public Text _id;
 	public InputField _password;
-	public Text _name;
 
 	//public string LoginID { get { return _id.text; } }
 	//public string LoginPassword { get { return _password.text; } }
@@ -108,16 +107,10 @@ public class Login : MonoBehaviour
 			Debug.Log("pw를 입력 해야합니다");
 			return;
 		}
-		if (string.IsNullOrEmpty(_name.text) || _name == null)
-		{
-			// 경고 팝업창 생성
-			Debug.Log("캐릭터명을 입력 해야합니다");
-			return;
-		}
 
 		string EncryptPW = AESEncrypt128(_password.text);
 
-		NetworkManager.Instance.CheckBeforeLogin(_id.text, EncryptPW, _name.text);
+		NetworkManager.Instance.CheckBeforeLogin(_id.text, EncryptPW);
 	}
 
 	//void Update()
