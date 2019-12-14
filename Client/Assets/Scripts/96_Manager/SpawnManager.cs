@@ -7,6 +7,7 @@ public class SpawnManager : MonoBehaviour
 {
     private List<GameObject> _dungeonGameObject = new List<GameObject>();
 
+    [SerializeField]
     private AssetBundleManager _assetBundleManager;
 
     private static SpawnManager _instacne;
@@ -25,7 +26,6 @@ public class SpawnManager : MonoBehaviour
     void Start()
     {
         _instacne = this;
-        _assetBundleManager = new AssetBundleManager();
     }
 
     public GameObject LoadResourceFromCache(string path)
@@ -51,6 +51,7 @@ public class SpawnManager : MonoBehaviour
 
     public void Spawn(DungeonInfo dungeon)
     {
+
         foreach (var item in dungeon.objectinfos)
         {
             GameObject obj = LoadResourceFromCache(item.filePath);
@@ -59,12 +60,18 @@ public class SpawnManager : MonoBehaviour
             _dungeonGameObject.Add(obj);
         }
 
+        LoadAssetBundle("monster");
         foreach (var item in dungeon.monsterInfos)
         {
-            GameObject obj = LoadResourceFromCache(item.filePath);
+            //GameObject obj = LoadResourceFromCache(item.filePath);
+            GameObject obj = LoadAsset(item.filePath);
+
             MonsterManager.Instance.AddMonster(obj, item.position);
-            
+
+            // hack. 마테리얼 오류 떄문에 몬스터가 보이지 않음, 임시 마테리얼을 넣어둠. 
+            obj.transform.GetChild(1).GetComponent<SpriteRenderer>().material = new Material(Shader.Find("Sprites/Outline"));
         }
+        UnLoadAssetBundle(false);
 
         foreach (var item in dungeon.potalTransportinfos)
         {
@@ -92,6 +99,25 @@ public class SpawnManager : MonoBehaviour
 
         ClearCache();
     }
+
+    public void LoadAssetBundle(string name)
+    {
+        _assetBundleManager.LoadAssetFromLocalDisk(name);
+    }
+
+    public GameObject LoadAsset(string name)
+    {
+        return _assetBundleManager.LoadAsset(name);
+    }
+    public Object LoadObjectAsset(string name)
+    {
+        return _assetBundleManager.LoadUnCacheObjectAsset(name);
+    }
+    public void UnLoadAssetBundle(bool isUnloadAll)
+    {
+        _assetBundleManager.UnLoadAssetBundle(isUnloadAll);
+    }
+
     public GameObject AddObject(GameObject prefab, Vector3 position)
     {
         GameObject obj = ObjectPoolManager.Instance.GetRestObject(prefab);

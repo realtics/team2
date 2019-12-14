@@ -42,7 +42,7 @@
       ],
       "monsterInfos": [
         {
-          "filePath": "Monster/Goblin/Unit/Goblin",
+          "filePath": "Goblin",
           "position": {
             "x": -3.17,
             "y": -9.05,
@@ -59,7 +59,7 @@
           }
         },
         {
-          "filePath": "Monster/Goblin/Unit/Goblin",
+          "filePath": "Goblin",
           "position": {
             "x": -1.51,
             "y": -9.2,
@@ -76,7 +76,7 @@
           }
         },
         {
-          "filePath": "Monster/Goblin/Unit/Goblin",
+          "filePath": "Goblin",
           "position": {
             "x": -2.47,
             "y": -7.5,
@@ -100,7 +100,7 @@
           }
         },
         {
-          "filePath": "Monster/Goblin/Unit/Goblin",
+          "filePath": "Goblin",
           "position": {
             "x": -0.77,
             "y": -7.5,
@@ -117,7 +117,7 @@
           }
         },
         {
-          "filePath": "Monster/Goblin/Unit/Goblin",
+          "filePath": "Goblin",
           "position": {
             "x": -1.8,
             "y": -7.64999962,
@@ -134,7 +134,7 @@
           }
         },
         {
-          "filePath": "Monster/Goblin/Unit/Goblin",
+          "filePath": "Goblin",
           "position": {
             "x": -1.06,
             "y": -5.95,
@@ -158,7 +158,7 @@
           }
         },
         {
-          "filePath": "Monster/Goblin/Unit/Goblin",
+          "filePath": "Goblin",
           "position": {
             "x": -3.46,
             "y": -7.5,
@@ -175,7 +175,7 @@
           }
         },
         {
-          "filePath": "Monster/Goblin/Unit/Goblin",
+          "filePath": "Goblin",
           "position": {
             "x": -2.75999975,
             "y": -5.95,
@@ -322,7 +322,7 @@
       ],
       "monsterInfos": [
         {
-          "filePath": "Monster/Tauarmy/Unit/Tauarmy",
+          "filePath": "Tauarmy",
           "position": {
             "x": -4.36,
             "y": -10.3,
@@ -339,7 +339,7 @@
           }
         },
         {
-          "filePath": "Monster/Tauarmy/Unit/Tauarmy",
+          "filePath": "Tauarmy",
           "position": {
             "x": -2.25,
             "y": -7.2,
@@ -363,7 +363,7 @@
           }
         },
         {
-          "filePath": "Monster/Tauarmy/Unit/Tauarmy",
+          "filePath": "Tauarmy",
           "position": {
             "x": -1.37,
             "y": -10.53,
@@ -586,7 +586,7 @@
       ],
       "monsterInfos": [
         {
-          "filePath": "Monster/Tauarmy/Unit/Tauarmy",
+          "filePath": "Tauarmy",
           "position": {
             "x": -10.78,
             "y": -10.89,
@@ -603,7 +603,7 @@
           }
         },
         {
-          "filePath": "Monster/Goblin/Unit/Goblin",
+          "filePath": "Goblin",
           "position": {
             "x": -9.57,
             "y": -5.58,
@@ -627,7 +627,7 @@
           }
         },
         {
-          "filePath": "Monster/Calvary/Unit/Calvary",
+          "filePath": "Calvary",
           "position": {
             "x": 5.32,
             "y": -7.76,

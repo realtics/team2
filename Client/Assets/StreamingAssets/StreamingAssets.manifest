@@ -1,7 +1,16 @@
 ManifestFileVersion: 0
-CRC: 748034766
+CRC: 2794054048
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
       Name: potal
+      Dependencies: {}
+    Info_1:
+      Name: map
+      Dependencies: {}
+    Info_2:
+      Name: monster
+      Dependencies: {}
+    Info_3:
+      Name: atlas
       Dependencies: {}

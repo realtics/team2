@@ -323,6 +323,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3189d542707201147987dc37e9f0db04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _assetBundleManager: {fileID: 551493656}
+  _tempShader: {fileID: 4800000, guid: ec692f845e2d83845bf278023f3e37de, type: 3}
 --- !u!4 &289057886
 Transform:
   m_ObjectHideFlags: 0
@@ -795,6 +797,50 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6097cff8d35e4ce4bad8ffb824a90d00, type: 3}
+--- !u!1 &551493655
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 551493657}
+  - component: {fileID: 551493656}
+  m_Layer: 0
+  m_Name: AssetBundle
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &551493656
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 551493655}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a835fb67ddbaee44a6142834929ca4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  saBundle: atlas
+--- !u!4 &551493657
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 551493655}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -5.8667827, y: -13.20706, z: -3.2003632}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 21
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1052138137
 GameObject:
   m_ObjectHideFlags: 0
@@ -1394,7 +1440,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1519216641}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.00000035762787, y: -1.5, z: -10}
+  m_LocalPosition: {x: -0.00000023841858, y: -1.5, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 289681352}
@@ -1969,7 +2015,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1963510532}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.08405244, y: -0.6329603, z: -10}
+  m_LocalPosition: {x: -0.06838536, y: -0.6330204, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2500,6 +2546,11 @@ PrefabInstance:
         type: 3}
       propertyPath: _dungeonFileName
       value: Force
+      objectReference: {fileID: 0}
+    - target: {fileID: 7840884828415449384, guid: 86fb9eee594769e44bbd9bbda0425571,
+        type: 3}
+      propertyPath: _dungeonFileName
+      value: Test
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 86fb9eee594769e44bbd9bbda0425571, type: 3}

@@ -9,7 +9,7 @@
       },
       "objectinfos": [
         {
-          "filePath": "Dungeon",
+          "filePath": "Dungeon/Dungeon",
           "position": {
             "x": 5.34,
             "y": -7.91,
@@ -57,144 +57,11 @@
             "magnitude": 9.589129,
             "sqrMagnitude": 91.9514
           }
-        },
-        {
-          "filePath": "Goblin",
-          "position": {
-            "x": -1.51,
-            "y": -9.2,
-            "z": 0.0,
-            "normalized": {
-              "x": -0.161963388,
-              "y": -0.9867968,
-              "z": 0.0,
-              "magnitude": 1.0,
-              "sqrMagnitude": 1.0
-            },
-            "magnitude": 9.323094,
-            "sqrMagnitude": 86.9201
-          }
-        },
-        {
-          "filePath": "Goblin",
-          "position": {
-            "x": -2.47,
-            "y": -7.5,
-            "z": 0.0,
-            "normalized": {
-              "x": -0.312806368,
-              "y": -0.9498169,
-              "z": 0.0,
-              "normalized": {
-                "x": -0.3128064,
-                "y": -0.949816942,
-                "z": 0.0,
-                "magnitude": 1.0,
-                "sqrMagnitude": 1.00000012
-              },
-              "magnitude": 0.99999994,
-              "sqrMagnitude": 0.99999994
-            },
-            "magnitude": 7.896259,
-            "sqrMagnitude": 62.3509
-          }
-        },
-        {
-          "filePath": "Goblin",
-          "position": {
-            "x": -0.77,
-            "y": -7.5,
-            "z": 0.0,
-            "normalized": {
-              "x": -0.102129832,
-              "y": -0.994771063,
-              "z": 0.0,
-              "magnitude": 1.0,
-              "sqrMagnitude": 1.0
-            },
-            "magnitude": 7.539423,
-            "sqrMagnitude": 56.8429
-          }
-        },
-        {
-          "filePath": "Goblin",
-          "position": {
-            "x": -1.8,
-            "y": -7.64999962,
-            "z": 0.0,
-            "normalized": {
-              "x": -0.229039326,
-              "y": -0.973417163,
-              "z": 0.0,
-              "magnitude": 1.0,
-              "sqrMagnitude": 1.0
-            },
-            "magnitude": 7.858912,
-            "sqrMagnitude": 61.7624931
-          }
-        },
-        {
-          "filePath": "Goblin",
-          "position": {
-            "x": -1.06,
-            "y": -5.95,
-            "z": 0.0,
-            "normalized": {
-              "x": -0.175389752,
-              "y": -0.984499037,
-              "z": 0.0,
-              "normalized": {
-                "x": -0.175389767,
-                "y": -0.9844991,
-                "z": 0.0,
-                "magnitude": 1.0,
-                "sqrMagnitude": 1.0
-              },
-              "magnitude": 0.99999994,
-              "sqrMagnitude": 0.99999994
-            },
-            "magnitude": 6.04368258,
-            "sqrMagnitude": 36.5260963
-          }
-        },
-        {
-          "filePath": "Goblin",
-          "position": {
-            "x": -3.46,
-            "y": -7.5,
-            "z": 0.0,
-            "normalized": {
-              "x": -0.418904632,
-              "y": -0.9080302,
-              "z": 0.0,
-              "magnitude": 1.0,
-              "sqrMagnitude": 0.99999994
-            },
-            "magnitude": 8.259637,
-            "sqrMagnitude": 68.2216
-          }
-        },
-        {
-          "filePath": "Goblin",
-          "position": {
-            "x": -2.75999975,
-            "y": -5.95,
-            "z": 0.0,
-            "normalized": {
-              "x": -0.4207977,
-              "y": -0.90715456,
-              "z": 0.0,
-              "magnitude": 1.0,
-              "sqrMagnitude": 1.00000012
-            },
-            "magnitude": 6.55897045,
-            "sqrMagnitude": 43.0200958
-          }
         }
       ],
       "potalTransportinfos": [
         {
-          "filePath": "PotalTransport Side",
+          "filePath": "Object/PotalTransport Side",
           "position": {
             "x": 1.7654109,
             "y": -5.242311,
@@ -296,7 +163,7 @@
       },
       "objectinfos": [
         {
-          "filePath": "LorienAndForceAltar",
+          "filePath": "Dungeon/LorienAndForceAltar",
           "position": {
             "x": 3.3,
             "y": -9.09,
@@ -382,7 +249,7 @@
       ],
       "potalTransportinfos": [
         {
-          "filePath": "PotalTransport Side",
+          "filePath": "Object/PotalTransport Side",
           "position": {
             "x": -14.85,
             "y": -9.67,
@@ -459,7 +326,7 @@
           "nextIndex": 0
         },
         {
-          "filePath": "ForceAltarPotalTransportLeft",
+          "filePath": "Object/ForceAltarPotalTransportLeft",
           "position": {
             "x": 1.03,
             "y": -6.61,
@@ -560,7 +427,7 @@
       },
       "objectinfos": [
         {
-          "filePath": "ForceAltar",
+          "filePath": "Dungeon/ForceAltar",
           "position": {
             "x": 2.01,
             "y": -6.8,
@@ -653,7 +520,7 @@
       ],
       "potalTransportinfos": [
         {
-          "filePath": "ForceAltarPotalTransportRight",
+          "filePath": "Object/ForceAltarPotalTransportRight",
           "position": {
             "x": -14.51,
             "y": -4.43,

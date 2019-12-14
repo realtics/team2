@@ -3,15 +3,57 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.Networking;
+using UnityEngine.U2D;
+using System.Threading.Tasks;
 
-public class AssetBundleManager
+public class AssetBundleManager : MonoBehaviour
 {
     private Dictionary<string, GameObject> _cache = new Dictionary<string, GameObject>();
-    AssetBundle myLoadedAssetBundle;
+    AssetBundle LoadedAssetBundle;
+    public string saBundle = "atlas";
+
+    private static AssetBundleManager _instacne;
+    public static AssetBundleManager instacne
+    {
+        get
+        {
+            return _instacne;
+        }
+    }
+    private void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
+    private void Start()
+    {
+        _instacne = this;
+    }
+
+    void OnEnable()
+    {
+        SpriteAtlasManager.atlasRequested += RequestLateBindingAtlas;
+    }
+    void OnDisable()
+    {
+        SpriteAtlasManager.atlasRequested -= RequestLateBindingAtlas;
+    }
+
+    private void RequestLateBindingAtlas(string tag, System.Action<SpriteAtlas> action)
+    {
+        StartCoroutine(LoadSpriteAtlasFromAssetBundle(tag, action));
+    }
+    private IEnumerator LoadSpriteAtlasFromAssetBundle(string tag, System.Action<SpriteAtlas> action)
+    {
+        var loadOp = AssetBundle.LoadFromFile(Path.Combine(Application.streamingAssetsPath, saBundle));
+        yield return loadOp;
+        var sa = loadOp.LoadAsset<SpriteAtlas>(tag);
+        action(sa);
+    }
+
     public void LoadAssetFromLocalDisk(string assetBundleName)
     {
-        myLoadedAssetBundle = AssetBundle.LoadFromFile(Path.Combine(Application.streamingAssetsPath, assetBundleName));
-        if (myLoadedAssetBundle == null)
+        LoadedAssetBundle = AssetBundle.LoadFromFile(Path.Combine(Application.streamingAssetsPath, assetBundleName));
+        if (LoadedAssetBundle == null)
         {
             Debug.Log("Failed to load AssetBundle!");
         }
@@ -23,10 +65,16 @@ public class AssetBundleManager
     {
         return LoadAssetFromCache(name);
     }
-    public void UnLoadAssetBundle(bool isAllUnload)
+
+    public Object LoadUnCacheObjectAsset(string name)
+    {
+        return LoadedAssetBundle.LoadAsset<Object>(name);
+    }
+
+    public void UnLoadAssetBundle(bool isUnloadAll)
     {
         ClearCache();
-        myLoadedAssetBundle.Unload(isAllUnload);
+        LoadedAssetBundle.Unload(isUnloadAll);
     }
 
     private GameObject LoadAssetFromCache(string name)
@@ -35,7 +83,7 @@ public class AssetBundleManager
         _cache.TryGetValue(name, out resourceObj);
         if (resourceObj == null)
         {
-            resourceObj = myLoadedAssetBundle.LoadAsset<GameObject>(name);
+            resourceObj = LoadedAssetBundle.LoadAsset<GameObject>(name);
             if (resourceObj != null)
             {
                 _cache.Add(name, resourceObj);
