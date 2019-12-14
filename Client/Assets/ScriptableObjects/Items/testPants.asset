@@ -12,14 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a3a2b901820e084389f2b5956e1c65a, type: 3}
   m_Name: testPants
   m_EditorClassIdentifier: 
-  itemName: 
+  itemName: "\u8D85 \uD558\uB298\uC5F0 - \uAEBC\uC9C0\uC9C0 \uC54A\uB294 \uBC1D\uC74C"
   icon: {fileID: 21300000, guid: 96b74e8c0990b8c4ebc6f839618354ef, type: 3}
-  strengthBonus: 999
-  agilityBonus: 999
-  intelligenceBonus: 999
-  vitalityBonus: 999
+  physicalAttackBonus: 0
+  magicAttackBonus: 0
+  physicalDefenseBonus: 2442
+  magicDefenseBonus: 0
+  strengthBonus: 46
+  intelligenceBonus: 46
+  healthBonus: 0
+  mentalityBonus: 52
+  hangmaBonus: 322
   strengthPercentBonus: 0
-  agilityPercentBonus: 0
   intelligencePercentBonus: 0
-  vitalityPercentBonus: 0
+  healthPercentBonus: 0
+  mentalityPercentBonus: 0
+  Information: "\uB0AE\uACFC \uBC24\uC740 \uD56D\uC0C1 \uD568\uAED8\uC600\uB2E4."
   equipmentType: 2

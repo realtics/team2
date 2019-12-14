@@ -12,14 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a3a2b901820e084389f2b5956e1c65a, type: 3}
   m_Name: testNeck
   m_EditorClassIdentifier: 
-  itemName: 
+  itemName: "\u8D85 \uBB3C\uC624\uB984 - \uB298\uD478\uB974\uAC8C \uC775\uB294 \uC0B0\uB4E4"
   icon: {fileID: 21300000, guid: 326f94c8405cef542bc4297acdef8acf, type: 3}
-  strengthBonus: 999
-  agilityBonus: 999
-  intelligenceBonus: 999
-  vitalityBonus: 999
+  physicalAttackBonus: 0
+  magicAttackBonus: 0
+  physicalDefenseBonus: 1954
+  magicDefenseBonus: 0
+  strengthBonus: 37
+  intelligenceBonus: 37
+  healthBonus: 0
+  mentalityBonus: 41
+  hangmaBonus: 322
   strengthPercentBonus: 0
-  agilityPercentBonus: 0
   intelligencePercentBonus: 0
-  vitalityPercentBonus: 0
+  healthPercentBonus: 0
+  mentalityPercentBonus: 0
+  Information: "\uB4E4\uACFC \uC0B0\uC740 \uD56D\uC0C1 \uD478\uB974\uAC8C \uC775\uC5C8\uACE0"
   equipmentType: 3

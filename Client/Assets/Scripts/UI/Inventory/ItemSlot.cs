@@ -42,6 +42,7 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandle
     {
        if(eventData != null && eventData.button == PointerEventData.InputButton.Right)
         {
+            Debug.Log("?");
             if (Item != null && OnRightClickEvent != null)
                 OnRightClickEvent(Item);
         }

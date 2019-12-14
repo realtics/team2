@@ -12,14 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a3a2b901820e084389f2b5956e1c65a, type: 3}
   m_Name: testBracelet
   m_EditorClassIdentifier: 
-  itemName: 
+  itemName: "\uD751\uC6B4 : \uC0BC\uCF1C\uC9C0\uB294 \uD0DC\uC591"
   icon: {fileID: 21300000, guid: 65c6b116c8989ed4f853df7963c85ff1, type: 3}
-  strengthBonus: 999
-  agilityBonus: 999
-  intelligenceBonus: 999
-  vitalityBonus: 999
+  physicalAttackBonus: 0
+  magicAttackBonus: 0
+  physicalDefenseBonus: 0
+  magicDefenseBonus: 5914
+  strengthBonus: 45
+  intelligenceBonus: 0
+  healthBonus: 112
+  mentalityBonus: 0
+  hangmaBonus: 536
   strengthPercentBonus: 0
-  agilityPercentBonus: 0
   intelligencePercentBonus: 0
-  vitalityPercentBonus: 0
+  healthPercentBonus: 0
+  mentalityPercentBonus: 0
+  Information: "\uADF8\uC758 \uAD8C\uB2A5\uC73C\uB85C \uC138\uC0C1\uC744 \uC870\uAC01\uB0B4\uACE0"
   equipmentType: 6
