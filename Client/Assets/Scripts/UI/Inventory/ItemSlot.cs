@@ -28,16 +28,6 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandle
             }
         } 
     }
-
-    public void OnPointerClick(PointerEventData eventData)
-    {
-       if(eventData != null && eventData.button == PointerEventData.InputButton.Right)
-        {
-            if (Item != null && OnRightClickEvent != null)
-                OnRightClickEvent(Item);
-        }
-    }
-
     protected virtual void OnValidate()
     {
         if (_image == null)
@@ -46,6 +36,15 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandle
         //게임실행중이면 느릴거지만, 어차피 에디터에서 찾고 게임중엔 찾지않을 것이 분명
         if (_itemToolTip == null)
             _itemToolTip = FindObjectOfType<ItemToolTip>();
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+       if(eventData != null && eventData.button == PointerEventData.InputButton.Right)
+        {
+            if (Item != null && OnRightClickEvent != null)
+                OnRightClickEvent(Item);
+        }
     }
 
     public void OnPointerEnter(PointerEventData eventData)
