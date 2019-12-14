@@ -15,11 +15,11 @@ MonoBehaviour:
   itemName: 
   icon: {fileID: 21300000, guid: d3f51b5a52e946b46a9d5f51052edf04, type: 3}
   strengthBonus: 999
-  agilityBonus: 999
   intelligenceBonus: 999
-  vitalityBonus: 999
+  healthBonus: 0
+  mentalityBonus: 0
   strengthPercentBonus: 0
-  agilityPercentBonus: 0
   intelligencePercentBonus: 0
-  vitalityPercentBonus: 0
+  healthPercentBonus: 0
+  mentalityPercentBonus: 0
   equipmentType: 4

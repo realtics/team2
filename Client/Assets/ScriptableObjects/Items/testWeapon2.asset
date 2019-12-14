@@ -12,14 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a3a2b901820e084389f2b5956e1c65a, type: 3}
   m_Name: testWeapon2
   m_EditorClassIdentifier: 
-  itemName: 
+  itemName: "\u73FE : \uD751\uCC9C\uC758 \uC8FC\uC778 - \uAD11\uAC80"
   icon: {fileID: 21300000, guid: 957526639ee6b8349bea8b4ce8d09bf3, type: 3}
-  strengthBonus: 999
-  agilityBonus: 999
-  intelligenceBonus: 999
-  vitalityBonus: 999
-  strengthPercentBonus: 0
-  agilityPercentBonus: 0
-  intelligencePercentBonus: 0
-  vitalityPercentBonus: 0
+  physicalAttackBonus: 900
+  magicAttackBonus: 0
+  physicalDefenseBonus: 0
+  magicDefenseBonus: 0
+  strengthBonus: 0
+  intelligenceBonus: 0
+  healthBonus: 0
+  mentalityBonus: 0
+  hangmaBonus: 0
+  strengthPercentBonus: 1
+  intelligencePercentBonus: 1
+  healthPercentBonus: 1
+  mentalityPercentBonus: 1
+  Information: gg
   equipmentType: 0

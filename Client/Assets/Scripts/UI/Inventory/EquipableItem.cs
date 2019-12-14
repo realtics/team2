@@ -19,15 +19,23 @@ public enum EquipmentType
 [CreateAssetMenu]
 public class EquipableItem : Item
 {
+    public int physicalAttackBonus;
+    public int magicAttackBonus;
+    [Space]
+    public int physicalDefenseBonus;
+    public int magicDefenseBonus;
+    [Space]
     public int strengthBonus;
-    public int agilityBonus;
     public int intelligenceBonus;
-    public int vitalityBonus;
+    public int healthBonus;
+    public int mentalityBonus;
+    public int hangmaBonus;
     [Space]
     public float strengthPercentBonus;
-    public float agilityPercentBonus;
     public float intelligencePercentBonus;
-    public float vitalityPercentBonus;
+    public float healthPercentBonus;
+    public float mentalityPercentBonus;
     [Space]
+    public string Information;
     public EquipmentType equipmentType;
 }
