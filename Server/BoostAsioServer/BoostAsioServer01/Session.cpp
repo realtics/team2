@@ -97,12 +97,13 @@ void Session::HandleReceive(const boost::system::error_code& error, size_t bytes
 	}
 	else
 	{
+		_packetBufferMark = 0;
 		Deserialization(_receiveBuffer.data());
 		//memcpy(&_packetBuffer[_packetBufferMark], _receiveBuffer.data(), bytes_transferred);
 		
 		int packetData = _packetBufferMark + bytes_transferred;
 		int readData = 0;
-
+		std::cout << "packetData : " << packetData << std::endl;
 		PACKET_HEADER* pHeader = (PACKET_HEADER*)&_packetBuffer[readData];
 
 		while (packetData > 0)
@@ -157,9 +158,21 @@ void Session::Deserialization(char* jsonData)
 	
 	switch (packetIndex)
 	{
+	case PACKET_INDEX::REQ_CHECK_BEFORE_LOGIN:
+	{
+		PKT_REQ_CHECK_BEFORE_LOGIN packet;
+		packet.Init();
+		packet.packetIndex = packetIndex;
+		packet.packetSize = packetSize;
+		strcpy_s(packet.userID, MAX_USER_ID, ptRecv.get<std::string>("userID").c_str());
+		strcpy_s(packet.userPW, MAX_USER_PW, ptRecv.get<std::string>("userPW").c_str());
+		memcpy(&_packetBuffer[_packetBufferMark], (char*)&packet, sizeof(packet));
+	}
+	break;
 	case PACKET_INDEX::REQ_NEW_LOGIN:
 	{
 		PKT_REQ_NEW_LOGIN packet;
+		packet.Init();
 		packet.packetIndex = packetIndex;
 		packet.packetSize = packetSize;
 		memcpy(&_packetBuffer[_packetBufferMark], (char*)&packet, sizeof(packet));
@@ -168,8 +181,19 @@ void Session::Deserialization(char* jsonData)
 	case PACKET_INDEX::REQ_CONCURRENT_USER:
 	{
 		PKT_REQ_CONCURRENT_USER packet;
+		packet.Init();
 		packet.packetIndex = packetIndex;
 		packet.packetSize = packetSize;
+		memcpy(&_packetBuffer[_packetBufferMark], (char*)&packet, sizeof(packet));
+	}
+	break;
+	case PACKET_INDEX::REQ_USER_EXIT:
+	{
+		PKT_REQ_USER_EXIT packet;
+		packet.Init();
+		packet.packetIndex = packetIndex;
+		packet.packetSize = packetSize;
+		packet.sessionID = ptRecv.get<int>("sessionID");
 		memcpy(&_packetBuffer[_packetBufferMark], (char*)&packet, sizeof(packet));
 	}
 	break;
@@ -179,7 +203,7 @@ void Session::Deserialization(char* jsonData)
 		packet.Init();
 		packet.packetIndex = packetIndex;
 		packet.packetSize = packetSize;
-		packet.userID = ptRecv.get<int>("userID");
+		packet.sessionID = ptRecv.get<int>("sessionID");
 		strcpy_s(packet.userPos, MAX_PLAYER_MOVE_LEN, ptRecv.get<std::string>("userPos").c_str());
 		strcpy_s(packet.userDir, MAX_PLAYER_MOVE_LEN, ptRecv.get<std::string>("userDir").c_str());
 		memcpy(&_packetBuffer[_packetBufferMark], (char*)&packet, sizeof(packet));
@@ -191,7 +215,7 @@ void Session::Deserialization(char* jsonData)
 		packet.Init();
 		packet.packetIndex = packetIndex;
 		packet.packetSize = packetSize;
-		packet.userID = ptRecv.get<int>("userID");
+		packet.sessionID = ptRecv.get<int>("sessionID");
 		strcpy_s(packet.userPos, MAX_PLAYER_MOVE_LEN, ptRecv.get<std::string>("userPos").c_str());
 		strcpy_s(packet.userDir, MAX_PLAYER_MOVE_LEN, ptRecv.get<std::string>("userDir").c_str());
 		memcpy(&_packetBuffer[_packetBufferMark], (char*)&packet, sizeof(packet));

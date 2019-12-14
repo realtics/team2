@@ -167,7 +167,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4668375787229723021}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9a760b1a12bec86439aaa56a15e9d2f0, type: 3}
   m_Name: 
@@ -199,7 +199,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _hp: 0
   _mp: 0
-  _attackDamage: 100
+  _attackDamage: 123
   _attackSpeed: 200
 --- !u!1 &4668375787703239335
 GameObject:

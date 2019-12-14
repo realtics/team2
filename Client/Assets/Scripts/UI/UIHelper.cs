@@ -11,8 +11,13 @@ public class UIHelper : MonoBehaviour
             return _instance;       
         }
     }
+    [Header("[Common]")]
     [SerializeField]
     private UIPlayerInfo _playerInfo;
+    [Header("[Town]")]
+    [SerializeField]
+    private UIDungeonSelectMenu _dungeonSelectMenu;
+    [Header("[Dungeon]")]
     [SerializeField]
     private UIMosterInfo _monsterInfo;
     [SerializeField]
@@ -22,9 +27,16 @@ public class UIHelper : MonoBehaviour
     [SerializeField]
     private UIDungeonClearMenu _dungeonClearMenu;
     [SerializeField]
-    private UIDungeonSelectMenu _dungeonSelectMenu;
-    [SerializeField]
-    private GameObject _dungeonTile;
+    private UIMiniMap _miniMap;
+    public UIMiniMap miniMap
+    {
+        get
+        {
+            return _miniMap;
+        }
+    }
+
+
     // Use this for initialization
     void Start()
     {
@@ -39,16 +51,12 @@ public class UIHelper : MonoBehaviour
         if (_dungeonClearMenu != null)
             _dungeonClearMenu.gameObject.SetActive(false);
         if (_dungeonSelectMenu != null)
-            _dungeonSelectMenu.gameObject.SetActive(false);        
-        if (_dungeonTile != null)
-            _dungeonTile.SetActive(true);
+            _dungeonSelectMenu.gameObject.SetActive(false);
+        if (_miniMap != null)
+            _miniMap.gameObject.SetActive(true);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
 
-    }
     public void SetGameOver(bool isActive)
     {
         _gameOver.gameObject.SetActive(isActive);
@@ -84,10 +92,6 @@ public class UIHelper : MonoBehaviour
         _gameResult.OpenResultBox(index);
     }
 
-    public void SetMonsterHp(float CurrentHp, float MaxHp)
-    {
-        _monsterInfo.SetHp(CurrentHp, MaxHp);
-    }
     // Todo.
     public void SetMonster(BaseMonster monster)
     {

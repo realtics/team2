@@ -8,12 +8,15 @@
 #include <vector>
 #include <sstream>
 
+#include "DBMySQL.h"
 #include "Session.h"
 #include "Protocol.h"
 
 class AsioServer
 {
 private:
+	DBMySQL _DBMysql;
+
 	bool _isAccepting;
 
 	boost::asio::ip::tcp::acceptor _acceptor;
@@ -27,7 +30,7 @@ private:
 	bool PostAccept();
 	void HandleAccept(Session* pSession, const boost::system::error_code& error);
 
-	int _userID;
+	int _sessionID;
 public:
 	AsioServer(boost::asio::io_context& io_context);
 	~AsioServer();
@@ -40,8 +43,7 @@ public:
 	short JsonDataSize(std::string jsonData);
 
 	void ConcurrentUser();
-
-	
+	void UserExit(int sessionID);
 
 	std::vector< Session* > GetSessionList() { return _sessionList; }
 };

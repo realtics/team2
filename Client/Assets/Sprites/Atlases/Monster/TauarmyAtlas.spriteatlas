@@ -29,14 +29,69 @@ SpriteAtlas:
       enableRotation: 1
       enableTightPacking: 1
     variantMultiplier: 1
-    packables: []
-    totalSpriteSurfaceArea: 0
+    packables:
+    - {fileID: 102900000, guid: 386ee0a5960b9be4192ac30a0f8758c7, type: 3}
+    totalSpriteSurfaceArea: 840706
     bindAsDefault: 1
     storedHash:
       serializedVersion: 2
-      Hash: d650b748aa2d8645b0935a8723006982
+      Hash: cef70271b19fc664afba9d7804758a26
   m_MasterAtlas: {fileID: 0}
-  m_PackedSprites: []
-  m_PackedSpriteNamesToIndex: []
+  m_PackedSprites:
+  - {fileID: 21300000, guid: f837d5b0bed36f94698247d4628d7a27, type: 3}
+  - {fileID: 21300000, guid: 6635304132bd926498a64bf4f84b45cc, type: 3}
+  - {fileID: 21300000, guid: 4d17bcb1ab34e124693dc95da30c326f, type: 3}
+  - {fileID: 21300000, guid: d54160e207d565449ae90519497e4103, type: 3}
+  - {fileID: 21300000, guid: 77a514f4ee7a4b040b31898e124a1a78, type: 3}
+  - {fileID: 21300000, guid: f2cb6645c6df1ac41877eaf8cdd989bc, type: 3}
+  - {fileID: 21300000, guid: 93206d958e7837e4e892cd667719bd3f, type: 3}
+  - {fileID: 21300000, guid: 720b752664427c540a54903dcf45aea9, type: 3}
+  - {fileID: 21300000, guid: 471fb92679c316142aa3d63f69507666, type: 3}
+  - {fileID: 21300000, guid: aaa7b9365c136c245b900d3d377cdac3, type: 3}
+  - {fileID: 21300000, guid: 11dcc8486a38f4649ae0a5c221eab103, type: 3}
+  - {fileID: 21300000, guid: 5c869498e998de1459853575bf637781, type: 3}
+  - {fileID: 21300000, guid: a76db9a80965d3848a23ac2971a6f0fc, type: 3}
+  - {fileID: 21300000, guid: dadc22f8b5048724e8c66294b0e66b8d, type: 3}
+  - {fileID: 21300000, guid: 8cc0d129a38e67b4388980efbb30de52, type: 3}
+  - {fileID: 21300000, guid: afe254a9af463874c826e42b9e973b33, type: 3}
+  - {fileID: 21300000, guid: 3ba1ba9a631b99e47996428bdae2c7f9, type: 3}
+  - {fileID: 21300000, guid: 48259d7c580b2814cbcb4989410df787, type: 3}
+  - {fileID: 21300000, guid: 2105580d1e3a8494eb1e2a2d3e061948, type: 3}
+  - {fileID: 21300000, guid: 60990e9d081423045bfb83f64bf7c61b, type: 3}
+  - {fileID: 21300000, guid: 5110d00efd4674248ad6f8b3c8726245, type: 3}
+  - {fileID: 21300000, guid: ab3ee30e7c8da624089df6ef3a892206, type: 3}
+  - {fileID: 21300000, guid: ca18485ece6f1a4459f85cffd615d33d, type: 3}
+  - {fileID: 21300000, guid: c302880fb1179cd4d8ac28c3f4d5ead8, type: 3}
+  - {fileID: 21300000, guid: 42d0614feb8e4e24b833e687d8ef39c5, type: 3}
+  - {fileID: 21300000, guid: 5876be8fba8f20d4696ed2892bb0d905, type: 3}
+  - {fileID: 21300000, guid: c3b2929f0be10bc4eb83680deec0608b, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - tauarmy_die_1
+  - tauarmy_attack1_3
+  - "tauarmy_idle_1 - \uBCF5\uC0AC\uBCF8"
+  - tauarmy_attack2_1
+  - tauarmy_attack2_5
+  - tauarmy_walk_2
+  - 0
+  - tauarmy_die_2
+  - tauarmy_walk_3
+  - tauarmy_attack2_2
+  - tauarmy_hit_1
+  - tauarmy_downRecovery_1
+  - tauarmy_attack2_3
+  - tauarmy_walk_6
+  - tauarmy_die_3
+  - 'tauarmy_attack1_2 '
+  - tauarmy_attack2_6
+  - tauarmy_walk_1
+  - tauarmy_walk_4
+  - tauarmy_walk_5
+  - tauarmy_attack2_4
+  - 2
+  - tauarmy_hit_2
+  - tauarmy_idle_1
+  - tauarmy_attack1_1
+  - 1
+  - tauarmy_attack1_4
   m_Tag: TauarmyAtlas
   m_IsVariant: 0

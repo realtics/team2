@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class Calvary : BaseMonster
 {
-    protected override void Start()
-    {
-        base.Start();
-    }
+    protected override void Awake()
+	{
+		base.Awake();
+		OnSuperArmor();
+	}
 
     protected override void FixedUpdate()
     {
@@ -18,12 +19,6 @@ public class Calvary : BaseMonster
             ChangeDieState();
         }
     }
-
-	protected override void AddHitEffect()
-	{
-		Vector3 newPos = new Vector3(0, 4.53f+1, 0);
-		HitEffectManager.Instance.AddHitEffect(_avatar.position + _hitBox.right / 2 + _hitBox.up / 2 + newPos, 4.2f);
-	}
 
 	//AttackState
 	public override void EnterAttackState()
@@ -78,18 +73,10 @@ public class Calvary : BaseMonster
     //DieState
     public override void EnterDieState()
     {
-        // FIXME HACK : (안병욱) 수정해
         StartCoroutine(TimeScaleSlow());
-        GameObject circle = ObjectPoolManager.Instance.GetRestObject(SwordmanSkillManager.Instance.FindSkillEffect(SwordmanSkillIndex.ClearCircle));
-        Vector3 newPos = transform.root.position;
-        newPos.y += 1.2f;
-        circle.transform.position = newPos;
+		EffectManager.Instance.SpawnClearCircle(HitBoxCenter);
 
-        print(newPos + " / " + newPos);
-
-        base.EnterDieState();
-
-
+		base.EnterDieState();
     }
 
     public override void UpdateDieState()

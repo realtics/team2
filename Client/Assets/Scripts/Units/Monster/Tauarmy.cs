@@ -15,15 +15,9 @@ public class Tauarmy : BaseMonster
     [SerializeField]
     private Transform _rushAttackBox;
 
-	protected override void AddHitEffect()
+	protected override void Awake()
 	{
-		Vector3 newPos = new Vector3(0, 1.2f, 0);
-		HitEffectManager.Instance.AddHitEffect(_avatar.position + _hitBox.right / 2 + _hitBox.up / 2 + newPos,6.0f);
-	}
-
-	protected override void Start()
-    {
-        base.Start();
+		base.Awake();
     }
 
     protected override void FixedUpdate()
@@ -45,7 +39,9 @@ public class Tauarmy : BaseMonster
     public override void EnterAttackState()
     { 
         base.EnterAttackState();
-        _currentAttackMotion = (TauarmyAttackMotion)Random.Range((int)TauarmyAttackMotion.AttackMotion1, (int)TauarmyAttackMotion.AttacknMotionEnd);
+		OnSuperArmor();
+
+		_currentAttackMotion = (TauarmyAttackMotion)Random.Range((int)TauarmyAttackMotion.AttackMotion1, (int)TauarmyAttackMotion.AttacknMotionEnd);
         _animator.SetInteger("attackMotion", (int)_currentAttackMotion);
         SetForwardDirection();
 	}
@@ -62,7 +58,8 @@ public class Tauarmy : BaseMonster
     public override void ExitAttackState()
     {
         base.ExitAttackState();
-        InactiveRushAttackBox();
+		OffSuperArmor();
+		InactiveRushAttackBox();
 	}
 
     //MoveState

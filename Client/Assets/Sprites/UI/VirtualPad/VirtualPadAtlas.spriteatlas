@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: VirtualPadAtlas
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings: []
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 0
+      enableTightPacking: 0
+    variantMultiplier: 1
+    packables:
+    - {fileID: 2800000, guid: 0490c1a3abed2b2409e9305fd047cdc4, type: 3}
+    - {fileID: 2800000, guid: df47646612130764383c7ad1c70b39ca, type: 3}
+    - {fileID: 2800000, guid: db6c21c0e9aad3f498dff9ec13209b66, type: 3}
+    - {fileID: 2800000, guid: 1d08ae73883b9af43975e5276cf80052, type: 3}
+    - {fileID: 2800000, guid: 309f6ce3fb5523c4faa7726631eabbbe, type: 3}
+    - {fileID: 2800000, guid: 67e34b5638bfd154bb84e060cc11774e, type: 3}
+    - {fileID: 2800000, guid: 837421c7a12c3804d823fbc2587a8ba5, type: 3}
+    totalSpriteSurfaceArea: 103642
+    bindAsDefault: 1
+    storedHash:
+      serializedVersion: 2
+      Hash: dcfca00c5433f368ade5d4429c5a4b95
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: db6c21c0e9aad3f498dff9ec13209b66, type: 3}
+  - {fileID: 21300000, guid: 1d08ae73883b9af43975e5276cf80052, type: 3}
+  - {fileID: 21300000, guid: 0490c1a3abed2b2409e9305fd047cdc4, type: 3}
+  - {fileID: 21300000, guid: 309f6ce3fb5523c4faa7726631eabbbe, type: 3}
+  - {fileID: 21300000, guid: 67e34b5638bfd154bb84e060cc11774e, type: 3}
+  - {fileID: 21300000, guid: df47646612130764383c7ad1c70b39ca, type: 3}
+  - {fileID: 21300000, guid: 837421c7a12c3804d823fbc2587a8ba5, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - JingongchamIcon
+  - UI_Common_Joystick
+  - BlacheIcon
+  - UI_Common_Joystick_Center
+  - UI_Dungeon_AtkBtn_Ghost
+  - HadoukenIcon
+  - UI_Skill_Slide_Slot_CE
+  m_Tag: VirtualPadAtlas
+  m_IsVariant: 0

@@ -6,7 +6,8 @@ public enum SceneIndex
 {
     MainMenu,
     Lobby,
-    Dungen
+    Dungen,
+	LobbySingle,
 }
 
 public class DNFSceneManager : MonoBehaviour
@@ -46,7 +47,7 @@ public class DNFSceneManager : MonoBehaviour
 
         SpawnManager.instacne.RoomSetActive(false, _currentDungeonIndex);
         DungeonInfo dungeonInfo = MapLoader.instacne.GetDungeonInfo(index);
-        SpawnManager.instacne.Instantiate(dungeonInfo);
+        SpawnManager.instacne.Spawn(dungeonInfo);
         MapLoader.instacne.AfterInstantiateMonsterDelete(_currentDungeonIndex);
         _currentDungeonIndex = index;
 
@@ -58,6 +59,8 @@ public class DNFSceneManager : MonoBehaviour
             potalManager.BlockPotals();
         else
             potalManager.ResetPotals();
+
+        MiniMapManager.instance.movePlayerCursor(dungeonInfo.position);
 
         gameManager.FindCameraCollider();
         gameManager.MoveToPlayer(potalManager.FindGetArrowPotalPosition(FlipArrow(arrow)));
@@ -71,7 +74,7 @@ public class DNFSceneManager : MonoBehaviour
         DungeonInfo dungeonInfo = MapLoader.instacne.GetDungeonInfo(_startDungeonIndex);
 
         _currentDungeonIndex = _startDungeonIndex;
-        SpawnManager.instacne.Instantiate(dungeonInfo);
+        SpawnManager.instacne.Spawn(dungeonInfo);
 
         //FIXME : 리팩토링
         PotalManager potalManager = PotalManager.instance;

@@ -30,6 +30,9 @@ public class MovementJoystick : MonoBehaviour
 
     private PlayerCharacter _pc;
 
+    public PlayerCharacter PC { get { return _pc; } set { _pc = value; } }
+
+
     void Start()
     {
         _stick = transform.GetChild(0);
@@ -39,7 +42,7 @@ public class MovementJoystick : MonoBehaviour
         _oldDirection = _stickDirection;
         _dirVec = Vector2.zero;
 
-        _pc = FindObjectOfType<PlayerCharacter>();
+        FindPlayerCharacter();
     }
 
     // Update is called once per frame
@@ -125,5 +128,13 @@ public class MovementJoystick : MonoBehaviour
         }
 
         return stickDir;
+    }
+
+    public void FindPlayerCharacter()
+    {
+        _pc = FindObjectOfType<PlayerCharacter>();
+
+		if (_pc != null)
+			_pc.FindMovement();
     }
 }

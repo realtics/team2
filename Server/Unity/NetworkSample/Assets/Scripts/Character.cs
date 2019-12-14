@@ -22,7 +22,7 @@ public class Character : MonoBehaviour
 
     private Vector3 _position;
 
-    public bool IsMine { get { return _id == NetworkManager.Instance.GetMyId; } }
+    public bool IsMine { get { return _id == NetworkManager.Instance.MyId; } }
     public int Id { get { return _id; } }
     void Start()
     {

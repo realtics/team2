@@ -22,6 +22,9 @@ public class DungeonSlot : MonoBehaviour
         { 
             MapLoader.instacne.SetMap(_dungeonFileName);
             DNFSceneManager.instacne.LoadScene((int)SceneIndex.Dungen);
+
+			if (NetworkManager.Instance != null)
+				NetworkManager.Instance.DisconnectServer();
         });
     }
 }

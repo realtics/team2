@@ -37,8 +37,10 @@ public class GameManager : MonoBehaviour
     {
         FadeOut();
 
+		PlayerCharacter pc = GameObject.FindObjectOfType<PlayerCharacter>();
 
-        _player = GameObject.FindObjectOfType<PlayerCharacter>().gameObject;
+		if (pc != null)
+			_player = pc.gameObject;
         
 
     }
@@ -60,6 +62,9 @@ public class GameManager : MonoBehaviour
 
     public void MoveToPlayer(Vector3 position)
     {
+		if (_player == null)
+			return;
+
         _player.transform.position = position;
     }
 
