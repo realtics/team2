@@ -56,12 +56,8 @@ public class MapLoader : MonoBehaviour
     }
 
     public DungeonJsonData dungeonData;
-
-    private Dictionary<int,List<GameObject>> _dungeonGameObject;
-
     private string _dungeonName;
-    private int _currentDungeonIndex;
-    private const int _startDungeonIndex = 0;
+    private string _mapFolderName = "map";
 
     private void Awake()
     {
@@ -71,12 +67,12 @@ public class MapLoader : MonoBehaviour
     private void Start()
     {
         _instance = this;
-        _dungeonGameObject = new Dictionary<int, List<GameObject>>();
     }
 
     public void LoaderDungeon()
     {
         dungeonData = JsonLoad<DungeonJsonData>(_dungeonName);
+        SpawnManager.instacne.UnLoadAssetBundle(false);
     }
     public DungeonInfo GetDungeonInfo(int index)
     {
@@ -93,8 +89,10 @@ public class MapLoader : MonoBehaviour
 
     private T JsonLoad<T>(string fileName)
     {
-        string path = string.Format("{0}/{1}", "Map", fileName);
-        TextAsset textAsset = Resources.Load(path) as TextAsset;
+        SpawnManager.instacne.LoadAssetBundle(_mapFolderName);
+ 
+        TextAsset textAsset = SpawnManager.instacne.LoadObjectAsset(fileName) as TextAsset;
+
         string dungeonText = textAsset.text;
         return JsonConvert.DeserializeObject<T>(dungeonText);
     }
