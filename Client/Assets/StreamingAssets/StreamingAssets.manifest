@@ -1,5 +1,5 @@
 ManifestFileVersion: 0
-CRC: 2794054048
+CRC: 4220287365
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
@@ -10,7 +10,11 @@ AssetBundleManifest:
       Dependencies: {}
     Info_2:
       Name: monster
-      Dependencies: {}
+      Dependencies:
+        Dependency_0: material
     Info_3:
       Name: atlas
+      Dependencies: {}
+    Info_4:
+      Name: material
       Dependencies: {}

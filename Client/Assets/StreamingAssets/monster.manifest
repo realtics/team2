@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 2839467937
+CRC: 192902294
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: fb663e46fc433bf7c3628113aa33cfb4
+    Hash: 9eb3f0a712c146183ed009da7de4f07a
   TypeTreeHash:
     serializedVersion: 2
     Hash: 6c12c6b21d2af24dd83ed38a72cfba33
@@ -64,4 +64,5 @@ Assets:
 - Assets/Prefabs/Monster/Tauarmy/Effect/TauarmyBaseAttackEffect.prefab
 - Assets/Prefabs/Monster/Calvary/Effect/CalvaryBaseAttackEffect.prefab
 - Assets/Prefabs/Monster/Calvary/Unit/Calvary.prefab
-Dependencies: []
+Dependencies:
+- C:/Users/KSJ/Documents/GitHub/team2/Client/Assets/StreamingAssets/material

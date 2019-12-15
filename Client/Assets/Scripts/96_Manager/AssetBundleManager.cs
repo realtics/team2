@@ -9,7 +9,9 @@ using System.Threading.Tasks;
 public class AssetBundleManager : MonoBehaviour
 {
     private Dictionary<string, GameObject> _cache = new Dictionary<string, GameObject>();
-    AssetBundle LoadedAssetBundle;
+    private AssetBundle _LoadedAssetBundle;
+    private AssetBundle _LoadedMaterialAssetBundle;
+    private AssetBundleManifest _manifest;
     public string saBundle = "atlas";
 
     private static AssetBundleManager _instacne;
@@ -52,13 +54,37 @@ public class AssetBundleManager : MonoBehaviour
 
     public void LoadAssetFromLocalDisk(string assetBundleName)
     {
-        LoadedAssetBundle = AssetBundle.LoadFromFile(Path.Combine(Application.streamingAssetsPath, assetBundleName));
-        if (LoadedAssetBundle == null)
+        _LoadedAssetBundle = AssetBundle.LoadFromFile(Path.Combine(Application.streamingAssetsPath, assetBundleName));
+        LoadAssetBundleManifest(assetBundleName);
+
+        if (_LoadedAssetBundle == null)
         {
             Debug.Log("Failed to load AssetBundle!");
         }
         else
             Debug.Log("Successed to load AssetBundle!");
+    }
+    private void LoadAssetBundleManifest(string assetBundleName)
+    {
+        if(_manifest == null)
+        {
+            AssetBundle manifestAssetBundle = AssetBundle.LoadFromFile(Path.Combine(Application.streamingAssetsPath, "StreamingAssets"));
+            _manifest = manifestAssetBundle.LoadAsset<AssetBundleManifest>("assetbundlemanifest");
+        }
+        string[] dependencies = _manifest.GetAllDependencies(assetBundleName);
+
+
+        foreach (string dependency in dependencies)
+        {
+            _LoadedMaterialAssetBundle = AssetBundle.LoadFromFile(Path.Combine(Application.streamingAssetsPath, dependency));
+        }
+
+        //AssetBundle assetBundle = AssetBundle.LoadFromFile(Path.Combine(Application.streamingAssetsPath, "monster"));
+        //Hash128 hash = assetBundleManifest.GetAssetBundleHash(assetBundle.name);
+    }
+    public Object GetMaterial(string name)
+    {
+        return _LoadedMaterialAssetBundle.LoadAsset<Object>(name);
     }
 
     public GameObject LoadAsset(string name)
@@ -68,13 +94,13 @@ public class AssetBundleManager : MonoBehaviour
 
     public Object LoadUnCacheObjectAsset(string name)
     {
-        return LoadedAssetBundle.LoadAsset<Object>(name);
+        return _LoadedAssetBundle.LoadAsset<Object>(name);
     }
 
     public void UnLoadAssetBundle(bool isUnloadAll)
     {
         ClearCache();
-        LoadedAssetBundle.Unload(isUnloadAll);
+        _LoadedAssetBundle.Unload(isUnloadAll);
     }
 
     private GameObject LoadAssetFromCache(string name)
@@ -83,7 +109,7 @@ public class AssetBundleManager : MonoBehaviour
         _cache.TryGetValue(name, out resourceObj);
         if (resourceObj == null)
         {
-            resourceObj = LoadedAssetBundle.LoadAsset<GameObject>(name);
+            resourceObj = _LoadedAssetBundle.LoadAsset<GameObject>(name);
             if (resourceObj != null)
             {
                 _cache.Add(name, resourceObj);

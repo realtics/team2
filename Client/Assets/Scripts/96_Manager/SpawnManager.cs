@@ -69,9 +69,11 @@ public class SpawnManager : MonoBehaviour
             MonsterManager.Instance.AddMonster(obj, item.position);
 
             // hack. 마테리얼 오류 떄문에 몬스터가 보이지 않음, 임시 마테리얼을 넣어둠. 
-            obj.transform.GetChild(1).GetComponent<SpriteRenderer>().material = new Material(Shader.Find("Sprites/Outline"));
+            //obj.transform.GetChild(1).GetComponent<SpriteRenderer>().material = new Material(Shader.Find("Sprites/Outline")); 
+            Debug.Log(_assetBundleManager.GetMaterial("SpriteOutlineMatarial") as Material);
+            obj.transform.GetChild(1).GetComponent<SpriteRenderer>().material = _assetBundleManager.GetMaterial("SpriteOutlineMatarial") as Material;
         }
-        UnLoadAssetBundle(false);
+        UnLoadAssetBundle(false); 
 
         foreach (var item in dungeon.potalTransportinfos)
         {
