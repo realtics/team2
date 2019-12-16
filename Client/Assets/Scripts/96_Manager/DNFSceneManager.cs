@@ -51,19 +51,12 @@ public class DNFSceneManager : MonoBehaviour
         MapLoader.instacne.AfterInstantiateMonsterDelete(_currentDungeonIndex);
         _currentDungeonIndex = index;
 
-        //FIXME : 리팩토링
-        PotalManager potalManager = PotalManager.instance;
-        potalManager.FIndPotals();
-
-        if (MonsterManager.Instance.IsExistMonster())
-            potalManager.BlockPotals();
-        else
-            potalManager.ResetPotals();
+        MoveRoomPotalActive();
 
         MiniMapManager.instance.movePlayerCursor(dungeonInfo.position);
 
         gameManager.FindCameraCollider();
-        gameManager.MoveToPlayer(potalManager.FindGetArrowPotalPosition(FlipArrow(arrow)));
+        gameManager.MoveToPlayer(PotalManager.instance.FindGetArrowPotalPosition(FlipArrow(arrow)));
     }
     public void Loader()
     {
@@ -73,20 +66,23 @@ public class DNFSceneManager : MonoBehaviour
         MapLoader.instacne.LoaderDungeon();
         DungeonInfo dungeonInfo = MapLoader.instacne.GetDungeonInfo(_startDungeonIndex);
 
-        _currentDungeonIndex = _startDungeonIndex;
         SpawnManager.instacne.Spawn(dungeonInfo);
+        _currentDungeonIndex = _startDungeonIndex;
 
-        //FIXME : 리팩토링
-        PotalManager potalManager = PotalManager.instance;
-        potalManager.FIndPotals();
-
-        if (MonsterManager.Instance.IsExistMonster())
-            potalManager.BlockPotals();
-        else
-            potalManager.ResetPotals();
+        MoveRoomPotalActive();
 
         gameManager.FindCameraCollider();
         gameManager.MoveToPlayer(dungeonInfo.PlayerStartPosition);
+    }
+
+    private void MoveRoomPotalActive()
+    {
+        PotalManager.instance.FIndPotals();
+
+        if (MonsterManager.Instance.IsExistMonster())
+            PotalManager.instance.BlockPotals();
+        else
+            PotalManager.instance.ResetPotals();
     }
 
     private ARROW FlipArrow(ARROW arrow)
