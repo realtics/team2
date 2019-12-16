@@ -12,8 +12,8 @@ public class AssetBundleManager : MonoBehaviour
     private AssetBundle _LoadedAssetBundle;
     private AssetBundle _LoadedMaterialAssetBundle;
     private AssetBundleManifest _manifest;
-    public string saBundle = "atlas";
-    public string maBundle = "material";
+    private string saBundle = "atlas";
+    private string maBundle = "material";
 
     private static AssetBundleManager _instacne;
     public static AssetBundleManager instacne

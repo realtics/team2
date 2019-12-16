@@ -63,21 +63,19 @@ public class SpawnManager : MonoBehaviour
         LoadAssetBundle("monster");
         foreach (var item in dungeon.monsterInfos)
         {
-            //GameObject obj = LoadResourceFromCache(item.filePath);
             GameObject obj = LoadAsset(item.filePath);
 
             MonsterManager.Instance.AddMonster(obj, item.position);
-
-            // hack. 마테리얼 오류 떄문에 몬스터가 보이지 않음, 임시 마테리얼을 넣어둠. 
-            //obj.transform.GetChild(1).GetComponent<SpriteRenderer>().material = new Material(Shader.Find("Sprites/Outline")); 
-            //Debug.Log(_assetBundleManager.GetMaterial("SpriteOutlineMatarial") as Material);
-            //obj.transform.GetChild(1).GetComponent<SpriteRenderer>().material = _assetBundleManager.GetMaterial("SpriteOutlineMatarial.mat") as Material;
         }
-        UnLoadAssetBundle(false); 
+        UnLoadAssetBundle(false);
 
+        LoadAssetBundle("dungeon/potal");
         foreach (var item in dungeon.potalTransportinfos)
         {
-            GameObject obj = LoadResourceFromCache(item.filePath);
+            //GameObject obj = LoadResourceFromCache(item.filePath);
+
+            GameObject obj = LoadAsset(item.filePath);
+
             obj = AddObject(obj, item.position);
 
             PotalTransport potal = obj.GetComponent<PotalTransport>();
@@ -91,13 +89,7 @@ public class SpawnManager : MonoBehaviour
 
             _dungeonGameObject.Add(obj);
         }
-
-        //To do AssetBundle.
-        //_assetBundleManager.LoadAssetFromLocalDisk("potal");
-
-        //AddObject(_assetBundleManager.LoadAsset("PotalTransport Up"), Vector3.zero);
-
-        //_assetBundleManager.UnLoadAssetBundle(false);
+        UnLoadAssetBundle(false);
 
         ClearCache();
     }
