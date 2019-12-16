@@ -18,7 +18,7 @@ public class ItemToolTip : MonoBehaviour
         _itemInfoText.text = item.Information;
 
         _sb.Length = 0;
-        AddAttackStat(item);
+        AddTopStat(item);
         AddMainStat(item);
         //AddPercentStat(item);
    
@@ -56,12 +56,14 @@ public class ItemToolTip : MonoBehaviour
             }
         }
     }
-    private void AddAttackStat(EquipableItem item)
+    private void AddTopStat(EquipableItem item)
     {
         AddStat(item.physicalAttackBonus, "물리 공격력");
         AddStat(item.magicAttackBonus, "마법 공격력");
+		AddStat(item.physicalDefenseBonus, "물리 방어력");
+		AddStat(item.magicDefenseBonus, "마법 방어력");
 
-        if (_sb.Length > 0)
+		if (_sb.Length > 0)
             _sb.AppendLine();
     }
 
