@@ -54,7 +54,7 @@ public class ChatManager : MonoBehaviour
             return;
 
         AddNewChat("Me", chatField.text);
-        chatField.text = "";
         NetworkManager.Instance.SendChat(chatField.text);
-    }
+		chatField.text = "";
+	}
 }

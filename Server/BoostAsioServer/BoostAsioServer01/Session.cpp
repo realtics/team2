@@ -197,6 +197,17 @@ void Session::Deserialization(char* jsonData)
 		memcpy(&_packetBuffer[_packetBufferMark], (char*)&packet, sizeof(packet));
 	}
 	break;
+	case PACKET_INDEX::REQ_CHATTING:
+	{
+		PKT_REQ_CHATTING packet;
+		packet.Init();
+		packet.packetIndex = packetIndex;
+		packet.packetSize = packetSize;
+		packet.sessionID = ptRecv.get<int>("sessionID");
+		strcpy_s(packet.chatMessage, MAX_MESSAGE_LEN, ptRecv.get<std::string>("chatMessage").c_str());
+		memcpy(&_packetBuffer[_packetBufferMark], (char*)&packet, sizeof(packet));
+	}
+	break;
 	case PACKET_INDEX::REQ_PLAYER_MOVE_START:
 	{
 		PKT_REQ_PLAYER_MOVE_START packet;

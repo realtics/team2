@@ -2,7 +2,7 @@
 
 const unsigned short PORT_NUMBER = 31452;
 const int MAX_RECEIVE_BUFFER_LEN = 512;
-const int MAX_NAME_LEN = 13;
+
 const int MAX_MESSAGE_LEN = 129;
 
 const int MAX_PLAYER_MOVE_LEN = 50;
@@ -17,11 +17,6 @@ enum PACKET_INDEX : short
 {
 	// REQ : 클라->서버, 클라에서 서버에 어떤 값을 요청
 	// RES : 서버->클라, 서버가 어떤 값으로 응답
-
-	REQ_IN = 1,
-	RES_IN = 2,
-	REQ_CHAT = 5,
-	NOTICE_CHAT = 6,
 	
 	REQ_CHECK_BEFORE_LOGIN = 105, 
 	RES_CHECK_BEFORE_LOGIN = 106,
@@ -61,56 +56,6 @@ struct PACKET_HEADER_BODY
 	PACKET_HEADER header;
 };
 
-struct PKT_REQ_IN : public PACKET_HEADER
-{
-	char characterName[MAX_NAME_LEN];
-
-	void Init()
-	{
-		packetIndex = PACKET_INDEX::REQ_IN;
-		packetSize = sizeof(PKT_REQ_IN);
-		memset(characterName, 0, MAX_NAME_LEN);
-	}
-};
-
-struct PKT_RES_IN : public PACKET_HEADER
-{
-	bool isSuccess;
-
-	void Init()
-	{
-		packetIndex = PACKET_INDEX::RES_IN;
-		packetSize = sizeof(PKT_RES_IN);
-		isSuccess = false;
-	}
-};
-
-struct PKT_REQ_CHAT : public PACKET_HEADER
-{
-	char userMessage[MAX_MESSAGE_LEN];
-
-	void Init()
-	{
-		packetIndex = PACKET_INDEX::REQ_CHAT;
-		packetSize = sizeof(PKT_REQ_CHAT);
-		memset(userMessage, 0, MAX_MESSAGE_LEN);
-	}
-};
-
-struct PKT_NOTICE_CHAT : public PACKET_HEADER
-{
-	char characterName[MAX_NAME_LEN];
-	char userMessage[MAX_MESSAGE_LEN];
-
-	void Init()
-	{
-		packetIndex = PACKET_INDEX::NOTICE_CHAT;
-		packetSize = sizeof(PKT_NOTICE_CHAT);
-		memset(characterName, 0, MAX_NAME_LEN);
-		memset(userMessage, 0, MAX_MESSAGE_LEN);
-	}
-};
-
 struct PKT_REQ_CHECK_BEFORE_LOGIN : public PACKET_HEADER
 {
 	char userID[MAX_USER_ID];
@@ -127,6 +72,7 @@ struct PKT_REQ_CHECK_BEFORE_LOGIN : public PACKET_HEADER
 struct PKT_RES_CHECK_BEFORE_LOGIN : public PACKET_HEADER
 {
 	int checkResult;
+	char userID[MAX_USER_ID];
 	int sessionID;
 	//char userName[MAX_USER_NAME];
 	std::string userName;
@@ -135,6 +81,7 @@ struct PKT_RES_CHECK_BEFORE_LOGIN : public PACKET_HEADER
 		packetIndex = PACKET_INDEX::RES_CHECK_BEFORE_LOGIN;
 		packetSize = sizeof(PKT_RES_CHECK_BEFORE_LOGIN);
 		checkResult = 0;
+		memset(userID, 0, MAX_USER_ID);
 		sessionID = FIRST_SESSION_INDEX;
 		//memset(userName, 0, MAX_USER_NAME);
 	}
@@ -213,30 +160,30 @@ struct PKT_RES_USER_EXIT : public PACKET_HEADER
 
 struct PKT_REQ_CHATTING : public PACKET_HEADER
 {
-	int userID;
+	int sessionID;
 	char chatMessage[MAX_MESSAGE_LEN];
 
 	void Init()
 	{
 		packetIndex = PACKET_INDEX::REQ_CHATTING;
 		packetSize = sizeof(PKT_REQ_CHATTING);
-		userID = FIRST_SESSION_INDEX;
+		sessionID = FIRST_SESSION_INDEX;
 		memset(chatMessage, 0, MAX_MESSAGE_LEN);
 	}
 };
 
 struct PKT_RES_CHATTING : public PACKET_HEADER
 {
-	int userID;
-	char userName[MAX_NAME_LEN];
+	int sessionID;
+	char userName[MAX_USER_NAME];
 	char chatMessage[MAX_MESSAGE_LEN];
 
 	void Init()
 	{
-		packetIndex = PACKET_INDEX::REQ_CHATTING;
-		packetSize = sizeof(PKT_REQ_CHATTING);
-		userID = FIRST_SESSION_INDEX;
-		memset(userName, 0, MAX_NAME_LEN);
+		packetIndex = PACKET_INDEX::RES_CHATTING;
+		packetSize = sizeof(PKT_RES_CHATTING);
+		sessionID = FIRST_SESSION_INDEX;
+		memset(userName, 0, MAX_USER_NAME);
 		memset(chatMessage, 0, MAX_MESSAGE_LEN);
 	}
 };
@@ -251,7 +198,7 @@ struct PKT_REQ_PLAYER_MOVE_START : public PACKET_HEADER
 	{
 		packetIndex = PACKET_INDEX::REQ_PLAYER_MOVE_START;
 		packetSize = sizeof(PKT_REQ_PLAYER_MOVE_START);
-		sessionID = 0;
+		sessionID = FIRST_SESSION_INDEX;
 		memset(userPos, 0, MAX_PLAYER_MOVE_LEN);
 		memset(userDir, 0, MAX_PLAYER_MOVE_LEN);
 	}
@@ -267,7 +214,7 @@ struct PKT_RES_PLAYER_MOVE_START : public PACKET_HEADER
 	{
 		packetIndex = PACKET_INDEX::RES_PLAYER_MOVE_START;
 		packetSize = sizeof(PKT_RES_PLAYER_MOVE_START);
-		sessionID = 0;
+		sessionID = FIRST_SESSION_INDEX;
 		memset(userPos, 0, MAX_PLAYER_MOVE_LEN);
 		memset(userDir, 0, MAX_PLAYER_MOVE_LEN);
 	}
@@ -283,7 +230,7 @@ struct PKT_REQ_PLAYER_MOVE_END : public PACKET_HEADER
 	{
 		packetIndex = PACKET_INDEX::REQ_PLAYER_MOVE_END;
 		packetSize = sizeof(PKT_REQ_PLAYER_MOVE_START);
-		sessionID = 0;
+		sessionID = FIRST_SESSION_INDEX;
 		memset(userPos, 0, MAX_PLAYER_MOVE_LEN);
 		memset(userDir, 0, MAX_PLAYER_MOVE_LEN);
 	}
@@ -299,7 +246,7 @@ struct PKT_RES_PLAYER_MOVE_END : public PACKET_HEADER
 	{
 		packetIndex = PACKET_INDEX::RES_PLAYER_MOVE_END;
 		packetSize = sizeof(PKT_RES_PLAYER_MOVE_END);
-		sessionID = 0;
+		sessionID = FIRST_SESSION_INDEX;
 		memset(userPos, 0, MAX_PLAYER_MOVE_LEN);
 		memset(userDir, 0, MAX_PLAYER_MOVE_LEN);
 	}

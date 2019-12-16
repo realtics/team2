@@ -58,6 +58,9 @@ public class NetworkManager : MonoBehaviour
     public int MyId { get { return _myId; } }
     public void SetMyId(int id) { _myId = id; }
 
+	private string _myName;
+	public string MyName { get { return _myName; } }
+	public void SetMyName(string name) { _myName = name; }
 
     private bool _isLogin = false;      // 로그인 여부
     public bool GetIsLogin { get { return _isLogin; } }
@@ -257,15 +260,15 @@ public class NetworkManager : MonoBehaviour
 
 				// TODO : EUC-KR로 한글이 들어 올 경우, 패킷 자르기 시, 서버에서 잰 길이와 클라에서 받는 길이가 다르게 판정됨
 				// 패킷 자르기
-				//string recvDataSubstring = recvData.Substring(45, 3);
-				//string[] recvDataSplit = recvDataSubstring.Split('"');
-				//int recvDataSize = int.Parse(recvDataSplit[0]);
+				string recvDataSubstring = recvData.Substring(45, 3);
+				string[] recvDataSplit = recvDataSubstring.Split('"');
+				int recvDataSize = int.Parse(recvDataSplit[0]);
 
-				//string recvDataSubstring2 = recvData.Substring(0, recvDataSize);
-				//DebugLogList(recvDataSubstring2);
-				//var JsonData = JsonConvert.DeserializeObject<PACKET_HEADER_BODY>(recvDataSubstring2);
+				string recvDataSubstring2 = recvData.Substring(0, recvDataSize);
+				DebugLogList(recvDataSubstring2);
+				var JsonData = JsonConvert.DeserializeObject<PACKET_HEADER_BODY>(recvDataSubstring2);
 
-				var JsonData = JsonConvert.DeserializeObject<PACKET_HEADER_BODY>(recvData);
+				//var JsonData = JsonConvert.DeserializeObject<PACKET_HEADER_BODY>(recvData);
 
 				DebugLogList("ReceiveCallback - ProcessPacket - start");
                 ProcessPacket(JsonData.header.packetIndex, recvData);
@@ -312,6 +315,9 @@ public class NetworkManager : MonoBehaviour
 
 						var sessionID = desJson.sessionID;
 						var userName = desJson.userName;
+
+						SetMyId(sessionID);
+						SetMyName(userName);
 					}
 					break;
                 case (short)PACKET_INDEX.RES_CONCURRENT_USER_LIST:
@@ -397,7 +403,7 @@ public class NetworkManager : MonoBehaviour
                     {
                         var desJson = JsonConvert.DeserializeObject<PKT_RES_CHATTING>(jsonData);
 
-                        var userID = desJson.userID;
+                        var sessionID = desJson.sessionID;
                         var userName = desJson.userName;
                         var newChat = desJson.chatMessage;
 
@@ -831,13 +837,13 @@ public class NetworkManager : MonoBehaviour
         var packHeader = new PACKET_HEADER
         {
             packetIndex = (short)PACKET_INDEX.REQ_CHATTING,
-            packetSize = 1
-        };
+            packetSize = (short)DefineDefaultValue.packetSize
+		};
         var packData = new PKT_REQ_CHATTING
         {
             header = packHeader,
-            userID = MyId,
-            chatMessage = chat
+			sessionID = MyId,
+			chatMessage = chat
         };
 
         jsonData = JsonConvert.SerializeObject(packData);
@@ -846,7 +852,32 @@ public class NetworkManager : MonoBehaviour
         byte[] sendByte = new byte[512];
         sendByte = Encoding.UTF8.GetBytes(jsonData);
 
-        int resultSize = _sock.Send(sendByte);
+		short jsonDataSize = 0;
+		foreach (byte b in sendByte)
+		{
+			jsonDataSize++;
+			if (b == '\0')
+				break;
+		}
+
+		var packHeader2 = new PACKET_HEADER
+		{
+			packetIndex = (short)PACKET_INDEX.REQ_CHATTING,
+			packetSize = jsonDataSize
+		};
+		var packData2 = new PKT_REQ_CHATTING
+		{
+			header = packHeader2,
+			sessionID = MyId,
+			chatMessage = chat
+		};
+		string jsonData2;
+		jsonData2 = JsonConvert.SerializeObject(packData2);
+		jsonData2 += endNullValue;
+		byte[] sendByte2 = new byte[512];
+		sendByte2 = Encoding.UTF8.GetBytes(jsonData2);
+
+		int resultSize = _sock.Send(sendByte2);
     }
 
 }
