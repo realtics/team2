@@ -1,0 +1,68 @@
+ManifestFileVersion: 0
+CRC: 192902294
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 9eb3f0a712c146183ed009da7de4f07a
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 6c12c6b21d2af24dd83ed38a72cfba33
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 50
+  Script: {instanceID: 0}
+- Class: 58
+  Script: {instanceID: 0}
+- Class: 61
+  Script: {instanceID: 0}
+- Class: 74
+  Script: {instanceID: 0}
+- Class: 91
+  Script: {instanceID: 0}
+- Class: 95
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: cb6a0c20dba84be42a38f4e212031971, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 07977fa0d10651641b23300a1a2b3527, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: a5d041c509245134691aa8c3b1f5aef1, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 48d06c5856586af4b8c3570d7dc496f4, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 29b97b68b6ba3e64d9587aedd9fa5c26, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: ee206c0ccd87a8b499a371b5bfa22355, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 9b8cdc8dc0ced434dbae51543f99b043, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 91a71d3e566804d4180ff11b290ba1ee, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 2decde5f0c379d549ad25131bddce8f0, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+- Class: 212
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+- Class: 221
+  Script: {instanceID: 0}
+- Class: 687078895
+  Script: {instanceID: 0}
+Assets:
+- Assets/Prefabs/Monster/Tauarmy/Unit/Tauarmy.prefab
+- Assets/Prefabs/Monster/Goblin/Unit/Goblin.prefab
+- Assets/Prefabs/Monster/Goblin/Effect/GoblinBaseAttackEffect.prefab
+- Assets/Prefabs/Monster/Tauarmy/Effect/TauarmyBaseAttackEffect.prefab
+- Assets/Prefabs/Monster/Calvary/Effect/CalvaryBaseAttackEffect.prefab
+- Assets/Prefabs/Monster/Calvary/Unit/Calvary.prefab
+Dependencies:
+- C:/Users/KSJ/Documents/GitHub/team2/Client/Assets/StreamingAssets/material

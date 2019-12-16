@@ -5,8 +5,10 @@ using System.Collections.Generic;
 
 public class SpawnManager : MonoBehaviour
 {
+    private List<GameObject> _dungeonGameObject = new List<GameObject>();
+
     [SerializeField]
-    private List<GameObject> _dungeonGameObject;
+    private AssetBundleManager _assetBundleManager;
 
     private static SpawnManager _instacne;
     public static SpawnManager instacne
@@ -24,7 +26,6 @@ public class SpawnManager : MonoBehaviour
     void Start()
     {
         _instacne = this;
-        _dungeonGameObject = new List<GameObject>();
     }
 
     public GameObject LoadResourceFromCache(string path)
@@ -48,8 +49,9 @@ public class SpawnManager : MonoBehaviour
         Resources.UnloadUnusedAssets();
     }
 
-    public void Instantiate(DungeonInfo dungeon)
+    public void Spawn(DungeonInfo dungeon)
     {
+
         foreach (var item in dungeon.objectinfos)
         {
             GameObject obj = LoadResourceFromCache(item.filePath);
@@ -58,12 +60,20 @@ public class SpawnManager : MonoBehaviour
             _dungeonGameObject.Add(obj);
         }
 
+        LoadAssetBundle("monster");
         foreach (var item in dungeon.monsterInfos)
         {
-            GameObject obj = LoadResourceFromCache(item.filePath);
+            //GameObject obj = LoadResourceFromCache(item.filePath);
+            GameObject obj = LoadAsset(item.filePath);
+
             MonsterManager.Instance.AddMonster(obj, item.position);
-            
+
+            // hack. 마테리얼 오류 떄문에 몬스터가 보이지 않음, 임시 마테리얼을 넣어둠. 
+            obj.transform.GetChild(1).GetComponent<SpriteRenderer>().material = new Material(Shader.Find("Sprites/Outline")); 
+            //Debug.Log(_assetBundleManager.GetMaterial("SpriteOutlineMatarial") as Material);
+            //obj.transform.GetChild(1).GetComponent<SpriteRenderer>().material = _assetBundleManager.GetMaterial("SpriteOutlineMatarial") as Material;
         }
+        UnLoadAssetBundle(false); 
 
         foreach (var item in dungeon.potalTransportinfos)
         {
@@ -81,8 +91,35 @@ public class SpawnManager : MonoBehaviour
 
             _dungeonGameObject.Add(obj);
         }
+
+        //To do AssetBundle.
+        //_assetBundleManager.LoadAssetFromLocalDisk("potal");
+
+        //AddObject(_assetBundleManager.LoadAsset("PotalTransport Up"), Vector3.zero);
+
+        //_assetBundleManager.UnLoadAssetBundle(false);
+
         ClearCache();
     }
+
+    public void LoadAssetBundle(string name)
+    {
+        _assetBundleManager.LoadAssetFromLocalDisk(name);
+    }
+
+    public GameObject LoadAsset(string name)
+    {
+        return _assetBundleManager.LoadAsset(name);
+    }
+    public Object LoadObjectAsset(string name)
+    {
+        return _assetBundleManager.LoadUnCacheObjectAsset(name);
+    }
+    public void UnLoadAssetBundle(bool isUnloadAll)
+    {
+        _assetBundleManager.UnLoadAssetBundle(isUnloadAll);
+    }
+
     public GameObject AddObject(GameObject prefab, Vector3 position)
     {
         GameObject obj = ObjectPoolManager.Instance.GetRestObject(prefab);

@@ -4,7 +4,7 @@ AsioServer::AsioServer(boost::asio::io_context& io_context)
 	: _acceptor(io_context, boost::asio::ip::tcp::endpoint(boost::asio::ip::tcp::v4(), PORT_NUMBER))
 {
 	_isAccepting = false;
-	_userID = 0;
+	_sessionID = 0;
 }
 
 AsioServer::~AsioServer()
@@ -66,12 +66,12 @@ bool AsioServer::PostAccept()
 
 void AsioServer::HandleAccept(Session* pSession, const boost::system::error_code& error)
 {
-	_userID = pSession->SessionID() + FIRST_USER_INDEX;
+	_sessionID = pSession->SessionID() + FIRST_SESSION_INDEX;
 
 	if (!error)
 	{
 		//std::cout << "클라이언트 접속 성공. SessionID: " << pSession->SessionID() << std::endl;
-		std::cout << "\"" << _userID << "\"번 클라이언트 서버 접속 성공" << std::endl;
+		std::cout << "\"" << _sessionID << "\"번 클라이언트 서버 접속 성공" << std::endl;
 
 		pSession->Init();
 		pSession->PostReceive();
@@ -86,8 +86,8 @@ void AsioServer::HandleAccept(Session* pSession, const boost::system::error_code
 
 void AsioServer::CloseSession(const int sessionID)
 {
-	_userID = sessionID + FIRST_USER_INDEX;
-	std::cout << "\"" << _userID << "\"번 클라이언트 접속 종료" << std::endl;
+	_sessionID = sessionID + FIRST_SESSION_INDEX;
+	std::cout << "\"" << _sessionID << "\"번 클라이언트 접속 종료" << std::endl;
 
 	_sessionList[sessionID]->Socket().close();
 
@@ -98,10 +98,10 @@ void AsioServer::CloseSession(const int sessionID)
 		PostAccept();
 	}
 
-	_totalUserPos.erase(_userID);
-	_totalUserDir.erase(_userID);
+	_totalUserPos.erase(_sessionID);
+	_totalUserDir.erase(_sessionID);
 
-	UserExit(_userID);
+	UserExit(_sessionID);
 	//ConcurrentUser();	//유저가 접속 종료 하면 클라이언트에게 갱신된 정보를 보냄
 }
 
@@ -160,8 +160,10 @@ void AsioServer::ProcessPacket(const int sessionID, const char* pData)
 		{
 			SendPkt.checkResult = _DBMysql.DBLoginCheckUserPW(pPacket->userID, pPacket->userPW);
 			std::cout << "PW checkResult = " << SendPkt.checkResult << std::endl;
+			SendPkt.userName = _DBMysql.DBLoginGetUserName(pPacket->userID);
 		}
 
+		// json
 		boost::property_tree::ptree ptSendHeader;
 		ptSendHeader.put<short>("packetIndex", SendPkt.packetIndex);
 		ptSendHeader.put<short>("packetSize", SendPkt.packetSize);
@@ -169,6 +171,8 @@ void AsioServer::ProcessPacket(const int sessionID, const char* pData)
 		boost::property_tree::ptree ptSend;
 		ptSend.add_child("header", ptSendHeader);
 		ptSend.put<int>("checkResult", SendPkt.checkResult);
+		ptSend.put<int>("sessionID", SendPkt.sessionID);
+		ptSend.put<std::string>("userName", SendPkt.userName);
 
 		std::string stringRecv;
 		std::ostringstream oss(stringRecv);
@@ -184,6 +188,8 @@ void AsioServer::ProcessPacket(const int sessionID, const char* pData)
 		boost::property_tree::ptree ptSend2;
 		ptSend2.add_child("header", ptSendHeader2);
 		ptSend2.put<int>("checkResult", SendPkt.checkResult);
+		ptSend2.put<int>("sessionID", SendPkt.sessionID);
+		ptSend2.put<std::string>("userName", SendPkt.userName);
 
 		std::string stringRecv2;
 		std::ostringstream oss2(stringRecv2);
@@ -200,13 +206,13 @@ void AsioServer::ProcessPacket(const int sessionID, const char* pData)
 
 		PKT_RES_NEW_LOGIN_SUCSESS SendPkt;
 		SendPkt.Init();
-		std::cout << "\"" << _userID << "\"번 클라이언트 로그인 성공" << std::endl;
+		std::cout << "\"" << _sessionID << "\"번 클라이언트 로그인 성공" << std::endl;
 
 		SendPkt.isSuccess = true;
-		SendPkt.userID = _userID;
+		SendPkt.sessionID = _sessionID;
 
-		_totalUserPos.insert(std::make_pair(_userID, "(0.0000, 0.0000, 0.0000)"));
-		_totalUserDir.insert(std::make_pair(_userID, "(0.0000, 0.0000, 0.0000)"));
+		_totalUserPos.insert(std::make_pair(_sessionID, "(0.0000, 0.0000, 0.0000)"));
+		_totalUserDir.insert(std::make_pair(_sessionID, "(0.0, 0.0, 0.0)"));
 
 		boost::property_tree::ptree ptSendHeader;
 		ptSendHeader.put<short>("packetIndex", SendPkt.packetIndex);
@@ -215,7 +221,7 @@ void AsioServer::ProcessPacket(const int sessionID, const char* pData)
 		boost::property_tree::ptree ptSend;
 		ptSend.add_child("header", ptSendHeader);
 		ptSend.put<bool>("isSuccess", SendPkt.isSuccess);
-		ptSend.put<int>("userID", SendPkt.userID);
+		ptSend.put<int>("sessionID", SendPkt.sessionID);
 
 		std::string stringRecv;
 		std::ostringstream oss(stringRecv);
@@ -232,7 +238,7 @@ void AsioServer::ProcessPacket(const int sessionID, const char* pData)
 		boost::property_tree::ptree ptSend2;
 		ptSend2.add_child("header", ptSendHeader2);
 		ptSend2.put<bool>("isSuccess", SendPkt.isSuccess);
-		ptSend2.put<int>("userID", SendPkt.userID);
+		ptSend2.put<int>("sessionID", SendPkt.sessionID);
 
 		std::string stringRecv2;
 		std::ostringstream oss2(stringRecv2);
@@ -262,7 +268,7 @@ void AsioServer::ProcessPacket(const int sessionID, const char* pData)
 	{
 		PKT_REQ_USER_EXIT* pPacket = (PKT_REQ_USER_EXIT*)pData;
 
-		int exitUser = pPacket->userID;
+		int exitUser = pPacket->sessionID;
 
 		UserExit(exitUser);
 	}
@@ -274,7 +280,7 @@ void AsioServer::ProcessPacket(const int sessionID, const char* pData)
 		PKT_RES_PLAYER_MOVE_START playerMove;
 		playerMove.Init();
 
-		playerMove.userID = pPacket->userID;
+		playerMove.sessionID = pPacket->sessionID;
 		strcpy_s(playerMove.userPos, MAX_PLAYER_MOVE_LEN, pPacket->userPos);
 		strcpy_s(playerMove.userDir, MAX_PLAYER_MOVE_LEN, pPacket->userDir);
 
@@ -284,7 +290,7 @@ void AsioServer::ProcessPacket(const int sessionID, const char* pData)
 
 		boost::property_tree::ptree ptSend;
 		ptSend.add_child("header", ptSendHeader);
-		ptSend.put<int>("userID", playerMove.userID);
+		ptSend.put<int>("sessionID", playerMove.sessionID);
 		ptSend.put<std::string>("userPos", playerMove.userPos);
 		ptSend.put<std::string>("userDir", playerMove.userDir);
 
@@ -302,7 +308,7 @@ void AsioServer::ProcessPacket(const int sessionID, const char* pData)
 
 		boost::property_tree::ptree ptSend2;
 		ptSend2.add_child("header", ptSendHeader2);
-		ptSend2.put<int>("userID", playerMove.userID);
+		ptSend2.put<int>("sessionID", playerMove.sessionID);
 		ptSend2.put<std::string>("userPos", playerMove.userPos);
 		ptSend2.put<std::string>("userDir", playerMove.userDir);
 
@@ -318,7 +324,7 @@ void AsioServer::ProcessPacket(const int sessionID, const char* pData)
 		{
 			if (_sessionList[i]->Socket().is_open())
 			{
-				if (_sessionList[i]->SessionID() == (playerMove.userID - FIRST_USER_INDEX))
+				if (_sessionList[i]->SessionID() == (playerMove.sessionID - FIRST_SESSION_INDEX))
 					continue;
 
 				_sessionList[i]->PostSend(false, std::strlen(sendStr2.c_str()), (char*)sendStr2.c_str());
@@ -330,10 +336,10 @@ void AsioServer::ProcessPacket(const int sessionID, const char* pData)
 	{
 		PKT_REQ_PLAYER_MOVE_END* pPacket = (PKT_REQ_PLAYER_MOVE_END*)pData;
 
-		_totalUserPos.erase(pPacket->userID);
-		_totalUserDir.erase(pPacket->userID);
-		_totalUserPos.insert(std::make_pair(pPacket->userID, pPacket->userPos));
-		_totalUserDir.insert(std::make_pair(pPacket->userID, pPacket->userDir));
+		_totalUserPos.erase(pPacket->sessionID);
+		_totalUserDir.erase(pPacket->sessionID);
+		_totalUserPos.insert(std::make_pair(pPacket->sessionID, pPacket->userPos));
+		_totalUserDir.insert(std::make_pair(pPacket->sessionID, pPacket->userDir));
 		
 
 		//for (auto it = _totalUserPos.begin(); it != _totalUserPos.end(); it++)
@@ -348,7 +354,7 @@ void AsioServer::ProcessPacket(const int sessionID, const char* pData)
 		PKT_RES_PLAYER_MOVE_END playerMove;
 		playerMove.Init();
 
-		playerMove.userID = pPacket->userID;
+		playerMove.sessionID = pPacket->sessionID;
 		strcpy_s(playerMove.userPos, MAX_PLAYER_MOVE_LEN, pPacket->userPos);
 		strcpy_s(playerMove.userDir, MAX_PLAYER_MOVE_LEN, pPacket->userDir);
 
@@ -358,7 +364,7 @@ void AsioServer::ProcessPacket(const int sessionID, const char* pData)
 
 		boost::property_tree::ptree ptSend;
 		ptSend.add_child("header", ptSendHeader);
-		ptSend.put<int>("userID", playerMove.userID);
+		ptSend.put<int>("sessionID", playerMove.sessionID);
 		ptSend.put<std::string>("userPos", playerMove.userPos);
 		ptSend.put<std::string>("userDir", playerMove.userDir);
 
@@ -376,7 +382,7 @@ void AsioServer::ProcessPacket(const int sessionID, const char* pData)
 
 		boost::property_tree::ptree ptSend2;
 		ptSend2.add_child("header", ptSendHeader2);
-		ptSend2.put<int>("userID", playerMove.userID);
+		ptSend2.put<int>("sessionID", playerMove.sessionID);
 		ptSend2.put<std::string>("userPos", playerMove.userPos);
 		ptSend2.put<std::string>("userDir", playerMove.userDir);
 
@@ -392,7 +398,7 @@ void AsioServer::ProcessPacket(const int sessionID, const char* pData)
 		{
 			if (_sessionList[i]->Socket().is_open())
 			{
-				if (_sessionList[i]->SessionID() == (playerMove.userID - FIRST_USER_INDEX))
+				if (_sessionList[i]->SessionID() == (playerMove.sessionID - FIRST_SESSION_INDEX))
 					continue;
 
 				_sessionList[i]->PostSend(false, std::strlen(sendStr2.c_str()), (char*)sendStr2.c_str());
@@ -426,7 +432,7 @@ void AsioServer::ConcurrentUser()
 		{
 			totalUser++;
 
-			int userNum = i + FIRST_USER_INDEX;
+			int userNum = i + FIRST_SESSION_INDEX;
 
 			userList += std::to_string(userNum);
 			userList += ",";
@@ -517,12 +523,12 @@ void AsioServer::ConcurrentUser()
 	}
 }
 
-void AsioServer::UserExit(int userID)
+void AsioServer::UserExit(int sessionID)
 {
 	PKT_RES_USER_EXIT userExit;
 	userExit.Init();
 
-	userExit.userID = userID;
+	userExit.sessionID = sessionID;
 
 	boost::property_tree::ptree ptSendHeader;
 	ptSendHeader.put<short>("packetIndex", userExit.packetIndex);
@@ -530,7 +536,7 @@ void AsioServer::UserExit(int userID)
 
 	boost::property_tree::ptree ptSend;
 	ptSend.add_child("header", ptSendHeader);
-	ptSend.put<int>("userID", userExit.userID);
+	ptSend.put<int>("sessionID", userExit.sessionID);
 
 	std::string stringRecv;
 	std::ostringstream oss(stringRecv);
@@ -546,7 +552,7 @@ void AsioServer::UserExit(int userID)
 
 	boost::property_tree::ptree ptSend2;
 	ptSend2.add_child("header", ptSendHeader2);
-	ptSend2.put<int>("userID", userExit.userID);
+	ptSend2.put<int>("sessionID", userExit.sessionID);
 
 	std::string stringRecv2;
 	std::ostringstream oss2(stringRecv2);

@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a3a2b901820e084389f2b5956e1c65a, type: 3}
+  m_Name: testShoes
+  m_EditorClassIdentifier: 
+  itemName: "\u8D85 \uB9E4\uB4ED - \uC5BD\uD788\uC9C0 \uC54A\uC740 \uB9C8\uC74C"
+  icon: {fileID: 21300000, guid: 9cbecf0967e0af443b6b474c25aede35, type: 3}
+  physicalAttackBonus: 0
+  magicAttackBonus: 0
+  physicalDefenseBonus: 1465
+  magicDefenseBonus: 0
+  strengthBonus: 28
+  intelligenceBonus: 28
+  healthBonus: 0
+  mentalityBonus: 31
+  hangmaBonus: 322
+  strengthPercentBonus: 0
+  intelligencePercentBonus: 0
+  healthPercentBonus: 0
+  mentalityPercentBonus: 0
+  Information: "\uADF8\uACF3\uC740 \uC0AC\uACC4\uC808\uC774 \uC874\uC7AC\uD558\uC9C0
+    \uC54A\uC558\uACE0"
+  equipmentType: 5

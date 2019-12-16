@@ -187,3 +187,56 @@ int DBMySQL::DBLoginCheckUserPW(std::string checkID, std::string checkPW)
 
 	return CHECK_BEFORE_LOGIN_RESULT::RESULT_IS_WRONG_PASSWORD;
 }
+
+std::string DBMySQL::DBLoginGetUserName(std::string userID)
+{
+	mysql_select_db(&_mysql, _dbName);
+
+	const char* DBQuery1 = "SELECT user_name FROM login WHERE user_id = \"";
+	const char* DBQuery2 = userID.c_str();
+	const char* DBQuery3 = "\";";
+
+	char DBQuery[256] = "";
+
+	strcat_s(DBQuery, DBQuery1);
+	strcat_s(DBQuery, DBQuery2);
+	strcat_s(DBQuery, DBQuery3);
+
+	if (_pConnection == NULL)
+	{
+		std::cout << mysql_errno(&_mysql) << " 에러 : " << mysql_error(&_mysql) << std::endl;
+	}
+	else
+	{
+		int DBState = mysql_query(_pConnection, DBQuery);
+		if (DBState == 0)
+		{
+			_pSqlResult = mysql_store_result(_pConnection);
+
+			int fields = mysql_num_fields(_pSqlResult);
+
+			while ((_SqlRow = mysql_fetch_row(_pSqlResult)) != NULL)
+			{
+				for (int i = 0; i < fields; i++)
+				{
+					if (_SqlRow[i] != NULL)
+					{
+						std::cout << userID << "의 캐릭터 명 : " << _SqlRow[i] << std::endl;
+
+						return _SqlRow[i];
+					}
+					else
+					{
+						return "캐릭터 명 없음";
+					}
+
+					std::cout << "\t";
+				}
+				std::cout << std::endl;
+			}
+			mysql_free_result(_pSqlResult);
+		}
+	}
+
+	return "캐릭터 명 없음";
+}

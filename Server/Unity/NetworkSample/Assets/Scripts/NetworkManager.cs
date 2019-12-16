@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿using System;
+using System.IO;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,12 +9,9 @@ using System.Net;
 using System.Net.Sockets;
 using System.Threading;
 using System.Text;
-using System;
 
 using Newtonsoft.Json;
 
-using System;
-using System.IO;
 
 enum DefineDefaultValue : short
 {
@@ -56,7 +55,7 @@ public class NetworkManager : MonoBehaviour
 
 
     private int _myId = 0;      // 실행한 클라이언트의 ID
-    public int GetMyId { get { return _myId; } }
+    public int MyId { get { return _myId; } }
     public void SetMyId(int id) { _myId = id; }
 
 
@@ -247,23 +246,28 @@ public class NetworkManager : MonoBehaviour
             if (bytesRead > 0)
             {
                 DebugLogList("bytesRead > 0");
-                string recvData = Encoding.UTF8.GetString(state.RecvBuffer, 0, bytesRead);
-                DebugLogList(recvData);
+				// TODO : 인코딩 해결 할 것
+				//string recvData = Encoding.UTF8.GetString(state.RecvBuffer);
+				
+				string recvData = Encoding.UTF8.GetString(state.RecvBuffer, 0, bytesRead);
+				//string recvData = Encoding.GetEncoding("EUC-KR").GetString(state.RecvBuffer, 0, bytesRead);
+				DebugLogList(recvData);
                 int bufLen = recvData.Length;
                 Debug.Log("recvData[" + bufLen + "]= " + recvData);
 
-                // 패킷 자르기
-                string recvDataSubstring = recvData.Substring(45, 3);
-                string[] recvDataSplit = recvDataSubstring.Split('"');
-                int recvDataSize = int.Parse(recvDataSplit[0]);
+				// TODO : EUC-KR로 한글이 들어 올 경우, 패킷 자르기 시, 서버에서 잰 길이와 클라에서 받는 길이가 다르게 판정됨
+				// 패킷 자르기
+				//string recvDataSubstring = recvData.Substring(45, 3);
+				//string[] recvDataSplit = recvDataSubstring.Split('"');
+				//int recvDataSize = int.Parse(recvDataSplit[0]);
 
-                string recvDataSubstring2 = recvData.Substring(0, recvDataSize);
-                DebugLogList(recvDataSubstring2);
+				//string recvDataSubstring2 = recvData.Substring(0, recvDataSize);
+				//DebugLogList(recvDataSubstring2);
+				//var JsonData = JsonConvert.DeserializeObject<PACKET_HEADER_BODY>(recvDataSubstring2);
 
+				var JsonData = JsonConvert.DeserializeObject<PACKET_HEADER_BODY>(recvData);
 
-                var JsonData = JsonConvert.DeserializeObject<PACKET_HEADER_BODY>(recvDataSubstring2);
-
-                DebugLogList("ReceiveCallback - ProcessPacket - start");
+				DebugLogList("ReceiveCallback - ProcessPacket - start");
                 ProcessPacket(JsonData.header.packetIndex, recvData);
                 DebugLogList("ReceiveCallback - ProcessPacket - end");
                 // 수신 대기
@@ -305,6 +309,9 @@ public class NetworkManager : MonoBehaviour
 							Debug.Log("ID가 존재하지 않음");
 						else if (checkResult == (int)CHECK_BEFORE_LOGIN_RESULT.RESULT_IS_WRONG_PASSWORD)
 							Debug.Log("비밀번호가 틀렸음");
+
+						var sessionID = desJson.sessionID;
+						var userName = desJson.userName;
 					}
 					break;
                 case (short)PACKET_INDEX.RES_CONCURRENT_USER_LIST:
@@ -334,17 +341,17 @@ public class NetworkManager : MonoBehaviour
                             Debug.Log(splitConcurrentUser[i]);
                             Debug.Log(splitUserPos[i]);
                             Debug.Log(splitUserDir[i]);
-                            int userId = Int32.Parse(splitConcurrentUser[i]);
+                            int sessionID = Int32.Parse(splitConcurrentUser[i]);
                             string userPos = splitUserPos[i];
                             string userDir = splitUserDir[i];
 
-                            if (GetMyId == userId)
+                            if (MyId == sessionID)
                                 continue;
 
-                            if (_characters.ContainsKey(userId))
+                            if (_characters.ContainsKey(sessionID))
                                 continue;
 
-                            JoinNewPlayer(userId, StringToVector3(userPos));
+                            JoinNewPlayer(sessionID, StringToVector3(userPos));
                         }
                         DebugLogList("PACKET_INDEX.RES_CONCURRENT_USER_LIST end");
                         SetIsConcurrentUserList(true);
@@ -354,14 +361,14 @@ public class NetworkManager : MonoBehaviour
                     {
                         var desJson = JsonConvert.DeserializeObject<PKT_RES_USER_EXIT>(jsonData);
 
-                        var userID = desJson.userID;
+                        var sessionID = desJson.sessionID;
                     }
                     break;
                 case (short)PACKET_INDEX.RES_PLAYER_MOVE_START:
                     {
                         var desJson = JsonConvert.DeserializeObject<PKT_RES_PLAYER_MOVE_START>(jsonData);
 
-                        var userID = desJson.userID;
+                        var sessionID = desJson.sessionID;
                         var userPos = desJson.userPos;
                         var userDir = desJson.userDir;
 
@@ -370,20 +377,31 @@ public class NetworkManager : MonoBehaviour
 
                         //Debug.Log("userPos:" + vecPos.ToString("N5") + ", userDir:" + vecDir.ToString("N5"));
 
-                        ReceivedPacketHandler(userID, vecPos, vecDir);
+                        ReceivedPacketHandler(sessionID, vecPos, vecDir);
                     }
                     break;
                 case (short)PACKET_INDEX.RES_PLAYER_MOVE_END:
                     {
                         var desJson = JsonConvert.DeserializeObject<PKT_RES_PLAYER_MOVE_END>(jsonData);
 
-                        var userID = desJson.userID;
+                        var sessionID = desJson.sessionID;
                         var userPos = desJson.userPos;
 
                         Vector3 vecPos = StringToVector3(userPos);
                         //Debug.Log("userPos:" + vecPos.ToString("N5"));
 
-                        ThisIsStopPacket(userID, vecPos);
+                        ThisIsStopPacket(sessionID, vecPos);
+                    }
+                    break;
+                case (short)PACKET_INDEX.RES_CHATTING:
+                    {
+                        var desJson = JsonConvert.DeserializeObject<PKT_RES_CHATTING>(jsonData);
+
+                        var userID = desJson.userID;
+                        var userName = desJson.userName;
+                        var newChat = desJson.chatMessage;
+
+                        ChatManager.Instance.AddNewChat(userName, newChat);
                     }
                     break;
                 default:
@@ -499,13 +517,13 @@ public class NetworkManager : MonoBehaviour
         if (desJson.header.packetIndex == (short)PACKET_INDEX.RES_NEW_LOGIN_SUCSESS)
         {
             Debug.Log("접속 성공 여부 : " + desJson.isSuccess);
-            Debug.Log("접속 ID : " + desJson.userID);
+            Debug.Log("접속 ID : " + desJson.sessionID);
 
-            if (GetMyId == 0)
+            if (MyId == 0)
             {
                 SetIsLogin(desJson.isSuccess);
-                SetMyId(desJson.userID);
-                JoinNewPlayer(desJson.userID, Vector3.zero);
+                SetMyId(desJson.sessionID);
+                JoinNewPlayer(desJson.sessionID, Vector3.zero);
             }
         }
         DebugLogList("NewLoginSucsess() end");
@@ -552,7 +570,7 @@ public class NetworkManager : MonoBehaviour
         var packData = new PKT_REQ_USER_EXIT
         {
             header = packHeader,
-            userID = GetMyId
+			sessionID = MyId
         };
         DebugLogList(packData.ToString());
         jsonData = JsonConvert.SerializeObject(packData);
@@ -624,7 +642,7 @@ public class NetworkManager : MonoBehaviour
     public void MoveStart(Vector3 pos, Vector3 dir)
     {
         string startPos = pos.ToString("N4");
-        string startDir = dir.ToString("N4");
+        string startDir = dir.ToString("N1");
 
         string jsonData;
         char endNullValue = '\0';
@@ -637,7 +655,7 @@ public class NetworkManager : MonoBehaviour
         var packData = new PKT_REQ_PLAYER_MOVE_START
         {
             header = packHeader,
-            userID = GetMyId,
+			sessionID = MyId,
             userPos = startPos,
             userDir = startDir
         };
@@ -655,7 +673,7 @@ public class NetworkManager : MonoBehaviour
     public void MoveEnd(Vector3 pos, Vector3 dir)
     {
         string EndPos = pos.ToString("N4");
-        string EndDir = dir.ToString("N4");
+        string EndDir = dir.ToString("N1");
 
         string jsonData;
         char endNullValue = '\0';
@@ -668,7 +686,7 @@ public class NetworkManager : MonoBehaviour
         var packData = new PKT_REQ_PLAYER_MOVE_END
         {
             header = packHeader,
-            userID = GetMyId,
+			sessionID = MyId,
             userPos = EndPos,
             userDir = EndDir
         };
@@ -705,16 +723,16 @@ public class NetworkManager : MonoBehaviour
     }
 
     // 원래는 패킷마다 핸들러를 만들어 사용해야함
-    private void ReceivedPacketHandler(int userID, Vector3 pos, Vector3 dir)
+    private void ReceivedPacketHandler(int sessionID, Vector3 pos, Vector3 dir)
     {
         // id가 2인 플레이어가 1,0,0 방향벡터로 움직였다고 가정
         Character movePlayer;
         //_characters.TryGetValue(2, out movePlayer);
-        _characters.TryGetValue(userID, out movePlayer);
+        _characters.TryGetValue(sessionID, out movePlayer);
 
         // 무언가 받아온 다음 null 체크는 필수
         // Dictinary에서 받아오는 것이기 때문에
-        if (!_characters.ContainsKey(userID))
+        if (!_characters.ContainsKey(sessionID))
             return;
         // 같은 방식도 괜찮다 둘중에 아무거나 하면 됨
         if (movePlayer == null)
@@ -727,16 +745,16 @@ public class NetworkManager : MonoBehaviour
         movePlayer.SetMoveDirectionAndMove(pos, dir);
     }
 
-    private void ThisIsStopPacket(int userID, Vector3 pos)
+    private void ThisIsStopPacket(int sessionID, Vector3 pos)
     {
         // 이것도 위의 함수와 동일함
         // MoveEnd 패킷이 왔고 마지막 좌표가 담겨있다고 가정
 
         Character movePlayer;
         //_characters.TryGetValue(2, out movePlayer);
-        _characters.TryGetValue(userID, out movePlayer);
+        _characters.TryGetValue(sessionID, out movePlayer);
 
-        if (!_characters.ContainsKey(userID))
+        if (!_characters.ContainsKey(sessionID))
             return;
 
         //movePlayer.StopMove(movePlayer.transform.position);
@@ -745,7 +763,7 @@ public class NetworkManager : MonoBehaviour
 
     private void OnGUI()
     {
-        GUI.Label(new Rect(0, 0, 500, 100), "접속여부:" + _isLogin.ToString() + ", 유저:" + GetMyId.ToString());
+        GUI.Label(new Rect(0, 0, 500, 100), "접속여부:" + _isLogin.ToString() + ", 유저:" + MyId.ToString());
         GUI.Label(new Rect(0, 15, 300, 100), "동시접속자 수 : " + DebugMsg02);
         GUI.Label(new Rect(0, 30, 960, 100), "접속자 리스트 : " + DebugMsg01);
 
@@ -757,7 +775,7 @@ public class NetworkManager : MonoBehaviour
     {
         string addLogIndex = "[" + DebugLogListIndex + "]["
                                 + _isLogin.ToString() + "]["
-                                + GetMyId.ToString() + "] "
+                                + MyId.ToString() + "] "
                                 + logData;
 
         _DebugMsgList01.Add(addLogIndex);
@@ -773,7 +791,7 @@ public class NetworkManager : MonoBehaviour
             Directory.CreateDirectory(appDataPathParent + "/log");
         }
         string dateTime = DateTime.Now.ToString("yyMMdd-HHmmss");
-        string fileName = appDataPathParent + "/Log/Debug-" + dateTime + "-" + GetMyId.ToString() + ".txt";
+        string fileName = appDataPathParent + "/Log/Debug-" + dateTime + "-" + MyId.ToString() + ".txt";
         //Debug.Log(fileName);
 
         FileStream fs = new FileStream(fileName, FileMode.Create);
@@ -803,6 +821,32 @@ public class NetworkManager : MonoBehaviour
                                     float.Parse(arrayData[2]));
 
         return result;
+    }
+
+    public void SendChat(string chat)
+    {
+        string jsonData;
+        char endNullValue = '\0';
+
+        var packHeader = new PACKET_HEADER
+        {
+            packetIndex = (short)PACKET_INDEX.REQ_CHATTING,
+            packetSize = 1
+        };
+        var packData = new PKT_REQ_CHATTING
+        {
+            header = packHeader,
+            userID = MyId,
+            chatMessage = chat
+        };
+
+        jsonData = JsonConvert.SerializeObject(packData);
+        jsonData += endNullValue;
+
+        byte[] sendByte = new byte[512];
+        sendByte = Encoding.UTF8.GetBytes(jsonData);
+
+        int resultSize = _sock.Send(sendByte);
     }
 
 }
