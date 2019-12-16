@@ -12,7 +12,8 @@ public class AssetBundleManager : MonoBehaviour
     private AssetBundle _LoadedAssetBundle;
     private AssetBundle _LoadedMaterialAssetBundle;
     private AssetBundleManifest _manifest;
-    public string saBundle = "atlas";
+    private string saBundle = "atlas";
+    private string maBundle = "material";
 
     private static AssetBundleManager _instacne;
     public static AssetBundleManager instacne
@@ -34,10 +35,12 @@ public class AssetBundleManager : MonoBehaviour
     void OnEnable()
     {
         SpriteAtlasManager.atlasRequested += RequestLateBindingAtlas;
+        LoadMaterial();
     }
     void OnDisable()
     {
         SpriteAtlasManager.atlasRequested -= RequestLateBindingAtlas;
+        _LoadedMaterialAssetBundle.Unload(false);
     }
 
     private void RequestLateBindingAtlas(string tag, System.Action<SpriteAtlas> action)
@@ -51,12 +54,20 @@ public class AssetBundleManager : MonoBehaviour
         var sa = loadOp.LoadAsset<SpriteAtlas>(tag);
         action(sa);
     }
-
+    private void LoadMaterial()
+    {
+        StartCoroutine(LoadMaterialFromAssetBundle());
+    }
+    private IEnumerator LoadMaterialFromAssetBundle()
+    {
+        _LoadedMaterialAssetBundle = AssetBundle.LoadFromFile(Path.Combine(Application.streamingAssetsPath, maBundle));
+        yield return _LoadedMaterialAssetBundle;
+        _LoadedMaterialAssetBundle.LoadAllAssets();
+    }
     public void LoadAssetFromLocalDisk(string assetBundleName)
     {
         _LoadedAssetBundle = AssetBundle.LoadFromFile(Path.Combine(Application.streamingAssetsPath, assetBundleName));
-        LoadAssetBundleManifest(assetBundleName);
-
+ 
         if (_LoadedAssetBundle == null)
         {
             Debug.Log("Failed to load AssetBundle!");
@@ -77,6 +88,7 @@ public class AssetBundleManager : MonoBehaviour
         foreach (string dependency in dependencies)
         {
             _LoadedMaterialAssetBundle = AssetBundle.LoadFromFile(Path.Combine(Application.streamingAssetsPath, dependency));
+            _LoadedMaterialAssetBundle.LoadAllAssets();
         }
 
         //AssetBundle assetBundle = AssetBundle.LoadFromFile(Path.Combine(Application.streamingAssetsPath, "monster"));

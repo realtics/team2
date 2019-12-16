@@ -92,14 +92,14 @@ public struct PKT_RES_USER_EXIT
 public struct PKT_REQ_CHATTING
 {
     public PACKET_HEADER header;
-    public int userID;
+    public int sessionID;
     public string chatMessage;
 }
 
 public struct PKT_RES_CHATTING
 {
     public PACKET_HEADER header;
-    public int userID;
+    public int sessionID;
     public string userName;
     public string chatMessage;
 }

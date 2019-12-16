@@ -194,7 +194,7 @@
       ],
       "potalTransportinfos": [
         {
-          "filePath": "Object/PotalTransport Side",
+          "filePath": "PotalTransport Side",
           "position": {
             "x": 1.7654109,
             "y": -5.242311,
@@ -382,7 +382,7 @@
       ],
       "potalTransportinfos": [
         {
-          "filePath": "Object/PotalTransport Side",
+          "filePath": "PotalTransport Side",
           "position": {
             "x": -14.85,
             "y": -9.67,
@@ -459,7 +459,7 @@
           "nextIndex": 0
         },
         {
-          "filePath": "Object/ForceAltarPotalTransportLeft",
+          "filePath": "ForceAltarPotalTransportLeft",
           "position": {
             "x": 1.03,
             "y": -6.61,
@@ -653,7 +653,7 @@
       ],
       "potalTransportinfos": [
         {
-          "filePath": "Object/ForceAltarPotalTransportRight",
+          "filePath": "ForceAltarPotalTransportRight",
           "position": {
             "x": -14.51,
             "y": -4.43,
