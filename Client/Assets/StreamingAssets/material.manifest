@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 1571820049
+CRC: 556155739
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: c5fa522c482492457969fdd93adf6238
+    Hash: 61a9abdf0199124ae2980531e72c8922
   TypeTreeHash:
     serializedVersion: 2
     Hash: a15026e7645264409a88f84f584030a1
@@ -14,5 +14,5 @@ ClassTypes:
 - Class: 48
   Script: {instanceID: 0}
 Assets:
-- Assets/Shader/SpriteOutlineMatarial.mat
+- Assets/Materials/SpriteOutlineMatarial.mat
 Dependencies: []
