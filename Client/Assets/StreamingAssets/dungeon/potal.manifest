@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 2636294189
+CRC: 2619669276
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 73af0ad4d54f2ae2835b78703b77edb7
+    Hash: 7c42970e8cfa084157c8b2d98c771a3d
   TypeTreeHash:
     serializedVersion: 2
     Hash: 44a33f750f07df9b0f179c6857eb6a72
@@ -36,6 +36,9 @@ ClassTypes:
 - Class: 213
   Script: {instanceID: 0}
 Assets:
-- Assets/Resources/Object/PotalTransport Up.prefab
-- Assets/Resources/Object/PotalTransport Side.prefab
+- Assets/Prefabs/Dungeon/Potal/PotalTransport Up.prefab
+- Assets/Prefabs/Dungeon/Potal/ForceAltarPotalTransportLeft.prefab
+- Assets/Prefabs/Dungeon/Potal/ForceAltarPotalTransportRight.prefab
+- Assets/Prefabs/Dungeon/Potal/PotalTransport Side.prefab
+- Assets/Prefabs/Dungeon/Potal/PotalTransport Down.prefab
 Dependencies: []
