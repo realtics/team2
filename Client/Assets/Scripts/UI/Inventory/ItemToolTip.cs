@@ -9,11 +9,15 @@ public class ItemToolTip : MonoBehaviour
     [SerializeField] Text _itemStatsText;
     [SerializeField] Text _itemInfoText;
 
+	[SerializeField]
+	private ItemSlot _itemSlot; 
     private StringBuilder _sb = new StringBuilder();
 
-    public void ShowToolTip(EquipableItem item)
+    public void ShowToolTip(EquipableItem item, ItemSlot itemSlot)
     {
-        _itemNameText.text = item.itemName;
+		_itemSlot = itemSlot;
+
+		_itemNameText.text = item.itemName;
         _itemSlotText.text = item.equipmentType.ToString();
         _itemInfoText.text = item.Information;
 
@@ -21,7 +25,6 @@ public class ItemToolTip : MonoBehaviour
         AddTopStat(item);
         AddMainStat(item);
         //AddPercentStat(item);
-   
         _itemStatsText.text = _sb.ToString();
 
         gameObject.SetActive(true);
@@ -89,4 +92,9 @@ public class ItemToolTip : MonoBehaviour
         if (_sb.Length > 0)
             _sb.AppendLine();
     }
+
+	public void ClickButton()
+	{
+		_itemSlot.ClickEvent();
+	}
 }

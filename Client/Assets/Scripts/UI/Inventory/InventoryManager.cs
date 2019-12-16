@@ -9,8 +9,8 @@ public class InventoryManager : MonoBehaviour
 
     private void Awake()
     {
-        _inventory.OnItemRightClickEvent += EquipFromInventory;
-        _equipmentPanel.OnItemRightClickEvent += UnequipFromEquipPanel;
+        _inventory.OnItemLeftClickEvent += EquipFromInventory;
+        _equipmentPanel.OnItemLeftClickEvent += UnequipFromEquipPanel;
     }
 
     private void EquipFromInventory(Item item)

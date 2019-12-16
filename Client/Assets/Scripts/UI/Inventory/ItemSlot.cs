@@ -10,6 +10,8 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandle
     [SerializeField]
     private ItemToolTip _itemToolTip;
 
+	private Button _button;
+
     public event Action<Item> OnRightClickEvent;
 
     private Item _item;
@@ -28,7 +30,13 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandle
             }
         } 
     }
-    protected virtual void OnValidate()
+	private void Awake()
+	{
+		_button = GetComponent<Button>();
+		_button.onClick.AddListener(ClickSlot);
+	}
+
+	protected virtual void OnValidate()
     {
         if (_image == null)
             _image = GetComponent<Image>();
@@ -38,27 +46,39 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandle
             _itemToolTip = FindObjectOfType<ItemToolTip>();
     }
 
-    public void OnPointerClick(PointerEventData eventData)
+	public void OnPointerClick(PointerEventData eventData)
     {
        if(eventData != null && eventData.button == PointerEventData.InputButton.Right)
         {
-            Debug.Log("?");
             if (Item != null && OnRightClickEvent != null)
                 OnRightClickEvent(Item);
         }
-    }
-
+	}
+	
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if(Item is EquipableItem)
-        {
-            _itemToolTip.ShowToolTip((EquipableItem)Item);
-        }
-        
-    }
+		
+
+	}
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        _itemToolTip.HideToolTip();
     }
+
+	public void ClickSlot()
+	{
+		if (Item is EquipableItem)
+		{
+
+			if(_itemToolTip.enabled)
+				_itemToolTip.HideToolTip();
+
+			_itemToolTip.ShowToolTip((EquipableItem)Item, this);
+		}
+	}
+
+	public void ClickEvent()
+	{
+		OnRightClickEvent(Item);
+	}
 }
