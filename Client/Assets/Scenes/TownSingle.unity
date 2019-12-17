@@ -2365,7 +2365,7 @@ PrefabInstance:
     - target: {fileID: 7840884827531810711, guid: 86fb9eee594769e44bbd9bbda0425571,
         type: 3}
       propertyPath: _dungeonFileName
-      value: minimap
+      value: OnlyBoss
       objectReference: {fileID: 0}
     - target: {fileID: 7840884827199486510, guid: 86fb9eee594769e44bbd9bbda0425571,
         type: 3}
