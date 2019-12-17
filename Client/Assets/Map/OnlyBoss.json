@@ -1,0 +1,66 @@
+{
+  "DungeonInfos": [
+    {
+      "position": {
+        "x": 0.0,
+        "y": 0.0,
+        "magnitude": 0.0,
+        "sqrMagnitude": 0.0
+      },
+      "objectinfos": [
+        {
+          "filePath": "Dungeon/Dungeon",
+          "position": {
+            "x": 5.35,
+            "y": -8.06,
+            "z": -4.17578125,
+            "normalized": {
+              "x": 0.507746339,
+              "y": -0.7649413,
+              "z": -0.3963061,
+              "magnitude": 1.0,
+              "sqrMagnitude": 1.0
+            },
+            "magnitude": 10.5367575,
+            "sqrMagnitude": 111.023254
+          }
+        }
+      ],
+      "monsterInfos": [
+        {
+          "filePath": "Calvary",
+          "position": {
+            "x": 0.64,
+            "y": -7.25,
+            "z": 0.0,
+            "normalized": {
+              "x": 0.0879339054,
+              "y": -0.9961263,
+              "z": 0.0,
+              "magnitude": 1.0,
+              "sqrMagnitude": 0.99999994
+            },
+            "magnitude": 7.27819347,
+            "sqrMagnitude": 52.9721
+          }
+        }
+      ],
+      "potalTransportinfos": [],
+      "isBoss": true,
+      "PlayerStartPosition": {
+        "x": -13.42,
+        "y": -7.3,
+        "z": 0.0,
+        "normalized": {
+          "x": -0.8784454,
+          "y": -0.477842867,
+          "z": 0.0,
+          "magnitude": 1.0,
+          "sqrMagnitude": 1.00000012
+        },
+        "magnitude": 15.276989,
+        "sqrMagnitude": 233.3864
+      }
+    }
+  ]
+}

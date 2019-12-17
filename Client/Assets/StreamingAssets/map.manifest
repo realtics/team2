@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 1415428968
+CRC: 2688885176
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 86a8cb848e195d90112fc5475ac9a303
+    Hash: 6fa2c111f7585b2c49721f5f77882bdd
   TypeTreeHash:
     serializedVersion: 2
     Hash: 5ad585dd02dfb5016c0dad519eab8f49
@@ -17,5 +17,6 @@ Assets:
 - Assets/Map/Test2.json
 - Assets/Map/Test.json
 - Assets/Map/Force.json
+- Assets/Map/OnlyBoss.json
 - Assets/Map/LJSTest.json
 Dependencies: []

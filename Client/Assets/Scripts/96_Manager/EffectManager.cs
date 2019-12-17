@@ -54,4 +54,9 @@ public class EffectManager : MonoBehaviour
 		GameObject clearCircle = ObjectPoolManager.Instance.GetRestObject(_clearCircle);
 		clearCircle.transform.position = position;
 	}
+
+	public void ShowCutin()
+	{
+		GameObject cutin = ObjectPoolManager.Instance.GetRestObject(_cutin);
+	}
 }
