@@ -3,29 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 
 
-public class SpawnManager : MonoBehaviour
+public class SpawnManager : Single.Singleton<SpawnManager>
 {
     private List<GameObject> _dungeonGameObject = new List<GameObject>();
 
-    [SerializeField]
     private AssetBundleManager _assetBundleManager;
-
-    private static SpawnManager _instacne;
-    public static SpawnManager instacne
-    {
-        get
-        {
-            return _instacne;
-        }
-    }
-
 
     private Dictionary<string, GameObject> _cache = new Dictionary<string, GameObject>();
 
-    // Use this for initialization
-    void Start()
+    public SpawnManager()
     {
-        _instacne = this;
+        _assetBundleManager = AssetBundleManager.instacne;
     }
 
     public GameObject LoadResourceFromCache(string path)

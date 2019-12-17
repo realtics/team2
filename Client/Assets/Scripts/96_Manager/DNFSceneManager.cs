@@ -10,30 +10,12 @@ public enum SceneIndex
 	LobbySingle,
 }
 
-public class DNFSceneManager : MonoBehaviour
+public class DNFSceneManager : Single.Singleton<DNFSceneManager>
 {
-    private static DNFSceneManager _instacne;
-
-    public static DNFSceneManager instacne
-    {
-        get
-        {
-            return _instacne;
-        }
-    }
     private int _currentDungeonIndex;
     private const int _startDungeonIndex = 0;
 
-    private void Awake()
-    {
-        DontDestroyOnLoad(gameObject);
-    }
-
     // Use this for initialization
-    void Start()
-    {
-        _instacne = this;
-    }
 
     public void LoadScene(int Scene)
     {
@@ -45,10 +27,10 @@ public class DNFSceneManager : MonoBehaviour
         GameManager gameManager = GetGameManager();
         gameManager.FadeOut();
 
-        SpawnManager.instacne.RoomSetActive(false, _currentDungeonIndex);
-        DungeonInfo dungeonInfo = MapLoader.instacne.GetDungeonInfo(index);
-        SpawnManager.instacne.Spawn(dungeonInfo);
-        MapLoader.instacne.AfterInstantiateMonsterDelete(_currentDungeonIndex);
+        SpawnManager.instance.RoomSetActive(false, _currentDungeonIndex);
+        DungeonInfo dungeonInfo = MapLoader.instance.GetDungeonInfo(index);
+        SpawnManager.instance.Spawn(dungeonInfo);
+        MapLoader.instance.AfterInstantiateMonsterDelete(_currentDungeonIndex);
         _currentDungeonIndex = index;
 
         MoveRoomPotalActive();
@@ -63,10 +45,10 @@ public class DNFSceneManager : MonoBehaviour
         GameManager gameManager = GetGameManager();
         gameManager.FadeOut();
 
-        MapLoader.instacne.LoaderDungeon();
-        DungeonInfo dungeonInfo = MapLoader.instacne.GetDungeonInfo(_startDungeonIndex);
+        MapLoader.instance.LoaderDungeon();
+        DungeonInfo dungeonInfo = MapLoader.instance.GetDungeonInfo(_startDungeonIndex);
 
-        SpawnManager.instacne.Spawn(dungeonInfo);
+        SpawnManager.instance.Spawn(dungeonInfo);
         _currentDungeonIndex = _startDungeonIndex;
 
         MoveRoomPotalActive();

@@ -10,7 +10,6 @@ enum PartyNumber
 }
 public class DungeonGameManager : GameManager
 {
-    private PartyNumber _myPartyNumber = PartyNumber.p1;
     private int _countDown;
     private const int _maxDieCountDown = 10;
     private const int _maxResultCountDown = 4;
@@ -40,8 +39,7 @@ public class DungeonGameManager : GameManager
     {
         base.Start();
         _instance = this;
-        DNFSceneManager.instacne.Loader();
-        _myPartyNumber = 0;
+        DNFSceneManager.instance.Loader();
     }
 
     // Update is called once per frame
