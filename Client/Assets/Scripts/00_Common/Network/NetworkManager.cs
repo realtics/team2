@@ -35,53 +35,49 @@ public class StateObject    // 데이터를 수신하기 위한 상태 객체
 
 public class NetworkManager : MonoBehaviour
 {
-    private static NetworkManager _instance;
-    public static NetworkManager Instance
-    {
-        get
-        {
-            //if (_instance._sock == null)
-            //    return null;
+	private static NetworkManager _instance;
+	public static NetworkManager Instance
+	{
+		get
+		{
+			//if (_instance._sock == null)
+			//    return null;
 
-            return _instance;
-        }
-    }
+			return _instance;
+		}
+	}
 
-    public GameObject playerPrefab;
+	public GameObject playerPrefab;
 
-    //// 신호를 받을 때 수동으로 재설정 되어야 하는 스레드 동기화 이벤트
-    //private static ManualResetEvent _connectDone = new ManualResetEvent(false);
-    //private static ManualResetEvent _sendDone = new ManualResetEvent(false);
-    //private static ManualResetEvent _receiveDone = new ManualResetEvent(false);
-    //private static String _response = String.Empty; // 서버 응답
+	//// 신호를 받을 때 수동으로 재설정 되어야 하는 스레드 동기화 이벤트
+	//private static ManualResetEvent _connectDone = new ManualResetEvent(false);
+	//private static ManualResetEvent _sendDone = new ManualResetEvent(false);
+	//private static ManualResetEvent _receiveDone = new ManualResetEvent(false);
+	//private static String _response = String.Empty; // 서버 응답
 
-    public string appDataPath;
-    public string appDataPathParent;
+	public string appDataPath;
+	public string appDataPathParent;
 
-    private Socket _sock = null;
-
-
-    private int _myId = 0;      // 실행한 클라이언트의 ID
-    public int GetMyId { get { return _myId; } }
-    public void SetMyId(int id) { _myId = id; }
+	private Socket _sock = null;
 
 
-    private bool _isLogin = false;      // 로그인 여부
-    public bool GetIsLogin { get { return _isLogin; } }
-    public void SetIsLogin(bool isLogin) { _isLogin = isLogin; }
-    public bool LoginSuccess { set { _isLogin = true; } }
+	private int _myId = 0;      // 실행한 클라이언트의 ID
+	public int MyId { get { return _myId; } set { _myId = value; } }
 
 
-    private int _totalUser;     // 전체 유저 수
-    public void SetTotalUser(int totalUser) { _totalUser = totalUser; }
+	private bool _isLogin = false;      // 로그인 여부
+	public bool IsLogin { get { return _isLogin; } set { _isLogin = true; } }
 
-    private string _UserList;       // 유저 리스트
-    public void SetUserList(string userList) { _UserList = userList; }
+
+	private int _totalUser;     // 전체 유저 수
+	public int TotalUser { get { return _totalUser; } set { _totalUser = value; } }
+
+    private string _userList;       // 유저 리스트
+    public string UserList { get { return _userList; } set { _userList = value; } }
 
 
     private bool _isConcurrentUserList = false;     // 유저리스트 여부
-    public bool GetIsConcurrentUserList { get { return _isConcurrentUserList; } }
-    public void SetIsConcurrentUserList(bool isConcurrentUserList) { _isConcurrentUserList = isConcurrentUserList; }
+    public bool IsConcurrentUserList { get { return _isConcurrentUserList; } set { _isConcurrentUserList = value; } }
 
 
     public string DebugMsg01;
@@ -117,7 +113,7 @@ public class NetworkManager : MonoBehaviour
 
 		DebugLogList("start() start");
 
-        if (GetIsLogin == false)
+        if (_isLogin == false)
         {
             CreateSocket();
 
@@ -132,9 +128,9 @@ public class NetworkManager : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (GetIsLogin)
+        if (_isLogin)
         {
-            if (!GetIsConcurrentUserList)
+            if (!IsConcurrentUserList)
             {
                 ConcurrentUser();
             }
@@ -353,7 +349,7 @@ public class NetworkManager : MonoBehaviour
                         //Debug.Log(desJson.concurrentUser);
                         //Debug.Log(desJson.userPos);
                         //Debug.Log(desJson.userDir);
-                        SetTotalUser(desJson.totalUser);
+                        _totalUser = desJson.totalUser;
                         //SetUserList(Json.concurrentUserList);
                         DebugMsg01 = desJson.concurrentUser;
                         DebugMsg02 = desJson.totalUser;
@@ -370,7 +366,7 @@ public class NetworkManager : MonoBehaviour
                             string userPos = splitUserPos[i];
                             string userDir = splitUserDir[i];
 
-                            if (GetMyId == sessionID)
+                            if (MyId == sessionID)
                                 continue;
 
                             if (_characters.ContainsKey(sessionID))
@@ -379,7 +375,7 @@ public class NetworkManager : MonoBehaviour
                             JoinNewPlayer(sessionID, StringToVector3(userPos), StringToVector3(userDir));
                         }
                         DebugLogList("PACKET_INDEX.RES_CONCURRENT_USER_LIST end");
-                        SetIsConcurrentUserList(true);
+                        _isConcurrentUserList = true;
                     }
                     break;
                 case (short)PACKET_INDEX.RES_USER_EXIT:
@@ -511,7 +507,7 @@ public class NetworkManager : MonoBehaviour
 		byte[] sendByte2 = new byte[512];
 		sendByte2 = Encoding.UTF8.GetBytes(jsonData2);
 
-		SetMyId(0);
+		_myId = 0;
         int resultSize = _sock.Send(sendByte2);
         //Debug.Log("NewLogin() = " + resultSize);
         DebugLogList("NewLogin() end");
@@ -535,10 +531,10 @@ public class NetworkManager : MonoBehaviour
             //Debug.Log("접속 성공 여부 : " + desJson.isSuccess);
             //Debug.Log("접속 ID : " + desJson.sessionID);
 
-            if (GetMyId == 0)
+            if (MyId == 0)
             {
-                SetIsLogin(desJson.isSuccess);
-                SetMyId(desJson.sessionID);
+                _isLogin = desJson.isSuccess;
+                _myId = desJson.sessionID;
                 JoinNewPlayer(desJson.sessionID, Vector3.zero, Vector3.right);
             }
         }
@@ -564,9 +560,9 @@ public class NetworkManager : MonoBehaviour
         byte[] sendByte = new byte[512];
         sendByte = Encoding.UTF8.GetBytes(jsonData);
 
-        SetIsConcurrentUserList(true);
+		_isConcurrentUserList = true;
 
-        int resultSize = _sock.Send(sendByte);
+		int resultSize = _sock.Send(sendByte);
         //Debug.Log("ConcurrentUser() = " + resultSize);
         DebugLogList("resultSize :" + resultSize.ToString());
         DebugLogList("ConcurrentUser() end");
@@ -591,7 +587,7 @@ public class NetworkManager : MonoBehaviour
         var packData = new PKT_REQ_PLAYER_MOVE_START
         {
             header = packHeader,
-			sessionID = GetMyId,
+			sessionID = MyId,
             userPos = startPos,
             userDir = startDir
         };
@@ -625,7 +621,7 @@ public class NetworkManager : MonoBehaviour
         var packData = new PKT_REQ_PLAYER_MOVE_END
         {
             header = packHeader,
-			sessionID = GetMyId,
+			sessionID = MyId,
             userPos = EndPos,
             userDir = EndDir
         };
@@ -715,7 +711,7 @@ public class NetworkManager : MonoBehaviour
     {
         string addLogIndex = "[" + DebugLogListIndex + "]["
                                 + _isLogin.ToString() + "]["
-                                + GetMyId.ToString() + "] "
+                                + MyId.ToString() + "] "
                                 + logData;
 
         _DebugMsgList01.Add(addLogIndex);
@@ -731,7 +727,7 @@ public class NetworkManager : MonoBehaviour
             Directory.CreateDirectory(appDataPathParent + "/log");
         }
         string dateTime = DateTime.Now.ToString("yyMMdd-HHmmss");
-        string fileName = appDataPathParent + "/Log/Debug-" + dateTime + "-" + GetMyId.ToString() + ".txt";
+        string fileName = appDataPathParent + "/Log/Debug-" + dateTime + "-" + MyId.ToString() + ".txt";
         //Debug.Log(fileName);
 
         FileStream fs = new FileStream(fileName, FileMode.Create);
