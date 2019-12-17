@@ -3,16 +3,16 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class ItemSlot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
+public class ItemSlot : MonoBehaviour
 {
     [SerializeField]
     private Image _image;
     [SerializeField]
-    private ItemToolTip _itemToolTip;
+    protected ItemToolTip _itemToolTip;
 
 	private Button _button;
 
-    public event Action<Item> OnRightClickEvent;
+    public event Action<Item> OnClickEvent;
 
     private Item _item;
     public Item Item
@@ -41,29 +41,14 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandle
         if (_image == null)
             _image = GetComponent<Image>();
 
-        //게임실행중이면 느릴거지만, 어차피 에디터에서 찾고 게임중엔 찾지않을 것이 분명
-        if (_itemToolTip == null)
-            _itemToolTip = FindObjectOfType<ItemToolTip>();
-    }
-
-	public void OnPointerClick(PointerEventData eventData)
-    {
-       if(eventData != null && eventData.button == PointerEventData.InputButton.Right)
-        {
-            if (Item != null && OnRightClickEvent != null)
-                OnRightClickEvent(Item);
-        }
-	}
-	
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-		
-
+		FindToolTip();
 	}
 
-    public void OnPointerExit(PointerEventData eventData)
-    {
-    }
+	protected virtual void FindToolTip()
+	{
+		if (_itemToolTip == null)
+			_itemToolTip = InventoryManager.Instance.InventoryTooltip;
+	}
 
 	public void ClickSlot()
 	{
@@ -79,6 +64,6 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandle
 
 	public void ClickEvent()
 	{
-		OnRightClickEvent(Item);
+		OnClickEvent(Item);
 	}
 }

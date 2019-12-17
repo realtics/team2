@@ -8,6 +8,9 @@ public class ItemToolTip : MonoBehaviour
     [SerializeField] Text _itemSlotText;
     [SerializeField] Text _itemStatsText;
     [SerializeField] Text _itemInfoText;
+	[SerializeField] Text _equipUequipText;
+	[SerializeField] GameObject _BlockRayCast;
+	[SerializeField] Image _ItemImage;
 
 	[SerializeField]
 	private ItemSlot _itemSlot; 
@@ -15,7 +18,15 @@ public class ItemToolTip : MonoBehaviour
 
     public void ShowToolTip(EquipableItem item, ItemSlot itemSlot)
     {
+		_BlockRayCast.SetActive(true);
+
 		_itemSlot = itemSlot;
+		if (_itemSlot is EquipmentSlot)
+			_equipUequipText.text = "해제";
+		else
+			_equipUequipText.text = "장착";
+
+		_ItemImage.sprite = _itemSlot.Item.icon;
 
 		_itemNameText.text = item.itemName;
         _itemSlotText.text = item.equipmentType.ToString();
@@ -32,7 +43,8 @@ public class ItemToolTip : MonoBehaviour
 
     public void HideToolTip()
     {
-        gameObject.SetActive(false);
+		_BlockRayCast.SetActive(false);
+		gameObject.SetActive(false);
     }
 
     private void AddStat(float value, string statName, bool isPercent = false)
@@ -96,5 +108,6 @@ public class ItemToolTip : MonoBehaviour
 	public void ClickButton()
 	{
 		_itemSlot.ClickEvent();
+		HideToolTip();
 	}
 }

@@ -11,13 +11,13 @@ public class Inventory : MonoBehaviour
     [SerializeField]
     private ItemSlot[] _itemSlots;
 
-    public event Action<Item> OnItemLeftClickEvent;
+    public event Action<Item> OnItemClickEvent;
 
     private void Start()
     {
         for(int i =0; i < _itemSlots.Length; i++)
         {
-            _itemSlots[i].OnRightClickEvent += OnItemLeftClickEvent;
+            _itemSlots[i].OnClickEvent += OnItemClickEvent;
         }
 
 		RefreshUI();
