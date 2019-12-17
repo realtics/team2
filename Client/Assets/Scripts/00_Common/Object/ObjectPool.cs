@@ -60,6 +60,7 @@ public class ObjectPool
             return null;
 
         obj.transform.SetParent(parent);
+		obj.transform.localScale = pooledObjectPrefab.transform.localScale;
         obj.transform.position = position;
 
         return obj;
