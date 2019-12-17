@@ -18,7 +18,10 @@ public class SpawnManager : MonoBehaviour
             return _instacne;
         }
     }
-
+    private void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
 
     private Dictionary<string, GameObject> _cache = new Dictionary<string, GameObject>();
 
