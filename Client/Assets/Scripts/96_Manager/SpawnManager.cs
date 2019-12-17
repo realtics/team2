@@ -48,7 +48,7 @@ public class SpawnManager : Single.Singleton<SpawnManager>
             _dungeonGameObject.Add(obj);
         }
 
-        LoadAssetBundle("monster");
+        LoadAssetBundle("monsters/calvary");
         foreach (var item in dungeon.monsterInfos)
         {
             GameObject obj = LoadAsset(item.filePath);
