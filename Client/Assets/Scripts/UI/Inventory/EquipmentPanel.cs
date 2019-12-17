@@ -10,6 +10,8 @@ public class EquipmentPanel : MonoBehaviour
 
     public event Action<Item> OnItemClickEvent;
 
+	public EquipmentSlot[] EquipmentSlots { get { return _equipmentSlots; } }
+
     private void Start()
     {
         for (int i = 0; i < _equipmentSlots.Length; i++)
