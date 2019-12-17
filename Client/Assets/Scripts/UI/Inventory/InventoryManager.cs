@@ -2,15 +2,32 @@
 
 public class InventoryManager : MonoBehaviour
 {
-    [SerializeField]
-    private Inventory _inventory;
-    [SerializeField]
-    private EquipmentPanel _equipmentPanel;
+	private static InventoryManager _instance;
+	public static InventoryManager Instance
+	{
+		get
+		{
+			return _instance;
+		}
+	}
 
-    private void Awake()
+	[SerializeField]
+	private Inventory _inventory;
+	[SerializeField]
+	private EquipmentPanel _equipmentPanel;
+	[SerializeField]
+	private ItemToolTip _inventoryTooltip;
+	[SerializeField]
+	private ItemToolTip _equipPanelTooltip;
+
+	public ItemToolTip InventoryTooltip{ get { return _inventoryTooltip; } }
+	public ItemToolTip EquipPanelTooltip { get { return _equipPanelTooltip; } }
+
+	private void Awake()
     {
-        _inventory.OnItemLeftClickEvent += EquipFromInventory;
-        _equipmentPanel.OnItemLeftClickEvent += UnequipFromEquipPanel;
+		_instance = this;
+		_inventory.OnItemClickEvent += EquipFromInventory;
+        _equipmentPanel.OnItemClickEvent += UnequipFromEquipPanel;
     }
 
     private void EquipFromInventory(Item item)
