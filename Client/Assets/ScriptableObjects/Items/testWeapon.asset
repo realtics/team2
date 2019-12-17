@@ -19,10 +19,10 @@ MonoBehaviour:
   physicalDefenseBonus: 0
   magicDefenseBonus: 0
   strengthBonus: 78
-  intelligenceBonus: 858
+  intelligenceBonus: 0
   healthBonus: 0
   mentalityBonus: 0
-  hangmaBonus: 0
+  hangmaBonus: 858
   strengthPercentBonus: 0
   intelligencePercentBonus: 0
   healthPercentBonus: 0

@@ -150,6 +150,7 @@ public class JsonManagement
 
         dungeonInfo.potalTransportinfos.Add(potalTransportinfo);
     }
+    // AssetBundle 모두 적용시 삭제 예정.
     string GetSubstringResourcesLoadFilePath(string filePath)
     {
         int FilePos = filePath.LastIndexOf("Resources/") + 10;

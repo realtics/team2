@@ -9,11 +9,10 @@ public class ItemSlot : MonoBehaviour
     private Image _image;
     [SerializeField]
     protected ItemToolTip _itemToolTip;
-
 	private Button _button;
-
     public event Action<Item> OnClickEvent;
 
+	[SerializeField]
     private Item _item;
     public Item Item
     { get { return _item; }
