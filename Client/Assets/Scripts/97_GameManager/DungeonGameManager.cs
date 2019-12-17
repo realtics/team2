@@ -39,7 +39,7 @@ public class DungeonGameManager : GameManager
     {
         base.Start();
         _instance = this;
-        DNFSceneManager.instacne.Loader();
+        DNFSceneManager.instance.Loader();
     }
 
     // Update is called once per frame

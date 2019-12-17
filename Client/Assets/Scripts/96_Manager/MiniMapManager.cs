@@ -50,7 +50,7 @@ public class MiniMapManager : MonoBehaviour
 
     private void Initialized()
     {
-        dungeonData = MapLoader.instacne.dungeonData;
+        dungeonData = MapLoader.instance.dungeonData;
 
         _tileSize = _tile.GetComponent<Image>().rectTransform.rect.width;
 
