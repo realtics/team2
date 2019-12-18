@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class Inventory : MonoBehaviour
 {
-    [SerializeField]
+	[FormerlySerializedAs("_startingItems")]
+	[SerializeField]
     private List<Item> _items;
     [SerializeField]
     private Transform _itemsParent;
@@ -36,8 +38,10 @@ public class Inventory : MonoBehaviour
         int i = 0;
         for(; i < _items.Count && i < _itemSlots.Length; i++)
         {
-            _itemSlots[i].Item = _items[i];
-        }
+			//TODO : 확인
+            //_itemSlots[i].Item = Instantiate(_items[i]);
+			_itemSlots[i].Item = _items[i];
+		}
 
         for(; i < _itemSlots.Length; i++)
         {
@@ -47,27 +51,70 @@ public class Inventory : MonoBehaviour
 
     public bool AddItem(Item item)
     {
-        if (IsFull())
-            return false;
+		if (IsFull())
+			return false;
 
-        _items.Add(item);
-        RefreshUI();
-        return true;
-    }
+		_items.Add(item);
+		RefreshUI();
+		return true;
+
+		//for(int i=0; i < _itemSlots.Length; i++)
+		//{
+		//	if(_itemSlots[i].Item == null)
+		//	{
+		//		_itemSlots[i].Item = item;
+		//		return true;
+		//	}
+		//}
+		//return false;
+	}
 
     public bool RemoveItem(Item item)
     {
-        if(_items.Remove(item))
-        {
-            RefreshUI();
-            return true;
-        }
-        return false;
-    }
+		if (_items.Remove(item))
+		{
+			RefreshUI();
+			return true;
+		}
+		return false;
+		//for (int i = 0; i < _itemSlots.Length; i++)
+		//{
+		//	if (_itemSlots[i].Item == item)
+		//	{
+		//		_itemSlots[i].Item = item;
+		//		return true;
+		//	}
+		//}
+		//return false;
+	}
+
+	public Item RemoveItem(string itemID)
+	{
+		for(int i =0; i < _itemSlots.Length; i++)
+		{
+			Item item = _itemSlots[i].Item;
+			if(item != null && item.ID == itemID)
+			{
+				_itemSlots[i].Item = null;
+				return item;
+			}
+		}
+		return null;
+	}
+	
 
     //Fixme : 속성으로 만들기
     public bool IsFull()
     {
-        return _items.Count >= _itemSlots.Length;
-    }
+		return _items.Count >= _itemSlots.Length;
+
+		//for (int i = 0; i < _itemSlots.Length; i++)
+		//{
+		//	if (_itemSlots[i].Item == null)
+		//	{
+		//		return false;
+		//	}
+		//}
+		//return true;
+	}
 }
