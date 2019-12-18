@@ -57,8 +57,8 @@ void DBMySQL::DBDataLoginSelectAll()
 
 			while ((_SqlRow = mysql_fetch_row(_pSqlResult)) != NULL)
 			{
-				std::cout << "idx" << "\t" << "userid" << "\t" << "pw" << "\t"
-					<< "name" << "\t" << "lastConnect" << std::endl;
+				std::cout << "index" << "\t" << "user_id" << "\t" << "user_pw" << "\t"
+					<< "user_name" << "\t" << "sign_date" << std::endl;
 
 				for (int i = 0; i < fields; i++)
 				{
@@ -75,6 +75,49 @@ void DBMySQL::DBDataLoginSelectAll()
 		}
 	}
 }
+
+int DBMySQL::DBSignUp(std::string inputID, std::string inputPW, std::string inputName)
+{
+	mysql_select_db(&_mysql, _dbName);
+	//INSERT INTO login(user_id, user_password, user_name, sign_date) VALUES ('dddd', 'dddd', '디디디디',CURRENT_TIMESTAMP);
+	const char* DBQuery1 = "INSERT INTO login(user_id, user_password, user_name, sign_date) VALUES('\"";
+	const char* DBQuery2 = inputID.c_str();
+	const char* DBQuery3 = "', '";
+	const char* DBQuery4 = inputPW.c_str();
+	const char* DBQuery5 = "', '";
+	const char* DBQuery6 = inputName.c_str();
+	const char* DBQuery7 = "', '";
+	const char* DBQuery8 = "', CURRENT_TIMESTAMP);";
+
+	char DBQuery[256] = "";
+	strcat_s(DBQuery, DBQuery1);
+	strcat_s(DBQuery, DBQuery2);
+	strcat_s(DBQuery, DBQuery3);
+	strcat_s(DBQuery, DBQuery4);
+	strcat_s(DBQuery, DBQuery5);
+	strcat_s(DBQuery, DBQuery6);
+	strcat_s(DBQuery, DBQuery7);
+	strcat_s(DBQuery, DBQuery8);
+
+	if (_pConnection == NULL)
+	{
+		std::cout << mysql_errno(&_mysql) << " 에러 : " << mysql_error(&_mysql) << std::endl;
+	}
+	else
+	{
+		int DBState = mysql_query(_pConnection, DBQuery);
+		if (DBState == 0)
+		{
+			_pSqlResult = mysql_store_result(_pConnection);
+
+			mysql_free_result(_pSqlResult);
+		}
+	}
+
+	return RESULT_SIGN_UP_CHECK::RESULT_SIGN_UP_CHECK_SUCCESS;
+}
+
+
 
 int DBMySQL::DBLoginCheckUserID(std::string checkID)
 {
@@ -113,12 +156,12 @@ int DBMySQL::DBLoginCheckUserID(std::string checkID)
 
 						if (!strcmp(_SqlRow[i], checkID.c_str()))
 						{
-							return CHECK_BEFORE_LOGIN_RESULT::RESULT_SUCCESS;
+							return RESULT_BEFORE_LOGIN_CHECK::RESULT_BEFORE_LOGIN_CHECK_SUCCESS;
 						}
 					}
 					else
 					{
-						return CHECK_BEFORE_LOGIN_RESULT::RESULT_NO_ID;
+						return RESULT_BEFORE_LOGIN_CHECK::RESULT_BEFORE_LOGIN_CHECK_NO_ID;
 					}
 
 					std::cout << "\t";
@@ -129,7 +172,7 @@ int DBMySQL::DBLoginCheckUserID(std::string checkID)
 		}
 	}
 
-	return CHECK_BEFORE_LOGIN_RESULT::RESULT_NO_ID;
+	return RESULT_BEFORE_LOGIN_CHECK::RESULT_BEFORE_LOGIN_CHECK_NO_ID;
 }
 
 int DBMySQL::DBLoginCheckUserPW(std::string checkID, std::string checkPW)
@@ -169,12 +212,12 @@ int DBMySQL::DBLoginCheckUserPW(std::string checkID, std::string checkPW)
 
 						if (!strcmp(_SqlRow[i], checkPW.c_str()))
 						{
-							return CHECK_BEFORE_LOGIN_RESULT::RESULT_SUCCESS;
+							return RESULT_BEFORE_LOGIN_CHECK::RESULT_BEFORE_LOGIN_CHECK_SUCCESS;
 						}
 					}
 					else
 					{
-						return CHECK_BEFORE_LOGIN_RESULT::RESULT_IS_WRONG_PASSWORD;
+						return RESULT_BEFORE_LOGIN_CHECK::RESULT_BEFORE_LOGIN_CHECK_IS_WRONG_PASSWORD;
 					}
 
 					std::cout << "\t";
@@ -185,7 +228,7 @@ int DBMySQL::DBLoginCheckUserPW(std::string checkID, std::string checkPW)
 		}
 	}
 
-	return CHECK_BEFORE_LOGIN_RESULT::RESULT_IS_WRONG_PASSWORD;
+	return RESULT_BEFORE_LOGIN_CHECK::RESULT_BEFORE_LOGIN_CHECK_IS_WRONG_PASSWORD;
 }
 
 std::string DBMySQL::DBLoginGetUserName(std::string userID)

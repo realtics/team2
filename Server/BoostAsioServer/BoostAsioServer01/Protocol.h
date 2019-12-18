@@ -18,6 +18,9 @@ enum PACKET_INDEX : short
 	// REQ : 클라->서버, 클라에서 서버에 어떤 값을 요청
 	// RES : 서버->클라, 서버가 어떤 값으로 응답
 	
+	REQ_SIGN_UP = 103,
+	RES_SIGN_UP = 104,
+
 	REQ_CHECK_BEFORE_LOGIN = 105, 
 	RES_CHECK_BEFORE_LOGIN = 106,
 
@@ -38,11 +41,22 @@ enum PACKET_INDEX : short
 	RES_PLAYER_MOVE_END = 133,
 };
 
-enum CHECK_BEFORE_LOGIN_RESULT : int
+enum RESULT_SIGN_UP_CHECK : int
 {
-	RESULT_SUCCESS = 1,
-	RESULT_NO_ID = 2,
-	RESULT_IS_WRONG_PASSWORD = 3,
+	RESULT_SIGN_UP_CHECK_SUCCESS = 1,
+	RESULT_SIGN_UP_OVERLAP_ID = 2,
+	RESULT_SIGN_UP_OVERLAP_NAME = 3,
+
+	RESULT_SIGN_UP_UNKNOWN = -1,
+};
+
+enum RESULT_BEFORE_LOGIN_CHECK : int
+{
+	RESULT_BEFORE_LOGIN_CHECK_SUCCESS = 1,
+	RESULT_BEFORE_LOGIN_CHECK_NO_ID = 2,
+	RESULT_BEFORE_LOGIN_CHECK_IS_WRONG_PASSWORD = 3,
+
+	RESULT_BEFORE_LOGIN_CHECK_UNKNOWN = -1,
 };
 
 struct PACKET_HEADER
@@ -54,6 +68,34 @@ struct PACKET_HEADER
 struct PACKET_HEADER_BODY
 {
 	PACKET_HEADER header;
+};
+
+struct PKT_REQ_SIGN_UP : public PACKET_HEADER
+{
+	char userID[MAX_USER_ID];
+	char userPW[MAX_USER_PW];
+	char userName[MAX_USER_NAME];
+	void Init()
+	{
+		packetIndex = PACKET_INDEX::REQ_SIGN_UP;
+		packetSize = sizeof(PKT_REQ_SIGN_UP);
+		memset(userID, 0, MAX_USER_ID);
+		memset(userPW, 0, MAX_USER_PW);
+		memset(userName, 0, MAX_USER_NAME);
+	}
+};
+
+struct PKT_RES_SIGN_UP : public PACKET_HEADER
+{
+	int checkResult;
+	char userID[MAX_USER_ID];
+	std::string userName;
+	void Init()
+	{
+		packetIndex = PACKET_INDEX::RES_SIGN_UP;
+		packetSize = sizeof(PKT_RES_SIGN_UP);
+		memset(userID, 0, MAX_USER_ID);
+	}
 };
 
 struct PKT_REQ_CHECK_BEFORE_LOGIN : public PACKET_HEADER
@@ -74,7 +116,6 @@ struct PKT_RES_CHECK_BEFORE_LOGIN : public PACKET_HEADER
 	int checkResult;
 	char userID[MAX_USER_ID];
 	int sessionID;
-	//char userName[MAX_USER_NAME];
 	std::string userName;
 	void Init()
 	{
@@ -83,7 +124,6 @@ struct PKT_RES_CHECK_BEFORE_LOGIN : public PACKET_HEADER
 		checkResult = 0;
 		memset(userID, 0, MAX_USER_ID);
 		sessionID = FIRST_SESSION_INDEX;
-		//memset(userName, 0, MAX_USER_NAME);
 	}
 };
 
