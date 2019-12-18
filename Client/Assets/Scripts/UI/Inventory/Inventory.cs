@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public class Inventory : MonoBehaviour
+public class Inventory : MonoBehaviour, IItemContainer
 {
-	[FormerlySerializedAs("_startingItems")]
+	//[FormerlySerializedAs("_startingItems")]
 	[SerializeField]
     private List<Item> _items;
     [SerializeField]

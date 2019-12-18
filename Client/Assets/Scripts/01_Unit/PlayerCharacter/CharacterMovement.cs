@@ -11,6 +11,7 @@ public struct CharacterMovePacket
 public class CharacterMovement : BaseUnit
 {
     private int _id;
+	private string _nickName;
     private bool _nextAttack;
     private CharacterAnimController _animController;
     private Dictionary<SwordmanSkillIndex, CharacterSkill> _equipSkills;
@@ -24,6 +25,7 @@ public class CharacterMovement : BaseUnit
 
 	public CharacterSkill UsedSkill { get { return _equipSkills[_usedSkill]; } }
     public int Id { get { return _id; } set { _id = value; } }
+	public string NickName { get { return _nickName; } set { _nickName = value; } }
 
 
     protected override void Awake()
