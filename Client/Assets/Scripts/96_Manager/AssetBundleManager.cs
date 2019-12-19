@@ -11,9 +11,11 @@ public class AssetBundleManager : MonoBehaviour
     private Dictionary<string, GameObject> _cache = new Dictionary<string, GameObject>();
     private AssetBundle _LoadedAssetBundle;
     private AssetBundle _LoadedMaterialAssetBundle;
+    private AssetBundle _LoadedshBundleAssetBundle;
     private AssetBundleManifest _manifest;
     private string saBundle = "monster";
     private string maBundle = "material";
+    private string shBundle = "shader";
 
     private static AssetBundleManager _instacne;
     public static AssetBundleManager instacne
@@ -71,6 +73,7 @@ public class AssetBundleManager : MonoBehaviour
     //}
     private IEnumerator LoadMaterialFromAssetBundle()
     {
+        //LoadAssetBundleManifest(maBundle);
         _LoadedMaterialAssetBundle = AssetBundle.LoadFromFile(Path.Combine(Application.streamingAssetsPath, maBundle));
         yield return _LoadedMaterialAssetBundle;
         _LoadedMaterialAssetBundle.LoadAllAssets();

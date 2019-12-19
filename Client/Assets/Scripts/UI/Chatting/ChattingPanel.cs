@@ -1,9 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
+public struct ChattingData
+{
+	public string nickName;
+	public string chatting;
+}
 public class ChattingPanel : MonoBehaviour
 {
+	private List<ChattingData> _chattings;
+
 	private static ChattingPanel _instance;
 	public static ChattingPanel Instance
 	{
@@ -19,13 +27,30 @@ public class ChattingPanel : MonoBehaviour
 	private void Awake()
 	{
 		_instance = this;
+		_chattings = new List<ChattingData>();
 	}
 	private void Update()
 	{
+		NewChatProcess();
+	}
+
+	private void NewChatProcess()
+	{
+		if (_chattings.Count <= 0)
+			return;
+
+		ChattingData chatData = _chattings[0];
+
+		minichatPanel.AddNewChatting(chatData.nickName, chatData.chatting);
+		bigChatPanel.AddNewChatting(chatData.nickName, chatData.chatting);
+
+		_chattings.Remove(chatData);
 	}
 	public void AddNewChatting(string nickName, string chatting)
 	{
-		minichatPanel.AddNewChatting(nickName, chatting);
-		bigChatPanel.AddNewChatting(nickName, chatting);
+		ChattingData newChat = new ChattingData();
+		newChat.nickName = nickName;
+		newChat.chatting = chatting;
+		_chattings.Add(newChat);
 	}
 }
