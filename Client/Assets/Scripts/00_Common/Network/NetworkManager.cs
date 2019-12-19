@@ -162,8 +162,10 @@ public class NetworkManager : MonoBehaviour
             if (_spawnCharacters.Count > 0)
             {
                 GameObject newPlayer = Instantiate(playerPrefab);
+				CharacterSpawnData spawnData = _spawnCharacters[0];
+				_spawnCharacters.Remove(spawnData);
 
-                if (_spawnCharacters[0].id == _myId)
+				if (spawnData.id == _myId)
                 {
                     PlayerCharacter pc = newPlayer.AddComponent<PlayerCharacter>();
                     pc.FindMovement();
@@ -182,11 +184,10 @@ public class NetworkManager : MonoBehaviour
 					newPlayer.transform.GetChild(0).tag = "UserPlayer";
 
 				CharacterMovement spawnedPlayer = newPlayer.GetComponent<CharacterMovement>();
-                spawnedPlayer.Id = _spawnCharacters[0].id;
-                spawnedPlayer.SetFlipX(_spawnCharacters[0].direction.x < 0 ? true : false);
-                newPlayer.transform.position = _spawnCharacters[0].position;
-                _characters.Add(_spawnCharacters[0].id, spawnedPlayer);
-                _spawnCharacters.RemoveAt(0);
+                spawnedPlayer.Id = spawnData.id;
+                spawnedPlayer.SetFlipX(spawnData.direction.x < 0 ? true : false);
+                newPlayer.transform.position = spawnData.position;
+                _characters.Add(spawnData.id, spawnedPlayer);
             }
 
             ExitUserOff();
