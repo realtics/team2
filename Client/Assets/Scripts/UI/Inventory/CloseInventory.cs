@@ -14,6 +14,7 @@ public class CloseInventory : MonoBehaviour
 
 	public void ClickReturn()
 	{
+		InventoryManager.Instance.Save();
 		DNFSceneManager.instance.UnLoadScene((int)SceneIndex.Inventory);
 	}
 }

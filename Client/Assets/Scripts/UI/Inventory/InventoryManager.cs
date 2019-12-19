@@ -46,6 +46,15 @@ public class InventoryManager : MonoBehaviour
 		}
 	}
 
+	public void Save()
+	{
+		if (_itemSaveManager != null)
+		{
+			_itemSaveManager.SaveEquipment();
+			_itemSaveManager.SaveInventory();
+		}
+	}
+
 	private void OnDestroy()
 	{
 		if (_itemSaveManager != null)
