@@ -6,7 +6,29 @@ public class ItemSaveManager : MonoBehaviour
 	private const string InventoryFileName = "Inventory";
 	private const string EquipmentFilename = "Equipment";
 
-	 private void SaveItems(IList<ItemSlot> itemSlots, string fileName)
+	public void LoadInventory()
+	{
+		ItemContainerSaveData savedSlots = ItemSaveIO.LoadItems(InventoryFileName);
+		if (savedSlots == null) return;
+		InventoryManager.Instance.Inventory.Clear();
+
+		for (int i = 0; i < savedSlots.SavedSlots.Length; i++)
+		{
+			ItemSlot itemSlot = character.Inventory.ItemSlots[i];
+			ItemSlotSaveData savedSlot = savedSlots.SavedSlots[i];
+
+			if (savedSlot == null)
+			{
+				itemSlot.Item = null;
+			}
+			else
+			{
+				itemSlot.Item = itemDatabase.GetItemCopy(savedSlot.ItemID);
+			}
+		}
+	}
+
+	private void SaveItems(IList<ItemSlot> itemSlots, string fileName)
 	{
 		var saveData = new ItemContainerSaveData(itemSlots.Count);
 
