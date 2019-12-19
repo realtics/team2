@@ -28,6 +28,8 @@ public:
 	void DBMySQLVersion();
 	void DBDataLoginSelectAll();
 
+	int DBSignUp(std::string inputID, std::string inputPW, std::string inputName);
+
 	int DBLoginCheckUserID(std::string checkID);
 	int DBLoginCheckUserPW(std::string checkID, std::string checkPW);
 	

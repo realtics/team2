@@ -17,6 +17,8 @@ public class PlayerManager
 		}
 	}
 
+	private string _nickName;
+	public string NickName { get { return _nickName; } set { _nickName = value; } }
 	private PlayerCharacter _playerCharacter;
 	public PlayerCharacter PlayerCharacter { get { return _playerCharacter; } set { _playerCharacter = value; } }
 

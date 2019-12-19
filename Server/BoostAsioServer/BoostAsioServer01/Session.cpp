@@ -158,6 +158,18 @@ void Session::Deserialization(char* jsonData)
 	
 	switch (packetIndex)
 	{
+	case PACKET_INDEX::REQ_SIGN_UP:
+	{
+		PKT_REQ_SIGN_UP packet;
+		packet.Init();
+		packet.packetIndex = packetIndex;
+		packet.packetSize = packetSize;
+		strcpy_s(packet.userID, MAX_USER_ID, ptRecv.get<std::string>("userID").c_str());
+		strcpy_s(packet.userPW, MAX_USER_PW, ptRecv.get<std::string>("userPW").c_str());
+		strcpy_s(packet.userName, MAX_USER_NAME, ptRecv.get<std::string>("userName").c_str());
+		memcpy(&_packetBuffer[_packetBufferMark], (char*)&packet, sizeof(packet));
+	}
+	break;
 	case PACKET_INDEX::REQ_CHECK_BEFORE_LOGIN:
 	{
 		PKT_REQ_CHECK_BEFORE_LOGIN packet;

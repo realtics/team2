@@ -111,6 +111,16 @@ void AsioServer::ProcessPacket(const int sessionID, const char* pData)
 
 	switch (pHeader->packetIndex)
 	{
+	case PACKET_INDEX::REQ_SIGN_UP:
+	{
+		PKT_REQ_SIGN_UP* pPacket = (PKT_REQ_SIGN_UP*)pData;
+
+		PKT_RES_SIGN_UP SendPkt;
+		SendPkt.Init();
+
+		SendPkt.checkResult = _DBMysql.DBLoginCheckUserID(pPacket->userID);
+	}
+	break;
 	case PACKET_INDEX::REQ_CHECK_BEFORE_LOGIN:
 	{
 		PKT_REQ_CHECK_BEFORE_LOGIN* pPacket = (PKT_REQ_CHECK_BEFORE_LOGIN*)pData;
@@ -124,7 +134,7 @@ void AsioServer::ProcessPacket(const int sessionID, const char* pData)
 		SendPkt.checkResult = _DBMysql.DBLoginCheckUserID(pPacket->userID);
 		std::cout << "ID checkResult = " << SendPkt.checkResult << std::endl;
 
-		if (SendPkt.checkResult == CHECK_BEFORE_LOGIN_RESULT::RESULT_SUCCESS)
+		if (SendPkt.checkResult == RESULT_BEFORE_LOGIN_CHECK::RESULT_BEFORE_LOGIN_CHECK_SUCCESS)
 		{
 			SendPkt.checkResult = _DBMysql.DBLoginCheckUserPW(pPacket->userID, pPacket->userPW);
 			std::cout << "PW checkResult = " << SendPkt.checkResult << std::endl;

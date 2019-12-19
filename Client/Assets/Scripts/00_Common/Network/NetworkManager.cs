@@ -99,6 +99,7 @@ public class NetworkManager : MonoBehaviour
     private void Awake()
     {
         _instance = this;
+		DontDestroyOnLoad(this);
         appDataPath = Application.dataPath;
         appDataPathParent = System.IO.Directory.GetParent(appDataPath).ToString();
         _exitCharacters = new List<int>();
@@ -112,19 +113,21 @@ public class NetworkManager : MonoBehaviour
 		//Screen.SetResolution(960, 540, false);
 
 		DebugLogList("start() start");
+		//ConnectToServer();
 
-        if (_isLogin == false)
-        {
-            CreateSocket();
-
-            NewLogin();
-
-            NewLoginSucsess();
-        }
-
-        Receive(_sock);
         DebugLogList("start() end");
     }
+
+	public void ConnectToServer()
+	{
+		if (_isLogin)
+			return;
+
+		CreateSocket();
+		//NewLogin();
+		//NewLoginSucsess();
+		Receive(_sock);
+	}
 
     void FixedUpdate()
     {
@@ -335,7 +338,29 @@ public class NetworkManager : MonoBehaviour
         {
             switch (packetIndex)
             {
-                case (short)PACKET_INDEX.RES_CONCURRENT_USER_LIST:
+				case (short)PACKET_INDEX.RES_CHECK_BEFORE_LOGIN:
+					{
+						DebugLogList("PACKET_INDEX.RES_CHECK_BEFORE_LOGIN start");
+						var desJson = JsonConvert.DeserializeObject<PKT_RES_CHECK_BEFORE_LOGIN>(jsonData);
+						Debug.Log(desJson.checkResult);
+
+						int checkResult = desJson.checkResult;
+
+						if (checkResult == (int)CHECK_BEFORE_LOGIN_RESULT.RESULT_SUCCESS)
+							Debug.Log("성공");
+						else if (checkResult == (int)CHECK_BEFORE_LOGIN_RESULT.RESULT_NO_ID)
+							Debug.Log("ID가 존재하지 않음");
+						else if (checkResult == (int)CHECK_BEFORE_LOGIN_RESULT.RESULT_IS_WRONG_PASSWORD)
+							Debug.Log("비밀번호가 틀렸음");
+
+						var sessionID = desJson.sessionID;
+						var userName = desJson.userName;
+
+						_myId = sessionID;
+						PlayerManager.Instance.NickName = userName;
+					}
+					break;
+				case (short)PACKET_INDEX.RES_CONCURRENT_USER_LIST:
                     {
                         DebugLogList("PACKET_INDEX.RES_CONCURRENT_USER_LIST start");
                         var desJson = JsonConvert.DeserializeObject<PKT_RES_CONCURRENT_USER_LIST>(jsonData);
@@ -764,4 +789,58 @@ public class NetworkManager : MonoBehaviour
         _sock.Close();
     }
 
+	public void CheckBeforeLogin(string id, string pw)
+	{
+		DebugLogList("CheckBeforeLogin() start");
+		string jsonData;
+		char endNullValue = '\0';
+
+		var packHeader = new PACKET_HEADER
+		{
+			packetIndex = (short)PACKET_INDEX.REQ_CHECK_BEFORE_LOGIN,
+			packetSize = (short)DefineDefaultValue.packetSize
+		};
+		var packData = new PKT_REQ_CHECK_BEFORE_LOGIN
+		{
+			header = packHeader,
+			userID = id,
+			userPW = pw
+		};
+		DebugLogList(packData.ToString());
+		jsonData = JsonConvert.SerializeObject(packData);
+		jsonData += endNullValue;
+		DebugLogList(jsonData.ToString());
+		byte[] sendByte = new byte[512];
+		sendByte = Encoding.UTF8.GetBytes(jsonData);
+
+		short jsonDataSize = 0;
+		foreach (byte b in sendByte)
+		{
+			jsonDataSize++;
+			if (b == '\0')
+				break;
+		}
+		//Debug.Log(jsonData);
+		//Debug.Log(jsonDataSize);
+		var packHeader2 = new PACKET_HEADER
+		{
+			packetIndex = (short)PACKET_INDEX.REQ_CHECK_BEFORE_LOGIN,
+			packetSize = jsonDataSize
+		};
+		var packData2 = new PKT_REQ_CHECK_BEFORE_LOGIN
+		{
+			header = packHeader2,
+			userID = id,
+			userPW = pw
+		};
+		string jsonData2;
+		jsonData2 = JsonConvert.SerializeObject(packData2);
+		jsonData2 += endNullValue;
+		byte[] sendByte2 = new byte[512];
+		sendByte2 = Encoding.UTF8.GetBytes(jsonData2);
+
+		_myId = 0;
+		int resultSize = _sock.Send(sendByte2);
+		DebugLogList("CheckBeforeLogin() end");
+	}
 }

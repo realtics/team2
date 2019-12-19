@@ -306,11 +306,11 @@ public class NetworkManager : MonoBehaviour
 
 						int checkResult = desJson.checkResult;
 
-						if (checkResult == (int)CHECK_BEFORE_LOGIN_RESULT.RESULT_SUCCESS)
+						if (checkResult == (int)RESULT_BEFORE_LOGIN_CHECK.RESULT_BEFORE_LOGIN_CHECK_SUCCESS)
 							Debug.Log("성공");
-						else if (checkResult == (int)CHECK_BEFORE_LOGIN_RESULT.RESULT_NO_ID)
+						else if (checkResult == (int)RESULT_BEFORE_LOGIN_CHECK.RESULT_BEFORE_LOGIN_CHECK_NO_ID)
 							Debug.Log("ID가 존재하지 않음");
-						else if (checkResult == (int)CHECK_BEFORE_LOGIN_RESULT.RESULT_IS_WRONG_PASSWORD)
+						else if (checkResult == (int)RESULT_BEFORE_LOGIN_CHECK.RESULT_BEFORE_LOGIN_CHECK_IS_WRONG_PASSWORD)
 							Debug.Log("비밀번호가 틀렸음");
 
 						var sessionID = desJson.sessionID;
