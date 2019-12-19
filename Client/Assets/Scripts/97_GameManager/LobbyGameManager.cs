@@ -17,5 +17,7 @@ public class LobbyGameManager : GameManager
     {
         base.Start();
         _instance = this;
+
+		NetworkManager.Instance.LoginToTown();
     }
 }

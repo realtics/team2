@@ -5,8 +5,10 @@ using UnityEngine.UI;
 
 public class BigChatPanel : MonoBehaviour
 {
+	public ChattingPanel chattingPanel;
 	public BigChatContentsVerticalPosition bigChatContent;
 	public Text bigChatText;
+	public InputField chattingField;
 
 	private int _chatCount = 0;
 
@@ -21,5 +23,17 @@ public class BigChatPanel : MonoBehaviour
 		((RectTransform)bigChatText.transform).sizeDelta = chatHeight;
 
 		bigChatContent.AddNetChatting(_chatCount);
+	}
+
+	public void SendChatButton()
+	{
+		if (chattingField.text == "")
+			return;
+
+		string chatting = chattingField.text;
+
+		chattingPanel.AddNewChatting(PlayerManager.Instance.NickName, chatting);
+		chattingField.text = "";
+		NetworkManager.Instance.SendChat(chatting);
 	}
 }

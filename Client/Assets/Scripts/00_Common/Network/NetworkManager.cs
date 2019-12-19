@@ -79,6 +79,8 @@ public class NetworkManager : MonoBehaviour
     private bool _isConcurrentUserList = false;     // 유저리스트 여부
     public bool IsConcurrentUserList { get { return _isConcurrentUserList; } set { _isConcurrentUserList = value; } }
 
+	private bool _login;
+	public bool Login { get { return _login; } }
 
     public string DebugMsg01;
     public int DebugMsg02;
@@ -293,31 +295,36 @@ public class NetworkManager : MonoBehaviour
 
             if (bytesRead > 0)
             {
-                DebugLogList("bytesRead > 0");
-                string recvData = Encoding.UTF8.GetString(state.RecvBuffer, 0, bytesRead);
-                DebugLogList(recvData);
-                int bufLen = recvData.Length;
-                //Debug.Log("recvData[" + bufLen + "]= " + recvData);
+				DebugLogList("bytesRead > 0");
+				// TODO : 인코딩 해결 할 것
+				//string recvData = Encoding.UTF8.GetString(state.RecvBuffer);
 
-                // 패킷 자르기
-                string recvDataSubstring = recvData.Substring(45, 3);
-                string[] recvDataSplit = recvDataSubstring.Split('"');
-                int recvDataSize = int.Parse(recvDataSplit[0]);
+				//string recvData = Encoding.UTF8.GetString(state.RecvBuffer, 0, bytesRead);
+				string recvData = Encoding.GetEncoding("EUC-KR").GetString(state.RecvBuffer, 0, bytesRead);
+				DebugLogList(recvData);
+				var JsonData = JsonConvert.DeserializeObject<PACKET_HEADER_BODY>(recvData);
 
-                string recvDataSubstring2 = recvData.Substring(0, recvDataSize);
-                DebugLogList(recvDataSubstring2);
+				//int bufLen = recvData.Length;
+				//Debug.Log("recvData[" + bufLen + "]= " + recvData);
 
+				//// TODO : EUC-KR로 한글이 들어 올 경우, 패킷 자르기 시, 서버에서 잰 길이와 클라에서 받는 길이가 다르게 판정됨
+				//// 패킷 자르기
+				//string recvDataSubstring = recvData.Substring(45, 3);
+				//string[] recvDataSplit = recvDataSubstring.Split('"');
+				//int recvDataSize = int.Parse(recvDataSplit[0]);
 
-                var JsonData = JsonConvert.DeserializeObject<PACKET_HEADER_BODY>(recvDataSubstring2);
+				//string recvDataSubstring2 = recvData.Substring(0, recvDataSize);
+				//DebugLogList(recvDataSubstring2);
+				//var JsonData = JsonConvert.DeserializeObject<PACKET_HEADER_BODY>(recvDataSubstring2);
 
-                DebugLogList("ReceiveCallback - ProcessPacket - start");
-                ProcessPacket(JsonData.header.packetIndex, recvData);
-                DebugLogList("ReceiveCallback - ProcessPacket - end");
-                // 수신 대기
-                _sock.BeginReceive(state.RecvBuffer, 0, StateObject.BufferSize, 0,
-                                    new AsyncCallback(ReceiveCallback), state);
-                DebugLogList("ReceiveCallback end");
-            }
+				DebugLogList("ReceiveCallback - ProcessPacket - start");
+				ProcessPacket(JsonData.header.packetIndex, recvData);
+				DebugLogList("ReceiveCallback - ProcessPacket - end");
+				// 수신 대기
+				_sock.BeginReceive(state.RecvBuffer, 0, StateObject.BufferSize, 0,
+									new AsyncCallback(ReceiveCallback), state);
+				DebugLogList("ReceiveCallback end");
+			}
             else
             {
                 //_receiveDone.Set();
@@ -346,18 +353,27 @@ public class NetworkManager : MonoBehaviour
 
 						int checkResult = desJson.checkResult;
 
-						if (checkResult == (int)CHECK_BEFORE_LOGIN_RESULT.RESULT_SUCCESS)
-							Debug.Log("성공");
-						else if (checkResult == (int)CHECK_BEFORE_LOGIN_RESULT.RESULT_NO_ID)
-							Debug.Log("ID가 존재하지 않음");
-						else if (checkResult == (int)CHECK_BEFORE_LOGIN_RESULT.RESULT_IS_WRONG_PASSWORD)
-							Debug.Log("비밀번호가 틀렸음");
+						switch (checkResult)
+						{
+							case (int)CHECK_BEFORE_LOGIN_RESULT.RESULT_SUCCESS:
+								{
+									var sessionID = desJson.sessionID;
+									var userName = desJson.userName;
 
-						var sessionID = desJson.sessionID;
-						var userName = desJson.userName;
+									_myId = sessionID;
+									PlayerManager.Instance.NickName = userName;
+									_login = true;
+								}
+								break;
+							case (int)CHECK_BEFORE_LOGIN_RESULT.RESULT_NO_ID:
+								Debug.Log("아이디가 존재하지 않음");
+								break;
+							case (int)CHECK_BEFORE_LOGIN_RESULT.RESULT_IS_WRONG_PASSWORD:
+								Debug.Log("비밀번호가 틀림");
+								break;
+						}
 
-						_myId = sessionID;
-						PlayerManager.Instance.NickName = userName;
+						
 					}
 					break;
 				case (short)PACKET_INDEX.RES_CONCURRENT_USER_LIST:
@@ -440,7 +456,18 @@ public class NetworkManager : MonoBehaviour
                         ThisIsStopPacket(sessionID, vecPos);
                     }
                     break;
-                default:
+				case (short)PACKET_INDEX.RES_CHATTING:
+					{
+						var desJson = JsonConvert.DeserializeObject<PKT_RES_CHATTING>(jsonData);
+
+						var sessionID = desJson.sessionID;
+						var userName = desJson.userName;
+						var newChat = desJson.chatMessage;
+
+						ChattingPanel.Instance.AddNewChatting(userName, newChat);
+					}
+					break;
+				default:
                     {
                         Debug.LogError("Index가 존재 하지 않는 Packet");
                     }
@@ -491,7 +518,7 @@ public class NetworkManager : MonoBehaviour
     }
 
 
-    private void NewLogin()
+    public void NewLogin()
     {
         DebugLogList("NewLogin() start");
         string jsonData;
@@ -842,5 +869,62 @@ public class NetworkManager : MonoBehaviour
 		_myId = 0;
 		int resultSize = _sock.Send(sendByte2);
 		DebugLogList("CheckBeforeLogin() end");
+	}
+
+	public void LoginToTown()
+	{
+		NewLogin();
+		NewLoginSucsess();
+	}
+
+	public void SendChat(string chat)
+	{
+		string jsonData;
+		char endNullValue = '\0';
+
+		var packHeader = new PACKET_HEADER
+		{
+			packetIndex = (short)PACKET_INDEX.REQ_CHATTING,
+			packetSize = (short)DefineDefaultValue.packetSize
+		};
+		var packData = new PKT_REQ_CHATTING
+		{
+			header = packHeader,
+			sessionID = MyId,
+			chatMessage = chat
+		};
+
+		jsonData = JsonConvert.SerializeObject(packData);
+		jsonData += endNullValue;
+
+		byte[] sendByte = new byte[512];
+		sendByte = Encoding.UTF8.GetBytes(jsonData);
+
+		short jsonDataSize = 0;
+		foreach (byte b in sendByte)
+		{
+			jsonDataSize++;
+			if (b == '\0')
+				break;
+		}
+
+		var packHeader2 = new PACKET_HEADER
+		{
+			packetIndex = (short)PACKET_INDEX.REQ_CHATTING,
+			packetSize = jsonDataSize
+		};
+		var packData2 = new PKT_REQ_CHATTING
+		{
+			header = packHeader2,
+			sessionID = MyId,
+			chatMessage = chat
+		};
+		string jsonData2;
+		jsonData2 = JsonConvert.SerializeObject(packData2);
+		jsonData2 += endNullValue;
+		byte[] sendByte2 = new byte[512];
+		sendByte2 = Encoding.UTF8.GetBytes(jsonData2);
+
+		int resultSize = _sock.Send(sendByte2);
 	}
 }

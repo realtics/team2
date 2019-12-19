@@ -117,8 +117,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8798464224320280757}
   m_HandleRect: {fileID: 8798464224320280756}
   m_Direction: 2
-  m_Value: 1.0000026
-  m_Size: 0.97285706
+  m_Value: 0.9999973
+  m_Size: 0.9728572
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -432,9 +432,9 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -17, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &8798464224423828066
 CanvasRenderer:
@@ -976,7 +976,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1143,7 +1143,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0.00032547372, y: 0.000029668212}
-  m_SizeDelta: {x: 0, y: 5}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &8798464225337335924
 MonoBehaviour:
@@ -1305,9 +1305,9 @@ RectTransform:
   m_Father: {fileID: 8798464225337335927}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 779, y: -5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1548, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8798464225455578532
@@ -1473,7 +1473,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &8798464225535873647
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1509,8 +1509,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5eef21a893c1ad409ee2f69b6145c37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  chattingPanel: {fileID: 8798464224418044368}
   bigChatContent: {fileID: 8798464225337335930}
   bigChatText: {fileID: 8798464225455578535}
+  chattingField: {fileID: 8798464224625139814}
+  sendChattingButton: {fileID: 8798464226104576326}
 --- !u!1 &8798464225565847020
 GameObject:
   m_ObjectHideFlags: 0
@@ -1922,10 +1925,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MiniChatText
       objectReference: {fileID: 0}
-    - target: {fileID: 7025211693925355410, guid: 7c7e40e11c57f834eb759d9e48c834a7,
+    - target: {fileID: 7025211693925355412, guid: 7c7e40e11c57f834eb759d9e48c834a7,
         type: 3}
-      propertyPath: m_IsActive
-      value: 1
+      propertyPath: m_Text
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7025211693925355413, guid: 7c7e40e11c57f834eb759d9e48c834a7,
         type: 3}
@@ -2031,11 +2034,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7025211693925355412, guid: 7c7e40e11c57f834eb759d9e48c834a7,
-        type: 3}
-      propertyPath: m_Text
-      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7c7e40e11c57f834eb759d9e48c834a7, type: 3}

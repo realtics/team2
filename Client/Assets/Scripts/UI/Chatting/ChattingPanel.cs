@@ -4,14 +4,24 @@ using UnityEngine;
 
 public class ChattingPanel : MonoBehaviour
 {
+	private static ChattingPanel _instance;
+	public static ChattingPanel Instance
+	{
+		get
+		{
+			return _instance;
+		}
+	}
+
 	public MiniChatPanel minichatPanel;
 	public BigChatPanel bigChatPanel;
+
+	private void Awake()
+	{
+		_instance = this;
+	}
 	private void Update()
 	{
-		if (Input.GetKeyDown(KeyCode.Space))
-		{
-			AddNewChatting("Wook", "AASSDASD");
-		}
 	}
 	public void AddNewChatting(string nickName, string chatting)
 	{
