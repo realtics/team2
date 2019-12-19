@@ -22,6 +22,7 @@ public class InventoryManager : MonoBehaviour
 
 	public ItemToolTip InventoryTooltip{ get { return _inventoryTooltip; } }
 	public ItemToolTip EquipPanelTooltip { get { return _equipPanelTooltip; } }
+	public Inventory Inventory { get { return _inventory; } }
 
 	private void Awake()
     {

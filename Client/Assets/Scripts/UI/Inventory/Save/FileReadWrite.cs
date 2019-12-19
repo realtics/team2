@@ -9,7 +9,6 @@ public static class FileReadWrite
 		{
 			var binaryFormatter = new BinaryFormatter();
 			binaryFormatter.Serialize(stream, objectToWrite);
-			stream.Close();
 		}
 	}
 
