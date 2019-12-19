@@ -19,6 +19,8 @@ public class LobbyGameManager : GameManager
         _instance = this;
 
 		if (NetworkManager.Instance.IsConnect)
+		{
 			NetworkManager.Instance.LoginToTown();
+		}
     }
 }
