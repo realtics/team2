@@ -42,6 +42,12 @@ public class AssetBundleManager : MonoBehaviour
         SpriteAtlasManager.atlasRequested -= RequestLateBindingAtlas;
         _LoadedMaterialAssetBundle.Unload(false);
     }
+    //private void RequestLateBindingAtlas(string tag, System.Action<SpriteAtlas> action)
+    //{
+    //    var loadOp = AssetBundle.LoadFromFileAsync(Path.Combine(Application.streamingAssetsPath, saBundle));
+    //    var sa = loadOp.assetBundle.LoadAsset<SpriteAtlas>(tag);
+    //    action(sa);
+    //}
 
     private void RequestLateBindingAtlas(string tag, System.Action<SpriteAtlas> action)
     {
