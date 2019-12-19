@@ -26,4 +26,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/LJS.unity
     guid: c1124a690e588104389817b83e428a7b
+  - enabled: 1
+    path: Assets/Scenes/Inventory.unity
+    guid: b2585d1dce67ee747be54a0ca5897335
   m_configObjects: {}

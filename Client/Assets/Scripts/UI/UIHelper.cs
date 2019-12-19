@@ -28,7 +28,7 @@ public class UIHelper : MonoBehaviour
     private UIDungeonClearMenu _dungeonClearMenu;
     [SerializeField]
     private UIMiniMap _miniMap;
-    public UIMiniMap miniMap
+	public UIMiniMap miniMap
     {
         get
         {

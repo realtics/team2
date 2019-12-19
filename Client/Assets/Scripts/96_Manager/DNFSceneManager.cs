@@ -8,6 +8,7 @@ public enum SceneIndex
     Lobby,
     Dungen,
 	LobbySingle,
+	Inventory
 }
 
 public class DNFSceneManager : Single.Singleton<DNFSceneManager>
@@ -21,6 +22,16 @@ public class DNFSceneManager : Single.Singleton<DNFSceneManager>
     {
         SceneManager.LoadScene(Scene);
     }
+
+	public void LoadSceneAddtive(int Scene)
+	{
+		SceneManager.LoadScene(Scene,LoadSceneMode.Additive);
+	}
+
+	public void UnLoadScene(int Scene)
+	{
+		SceneManager.UnloadSceneAsync(Scene);
+	}
 
     public void ChangeRoom(int index, ARROW arrow)
     {
