@@ -15,6 +15,5 @@ public class InventoryPopup : MonoBehaviour
 	public void ClickInventory()
 	{
 		DNFSceneManager.instance.LoadSceneAddtive((int)SceneIndex.Inventory);
-
 	}
 }
