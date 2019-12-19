@@ -38,4 +38,20 @@ public class EquipableItem : Item
     [Space]
     public string Information;
     public EquipmentType equipmentType;
+
+	public override Item GetCopy()
+	{
+		return Instantiate(this);
+	}
+
+	public override void Destroy()
+	{
+		DestroyImmediate(this);
+	}
+
+	public override string GetItemType()
+	{
+		return equipmentType.ToString();
+	}
+
 }

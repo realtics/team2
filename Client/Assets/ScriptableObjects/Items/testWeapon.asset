@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a3a2b901820e084389f2b5956e1c65a, type: 3}
   m_Name: testWeapon
   m_EditorClassIdentifier: 
+  _id: fa8b82ed25dfa2d43a359d464860c369
   itemName: "\u73FE : \uD751\uCC9C\uC758 \uC8FC\uC778 - \uB300\uAC80"
   icon: {fileID: 21300000, guid: df4d1b3d8ad4dc440a11a9cf1a6b2725, type: 3}
   physicalAttackBonus: 1406

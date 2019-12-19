@@ -79,6 +79,8 @@ public class MapTool : EditorWindow
 
     private bool _showAlign = true;
 
+    AssetBundleManager assetBundleManager;
+
     [MenuItem("Window/MapTool/Open Editor %m", false, 1)]
     static void InitWindow()
     {
@@ -334,6 +336,9 @@ public class MapTool : EditorWindow
 
     private void LoadPrefabs()
     {
+        if (AssetBundleManager.instacne == null)
+            assetBundleManager = AssetBundleManager.instacne;
+
         if (allPrefabs == null)
             allPrefabs = new List<GameObject>();
         allPrefabs.Clear();
