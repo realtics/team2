@@ -43,6 +43,8 @@ public class ChattingPanel : MonoBehaviour
 
 		minichatPanel.AddNewChatting(chatData.nickName, chatData.chatting);
 		bigChatPanel.AddNewChatting(chatData.nickName, chatData.chatting);
+
+		_chattings.Remove(chatData);
 	}
 	public void AddNewChatting(string nickName, string chatting)
 	{
