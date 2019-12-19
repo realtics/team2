@@ -27,6 +27,7 @@ public class ChattingPanel : MonoBehaviour
 	private void Awake()
 	{
 		_instance = this;
+		_chattings = new List<ChattingData>();
 	}
 	private void Update()
 	{
