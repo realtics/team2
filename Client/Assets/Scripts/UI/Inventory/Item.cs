@@ -19,5 +19,6 @@ public class Item : ScriptableObject
 		string path = AssetDatabase.GetAssetPath(this);
 		_id = AssetDatabase.AssetPathToGUID(path);
 	}
-}
 #endif
+}
+
