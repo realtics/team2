@@ -22,6 +22,10 @@ AsioServer::~AsioServer()
 
 void AsioServer::Init(const int maxSessionCount)
 {
+	//setlocale(LC_ALL, "");
+	//std::locale::global(std::locale("ko_KR.UTF-8"));
+
+	std::cout << "port : " << PORT_NUMBER << std::endl;
 	_DBMysql.Init();
 	_DBMysql.DBDataLoginSelectAll();
 	_DBMysql.DBMySQLVersion();
@@ -129,6 +133,11 @@ void AsioServer::ProcessPacket(const int sessionID, const char* pData)
 		SendPkt.Init();
 
 		SendPkt.sessionID = _sessionID;
+
+
+		// 임시
+		//int tempsadf = _DBMysql.DBSignUp("aaaa", "eeee", "이이이이");
+		// 임시 
 
 		// DB 체크
 		SendPkt.checkResult = _DBMysql.DBLoginCheckUserID(pPacket->userID);
@@ -307,9 +316,8 @@ void AsioServer::ProcessPacket(const int sessionID, const char* pData)
 		{
 			if (_sessionList[i]->Socket().is_open())
 			{
-				//std::cout << "*확인! " << _sessionList[i]->SessionID() << " =?= " << (SendPkt.sessionID - FIRST_SESSION_INDEX) << std::endl;
-				//if (_sessionList[i]->SessionID() == (SendPkt.sessionID - FIRST_SESSION_INDEX))
-				//	continue;
+				if (_sessionList[i]->SessionID() == (SendPkt.sessionID - FIRST_SESSION_INDEX))
+					continue;
 
 				_sessionList[i]->PostSend(false, std::strlen(sendStr2.c_str()), (char*)sendStr2.c_str());
 			}

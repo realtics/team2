@@ -108,9 +108,22 @@ int DBMySQL::DBSignUp(std::string inputID, std::string inputPW, std::string inpu
 		int DBState = mysql_query(_pConnection, DBQuery);
 		if (DBState == 0)
 		{
+			std::cout << DBState << " 에러 : " << std::endl;
+
 			_pSqlResult = mysql_store_result(_pConnection);
 
 			mysql_free_result(_pSqlResult);
+		}
+		else
+		{
+			std::cout << "insert 성공 " << std::endl;
+
+			_pSqlResult = mysql_store_result(_pConnection);
+
+			mysql_free_result(_pSqlResult);
+
+
+			return RESULT_SIGN_UP_CHECK::RESULT_SIGN_UP_CHECK_SUCCESS;
 		}
 	}
 

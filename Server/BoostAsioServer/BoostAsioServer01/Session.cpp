@@ -148,12 +148,17 @@ void Session::Deserialization(char* jsonData)
 
 	std::cout << "[클라->서버][Size:" << packetSize << "] " << jsonData << std::endl;
 
+	//std::string stringJsonData1 = jsonData;
+	//std::string stringJsonData2 = stringJsonData1.substr(25, 3);
+	//int packetIndex = atoi(stringJsonData2.c_str());
+
 	boost::property_tree::ptree ptRecv;
 	std::istringstream iss(jsonData);
 	boost::property_tree::read_json(iss, ptRecv);
 
 	boost::property_tree::ptree& children = ptRecv.get_child("header");
 	short packetIndex = children.get<short>("packetIndex");
+
 	//short packetSize = children.get<short>("packetSize");
 	
 	switch (packetIndex)

@@ -1,0 +1,18 @@
+﻿  AsioServer.cpp
+D:\github\team2\Server\BoostAsioServer\BoostAsioServer01\AsioServer.cpp(193,98): warning C4267: '인수': 'size_t'에서 'const int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\github\team2\Server\BoostAsioServer\BoostAsioServer01\AsioServer.cpp(243,98): warning C4267: '인수': 'size_t'에서 'const int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\github\team2\Server\BoostAsioServer\BoostAsioServer01\AsioServer.cpp(322,92): warning C4267: '인수': 'size_t'에서 'const int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\github\team2\Server\BoostAsioServer\BoostAsioServer01\AsioServer.cpp(381,92): warning C4267: '인수': 'size_t'에서 'const int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\github\team2\Server\BoostAsioServer\BoostAsioServer01\AsioServer.cpp(455,92): warning C4267: '인수': 'size_t'에서 'const int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\github\team2\Server\BoostAsioServer\BoostAsioServer01\AsioServer.cpp(486,41): warning C4267: '초기화 중': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\github\team2\Server\BoostAsioServer\BoostAsioServer01\AsioServer.cpp(504,40): warning C4267: '초기화 중': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\github\team2\Server\BoostAsioServer\BoostAsioServer01\AsioServer.cpp(509,39): warning C4267: '초기화 중': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\github\team2\Server\BoostAsioServer\BoostAsioServer01\AsioServer.cpp(512,39): warning C4267: '초기화 중': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\github\team2\Server\BoostAsioServer\BoostAsioServer01\AsioServer.cpp(572,91): warning C4267: '인수': 'size_t'에서 'const int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\github\team2\Server\BoostAsioServer\BoostAsioServer01\AsioServer.cpp(620,91): warning C4267: '인수': 'size_t'에서 'const int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  코드를 생성하고 있습니다.
+  4 of 2515 functions ( 0.2%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    2 functions had inline decision re-evaluated but remain unchanged
+  코드를 생성했습니다.
+  BoostAsioServer01.vcxproj -> D:\github\team2\Server\BoostAsioServer\x64\Release\BoostAsioServer01.exe
