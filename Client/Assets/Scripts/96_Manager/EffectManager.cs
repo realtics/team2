@@ -22,6 +22,8 @@ public class EffectManager : MonoBehaviour
 	private GameObject _clearCircle;
 	[SerializeField]
 	private GameObject _cutin;
+	[SerializeField]
+	private Transform _cutinParent;
 
 	private void Awake()
 	{
@@ -58,5 +60,8 @@ public class EffectManager : MonoBehaviour
 	public void ShowCutin()
 	{
 		GameObject cutin = ObjectPoolManager.Instance.GetRestObject(_cutin);
+		cutin.transform.SetParent(_cutinParent);
+		cutin.transform.localScale = Vector3.one;
+		cutin.transform.localPosition = Vector3.zero;
 	}
 }

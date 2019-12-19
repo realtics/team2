@@ -17,7 +17,7 @@ public class MiniChatPanel : MonoBehaviour
 		miniChatText.text.Replace("\\n", "\n");
 
 		Vector3 chatHeight = ((RectTransform)miniChatText.transform).sizeDelta;
-		chatHeight.y = 40.0f * (++_chatCount);
+		chatHeight.y = 43.0f * (++_chatCount) + 10.0f;
 		((RectTransform)miniChatText.transform).sizeDelta = chatHeight;
 
 		miniChatContent.AddNetChatting(_chatCount);
