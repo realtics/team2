@@ -6,12 +6,12 @@ public class BigChatContentsVerticalPosition : MonoBehaviour
 {
 	public void AddNetChatting(int count)
 	{
-		if (count <= 22)
+		if (count <= 21)
 			return;
 
 		RectTransform rtTrf = (RectTransform)transform;
 		Vector3 pos = rtTrf.localPosition;
-		pos.y = (count - 22) * 35.0f + 5.0f;
+		pos.y = (count - 21) * 37.0f + 5.0f;
 		rtTrf.localPosition = pos;
 	}
 }

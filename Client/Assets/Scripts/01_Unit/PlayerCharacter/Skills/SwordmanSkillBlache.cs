@@ -12,6 +12,7 @@ public class SwordmanSkillBlache : CharacterSkill
         _instanceEffect = ObjectPoolManager.Instance.GetRestObject(_effectPrefab);
         _instanceEffect.transform.position = _sender.Attacker.position;
         SetSpriteFlipForward();
+		EffectManager.Instance.ShowCutin();
 
 		//GameObject canvas = GameObject.Find("CutinParent");
 		//if (canvas != null)

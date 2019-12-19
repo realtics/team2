@@ -2427,10 +2427,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3290036672774756142, guid: d5c170d3d3cb9d444bcf0b102b7f01af,
         type: 3}
-      propertyPath: _cutin
+      propertyPath: _cutinParent
       value: 
-      objectReference: {fileID: 2271839019722285728, guid: 64f84d7016819284ca01baaa70a59f80,
-        type: 3}
+      objectReference: {fileID: 217537398}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d5c170d3d3cb9d444bcf0b102b7f01af, type: 3}
 --- !u!4 &1948332029 stripped
