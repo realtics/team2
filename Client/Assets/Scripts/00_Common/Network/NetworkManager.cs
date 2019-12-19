@@ -136,10 +136,10 @@ public class NetworkManager : MonoBehaviour
     {
         if (_isLogin)
         {
-            if (!IsConcurrentUserList)
-            {
-                ConcurrentUser();
-            }
+            //if (!IsConcurrentUserList)
+            //{
+            //    ConcurrentUser();
+            //}
 
 
             //// 서버에서 새로운 플레이어가 접속했다고 알려주는 역할임
@@ -595,7 +595,7 @@ public class NetworkManager : MonoBehaviour
         DebugLogList("NewLoginSucsess() end");
     }
 
-    private void ConcurrentUser()
+    public void ConcurrentUser()
     {
         DebugLogList("ConcurrentUser() start");
         string jsonData;
@@ -879,6 +879,7 @@ public class NetworkManager : MonoBehaviour
 	{
 		NewLogin();
 		NewLoginSucsess();
+		ConcurrentUser();
 	}
 
 	public void SendChat(string chat)
