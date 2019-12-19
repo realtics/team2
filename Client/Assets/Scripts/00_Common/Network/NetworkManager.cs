@@ -187,7 +187,7 @@ public class NetworkManager : MonoBehaviour
                 spawnedPlayer.SetFlipX(spawnData.direction.x < 0 ? true : false);
                 newPlayer.transform.position = spawnData.position;
                 _characters.Add(spawnData.id, spawnedPlayer);
-				_spawnCharacters.Remove(spawnData);
+				_spawnCharacters.RemoveAt(0);
 			}
 
 			ExitUserOff();
@@ -963,5 +963,7 @@ public class NetworkManager : MonoBehaviour
 
 		int resultSize = _sock.Send(sendByte);
 		DebugLogList("UserExit() end");
+
+		_characters.Clear();
 	}
 }
