@@ -23,8 +23,8 @@ public class DungeonSlot : MonoBehaviour
             MapLoader.instance.SetMap(_dungeonFileName);
             DNFSceneManager.instance.LoadScene((int)SceneIndex.Dungen);
 
-			//if (NetworkManager.Instance != null)
-			//	NetworkManager.Instance.DisconnectServer();
+			if (NetworkManager.Instance != null)
+				NetworkManager.Instance.DisconnectServer();
         });
     }
 }
