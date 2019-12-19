@@ -5,6 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
+	private void Update()
+	{
+		CheckLogin();
+	}
 	public void GameStart()
 	{
 		// scene Town
@@ -15,5 +19,13 @@ public class MainMenu : MonoBehaviour
 	{
 		// scene Town
 		SceneManager.LoadScene((int)SceneIndex.LobbySingle);
+	}
+
+	private void CheckLogin()
+	{
+		if (!NetworkManager.Instance.Login)
+			return;
+
+		GameStart();
 	}
 }
