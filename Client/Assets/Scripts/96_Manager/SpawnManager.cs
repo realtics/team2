@@ -60,8 +60,6 @@ public class SpawnManager : Single.Singleton<SpawnManager>
         LoadAssetBundle("dungeon/potal");
         foreach (var item in dungeon.potalTransportinfos)
         {
-            //GameObject obj = LoadResourceFromCache(item.filePath);
-
             GameObject obj = LoadAsset(item.filePath);
 
             obj = AddObject(obj, item.position);
