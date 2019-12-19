@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a3a2b901820e084389f2b5956e1c65a, type: 3}
   m_Name: testPants
   m_EditorClassIdentifier: 
+  _id: 744c5b43cc1798f4e8d93bfc14224dc0
   itemName: "\u8D85 \uD558\uB298\uC5F0 - \uAEBC\uC9C0\uC9C0 \uC54A\uB294 \uBC1D\uC74C"
   icon: {fileID: 21300000, guid: 96b74e8c0990b8c4ebc6f839618354ef, type: 3}
   physicalAttackBonus: 0

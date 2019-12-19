@@ -3,30 +3,61 @@ using UnityEngine;
 
 public class ItemSaveManager : MonoBehaviour
 {
+	[SerializeField] ItemDatabase itemDatabase;
+
 	private const string InventoryFileName = "Inventory";
-	private const string EquipmentFilename = "Equipment";
+	private const string EquipmentFileName = "Equipment";
 
-	//public void LoadInventory()
-	//{
-	//	ItemContainerSaveData savedSlots = ItemSaveIO.LoadItems(InventoryFileName);
-	//	if (savedSlots == null) return;
-	//	InventoryManager.Instance.Inventory.
+	public void LoadInventory()
+	{
+		ItemContainerSaveData savedSlots = ItemSaveIO.LoadItems(InventoryFileName);
+		if (savedSlots == null) return;
+		InventoryManager.Instance.Inventory.Clear();
 
-	//	for (int i = 0; i < savedSlots.SavedSlots.Length; i++)
-	//	{
-	//		ItemSlot itemSlot = character.Inventory.ItemSlots[i];
-	//		ItemSlotSaveData savedSlot = savedSlots.SavedSlots[i];
+		for (int i = 0; i < savedSlots.SavedSlots.Length; i++)
+		{
+			ItemSlot itemSlot = InventoryManager.Instance.Inventory.ItemSlots[i];
+			ItemSlotSaveData savedSlot = savedSlots.SavedSlots[i];
 
-	//		if (savedSlot == null)
-	//		{
-	//			itemSlot.Item = null;
-	//		}
-	//		else
-	//		{
-	//			itemSlot.Item = itemDatabase.GetItemCopy(savedSlot.ItemID);
-	//		}
-	//	}
-	//}
+			if (savedSlot == null)
+			{
+				itemSlot.Item = null;
+			}
+			else
+			{
+				//itemSlot.Item = itemDatabase.GetItemCopy(savedSlot.ItemID);
+				InventoryManager.Instance.Inventory.AddItem(itemDatabase.GetItemCopy(savedSlot.ItemID));
+
+			}
+		}
+	}
+
+	public void LoadEquipment()
+	{
+		ItemContainerSaveData savedSlots = ItemSaveIO.LoadItems(EquipmentFileName);
+		if (savedSlots == null) return;
+
+		foreach (ItemSlotSaveData savedSlot in savedSlots.SavedSlots)
+		{
+			if (savedSlot == null)
+			{
+				continue;
+			}
+
+			Item item = itemDatabase.GetItemCopy(savedSlot.ItemID);
+			InventoryManager.Instance.Inventory.AddItem(item);
+			InventoryManager.Instance.Equip((EquipableItem)item);
+		}
+	}
+	public void SaveInventory()
+	{
+		SaveItems(InventoryManager.Instance.Inventory.ItemSlots, InventoryFileName);
+	}
+
+	public void SaveEquipment()
+	{
+		SaveItems(InventoryManager.Instance.EquipmentPanel.EquipmentSlots, EquipmentFileName);
+	}
 
 	private void SaveItems(IList<ItemSlot> itemSlots, string fileName)
 	{
