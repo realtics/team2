@@ -19,19 +19,44 @@ public class InventoryManager : MonoBehaviour
 	private ItemToolTip _inventoryTooltip;
 	[SerializeField]
 	private ItemToolTip _equipPanelTooltip;
+	[SerializeField] 
+	private ItemSaveManager _itemSaveManager;
+	[SerializeField]
+	private ChracterStatInfo _chracterStatInfo;
 
 	public ItemToolTip InventoryTooltip{ get { return _inventoryTooltip; } }
 	public ItemToolTip EquipPanelTooltip { get { return _equipPanelTooltip; } }
 	public Inventory Inventory { get { return _inventory; } }
+	public EquipmentPanel EquipmentPanel { get { return _equipmentPanel; } }
 
 	private void Awake()
     {
 		_instance = this;
 		_inventory.OnItemClickEvent += EquipFromInventory;
         _equipmentPanel.OnItemClickEvent += UnequipFromEquipPanel;
-    }
+	}
 
-    private void EquipFromInventory(Item item)
+	private void Start()
+	{
+		if (_itemSaveManager != null)
+		{
+			_itemSaveManager.LoadEquipment();
+			_itemSaveManager.LoadInventory();
+			_chracterStatInfo.SetCharacterInfo();
+		}
+	}
+
+	private void OnDestroy()
+	{
+		if (_itemSaveManager != null)
+		{
+			_itemSaveManager.SaveEquipment();
+			_itemSaveManager.SaveInventory();
+		}
+	}
+
+
+	private void EquipFromInventory(Item item)
     {
         if(item is EquipableItem)
         {

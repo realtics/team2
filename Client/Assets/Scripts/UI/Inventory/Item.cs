@@ -13,6 +13,26 @@ public class Item : ScriptableObject
 
 	public string ID { get { return _id; } }
 
+	public virtual Item GetCopy()
+	{
+		return this;
+	}
+
+	public virtual void Destroy()
+	{
+
+	}
+
+	public virtual string GetItemType()
+	{
+		return "";
+	}
+
+	public virtual string GetDescription()
+	{
+		return "";
+	}
+
 #if UNITY_EDITOR
 	private void OnValidate()
 	{

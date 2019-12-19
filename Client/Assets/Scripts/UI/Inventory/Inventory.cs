@@ -15,6 +15,8 @@ public class Inventory : MonoBehaviour, IItemContainer
 
     public event Action<Item> OnItemClickEvent;
 
+	public ItemSlot[] ItemSlots { get { return _itemSlots;} }
+
     private void Start()
     {
         for(int i =0; i < _itemSlots.Length; i++)
@@ -118,16 +120,15 @@ public class Inventory : MonoBehaviour, IItemContainer
 		//return true;
 	}
 
-	//public void Clear()
-	//{
-	//	for (int i = 0; i < _itemSlots.Count; i++)
-	//	{
-	//		if (ItemSlots[i].Item != null && Application.isPlaying)
-	//		{
-	//			ItemSlots[i].Item.Destroy();
-	//		}
-	//		ItemSlots[i].Item = null;
-	//		ItemSlots[i].Amount = 0;
-	//	}
-	//}
+	public void Clear()
+	{
+		for (int i = 0; i < _itemSlots.Length; i++)
+		{
+			if (_itemSlots[i].Item != null && Application.isPlaying)
+			{
+				_itemSlots[i].Item.Destroy();
+			}
+			_itemSlots[i].Item = null;
+		}
+	}
 }

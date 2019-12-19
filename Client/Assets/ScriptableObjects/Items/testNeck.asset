@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a3a2b901820e084389f2b5956e1c65a, type: 3}
   m_Name: testNeck
   m_EditorClassIdentifier: 
+  _id: ef2a13482a3718947b689a3809d779cb
   itemName: "\u8D85 \uBB3C\uC624\uB984 - \uB298\uD478\uB974\uAC8C \uC775\uB294 \uC0B0\uB4E4"
   icon: {fileID: 21300000, guid: 326f94c8405cef542bc4297acdef8acf, type: 3}
   physicalAttackBonus: 0

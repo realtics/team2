@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a3a2b901820e084389f2b5956e1c65a, type: 3}
   m_Name: testRing
   m_EditorClassIdentifier: 
+  _id: 906935775bcb6274fa9b0cf6c7fa481f
   itemName: "\uD751\uC5FC : \uC7A0\uC2DD\uB418\uB294 \uD0DC\uC591"
   icon: {fileID: 21300000, guid: f69c615e4b2a6464a88e9a8e2e65a88f, type: 3}
   physicalAttackBonus: 0
