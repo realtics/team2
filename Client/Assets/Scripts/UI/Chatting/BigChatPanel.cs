@@ -12,6 +12,13 @@ public class BigChatPanel : MonoBehaviour
 
 	private int _chatCount = 0;
 
+	private void Update()
+	{
+		if (Input.GetKeyDown(KeyCode.Return))
+		{
+			SendChatButton();
+		}
+	}
 
 	public void AddNewChatting(string nickName, string chatting)
 	{
