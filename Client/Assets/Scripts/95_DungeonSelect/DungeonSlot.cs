@@ -24,7 +24,7 @@ public class DungeonSlot : MonoBehaviour
             DNFSceneManager.instance.LoadScene((int)SceneIndex.Dungen);
 
 			if (NetworkManager.Instance != null)
-				NetworkManager.Instance.DisconnectServer();
+				NetworkManager.Instance.UserExit();
         });
     }
 }
