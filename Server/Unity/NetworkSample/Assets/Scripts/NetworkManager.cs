@@ -252,23 +252,23 @@ public class NetworkManager : MonoBehaviour
 				// TODO : 인코딩 해결 할 것
 				//string recvData = Encoding.UTF8.GetString(state.RecvBuffer);
 				
-				string recvData = Encoding.UTF8.GetString(state.RecvBuffer, 0, bytesRead);
-				//string recvData = Encoding.GetEncoding("EUC-KR").GetString(state.RecvBuffer, 0, bytesRead);
+				//string recvData = Encoding.UTF8.GetString(state.RecvBuffer, 0, bytesRead);
+				string recvData = Encoding.GetEncoding("EUC-KR").GetString(state.RecvBuffer, 0, bytesRead);
 				DebugLogList(recvData);
-                int bufLen = recvData.Length;
-                Debug.Log("recvData[" + bufLen + "]= " + recvData);
+				var JsonData = JsonConvert.DeserializeObject<PACKET_HEADER_BODY>(recvData);
 
-				// TODO : EUC-KR로 한글이 들어 올 경우, 패킷 자르기 시, 서버에서 잰 길이와 클라에서 받는 길이가 다르게 판정됨
-				// 패킷 자르기
-				string recvDataSubstring = recvData.Substring(45, 3);
-				string[] recvDataSplit = recvDataSubstring.Split('"');
-				int recvDataSize = int.Parse(recvDataSplit[0]);
+				//int bufLen = recvData.Length;
+				//Debug.Log("recvData[" + bufLen + "]= " + recvData);
 
-				string recvDataSubstring2 = recvData.Substring(0, recvDataSize);
-				DebugLogList(recvDataSubstring2);
-				var JsonData = JsonConvert.DeserializeObject<PACKET_HEADER_BODY>(recvDataSubstring2);
+				//// TODO : EUC-KR로 한글이 들어 올 경우, 패킷 자르기 시, 서버에서 잰 길이와 클라에서 받는 길이가 다르게 판정됨
+				//// 패킷 자르기
+				//string recvDataSubstring = recvData.Substring(45, 3);
+				//string[] recvDataSplit = recvDataSubstring.Split('"');
+				//int recvDataSize = int.Parse(recvDataSplit[0]);
 
-				//var JsonData = JsonConvert.DeserializeObject<PACKET_HEADER_BODY>(recvData);
+				//string recvDataSubstring2 = recvData.Substring(0, recvDataSize);
+				//DebugLogList(recvDataSubstring2);
+				//var JsonData = JsonConvert.DeserializeObject<PACKET_HEADER_BODY>(recvDataSubstring2);
 
 				DebugLogList("ReceiveCallback - ProcessPacket - start");
                 ProcessPacket(JsonData.header.packetIndex, recvData);
