@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using System;
 
 public enum ALIGN
 { 
@@ -30,22 +31,35 @@ public class MapTool : EditorWindow
     public static bool overWrite;
     public static bool snapping;
 
+    public bool areaDeletion;
+    public bool areaInsertion;
+
     //align
     private Vector2 _alignPos;
     private int _alignId;
 
     private bool _isPlaying;
 
+    private bool _switchTool;
+
     // Tile.
     static SpriteRenderer gizmoTileSpriteRenderer;
 
     public float layerDepthMultiplier = 0.1f;
+
+    public Vector3 beginPos;
+    public Vector3 endPos;
 
     public static int currentLayer;
     public static Layer activeLayer;
 
     private Tool _currentTool;
 
+    //Holding certain keys
+    public bool holdingR, holdingEscape, holdingRightMouse;
+    public bool holdingTab, holdingS, holdingA;
+
+    public static bool eraseTool;
     public static bool mouseDown;
 
     public static GameObject gizmoCursor, gizmoTile;
@@ -99,6 +113,7 @@ public class MapTool : EditorWindow
     private void OnFocus()
     {
         LoadPrefabs();
+        ShowLog("MapMaker Activated");
         if (Tools.current != Tool.None)
             _currentTool = Tools.current;
 
@@ -128,6 +143,13 @@ public class MapTool : EditorWindow
         isActivateTools = true;
 
         _layers = new List<Layer>();
+
+        _switchTool = false;
+        //is this evenright?
+
+        beginPos = Vector3.zero;
+        endPos = Vector3.zero;
+
     }
     private void SceneGUI(SceneView sceneView)
     {
@@ -152,6 +174,38 @@ public class MapTool : EditorWindow
             isActivateTools = true;
             Tools.current = Tool.None;
         }
+        if (currentEvent.type == EventType.KeyDown && currentEvent.keyCode == KeyCode.Escape)
+        {
+            holdingEscape = true;
+        }
+
+        if (currentEvent.type == EventType.MouseDown && currentEvent.button == 1)
+        {
+            holdingEscape = true;
+        }
+        if (currentEvent.type == EventType.MouseUp && currentEvent.button == 1)
+        {
+            holdingEscape = true;
+            _switchTool = false;
+        }
+        if (currentEvent.type == EventType.KeyUp && currentEvent.keyCode == KeyCode.Escape)
+        {
+            holdingEscape = false;
+
+            _switchTool = false;
+        }
+        if (holdingEscape && _switchTool == false)
+        {
+            isActivateTools = !isActivateTools;
+
+            if (isActivateTools)
+            {
+                ActivateTools();
+            }
+            else
+                Tools.current = _currentTool;
+            _switchTool = true;
+        }
 
         if (Tools.current != Tool.None)
             isActivateTools = false;
@@ -174,9 +228,9 @@ public class MapTool : EditorWindow
 
         }
 
-        InputMouse();
-        CursorUpdate();
+        InputMouse(currentEvent);
 
+        CursorUpdate();
         Repaint();
     }
 
@@ -273,7 +327,7 @@ public class MapTool : EditorWindow
     {
         if (_layers != null)
             _layers.Clear();
-        foreach (var item in Object.FindObjectsOfType<Layer>())
+        foreach (var item in FindObjectsOfType<Layer>())
         {
             _layers.Add(item);
         }
@@ -341,9 +395,8 @@ public class MapTool : EditorWindow
             gizmoCursor.SetActive(true);
     }
 
-    private void InputMouse()
+    private void InputMouse(Event currentEvent)
     {
-        Event currentEvent = Event.current;
         switch (currentEvent.type)
         {
             case EventType.MouseDown:
@@ -373,13 +426,179 @@ public class MapTool : EditorWindow
                 break;
         }
 
-        if (mouseDown && currentEvent.shift == false)
+        if (mouseDown && currentEvent.shift == false && areaInsertion == false)
         {
             if (snapping == false)
                 mouseDown = false;
 
             AddTile(gizmoCursor.transform.position, currentLayer);
         }
+        if (mouseDown && currentEvent.shift == true && areaInsertion == false && currentEvent.control == false)
+        {
+            areaInsertion = true;
+            beginPos = gizmoCursor.transform.position;
+        }
+
+        //Draws Rectangle
+        if (areaInsertion || areaDeletion)
+        {
+            DrawAreaRectangle();
+            SceneView.RepaintAll();
+        }
+        
+		//Cancel Area insertion if shift in released
+		if (mouseDown && currentEvent.shift == false && areaInsertion == true)
+			areaInsertion =false;
+
+		//Starts AreaDeletion
+		if (mouseDown && currentEvent.shift == true && areaDeletion==false && currentEvent.control==true) {
+			areaDeletion = true;
+			beginPos = gizmoTile.transform.position;
+			ShowLog("StartedAreaDELETION");
+		}
+
+
+		//Deletes Elements in that area
+		if (mouseDown == false && areaDeletion == true && currentEvent.shift && currentEvent.control) {
+			ShowLog("AreaDELETION");
+			AreaDeletion();
+			areaDeletion = false;
+		}
+
+		//Intantiates elements in that area
+		if(mouseDown==false && areaInsertion==true && currentEvent.shift && currentEvent.control==false)
+		{
+			
+			AreaInsertion();
+			areaInsertion=false;
+
+		}
+
+		//Removes single tile
+		if (mouseDown&& currentEvent.control && areaDeletion==false) {
+		
+			RemoveTile();
+		}
+    }
+
+    private void RemoveTile()
+    {
+        GameObject GOtoDelete = isObjectAt(new Vector3(gizmoCursor.transform.position.x, gizmoCursor.transform.position.y,
+            currentLayer * layerDepthMultiplier), currentLayer);
+        Undo.DestroyObjectImmediate(GOtoDelete);
+        DestroyImmediate(GOtoDelete);
+    }
+
+    private void AreaInsertion()
+    {
+        Vector2 topLeft;
+        Vector2 downRight;
+
+        endPos = gizmoTile.transform.position;
+
+        topLeft.y = endPos.y > beginPos.y ? endPos.y : beginPos.y;
+
+        topLeft.x = endPos.x < beginPos.x ? beginPos.x : endPos.x;
+
+        downRight.y = endPos.y > beginPos.y ? beginPos.y : endPos.y;
+
+        downRight.x = endPos.x < beginPos.x ? endPos.x : beginPos.x;
+
+        ShowLog(downRight);
+        ShowLog(topLeft);
+        for (float y = downRight.y; y <= topLeft.y; y++)
+        {
+            for (float x = downRight.x; x <= topLeft.x; x++)
+            {
+
+                GameObject go = isObjectAt(new Vector3(x, y, currentLayer * layerDepthMultiplier), currentLayer);
+
+                //If there no object than create it
+                if (go == null)
+                {
+
+                    InstantiateTile(new Vector3(x, y, layerDepthMultiplier), currentLayer);
+
+
+                }//in this case there is go in there 
+                else if (overWrite)
+                {
+                    Undo.DestroyObjectImmediate(go);
+                    DestroyImmediate(go);
+
+                    InstantiateTile(new Vector3(x, y), currentLayer);
+
+                }
+            }
+        }
+        ShowLog("Area Inserted");
+    }
+
+    private void AreaDeletion()
+    {
+        Vector2 topLeft;
+        Vector2 downRight;
+
+        endPos = gizmoTile.transform.position;
+
+        topLeft.y = endPos.y > beginPos.y ? endPos.y : beginPos.y;
+
+        topLeft.x = endPos.x < beginPos.x ? beginPos.x : endPos.x;
+
+        downRight.y = endPos.y > beginPos.y ? beginPos.y : endPos.y;
+
+        downRight.x = endPos.x < beginPos.x ? endPos.x : beginPos.x;
+
+        ShowLog(downRight);
+        ShowLog(topLeft);
+
+        //Goes througt all units
+        for (float y = downRight.y; y <= topLeft.y; y++)
+        {
+
+            for (float x = downRight.x; x <= topLeft.x; x++)
+            {
+
+                GameObject GOtoDelete = isObjectAt(new Vector3(x, y, currentLayer * layerDepthMultiplier), currentLayer);
+                //If theres something then delete it
+                if (GOtoDelete != null)
+                {
+                    Undo.DestroyObjectImmediate(GOtoDelete);
+                    DestroyImmediate(GOtoDelete);
+                }
+            }
+        }
+        ShowLog("Area Deleted");
+    }
+
+    private void DrawAreaRectangle()
+    {
+        Vector4 area = GetAreaBounds();
+        //topline
+        Handles.DrawLine(new Vector3(area[3] + 0.5f, area[0] + 0.5f, 0), new Vector3(area[1] - 0.5f, area[0] + 0.5f, 0));
+        //downline
+        Handles.DrawLine(new Vector3(area[3] + 0.5f, area[2] - 0.5f, 0), new Vector3(area[1] - 0.5f, area[2] - 0.5f, 0));
+        //leftline
+        Handles.DrawLine(new Vector3(area[3] + 0.5f, area[0] + 0.5f, 0), new Vector3(area[3] + 0.5f, area[2] - 0.5f, 0));
+        //rightline
+        Handles.DrawLine(new Vector3(area[1] - 0.5f, area[0] + 0.5f, 0), new Vector3(area[1] - 0.5f, area[2] - 0.5f, 0));
+    }
+    private Vector4 GetAreaBounds()
+    {
+        Vector2 topLeft;
+        Vector2 downRight;
+
+        endPos = gizmoCursor.transform.position;
+
+        topLeft.y = endPos.y > beginPos.y ? endPos.y : beginPos.y;
+
+        topLeft.x = endPos.x < beginPos.x ? beginPos.x : endPos.x;
+
+        downRight.y = endPos.y > beginPos.y ? beginPos.y : endPos.y;
+
+        downRight.x = endPos.x < beginPos.x ? endPos.x : beginPos.x;
+
+        return new Vector4(topLeft.y, downRight.x, downRight.y, topLeft.x);
     }
     private void CursorUpdate()
     {
@@ -489,12 +708,12 @@ public class MapTool : EditorWindow
 
         if (_layers.Count == 0)
         {
-            foreach (Layer item in Object.FindObjectsOfType<Layer>())
+            foreach (Layer item in FindObjectsOfType<Layer>())
             {
                 _layers.Add(item);
             }
         }
-        foreach (Layer item in Object.FindObjectsOfType<Layer>())
+        foreach (Layer item in FindObjectsOfType<Layer>())
         {
             if (item.priority == currentLayer)
             {
@@ -566,6 +785,7 @@ public class MapTool : EditorWindow
         }
     }
 
+
     Vector2 _alignId2Vec(int alignIndex)
     {
         Vector2 aux;
@@ -575,5 +795,27 @@ public class MapTool : EditorWindow
 
         return aux;
     }
-
+    void ShowLog(object msg)
+    {
+        if (_showConsole)
+        {
+            Debug.Log(msg);
+        }
+    }
+    [MenuItem("Window/MapTool/Increment Layer &d", false, 35)]
+    static void IncrementLayer()
+    { 
+        if (Instance == null)
+            return;
+        currentLayer++;
+        Undo.RecordObject(Instance, "Snapping");
+    }
+    [MenuItem("Window/MapTool/Decrement Layer &#d", false, 36)]
+    static void DecrementLayer()
+    {
+        if (Instance == null)
+            return;
+        currentLayer--;
+        Undo.RecordObject(Instance, "Snapping");
+    }
 }
