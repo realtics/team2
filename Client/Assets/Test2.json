@@ -1,0 +1,30 @@
+{
+  "DungeonInfos": [
+    {
+      "position": {
+        "x": 0.0,
+        "y": 0.0,
+        "magnitude": 0.0,
+        "sqrMagnitude": 0.0
+      },
+      "objectinfos": [
+        {
+          "filePath": "Dungeon/ForceAltar",
+          "position": {
+            "x": -0.04,
+            "y": -6.05,
+            "z": -4.17578125
+          }
+        }
+      ],
+      "monsterInfos": [],
+      "potalTransportinfos": [],
+      "isBoss": false,
+      "PlayerStartPosition": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      }
+    }
+  ]
+}

@@ -140,7 +140,7 @@ public class JsonManagement
         potalTransportinfo.position = obj.transform.position;
         potalTransportinfo.arrow = potal.arrow;
 
-        potalTransportinfo.spotPosition = new Vector3[potal.spotGatePosition.Length];
+        potalTransportinfo.spotPosition = new SerializableVector3[potal.spotGatePosition.Length];
         for (int i = 0; i < potal.spotGatePosition.Length; ++i)
         { 
             potalTransportinfo.spotPosition[i] = potal.spotGatePosition[i].position;
