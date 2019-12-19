@@ -163,7 +163,6 @@ public class NetworkManager : MonoBehaviour
             {
                 GameObject newPlayer = Instantiate(playerPrefab);
 				CharacterSpawnData spawnData = _spawnCharacters[0];
-				_spawnCharacters.Remove(spawnData);
 
 				if (spawnData.id == _myId)
                 {
@@ -188,9 +187,10 @@ public class NetworkManager : MonoBehaviour
                 spawnedPlayer.SetFlipX(spawnData.direction.x < 0 ? true : false);
                 newPlayer.transform.position = spawnData.position;
                 _characters.Add(spawnData.id, spawnedPlayer);
-            }
+				_spawnCharacters.Remove(spawnData);
+			}
 
-            ExitUserOff();
+			ExitUserOff();
         }
     }
 
