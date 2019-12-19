@@ -79,6 +79,7 @@ public class MapTool : EditorWindow
 
     private bool _showAlign = true;
 
+    AssetBundleManager assetBundleManager;
 
     [MenuItem("Window/MapTool/Open Editor %m", false, 1)]
     static void InitWindow()
@@ -145,7 +146,6 @@ public class MapTool : EditorWindow
         _layers = new List<Layer>();
 
         _switchTool = false;
-        //is this evenright?
 
         beginPos = Vector3.zero;
         endPos = Vector3.zero;
@@ -228,7 +228,7 @@ public class MapTool : EditorWindow
 
         }
 
-        InputMouse(currentEvent);
+        InputMouse(ref currentEvent);
 
         CursorUpdate();
         Repaint();
@@ -249,7 +249,8 @@ public class MapTool : EditorWindow
             for (int i = 0; i < allPrefabs.Count; i++)
             {
                 if (allPrefabs[i] != null && allPrefabs[i].name != "")
-                    contents[i] = new GUIContent(allPrefabs[i].name, AssetPreview.GetAssetPreview(allPrefabs[i]));
+                    //contents[i] = new GUIContent(allPrefabs[i].name, AssetPreview.GetAssetPreview(allPrefabs[i]));
+                    contents[i] = new GUIContent(AssetPreview.GetAssetPreview(allPrefabs[i]));
                 if (contents[i] == null)
                     contents[i] = GUIContent.none;
             }
@@ -335,6 +336,9 @@ public class MapTool : EditorWindow
 
     private void LoadPrefabs()
     {
+        if (AssetBundleManager.instacne == null)
+            assetBundleManager = AssetBundleManager.instacne;
+
         if (allPrefabs == null)
             allPrefabs = new List<GameObject>();
         allPrefabs.Clear();
@@ -346,7 +350,6 @@ public class MapTool : EditorWindow
             if (loadedObject.GetType() == typeof(GameObject))
                 allPrefabs.Add(loadedObject as GameObject);
         }
-
     }
     private GameObject isObjectAt(Vector2 tilePos, int currentLayer)
     {
@@ -357,27 +360,28 @@ public class MapTool : EditorWindow
 
             ArtificialPosition artPos = gameObject.GetComponent<ArtificialPosition>();
 
-            if (artPos != null)
+            if (artPos == null)
             {
-                if (artPos.position == tilePos && gameObject.name != "gizmoCursor")
+                if (gameObject.transform.localPosition != (Vector3)tilePos)
                 {
-                    return gameObject;
+                    continue;
+                }
+                if(gameObject.name == "gizmoCursor" || gameObject.name == "gizmoTile")
+                {
+                    continue;
+                }
+
+                if (gameObject.transform.parent != null && gameObject.transform.parent.GetComponent<Layer>().priority == currentLayer)
+                {
+                    if (gameObject.transform.parent.parent == null)
+                    {
+                        return gameObject;
+                    }
                 }
             }
-
-            if (gameObject.transform.localPosition != (Vector3)tilePos)
+            else
             {
-                return null;
-            }
-            if (gameObject.name == "gizmoCursor" || gameObject.name == "gizmoTile")
-            {
-                return null;
-            }
-
-            if (gameObject.transform.parent != null
-                && gameObject.transform.parent.GetComponent<Layer>().priority == currentLayer)
-            {
-                if (gameObject.transform.parent.parent == null)
+                if (artPos.position == tilePos && gameObject.name != "gizmoCursor")
                 {
                     return gameObject;
                 }
@@ -395,7 +399,7 @@ public class MapTool : EditorWindow
             gizmoCursor.SetActive(true);
     }
 
-    private void InputMouse(Event currentEvent)
+    private void InputMouse(ref Event currentEvent)
     {
         switch (currentEvent.type)
         {

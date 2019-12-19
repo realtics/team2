@@ -42,6 +42,12 @@ public class AssetBundleManager : MonoBehaviour
         SpriteAtlasManager.atlasRequested -= RequestLateBindingAtlas;
         _LoadedMaterialAssetBundle.Unload(false);
     }
+    //private void RequestLateBindingAtlas(string tag, System.Action<SpriteAtlas> action)
+    //{
+    //    var loadOp = AssetBundle.LoadFromFileAsync(Path.Combine(Application.streamingAssetsPath, saBundle));
+    //    var sa = loadOp.assetBundle.LoadAsset<SpriteAtlas>(tag);
+    //    action(sa);
+    //}
 
     private void RequestLateBindingAtlas(string tag, System.Action<SpriteAtlas> action)
     {
@@ -58,6 +64,11 @@ public class AssetBundleManager : MonoBehaviour
     {
         StartCoroutine(LoadMaterialFromAssetBundle());
     }
+    //private void LoadMaterial()
+    //{
+    //    _LoadedMaterialAssetBundle = AssetBundle.LoadFromFileAsync(Path.Combine(Application.streamingAssetsPath, maBundle)).assetBundle;
+    //    _LoadedMaterialAssetBundle.LoadAllAssets();
+    //}
     private IEnumerator LoadMaterialFromAssetBundle()
     {
         _LoadedMaterialAssetBundle = AssetBundle.LoadFromFile(Path.Combine(Application.streamingAssetsPath, maBundle));
@@ -67,13 +78,14 @@ public class AssetBundleManager : MonoBehaviour
     public void LoadAssetFromLocalDisk(string assetBundleName)
     {
         _LoadedAssetBundle = AssetBundle.LoadFromFile(Path.Combine(Application.streamingAssetsPath, assetBundleName));
- 
+#if UNITY_EDITOR
         if (_LoadedAssetBundle == null)
         {
             Debug.Log("Failed to load AssetBundle!");
         }
         else
             Debug.Log("Successed to load AssetBundle!");
+#endif
     }
     private void LoadAssetBundleManifest(string assetBundleName)
     {

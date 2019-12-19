@@ -23,7 +23,8 @@ public struct CharacterSpawnData
 
 public class StateObject    // 데이터를 수신하기 위한 상태 객체
 {
-    public Socket WorkSocket = null;                    // 클라이언트 소켓
+
+	public Socket WorkSocket = null;                    // 클라이언트 소켓
     public const int BufferSize = 512;                  // 수신 버퍼의 크기
     public byte[] RecvBuffer = new byte[BufferSize];    // 수신 버퍼
     public void ClearRecvBuffer()
@@ -59,7 +60,7 @@ public class NetworkManager : MonoBehaviour
 	public string appDataPathParent;
 
 	private Socket _sock = null;
-
+	public bool IsConnect { get { return _sock == null ? false : true; } }
 
 	private int _myId = 0;      // 실행한 클라이언트의 ID
 	public int MyId { get { return _myId; } set { _myId = value; } }
@@ -254,17 +255,16 @@ public class NetworkManager : MonoBehaviour
 
     private void Receive(Socket sock)
     {
-        try
+		try
         {
             DebugLogList("Receive() start");
             StateObject state = new StateObject();
             state.ClearRecvBuffer();
             state.WorkSocket = sock;
-
             // 데이터 수신 시작
             sock.BeginReceive(state.RecvBuffer, 0, StateObject.BufferSize, 0,
                                 new AsyncCallback(ReceiveCallback), state);
-            DebugLogList("Receive() end");
+			DebugLogList("Receive() end");
         }
         catch (Exception e)
         {
@@ -340,7 +340,8 @@ public class NetworkManager : MonoBehaviour
 
     private void ProcessPacket(short packetIndex, string jsonData)
     {
-        DebugLogList("ProcessPacket() start");
+
+		DebugLogList("ProcessPacket() start");
         try
         {
             switch (packetIndex)
@@ -749,16 +750,17 @@ public class NetworkManager : MonoBehaviour
         movePlayer.StopMove(pos);
     }
 
-    //private void OnGUI()
-    //{
-    //    GUI.Label(new Rect(0, 0, 500, 100), "접속여부:" + _isLogin.ToString() + ", 유저:" + GetMyId.ToString());
-    //    GUI.Label(new Rect(0, 15, 300, 100), "동시접속자 수 : " + DebugMsg02);
-    //    GUI.Label(new Rect(0, 30, 960, 100), "접속자 리스트 : " + DebugMsg01);
+	//private void OnGUI()
+	//{
+	//	//GUI.Label(new Rect(0, 0, 500, 100), "접속여부:" + _isLogin.ToString() + ", 유저:" + GetMyId.ToString());
+	//	//GUI.Label(new Rect(0, 15, 300, 100), "동시접속자 수 : " + DebugMsg02);
+	//	//GUI.Label(new Rect(0, 30, 960, 100), "접속자 리스트 : " + DebugMsg01);
 
-    //    GUI.Label(new Rect(0, 60, 960, 100), "10 : " + DebugMsg10 + ", 11 : " + DebugMsg11);
-    //}
+	//	//GUI.Label(new Rect(0, 60, 960, 100), "10 : " + DebugMsg10 + ", 11 : " + DebugMsg11);
 
-    public int DebugLogListIndex = 0;
+	//}
+
+	public int DebugLogListIndex = 0;
     public void DebugLogList(string logData)
     {
         string addLogIndex = "[" + DebugLogListIndex + "]["
@@ -813,7 +815,8 @@ public class NetworkManager : MonoBehaviour
 
     public void DisconnectServer()
     {
-        _sock.Close();
+		if (IsConnect)
+			_sock.Close();
     }
 
 	public void CheckBeforeLogin(string id, string pw)
@@ -922,9 +925,15 @@ public class NetworkManager : MonoBehaviour
 		string jsonData2;
 		jsonData2 = JsonConvert.SerializeObject(packData2);
 		jsonData2 += endNullValue;
-		byte[] sendByte2 = new byte[512];
-		sendByte2 = Encoding.UTF8.GetBytes(jsonData2);
+		//byte[] sendByte2 = new byte[512];
+		//sendByte2 = Encoding.UTF8.GetBytes(jsonData2);
 
-		int resultSize = _sock.Send(sendByte2);
+		int euckrCodepage = 51949;
+		Encoding euckr = Encoding.GetEncoding(euckrCodepage);
+
+		byte[] sendByte3 = euckr.GetBytes(jsonData2);
+		int resultSize = _sock.Send(sendByte3, 0, sendByte3.Length, SocketFlags.None);
+
+		//int resultSize = _sock.Send(sendByte2);
 	}
 }

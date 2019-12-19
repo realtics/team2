@@ -12,6 +12,13 @@ public class BigChatPanel : MonoBehaviour
 
 	private int _chatCount = 0;
 
+	private void Update()
+	{
+		if (Input.GetKeyDown(KeyCode.Return))
+		{
+			SendChatButton();
+		}
+	}
 
 	public void AddNewChatting(string nickName, string chatting)
 	{
@@ -19,7 +26,7 @@ public class BigChatPanel : MonoBehaviour
 		bigChatText.text.Replace("\\n", "\n");
 
 		Vector3 chatHeight = ((RectTransform)bigChatText.transform).sizeDelta;
-		chatHeight.y = 35.0f * (++_chatCount) + 5.0f;
+		chatHeight.y = 40.0f * (++_chatCount) + 5.0f;
 		((RectTransform)bigChatText.transform).sizeDelta = chatHeight;
 
 		bigChatContent.AddNetChatting(_chatCount);
