@@ -206,7 +206,9 @@ void AsioServer::ProcessPacket(const int sessionID, const char* pData)
 
 		SendPkt.isSuccess = true;
 		SendPkt.sessionID = _sessionID;
-
+		
+		_totalUserPos.erase(_sessionID);
+		_totalUserDir.erase(_sessionID);
 		_totalUserPos.insert(std::make_pair(_sessionID, "(0.0000, 0.0000, 0.0000)"));
 		_totalUserDir.insert(std::make_pair(_sessionID, "(0.0, 0.0, 0.0)"));
 
@@ -577,9 +579,7 @@ void AsioServer::ConcurrentUser()
 			//	if (_sessionList[i]->SessionID() == (exitUser - FIRST_SESSION_INDEX))
 			//		continue;
 			//}
-			std::cout << std::endl;
-			
-			std::cout << "¡Ú _sessionList[i]->SessionID ¿¡°Ô º¸³¿ = " << _sessionList[i]->SessionID() << std::endl;
+			std::cout << "¡Ú _sessionList[ " << i << " ]->SessionID ¿¡°Ô º¸³¿ = " << _sessionList[i]->SessionID() << std::endl;
 			std::cout << std::endl;
 
 			_sessionList[i]->PostSend(false, std::strlen(sendStr2.c_str()), (char*)sendStr2.c_str());
