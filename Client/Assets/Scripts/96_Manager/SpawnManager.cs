@@ -12,9 +12,9 @@ public class SpawnManager : Single.Singleton<SpawnManager>
     private Dictionary<string, GameObject> _cache = new Dictionary<string, GameObject>();
 
     private string _loadMonseterAssetName = "monster";
+    private string _loadPotalAssetName = "dungeon/potal";
     private bool _firstLoadMonseterAssetbundle = false;
     private bool _firstLoadPotalAssetbundle = false;
-    private string _loadPotalAssetName = "dungeon/potal";
 
     public SpawnManager()
     {
@@ -44,7 +44,6 @@ public class SpawnManager : Single.Singleton<SpawnManager>
 
     public void Spawn(DungeonInfo dungeon)
     {
-        Debug.Log(dungeon.objectinfos[0]);
         foreach (var item in dungeon.objectinfos)
         {
             GameObject obj = LoadResourceFromCache(item.filePath);
@@ -52,20 +51,20 @@ public class SpawnManager : Single.Singleton<SpawnManager>
 
             _dungeonGameObject.Add(obj);
         }
-        Debug.Log(dungeon.monsterInfos[0]);
+
         if (!_firstLoadMonseterAssetbundle)
         {
             LoadMonsterAssetBundle(_loadMonseterAssetName);
             _firstLoadMonseterAssetbundle = true;
             Debug.Log(_firstLoadMonseterAssetbundle);
         }
+
         foreach (var item in dungeon.monsterInfos)
         {
             GameObject obj = LoadMonsterAsset(item.filePath);
 
             MonsterManager.Instance.AddMonster(obj, item.position);
         }
-        Debug.Log(dungeon.potalTransportinfos[0]);
 
         if(!_firstLoadPotalAssetbundle)
         {
@@ -92,9 +91,9 @@ public class SpawnManager : Single.Singleton<SpawnManager>
         ClearCache();
     }
 
-    public void LoadAssetBundle(string name)
+    public void LoadMapAssetBundle(string name)
     {
-        _assetBundleManager.LoadAssetFromLocalDisk(name);
+        _assetBundleManager.LoadMapAssetFromLocalDisk(name);
     }
     public void LoadMonsterAssetBundle(string name)
     {
@@ -112,9 +111,9 @@ public class SpawnManager : Single.Singleton<SpawnManager>
     {
         return _assetBundleManager.LoadPotalAsset(name);
     }
-    public Object LoadObjectAsset(string name)
+    public Object LoadMapObjectAsset(string name)
     {
-        return _assetBundleManager.LoadUnCacheObjectAsset(name);
+        return _assetBundleManager.LoadMapObjectAsset(name);
     }
 
     public void UnLoadAssetBundle(bool isUnloadAll)
@@ -142,5 +141,9 @@ public class SpawnManager : Single.Singleton<SpawnManager>
         {
             item.gameObject.SetActive(active);
         }
+    }
+    public void ClearListdungeonObject()
+    {
+        _dungeonGameObject.Clear();
     }
 }

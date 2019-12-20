@@ -20,6 +20,10 @@ public class DNFSceneManager : Single.Singleton<DNFSceneManager>
 
     public void LoadScene(int Scene)
     {
+        if(Scene == (int)SceneIndex.Lobby)
+        {
+            SpawnManager.instance.ClearListdungeonObject();
+        }
         SceneManager.LoadScene(Scene);
     }
 

@@ -55,7 +55,7 @@ public class GameManager : MonoBehaviour
 
     private void LoadScene(int Scene)
     {
-        SceneManager.LoadScene(Scene);
+        DNFSceneManager.instance.LoadScene(Scene);
     }
 
     public void MoveToPlayer(Vector3 position)

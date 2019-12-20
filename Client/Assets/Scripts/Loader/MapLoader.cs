@@ -112,7 +112,7 @@ public class MapLoader : Single.Singleton<MapLoader>
     public void LoaderDungeon()
     {
         dungeonData = JsonLoad<DungeonJsonData>(_dungeonName);
-        SpawnManager.instance.UnLoadAssetBundle(false);
+        //SpawnManager.instance.UnLoadAssetBundle(false);
     }
     public DungeonInfo GetDungeonInfo(int index)
     {
@@ -129,9 +129,9 @@ public class MapLoader : Single.Singleton<MapLoader>
 
     private T JsonLoad<T>(string fileName)
     {
-        SpawnManager.instance.LoadAssetBundle(_mapFolderName);
+        SpawnManager.instance.LoadMapAssetBundle(_mapFolderName);
  
-        TextAsset textAsset = SpawnManager.instance.LoadObjectAsset(fileName) as TextAsset;
+        TextAsset textAsset = SpawnManager.instance.LoadMapObjectAsset(fileName) as TextAsset;
 
         string dungeonText = textAsset.text;
         return JsonConvert.DeserializeObject<T>(dungeonText);
