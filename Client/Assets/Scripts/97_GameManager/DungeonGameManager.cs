@@ -14,7 +14,6 @@ public class DungeonGameManager : GameManager
     private const int _maxDieCountDown = 10;
     private const int _maxResultCountDown = 4;
     private bool _countOver;
-    private float _currentTime = 0.0f;
 
     private const float _delayResult = 2.0f;
     private const float _delayClear = 2.0f;
