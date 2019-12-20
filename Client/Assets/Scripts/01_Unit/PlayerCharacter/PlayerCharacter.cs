@@ -109,8 +109,6 @@ public class PlayerCharacter : MonoBehaviour
     {
 		if (NetworkManager.Instance == null)
 			return;
-		if (!NetworkManager.Instance.IsConnect)
-			return;
 
 		Vector3 dir = new Vector3(horizontal, vertical, 0.0f);
         NetworkManager.Instance.MoveEnd(transform.position, dir);

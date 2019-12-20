@@ -29,8 +29,6 @@ public class GameManager : MonoBehaviour
 
     private float _time = 0f;
 
-    private bool _isFadeOutPlaying = false;
-
     protected GameObject _player;
 
     protected virtual void Start()
@@ -57,7 +55,7 @@ public class GameManager : MonoBehaviour
 
     private void LoadScene(int Scene)
     {
-        SceneManager.LoadScene(Scene);
+        DNFSceneManager.instance.LoadScene(Scene);
     }
 
     public void MoveToPlayer(Vector3 position)
@@ -83,7 +81,6 @@ public class GameManager : MonoBehaviour
 
     IEnumerator Fadeoutplay()
     {
-        _isFadeOutPlaying = true;
         Color fadecolor = _fadeOut.color;
         _time = 0f;
 
@@ -94,8 +91,6 @@ public class GameManager : MonoBehaviour
             _fadeOut.color = fadecolor;
             yield return null;
         }
-
-        _isFadeOutPlaying = false;
     }
 
 }

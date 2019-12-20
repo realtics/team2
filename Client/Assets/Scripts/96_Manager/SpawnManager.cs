@@ -13,6 +13,9 @@ public class SpawnManager : Single.Singleton<SpawnManager>
 
     private string _loadMonseterAssetName = "monster";
     private string _loadPotalAssetName = "dungeon/potal";
+    private bool _firstLoadMonseterAssetbundle = false;
+    private bool _firstLoadPotalAssetbundle = false;
+
     public SpawnManager()
     {
         _assetBundleManager = AssetBundleManager.instacne;
@@ -41,7 +44,6 @@ public class SpawnManager : Single.Singleton<SpawnManager>
 
     public void Spawn(DungeonInfo dungeon)
     {
-
         foreach (var item in dungeon.objectinfos)
         {
             GameObject obj = LoadResourceFromCache(item.filePath);
@@ -50,19 +52,28 @@ public class SpawnManager : Single.Singleton<SpawnManager>
             _dungeonGameObject.Add(obj);
         }
 
-        LoadAssetBundle(_loadMonseterAssetName);
+        if (!_firstLoadMonseterAssetbundle)
+        {
+            LoadMonsterAssetBundle(_loadMonseterAssetName);
+            _firstLoadMonseterAssetbundle = true;
+            Debug.Log(_firstLoadMonseterAssetbundle);
+        }
+
         foreach (var item in dungeon.monsterInfos)
         {
-            GameObject obj = LoadAsset(item.filePath);
+            GameObject obj = LoadMonsterAsset(item.filePath);
 
             MonsterManager.Instance.AddMonster(obj, item.position);
         }
-        UnLoadAssetBundle(false);
 
-        LoadAssetBundle(_loadPotalAssetName);
+        if(!_firstLoadPotalAssetbundle)
+        {
+            LoadPotalAssetBundle(_loadPotalAssetName);
+            _firstLoadPotalAssetbundle = true;
+        }
         foreach (var item in dungeon.potalTransportinfos)
         {
-            GameObject obj = LoadAsset(item.filePath);
+            GameObject obj = LoadPotalAsset(item.filePath);
 
             obj = AddObject(obj, item.position);
 
@@ -77,27 +88,45 @@ public class SpawnManager : Single.Singleton<SpawnManager>
 
             _dungeonGameObject.Add(obj);
         }
-        UnLoadAssetBundle(false);
-
         ClearCache();
     }
 
-    public void LoadAssetBundle(string name)
+    public void LoadMapAssetBundle(string name)
     {
-        _assetBundleManager.LoadAssetFromLocalDisk(name);
+        _assetBundleManager.LoadMapAssetFromLocalDisk(name);
+    }
+    public void LoadMonsterAssetBundle(string name)
+    {
+        _assetBundleManager.LoadMonsterAssetFromLocalDisk(name);
+    }
+    public void LoadPotalAssetBundle(string name)
+    {
+        _assetBundleManager.LoadPotalAssetFromLocalDisk(name);
+    }
+    public GameObject LoadMonsterAsset(string name)
+    {
+        return _assetBundleManager.LoadMonsterAsset(name);
+    }
+    public GameObject LoadPotalAsset(string name)
+    {
+        return _assetBundleManager.LoadPotalAsset(name);
+    }
+    public Object LoadMapObjectAsset(string name)
+    {
+        return _assetBundleManager.LoadMapObjectAsset(name);
     }
 
-    public GameObject LoadAsset(string name)
-    {
-        return _assetBundleManager.LoadAsset(name);
-    }
-    public Object LoadObjectAsset(string name)
-    {
-        return _assetBundleManager.LoadUnCacheObjectAsset(name);
-    }
     public void UnLoadAssetBundle(bool isUnloadAll)
     {
         _assetBundleManager.UnLoadAssetBundle(isUnloadAll);
+    }
+    public void UnLoadMonsterAssetBundle(bool isUnloadAll)
+    {
+        _assetBundleManager.UnLoadMonserAssetBundle(isUnloadAll);
+    }
+    public void UnLoadPotalAssetBundle(bool isUnloadAll)
+    {
+        _assetBundleManager.UnLoadPotalAssetBundle(isUnloadAll);
     }
 
     public GameObject AddObject(GameObject prefab, Vector3 position)
@@ -112,5 +141,9 @@ public class SpawnManager : Single.Singleton<SpawnManager>
         {
             item.gameObject.SetActive(active);
         }
+    }
+    public void ClearListdungeonObject()
+    {
+        _dungeonGameObject.Clear();
     }
 }

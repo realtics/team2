@@ -9,12 +9,21 @@ using System.Threading.Tasks;
 public class AssetBundleManager : MonoBehaviour
 {
     private Dictionary<string, GameObject> _cache = new Dictionary<string, GameObject>();
-    private AssetBundle _LoadedAssetBundle;
+    private AssetBundle _LoadedMapAssetBundle;
+    private AssetBundle _LoadedMonsterAssetBundle;
+    private AssetBundle _LoadedPotalAssetBundle;
     private AssetBundle _LoadedMaterialAssetBundle;
-    private AssetBundle _LoadedshBundleAssetBundle;
+    private AssetBundle _LoadedAtlasAssetBundle;
     private AssetBundleManifest _manifest;
-    private string saBundle = "monster";
-    private string maBundle = "material";
+    private string _atlasBundle = "atlas";
+    private string _materialBundle = "material";
+    private string _loadMonseterAssetName = "monster";
+    private string _loadPotalAssetName = "dungeon/potal";
+
+    private bool _firstLoadMapAssetbundle = false;
+    private bool _firstLoadMonseterAssetbundle = false;
+    private bool _firstLoadPotalAssetbundle = false;
+    private bool _firstLoadAtlas = false;
 
     private static AssetBundleManager _instacne;
     public static AssetBundleManager instacne
@@ -45,8 +54,14 @@ public class AssetBundleManager : MonoBehaviour
     }
     private void RequestLateBindingAtlas(string tag, System.Action<SpriteAtlas> action)
     {
-        var loadOp = AssetBundle.LoadFromFileAsync(Path.Combine(Application.streamingAssetsPath, saBundle));
-        var sa = loadOp.assetBundle.LoadAsset<SpriteAtlas>(tag);
+        Debug.Log(tag);
+        if(!_firstLoadAtlas)
+        {
+            _LoadedAtlasAssetBundle = AssetBundle.LoadFromFileAsync(Path.Combine(Application.streamingAssetsPath, _atlasBundle)).assetBundle;
+            _firstLoadAtlas = true;
+        }
+
+        var sa = _LoadedAtlasAssetBundle.LoadAsset<SpriteAtlas>(tag);
         action(sa);
     }
 
@@ -56,6 +71,7 @@ public class AssetBundleManager : MonoBehaviour
     //}
     //private IEnumerator LoadSpriteAtlasFromAssetBundle(string tag, System.Action<SpriteAtlas> action)
     //{
+    //    Debug.Log(tag);
     //    var loadOp = AssetBundle.LoadFromFile(Path.Combine(Application.streamingAssetsPath, saBundle));
     //    yield return loadOp;
     //    var sa = loadOp.LoadAsset<SpriteAtlas>(tag);
@@ -67,7 +83,7 @@ public class AssetBundleManager : MonoBehaviour
     //}
     private void LoadMaterial()
     {
-        _LoadedMaterialAssetBundle = AssetBundle.LoadFromFileAsync(Path.Combine(Application.streamingAssetsPath, maBundle)).assetBundle;
+        _LoadedMaterialAssetBundle = AssetBundle.LoadFromFileAsync(Path.Combine(Application.streamingAssetsPath, _materialBundle)).assetBundle;
         _LoadedMaterialAssetBundle.LoadAllAssets();
     }
     //private IEnumerator LoadMaterialFromAssetBundle()
@@ -77,11 +93,16 @@ public class AssetBundleManager : MonoBehaviour
     //    yield return _LoadedMaterialAssetBundle;
     //    _LoadedMaterialAssetBundle.LoadAllAssets();
     //}
-    public void LoadAssetFromLocalDisk(string assetBundleName)
+    public void LoadMapAssetFromLocalDisk(string assetBundleName)
     {
-        _LoadedAssetBundle = AssetBundle.LoadFromFile(Path.Combine(Application.streamingAssetsPath, assetBundleName));
+        Debug.Log(assetBundleName);
+        if(!_firstLoadMapAssetbundle)
+        {
+            _LoadedMapAssetBundle = AssetBundle.LoadFromFileAsync(Path.Combine(Application.streamingAssetsPath, assetBundleName)).assetBundle;
+            _firstLoadMapAssetbundle = true;
+        }
 #if UNITY_EDITOR
-        if (_LoadedAssetBundle == null)
+        if (_LoadedMapAssetBundle == null)
         {
             Debug.Log("Failed to load AssetBundle!");
         }
@@ -89,6 +110,37 @@ public class AssetBundleManager : MonoBehaviour
             Debug.Log("Successed to load AssetBundle!");
 #endif
     }
+    public void LoadMonsterAssetFromLocalDisk(string assetBundleName)
+    {
+        if (!_firstLoadMonseterAssetbundle)
+        {
+            _LoadedMonsterAssetBundle = AssetBundle.LoadFromFileAsync(Path.Combine(Application.streamingAssetsPath, assetBundleName)).assetBundle;
+            _firstLoadMonseterAssetbundle = true;
+        }
+
+#if UNITY_EDITOR
+        if (_LoadedMonsterAssetBundle == null)
+        {
+            Debug.Log("Failed to load AssetBundle!");
+        }
+        else
+            Debug.Log("Successed to load AssetBundle!");
+#endif
+    }
+    public void LoadPotalAssetFromLocalDisk(string assetBundleName)
+    {
+        Debug.Log(assetBundleName);
+        _LoadedPotalAssetBundle = AssetBundle.LoadFromFileAsync(Path.Combine(Application.streamingAssetsPath, assetBundleName)).assetBundle;
+#if UNITY_EDITOR
+        if (_LoadedPotalAssetBundle == null)
+        {
+            Debug.Log("Failed to load AssetBundle!");
+        }
+        else
+            Debug.Log("Successed to load AssetBundle!");
+#endif
+    }
+
     private void LoadAssetBundleManifest(string assetBundleName)
     {
         if(_manifest == null)
@@ -113,29 +165,41 @@ public class AssetBundleManager : MonoBehaviour
         return _LoadedMaterialAssetBundle.LoadAsset<Object>(name);
     }
 
-    public GameObject LoadAsset(string name)
+    public GameObject LoadPotalAsset(string name)
     {
-        return LoadAssetFromCache(name);
+        return LoadAssetFromCache(name,ref _LoadedPotalAssetBundle);
     }
 
-    public Object LoadUnCacheObjectAsset(string name)
+    public GameObject LoadMonsterAsset(string name)
     {
-        return _LoadedAssetBundle.LoadAsset<Object>(name);
+        return LoadAssetFromCache(name,ref _LoadedMonsterAssetBundle);
+    }
+
+    public Object LoadMapObjectAsset(string name)
+    {
+        return _LoadedMapAssetBundle.LoadAsset<Object>(name);
     }
 
     public void UnLoadAssetBundle(bool isUnloadAll)
     {
-        ClearCache();
-        _LoadedAssetBundle.Unload(isUnloadAll);
+        _LoadedMapAssetBundle.Unload(isUnloadAll);
+    }
+    public void UnLoadMonserAssetBundle(bool isUnloadAll)
+    {
+        _LoadedMonsterAssetBundle.Unload(isUnloadAll);
+    }
+    public void UnLoadPotalAssetBundle(bool isUnloadAll)
+    {
+        _LoadedPotalAssetBundle.Unload(isUnloadAll);
     }
 
-    private GameObject LoadAssetFromCache(string name)
+    private GameObject LoadAssetFromCache(string name, ref AssetBundle assetBundle)
     {
         GameObject resourceObj = null;
         _cache.TryGetValue(name, out resourceObj);
         if (resourceObj == null)
         {
-            resourceObj = _LoadedAssetBundle.LoadAsset<GameObject>(name);
+            resourceObj = assetBundle.LoadAsset<GameObject>(name);
             if (resourceObj != null)
             {
                 _cache.Add(name, resourceObj);
@@ -143,7 +207,7 @@ public class AssetBundleManager : MonoBehaviour
         }
         return resourceObj;
     }
-    private void ClearCache()
+    public void ClearCache()
     {
         _cache.Clear();
     }

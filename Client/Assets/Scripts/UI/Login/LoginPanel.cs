@@ -53,6 +53,7 @@ public class LoginPanel : MonoBehaviour
 
 	public void ClickLoginButton()
 	{
+		NetworkManager.Instance.ConnectToServer();
 		string password = AESEncrypt128(passwordText.text);
 
 		NetworkManager.Instance.CheckBeforeLogin(idText.text, password);

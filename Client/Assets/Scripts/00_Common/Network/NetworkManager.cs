@@ -62,6 +62,7 @@ public class NetworkManager : MonoBehaviour
 	private Socket _sock = null;
 	public bool IsConnect { get { return _sock == null ? false : true; } }
 
+	[SerializeField]
 	private int _myId = 0;      // 실행한 클라이언트의 ID
 	public int MyId { get { return _myId; } set { _myId = value; } }
 
@@ -123,7 +124,7 @@ public class NetworkManager : MonoBehaviour
 
 	public void ConnectToServer()
 	{
-		if (_isLogin)
+		if (IsConnect)
 			return;
 
 		CreateSocket();
@@ -426,7 +427,11 @@ public class NetworkManager : MonoBehaviour
                         var desJson = JsonConvert.DeserializeObject<PKT_RES_USER_EXIT>(jsonData);
 
                         var sessionID = desJson.sessionID;
-                        _exitCharacters.Add(sessionID);
+
+						if (_myId == sessionID)
+							break;
+
+						_exitCharacters.Add(sessionID);
                     }
                     break;
                 case (short)PACKET_INDEX.RES_PLAYER_MOVE_START:
@@ -966,5 +971,6 @@ public class NetworkManager : MonoBehaviour
 		DebugLogList("UserExit() end");
 
 		_characters.Clear();
+		_exitCharacters.Clear();
 	}
 }

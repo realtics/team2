@@ -18,6 +18,8 @@ public class MainMenu : MonoBehaviour
 
 	public void GameStartSingle()
 	{
+		if (NetworkManager.Instance.IsConnect)
+			NetworkManager.Instance.DisconnectServer();
 		// scene Town
 		SceneManager.LoadScene((int)SceneIndex.LobbySingle);
 	}
