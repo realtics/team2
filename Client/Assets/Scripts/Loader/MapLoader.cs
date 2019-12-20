@@ -129,7 +129,7 @@ public class MapLoader : Single.Singleton<MapLoader>
 
     private T JsonLoad<T>(string fileName)
     {
-        SpawnManager.instance.LoadAssetBundle(_mapFolderName);
+        SpawnManager.instance.LoadMapAssetBundle(_mapFolderName);
  
         TextAsset textAsset = SpawnManager.instance.LoadObjectAsset(fileName) as TextAsset;
 
