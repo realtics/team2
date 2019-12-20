@@ -24,4 +24,19 @@ public static class ItemSaveIO
 		}
 		return null;
 	}
+
+	public static void SaveResultItem(string ID)
+	{
+		ItemContainerSaveData savdData = ItemSaveIO.LoadItems("Inventory");
+
+		for (int i = 0; i < savdData.SavedSlots.Length; i++)
+		{
+			if (savdData.SavedSlots[i] == null)
+			{
+				savdData.SavedSlots[i] = new ItemSlotSaveData(ID);
+				ItemSaveIO.SaveItems(savdData, "Inventory");
+				return;
+			}
+		}
+	}
 }

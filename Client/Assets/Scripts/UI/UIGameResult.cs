@@ -43,5 +43,8 @@ public class UIGameResult : MonoBehaviour
     public void OpenResultBox(int index)
     {
         _resultBoxImage[index].sprite = _openResultBox.sprite;
+
+		//아이템얻기 테스트
+		ItemSaveIO.SaveResultItem("e0be90bbee72e43439649ee55df7f15d");
     }
 }

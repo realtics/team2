@@ -264,6 +264,10 @@ void AsioServer::ProcessPacket(const int sessionID, const char* pData)
 		int exitUser = pPacket->sessionID;
 
 		UserExit(exitUser);
+
+		Sleep(200);
+
+		ConcurrentUser();
 	}
 	break;
 	case PACKET_INDEX::REQ_CHATTING:
@@ -367,7 +371,7 @@ void AsioServer::ProcessPacket(const int sessionID, const char* pData)
 		std::ostringstream oss2(stringRecv2);
 		boost::property_tree::write_json(oss2, ptSend2, false);
 		std::string sendStr2 = oss2.str();
-		std::cout << "[서버->클라] " << sendStr2 << std::endl;
+//		std::cout << "[서버->클라] " << sendStr2 << std::endl;
 
 		size_t totalSessionCount = _sessionList.size();
 
@@ -441,7 +445,7 @@ void AsioServer::ProcessPacket(const int sessionID, const char* pData)
 		std::ostringstream oss2(stringRecv2);
 		boost::property_tree::write_json(oss2, ptSend2, false);
 		std::string sendStr2 = oss2.str();
-		std::cout << "[서버->클라] " << sendStr2 << std::endl;
+//		std::cout << "[서버->클라] " << sendStr2 << std::endl;
 
 		size_t totalSessionCount = _sessionList.size();
 
@@ -617,6 +621,9 @@ void AsioServer::UserExit(int sessionID)
 	{
 		if (_sessionList[i]->Socket().is_open())
 		{
+			if (_sessionList[i]->SessionID() == (userExit.sessionID - FIRST_SESSION_INDEX))
+				continue;
+
 			_sessionList[i]->PostSend(false, std::strlen(sendStr2.c_str()), (char*)sendStr2.c_str());
 		}
 	}
