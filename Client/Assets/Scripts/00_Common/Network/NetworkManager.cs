@@ -211,7 +211,9 @@ public class NetworkManager : MonoBehaviour
         // FIXME(안병욱) : 오브젝트 풀로 수정
 
         _characters.Remove(id);
-        Destroy(exitUser.gameObject);
+		_exitCharacters.Remove(0);
+
+		Destroy(exitUser.gameObject);
     }
 
     private void CreateSocket()
