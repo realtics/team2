@@ -233,7 +233,6 @@ void Session::Deserialization(char* jsonData)
 	break;
 	case PACKET_INDEX::REQ_PLAYER_MOVE_START:
 	{
-		//std::cout << "[클라->서버][Size:" << packetSize << "] " << jsonData << std::endl;
 		PKT_REQ_PLAYER_MOVE_START packet;
 		packet.Init();
 		packet.packetIndex = packetIndex;
@@ -246,7 +245,7 @@ void Session::Deserialization(char* jsonData)
 	break;
 	case PACKET_INDEX::REQ_PLAYER_MOVE_END:
 	{
-		//std::cout << "[클라->서버][Size:" << packetSize << "] " << jsonData << std::endl;
+		std::cout << "[클라->서버][Size:" << packetSize << "] " << jsonData << std::endl;
 		PKT_REQ_PLAYER_MOVE_END packet;
 		packet.Init();
 		packet.packetIndex = packetIndex;
