@@ -426,7 +426,11 @@ public class NetworkManager : MonoBehaviour
                         var desJson = JsonConvert.DeserializeObject<PKT_RES_USER_EXIT>(jsonData);
 
                         var sessionID = desJson.sessionID;
-                        _exitCharacters.Add(sessionID);
+
+						if (_myId == sessionID)
+							break;
+
+						_exitCharacters.Add(sessionID);
                     }
                     break;
                 case (short)PACKET_INDEX.RES_PLAYER_MOVE_START:
@@ -966,5 +970,6 @@ public class NetworkManager : MonoBehaviour
 		DebugLogList("UserExit() end");
 
 		_characters.Clear();
+		_exitCharacters.Clear();
 	}
 }
