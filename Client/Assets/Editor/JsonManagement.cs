@@ -118,10 +118,11 @@ public class JsonManagement
 
     public void AddMonster(DungeonInfo dungeonInfo, GameObject obj) 
     {
-        Object parentObject = PrefabUtility.GetCorrespondingObjectFromOriginalSource(obj);
+        //Object parentObject = PrefabUtility.GetCorrespondingObjectFromOriginalSource(obj);
 
         MonsterInfo monsterInfo = new MonsterInfo();
-        monsterInfo.filePath = parentObject.name;
+        //monsterInfo.filePath = parentObject.name;
+        monsterInfo.filePath = obj.name;
         monsterInfo.position = obj.transform.position;
 
         dungeonInfo.monsterInfos.Add(monsterInfo);
