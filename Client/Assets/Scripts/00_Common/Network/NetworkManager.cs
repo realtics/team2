@@ -123,7 +123,7 @@ public class NetworkManager : MonoBehaviour
 
 	public void ConnectToServer()
 	{
-		if (_isLogin)
+		if (IsConnect)
 			return;
 
 		CreateSocket();
