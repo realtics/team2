@@ -111,9 +111,9 @@ public class SpawnManager : Single.Singleton<SpawnManager>
     {
         return _assetBundleManager.LoadPotalAsset(name);
     }
-    public Object LoadObjectAsset(string name)
+    public Object LoadMapObjectAsset(string name)
     {
-        return _assetBundleManager.LoadUnCacheObjectAsset(name);
+        return _assetBundleManager.LoadMapObjectAsset(name);
     }
 
     public void UnLoadAssetBundle(bool isUnloadAll)
@@ -141,5 +141,9 @@ public class SpawnManager : Single.Singleton<SpawnManager>
         {
             item.gameObject.SetActive(active);
         }
+    }
+    public void ClearListdungeonObject()
+    {
+        _dungeonGameObject.Clear();
     }
 }

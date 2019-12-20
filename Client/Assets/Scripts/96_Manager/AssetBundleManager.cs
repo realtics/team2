@@ -20,6 +20,7 @@ public class AssetBundleManager : MonoBehaviour
     private string _loadMonseterAssetName = "monster";
     private string _loadPotalAssetName = "dungeon/potal";
 
+    private bool _firstLoadMapAssetbundle = false;
     private bool _firstLoadMonseterAssetbundle = false;
     private bool _firstLoadPotalAssetbundle = false;
     private bool _firstLoadAtlas = false;
@@ -95,7 +96,11 @@ public class AssetBundleManager : MonoBehaviour
     public void LoadMapAssetFromLocalDisk(string assetBundleName)
     {
         Debug.Log(assetBundleName);
-        _LoadedMapAssetBundle = AssetBundle.LoadFromFileAsync(Path.Combine(Application.streamingAssetsPath, assetBundleName)).assetBundle;
+        if(!_firstLoadMapAssetbundle)
+        {
+            _LoadedMapAssetBundle = AssetBundle.LoadFromFileAsync(Path.Combine(Application.streamingAssetsPath, assetBundleName)).assetBundle;
+            _firstLoadMapAssetbundle = true;
+        }
 #if UNITY_EDITOR
         if (_LoadedMapAssetBundle == null)
         {
@@ -170,7 +175,7 @@ public class AssetBundleManager : MonoBehaviour
         return LoadAssetFromCache(name,ref _LoadedMonsterAssetBundle);
     }
 
-    public Object LoadUnCacheObjectAsset(string name)
+    public Object LoadMapObjectAsset(string name)
     {
         return _LoadedMapAssetBundle.LoadAsset<Object>(name);
     }
