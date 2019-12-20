@@ -15,7 +15,6 @@ public class AssetBundleManager : MonoBehaviour
     private AssetBundleManifest _manifest;
     private string saBundle = "monster";
     private string maBundle = "material";
-    private string shBundle = "shader";
 
     private static AssetBundleManager _instacne;
     public static AssetBundleManager instacne
@@ -44,40 +43,40 @@ public class AssetBundleManager : MonoBehaviour
         SpriteAtlasManager.atlasRequested -= RequestLateBindingAtlas;
         _LoadedMaterialAssetBundle.Unload(false);
     }
-    //private void RequestLateBindingAtlas(string tag, System.Action<SpriteAtlas> action)
-    //{
-    //    var loadOp = AssetBundle.LoadFromFileAsync(Path.Combine(Application.streamingAssetsPath, saBundle));
-    //    var sa = loadOp.assetBundle.LoadAsset<SpriteAtlas>(tag);
-    //    action(sa);
-    //}
-
     private void RequestLateBindingAtlas(string tag, System.Action<SpriteAtlas> action)
     {
-        StartCoroutine(LoadSpriteAtlasFromAssetBundle(tag, action));
-    }
-    private IEnumerator LoadSpriteAtlasFromAssetBundle(string tag, System.Action<SpriteAtlas> action)
-    {
-        var loadOp = AssetBundle.LoadFromFile(Path.Combine(Application.streamingAssetsPath, saBundle));
-        yield return loadOp;
-        var sa = loadOp.LoadAsset<SpriteAtlas>(tag);
+        var loadOp = AssetBundle.LoadFromFileAsync(Path.Combine(Application.streamingAssetsPath, saBundle));
+        var sa = loadOp.assetBundle.LoadAsset<SpriteAtlas>(tag);
         action(sa);
     }
-    private void LoadMaterial()
-    {
-        StartCoroutine(LoadMaterialFromAssetBundle());
-    }
+
+    //private void RequestLateBindingAtlas(string tag, System.Action<SpriteAtlas> action)
+    //{
+    //    StartCoroutine(LoadSpriteAtlasFromAssetBundle(tag, action));
+    //}
+    //private IEnumerator LoadSpriteAtlasFromAssetBundle(string tag, System.Action<SpriteAtlas> action)
+    //{
+    //    var loadOp = AssetBundle.LoadFromFile(Path.Combine(Application.streamingAssetsPath, saBundle));
+    //    yield return loadOp;
+    //    var sa = loadOp.LoadAsset<SpriteAtlas>(tag);
+    //    action(sa);
+    //}
     //private void LoadMaterial()
     //{
-    //    _LoadedMaterialAssetBundle = AssetBundle.LoadFromFileAsync(Path.Combine(Application.streamingAssetsPath, maBundle)).assetBundle;
-    //    _LoadedMaterialAssetBundle.LoadAllAssets();
+    //    StartCoroutine(LoadMaterialFromAssetBundle());
     //}
-    private IEnumerator LoadMaterialFromAssetBundle()
+    private void LoadMaterial()
     {
-        //LoadAssetBundleManifest(maBundle);
-        _LoadedMaterialAssetBundle = AssetBundle.LoadFromFile(Path.Combine(Application.streamingAssetsPath, maBundle));
-        yield return _LoadedMaterialAssetBundle;
+        _LoadedMaterialAssetBundle = AssetBundle.LoadFromFileAsync(Path.Combine(Application.streamingAssetsPath, maBundle)).assetBundle;
         _LoadedMaterialAssetBundle.LoadAllAssets();
     }
+    //private IEnumerator LoadMaterialFromAssetBundle()
+    //{
+    //    //LoadAssetBundleManifest(maBundle);
+    //    _LoadedMaterialAssetBundle = AssetBundle.LoadFromFile(Path.Combine(Application.streamingAssetsPath, maBundle));
+    //    yield return _LoadedMaterialAssetBundle;
+    //    _LoadedMaterialAssetBundle.LoadAllAssets();
+    //}
     public void LoadAssetFromLocalDisk(string assetBundleName)
     {
         _LoadedAssetBundle = AssetBundle.LoadFromFile(Path.Combine(Application.streamingAssetsPath, assetBundleName));

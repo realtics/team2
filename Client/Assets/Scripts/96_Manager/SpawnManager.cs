@@ -11,6 +11,8 @@ public class SpawnManager : Single.Singleton<SpawnManager>
 
     private Dictionary<string, GameObject> _cache = new Dictionary<string, GameObject>();
 
+    private string _loadMonseterAssetName = "monster";
+    private string _loadPotalAssetName = "dungeon/potal";
     public SpawnManager()
     {
         _assetBundleManager = AssetBundleManager.instacne;
@@ -48,7 +50,7 @@ public class SpawnManager : Single.Singleton<SpawnManager>
             _dungeonGameObject.Add(obj);
         }
 
-        LoadAssetBundle("monster");
+        LoadAssetBundle(_loadMonseterAssetName);
         foreach (var item in dungeon.monsterInfos)
         {
             GameObject obj = LoadAsset(item.filePath);
@@ -57,7 +59,7 @@ public class SpawnManager : Single.Singleton<SpawnManager>
         }
         UnLoadAssetBundle(false);
 
-        LoadAssetBundle("dungeon/potal");
+        LoadAssetBundle(_loadPotalAssetName);
         foreach (var item in dungeon.potalTransportinfos)
         {
             GameObject obj = LoadAsset(item.filePath);
