@@ -682,7 +682,7 @@ public class MapTool : EditorWindow
             return;
 
         GameObject metaTile = (GameObject)Instantiate(_currentPrefab);
-
+        metaTile.name = _currentPrefab.name;
         metaTile.transform.SetParent(FindLayer(layer).transform);
         metaTile.transform.localPosition = (Vector3)pos + metaTile.transform.InverseTransformVector(OffsetWeirdTiles());
 

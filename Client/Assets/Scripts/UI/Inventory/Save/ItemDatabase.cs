@@ -8,6 +8,18 @@ public class ItemDatabase : ScriptableObject
 {
 	[SerializeField] Item[] items;
 
+	public string GetRandomItemID(out Sprite icon, out string itemName)
+	{
+		int startNum = 0;
+		int endNum = items.Length;
+		int randNum = Random.Range(startNum, endNum);
+
+		icon = items[randNum].icon;
+		itemName = items[randNum].itemName;
+		return items[randNum].ID;
+		
+	}
+
 	public Item GetItemReference(string itemID)
 	{
 		foreach (Item item in items)
