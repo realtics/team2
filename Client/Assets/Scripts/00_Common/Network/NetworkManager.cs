@@ -360,7 +360,7 @@ public class NetworkManager : MonoBehaviour
 
 						switch (checkResult)
 						{
-							case (int)CHECK_BEFORE_LOGIN_RESULT.RESULT_SUCCESS:
+							case (int)CHECK_BEFORE_LOGIN_RESULT.RESULT_BEFORE_LOGIN_CHECK_SUCCESS:
 								{
 									var sessionID = desJson.sessionID;
 									var userName = desJson.userName;
@@ -370,10 +370,10 @@ public class NetworkManager : MonoBehaviour
 									_login = true;
 								}
 								break;
-							case (int)CHECK_BEFORE_LOGIN_RESULT.RESULT_NO_ID:
+							case (int)CHECK_BEFORE_LOGIN_RESULT.RESULT_BEFORE_LOGIN_CHECK_NO_ID:
 								Debug.Log("아이디가 존재하지 않음");
 								break;
-							case (int)CHECK_BEFORE_LOGIN_RESULT.RESULT_IS_WRONG_PASSWORD:
+							case (int)CHECK_BEFORE_LOGIN_RESULT.RESULT_BEFORE_LOGIN_CHECK_IS_WRONG_PASSWORD:
 								Debug.Log("비밀번호가 틀림");
 								break;
 						}
