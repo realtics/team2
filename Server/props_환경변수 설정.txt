@@ -18,7 +18,7 @@ VC++디렉터리 - 포함 디렉터리
 %MYSQL_ROOT%\include;%BOOST_ROOT%;$(VC_IncludePath);$(WindowsSDK_IncludePath);
 
 VC++디렉터리 - 라이브러리 디렉터리
-%MYSQL_ROOT%\lib;%BOOST_ROOT%\libs;$(LibraryPath)
+%MYSQL_ROOT%\lib;%BOOST_ROOT%\libs;$(LibraryPath);
 
 C/C++ - 추가 포함 디렉터리
 %MYSQL_ROOT%\include;%BOOST_ROOT%
