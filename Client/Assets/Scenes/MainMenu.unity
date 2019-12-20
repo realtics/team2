@@ -308,7 +308,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1338677957}
-        m_MethodName: ConnectToServer
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2558,6 +2558,7 @@ MonoBehaviour:
     type: 3}
   appDataPath: 
   appDataPathParent: 
+  _myId: 0
   DebugMsg01: 
   DebugMsg02: 0
   DebugMsg03: 0

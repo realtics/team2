@@ -57,7 +57,7 @@ bool AsioServer::PostAccept()
 	int sessionID = _sessionQueue.front();
 	
 	_sessionQueue.pop_front();
-
+	
 	_acceptor.async_accept(_sessionList[sessionID]->Socket(),
 							boost::bind(&AsioServer::HandleAccept,
 								this,
@@ -111,6 +111,8 @@ void AsioServer::CloseSession(const int sessionID)
 
 void AsioServer::ProcessPacket(const int sessionID, const char* pData)
 {
+	_sessionID = sessionID + FIRST_SESSION_INDEX;
+
 	PACKET_HEADER* pHeader = (PACKET_HEADER*)pData;
 
 	switch (pHeader->packetIndex)
@@ -199,6 +201,7 @@ void AsioServer::ProcessPacket(const int sessionID, const char* pData)
 
 		PKT_RES_NEW_LOGIN_SUCSESS SendPkt;
 		SendPkt.Init();
+		
 		std::cout << "\"" << _sessionID << "\"번 클라이언트 로그인 성공" << std::endl;
 
 		SendPkt.isSuccess = true;
@@ -367,7 +370,7 @@ void AsioServer::ProcessPacket(const int sessionID, const char* pData)
 		std::ostringstream oss2(stringRecv2);
 		boost::property_tree::write_json(oss2, ptSend2, false);
 		std::string sendStr2 = oss2.str();
-		std::cout << "[서버->클라] " << sendStr2 << std::endl;
+//		std::cout << "[서버->클라] " << sendStr2 << std::endl;
 
 		size_t totalSessionCount = _sessionList.size();
 
@@ -441,7 +444,7 @@ void AsioServer::ProcessPacket(const int sessionID, const char* pData)
 		std::ostringstream oss2(stringRecv2);
 		boost::property_tree::write_json(oss2, ptSend2, false);
 		std::string sendStr2 = oss2.str();
-		std::cout << "[서버->클라] " << sendStr2 << std::endl;
+//		std::cout << "[서버->클라] " << sendStr2 << std::endl;
 
 		size_t totalSessionCount = _sessionList.size();
 
@@ -466,7 +469,7 @@ void AsioServer::ProcessPacket(const int sessionID, const char* pData)
 short AsioServer::JsonDataSize(std::string jsonData)
 {
 	short JsonAllSize = (short)jsonData.size();
-	std::cout << "Json 사이즈 : " << JsonAllSize << std::endl;
+//	std::cout << "Json 사이즈 : " << JsonAllSize << std::endl;
 	return JsonAllSize;
 }
 
@@ -569,6 +572,16 @@ void AsioServer::ConcurrentUser()
 	{
 		if (_sessionList[i]->Socket().is_open())
 		{
+			//if(exitUser != 0)
+			//{
+			//	if (_sessionList[i]->SessionID() == (exitUser - FIRST_SESSION_INDEX))
+			//		continue;
+			//}
+			std::cout << std::endl;
+			
+			std::cout << "★ _sessionList[i]->SessionID 에게 보냄 = " << _sessionList[i]->SessionID() << std::endl;
+			std::cout << std::endl;
+
 			_sessionList[i]->PostSend(false, std::strlen(sendStr2.c_str()), (char*)sendStr2.c_str());
 		}
 	}
@@ -617,6 +630,9 @@ void AsioServer::UserExit(int sessionID)
 	{
 		if (_sessionList[i]->Socket().is_open())
 		{
+			if (_sessionList[i]->SessionID() == (userExit.sessionID - FIRST_SESSION_INDEX))
+				continue;
+
 			_sessionList[i]->PostSend(false, std::strlen(sendStr2.c_str()), (char*)sendStr2.c_str());
 		}
 	}
