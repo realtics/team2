@@ -13,6 +13,12 @@ public class UIGameResult : MonoBehaviour
     private Image _countDown;
     [SerializeField]
     private Sprite[] _countImage;
+	[SerializeField]
+	private Image _itemIcon;
+	[SerializeField]
+	private Text _itemName;
+	[SerializeField]
+	private ItemDatabase _itemDatabase;
 
     private Image[] _resultBoxImage;
     private Button[] _resultBoxButton;
@@ -42,9 +48,15 @@ public class UIGameResult : MonoBehaviour
     // ToDo. 클릭시에 GameManager에서 UI를 호출해서 Sprite 변경 및 임시 아이템 띄우기.
     public void OpenResultBox(int index)
     {
-        _resultBoxImage[index].sprite = _openResultBox.sprite;
+		//아이템얻기 테스트 잘된당!!~~!! 이히~~!!!!
+		Sprite icon;
+		string itemName;
+		ItemSaveIO.SaveResultItem(_itemDatabase.GetRandomItemID(out icon, out itemName));
+		_itemIcon.sprite = icon;
+		_itemName.text = itemName;
+		
 
-		//아이템얻기 테스트
-		ItemSaveIO.SaveResultItem("e0be90bbee72e43439649ee55df7f15d");
-    }
+		_openResultBox.transform.position = _resultBox[index].transform.position;
+
+	}
 }
