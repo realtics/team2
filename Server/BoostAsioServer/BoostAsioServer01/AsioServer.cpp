@@ -473,7 +473,7 @@ short AsioServer::JsonDataSize(std::string jsonData)
 	return JsonAllSize;
 }
 
-void AsioServer::ConcurrentUser(int exitUser)
+void AsioServer::ConcurrentUser()
 {
 	int totalUser = 0;
 	std::string userList = "";
@@ -578,7 +578,6 @@ void AsioServer::ConcurrentUser(int exitUser)
 			//		continue;
 			//}
 			std::cout << std::endl;
-			std::cout << exitUser << "°¡ ³ª°¬¾úÀ½ " << std::endl;
 			
 			std::cout << "¡Ú _sessionList[i]->SessionID ¿¡°Ô º¸³¿ = " << _sessionList[i]->SessionID() << std::endl;
 			std::cout << std::endl;
