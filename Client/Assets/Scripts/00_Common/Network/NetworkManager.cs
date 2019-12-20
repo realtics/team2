@@ -211,7 +211,9 @@ public class NetworkManager : MonoBehaviour
         // FIXME(안병욱) : 오브젝트 풀로 수정
 
         _characters.Remove(id);
-        Destroy(exitUser.gameObject);
+		_exitCharacters.Remove(0);
+
+		Destroy(exitUser.gameObject);
     }
 
     private void CreateSocket()
@@ -932,16 +934,16 @@ public class NetworkManager : MonoBehaviour
 		string jsonData2;
 		jsonData2 = JsonConvert.SerializeObject(packData2);
 		jsonData2 += endNullValue;
-		//byte[] sendByte2 = new byte[512];
-		//sendByte2 = Encoding.UTF8.GetBytes(jsonData2);
+		byte[] sendByte2 = new byte[512];
+		sendByte2 = Encoding.UTF8.GetBytes(jsonData2);
+		int resultSize = _sock.Send(sendByte2);
 
-		int euckrCodepage = 51949;
-		Encoding euckr = Encoding.GetEncoding(euckrCodepage);
+		//int euckrCodepage = 51949;
+		//Encoding euckr = Encoding.GetEncoding(euckrCodepage);
 
-		byte[] sendByte3 = euckr.GetBytes(jsonData2);
-		int resultSize = _sock.Send(sendByte3, 0, sendByte3.Length, SocketFlags.None);
+		//byte[] sendByte3 = euckr.GetBytes(jsonData2);
+		//int resultSize = _sock.Send(sendByte3, 0, sendByte3.Length, SocketFlags.None);
 
-		//int resultSize = _sock.Send(sendByte2);
 	}
 
 	public void UserExit()
