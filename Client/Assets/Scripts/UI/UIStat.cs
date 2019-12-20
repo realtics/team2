@@ -6,8 +6,8 @@ public class UIStat : MonoBehaviour
 {
     protected Image _content;
 
-    [SerializeField]
-    private float _lerpSpeed = 3;
+    //[SerializeField]
+    //private float _lerpSpeed = 3;
 
     protected float _currentFill;
     public float MaxValue { get { return _maxValue; } set { _maxValue = value; } }

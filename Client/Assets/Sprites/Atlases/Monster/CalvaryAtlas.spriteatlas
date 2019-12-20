@@ -32,7 +32,7 @@ SpriteAtlas:
     packables:
     - {fileID: 102900000, guid: 076134759af2a9047a704f268fad4c6b, type: 3}
     totalSpriteSurfaceArea: 14512922
-    bindAsDefault: 1
+    bindAsDefault: 0
     storedHash:
       serializedVersion: 2
       Hash: af0095fdba659c6b1aeba092a6f42af8
