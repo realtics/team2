@@ -946,6 +946,9 @@ public class NetworkManager : MonoBehaviour
 
 	public void UserExit()
 	{
+		if (!IsConnect)
+			return;
+
 		//DebugLogList("UserExit() start");
 		string jsonData;
 		char endNullValue = '\0';
