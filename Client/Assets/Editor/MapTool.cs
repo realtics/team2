@@ -271,6 +271,10 @@ public class MapTool : EditorWindow
 
         EditorGUILayout.Space();
 
+        EditorGUILayout.LabelField("Select a DungeonSlot");
+        EditorGUILayout.Space();
+
+
         EditorGUI.BeginChangeCheck();
         currentLayer = EditorGUILayout.IntField("Layer", currentLayer);
 
