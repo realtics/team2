@@ -26,7 +26,14 @@ public class JsonManagement
         setting.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
     }
 
-    public void JsonSave()
+    public void NewJson()
+    {
+        DungeonJsonData dungeonJson = new DungeonJsonData();
+        string strJsonData = JsonConvert.SerializeObject(dungeonJson, setting);
+        CreateJsonFile(Application.dataPath, "New", strJsonData);
+    }
+
+    public void SaveJson()
     {
         DungeonJsonData dungeonJson = new DungeonJsonData();
         dungeonJson.DungeonInfos = jsonData.dungeonObjectList.ToArray();
@@ -35,10 +42,14 @@ public class JsonManagement
         CreateJsonFile(Application.dataPath, "Test2", strJsonData);
     }
 
-    public void JsonClear()
+    public void ClearJson()
     {
         jsonData.dungeonObjectList.Clear();
-        _currentPosition.Set(0,0);
+        FirstPosition();
+    }
+    public void FirstPosition()
+    {
+        _currentPosition.Set(0, 0);
     }
 
     public void SetDungeonBoss()
@@ -84,7 +95,7 @@ public class JsonManagement
         jsonData.dungeonObjectList.Add(dungeonInfo);
     }
 
-    public T JsonLoad<T>(string fileName)
+    public T LoadJson<T>(string fileName)
     {
         FileStream fileStream = new FileStream(string.Format("{0}/{1}.json", Application.dataPath + "\\Map\\", fileName), FileMode.Open);
         byte[] data = new byte[fileStream.Length];

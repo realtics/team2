@@ -68,9 +68,6 @@ public class MapTool : EditorWindow
 
     private bool _showConsole = false;
 
-    static List<GameObject> allPrefabs;
-    private GameObject _currentPrefab;
-
     private List<Layer> _layers;
 
     static int selectGrid = 0;
@@ -79,7 +76,16 @@ public class MapTool : EditorWindow
 
     private bool _showAlign = true;
 
-    AssetBundleManager assetBundleManager;
+    static List<GameObject> allPrefabs;
+    private GameObject _currentPrefab;
+
+    private int _selectRoomGrid = 0;
+    private TextAsset _dungeon;
+    private JsonManagement _jsonManagement;
+
+
+    //static List<string> allPrefabs;
+
 
     [MenuItem("Window/MapTool/Open Editor %m", false, 1)]
     static void InitWindow()
@@ -95,6 +101,7 @@ public class MapTool : EditorWindow
     {
         Init();
         Load_layers();
+        _jsonManagement = new JsonManagement();
 
         SceneView.duringSceneGui += SceneGUI;
     }
@@ -238,6 +245,57 @@ public class MapTool : EditorWindow
     {
         EditorGUILayout.BeginVertical();
 
+        if (GUILayout.Button("New"))
+        {
+            _jsonManagement.NewJson();
+            AssetDatabase.Refresh();
+        }
+        EditorGUILayout.LabelField("Select a Dungeon");
+
+        _dungeon = (TextAsset)EditorGUILayout.ObjectField(_dungeon, typeof(TextAsset), false);
+        // DungeonLoad 필요.
+        if (_dungeon != null)
+        {
+            using (new EditorGUILayout.HorizontalScope())
+            {
+                if (GUILayout.Button("Save"))
+                {
+
+                }
+                if (GUILayout.Button("Load"))
+                {
+
+                }
+                if (GUILayout.Button("export"))
+                {
+
+                }
+            }
+            EditorGUILayout.LabelField("Select a RoomSlot");
+
+            int count = 5;
+            GUIContent[] dungeonSlot = new GUIContent[count];
+            for (int i = 0; i < count; i++)
+            {
+                //if (allPrefabs[i] != null && allPrefabs[i].name != "")
+                    dungeonSlot[i] = new GUIContent("1");
+                if (dungeonSlot[i] == null)
+                    dungeonSlot[i] = GUIContent.none;
+            }
+
+            _selectRoomGrid = GUILayout.SelectionGrid(_selectRoomGrid, dungeonSlot, 5,
+                GUILayout.Height(50 * (Mathf.Ceil(count / (float)5))),
+                GUILayout.Width(this.position.width - 30));
+
+            EditorGUI.BeginChangeCheck();
+            if (EditorGUI.EndChangeCheck())
+            {
+
+            }
+        }
+        EditorGUILayout.Space();
+
+
         _scrollPos =
             EditorGUILayout.BeginScrollView(_scrollPos, false, false);
         EditorGUILayout.LabelField("Select a prefab");
@@ -271,9 +329,6 @@ public class MapTool : EditorWindow
 
         EditorGUILayout.Space();
 
-        EditorGUILayout.LabelField("Select a DungeonSlot");
-        EditorGUILayout.Space();
-
 
         EditorGUI.BeginChangeCheck();
         currentLayer = EditorGUILayout.IntField("Layer", currentLayer);
@@ -288,21 +343,21 @@ public class MapTool : EditorWindow
         }
         EditorGUILayout.Space();
 
-        EditorGUI.BeginChangeCheck();
-        _showAlign = EditorGUILayout.Foldout(_showAlign, "Alignment");
+        //EditorGUI.BeginChangeCheck();
+        //_showAlign = EditorGUILayout.Foldout(_showAlign, "Alignment");
 
-        if (EditorGUI.EndChangeCheck()) { }
+        //if (EditorGUI.EndChangeCheck()) { }
 
-        if (_showAlign)
-        {
-            EditorGUI.BeginChangeCheck();
+        //if (_showAlign)
+        //{
+        //    EditorGUI.BeginChangeCheck();
 
-            _alignId = GUILayout.SelectionGrid(_alignId, new string[9], 3, GUILayout.MaxHeight(100), GUILayout.MaxWidth(100));
-            if (EditorGUI.EndChangeCheck())
-            {
-                _alignPos = _alignId2Vec(_alignId);
-            }
-        }
+        //    _alignId = GUILayout.SelectionGrid(_alignId, new string[9], 3, GUILayout.MaxHeight(100), GUILayout.MaxWidth(100));
+        //    if (EditorGUI.EndChangeCheck())
+        //    {
+        //        _alignPos = _alignId2Vec(_alignId);
+        //    }
+        //}
 
         EditorGUI.BeginChangeCheck();
 
@@ -340,9 +395,6 @@ public class MapTool : EditorWindow
 
     private void LoadPrefabs()
     {
-        if (AssetBundleManager.instacne == null)
-            assetBundleManager = AssetBundleManager.instacne;
-
         if (allPrefabs == null)
             allPrefabs = new List<GameObject>();
         allPrefabs.Clear();
