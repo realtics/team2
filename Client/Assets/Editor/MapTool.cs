@@ -271,7 +271,7 @@ public class MapTool : EditorWindow
                     _mapToolSpawn.DestoryAllObject();
                     _mapToolSpawn.ClearListdungeonObject();
                     _mapToolLoader.LoaderDungeon(_dungeon);
-                    _mapToolSpawn.Spawn(_mapToolLoader.dungeonList.dungeonObjectList[_selectRoomGrid]);
+                    _mapToolSpawn.Spawn(_mapToolLoader.dungeonList.dungeonObjectList[_selectRoomGrid], SpawnTile);
                 }
                 if (GUILayout.Button("export"))
                 {
@@ -306,7 +306,7 @@ public class MapTool : EditorWindow
             {
                 _mapToolSpawn.DestoryAllObject();
                 _mapToolSpawn.ClearListdungeonObject();
-                _mapToolSpawn.Spawn(_mapToolLoader.dungeonList.dungeonObjectList[_selectRoomGrid]);
+                _mapToolSpawn.Spawn(_mapToolLoader.dungeonList.dungeonObjectList[_selectRoomGrid], SpawnTile);
             }
         }
 
@@ -769,7 +769,23 @@ public class MapTool : EditorWindow
         }
         Undo.RegisterCreatedObjectUndo(metaTile, "Created go");
     }
-
+    GameObject SpawnTile(UnityEngine.Object prefab , Vector2 pos)
+    {
+        GameObject metaTile = (GameObject)Instantiate(prefab);
+        metaTile.name = prefab.name;
+        metaTile.transform.SetParent(FindLayer(currentLayer).transform);
+        metaTile.transform.localPosition = (Vector3)pos + metaTile.transform.InverseTransformVector(OffsetWeirdTiles());
+        //ZorderRecorrenciaSpriteRender(metaTile);
+        if (metaTile.transform.localPosition != (Vector3)pos)
+        {
+            ArtificialPosition artPos = metaTile.AddComponent<ArtificialPosition>();
+            artPos.position = pos;
+            artPos.offset = artPos.position - (Vector2)metaTile.transform.position;
+            artPos.layer = currentLayer;
+        }
+        Undo.RegisterCreatedObjectUndo(metaTile, "Created go");
+        return metaTile;
+    }
     Vector3 OffsetWeirdTiles()
     {
         if (gizmoTileSpriteRenderer != null && gizmoTileSpriteRenderer.sprite != null && (gizmoTileSpriteRenderer.sprite.bounds.extents.x != 0.5f || gizmoTileSpriteRenderer.sprite.bounds.extents.y != 0.5f))
