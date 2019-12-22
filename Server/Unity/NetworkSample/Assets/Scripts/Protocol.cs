@@ -40,10 +40,18 @@ enum RESULT_BEFORE_LOGIN_CHECK : int
 	RESULT_BEFORE_LOGIN_CHECK_UNKNOWN = -1,
 }
 
+
+
 public struct PACKET_HEADER
 {
     public short packetIndex;
     public short packetSize;
+};
+
+public struct PACKET_TEST
+{
+    public PACKET_HEADER header;
+    public string han;
 };
 
 public struct PACKET_HEADER_BODY

@@ -174,9 +174,9 @@ public class NetworkManager : MonoBehaviour
             {
                 Debug.Log("소켓 생성 실패");
             }
-            //_sock.Connect(new IPEndPoint(IPAddress.Parse("127.0.0.1"), 31452));
+            _sock.Connect(new IPEndPoint(IPAddress.Parse("127.0.0.1"), 31452));
 			//_sock.Connect(new IPEndPoint(IPAddress.Parse("192.168.200.168"), 31452));
-			_sock.Connect(new IPEndPoint(IPAddress.Parse("192.168.1.105"), 31452));
+			//_sock.Connect(new IPEndPoint(IPAddress.Parse("192.168.1.105"), 31452));
 
 			DebugLogList("socket() end");
         }
@@ -463,55 +463,74 @@ public class NetworkManager : MonoBehaviour
 
     private void NewLogin()
     {
-		DebugLogList("NewLogin() start");
-		string jsonData;
-		char endNullValue = '\0';
+        string testJson;
+        char testEndNullValue = '\0';
+        var packHead = new PACKET_HEADER
+        {
+            packetIndex = (short)199,
+            packetSize = 10
+        };
+        var packTest = new PACKET_TEST
+        {
+            header = packHead,
+            han = "테스트임"
+        };
+        testJson = JsonConvert.SerializeObject(packTest);
+        testJson += testEndNullValue;
+        byte[] sendB = new byte[512];
+        sendB = Encoding.UTF8.GetBytes(testJson);
+        int resultSize = _sock.Send(sendB);
 
-		var packHeader = new PACKET_HEADER
-		{
-			packetIndex = (short)PACKET_INDEX.REQ_NEW_LOGIN,
-			packetSize = (short)DefineDefaultValue.packetSize
-		};
-		var packData = new PKT_REQ_NEW_LOGIN { header = packHeader };
-		DebugLogList(packData.ToString());
-		jsonData = JsonConvert.SerializeObject(packData);
-		jsonData += endNullValue;
-		DebugLogList(jsonData.ToString());
-		byte[] sendByte = new byte[512];
-		sendByte = Encoding.UTF8.GetBytes(jsonData);
 
-		short jsonDataSize = 0;
-		foreach (byte b in sendByte)
-		{
-			jsonDataSize++;
-			if (b == '\0')
-				break;
-		}
-		//Debug.Log(jsonData);
-		//Debug.Log(jsonDataSize);
-		var packHeader2 = new PACKET_HEADER
-		{
-			packetIndex = (short)PACKET_INDEX.REQ_NEW_LOGIN,
-			packetSize = jsonDataSize
-		};
-		var packData2 = new PKT_REQ_NEW_LOGIN { header = packHeader2 };
-		string jsonData2;
-		jsonData2 = JsonConvert.SerializeObject(packData2);
-		jsonData2 += endNullValue;
-		//byte[] sendByte2 = new byte[512];
-		//sendByte2 = Encoding.UTF8.GetBytes(jsonData2);
+  //      DebugLogList("NewLogin() start");
+		//string jsonData;
+		//char endNullValue = '\0';
 
-		SetMyId(0);
+		//var packHeader = new PACKET_HEADER
+		//{
+		//	packetIndex = (short)PACKET_INDEX.REQ_NEW_LOGIN,
+		//	packetSize = (short)DefineDefaultValue.packetSize
+		//};
+		//var packData = new PKT_REQ_NEW_LOGIN { header = packHeader };
+		//DebugLogList(packData.ToString());
+		//jsonData = JsonConvert.SerializeObject(packData);
+		//jsonData += endNullValue;
+		//DebugLogList(jsonData.ToString());
+		//byte[] sendByte = new byte[512];
+		//sendByte = Encoding.UTF8.GetBytes(jsonData);
 
-		int euckrCodepage = 51949;
-		Encoding euckr = Encoding.GetEncoding(euckrCodepage);
+		//short jsonDataSize = 0;
+		//foreach (byte b in sendByte)
+		//{
+		//	jsonDataSize++;
+		//	if (b == '\0')
+		//		break;
+		//}
+		////Debug.Log(jsonData);
+		////Debug.Log(jsonDataSize);
+		//var packHeader2 = new PACKET_HEADER
+		//{
+		//	packetIndex = (short)PACKET_INDEX.REQ_NEW_LOGIN,
+		//	packetSize = jsonDataSize
+		//};
+		//var packData2 = new PKT_REQ_NEW_LOGIN { header = packHeader2 };
+		//string jsonData2;
+		//jsonData2 = JsonConvert.SerializeObject(packData2);
+		//jsonData2 += endNullValue;
+		////byte[] sendByte2 = new byte[512];
+		////sendByte2 = Encoding.UTF8.GetBytes(jsonData2);
 
-		byte[] sendByte3 = euckr.GetBytes(jsonData2);
-		int resultSize = _sock.Send(sendByte3, 0, sendByte3.Length, SocketFlags.None);
+		//SetMyId(0);
 
-		//int resultSize = _sock.Send(sendByte2);
-		//Debug.Log("NewLogin() = " + resultSize);
-		DebugLogList("NewLogin() end");
+		//int euckrCodepage = 51949;
+		//Encoding euckr = Encoding.GetEncoding(euckrCodepage);
+
+		//byte[] sendByte3 = euckr.GetBytes(jsonData2);
+		//int resultSize = _sock.Send(sendByte3, 0, sendByte3.Length, SocketFlags.None);
+
+		////int resultSize = _sock.Send(sendByte2);
+		////Debug.Log("NewLogin() = " + resultSize);
+		//DebugLogList("NewLogin() end");
 	}
 
     private void NewLoginSucsess()
@@ -523,7 +542,7 @@ public class NetworkManager : MonoBehaviour
 
         string recvData = Encoding.UTF8.GetString(recvBuf, 0, socketReceive);
         int bufLen = recvBuf.Length;
-        Debug.Log(recvData);
+        Debug.Log("한글테스트 = " + recvData);
         DebugLogList(recvData);
 
         var desJson = JsonConvert.DeserializeObject<PKT_RES_NEW_LOGIN_SUCSESS>(recvData);
