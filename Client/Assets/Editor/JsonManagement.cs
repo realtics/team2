@@ -61,7 +61,7 @@ public class JsonManagement
         Debug.Log("Boss 던전 :" + _isBoss);
     }
 
-    public void AddDungeon()
+    public void AddRoom()
     {
         DungeonInfo dungeonInfo = new DungeonInfo();
         foreach (GameObject obj in GameObject.FindGameObjectsWithTag(_objectTag))

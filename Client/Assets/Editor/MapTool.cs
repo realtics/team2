@@ -82,9 +82,10 @@ public class MapTool : EditorWindow
     private int _selectRoomGrid = 0;
     private TextAsset _dungeon;
     private JsonManagement _jsonManagement;
+    private MapToolLoader _mapToolLoader;
+    private MapToolSpawn _mapToolSpawn;
 
-
-    //static List<string> allPrefabs;
+    public static int currentZOrder = 0;
 
 
     [MenuItem("Window/MapTool/Open Editor %m", false, 1)]
@@ -102,6 +103,8 @@ public class MapTool : EditorWindow
         Init();
         Load_layers();
         _jsonManagement = new JsonManagement();
+        _mapToolLoader = new MapToolLoader();
+        _mapToolSpawn = new MapToolSpawn();
 
         SceneView.duringSceneGui += SceneGUI;
     }
@@ -109,6 +112,7 @@ public class MapTool : EditorWindow
     {
         Tools.current = _currentTool;
         DestroyGizmo();
+        _mapToolSpawn.DestoryAllObject();
         SceneView.duringSceneGui -= SceneGUI;
     }
 
@@ -264,35 +268,48 @@ public class MapTool : EditorWindow
                 }
                 if (GUILayout.Button("Load"))
                 {
-
+                    _mapToolSpawn.DestoryAllObject();
+                    _mapToolSpawn.ClearListdungeonObject();
+                    _mapToolLoader.LoaderDungeon(_dungeon);
+                    _mapToolSpawn.Spawn(_mapToolLoader.dungeonList.dungeonObjectList[_selectRoomGrid]);
                 }
                 if (GUILayout.Button("export"))
                 {
 
                 }
             }
+        }
+        if(_mapToolLoader.dungeonList != null)
+        {
             EditorGUILayout.LabelField("Select a RoomSlot");
 
-            int count = 5;
+            int count = _mapToolLoader.dungeonList.dungeonObjectList.Count;
             GUIContent[] dungeonSlot = new GUIContent[count];
             for (int i = 0; i < count; i++)
             {
-                //if (allPrefabs[i] != null && allPrefabs[i].name != "")
-                    dungeonSlot[i] = new GUIContent("1");
+                if(_mapToolLoader.dungeonList.dungeonObjectList[i].isBoss)
+                    dungeonSlot[i] = new GUIContent("Boss");
+                else
+                    dungeonSlot[i] = new GUIContent(i.ToString());
+
                 if (dungeonSlot[i] == null)
                     dungeonSlot[i] = GUIContent.none;
             }
 
+            EditorGUI.BeginChangeCheck();
+
             _selectRoomGrid = GUILayout.SelectionGrid(_selectRoomGrid, dungeonSlot, 5,
                 GUILayout.Height(50 * (Mathf.Ceil(count / (float)5))),
                 GUILayout.Width(this.position.width - 30));
-
-            EditorGUI.BeginChangeCheck();
+ 
             if (EditorGUI.EndChangeCheck())
             {
-
+                _mapToolSpawn.DestoryAllObject();
+                _mapToolSpawn.ClearListdungeonObject();
+                _mapToolSpawn.Spawn(_mapToolLoader.dungeonList.dungeonObjectList[_selectRoomGrid]);
             }
         }
+
         EditorGUILayout.Space();
 
 
@@ -332,6 +349,7 @@ public class MapTool : EditorWindow
 
         EditorGUI.BeginChangeCheck();
         currentLayer = EditorGUILayout.IntField("Layer", currentLayer);
+        currentZOrder = EditorGUILayout.IntField("Zorder", currentZOrder);
 
         snapping = EditorGUILayout.Toggle(new GUIContent("Snapping", "Should tiles snap to the grid"), snapping);
         overWrite = EditorGUILayout.Toggle(new GUIContent("OverWrite", "Do you want to overwrite tile in the same layer and position"), overWrite);
@@ -741,7 +759,7 @@ public class MapTool : EditorWindow
         metaTile.name = _currentPrefab.name;
         metaTile.transform.SetParent(FindLayer(layer).transform);
         metaTile.transform.localPosition = (Vector3)pos + metaTile.transform.InverseTransformVector(OffsetWeirdTiles());
-
+        ZorderRecorrenciaSpriteRender(metaTile);
         if (metaTile.transform.localPosition != (Vector3)pos)
         {
             ArtificialPosition artPos = metaTile.AddComponent<ArtificialPosition>();
@@ -827,10 +845,10 @@ public class MapTool : EditorWindow
         if (gizmoTileSpriteRenderer == null)
             gizmoTileSpriteRenderer = gizmoTile.GetComponent<SpriteRenderer>();
 
-        RecorrenciaSpriteRender(gizmoTile);
+        ColorRecorrenciaSpriteRender(gizmoTile);
     }
 
-    static void RecorrenciaSpriteRender(GameObject gameObject)
+    static void ColorRecorrenciaSpriteRender(GameObject gameObject)
     {
         if (gameObject.GetComponent<SpriteRenderer>() != null)
         {
@@ -841,10 +859,21 @@ public class MapTool : EditorWindow
 
         foreach (Transform t in gameObject.transform)
         {
-            RecorrenciaSpriteRender(t.gameObject);
+            ColorRecorrenciaSpriteRender(t.gameObject);
         }
     }
+    static void ZorderRecorrenciaSpriteRender(GameObject gameObject)
+    {
+        if (gameObject.GetComponent<SpriteRenderer>() != null)
+        {
+            gameObject.GetComponent<SpriteRenderer>().sortingOrder = currentZOrder;
+        }
 
+        foreach (Transform t in gameObject.transform)
+        {
+            ZorderRecorrenciaSpriteRender(t.gameObject);
+        }
+    }
 
     Vector2 _alignId2Vec(int alignIndex)
     {
@@ -876,6 +905,22 @@ public class MapTool : EditorWindow
         if (Instance == null)
             return;
         currentLayer--;
+        Undo.RecordObject(Instance, "Snapping");
+    }
+    [MenuItem("Window/MapTool/Increment Zorder &z", false, 37)]
+    static void IncrementZorder()
+    {
+        if (Instance == null)
+            return;
+        currentZOrder++;
+        Undo.RecordObject(Instance, "Snapping");
+    }
+    [MenuItem("Window/MapTool/Decrement Zorder &#z", false, 38)]
+    static void DecrementZorder()
+    {
+        if (Instance == null)
+            return;
+        currentZOrder--;
         Undo.RecordObject(Instance, "Snapping");
     }
 }
