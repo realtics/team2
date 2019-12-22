@@ -31,43 +31,6 @@ public class MapToolSpawn
         Resources.UnloadUnusedAssets();
     }
 
-    public void Spawn(DungeonInfo dungeon)
-    {
-        foreach (var item in dungeon.objectinfos)
-        {
-            GameObject obj = LoadResourceFromCache(item.filePath);
-            obj = SpawnObject(obj, item.position);
-
-            _dungeonGameObject.Add(obj);
-        }
-
-
-        foreach (var item in dungeon.monsterInfos)
-        {
-            GameObject obj = LoadResourceFromCache(item.filePath);
-            obj = SpawnObject(obj, item.position);
-
-            _dungeonGameObject.Add(obj);
-        }
-
-        foreach (var item in dungeon.potalTransportinfos)
-        {
-            GameObject obj = LoadResourceFromCache(item.filePath);
-
-            obj = SpawnObject(obj, item.position);
-
-            PotalTransport potal = obj.GetComponent<PotalTransport>();
-            potal.arrow = item.arrow;
-            potal.nextIndex = item.nextIndex;
-
-            for (int i = 0; i < item.spotPosition.Length; i++)
-            {
-                potal.spotGatePosition[i].position = item.spotPosition[i];
-            }
-            _dungeonGameObject.Add(obj);
-        }
-        ClearCache();
-    }
     public void Spawn(DungeonInfo dungeon, CallBack callBack)
     {
         foreach (var item in dungeon.objectinfos)

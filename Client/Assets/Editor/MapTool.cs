@@ -80,6 +80,7 @@ public class MapTool : EditorWindow
     private GameObject _currentPrefab;
 
     private int _selectRoomGrid = 0;
+    private int _preSelectRoomGrid = 0;
     private TextAsset _dungeon;
     private JsonManagement _jsonManagement;
     private MapToolLoader _mapToolLoader;
@@ -181,7 +182,7 @@ public class MapTool : EditorWindow
 
         if (currentEvent.type == EventType.KeyDown && currentEvent.keyCode == KeyCode.M)
         {
-            ActivateTools();
+            ActivateTools(true);
             isActivateTools = true;
             Tools.current = Tool.None;
         }
@@ -211,7 +212,7 @@ public class MapTool : EditorWindow
 
             if (isActivateTools)
             {
-                ActivateTools();
+                ActivateTools(true);
             }
             else
                 Tools.current = _currentTool;
@@ -304,9 +305,12 @@ public class MapTool : EditorWindow
  
             if (EditorGUI.EndChangeCheck())
             {
+                ActivateTools(false);
+                _mapToolLoader.SaveRoom(_preSelectRoomGrid, false);
                 _mapToolSpawn.DestoryAllObject();
                 _mapToolSpawn.ClearListdungeonObject();
                 _mapToolSpawn.Spawn(_mapToolLoader.dungeonList.dungeonObjectList[_selectRoomGrid], SpawnTile);
+                _preSelectRoomGrid = _selectRoomGrid;
             }
         }
 
@@ -464,13 +468,13 @@ public class MapTool : EditorWindow
         return null;
     }
 
-    private void ActivateTools()
+    private void ActivateTools(bool active)
     {
         Tools.current = Tool.None;
         if (gizmoTile != null)
-            gizmoTile.SetActive(true);
+            gizmoTile.SetActive(active);
         if (gizmoCursor != null)
-            gizmoCursor.SetActive(true);
+            gizmoCursor.SetActive(active);
     }
 
     private void InputMouse(ref Event currentEvent)
@@ -755,7 +759,7 @@ public class MapTool : EditorWindow
         if (_currentPrefab == null)
             return;
 
-        GameObject metaTile = (GameObject)Instantiate(_currentPrefab);
+        GameObject metaTile = (GameObject)PrefabUtility.InstantiatePrefab(_currentPrefab);
         metaTile.name = _currentPrefab.name;
         metaTile.transform.SetParent(FindLayer(layer).transform);
         metaTile.transform.localPosition = (Vector3)pos + metaTile.transform.InverseTransformVector(OffsetWeirdTiles());
@@ -771,7 +775,7 @@ public class MapTool : EditorWindow
     }
     GameObject SpawnTile(UnityEngine.Object prefab , Vector2 pos)
     {
-        GameObject metaTile = (GameObject)Instantiate(prefab);
+        GameObject metaTile = (GameObject)PrefabUtility.InstantiatePrefab(prefab);
         metaTile.name = prefab.name;
         metaTile.transform.SetParent(FindLayer(currentLayer).transform);
         metaTile.transform.localPosition = (Vector3)pos + metaTile.transform.InverseTransformVector(OffsetWeirdTiles());

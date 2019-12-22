@@ -63,6 +63,36 @@ public class MapToolLoader
 
         dungeonList.dungeonObjectList.Add(dungeonInfo);
     }
+    public void SaveRoom(int roomIndex, bool isBoss)
+    {
+        DungeonInfo dungeonInfo = new DungeonInfo();
+        foreach (GameObject obj in GameObject.FindGameObjectsWithTag(_objectTag))
+        {
+            AddObject(dungeonInfo, obj);
+        }
+        foreach (GameObject obj in GameObject.FindGameObjectsWithTag(_monsterTag))
+        {
+            AddMonster(dungeonInfo, obj);
+        }
+        foreach (GameObject obj in GameObject.FindGameObjectsWithTag(_potalTranportTag))
+        {
+            AddPotalTransport(dungeonInfo, obj);
+        }
+        GameObject spotObject = GameObject.FindGameObjectWithTag("PlayerStartSpot");
+        if (spotObject != null)
+        {
+            dungeonInfo.PlayerStartPosition = spotObject.transform.position;
+        }
+        else
+        {
+            dungeonInfo.PlayerStartPosition = new Vector3(0, 0, 0);
+        }
+        dungeonInfo.position = dungeonList.dungeonObjectList[roomIndex].position;
+        dungeonInfo.isBoss = isBoss;
+
+        dungeonList.dungeonObjectList[roomIndex] = dungeonInfo;
+    }
+
     public void AddObject(DungeonInfo dungeonInfo, GameObject obj)
     {
         Object parentObject = PrefabUtility.GetCorrespondingObjectFromOriginalSource(obj);
@@ -78,11 +108,13 @@ public class MapToolLoader
 
     public void AddMonster(DungeonInfo dungeonInfo, GameObject obj)
     {
-        //Object parentObject = PrefabUtility.GetCorrespondingObjectFromOriginalSource(obj);
+        Object parentObject = PrefabUtility.GetCorrespondingObjectFromOriginalSource(obj);
+        string path = AssetDatabase.GetAssetPath(parentObject);
+        path = GetSubstringResourcesLoadFilePath(path);
 
         MonsterInfo monsterInfo = new MonsterInfo();
-        //monsterInfo.filePath = parentObject.name;
-        monsterInfo.filePath = obj.name;
+        monsterInfo.filePath = path;
+        //monsterInfo.filePath = obj.name;
         monsterInfo.position = obj.transform.position;
 
         dungeonInfo.monsterInfos.Add(monsterInfo);
