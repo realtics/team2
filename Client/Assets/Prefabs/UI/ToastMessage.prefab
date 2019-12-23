@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 664461646563231843}
   - component: {fileID: 6448933757284935735}
   - component: {fileID: 6496447773995096354}
+  - component: {fileID: 7551566858422902324}
   m_Layer: 5
   m_Name: ToastMessage
   m_TagString: Untagged
@@ -89,6 +90,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   messageText: {fileID: 6086469284541688924}
+--- !u!95 &7551566858422902324
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 311580018779110367}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d47fc9c58f173c14b8fc49f9bd6efb27, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1026139515710335571
 GameObject:
   m_ObjectHideFlags: 0
@@ -165,4 +185,4 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 
+  m_Text: "\uD1A0\uC2A4\uD2B8 \uBA54\uC138\uC9C0 \uC0D8\uD50C"

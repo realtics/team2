@@ -303,8 +303,8 @@ public class NetworkManager : MonoBehaviour
 				// TODO : 인코딩 해결 할 것
 				//string recvData = Encoding.UTF8.GetString(state.RecvBuffer);
 
-				//string recvData = Encoding.UTF8.GetString(state.RecvBuffer, 0, bytesRead);
-				string recvData = Encoding.GetEncoding("EUC-KR").GetString(state.RecvBuffer, 0, bytesRead);
+				string recvData = Encoding.UTF8.GetString(state.RecvBuffer, 0, bytesRead);
+				//string recvData = Encoding.GetEncoding("EUC-KR").GetString(state.RecvBuffer, 0, bytesRead);
 				DebugLogList(recvData);
 				var JsonData = JsonConvert.DeserializeObject<PACKET_HEADER_BODY>(recvData);
 
@@ -371,10 +371,10 @@ public class NetworkManager : MonoBehaviour
 								}
 								break;
 							case (int)CHECK_BEFORE_LOGIN_RESULT.RESULT_BEFORE_LOGIN_CHECK_NO_ID:
-								Debug.Log("아이디가 존재하지 않음");
+								ToastMessagePanel.Instance.SetToastMessage("존재하지 않는 아이디입니다.");
 								break;
 							case (int)CHECK_BEFORE_LOGIN_RESULT.RESULT_BEFORE_LOGIN_CHECK_IS_WRONG_PASSWORD:
-								Debug.Log("비밀번호가 틀림");
+								ToastMessagePanel.Instance.SetToastMessage("비밀번호가 틀렸습니다.");
 								break;
 						}
 
@@ -474,6 +474,20 @@ public class NetworkManager : MonoBehaviour
 						var newChat = desJson.chatMessage;
 
 						ChattingPanel.Instance.AddNewChatting(userName, newChat);
+					}
+					break;
+				case (short)PACKET_INDEX.RES_SIGN_UP:
+					{
+						var desJson = JsonConvert.DeserializeObject<PKT_RES_SIGN_UP>(jsonData);
+
+						RESULT_SIGN_UP_CHECK checkResult = (RESULT_SIGN_UP_CHECK)desJson.checkResult;
+
+						switch (checkResult)
+						{
+							case RESULT_SIGN_UP_CHECK.RESULT_SIGN_UP_OVERLAP_ID:
+								ToastMessagePanel.Instance.SetToastMessage("이미 사용중인 아이디입니다.");
+							break;
+						}
 					}
 					break;
 				default:
@@ -977,5 +991,32 @@ public class NetworkManager : MonoBehaviour
 
 		_characters.Clear();
 		_exitCharacters.Clear();
+	}
+
+	public void SignUpUser(string id, string password, string nickName)
+	{
+		string jsonData;
+		char endNullValue = '\0';
+
+		var packHeader = new PACKET_HEADER
+		{
+			packetIndex = (short)PACKET_INDEX.REQ_SIGN_UP,
+			packetSize = 8
+		};
+		var packData = new PKT_REQ_SIGN_UP
+		{
+			header = packHeader,
+			userID = id,
+			userPW = password,
+			userName = nickName
+		};
+		DebugLogList(packData.ToString());
+		jsonData = JsonConvert.SerializeObject(packData);
+		jsonData += endNullValue;
+		DebugLogList(jsonData.ToString());
+		byte[] sendByte = new byte[512];
+		sendByte = Encoding.UTF8.GetBytes(jsonData);
+
+		int resultSize = _sock.Send(sendByte);
 	}
 }

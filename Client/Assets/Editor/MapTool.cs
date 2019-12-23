@@ -88,6 +88,7 @@ public class MapTool : EditorWindow
 
     public static int currentZOrder = 0;
 
+    private bool _isLoadDungeon = false;
 
     [MenuItem("Window/MapTool/Open Editor %m", false, 1)]
     static void InitWindow()
@@ -113,7 +114,7 @@ public class MapTool : EditorWindow
     {
         Tools.current = _currentTool;
         DestroyGizmo();
-        _mapToolSpawn.DestoryAllObject();
+        _mapToolSpawn.DestoryAllObjects();
         SceneView.duringSceneGui -= SceneGUI;
     }
 
@@ -257,30 +258,37 @@ public class MapTool : EditorWindow
         }
         EditorGUILayout.LabelField("Select a Dungeon");
 
+        EditorGUI.BeginChangeCheck();
         _dungeon = (TextAsset)EditorGUILayout.ObjectField(_dungeon, typeof(TextAsset), false);
-        // DungeonLoad 필요.
+
+        if (EditorGUI.EndChangeCheck())
+        {
+            _isLoadDungeon = false;
+        }
         if (_dungeon != null)
         {
             using (new EditorGUILayout.HorizontalScope())
             {
                 if (GUILayout.Button("Save"))
                 {
-
+                    _jsonManagement.SaveJson(_mapToolLoader.dungeonList);
+                    AssetDatabase.Refresh();
                 }
                 if (GUILayout.Button("Load"))
                 {
-                    _mapToolSpawn.DestoryAllObject();
-                    _mapToolSpawn.ClearListdungeonObject();
+                    _mapToolSpawn.DestoryAllObjects();
                     _mapToolLoader.LoaderDungeon(_dungeon);
                     _mapToolSpawn.Spawn(_mapToolLoader.dungeonList.dungeonObjectList[_selectRoomGrid], SpawnTile);
+                    _isLoadDungeon = true;
                 }
                 if (GUILayout.Button("export"))
                 {
-
+                    _jsonManagement.ExportJson(_mapToolLoader.dungeonList);
+                    AssetDatabase.Refresh();
                 }
             }
         }
-        if(_mapToolLoader.dungeonList != null)
+        if(_isLoadDungeon)
         {
             EditorGUILayout.LabelField("Select a RoomSlot");
 
@@ -306,12 +314,33 @@ public class MapTool : EditorWindow
             if (EditorGUI.EndChangeCheck())
             {
                 ActivateTools(false);
-                _mapToolLoader.SaveRoom(_preSelectRoomGrid, false);
-                _mapToolSpawn.DestoryAllObject();
-                _mapToolSpawn.ClearListdungeonObject();
+                _mapToolLoader.SaveRoom(_preSelectRoomGrid);
+                _mapToolSpawn.DestoryAllObjects();
                 _mapToolSpawn.Spawn(_mapToolLoader.dungeonList.dungeonObjectList[_selectRoomGrid], SpawnTile);
                 _preSelectRoomGrid = _selectRoomGrid;
             }
+            EditorGUILayout.Space();
+            using (new EditorGUILayout.HorizontalScope())
+            {
+                if (GUILayout.Button("Add"))
+                {
+                    _mapToolLoader.AddRoom();
+                }
+                if (GUILayout.Button("Delete"))
+                {
+                    if(_mapToolLoader.dungeonList.dungeonObjectList.Count > 1)
+                    {
+                        _mapToolLoader.DeleteRoom(_selectRoomGrid);
+                        _selectRoomGrid = 0;
+                        ActivateTools(false);
+                        _mapToolSpawn.DestoryAllObjects();
+                        _mapToolSpawn.Spawn(_mapToolLoader.dungeonList.dungeonObjectList[_selectRoomGrid], SpawnTile);
+                        _preSelectRoomGrid = _selectRoomGrid;
+                    }
+                }
+            }
+            bool on = _mapToolLoader.GetDungeonInfo(_selectRoomGrid).isBoss;
+            _mapToolLoader.GetDungeonInfo(_selectRoomGrid).isBoss = GUILayout.Toggle(on, on ? "Boss on" : "Boss off", "button");
         }
 
         EditorGUILayout.Space();
@@ -328,8 +357,8 @@ public class MapTool : EditorWindow
             for (int i = 0; i < allPrefabs.Count; i++)
             {
                 if (allPrefabs[i] != null && allPrefabs[i].name != "")
-                    //contents[i] = new GUIContent(allPrefabs[i].name, AssetPreview.GetAssetPreview(allPrefabs[i]));
                     contents[i] = new GUIContent(AssetPreview.GetAssetPreview(allPrefabs[i]));
+                    //contents[i] = new GUIContent(allPrefabs[i].name, AssetPreview.GetAssetPreview(allPrefabs[i]));
                 if (contents[i] == null)
                     contents[i] = GUIContent.none;
             }

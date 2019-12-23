@@ -70,8 +70,6 @@ public struct PKT_RES_SIGN_UP
 {
 	public PACKET_HEADER header;
 	public int checkResult;
-	public string userID;
-	public string userName;
 }
 public struct PKT_REQ_CHECK_BEFORE_LOGIN
 {

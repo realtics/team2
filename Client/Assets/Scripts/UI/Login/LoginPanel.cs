@@ -53,6 +53,18 @@ public class LoginPanel : MonoBehaviour
 
 	public void ClickLoginButton()
 	{
+		if (idText.text == "")
+		{
+			ToastMessagePanel.Instance.SetToastMessage("아이디를 입력하세요.");
+			return;
+		}
+
+		if (passwordText.text == "")
+		{
+			ToastMessagePanel.Instance.SetToastMessage("비밀번호를 입력하세요.");
+			return;
+		}
+
 		NetworkManager.Instance.ConnectToServer();
 		string password = AESEncrypt128(passwordText.text);
 
