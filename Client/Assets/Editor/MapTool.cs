@@ -4,18 +4,6 @@ using UnityEngine;
 using UnityEditor;
 using System;
 
-public enum ALIGN
-{ 
-    LeftTop = 0,
-    Top,
-    RightTop,
-    Left,
-    Middle,
-    Right,
-    LeftBottom,
-    Bottom,
-    RightBottom,
-};
 
 public class MapTool : EditorWindow
 {
@@ -36,7 +24,6 @@ public class MapTool : EditorWindow
 
     //align
     private Vector2 _alignPos;
-    private int _alignId;
 
     private bool _isPlaying;
 
@@ -143,8 +130,6 @@ public class MapTool : EditorWindow
     }
     private void Init()
     {
-        _alignId = (int)ALIGN.Middle;
-
         layerDepthMultiplier = 0.1f;
         _currentTool = Tools.current;
 
@@ -913,16 +898,6 @@ public class MapTool : EditorWindow
         {
             ZorderRecorrenciaSpriteRender(t.gameObject);
         }
-    }
-
-    Vector2 _alignId2Vec(int alignIndex)
-    {
-        Vector2 aux;
-
-        aux.x = alignIndex % 3 - 1;
-        aux.y = alignIndex / 3 - 1;
-
-        return aux;
     }
     void ShowLog(object msg)
     {
