@@ -6,10 +6,14 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
+    public GameObject signupPanel;
+    private bool _successSignup;
+
 	private void Update()
 	{
 		CheckLogin();
-	}
+        OffSginupPanel();
+    }
 	public void GameStart()
 	{
 		// scene Town
@@ -35,4 +39,17 @@ public class MainMenu : MonoBehaviour
 		GameStart();
 	}
 
+    public void SuccessSignup()
+    {
+        _successSignup = true;
+    }
+
+    private void OffSginupPanel()
+    {
+        if (!_successSignup)
+            return;
+
+        signupPanel.SetActive(false);
+        _successSignup = false;
+    }
 }

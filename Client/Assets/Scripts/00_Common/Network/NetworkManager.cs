@@ -404,6 +404,7 @@ public class NetworkManager : MonoBehaviour
                         DebugMsg02 = desJson.totalUser;
 
                         string[] splitConcurrentUser = desJson.concurrentUser.Split(',');
+                        //string[] splitUserName = desJson.
                         string[] splitUserPos = desJson.userPos.Split('|');
                         string[] splitUserDir = desJson.userDir.Split('|');
                         for (int i = 0; i < splitConcurrentUser.Length; i++)
@@ -487,10 +488,15 @@ public class NetworkManager : MonoBehaviour
 
 						switch (checkResult)
 						{
-							case RESULT_SIGN_UP_CHECK.RESULT_SIGN_UP_OVERLAP_ID:
-								ToastMessagePanel.Instance.SetToastMessage("이미 사용중인 아이디입니다.");
-							break;
-						}
+                            case RESULT_SIGN_UP_CHECK.RESULT_SIGN_UP_OVERLAP_ID:
+                                ToastMessagePanel.Instance.SetToastMessage("이미 사용중인 아이디입니다.");
+                                break;
+                            case RESULT_SIGN_UP_CHECK.RESULT_SIGN_UP_CHECK_SUCCESS:
+                                ToastMessagePanel.Instance.SetToastMessage("회원가입 완료 !");
+                                // FIXME: (안병욱) 파인드 수정
+                                FindObjectOfType<MainMenu>().SuccessSignup();
+                                break;
+                        }
 					}
 					break;
 				default:

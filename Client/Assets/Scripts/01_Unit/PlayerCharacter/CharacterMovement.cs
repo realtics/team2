@@ -12,7 +12,6 @@ public class CharacterMovement : BaseUnit
 {
     private int _id;
 	private string _nickName;
-    private bool _nextAttack;
     private CharacterAnimController _animController;
     private Dictionary<SwordmanSkillIndex, CharacterSkill> _equipSkills;
     private SwordmanSkillIndex _usedSkill;
@@ -32,7 +31,6 @@ public class CharacterMovement : BaseUnit
     protected override void Awake()
     {
         base.Awake();
-        _nextAttack = false;
         _animator.SetBool("IsGround", true);
         _animator.SetBool("NextAttack", false);
         _animController = GetComponentInChildren<CharacterAnimController>();
