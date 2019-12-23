@@ -55,11 +55,10 @@ void DBMySQL::DBDataLoginSelectAll()
 
 			int fields = mysql_num_fields(_pSqlResult);
 
+			std::cout << "index" << "\t\t" << "user_id" << "\t\t" << "user_pw" << "\t\t\t\t\t"
+				<< "user_name" << "\t" << "sign_date" << std::endl;
 			while ((_SqlRow = mysql_fetch_row(_pSqlResult)) != NULL)
 			{
-				std::cout << "index" << "\t" << "user_id" << "\t" << "user_pw" << "\t"
-					<< "user_name" << "\t" << "sign_date" << std::endl;
-
 				for (int i = 0; i < fields; i++)
 				{
 					if (_SqlRow[i] != NULL)
@@ -67,12 +66,13 @@ void DBMySQL::DBDataLoginSelectAll()
 					else
 						std::cout << "\t";
 
-					std::cout << "\t";
+					std::cout << "\t\t";
 				}
 				std::cout << std::endl;
 			}
 			mysql_free_result(_pSqlResult);
 		}
+		std::cout << std::endl;
 	}
 }
 
