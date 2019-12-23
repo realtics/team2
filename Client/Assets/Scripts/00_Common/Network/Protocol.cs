@@ -1,5 +1,11 @@
 ﻿enum PACKET_INDEX : short
 {
+	// REQ : 클라->서버, 클라에서 서버에 어떤 값을 요청
+	// RES : 서버->클라, 서버가 어떤 값으로 응답
+
+	REQ_SIGN_UP = 103,
+	RES_SIGN_UP = 104,
+
 	REQ_CHECK_BEFORE_LOGIN = 105,
 	RES_CHECK_BEFORE_LOGIN = 106,
 
@@ -46,6 +52,19 @@ public struct PACKET_HEADER_BODY
 {
 	public PACKET_HEADER header;
 };
+
+public struct PKT_REQ_SIGN_UP
+{
+	public PACKET_HEADER header;
+	public string userID;
+	public string userPW;
+	public string userName;
+}
+public struct PKT_RES_SIGN_UP
+{
+	public PACKET_HEADER header;
+	public int checkResult;
+}
 
 public struct PKT_REQ_CHECK_BEFORE_LOGIN
 {
