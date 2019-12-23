@@ -4,11 +4,13 @@ using System.Collections.Generic;
 
 public class MapToolSpawn
 {
-    private List<GameObject> _dungeonGameObject = new List<GameObject>();
-
     private Dictionary<string, GameObject> _cache = new Dictionary<string, GameObject>();
 
     public delegate GameObject CallBack(Object prefab, Vector2 pos);
+
+    private const string _objectTag = "FieldObject";
+    private const string _monsterTag = "Monster";
+    private const string _potalTranportTag = "PotalTransport";
 
     public GameObject LoadResourceFromCache(string path)
     {
@@ -37,8 +39,6 @@ public class MapToolSpawn
         {
             GameObject obj = LoadResourceFromCache(item.filePath);
             obj = callBack(obj ,new Vector2(item.position.x,item.position.y));
-
-            _dungeonGameObject.Add(obj);
         }
 
 
@@ -46,8 +46,6 @@ public class MapToolSpawn
         {
             GameObject obj = LoadResourceFromCache(item.filePath);
             obj = callBack(obj, new Vector2(item.position.x, item.position.y));
-
-            _dungeonGameObject.Add(obj);
         }
 
         foreach (var item in dungeon.potalTransportinfos)
@@ -64,7 +62,6 @@ public class MapToolSpawn
             {
                 potal.spotGatePosition[i].position = item.spotPosition[i];
             }
-            _dungeonGameObject.Add(obj);
         }
         ClearCache();
     }
@@ -74,22 +71,30 @@ public class MapToolSpawn
         obj.transform.position = position;
         return obj;
     }
-    public void SetActiveRoom(bool active, int index)
+    public void DestoryAllObjects()
     {
-        foreach (var item in _dungeonGameObject)
+        List<GameObject> ListObject = new List<GameObject>();
+        foreach (GameObject obj in GameObject.FindGameObjectsWithTag(_objectTag))
         {
-            item.gameObject.SetActive(active);
+            ListObject.Add(obj);
         }
-    }
-    public void DestoryAllObject()
-    {
-        foreach (var item in _dungeonGameObject)
+        foreach (GameObject obj in GameObject.FindGameObjectsWithTag(_monsterTag))
+        {
+            ListObject.Add(obj);
+        }
+        foreach (GameObject obj in GameObject.FindGameObjectsWithTag(_potalTranportTag))
+        {
+            ListObject.Add(obj);
+        }
+        GameObject spotObject = GameObject.FindGameObjectWithTag("PlayerStartSpot");
+        if (spotObject != null)
+        {
+            ListObject.Add(spotObject);
+        }
+
+        foreach (var item in ListObject)
         {
             Object.DestroyImmediate(item);
         }
-    }
-    public void ClearListdungeonObject()
-    {
-        _dungeonGameObject.Clear();
     }
 }

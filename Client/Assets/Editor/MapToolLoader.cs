@@ -1,17 +1,17 @@
 ﻿using UnityEngine;
 using Newtonsoft.Json;
 using UnityEditor;
+using System.Collections.Generic;
 
 public class MapToolLoader
 {
     public JsonData dungeonList;
-    public DungeonJsonData dungeonData;
+    private DungeonJsonData dungeonData;
     private const string _objectTag = "FieldObject";
     private const string _monsterTag = "Monster";
     private const string _potalTranportTag = "PotalTransport";
 
-    private Vector2 _currentPosition = new Vector2(0, 0);
-    private bool _isBoss = false;
+    private const int _lastSubstringIndex = 10;
 
     public MapToolLoader()
     {
@@ -33,50 +33,46 @@ public class MapToolLoader
     }
     public void AddRoom()
     {
+        Vector2 position;
+ 
         DungeonInfo dungeonInfo = new DungeonInfo();
-        foreach (GameObject obj in GameObject.FindGameObjectsWithTag(_objectTag))
+         
+        dungeonInfo.PlayerStartPosition = new Vector3(0, 0, 0);
+        if (dungeonList.dungeonObjectList.Count > 0)
         {
-            AddObject(dungeonInfo, obj);
-        }
-        foreach (GameObject obj in GameObject.FindGameObjectsWithTag(_monsterTag))
-        {
-            AddMonster(dungeonInfo, obj);
-        }
-        foreach (GameObject obj in GameObject.FindGameObjectsWithTag(_potalTranportTag))
-        {
-            AddPotalTransport(dungeonInfo, obj);
-        }
-        GameObject spotObject = GameObject.FindGameObjectWithTag("PlayerStartSpot");
-        if (spotObject != null)
-        {
-            dungeonInfo.PlayerStartPosition = spotObject.transform.position;
+            position = dungeonList.dungeonObjectList[dungeonList.dungeonObjectList.Count - 1].position;
+            position.Set(position.x + 1, position.y);
+            dungeonInfo.position = position;
         }
         else
         {
-            dungeonInfo.PlayerStartPosition = new Vector3(0, 0, 0);
+            dungeonInfo.position = new Vector2(0, 0);
         }
-        dungeonInfo.position = _currentPosition;
-        dungeonInfo.isBoss = _isBoss;
-        // Todo 아래 부분을 맵툴 쪽으로 빼서 수동으로 조작하게 끔 해야함.
-        Debug.Log(_currentPosition);
-        _currentPosition.Set(_currentPosition.x + 1, _currentPosition.y);
-
+        dungeonInfo.isBoss = false;
         dungeonList.dungeonObjectList.Add(dungeonInfo);
     }
-    public void SaveRoom(int roomIndex, bool isBoss)
+
+    public void DeleteRoom(int roomIndex)
     {
-        DungeonInfo dungeonInfo = new DungeonInfo();
+        dungeonList.dungeonObjectList.Remove(dungeonList.dungeonObjectList[roomIndex]);
+    }
+    public void SaveRoom(int roomIndex)
+    {
+        DungeonInfo dungeonInfo = dungeonList.dungeonObjectList[roomIndex];
+        dungeonInfo.monsterInfos.Clear();
+        dungeonInfo.objectinfos.Clear();
+        dungeonInfo.potalTransportinfos.Clear();
         foreach (GameObject obj in GameObject.FindGameObjectsWithTag(_objectTag))
         {
-            AddObject(dungeonInfo, obj);
+            AddObject(ref dungeonInfo, obj);
         }
         foreach (GameObject obj in GameObject.FindGameObjectsWithTag(_monsterTag))
         {
-            AddMonster(dungeonInfo, obj);
+            AddMonster(ref dungeonInfo, obj);
         }
         foreach (GameObject obj in GameObject.FindGameObjectsWithTag(_potalTranportTag))
         {
-            AddPotalTransport(dungeonInfo, obj);
+            AddPotalTransport(ref dungeonInfo, obj);
         }
         GameObject spotObject = GameObject.FindGameObjectWithTag("PlayerStartSpot");
         if (spotObject != null)
@@ -87,13 +83,9 @@ public class MapToolLoader
         {
             dungeonInfo.PlayerStartPosition = new Vector3(0, 0, 0);
         }
-        dungeonInfo.position = dungeonList.dungeonObjectList[roomIndex].position;
-        dungeonInfo.isBoss = isBoss;
-
-        dungeonList.dungeonObjectList[roomIndex] = dungeonInfo;
     }
 
-    public void AddObject(DungeonInfo dungeonInfo, GameObject obj)
+    public void AddObject(ref DungeonInfo dungeonInfo, GameObject obj)
     {
         Object parentObject = PrefabUtility.GetCorrespondingObjectFromOriginalSource(obj);
         string path = AssetDatabase.GetAssetPath(parentObject);
@@ -106,7 +98,7 @@ public class MapToolLoader
         dungeonInfo.objectinfos.Add(objectInfo);
     }
 
-    public void AddMonster(DungeonInfo dungeonInfo, GameObject obj)
+    public void AddMonster(ref DungeonInfo dungeonInfo, GameObject obj)
     {
         Object parentObject = PrefabUtility.GetCorrespondingObjectFromOriginalSource(obj);
         string path = AssetDatabase.GetAssetPath(parentObject);
@@ -120,7 +112,7 @@ public class MapToolLoader
         dungeonInfo.monsterInfos.Add(monsterInfo);
     }
 
-    public void AddPotalTransport(DungeonInfo dungeonInfo, GameObject obj)
+    public void AddPotalTransport(ref DungeonInfo dungeonInfo, GameObject obj)
     {
         PotalTransport potal = obj.GetComponent<PotalTransport>();
 
@@ -146,12 +138,13 @@ public class MapToolLoader
 
     string GetSubstringResourcesLoadFilePath(string filePath)
     {
-        int FilePos = filePath.LastIndexOf("Resources/") + 10;
+        
+        int FilePos = filePath.LastIndexOf("Resources/") + _lastSubstringIndex;
         string DirectoryFile = filePath.Substring(FilePos);
         int TagPos = DirectoryFile.IndexOf('/');
         if (TagPos > 0)
         {
-            string Tagname = DirectoryFile.Remove(TagPos);
+            DirectoryFile.Remove(TagPos);
         }
         DirectoryFile = DirectoryFile.Remove(DirectoryFile.LastIndexOf('.'));
         return DirectoryFile;
@@ -161,5 +154,10 @@ public class MapToolLoader
     {
         string dungeonText = dungeon.text;
         return JsonConvert.DeserializeObject<T>(dungeonText);
+    }
+
+    public void SetBossRoom(int roomIndex, bool isBoss)
+    {
+        dungeonList.dungeonObjectList[roomIndex].isBoss = isBoss;
     }
 }
