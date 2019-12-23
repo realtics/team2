@@ -14,7 +14,13 @@ public class PlayerCharacter : MonoBehaviour
         _movement = GetComponent<CharacterMovement>();
         _oldDirection = Vector3.zero;
 		PlayerManager.Instance.PlayerCharacter = this;
+       
+    }
+
+    private void Start()
+    {
         Movement.Stat.RefreshExtraStat();
+        Movement.NickName = PlayerManager.Instance.NickName;
     }
 
     public void SetJump()
