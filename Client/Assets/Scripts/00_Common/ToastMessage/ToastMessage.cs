@@ -11,4 +11,9 @@ public class ToastMessage : MonoBehaviour
 	{
 		messageText.text = message;
 	}
+
+	public void AnimEvent_OffActiveSelf()
+	{
+		gameObject.SetActive(false);
+	}
 }

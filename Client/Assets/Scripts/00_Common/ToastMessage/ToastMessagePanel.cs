@@ -29,5 +29,7 @@ public class ToastMessagePanel : MonoBehaviour
 
 		toastObject.transform.SetParent(transform);
 		toastObject.transform.localScale = Vector3.one;
+		toastObject.transform.localPosition = Vector3.zero;
+		toastObject.transform.SetAsFirstSibling();
 	}
 }

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id: fa8b82ed25dfa2d43a359d464860c369
   itemName: "\u73FE : \uD751\uCC9C\uC758 \uC8FC\uC778 - \uB300\uAC80"
-  icon: {fileID: 21300000, guid: df4d1b3d8ad4dc440a11a9cf1a6b2725, type: 3}
+  icon: {fileID: 21300000, guid: 957526639ee6b8349bea8b4ce8d09bf3, type: 3}
   physicalAttackBonus: 1406
   magicAttackBonus: 1054
   physicalDefenseBonus: 0

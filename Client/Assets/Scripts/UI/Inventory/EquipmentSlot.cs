@@ -8,11 +8,4 @@ public class EquipmentSlot : ItemSlot
         base.OnValidate();
         gameObject.name = equipmentType.ToString() + " Slot";
     }
-
-	protected override void FindToolTip()
-	{
-		if (_itemToolTip == null)
-			_itemToolTip = InventoryManager.Instance.EquipPanelTooltip;
-	}
-
 }
