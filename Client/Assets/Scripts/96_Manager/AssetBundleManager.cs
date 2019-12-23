@@ -89,7 +89,7 @@ public class AssetBundleManager : MonoBehaviour
     //private IEnumerator LoadMaterialFromAssetBundle()
     //{
     //    //LoadAssetBundleManifest(maBundle);
-    //    _LoadedMaterialAssetBundle = AssetBundle.LoadFromFile(Path.Combine(Application.streamingAssetsPath, maBundle));
+    //    _LoadedMaterialAssetBundle = AssetBundle.LoadFromFile(Path.Combine(Application.streamingAssetsPath, maBundle)); 
     //    yield return _LoadedMaterialAssetBundle;
     //    _LoadedMaterialAssetBundle.LoadAllAssets();
     //}

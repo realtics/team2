@@ -1,8 +1,5 @@
 ﻿using UnityEngine;
-using System.Text;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using Newtonsoft.Json;
 [System.Serializable]
 public struct SerializableVector3
@@ -122,7 +119,7 @@ public class MapLoader : Single.Singleton<MapLoader>
     {
         _dungeonName = dungeonName;
     }
-    public void AfterInstantiateMonsterDelete(int index)
+    public void DeleteAfterInstantiateMonster(int index)
     {
         dungeonData.DungeonInfos[index].monsterInfos.Clear();
     }
