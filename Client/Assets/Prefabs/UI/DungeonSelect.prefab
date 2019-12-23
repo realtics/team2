@@ -459,12 +459,18 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 6ee9aa33da085ac46afe5a4eaa552530,
+      objectReference: {fileID: 21300000, guid: 9665c79e2b9922e49a5d77df46250c1a,
         type: 3}
     - target: {fileID: 899091551, guid: 4ff95e8e0f24312489789d2207cf60b1, type: 3}
       propertyPath: _dungeonFileName
       value: Test3
       objectReference: {fileID: 0}
+    - target: {fileID: 3036723623874879632, guid: 4ff95e8e0f24312489789d2207cf60b1,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: a31aea671d3ac8740a53d1fcf7986aea,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4ff95e8e0f24312489789d2207cf60b1, type: 3}
 --- !u!1 &1336944431646400292 stripped
