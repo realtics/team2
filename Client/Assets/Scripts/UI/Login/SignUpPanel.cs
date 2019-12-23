@@ -10,6 +10,10 @@ using UnityEngine.UI;
 
 public class SignUpPanel : MonoBehaviour
 {
+	const int MinIdLength = 4;
+	const int MinPasswordLength = 4;
+	const int MinNicknameLength = 2;
+
 	public InputField idInputField;
 	public InputField passwordInputField;
 	public InputField passwordCheckInputField;
@@ -57,9 +61,27 @@ public class SignUpPanel : MonoBehaviour
 			return;
 		}
 
+		if (idInputField.text.Length < MinIdLength)
+		{
+			ToastMessagePanel.Instance.SetToastMessage($"아이디는 {MinIdLength}자 이상 입력하세요.");
+			return;
+		}
+
 		if (nickNameInputField.text == "")
 		{
 			ToastMessagePanel.Instance.SetToastMessage("닉네임을 입력해주세요.");
+			return;
+		}
+
+		if (nickNameInputField.text.Length < MinNicknameLength)
+		{
+			ToastMessagePanel.Instance.SetToastMessage($"닉네임은 {MinNicknameLength}자 이상 입력하세요.");
+			return;
+		}
+
+		if (passwordInputField.text.Length < MinPasswordLength)
+		{
+			ToastMessagePanel.Instance.SetToastMessage($"비밀번호는 {MinPasswordLength}자 이상 입력하세요.");
 			return;
 		}
 
