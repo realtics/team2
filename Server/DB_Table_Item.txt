@@ -1,0 +1,11 @@
+CREATE TABLE `item` (
+	`index` INT(10) NOT NULL AUTO_INCREMENT,
+	`item_index` INT(10) NOT NULL,
+	`item_id` VARCHAR(50) NOT NULL,
+	PRIMARY KEY (`index`),
+	UNIQUE INDEX `item_index` (`item_index`)
+)
+COLLATE='utf8mb4_0900_ai_ci'
+ENGINE=InnoDB
+AUTO_INCREMENT=14
+;

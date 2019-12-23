@@ -1,0 +1,184 @@
+SQL Attr Comment Foreground<|||>3<|||>8421504
+SQL Attr Comment Background<|||>3<|||>536870911
+SQL Attr Comment Style<|||>3<|||>2
+SQL Attr ConditionalComment Foreground<|||>3<|||>8421504
+SQL Attr ConditionalComment Background<|||>3<|||>536870911
+SQL Attr ConditionalComment Style<|||>3<|||>2
+SQL Attr ConsoleOutput Foreground<|||>3<|||>536870911
+SQL Attr ConsoleOutput Background<|||>3<|||>536870911
+SQL Attr ConsoleOutput Style<|||>3<|||>5
+SQL Attr DataType Foreground<|||>3<|||>128
+SQL Attr DataType Background<|||>3<|||>536870911
+SQL Attr DataType Style<|||>3<|||>1
+SQL Attr DefaultPackages Foreground<|||>3<|||>536870911
+SQL Attr DefaultPackages Background<|||>3<|||>536870911
+SQL Attr DefaultPackages Style<|||>3<|||>1
+SQL Attr DelimitedIdentifier Foreground<|||>3<|||>32896
+SQL Attr DelimitedIdentifier Background<|||>3<|||>536870911
+SQL Attr DelimitedIdentifier Style<|||>3<|||>0
+SQL Attr Exception Foreground<|||>3<|||>536870911
+SQL Attr Exception Background<|||>3<|||>536870911
+SQL Attr Exception Style<|||>3<|||>2
+SQL Attr Function Foreground<|||>3<|||>8388608
+SQL Attr Function Background<|||>3<|||>536870911
+SQL Attr Function Style<|||>3<|||>1
+SQL Attr Identifier Foreground<|||>3<|||>32896
+SQL Attr Identifier Background<|||>3<|||>536870911
+SQL Attr Identifier Style<|||>3<|||>0
+SQL Attr Key Foreground<|||>3<|||>16711680
+SQL Attr Key Background<|||>3<|||>536870911
+SQL Attr Key Style<|||>3<|||>1
+SQL Attr Number Foreground<|||>3<|||>8388736
+SQL Attr Number Background<|||>3<|||>536870911
+SQL Attr Number Style<|||>3<|||>0
+SQL Attr PLSQL-ReservedWord Foreground<|||>3<|||>536870911
+SQL Attr PLSQL-ReservedWord Background<|||>3<|||>536870911
+SQL Attr PLSQL-ReservedWord Style<|||>3<|||>1
+SQL Attr ProcName Foreground<|||>3<|||>536870911
+SQL Attr ProcName Background<|||>3<|||>536870911
+SQL Attr ProcName Style<|||>3<|||>0
+SQL Attr Space Foreground<|||>3<|||>536870911
+SQL Attr Space Background<|||>3<|||>536870911
+SQL Attr Space Style<|||>3<|||>0
+SQL Attr SQLPlus-Command Foreground<|||>3<|||>536870911
+SQL Attr SQLPlus-Command Background<|||>3<|||>536870911
+SQL Attr SQLPlus-Command Style<|||>3<|||>1
+SQL Attr String Foreground<|||>3<|||>32768
+SQL Attr String Background<|||>3<|||>536870911
+SQL Attr String Style<|||>3<|||>0
+SQL Attr Symbol Foreground<|||>3<|||>16711680
+SQL Attr Symbol Background<|||>3<|||>536870911
+SQL Attr Symbol Style<|||>3<|||>0
+SQL Attr TableName Foreground<|||>3<|||>16711935
+SQL Attr TableName Background<|||>3<|||>536870911
+SQL Attr TableName Style<|||>3<|||>0
+SQL Attr Variable Foreground<|||>3<|||>8388736
+SQL Attr Variable Background<|||>3<|||>536870911
+SQL Attr Variable Style<|||>3<|||>0
+LastSessions<|||>1<|||>mdnf
+LastActiveSession<|||>1<|||>mdnf
+ColWidths_connform.ListSessions<|||>1<|||>163,50,50,50,50,50,53
+ColsVisible_connform.ListSessions<|||>1<|||>0
+ColPositions_connform.ListSessions<|||>1<|||>0,1,2,3,4,5,6
+ColSort_connform.ListSessions<|||>1<|||>0,1
+MainWinOnMonitor<|||>3<|||>0
+MainWinLeft<|||>3<|||>503
+MainWinTop<|||>3<|||>372
+ColWidths_MainForm.ListDatabases<|||>1<|||>150,80,50,50,50,50,50,50,50,50,120
+ColsVisible_MainForm.ListDatabases<|||>1<|||>0,1,2,3,4,5,6,7,8,9,10
+ColPositions_MainForm.ListDatabases<|||>1<|||>0,1,2,3,4,5,6,7,8,9,10
+ColSort_MainForm.ListDatabases<|||>1<|||>0,0
+ColWidths_MainForm.ListVariables<|||>1<|||>160,200,428
+ColsVisible_MainForm.ListVariables<|||>1<|||>0,1,2
+ColPositions_MainForm.ListVariables<|||>1<|||>0,1,2
+ColSort_MainForm.ListVariables<|||>1<|||>0,0
+ColWidths_MainForm.ListStatus<|||>1<|||>160,428,100,100
+ColsVisible_MainForm.ListStatus<|||>1<|||>0,1,2,3
+ColPositions_MainForm.ListStatus<|||>1<|||>0,1,2,3
+ColSort_MainForm.ListStatus<|||>1<|||>0,0
+ColWidths_MainForm.ListProcesses<|||>1<|||>70,80,80,80,80,50,50,311
+ColsVisible_MainForm.ListProcesses<|||>1<|||>0,1,2,3,4,5,6,7
+ColPositions_MainForm.ListProcesses<|||>1<|||>0,1,2,3,4,5,6,7
+ColSort_MainForm.ListProcesses<|||>1<|||>0,1
+ColWidths_MainForm.ListCommandStats<|||>1<|||>120,100,100,100,368
+ColsVisible_MainForm.ListCommandStats<|||>1<|||>0,1,2,3,4
+ColPositions_MainForm.ListCommandStats<|||>1<|||>0,1,2,3,4
+ColSort_MainForm.ListCommandStats<|||>1<|||>1,1
+ColWidths_MainForm.ListTables<|||>1<|||>120,70,70,120,120,70,100,50,70,70,70,70,70,90,120,70,70,70,50
+ColsVisible_MainForm.ListTables<|||>1<|||>0,1,2,3,4,5,6,18
+ColPositions_MainForm.ListTables<|||>1<|||>0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18
+ColSort_MainForm.ListTables<|||>1<|||>0,0
+Theme<|||>1<|||>Windows
+FieldColor_Binary<|||>3<|||>8388736
+FieldColor_Datetime<|||>3<|||>128
+FieldColor_Numeric<|||>3<|||>16711680
+FieldColor_Other<|||>3<|||>32896
+FieldColor_Real<|||>3<|||>16711752
+FieldColor_Spatial<|||>3<|||>8421376
+FieldColor_Text<|||>3<|||>32768
+SessionManager_WindowLeft<|||>3<|||>930
+SessionManager_WindowTop<|||>3<|||>537
+CreateDbCollation<|||>1<|||>utf8mb4_0900_ai_ci
+ColWidths_frmTableEditor.listColumns<|||>1<|||>39,128,100,75,70,74,72,368,130,140,100,100
+ColsVisible_frmTableEditor.listColumns<|||>1<|||>0,1,2,3,4,5,6,7,8,9,10,11
+ColPositions_frmTableEditor.listColumns<|||>1<|||>0,1,2,3,4,5,6,7,8,9,10,11
+ColSort_frmTableEditor.listColumns<|||>1<|||>-1,0
+ColWidths_frmTableEditor.treeIndexes<|||>1<|||>942,100,80
+ColsVisible_frmTableEditor.treeIndexes<|||>1<|||>0,1,2
+ColPositions_frmTableEditor.treeIndexes<|||>1<|||>0,1,2
+ColSort_frmTableEditor.treeIndexes<|||>1<|||>-1,0
+ColWidths_frmTableEditor.listForeignKeys<|||>1<|||>720,80,100,80,80,80
+ColsVisible_frmTableEditor.listForeignKeys<|||>1<|||>0,1,2,3,4,5
+ColPositions_frmTableEditor.listForeignKeys<|||>1<|||>0,1,2,3,4,5
+ColSort_frmTableEditor.listForeignKeys<|||>1<|||>-1,0
+MainWinWidth<|||>3<|||>1107
+MainWinHeight<|||>3<|||>838
+FontSize<|||>3<|||>10
+FieldEditor_Set<|||>3<|||>1
+MemoEditorWidth<|||>3<|||>136
+DateTimeEditor_CursorPos_Type4<|||>3<|||>0
+querymemoheight<|||>3<|||>195
+ExportSQL_CreateDatabases<|||>3<|||>1
+ExportSQL_CreateTables<|||>3<|||>1
+ExportSQL_DataHow<|||>3<|||>2
+ExportSQL_Filenames<|||>1<|||>D:\github\DB\191220.sql<{{{><}}}>
+FileDialogEncoding_MainForm<|||>3<|||>0
+SQLFile0<|||>1<|||>G:\project\github\Team2\team2\Server\DB\191220.sql
+Servers\mdnf\SessionCreated<|||>1<|||>2019-12-19 00:40:12
+Servers\mdnf\Host<|||>1<|||>127.0.0.1
+Servers\mdnf\WindowsAuth<|||>3<|||>0
+Servers\mdnf\CleartextPluginEnabled<|||>3<|||>0
+Servers\mdnf\User<|||>1<|||>mdnf
+Servers\mdnf\Password<|||>1<|||>746B756D387
+Servers\mdnf\LoginPrompt<|||>3<|||>0
+Servers\mdnf\Port<|||>1<|||>3306
+Servers\mdnf\NetType<|||>3<|||>0
+Servers\mdnf\Compressed<|||>3<|||>0
+Servers\mdnf\LocalTimeZone<|||>3<|||>0
+Servers\mdnf\QueryTimeout<|||>3<|||>30
+Servers\mdnf\KeepAlive<|||>3<|||>20
+Servers\mdnf\FullTableStatus<|||>3<|||>1
+Servers\mdnf\Databases<|||>1<|||>
+Servers\mdnf\Library<|||>1<|||>libmysql.dll
+Servers\mdnf\Comment<|||>1<|||>
+Servers\mdnf\StartupScriptFilename<|||>1<|||>
+Servers\mdnf\TreeBackground<|||>3<|||>536870911
+Servers\mdnf\SSHtunnelHost<|||>1<|||>
+Servers\mdnf\SSHtunnelHostPort<|||>3<|||>22
+Servers\mdnf\SSHtunnelUser<|||>1<|||>
+Servers\mdnf\SSHtunnelPassword<|||>1<|||>5
+Servers\mdnf\SSHtunnelTimeout<|||>3<|||>4
+Servers\mdnf\SSHtunnelPrivateKey<|||>1<|||>
+Servers\mdnf\SSHtunnelPort<|||>3<|||>3307
+Servers\mdnf\SSL_Active<|||>3<|||>0
+Servers\mdnf\SSL_Key<|||>1<|||>
+Servers\mdnf\SSL_Cert<|||>1<|||>
+Servers\mdnf\SSL_CA<|||>1<|||>
+Servers\mdnf\SSL_Cipher<|||>1<|||>
+Servers\mdnf\ServerVersionFull<|||>1<|||>8.0.18 - MySQL Community Server - GPL
+Servers\mdnf\ConnectCount<|||>3<|||>4
+Servers\mdnf\ServerVersion<|||>3<|||>80018
+Servers\mdnf\LastConnect<|||>1<|||>2019-12-24 00:06:22
+Servers\mdnf\lastUsedDB<|||>1<|||>mdnf
+Servers\mdnf\RefusedCount<|||>3<|||>2
+Servers\mdnf\mdnf|item\Sort<|||>1<|||>0_index|
+Servers\mdnf\QueryHistory\2<|||>1<|||>2019-12-10 14:38:04|mdnf|0|SELECT * FROM login;
+Servers\mdnf\QueryHistory\1<|||>1<|||>2019-12-12 14:00:43|mdnf|0|/*<{{{><}}}>SELECT * FROM login;<{{{><}}}>*/<{{{><}}}><{{{><}}}>SELECT userid FROM login;
+Servers\mdnf\QueryHistory\3<|||>1<|||>2019-12-12 14:40:29|mdnf|0|/*<{{{><}}}>SELECT * FROM login;<{{{><}}}>*/<{{{><}}}><{{{><}}}>SELECT userid FROM login WHERE userid = "test";
+Servers\mdnf\QueryHistory\5<|||>1<|||>2019-12-12 15:47:30|mdnf|0|/*<{{{><}}}>SELECT * FROM login;<{{{><}}}>*/<{{{><}}}><{{{><}}}>SELECT userid FROM login WHERE userID = "test";
+Servers\mdnf\QueryHistory\6<|||>1<|||>2019-12-12 16:56:44|mdnf|0|/*<{{{><}}}>SELECT * FROM login;<{{{><}}}>*/<{{{><}}}><{{{><}}}>SELECT user_id FROM login WHERE user_id = "test";
+Servers\mdnf\QueryHistory\4<|||>1<|||>2019-12-12 16:57:56|mdnf|0|/*<{{{><}}}>SELECT * FROM login;<{{{><}}}>*/<{{{><}}}><{{{><}}}>/*SELECT user_id FROM login WHERE user_id = "test";*/<{{{><}}}>SELECT user_password FROM login WHERE user_password = "XzZ7zCBwUiKeNXHCKjpOkw==";
+Servers\mdnf\QueryHistory\7<|||>1<|||>2019-12-12 16:58:14|mdnf|0|/*<{{{><}}}>SELECT * FROM login;<{{{><}}}>*/<{{{><}}}><{{{><}}}>/*SELECT user_id FROM login WHERE user_id = "test";*/<{{{><}}}>SELECT user_id FROM login WHERE user_password = "XzZ7zCBwUiKeNXHCKjpOkw==";
+Servers\mdnf\QueryHistory\8<|||>1<|||>2019-12-12 16:58:25|mdnf|0|/*<{{{><}}}>SELECT * FROM login;<{{{><}}}>*/<{{{><}}}><{{{><}}}>/*SELECT user_id FROM login WHERE user_id = "test";*/<{{{><}}}>SELECT user_password FROM login WHERE user_id = "XzZ7zCBwUiKeNXHCKjpOkw==";
+Servers\mdnf\QueryHistory\10<|||>1<|||>2019-12-12 18:00:47|mdnf|0|/*<{{{><}}}>SELECT * FROM login;<{{{><}}}>*/<{{{><}}}><{{{><}}}>/*SELECT user_id FROM login WHERE user_id = "test";*/<{{{><}}}>SELECT user_password FROM login WHERE user_id = "test";
+Servers\mdnf\QueryHistory\11<|||>1<|||>2019-12-16 18:37:44|mdnf|0|/*<{{{><}}}>SELECT * FROM login;<{{{><}}}>*/<{{{><}}}><{{{><}}}>/*SELECT user_id FROM login WHERE user_id = "test";*/<{{{><}}}>/*SELECT user_password FROM login WHERE user_id = "test";*/<{{{><}}}>SELECT user_name FROM login WHERE user_id = "test";
+Servers\mdnf\QueryHistory\9<|||>1<|||>2019-12-18 17:48:07|mdnf|16|/*<{{{><}}}>SELECT * FROM login;<{{{><}}}>*/<{{{><}}}><{{{><}}}>/*SELECT user_id FROM login WHERE user_id = "test";*/<{{{><}}}>/*SELECT user_password FROM login WHERE user_id = "test";*/<{{{><}}}>/*SELECT user_name FROM login WHERE user_id = "test";*/<{{{><}}}><{{{><}}}>INSERT INTO login(user_id, user_password, user_name, last_connect) VALUES ('CCCC', 'aaa', '디디',CURRENT_TIMESTAMP);
+Servers\mdnf\QueryHistory\12<|||>1<|||>2019-12-18 17:49:01|mdnf|16|/*<{{{><}}}>SELECT * FROM login;<{{{><}}}>*/<{{{><}}}><{{{><}}}>/*SELECT user_id FROM login WHERE user_id = "test";*/<{{{><}}}>/*SELECT user_password FROM login WHERE user_id = "test";*/<{{{><}}}>/*SELECT user_name FROM login WHERE user_id = "test";*/<{{{><}}}><{{{><}}}>INSERT INTO login(user_id, user_password, user_name, last_connect) VALUES ('cccc', 'aaa', '씨씨씨씨',CURRENT_TIMESTAMP);
+Servers\mdnf\QueryHistory\13<|||>1<|||>2019-12-18 18:28:09|mdnf|0|/*<{{{><}}}>SELECT * FROM login;<{{{><}}}>*/<{{{><}}}><{{{><}}}>/*SELECT user_id FROM login WHERE user_id = "test";*/<{{{><}}}>/*SELECT user_password FROM login WHERE user_id = "test";*/<{{{><}}}>/*SELECT user_name FROM login WHERE user_id = "test";*/<{{{><}}}><{{{><}}}>INSERT INTO login(user_id, user_password, user_name, sign_date) VALUES ('dddd', 'dddd', '디디디디',CURRENT_TIMESTAMP);
+Servers\mdnf\QueryHistory\15<|||>1<|||>2019-12-21 13:30:45|mdnf|0|CREATE TABLE IF NOT EXISTS `login` (<{{{><}}}>  `index` int(10) NOT NULL AUTO_INCREMENT,<{{{><}}}>  `user_id` varchar(50) NOT NULL,<{{{><}}}>  `user_password` varchar(200) NOT NULL,<{{{><}}}>  `user_name` varchar(50) NOT NULL,<{{{><}}}>  `sign_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,<{{{><}}}>  PRIMARY KEY (`index`),<{{{><}}}>  UNIQUE KEY `user_id` (`user_id`),<{{{><}}}>  UNIQUE KEY `user_name` (`user_name`)<{{{><}}}>) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+Servers\mdnf\QueryHistory\14<|||>1<|||>2019-12-24 03:52:30|mdnf|0|SELECT item_index FROM item WHERE item_id = "2"
+Servers\mdnf\QueryHistory\16<|||>1<|||>2019-12-24 03:52:43|mdnf|0|SELECT item_id FROM item WHERE item_index = "2"
+Servers\mdnf\QueryHistory\17<|||>1<|||>2019-12-24 03:52:54|mdnf|0|SELECT item_id FROM item WHERE item_index = "10002"
+Servers\mdnf\QueryHistory\18<|||>1<|||>2019-12-24 05:24:55|mdnf|0|SELECT COUNT(*) AS cnt FROM item;
+Servers\mdnf\QueryHistory\19<|||>1<|||>2019-12-24 05:25:16|mdnf|15|SELECT COUNT(item_index) AS cnt FROM item;
+Servers\mdnf\QueryHistory\20<|||>1<|||>2019-12-24 06:20:41|mdnf|0|SELECT item_id FROM item WHERE item_index = "11";

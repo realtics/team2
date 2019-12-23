@@ -6,6 +6,7 @@
 #include <winsock2.h>
 #include <mysql.h>
 #include <string>
+#include <boost/lexical_cast.hpp>
 #include "Protocol.h"
 
 class DBMySQL
@@ -34,6 +35,7 @@ public:
 	int DBLoginCheckUserID(std::string checkID);
 	int DBLoginCheckUserPW(std::string checkID, std::string checkPW);
 
+	int DBDungeonClearResultItemSize();
 	std::string DBDungeonClearResultItem(int resultRandom);
 	
 	std::string DBLoginGetUserName(std::string userID);

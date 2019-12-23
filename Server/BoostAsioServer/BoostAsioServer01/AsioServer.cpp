@@ -125,7 +125,7 @@ void AsioServer::ProcessPacket(const int sessionID, const char* pData)
 		SendPkt.Init();
 		
 		SendPkt.checkResult = _DBMysql.DBSignUp(pPacket->userID, pPacket->userPW, pPacket->userName);
-		
+
 		// json
 		boost::property_tree::ptree ptSendHeader;
 		ptSendHeader.put<short>("packetIndex", SendPkt.packetIndex);
@@ -170,6 +170,7 @@ void AsioServer::ProcessPacket(const int sessionID, const char* pData)
 
 		// DB 체크
 		SendPkt.checkResult = _DBMysql.DBLoginCheckUserID(pPacket->userID);
+
 		std::cout << "ID checkResult = " << SendPkt.checkResult << std::endl;
 
 		if (SendPkt.checkResult == RESULT_BEFORE_LOGIN_CHECK::RESULT_BEFORE_LOGIN_CHECK_SUCCESS)
@@ -487,6 +488,56 @@ void AsioServer::ProcessPacket(const int sessionID, const char* pData)
 				_sessionList[i]->PostSend(false, std::strlen(sendStr2.c_str()), (char*)sendStr2.c_str());
 			}
 		}
+	}
+	break;
+	case PACKET_INDEX::REQ_DUNGEON_CLEAR_RESULT_ITEM:
+	{
+		PKT_REQ_DUNGEON_CLEAR_RESULT_ITEM* pPacket = (PKT_REQ_DUNGEON_CLEAR_RESULT_ITEM*)pData;
+
+		PKT_RES_DUNGEON_CLEAR_RESULT_ITEM SendPkt;
+		SendPkt.Init();
+
+		int resultItemSize = _DBMysql.DBDungeonClearResultItemSize();
+
+		boost::random::mt19937 gen;
+		boost::random::uniform_int_distribution<> dist(10001, (10000+resultItemSize));
+
+		int resultRandom = dist(gen);
+
+		// DB 체크
+		strcpy_s(SendPkt.resultItemIndex, MAX_RESULT_ITEM_ID, _DBMysql.DBDungeonClearResultItem(resultRandom).c_str());
+
+		// json
+		boost::property_tree::ptree ptSendHeader;
+		ptSendHeader.put<short>("packetIndex", SendPkt.packetIndex);
+		ptSendHeader.put<short>("packetSize", SendPkt.packetSize);
+
+		boost::property_tree::ptree ptSend;
+		ptSend.add_child("header", ptSendHeader);
+		ptSend.put<std::string>("resultItemIndex", SendPkt.resultItemIndex);
+
+		std::string stringRecv;
+		std::ostringstream oss(stringRecv);
+		boost::property_tree::write_json(oss, ptSend, false);
+		std::string sendStr = oss.str();
+
+		short JsonDataAllPacketSize = JsonDataSize(sendStr);
+
+		boost::property_tree::ptree ptSendHeader2;
+		ptSendHeader2.put<short>("packetIndex", SendPkt.packetIndex);
+		ptSendHeader2.put<short>("packetSize", JsonDataAllPacketSize);
+
+		boost::property_tree::ptree ptSend2;
+		ptSend2.add_child("header", ptSendHeader2);
+		ptSend2.put<std::string>("resultItemIndex", SendPkt.resultItemIndex);
+
+		std::string stringRecv2;
+		std::ostringstream oss2(stringRecv2);
+		boost::property_tree::write_json(oss2, ptSend2, false);
+		std::string sendStr2 = oss2.str();
+		std::cout << "[서버->클라] " << sendStr2 << std::endl;
+
+		_sessionList[sessionID]->PostSend(false, std::strlen(sendStr2.c_str()), (char*)sendStr2.c_str());
 	}
 	break;
 	}

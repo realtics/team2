@@ -246,12 +246,51 @@ int DBMySQL::DBLoginCheckUserPW(std::string checkID, std::string checkPW)
 	return RESULT_BEFORE_LOGIN_CHECK::RESULT_BEFORE_LOGIN_CHECK_IS_WRONG_PASSWORD;
 }
 
+int DBMySQL::DBDungeonClearResultItemSize()
+{
+	mysql_select_db(&_mysql, _dbName);
+
+	char DBQuery[256] = "SELECT COUNT(item_index) AS cnt FROM item";
+
+	int result = 0;
+
+	if (_pConnection == NULL)
+	{
+		std::cout << mysql_errno(&_mysql) << " ¿¡·¯ : " << mysql_error(&_mysql) << std::endl;
+	}
+	else
+	{
+		int DBState = mysql_query(_pConnection, DBQuery);
+		if (DBState == 0)
+		{
+			_pSqlResult = mysql_store_result(_pConnection);
+
+			int fields = mysql_num_fields(_pSqlResult);
+
+			while ((_SqlRow = mysql_fetch_row(_pSqlResult)) != NULL)
+			{
+				for (int i = 0; i < fields; i++)
+				{
+					if (_SqlRow[i] != NULL)
+					{
+						result = boost::lexical_cast<int>(_SqlRow[i]);
+					}
+				}
+			}
+		}
+		mysql_free_result(_pSqlResult);
+	}
+
+	return result;
+}
+
 std::string DBMySQL::DBDungeonClearResultItem(int resultRandom)
 {
 	mysql_select_db(&_mysql, _dbName);
 	
 	const char* DBQuery1 = "SELECT item_id FROM item WHERE item_index = \"";
-	const char* DBQuery2 = std::to_string(resultRandom).c_str();
+	std::string tostring = std::to_string(resultRandom);
+	const char* DBQuery2 = tostring.c_str();
 	const char* DBQuery3 = "\";";
 
 	char DBQuery[256] = "";
@@ -297,8 +336,6 @@ std::string DBMySQL::DBDungeonClearResultItem(int resultRandom)
 	}
 
 	return "no_id";
-
-	return 0;
 }
 
 std::string DBMySQL::DBLoginGetUserName(std::string userID)

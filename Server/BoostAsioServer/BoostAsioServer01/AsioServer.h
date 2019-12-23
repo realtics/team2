@@ -7,6 +7,9 @@
 #include <string>
 #include <vector>
 #include <sstream>
+#include <ctime>
+#include <boost/random/mersenne_twister.hpp>
+#include <boost/random/uniform_int_distribution.hpp>
 
 #include "DBMySQL.h"
 #include "Session.h"

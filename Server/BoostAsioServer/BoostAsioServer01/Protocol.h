@@ -13,6 +13,8 @@ const int MAX_USER_ID = 50;
 const int MAX_USER_PW = 200;
 const int MAX_USER_NAME = 50;
 
+const int MAX_RESULT_ITEM_ID = 50;
+
 enum PACKET_INDEX : short
 {
 	// REQ : 클라->서버, 클라에서 서버에 어떤 값을 요청
@@ -302,12 +304,12 @@ struct PKT_REQ_DUNGEON_CLEAR_RESULT_ITEM : PACKET_HEADER
 
 struct PKT_RES_DUNGEON_CLEAR_RESULT_ITEM : PACKET_HEADER
 {
-	int resultItemIndex;
+	char resultItemIndex[MAX_RESULT_ITEM_ID];
 
 	void Init()
 	{
 		packetIndex = PACKET_INDEX::RES_DUNGEON_CLEAR_RESULT_ITEM;
 		packetSize = sizeof(PKT_RES_DUNGEON_CLEAR_RESULT_ITEM);
-		resultItemIndex = 0;
+		memset(resultItemIndex, 0, MAX_RESULT_ITEM_ID);
 	}
 };

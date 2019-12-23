@@ -257,6 +257,15 @@ void Session::Deserialization(char* jsonData)
 		memcpy(&_packetBuffer[_packetBufferMark], (char*)&packet, sizeof(packet));
 	}
 	break;
+	case PACKET_INDEX::REQ_DUNGEON_CLEAR_RESULT_ITEM:
+	{
+		PKT_REQ_DUNGEON_CLEAR_RESULT_ITEM packet;
+		packet.Init();
+		packet.packetIndex = packetIndex;
+		packet.packetSize = packetSize;
+		memcpy(&_packetBuffer[_packetBufferMark], (char*)&packet, sizeof(packet));
+	}
+	break;
 	default:
 	{
 		std::cout << "Index가 존재 하지 않는 Packet : " << packetIndex << std::endl;
