@@ -30,53 +30,38 @@ public class ChracterStatInfo : MonoBehaviour
 
 	private void UpdateStat()
 	{
-		//FIXME : 스탯연동할때 지역변수 다 제거 일단은 확인용
-		int physicalAttackBonus = 0;
-		int magicAttackBonus = 0;
-		int physicalDefenseBonus = 0;
-		int magicDefenseBonus = 0;
-		int strengthBonus = 0;
-		int intelligenceBonus = 0;
-		int healthBonus = 0;
-		int mentalityBonus = 0;
-		int hangmaBonus = 0;
+		
+        CharacterBaseStat _totalEquipStat = new CharacterBaseStat();
 
 		for (int i = 0; i < _equipmentPanel.EquipmentSlots.Length; i++)
 		{
 			if (_equipmentPanel.EquipmentSlots[i].Item != null)
 			{
 				EquipableItem equipableItem = (EquipableItem)_equipmentPanel.EquipmentSlots[i].Item;
-				physicalAttackBonus += equipableItem.physicalAttackBonus;
-				magicAttackBonus += equipableItem.magicAttackBonus;
-				physicalDefenseBonus += equipableItem.physicalDefenseBonus;
-				magicDefenseBonus += equipableItem.magicDefenseBonus;
-				strengthBonus += equipableItem.strengthBonus;
-				intelligenceBonus += equipableItem.intelligenceBonus;
-				healthBonus += equipableItem.healthBonus;
-				mentalityBonus += equipableItem.intelligenceBonus;
-				hangmaBonus += equipableItem.hangmaBonus;
+                _totalEquipStat.physicalAttack += equipableItem.physicalAttackBonus;
+                _totalEquipStat.magicAttack += equipableItem.magicAttackBonus;
+                _totalEquipStat.physicalDefense += equipableItem.physicalDefenseBonus;
+                _totalEquipStat.magicDefense += equipableItem.magicDefenseBonus;
+                _totalEquipStat.strength += equipableItem.strengthBonus;
+                _totalEquipStat.intelligence += equipableItem.intelligenceBonus;
+                _totalEquipStat.health += equipableItem.healthBonus;
+                _totalEquipStat.mentality += equipableItem.intelligenceBonus;
+                _totalEquipStat.hangma += equipableItem.hangmaBonus;
 			}
 		}
-		_physicalAttackBonusText.text = physicalAttackBonus.ToString();
-		_magicAttackBonusText.text = magicAttackBonus.ToString();
-		_physicalDefenseBonusText.text = physicalDefenseBonus.ToString();
-		_magicDefenseBonusText.text = magicDefenseBonus.ToString();
-		_strengthBonusText.text = strengthBonus.ToString();
-		_intelligenceBonusText.text = intelligenceBonus.ToString();
-		_healthBonusText.text = healthBonus.ToString();
-		_mentalityBonusText.text = mentalityBonus.ToString();
-		_hangmaBonusText.text = hangmaBonus.ToString();
+        PlayerManager.Instance.SetEquipmentStat(_totalEquipStat);
+  
+        _physicalAttackBonusText.text = PlayerManager.Instance.Stat.TotalStat.physicalAttack.ToString();
+        _magicAttackBonusText.text = PlayerManager.Instance.Stat.TotalStat.magicAttack.ToString();
+		_physicalDefenseBonusText.text = PlayerManager.Instance.Stat.TotalStat.physicalDefense.ToString();
+		_magicDefenseBonusText.text = PlayerManager.Instance.Stat.TotalStat.magicDefense.ToString();
+		_strengthBonusText.text = PlayerManager.Instance.Stat.TotalStat.strength.ToString();
+		_intelligenceBonusText.text = PlayerManager.Instance.Stat.TotalStat.intelligence.ToString();
+		_healthBonusText.text = PlayerManager.Instance.Stat.TotalStat.health.ToString();
+		_mentalityBonusText.text = PlayerManager.Instance.Stat.TotalStat.mentality.ToString();
+		_hangmaBonusText.text = PlayerManager.Instance.Stat.TotalStat.hangma.ToString();
 
-		//_stat.physicalAttackBonus = physicalAttackBonus;
-		//_stat.magicAttackBonus = magicAttackBonus;
-		//_stat.physicalDefenseBonus = physicalDefenseBonus;
-		//_stat.magicDefenseBonus = magicDefenseBonus;
-		//_stat.strengthBonus = strengthBonus;
-		//_stat.intelligenceBonus = intelligenceBonus;
-		//_stat.healthBonus = healthBonus;
-		//_stat.mentalityBonus = mentalityBonus;
-		//_stat.hangmaBonus = hangmaBonus;
-	}
+    }
 
 	public void SetCharacterInfo()
 	{

@@ -44,16 +44,17 @@ public class CharacterStat : MonoBehaviour
     public float Mp { get { return _mp; } }
     public float AttackSpeed { get { return _attackSpeed; } }
     public BaseUnit Unit { get { return _unit; } }
+    public CharacterBaseStat TotalStat { get { return _totalStat; } }
 
     void Start()
     {
-        RefreshExtraStat();
-
-        _hp = _maxHp;
-        _mp = _maxMp;
         _uiPlayerInfo = FindObjectOfType<UIPlayerInfo>();
-        _uiPlayerInfo.SetPlayerHp(_hp, _maxHp);
-        _uiPlayerInfo.SetPlayerMp(_mp, _maxMp);
+        RefreshExtraStat();
+        //_hp = _maxHp;
+        //_mp = _maxMp;
+        //_uiPlayerInfo = FindObjectOfType<UIPlayerInfo>();
+        //_uiPlayerInfo.SetPlayerHp(_hp, _maxHp);
+        //_uiPlayerInfo.SetPlayerMp(_mp, _maxMp);
     }
 
     void Update()
@@ -103,5 +104,14 @@ public class CharacterStat : MonoBehaviour
         _totalStat.physicalAttack = _baseStat.physicalAttack + PlayerManager.Instance.EquipmentStat.physicalAttack;
         _totalStat.physicalDefense = _baseStat.physicalDefense + PlayerManager.Instance.EquipmentStat.physicalDefense;
         _totalStat.strength = _baseStat.strength + PlayerManager.Instance.EquipmentStat.strength;
+
+        _attackDamage = _totalStat.physicalAttack * _totalStat.strength / 100;
+        _maxHp = _totalStat.health * 10;
+        _maxMp = _totalStat.mentality * 10;
+        _hp = _maxHp;
+        _mp = _maxMp;
+       
+        _uiPlayerInfo.SetPlayerHp(_hp, _maxHp);
+        _uiPlayerInfo.SetPlayerMp(_mp, _maxMp);
     }
 }

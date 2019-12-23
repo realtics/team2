@@ -24,7 +24,7 @@ public class PlayerManager
 	private PlayerCharacter _playerCharacter;
 	public PlayerCharacter PlayerCharacter { get { return _playerCharacter; } set { _playerCharacter = value; } }
 	public CharacterStat Stat { get { return _playerCharacter.Movement.Stat; } }
-    public CharacterBaseStat EquipmentStat { get { return _equipmentStat; } }
+    public CharacterBaseStat EquipmentStat { get { return _equipmentStat; }}
 
 	private void Awake()
 	{
