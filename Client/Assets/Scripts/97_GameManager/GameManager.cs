@@ -83,8 +83,8 @@ public class GameManager : MonoBehaviour
     {
         Color fadecolor = _fadeOut.color;
         _time = 0f;
-
-        while (fadecolor.a > 0f)
+		SceneManager.UnloadSceneAsync((int)SceneIndex.Inventory);
+		while (fadecolor.a > 0f)
         {
             _time += Time.deltaTime / FadeTime;
             fadecolor.a = Mathf.Lerp(_start, _end, _time);

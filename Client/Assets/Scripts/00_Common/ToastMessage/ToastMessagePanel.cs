@@ -15,21 +15,41 @@ public class ToastMessagePanel : MonoBehaviour
 
 	public GameObject toastMessagePrefab;
 
+	private List<string> _messages;
+
 	private void Awake()
 	{
 		_instance = this;
+		_messages = new List<string>();
 	}
 
-	public void SetToastMessage(string message)
+	private void Update()
 	{
+		ShowToastMessage();
+	}
+
+	private void ShowToastMessage()
+	{
+		if (_messages.Count <= 0)
+			return;
+
+		string toastMessage = _messages[0];
+
 		GameObject toastObject = ObjectPoolManager.Instance.GetRestObject(toastMessagePrefab);
 		ToastMessage toastText = toastObject.GetComponent<ToastMessage>();
 
-		toastText.SetToastMessage(message);
+		toastText.SetToastMessage(toastMessage);
 
 		toastObject.transform.SetParent(transform);
 		toastObject.transform.localScale = Vector3.one;
 		toastObject.transform.localPosition = Vector3.zero;
 		toastObject.transform.SetAsFirstSibling();
+
+		_messages.Remove(toastMessage);
+	}
+
+	public void SetToastMessage(string message)
+	{
+		_messages.Add(message);
 	}
 }

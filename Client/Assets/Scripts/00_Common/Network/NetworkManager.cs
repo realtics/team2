@@ -371,10 +371,10 @@ public class NetworkManager : MonoBehaviour
 								}
 								break;
 							case (int)CHECK_BEFORE_LOGIN_RESULT.RESULT_BEFORE_LOGIN_CHECK_NO_ID:
-								Debug.Log("아이디가 존재하지 않음");
+								ToastMessagePanel.Instance.SetToastMessage("존재하지 않는 아이디입니다.");
 								break;
 							case (int)CHECK_BEFORE_LOGIN_RESULT.RESULT_BEFORE_LOGIN_CHECK_IS_WRONG_PASSWORD:
-								Debug.Log("비밀번호가 틀림");
+								ToastMessagePanel.Instance.SetToastMessage("비밀번호가 틀렸습니다.");
 								break;
 						}
 
@@ -474,6 +474,20 @@ public class NetworkManager : MonoBehaviour
 						var newChat = desJson.chatMessage;
 
 						ChattingPanel.Instance.AddNewChatting(userName, newChat);
+					}
+					break;
+				case (short)PACKET_INDEX.RES_SIGN_UP:
+					{
+						var desJson = JsonConvert.DeserializeObject<PKT_RES_SIGN_UP>(jsonData);
+
+						RESULT_SIGN_UP_CHECK checkResult = (RESULT_SIGN_UP_CHECK)desJson.checkResult;
+
+						switch (checkResult)
+						{
+							case RESULT_SIGN_UP_CHECK.RESULT_SIGN_UP_OVERLAP_ID:
+								ToastMessagePanel.Instance.SetToastMessage("이미 사용중인 아이디입니다.");
+							break;
+						}
 					}
 					break;
 				default:
