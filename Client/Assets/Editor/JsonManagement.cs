@@ -12,6 +12,7 @@ public class JsonManagement
     JsonSerializerSettings setting = new JsonSerializerSettings();
 
     private const string _mapFolderPath = "\\Map\\";
+    private const string _customMapFolderPath = "\\CustomMap\\";
 
     public JsonManagement()
     {
@@ -19,7 +20,7 @@ public class JsonManagement
         setting.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
     }
 
-    public void NewJson()
+    public void NewJson(string fileName)
     {
         JsonData jsonData = new JsonData();
         DungeonInfo dungeonInfo = new DungeonInfo();
@@ -29,16 +30,16 @@ public class JsonManagement
         DungeonJsonData dungeonJson = new DungeonJsonData();
         dungeonJson.DungeonInfos = jsonData.dungeonObjectList.ToArray();
         string strJsonData = JsonConvert.SerializeObject(dungeonJson, setting);
-        CreateJsonFile("New", strJsonData);
+        CreateJsonFile(fileName, strJsonData, _customMapFolderPath);
     }
 
-    public void SaveJson(JsonData jsonData)
+    public void SaveJson(JsonData jsonData, string fileName)
     {
         DungeonJsonData dungeonJson = new DungeonJsonData();
         dungeonJson.DungeonInfos = jsonData.dungeonObjectList.ToArray();
 
         string strJsonData = JsonConvert.SerializeObject(dungeonJson, setting);
-        CreateJsonFile("New", strJsonData);
+        CreateJsonFile(fileName, strJsonData, _customMapFolderPath);
     }
     public void ExportJson(JsonData jsonData)
     {

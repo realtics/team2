@@ -90,6 +90,8 @@ public class MapTool : EditorWindow
 
     private bool _isLoadDungeon = false;
 
+    private string _fileName = "";
+
     [MenuItem("Window/MapTool/Open Editor %m", false, 1)]
     static void InitWindow()
     {
@@ -251,10 +253,14 @@ public class MapTool : EditorWindow
     {
         EditorGUILayout.BeginVertical();
 
-        if (GUILayout.Button("New"))
+        using (new EditorGUILayout.HorizontalScope())
         {
-            _jsonManagement.NewJson();
-            AssetDatabase.Refresh();
+            _fileName = EditorGUILayout.TextField(new GUIContent("FileName", "FileName .Json"), _fileName);
+            if (GUILayout.Button("New"))
+            {
+                _jsonManagement.NewJson(_fileName);
+                AssetDatabase.Refresh();
+            }
         }
         EditorGUILayout.LabelField("Select a Dungeon");
 
@@ -271,7 +277,7 @@ public class MapTool : EditorWindow
             {
                 if (GUILayout.Button("Save"))
                 {
-                    _jsonManagement.SaveJson(_mapToolLoader.dungeonList);
+                    _jsonManagement.SaveJson(_mapToolLoader.dungeonList, _dungeon.name);
                     AssetDatabase.Refresh();
                 }
                 if (GUILayout.Button("Load"))
