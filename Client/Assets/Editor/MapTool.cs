@@ -74,8 +74,6 @@ public class MapTool : EditorWindow
 
     private int _controlID;
 
-    private bool _showAlign = true;
-
     static List<GameObject> allPrefabs;
     private GameObject _currentPrefab;
 
@@ -258,8 +256,11 @@ public class MapTool : EditorWindow
             _fileName = EditorGUILayout.TextField(new GUIContent("FileName", "FileName .Json"), _fileName);
             if (GUILayout.Button("New"))
             {
-                _jsonManagement.NewJson(_fileName);
-                AssetDatabase.Refresh();
+                if(_fileName == null)
+                {
+                    _jsonManagement.NewJson(_fileName);
+                    AssetDatabase.Refresh();
+                }
             }
         }
         EditorGUILayout.LabelField("Select a Dungeon");
@@ -399,22 +400,6 @@ public class MapTool : EditorWindow
             Undo.RecordObject(Instance, "Name");
         }
         EditorGUILayout.Space();
-
-        //EditorGUI.BeginChangeCheck();
-        //_showAlign = EditorGUILayout.Foldout(_showAlign, "Alignment");
-
-        //if (EditorGUI.EndChangeCheck()) { }
-
-        //if (_showAlign)
-        //{
-        //    EditorGUI.BeginChangeCheck();
-
-        //    _alignId = GUILayout.SelectionGrid(_alignId, new string[9], 3, GUILayout.MaxHeight(100), GUILayout.MaxWidth(100));
-        //    if (EditorGUI.EndChangeCheck())
-        //    {
-        //        _alignPos = _alignId2Vec(_alignId);
-        //    }
-        //}
 
         EditorGUI.BeginChangeCheck();
 
