@@ -36,20 +36,31 @@ public class JsonManagement
     }
     public void ExportJson(JsonData jsonData)
     {
+        for(int i = 0; i < jsonData.dungeonObjectList.Count; i++)
+        {
+            foreach (var item in jsonData.dungeonObjectList[i].monsterInfos)
+            {
+                int TagPos = item.filePath.IndexOf('/') + 1;
+                if (TagPos > 0)
+                {
+                    item.filePath = item.filePath.Substring(TagPos);
+                }
+            }
+            foreach (var item in jsonData.dungeonObjectList[i].potalTransportinfos)
+            {
+                int TagPos = item.filePath.IndexOf('/') + 1;
+                if (TagPos > 0)
+                {
+                    item.filePath = item.filePath.Substring(TagPos);
+                }
+            }
+        }
+
         DungeonJsonData dungeonJson = new DungeonJsonData();
         dungeonJson.DungeonInfos = jsonData.dungeonObjectList.ToArray();
 
         string strJsonData = JsonConvert.SerializeObject(dungeonJson, setting);
         CreateJsonFile("New", strJsonData, _mapFolderPath);
-    }
-    public T LoadJson<T>(string fileName)
-    {
-        FileStream fileStream = new FileStream(string.Format("{0}/{1}.json", Application.dataPath + _mapFolderPath, fileName), FileMode.Open);
-        byte[] data = new byte[fileStream.Length];
-        fileStream.Read(data, 0, data.Length);
-        fileStream.Close();
-        string jsonData = Encoding.UTF8.GetString(data);
-        return JsonConvert.DeserializeObject<T>(jsonData);
     }
 
     private void CreateJsonFile(string fileName, string jsonData)
