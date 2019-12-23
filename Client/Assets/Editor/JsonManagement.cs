@@ -42,33 +42,60 @@ public class JsonManagement
     }
     public void ExportJson(JsonData jsonData)
     {
-        
+        JsonData jsonDungeon = new JsonData();
 
-        for (int i = 0; i < jsonData.dungeonObjectList.Count; i++)
+        foreach(var item in jsonData.dungeonObjectList)
         {
-            foreach (var item in jsonData.dungeonObjectList[i].monsterInfos)
+            DungeonInfo dungeonInfo = new DungeonInfo();
+            foreach(var obejctitem in item.objectinfos)
             {
-                int TagPos = item.filePath.IndexOf('/') + 1;
+                dungeonInfo.objectinfos.Add(obejctitem);
+            }
+
+            foreach (var monsteritem in item.monsterInfos)
+            {
+                MonsterInfo monsterInfo = new MonsterInfo();
+                int TagPos = monsteritem.filePath.IndexOf('/') + 1;
                 if (TagPos > 0)
                 {
-                    item.filePath = item.filePath.Substring(TagPos);
+                    monsterInfo.filePath = monsteritem.filePath.Substring(TagPos);
                 }
+                monsterInfo.position = monsteritem.position;
+                dungeonInfo.monsterInfos.Add(monsterInfo);
             }
-            foreach (var item in jsonData.dungeonObjectList[i].potalTransportinfos)
+
+            foreach (var potalitem in item.potalTransportinfos)
             {
-                int TagPos = item.filePath.IndexOf('/') + 1;
+                PotalTransportinfo potal = new PotalTransportinfo();
+                int TagPos = potalitem.filePath.IndexOf('/') + 1;
                 if (TagPos > 0)
                 {
-                    item.filePath = item.filePath.Substring(TagPos);
+                    potal.filePath = potalitem.filePath.Substring(TagPos);
                 }
+                potal.position = potalitem.position;
+                potal.arrow = potalitem.arrow;
+                potal.nextIndex = potalitem.nextIndex;
+                
+                potal.spotPosition = new SerializableVector3[potalitem.spotPosition.Length];
+                for (int i = 0; i < potalitem.spotPosition.Length; ++i)
+                {
+                    potal.spotPosition[i] = potalitem.spotPosition[i];
+                }
+
+                dungeonInfo.potalTransportinfos.Add(potal);
             }
+
+            dungeonInfo.PlayerStartPosition = item.PlayerStartPosition;
+            dungeonInfo.position = item.position;
+            dungeonInfo.isBoss = item.isBoss;
+            jsonDungeon.dungeonObjectList.Add(dungeonInfo);
         }
 
         DungeonJsonData dungeonJson = new DungeonJsonData();
-        dungeonJson.DungeonInfos = jsonData.dungeonObjectList.ToArray();
+        dungeonJson.DungeonInfos = jsonDungeon.dungeonObjectList.ToArray();
 
         string strJsonData = JsonConvert.SerializeObject(dungeonJson, setting);
-        CreateJsonFile("New", strJsonData, _mapFolderPath);
+        CreateJsonFile("New1", strJsonData, _mapFolderPath);
     }
 
     private void CreateJsonFile(string fileName, string jsonData)

@@ -1842,7 +1842,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1963510532}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.07796979, y: -0.6329837, z: -10}
+  m_LocalPosition: {x: -0.08316541, y: -0.63296366, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2590,7 +2590,7 @@ PrefabInstance:
     - target: {fileID: 7840884828415449384, guid: 86fb9eee594769e44bbd9bbda0425571,
         type: 3}
       propertyPath: _dungeonFileName
-      value: New
+      value: New1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 86fb9eee594769e44bbd9bbda0425571, type: 3}

@@ -19,7 +19,7 @@
       ],
       "monsterInfos": [
         {
-          "filePath": "Monster/Goblin",
+          "filePath": "Goblin",
           "position": {
             "x": -0.5,
             "y": -10.5,
@@ -27,7 +27,7 @@
           }
         },
         {
-          "filePath": "Monster/Goblin",
+          "filePath": "Goblin",
           "position": {
             "x": -2.5,
             "y": -9.5,
@@ -35,7 +35,7 @@
           }
         },
         {
-          "filePath": "Monster/Goblin",
+          "filePath": "Goblin",
           "position": {
             "x": -2.5,
             "y": -7.5,
@@ -43,7 +43,7 @@
           }
         },
         {
-          "filePath": "Monster/Goblin",
+          "filePath": "Goblin",
           "position": {
             "x": -1.5,
             "y": -5.5,
@@ -51,7 +51,7 @@
           }
         },
         {
-          "filePath": "Monster/Goblin",
+          "filePath": "Goblin",
           "position": {
             "x": -5.5,
             "y": -5.5,
@@ -59,7 +59,7 @@
           }
         },
         {
-          "filePath": "Monster/Goblin",
+          "filePath": "Goblin",
           "position": {
             "x": -4.5,
             "y": -9.5,
@@ -67,7 +67,7 @@
           }
         },
         {
-          "filePath": "Monster/Goblin",
+          "filePath": "Goblin",
           "position": {
             "x": -5.5,
             "y": -10.5,
@@ -75,7 +75,7 @@
           }
         },
         {
-          "filePath": "Monster/Goblin",
+          "filePath": "Goblin",
           "position": {
             "x": -4.5,
             "y": -7.5,
@@ -85,7 +85,7 @@
       ],
       "potalTransportinfos": [
         {
-          "filePath": "Potal/PotalTransport Side",
+          "filePath": "PotalTransport Side",
           "position": {
             "x": 1.5,
             "y": -6.5,
@@ -143,7 +143,7 @@
       ],
       "monsterInfos": [
         {
-          "filePath": "Monster/Tauarmy",
+          "filePath": "Tauarmy",
           "position": {
             "x": -2.5,
             "y": -7.5,
@@ -151,7 +151,7 @@
           }
         },
         {
-          "filePath": "Monster/Tauarmy",
+          "filePath": "Tauarmy",
           "position": {
             "x": -0.5,
             "y": -10.5,
@@ -159,7 +159,7 @@
           }
         },
         {
-          "filePath": "Monster/Tauarmy",
+          "filePath": "Tauarmy",
           "position": {
             "x": -4.5,
             "y": -9.5,
@@ -169,7 +169,7 @@
       ],
       "potalTransportinfos": [
         {
-          "filePath": "Potal/PotalTransport Side",
+          "filePath": "PotalTransport Side",
           "position": {
             "x": -14.5,
             "y": -10.5,
@@ -201,7 +201,7 @@
           "nextIndex": 0
         },
         {
-          "filePath": "Potal/ForceAltarPotalTransportLeft",
+          "filePath": "ForceAltarPotalTransportLeft",
           "position": {
             "x": 1.5,
             "y": -5.5,
@@ -265,7 +265,7 @@
       ],
       "monsterInfos": [
         {
-          "filePath": "Monster/Tauarmy",
+          "filePath": "Tauarmy",
           "position": {
             "x": -5.5,
             "y": -10.5,
@@ -273,7 +273,7 @@
           }
         },
         {
-          "filePath": "Monster/Goblin",
+          "filePath": "Goblin",
           "position": {
             "x": -9.5,
             "y": -5.5,
@@ -281,7 +281,7 @@
           }
         },
         {
-          "filePath": "Monster/Calvary",
+          "filePath": "Calvary",
           "position": {
             "x": 7.5,
             "y": -7.5,
@@ -291,7 +291,7 @@
       ],
       "potalTransportinfos": [
         {
-          "filePath": "Potal/ForceAltarPotalTransportRight",
+          "filePath": "ForceAltarPotalTransportRight",
           "position": {
             "x": -16.5,
             "y": -6.5,
