@@ -74,8 +74,6 @@ public class MapTool : EditorWindow
 
     private int _controlID;
 
-    private bool _showAlign = true;
-
     static List<GameObject> allPrefabs;
     private GameObject _currentPrefab;
 
@@ -89,6 +87,8 @@ public class MapTool : EditorWindow
     public static int currentZOrder = 0;
 
     private bool _isLoadDungeon = false;
+
+    private string _fileName = "";
 
     [MenuItem("Window/MapTool/Open Editor %m", false, 1)]
     static void InitWindow()
@@ -251,10 +251,17 @@ public class MapTool : EditorWindow
     {
         EditorGUILayout.BeginVertical();
 
-        if (GUILayout.Button("New"))
+        using (new EditorGUILayout.HorizontalScope())
         {
-            _jsonManagement.NewJson();
-            AssetDatabase.Refresh();
+            _fileName = EditorGUILayout.TextField(new GUIContent("FileName", "FileName .Json"), _fileName);
+            if (GUILayout.Button("New"))
+            {
+                if(_fileName == null)
+                {
+                    _jsonManagement.NewJson(_fileName);
+                    AssetDatabase.Refresh();
+                }
+            }
         }
         EditorGUILayout.LabelField("Select a Dungeon");
 
@@ -271,7 +278,7 @@ public class MapTool : EditorWindow
             {
                 if (GUILayout.Button("Save"))
                 {
-                    _jsonManagement.SaveJson(_mapToolLoader.dungeonList);
+                    _jsonManagement.SaveJson(_mapToolLoader.dungeonList, _dungeon.name);
                     AssetDatabase.Refresh();
                 }
                 if (GUILayout.Button("Load"))
@@ -393,22 +400,6 @@ public class MapTool : EditorWindow
             Undo.RecordObject(Instance, "Name");
         }
         EditorGUILayout.Space();
-
-        //EditorGUI.BeginChangeCheck();
-        //_showAlign = EditorGUILayout.Foldout(_showAlign, "Alignment");
-
-        //if (EditorGUI.EndChangeCheck()) { }
-
-        //if (_showAlign)
-        //{
-        //    EditorGUI.BeginChangeCheck();
-
-        //    _alignId = GUILayout.SelectionGrid(_alignId, new string[9], 3, GUILayout.MaxHeight(100), GUILayout.MaxWidth(100));
-        //    if (EditorGUI.EndChangeCheck())
-        //    {
-        //        _alignPos = _alignId2Vec(_alignId);
-        //    }
-        //}
 
         EditorGUI.BeginChangeCheck();
 
