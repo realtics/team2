@@ -305,8 +305,8 @@ void AsioServer::ProcessPacket(const int sessionID, const char* pData)
 		PKT_RES_CHATTING SendPkt;
 		SendPkt.Init();
 		SendPkt.sessionID = pPacket->sessionID;
-		strcpy_s(SendPkt.userName, MAX_USER_NAME, _sessionList[sessionID]->GetName());
-		strcpy_s(SendPkt.chatMessage, MAX_MESSAGE_LEN, pPacket->chatMessage);
+		SendPkt.userName = _sessionList[sessionID]->GetName();
+		SendPkt.chatMessage = pPacket->chatMessage;
 
 		boost::property_tree::ptree ptSendHeader;
 		ptSendHeader.put<short>("packetIndex", SendPkt.packetIndex);
@@ -606,9 +606,6 @@ void AsioServer::ConcurrentUser()
 			//	if (_sessionList[i]->SessionID() == (exitUser - FIRST_SESSION_INDEX))
 			//		continue;
 			//}
-			std::cout << "¡Ú _sessionList[ " << i << " ]->SessionID ¿¡°Ô º¸³¿ = " << _sessionList[i]->SessionID() << std::endl;
-			std::cout << std::endl;
-
 			_sessionList[i]->PostSend(false, std::strlen(sendStr2.c_str()), (char*)sendStr2.c_str());
 		}
 	}
