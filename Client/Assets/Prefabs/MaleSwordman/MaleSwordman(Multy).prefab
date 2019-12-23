@@ -644,3 +644,23 @@ MonoBehaviour:
   _mp: 0
   _attackDamage: 123
   _attackSpeed: 200
+  _baseStat:
+    physicalAttack: 100
+    magicAttack: 100
+    physicalDefense: 100
+    magicDefense: 100
+    strength: 100
+    intelligence: 100
+    health: 100
+    mentality: 100
+    hangma: 500
+  _totalStat:
+    physicalAttack: 0
+    magicAttack: 0
+    physicalDefense: 0
+    magicDefense: 0
+    strength: 0
+    intelligence: 0
+    health: 0
+    mentality: 0
+    hangma: 0
