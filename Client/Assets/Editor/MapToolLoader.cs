@@ -106,7 +106,6 @@ public class MapToolLoader
 
         MonsterInfo monsterInfo = new MonsterInfo();
         monsterInfo.filePath = path;
-        //monsterInfo.filePath = obj.name;
         monsterInfo.position = obj.transform.position;
 
         dungeonInfo.monsterInfos.Add(monsterInfo);
