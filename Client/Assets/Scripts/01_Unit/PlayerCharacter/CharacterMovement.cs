@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public struct CharacterMovePacket
@@ -10,9 +11,9 @@ public struct CharacterMovePacket
 
 public class CharacterMovement : BaseUnit
 {
+    public TextMeshPro nicknameText;
     private int _id;
 	private string _nickName;
-    private bool _nextAttack;
     private CharacterAnimController _animController;
     private Dictionary<SwordmanSkillIndex, CharacterSkill> _equipSkills;
     private SwordmanSkillIndex _usedSkill;
@@ -25,14 +26,13 @@ public class CharacterMovement : BaseUnit
 
     public CharacterSkill UsedSkill { get { return _equipSkills[_usedSkill]; } }
     public int Id { get { return _id; } set { _id = value; } }
-	public string NickName { get { return _nickName; } set { _nickName = value; } }
+	public string NickName { get { return _nickName; } set { _nickName = value; nicknameText.text = _nickName; } }
     public bool IsMine { get { return NetworkManager.Instance.MyId == Id ? true : false; } }
 
 
     protected override void Awake()
     {
         base.Awake();
-        _nextAttack = false;
         _animator.SetBool("IsGround", true);
         _animator.SetBool("NextAttack", false);
         _animController = GetComponentInChildren<CharacterAnimController>();

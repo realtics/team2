@@ -506,6 +506,7 @@ void AsioServer::ConcurrentUser()
 {
 	int totalUser = 0;
 	std::string userList = "";
+	std::string userName = "";
 	std::string userPos = "";
 	std::string userDir = "";
 
@@ -519,6 +520,10 @@ void AsioServer::ConcurrentUser()
 
 			userList += std::to_string(userNum);
 			userList += ",";
+
+			userName += _sessionList[i]->GetName();
+			userName += ",";
+
 			if (_totalUserPos.empty() == false)
 			{
 				userPos += _totalUserPos.find(userNum)->second;
@@ -536,6 +541,9 @@ void AsioServer::ConcurrentUser()
 		int endUserList = userList.size() - 1;
 		userList.replace(endUserList, endUserList, "");
 
+		int endUserName = userName.size() - 1;
+		userName.replace(endUserName, endUserName, "");
+
 		if (_totalUserPos.empty() == false)
 		{
 			int endUserPos = userPos.size() - 1;
@@ -551,6 +559,7 @@ void AsioServer::ConcurrentUser()
 
 	concurrentUser.totalUser = totalUser;
 	concurrentUser.concurrentUserList = userList;
+	concurrentUser.userName = userName;
 	concurrentUser.userPos = userPos;
 	concurrentUser.userDir = userDir;
 
@@ -562,11 +571,13 @@ void AsioServer::ConcurrentUser()
 	ptSend.add_child("header", ptSendHeader);
 	ptSend.put<int>("totalUser", concurrentUser.totalUser);
 	ptSend.put<std::string>("concurrentUser", concurrentUser.concurrentUserList);
+	ptSend.put<std::string>("userName", concurrentUser.userName);
 	ptSend.put<std::string>("userPos", concurrentUser.userPos);
 	ptSend.put<std::string>("userDir", concurrentUser.userDir);
 
 	std::cout << "접속 유저 : " << concurrentUser.totalUser << std::endl;
 	std::cout << "유저 리스트 : " << concurrentUser.concurrentUserList << std::endl;
+	std::cout << "유저 이름 : " << concurrentUser.userName << std::endl;
 	//std::cout << "유저 Pos : " << concurrentUser.userPos << std::endl;
 	//std::cout << "유저 Dir : " << concurrentUser.userDir << std::endl;
 
@@ -586,6 +597,7 @@ void AsioServer::ConcurrentUser()
 	ptSend2.add_child("header", ptSendHeader2);
 	ptSend2.put<int>("totalUser", concurrentUser.totalUser);
 	ptSend2.put<std::string>("concurrentUser", concurrentUser.concurrentUserList);
+	ptSend2.put<std::string>("userName", concurrentUser.userName);
 	ptSend2.put<std::string>("userPos", concurrentUser.userPos);
 	ptSend2.put<std::string>("userDir", concurrentUser.userDir);
 
