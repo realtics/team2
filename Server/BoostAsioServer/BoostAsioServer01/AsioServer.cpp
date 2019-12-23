@@ -123,8 +123,47 @@ void AsioServer::ProcessPacket(const int sessionID, const char* pData)
 
 		PKT_RES_SIGN_UP SendPkt;
 		SendPkt.Init();
+		
+		SendPkt.checkResult = _DBMysql.DBSignUp(pPacket->userID, pPacket->userPW, pPacket->userName);
 
-		SendPkt.checkResult = _DBMysql.DBLoginCheckUserID(pPacket->userID);
+		strcpy_s(SendPkt.userID, pPacket->userID);
+		strcpy_s(SendPkt.userName, pPacket->userName);
+
+		// json
+		boost::property_tree::ptree ptSendHeader;
+		ptSendHeader.put<short>("packetIndex", SendPkt.packetIndex);
+		ptSendHeader.put<short>("packetSize", SendPkt.packetSize);
+
+		boost::property_tree::ptree ptSend;
+		ptSend.add_child("header", ptSendHeader);
+		ptSend.put<int>("checkResult", SendPkt.checkResult);
+		ptSend.put<std::string>("userID", SendPkt.userID);
+		ptSend.put<std::string>("userName", _sessionList[sessionID]->GetName());
+
+		std::string stringRecv;
+		std::ostringstream oss(stringRecv);
+		boost::property_tree::write_json(oss, ptSend, false);
+		std::string sendStr = oss.str();
+
+		short JsonDataAllPacketSize = JsonDataSize(sendStr);
+
+		boost::property_tree::ptree ptSendHeader2;
+		ptSendHeader2.put<short>("packetIndex", SendPkt.packetIndex);
+		ptSendHeader2.put<short>("packetSize", JsonDataAllPacketSize);
+
+		boost::property_tree::ptree ptSend2;
+		ptSend2.add_child("header", ptSendHeader2);
+		ptSend2.put<int>("checkResult", SendPkt.checkResult);
+		ptSend2.put<std::string>("userID", SendPkt.userID);
+		ptSend2.put<std::string>("userName", _sessionList[sessionID]->GetName());
+
+		std::string stringRecv2;
+		std::ostringstream oss2(stringRecv2);
+		boost::property_tree::write_json(oss2, ptSend2, false);
+		std::string sendStr2 = oss2.str();
+		std::cout << "[서버->클라] " << sendStr2 << std::endl;
+
+		_sessionList[sessionID]->PostSend(false, std::strlen(sendStr2.c_str()), (char*)sendStr2.c_str());
 	}
 	break;
 	case PACKET_INDEX::REQ_CHECK_BEFORE_LOGIN:
@@ -135,11 +174,6 @@ void AsioServer::ProcessPacket(const int sessionID, const char* pData)
 		SendPkt.Init();
 
 		SendPkt.sessionID = _sessionID;
-
-
-		// 임시
-		//int tempsadf = _DBMysql.DBSignUp("aaaa", "eeee", "이이이이");
-		// 임시 
 
 		// DB 체크
 		SendPkt.checkResult = _DBMysql.DBLoginCheckUserID(pPacket->userID);

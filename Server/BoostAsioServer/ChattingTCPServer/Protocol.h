@@ -111,3 +111,14 @@ struct PKT_NOTICE_CHARACTER_MOVE : public PACKET_HEADER
 		memset(characterName, 0, MAX_NAME_LEN);
 	}
 };
+
+struct PKT_RES_CHATTING : public PACKET_HEADER
+{
+	std::string chatMsg;
+
+	void Init()
+	{
+		packetIndex = 199;
+		packetSize = sizeof(PKT_RES_CHATTING);
+	}
+};

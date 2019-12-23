@@ -45,7 +45,7 @@ public class DNFSceneManager : Single.Singleton<DNFSceneManager>
         SpawnManager.instance.RoomSetActive(false, _currentDungeonIndex);
         DungeonInfo dungeonInfo = MapLoader.instance.GetDungeonInfo(index);
         SpawnManager.instance.Spawn(dungeonInfo);
-        MapLoader.instance.AfterInstantiateMonsterDelete(_currentDungeonIndex);
+        MapLoader.instance.DeleteAfterInstantiateMonster(_currentDungeonIndex);
         _currentDungeonIndex = index;
 
         MoveRoomPotalActive();

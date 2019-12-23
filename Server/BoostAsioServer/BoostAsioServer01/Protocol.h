@@ -45,7 +45,6 @@ enum RESULT_SIGN_UP_CHECK : int
 {
 	RESULT_SIGN_UP_CHECK_SUCCESS = 1,
 	RESULT_SIGN_UP_OVERLAP_ID = 2,
-	RESULT_SIGN_UP_OVERLAP_NAME = 3,
 
 	RESULT_SIGN_UP_UNKNOWN = -1,
 };
@@ -89,12 +88,13 @@ struct PKT_RES_SIGN_UP : public PACKET_HEADER
 {
 	int checkResult;
 	char userID[MAX_USER_ID];
-	std::string userName;
+	char userName[MAX_USER_NAME];
 	void Init()
 	{
 		packetIndex = PACKET_INDEX::RES_SIGN_UP;
 		packetSize = sizeof(PKT_RES_SIGN_UP);
 		memset(userID, 0, MAX_USER_ID);
+		memset(userName, 0, MAX_USER_NAME);
 	}
 };
 

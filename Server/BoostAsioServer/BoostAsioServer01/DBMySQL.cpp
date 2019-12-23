@@ -80,14 +80,14 @@ int DBMySQL::DBSignUp(std::string inputID, std::string inputPW, std::string inpu
 {
 	mysql_select_db(&_mysql, _dbName);
 	//INSERT INTO login(user_id, user_password, user_name, sign_date) VALUES ('dddd', 'dddd', '디디디디',CURRENT_TIMESTAMP);
-	const char* DBQuery1 = "INSERT INTO login(user_id, user_password, user_name, sign_date) VALUES('\"";
+	const char* DBQuery1 = "INSERT INTO login(user_id, user_password, user_name, sign_date) VALUES('";
 	const char* DBQuery2 = inputID.c_str();
 	const char* DBQuery3 = "', '";
 	const char* DBQuery4 = inputPW.c_str();
 	const char* DBQuery5 = "', '";
 	const char* DBQuery6 = inputName.c_str();
-	const char* DBQuery7 = "', '";
-	const char* DBQuery8 = "', CURRENT_TIMESTAMP);";
+	const char* DBQuery7 = "', ";
+	const char* DBQuery8 = "CURRENT_TIMESTAMP);";
 
 	char DBQuery[256] = "";
 	strcat_s(DBQuery, DBQuery1);
@@ -108,26 +108,28 @@ int DBMySQL::DBSignUp(std::string inputID, std::string inputPW, std::string inpu
 		int DBState = mysql_query(_pConnection, DBQuery);
 		if (DBState == 0)
 		{
-			std::cout << DBState << " 에러 : " << std::endl;
-
-			_pSqlResult = mysql_store_result(_pConnection);
-
-			mysql_free_result(_pSqlResult);
-		}
-		else
-		{
 			std::cout << "insert 성공 " << std::endl;
 
 			_pSqlResult = mysql_store_result(_pConnection);
 
 			mysql_free_result(_pSqlResult);
 
-
 			return RESULT_SIGN_UP_CHECK::RESULT_SIGN_UP_CHECK_SUCCESS;
+		}
+		else
+		{
+			std::cout << mysql_errno(&_mysql) << " 에러 : " << mysql_error(&_mysql) << std::endl;
+
+			if (mysql_errno(&_mysql) == 1062)	// 1062 : Duplicate entry '????' for key 'user_id'
+			{
+				return RESULT_SIGN_UP_CHECK::RESULT_SIGN_UP_OVERLAP_ID;
+			}
+
+			return RESULT_SIGN_UP_CHECK::RESULT_SIGN_UP_UNKNOWN;
 		}
 	}
 
-	return RESULT_SIGN_UP_CHECK::RESULT_SIGN_UP_CHECK_SUCCESS;
+	return RESULT_SIGN_UP_CHECK::RESULT_SIGN_UP_UNKNOWN;
 }
 
 
