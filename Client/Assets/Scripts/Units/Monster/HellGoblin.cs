@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class HellGoblin : Goblin
 {
+    [SerializeField]
+    private ItemDatabase _hellItemDatabase;
 
     protected override void Awake()
     {
@@ -14,10 +16,12 @@ public class HellGoblin : Goblin
     //DieState
     public override void EnterDieState()
     {
-
-
         StartCoroutine(TimeScaleSlow());
         EffectManager.Instance.SpawnClearCircle(HitBoxCenter);
+
+        //임시로 무조건 나오고 무조건 획득
+        Item hellItem = _hellItemDatabase.GetItemCopy(_hellItemDatabase.GetRandomItemID());
+        EffectManager.Instance.SpawnHellItem(HitBoxCenter, hellItem);
 
         base.EnterDieState();
     }

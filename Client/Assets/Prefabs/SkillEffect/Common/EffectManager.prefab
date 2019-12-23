@@ -51,3 +51,5 @@ MonoBehaviour:
     type: 3}
   _cutin: {fileID: 2271839019722285728, guid: 64f84d7016819284ca01baaa70a59f80, type: 3}
   _cutinParent: {fileID: 0}
+  _hellItem: {fileID: 5346669271803621469, guid: 6a05712e36fdf204abaabb3aa07139ad,
+    type: 3}
