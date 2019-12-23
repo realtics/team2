@@ -26,7 +26,7 @@ public class ChracterStatInfo : MonoBehaviour
 	private void OnValidate()
 	{
 		SetCharacterInfo();
-	}
+    }
 
 	private void UpdateStat()
 	{

@@ -96,9 +96,6 @@ public class CharacterStat : MonoBehaviour
 
     public void RefreshExtraStat()
     {
-        if (!((CharacterMovement)_unit).IsMine)
-            return;
-
         _totalStat.hangma = _baseStat.hangma + PlayerManager.Instance.EquipmentStat.hangma;
         _totalStat.health = _baseStat.health + PlayerManager.Instance.EquipmentStat.health;
         _totalStat.intelligence = _baseStat.intelligence + PlayerManager.Instance.EquipmentStat.intelligence;
