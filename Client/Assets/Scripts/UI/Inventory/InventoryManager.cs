@@ -40,8 +40,9 @@ public class InventoryManager : MonoBehaviour
 			_itemSaveManager.LoadEquipment();
 			_itemSaveManager.LoadInventory();
 			_chracterStatInfo.SetCharacterInfo();
-		}
-	}
+
+        }
+    }
 
 	public void Save()
 	{
