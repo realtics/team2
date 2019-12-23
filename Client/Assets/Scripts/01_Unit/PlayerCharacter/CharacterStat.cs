@@ -46,9 +46,13 @@ public class CharacterStat : MonoBehaviour
     public BaseUnit Unit { get { return _unit; } }
     public CharacterBaseStat TotalStat { get { return _totalStat; } }
 
-    void Start()
+    private void Awake()
     {
         _uiPlayerInfo = FindObjectOfType<UIPlayerInfo>();
+    }
+
+    private void Start()
+    {
         RefreshExtraStat();
         //_hp = _maxHp;
         //_mp = _maxMp;
