@@ -23,9 +23,10 @@ public class CharacterMovement : BaseUnit
 	private CharacterMovePacket _moveStartPacket;
 	private CharacterMovePacket _moveEndPacket;
 
-	public CharacterSkill UsedSkill { get { return _equipSkills[_usedSkill]; } }
+    public CharacterSkill UsedSkill { get { return _equipSkills[_usedSkill]; } }
     public int Id { get { return _id; } set { _id = value; } }
 	public string NickName { get { return _nickName; } set { _nickName = value; } }
+    public bool IsMine { get { return NetworkManager.Instance.MyId == Id ? true : false; } }
 
 
     protected override void Awake()

@@ -1,6 +1,21 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
+[Serializable]
+public struct CharacterBaseStat
+{
+    public int physicalAttack;
+    public int magicAttack;
+    public int physicalDefense;
+    public int magicDefense;
+    public int strength;
+    public int intelligence;
+    public int health;
+    public int mentality;
+    public int hangma;
+}
 
 public class CharacterStat : MonoBehaviour
 {
@@ -18,18 +33,11 @@ public class CharacterStat : MonoBehaviour
     private float _attackSpeed = 100.0f;
     private UIPlayerInfo _uiPlayerInfo;
 
-	//public int physicalAttackBonus = 0;
-	//public int magicAttackBonus = 0;
-	//public int physicalDefenseBonus = 0;
-	//public int magicDefenseBonus = 0;
-	//public int strengthBonus = 0;
-	//public int intelligenceBonus = 0;
-	//public int healthBonus = 0;
-	//public int mentalityBonus = 0;
-	//public int hangmaBonus = 0;
+    [SerializeField]  private CharacterBaseStat _baseStat;
+    [SerializeField] private CharacterBaseStat _totalStat;
 
-	// properties
-	public float AttackDamage { get { return _attackDamage; } set {_attackDamage = value; } }
+    // properties
+    public float AttackDamage { get { return _attackDamage; } set {_attackDamage = value; } }
     public float MaxHp { get { return _maxHp; } }
     public float Hp { get { return _hp; } }
     public float MaxMp { get { return _maxMp; } }
@@ -39,6 +47,8 @@ public class CharacterStat : MonoBehaviour
 
     void Start()
     {
+        RefreshExtraStat();
+
         _hp = _maxHp;
         _mp = _maxMp;
         _uiPlayerInfo = FindObjectOfType<UIPlayerInfo>();
@@ -77,5 +87,21 @@ public class CharacterStat : MonoBehaviour
     public void SetUnit(BaseUnit unit)
     {
         _unit = unit;
+    }
+
+    public void RefreshExtraStat()
+    {
+        if (!((CharacterMovement)_unit).IsMine)
+            return;
+
+        _totalStat.hangma = _baseStat.hangma + PlayerManager.Instance.EquipmentStat.hangma;
+        _totalStat.health = _baseStat.health + PlayerManager.Instance.EquipmentStat.health;
+        _totalStat.intelligence = _baseStat.intelligence + PlayerManager.Instance.EquipmentStat.intelligence;
+        _totalStat.magicAttack = _baseStat.magicAttack + PlayerManager.Instance.EquipmentStat.magicAttack;
+        _totalStat.magicDefense = _baseStat.magicDefense + PlayerManager.Instance.EquipmentStat.magicDefense;
+        _totalStat.mentality = _baseStat.mentality + PlayerManager.Instance.EquipmentStat.mentality;
+        _totalStat.physicalAttack = _baseStat.physicalAttack + PlayerManager.Instance.EquipmentStat.physicalAttack;
+        _totalStat.physicalDefense = _baseStat.physicalDefense + PlayerManager.Instance.EquipmentStat.physicalDefense;
+        _totalStat.strength = _baseStat.strength + PlayerManager.Instance.EquipmentStat.strength;
     }
 }
