@@ -67,7 +67,7 @@ public class MapToolSpawn
         }
         if (dungeon.PlayerStartPosition != Vector3.zero)
         {
-            GameObject obj = LoadResourceFromCache("PlayerStartSpot/SpotPlayerStart");
+            GameObject obj = LoadResourceFromCache(_playerStartSpotpath);
             obj = callBack(obj, new Vector2(dungeon.PlayerStartPosition.x, dungeon.PlayerStartPosition.y));
         }
 
