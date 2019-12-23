@@ -1,18 +1,24 @@
 ﻿  AsioServer.cpp
-D:\github\team2\Server\BoostAsioServer\BoostAsioServer01\AsioServer.cpp(193,98): warning C4267: '인수': 'size_t'에서 'const int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\github\team2\Server\BoostAsioServer\BoostAsioServer01\AsioServer.cpp(243,98): warning C4267: '인수': 'size_t'에서 'const int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\github\team2\Server\BoostAsioServer\BoostAsioServer01\AsioServer.cpp(326,92): warning C4267: '인수': 'size_t'에서 'const int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\github\team2\Server\BoostAsioServer\BoostAsioServer01\AsioServer.cpp(385,92): warning C4267: '인수': 'size_t'에서 'const int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\github\team2\Server\BoostAsioServer\BoostAsioServer01\AsioServer.cpp(459,92): warning C4267: '인수': 'size_t'에서 'const int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\github\team2\Server\BoostAsioServer\BoostAsioServer01\AsioServer.cpp(490,41): warning C4267: '초기화 중': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\github\team2\Server\BoostAsioServer\BoostAsioServer01\AsioServer.cpp(508,40): warning C4267: '초기화 중': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\github\team2\Server\BoostAsioServer\BoostAsioServer01\AsioServer.cpp(513,39): warning C4267: '초기화 중': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\github\team2\Server\BoostAsioServer\BoostAsioServer01\AsioServer.cpp(516,39): warning C4267: '초기화 중': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\github\team2\Server\BoostAsioServer\BoostAsioServer01\AsioServer.cpp(576,91): warning C4267: '인수': 'size_t'에서 'const int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\github\team2\Server\BoostAsioServer\BoostAsioServer01\AsioServer.cpp(627,91): warning C4267: '인수': 'size_t'에서 'const int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  코드를 생성하고 있습니다.
-  1 of 2515 functions (<0.1%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
-    1 functions had inline decision re-evaluated but remain unchanged
-  코드를 생성했습니다.
-  BoostAsioServer01.vcxproj -> D:\github\team2\Server\BoostAsioServer\x64\Release\BoostAsioServer01.exe
+D:\github\team2\Server\BoostAsioServer\BoostAsioServer01\AsioServer.cpp(159,98): warning C4267: '인수': 'size_t'에서 'const int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\github\team2\Server\BoostAsioServer\BoostAsioServer01\AsioServer.cpp(222,98): warning C4267: '인수': 'size_t'에서 'const int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\github\team2\Server\BoostAsioServer\BoostAsioServer01\AsioServer.cpp(275,98): warning C4267: '인수': 'size_t'에서 'const int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\github\team2\Server\BoostAsioServer\BoostAsioServer01\AsioServer.cpp(354,92): warning C4267: '인수': 'size_t'에서 'const int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\github\team2\Server\BoostAsioServer\BoostAsioServer01\AsioServer.cpp(413,92): warning C4267: '인수': 'size_t'에서 'const int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\github\team2\Server\BoostAsioServer\BoostAsioServer01\AsioServer.cpp(487,92): warning C4267: '인수': 'size_t'에서 'const int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\github\team2\Server\BoostAsioServer\BoostAsioServer01\AsioServer.cpp(518,41): warning C4267: '초기화 중': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\github\team2\Server\BoostAsioServer\BoostAsioServer01\AsioServer.cpp(536,40): warning C4267: '초기화 중': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\github\team2\Server\BoostAsioServer\BoostAsioServer01\AsioServer.cpp(541,39): warning C4267: '초기화 중': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\github\team2\Server\BoostAsioServer\BoostAsioServer01\AsioServer.cpp(544,39): warning C4267: '초기화 중': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\github\team2\Server\BoostAsioServer\BoostAsioServer01\AsioServer.cpp(612,91): warning C4267: '인수': 'size_t'에서 'const int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  DBMySQL.cpp
+  ServerMain.cpp
+  Session.cpp
+D:\github\team2\Server\BoostAsioServer\BoostAsioServer01\AsioServer.cpp(663,91): warning C4267: '인수': 'size_t'에서 'const int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\github\team2\Server\BoostAsioServer\BoostAsioServer01\AsioServer.cpp(663,91): warning C4267: Please define _WIN32_WINNT or _WIN32_WINDOWS appropriately. For example:
+D:\github\team2\Server\BoostAsioServer\BoostAsioServer01\AsioServer.cpp(663,91): warning C4267: - add -D_WIN32_WINNT=0x0601 to the compiler command line; or
+D:\github\team2\Server\BoostAsioServer\BoostAsioServer01\AsioServer.cpp(663,91): warning C4267: - add _WIN32_WINNT=0x0601 to your project's Preprocessor Definitions.
+D:\github\team2\Server\BoostAsioServer\BoostAsioServer01\AsioServer.cpp(663,91): warning C4267: Assuming _WIN32_WINNT=0x0601 (i.e. Windows 7 target).
+D:\github\team2\Server\BoostAsioServer\BoostAsioServer01\Session.cpp(104,57): warning C4267: '초기화 중': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\github\team2\Server\BoostAsioServer\BoostAsioServer01\Session.cpp(147,41): warning C4267: '초기화 중': 'size_t'에서 'short'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+LINK : fatal error LNK1104: 'D:\github\team2\Server\BoostAsioServer\x64\Release\BoostAsioServer01.exe' 파일을 열 수 없습니다.
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppCommon.targets(810,5): error MSB6006: "link.exe"이(가) 종료되었습니다(코드: 1104).

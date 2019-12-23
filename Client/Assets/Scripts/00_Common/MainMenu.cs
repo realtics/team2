@@ -22,6 +22,8 @@ public class MainMenu : MonoBehaviour
 			NetworkManager.Instance.DisconnectServer();
 		// scene Town
 		SceneManager.LoadScene((int)SceneIndex.LobbySingle);
+		//JS add
+		SceneManager.LoadScene((int)SceneIndex.Inventory,LoadSceneMode.Additive);
 	}
 
 	private void CheckLogin()

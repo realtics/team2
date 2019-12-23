@@ -78,7 +78,7 @@ public class BaseUnit : MonoBehaviour
         _animator = GetComponentInChildren<Animator>();
         _renderer = GetComponentInChildren<SpriteRenderer>();
         _rgdBody = GetComponent<Rigidbody2D>();
-        _stat = GetComponent<CharacterStat>();
+		_stat = GetComponent<CharacterStat>();
         _stat.SetUnit(this);
         _originPos = _avatar.localPosition;
 

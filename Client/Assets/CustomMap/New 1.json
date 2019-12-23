@@ -1,0 +1,334 @@
+{
+  "DungeonInfos": [
+    {
+      "position": {
+        "x": 0.0,
+        "y": 0.0,
+        "magnitude": 0.0,
+        "sqrMagnitude": 0.0
+      },
+      "objectinfos": [
+        {
+          "filePath": "Dungeon/Dungeon",
+          "position": {
+            "x": 2.5,
+            "y": -8.5,
+            "z": 0.0
+          }
+        }
+      ],
+      "monsterInfos": [
+        {
+          "filePath": "Monster/Goblin",
+          "position": {
+            "x": -0.5,
+            "y": -10.5,
+            "z": 0.0
+          }
+        },
+        {
+          "filePath": "Monster/Goblin",
+          "position": {
+            "x": -2.5,
+            "y": -9.5,
+            "z": 0.0
+          }
+        },
+        {
+          "filePath": "Monster/Goblin",
+          "position": {
+            "x": -2.5,
+            "y": -7.5,
+            "z": 0.0
+          }
+        },
+        {
+          "filePath": "Monster/Goblin",
+          "position": {
+            "x": -1.5,
+            "y": -5.5,
+            "z": 0.0
+          }
+        },
+        {
+          "filePath": "Monster/Goblin",
+          "position": {
+            "x": -5.5,
+            "y": -5.5,
+            "z": 0.0
+          }
+        },
+        {
+          "filePath": "Monster/Goblin",
+          "position": {
+            "x": -4.5,
+            "y": -9.5,
+            "z": 0.0
+          }
+        },
+        {
+          "filePath": "Monster/Goblin",
+          "position": {
+            "x": -5.5,
+            "y": -10.5,
+            "z": 0.0
+          }
+        },
+        {
+          "filePath": "Monster/Goblin",
+          "position": {
+            "x": -4.5,
+            "y": -7.5,
+            "z": 0.0
+          }
+        }
+      ],
+      "potalTransportinfos": [
+        {
+          "filePath": "Potal/PotalTransport Side",
+          "position": {
+            "x": 1.5,
+            "y": -6.5,
+            "z": 0.0
+          },
+          "spotPosition": [
+            {
+              "x": -0.440000057,
+              "y": -8.74,
+              "z": 0.0
+            },
+            {
+              "x": 1.5,
+              "y": -6.5,
+              "z": 0.0
+            },
+            {
+              "x": 1.5,
+              "y": -6.5,
+              "z": 0.0
+            },
+            {
+              "x": 1.5,
+              "y": -6.5,
+              "z": 0.0
+            }
+          ],
+          "arrow": 3,
+          "nextIndex": 1
+        }
+      ],
+      "isBoss": false,
+      "PlayerStartPosition": {
+        "x": -14.5,
+        "y": -7.5,
+        "z": 0.0
+      }
+    },
+    {
+      "position": {
+        "x": 1.0,
+        "y": 0.0,
+        "magnitude": 1.0,
+        "sqrMagnitude": 1.0
+      },
+      "objectinfos": [
+        {
+          "filePath": "Dungeon/LorienAndForceAltar",
+          "position": {
+            "x": 2.5,
+            "y": -9.5,
+            "z": 0.0
+          }
+        }
+      ],
+      "monsterInfos": [
+        {
+          "filePath": "Monster/Tauarmy",
+          "position": {
+            "x": -2.5,
+            "y": -7.5,
+            "z": 0.0
+          }
+        },
+        {
+          "filePath": "Monster/Tauarmy",
+          "position": {
+            "x": -0.5,
+            "y": -10.5,
+            "z": 0.0
+          }
+        },
+        {
+          "filePath": "Monster/Tauarmy",
+          "position": {
+            "x": -4.5,
+            "y": -9.5,
+            "z": 0.0
+          }
+        }
+      ],
+      "potalTransportinfos": [
+        {
+          "filePath": "Potal/PotalTransport Side",
+          "position": {
+            "x": -14.5,
+            "y": -10.5,
+            "z": 0.0
+          },
+          "spotPosition": [
+            {
+              "x": -12.34,
+              "y": -10.34,
+              "z": 0.0
+            },
+            {
+              "x": -14.5,
+              "y": -10.5,
+              "z": 0.0
+            },
+            {
+              "x": -14.5,
+              "y": -10.5,
+              "z": 0.0
+            },
+            {
+              "x": -14.5,
+              "y": -10.5,
+              "z": 0.0
+            }
+          ],
+          "arrow": 2,
+          "nextIndex": 0
+        },
+        {
+          "filePath": "Potal/ForceAltarPotalTransportLeft",
+          "position": {
+            "x": 1.5,
+            "y": -5.5,
+            "z": 0.0
+          },
+          "spotPosition": [
+            {
+              "x": -1.1400001,
+              "y": -8.32,
+              "z": 0.0
+            },
+            {
+              "x": 1.5,
+              "y": -5.5,
+              "z": 0.0
+            },
+            {
+              "x": 1.5,
+              "y": -5.5,
+              "z": 0.0
+            },
+            {
+              "x": 1.5,
+              "y": -5.5,
+              "z": 0.0
+            }
+          ],
+          "arrow": 3,
+          "nextIndex": 0
+        }
+      ],
+      "isBoss": false,
+      "PlayerStartPosition": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      }
+    },
+    {
+      "position": {
+        "x": 2.0,
+        "y": 0.0,
+        "normalized": {
+          "x": 1.0,
+          "y": 0.0,
+          "magnitude": 1.0,
+          "sqrMagnitude": 1.0
+        },
+        "magnitude": 2.0,
+        "sqrMagnitude": 4.0
+      },
+      "objectinfos": [
+        {
+          "filePath": "Dungeon/ForceAltar",
+          "position": {
+            "x": 0.5,
+            "y": -6.5,
+            "z": 0.0
+          }
+        }
+      ],
+      "monsterInfos": [
+        {
+          "filePath": "Monster/Tauarmy",
+          "position": {
+            "x": -5.5,
+            "y": -10.5,
+            "z": 0.0
+          }
+        },
+        {
+          "filePath": "Monster/Goblin",
+          "position": {
+            "x": -9.5,
+            "y": -5.5,
+            "z": 0.0
+          }
+        },
+        {
+          "filePath": "Monster/Calvary",
+          "position": {
+            "x": 7.5,
+            "y": -7.5,
+            "z": 0.0
+          }
+        }
+      ],
+      "potalTransportinfos": [
+        {
+          "filePath": "Potal/ForceAltarPotalTransportRight",
+          "position": {
+            "x": -16.5,
+            "y": -6.5,
+            "z": 0.0
+          },
+          "spotPosition": [
+            {
+              "x": -13.52,
+              "y": -8.52,
+              "z": 0.0
+            },
+            {
+              "x": -16.5,
+              "y": -6.5,
+              "z": 0.0
+            },
+            {
+              "x": -16.5,
+              "y": -6.5,
+              "z": 0.0
+            },
+            {
+              "x": -16.5,
+              "y": -6.5,
+              "z": 0.0
+            }
+          ],
+          "arrow": 2,
+          "nextIndex": 1
+        }
+      ],
+      "isBoss": true,
+      "PlayerStartPosition": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      }
+    }
+  ]
+}

@@ -39,6 +39,9 @@ enum PACKET_INDEX : short
 	RES_PLAYER_MOVE_START = 131,
 	REQ_PLAYER_MOVE_END = 132,
 	RES_PLAYER_MOVE_END = 133,
+
+	REQ_DUNGEON_CLEAR_RESULT_ITEM = 301,
+	RES_DUNGEON_CLEAR_RESULT_ITEM = 302,
 };
 
 enum RESULT_SIGN_UP_CHECK : int
@@ -199,30 +202,27 @@ struct PKT_RES_USER_EXIT : public PACKET_HEADER
 struct PKT_REQ_CHATTING : public PACKET_HEADER
 {
 	int sessionID;
-	char chatMessage[MAX_MESSAGE_LEN];
+	std::string chatMessage;
 
 	void Init()
 	{
 		packetIndex = PACKET_INDEX::REQ_CHATTING;
 		packetSize = sizeof(PKT_REQ_CHATTING);
 		sessionID = FIRST_SESSION_INDEX;
-		memset(chatMessage, 0, MAX_MESSAGE_LEN);
 	}
 };
 
 struct PKT_RES_CHATTING : public PACKET_HEADER
 {
 	int sessionID;
-	char userName[MAX_USER_NAME];
-	char chatMessage[MAX_MESSAGE_LEN];
+	std::string userName;
+	std::string chatMessage;
 
 	void Init()
 	{
 		packetIndex = PACKET_INDEX::RES_CHATTING;
 		packetSize = sizeof(PKT_RES_CHATTING);
 		sessionID = FIRST_SESSION_INDEX;
-		memset(userName, 0, MAX_USER_NAME);
-		memset(chatMessage, 0, MAX_MESSAGE_LEN);
 	}
 };
 
@@ -287,5 +287,26 @@ struct PKT_RES_PLAYER_MOVE_END : public PACKET_HEADER
 		sessionID = FIRST_SESSION_INDEX;
 		memset(userPos, 0, MAX_PLAYER_MOVE_LEN);
 		memset(userDir, 0, MAX_PLAYER_MOVE_LEN);
+	}
+};
+
+struct PKT_REQ_DUNGEON_CLEAR_RESULT_ITEM : PACKET_HEADER
+{
+	void Init()
+	{
+		packetIndex = PACKET_INDEX::REQ_DUNGEON_CLEAR_RESULT_ITEM;
+		packetSize = sizeof(PKT_REQ_DUNGEON_CLEAR_RESULT_ITEM);
+	}
+};
+
+struct PKT_RES_DUNGEON_CLEAR_RESULT_ITEM : PACKET_HEADER
+{
+	int resultItemIndex;
+
+	void Init()
+	{
+		packetIndex = PACKET_INDEX::RES_DUNGEON_CLEAR_RESULT_ITEM;
+		packetSize = sizeof(PKT_RES_DUNGEON_CLEAR_RESULT_ITEM);
+		resultItemIndex = 0;
 	}
 };
