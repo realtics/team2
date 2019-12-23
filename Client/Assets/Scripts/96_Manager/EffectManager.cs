@@ -24,6 +24,8 @@ public class EffectManager : MonoBehaviour
 	private GameObject _cutin;
 	[SerializeField]
 	private Transform _cutinParent;
+    [SerializeField]
+    private GameObject _hellItem;
 
 	private void Awake()
 	{
@@ -64,4 +66,12 @@ public class EffectManager : MonoBehaviour
 		cutin.transform.localScale = Vector3.one;
 		cutin.transform.localPosition = Vector3.zero;
 	}
+
+    public void SpawnHellItem(Vector3 position, Item item)
+    {
+        GameObject hellItem = ObjectPoolManager.Instance.GetRestObject(_hellItem);
+        _hellItem.transform.position = position;
+        hellItem.GetComponent<EpicDrop>().SetHellItem(item);
+
+    }
 }

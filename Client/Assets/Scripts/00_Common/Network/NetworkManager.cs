@@ -18,6 +18,7 @@ enum DefineDefaultValue : short
 public struct CharacterSpawnData
 {
     public int id;
+    public string userName;
     public Vector3 position;
     public Vector3 direction;
 }
@@ -188,6 +189,7 @@ public class NetworkManager : MonoBehaviour
 
 				CharacterMovement spawnedPlayer = newPlayer.GetComponent<CharacterMovement>();
                 spawnedPlayer.Id = spawnData.id;
+                spawnedPlayer.NickName = spawnData.userName;
                 spawnedPlayer.SetFlipX(spawnData.direction.x < 0 ? true : false);
                 newPlayer.transform.position = spawnData.position;
                 _characters.Add(spawnData.id, spawnedPlayer);
@@ -404,6 +406,7 @@ public class NetworkManager : MonoBehaviour
                         DebugMsg02 = desJson.totalUser;
 
                         string[] splitConcurrentUser = desJson.concurrentUser.Split(',');
+                        string[] splitUserName = desJson.userName.Split(',');
                         string[] splitUserPos = desJson.userPos.Split('|');
                         string[] splitUserDir = desJson.userDir.Split('|');
                         for (int i = 0; i < splitConcurrentUser.Length; i++)
@@ -412,6 +415,7 @@ public class NetworkManager : MonoBehaviour
                             //Debug.Log(splitUserPos[i]);
                             //Debug.Log(splitUserDir[i]);
                             int sessionID = Int32.Parse(splitConcurrentUser[i]);
+                            string userName = splitUserName[i];
                             string userPos = splitUserPos[i];
                             string userDir = splitUserDir[i];
 
@@ -421,7 +425,7 @@ public class NetworkManager : MonoBehaviour
                             if (_characters.ContainsKey(sessionID))
                                 continue;
 
-                            JoinNewPlayer(sessionID, StringToVector3(userPos), StringToVector3(userDir));
+                            JoinNewPlayer(sessionID, userName, StringToVector3(userPos), StringToVector3(userDir));
                         }
                         DebugLogList("PACKET_INDEX.RES_CONCURRENT_USER_LIST end");
                         _isConcurrentUserList = true;
@@ -487,10 +491,15 @@ public class NetworkManager : MonoBehaviour
 
 						switch (checkResult)
 						{
-							case RESULT_SIGN_UP_CHECK.RESULT_SIGN_UP_OVERLAP_ID:
-								ToastMessagePanel.Instance.SetToastMessage("이미 사용중인 아이디입니다.");
-							break;
-						}
+                            case RESULT_SIGN_UP_CHECK.RESULT_SIGN_UP_OVERLAP_ID:
+                                ToastMessagePanel.Instance.SetToastMessage("이미 사용중인 아이디입니다.");
+                                break;
+                            case RESULT_SIGN_UP_CHECK.RESULT_SIGN_UP_CHECK_SUCCESS:
+                                ToastMessagePanel.Instance.SetToastMessage("회원가입 완료 !");
+                                // FIXME: (안병욱) 파인드 수정
+                                FindObjectOfType<MainMenu>().SuccessSignup();
+                                break;
+                        }
 					}
 					break;
 				default:
@@ -613,7 +622,7 @@ public class NetworkManager : MonoBehaviour
             {
                 _isLogin = desJson.isSuccess;
                 _myId = desJson.sessionID;
-                JoinNewPlayer(desJson.sessionID, Vector3.zero, Vector3.right);
+                JoinNewPlayer(desJson.sessionID, PlayerManager.Instance.NickName, Vector3.zero, Vector3.right);
             }
         }
         DebugLogList("NewLoginSucsess() end");
@@ -714,7 +723,7 @@ public class NetworkManager : MonoBehaviour
         //Debug.Log("MoveEnd - Send");
     }
 
-    public void JoinNewPlayer(int id, Vector3 pos, Vector3 dir)
+    public void JoinNewPlayer(int id, string userName, Vector3 pos, Vector3 dir)
     {
         DebugLogList("JoinNewPlayer start");
         DebugLogList("ID : " + id.ToString());
@@ -730,6 +739,7 @@ public class NetworkManager : MonoBehaviour
         newPlayer.position = pos; //Vector3.zero; // 접속한 클라 위치
         newPlayer.direction = dir;
         newPlayer.id = id;
+        newPlayer.userName = userName;
 
         //_characters.Add(id, newPlayer);
         _spawnCharacters.Add(newPlayer);

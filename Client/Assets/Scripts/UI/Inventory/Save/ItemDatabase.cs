@@ -20,7 +20,16 @@ public class ItemDatabase : ScriptableObject
 		
 	}
 
-	public Item GetItemReference(string itemID)
+    public string GetRandomItemID()
+    {
+        int startNum = 0;
+        int endNum = items.Length;
+        int randNum = Random.Range(startNum, endNum);
+
+        return items[randNum].ID;
+    }
+
+    public Item GetItemReference(string itemID)
 	{
 		foreach (Item item in items)
 		{
