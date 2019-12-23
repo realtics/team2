@@ -981,6 +981,28 @@ public class NetworkManager : MonoBehaviour
 
 	public void SignUpUser(string id, string password, string nickName)
 	{
+		string jsonData;
+		char endNullValue = '\0';
 
+		var packHeader = new PACKET_HEADER
+		{
+			packetIndex = (short)PACKET_INDEX.REQ_SIGN_UP,
+			packetSize = 8
+		};
+		var packData = new PKT_REQ_SIGN_UP
+		{
+			header = packHeader,
+			userID = id,
+			userPW = password,
+			userName = nickName
+		};
+		DebugLogList(packData.ToString());
+		jsonData = JsonConvert.SerializeObject(packData);
+		jsonData += endNullValue;
+		DebugLogList(jsonData.ToString());
+		byte[] sendByte = new byte[512];
+		sendByte = Encoding.UTF8.GetBytes(jsonData);
+
+		int resultSize = _sock.Send(sendByte);
 	}
 }
