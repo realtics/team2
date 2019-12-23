@@ -18,8 +18,18 @@ public class CharacterStat : MonoBehaviour
     private float _attackSpeed = 100.0f;
     private UIPlayerInfo _uiPlayerInfo;
 
-    // properties
-    public float AttackDamage { get { return _attackDamage; } }
+	//public int physicalAttackBonus = 0;
+	//public int magicAttackBonus = 0;
+	//public int physicalDefenseBonus = 0;
+	//public int magicDefenseBonus = 0;
+	//public int strengthBonus = 0;
+	//public int intelligenceBonus = 0;
+	//public int healthBonus = 0;
+	//public int mentalityBonus = 0;
+	//public int hangmaBonus = 0;
+
+	// properties
+	public float AttackDamage { get { return _attackDamage; } set {_attackDamage = value; } }
     public float MaxHp { get { return _maxHp; } }
     public float Hp { get { return _hp; } }
     public float MaxMp { get { return _maxMp; } }

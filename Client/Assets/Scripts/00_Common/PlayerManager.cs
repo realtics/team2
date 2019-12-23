@@ -22,6 +22,10 @@ public class PlayerManager
 	private PlayerCharacter _playerCharacter;
 	public PlayerCharacter PlayerCharacter { get { return _playerCharacter; } set { _playerCharacter = value; } }
 
+	////JS 
+	//private CharacterStat _stat;
+	//public CharacterStat Stat { get { return _stat; } }
+
 	private void Awake()
 	{
 		_instance = this;

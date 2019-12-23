@@ -27,7 +27,6 @@ public class ItemSaveManager : MonoBehaviour
 			{
 				//itemSlot.Item = itemDatabase.GetItemCopy(savedSlot.ItemID);
 				InventoryManager.Instance.Inventory.AddItem(itemDatabase.GetItemCopy(savedSlot.ItemID));
-
 			}
 		}
 	}
