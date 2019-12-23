@@ -16,6 +16,8 @@ public class ChracterStatInfo : MonoBehaviour
 	[SerializeField] private Text _mentalityBonusText;
 	[SerializeField] private Text _hangmaBonusText;
 
+	//private CharacterStat _stat;
+
 	public void PopUpStatInfo()
 	{
 		gameObject.SetActive(!gameObject.activeSelf);
@@ -64,6 +66,16 @@ public class ChracterStatInfo : MonoBehaviour
 		_healthBonusText.text = healthBonus.ToString();
 		_mentalityBonusText.text = mentalityBonus.ToString();
 		_hangmaBonusText.text = hangmaBonus.ToString();
+
+		//_stat.physicalAttackBonus = physicalAttackBonus;
+		//_stat.magicAttackBonus = magicAttackBonus;
+		//_stat.physicalDefenseBonus = physicalDefenseBonus;
+		//_stat.magicDefenseBonus = magicDefenseBonus;
+		//_stat.strengthBonus = strengthBonus;
+		//_stat.intelligenceBonus = intelligenceBonus;
+		//_stat.healthBonus = healthBonus;
+		//_stat.mentalityBonus = mentalityBonus;
+		//_stat.hangmaBonus = hangmaBonus;
 	}
 
 	public void SetCharacterInfo()

@@ -227,7 +227,7 @@ void Session::Deserialization(char* jsonData)
 		packet.packetIndex = packetIndex;
 		packet.packetSize = packetSize;
 		packet.sessionID = ptRecv.get<int>("sessionID");
-		strcpy_s(packet.chatMessage, MAX_MESSAGE_LEN, ptRecv.get<std::string>("chatMessage").c_str());
+		packet.chatMessage = ptRecv.get<std::string>("chatMessage");
 		memcpy(&_packetBuffer[_packetBufferMark], (char*)&packet, sizeof(packet));
 	}
 	break;

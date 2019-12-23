@@ -199,30 +199,27 @@ struct PKT_RES_USER_EXIT : public PACKET_HEADER
 struct PKT_REQ_CHATTING : public PACKET_HEADER
 {
 	int sessionID;
-	char chatMessage[MAX_MESSAGE_LEN];
+	std::string chatMessage;
 
 	void Init()
 	{
 		packetIndex = PACKET_INDEX::REQ_CHATTING;
 		packetSize = sizeof(PKT_REQ_CHATTING);
 		sessionID = FIRST_SESSION_INDEX;
-		memset(chatMessage, 0, MAX_MESSAGE_LEN);
 	}
 };
 
 struct PKT_RES_CHATTING : public PACKET_HEADER
 {
 	int sessionID;
-	char userName[MAX_USER_NAME];
-	char chatMessage[MAX_MESSAGE_LEN];
+	std::string userName;
+	std::string chatMessage;
 
 	void Init()
 	{
 		packetIndex = PACKET_INDEX::RES_CHATTING;
 		packetSize = sizeof(PKT_RES_CHATTING);
 		sessionID = FIRST_SESSION_INDEX;
-		memset(userName, 0, MAX_USER_NAME);
-		memset(chatMessage, 0, MAX_MESSAGE_LEN);
 	}
 };
 
