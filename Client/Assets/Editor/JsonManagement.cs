@@ -21,9 +21,15 @@ public class JsonManagement
 
     public void NewJson()
     {
+        JsonData jsonData = new JsonData();
+        DungeonInfo dungeonInfo = new DungeonInfo();
+        dungeonInfo.position = new Vector2(0, 0);
+        jsonData.dungeonObjectList.Add(dungeonInfo);
+
         DungeonJsonData dungeonJson = new DungeonJsonData();
+        dungeonJson.DungeonInfos = jsonData.dungeonObjectList.ToArray();
         string strJsonData = JsonConvert.SerializeObject(dungeonJson, setting);
-        CreateJsonFile(Application.dataPath, "New", strJsonData);
+        CreateJsonFile("New", strJsonData);
     }
 
     public void SaveJson(JsonData jsonData)
@@ -36,7 +42,9 @@ public class JsonManagement
     }
     public void ExportJson(JsonData jsonData)
     {
-        for(int i = 0; i < jsonData.dungeonObjectList.Count; i++)
+        
+
+        for (int i = 0; i < jsonData.dungeonObjectList.Count; i++)
         {
             foreach (var item in jsonData.dungeonObjectList[i].monsterInfos)
             {

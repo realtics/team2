@@ -11,6 +11,8 @@ public class MapToolSpawn
     private const string _objectTag = "FieldObject";
     private const string _monsterTag = "Monster";
     private const string _potalTranportTag = "PotalTransport";
+    private const string _playerStartSpotTag = "PlayerStartSpot";
+    private const string _playerStartSpotpath = "PlayerStartSpot/SpotPlayerStart";
 
     public GameObject LoadResourceFromCache(string path)
     {
@@ -63,6 +65,12 @@ public class MapToolSpawn
                 potal.spotGatePosition[i].position = item.spotPosition[i];
             }
         }
+        if (dungeon.PlayerStartPosition != Vector3.zero)
+        {
+            GameObject obj = LoadResourceFromCache("PlayerStartSpot/SpotPlayerStart");
+            obj = callBack(obj, new Vector2(dungeon.PlayerStartPosition.x, dungeon.PlayerStartPosition.y));
+        }
+
         ClearCache();
     }
     public GameObject SpawnObject(GameObject prefab, Vector3 position)
@@ -86,7 +94,7 @@ public class MapToolSpawn
         {
             ListObject.Add(obj);
         }
-        GameObject spotObject = GameObject.FindGameObjectWithTag("PlayerStartSpot");
+        GameObject spotObject = GameObject.FindGameObjectWithTag(_playerStartSpotTag);
         if (spotObject != null)
         {
             ListObject.Add(spotObject);
