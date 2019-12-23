@@ -978,4 +978,9 @@ public class NetworkManager : MonoBehaviour
 		_characters.Clear();
 		_exitCharacters.Clear();
 	}
+
+	public void SignUpUser(string id, string password, string nickName)
+	{
+
+	}
 }
