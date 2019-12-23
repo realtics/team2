@@ -14,7 +14,8 @@ public class MainMenu : MonoBehaviour
 	{
 		// scene Town
 		SceneManager.LoadScene((int)SceneIndex.Lobby);
-	}
+        //JS add
+    }
 
 	public void GameStartSingle()
 	{

@@ -14,6 +14,7 @@ public class PlayerCharacter : MonoBehaviour
         _movement = GetComponent<CharacterMovement>();
         _oldDirection = Vector3.zero;
 		PlayerManager.Instance.PlayerCharacter = this;
+        Movement.Stat.RefreshExtraStat();
     }
 
     public void SetJump()
