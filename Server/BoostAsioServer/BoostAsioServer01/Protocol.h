@@ -164,6 +164,7 @@ struct PKT_RES_CONCURRENT_USER_LIST : public PACKET_HEADER
 {
 	int totalUser;
 	std::string concurrentUserList;
+	std::string userName;
 	std::string userPos;
 	std::string userDir;
 

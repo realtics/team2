@@ -102,6 +102,7 @@ public struct PKT_RES_CONCURRENT_USER_LIST
 	public PACKET_HEADER header;
 	public int totalUser;
 	public string concurrentUser;
+	public string userName;
 	public string userPos;
 	public string userDir;
 };
