@@ -303,8 +303,8 @@ public class NetworkManager : MonoBehaviour
 				// TODO : 인코딩 해결 할 것
 				//string recvData = Encoding.UTF8.GetString(state.RecvBuffer);
 
-				//string recvData = Encoding.UTF8.GetString(state.RecvBuffer, 0, bytesRead);
-				string recvData = Encoding.GetEncoding("EUC-KR").GetString(state.RecvBuffer, 0, bytesRead);
+				string recvData = Encoding.UTF8.GetString(state.RecvBuffer, 0, bytesRead);
+				//string recvData = Encoding.GetEncoding("EUC-KR").GetString(state.RecvBuffer, 0, bytesRead);
 				DebugLogList(recvData);
 				var JsonData = JsonConvert.DeserializeObject<PACKET_HEADER_BODY>(recvData);
 
