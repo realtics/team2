@@ -4,13 +4,21 @@ using UnityEngine.UI;
 
 public class ItemToolTip : MonoBehaviour
 {
-    [SerializeField] Text _itemNameText;
-    [SerializeField] Text _itemSlotText;
-    [SerializeField] Text _itemStatsText;
-    [SerializeField] Text _itemInfoText;
-	[SerializeField] Text _equipUequipText;
-	[SerializeField] GameObject _BlockRayCast;
-	[SerializeField] Image _ItemImage;
+    [SerializeField] 
+	private Text _itemNameText;
+    [SerializeField]
+	private Text _itemSlotText;
+    [SerializeField]
+	private Text _itemStatsText;
+    [SerializeField]
+	private Text _itemInfoText;
+	[SerializeField]
+	private Text _equipUequipText;
+	[SerializeField]
+	private Image _itemImage;
+	[SerializeField]
+	private GameObject _blockRayCast;
+	[SerializeField] GameObject _sellButton;
 
 	[SerializeField]
 	private ItemSlot _itemSlot; 
@@ -18,15 +26,22 @@ public class ItemToolTip : MonoBehaviour
 
     public void ShowToolTip(EquipableItem item, ItemSlot itemSlot)
     {
-		_BlockRayCast.SetActive(true);
+		_blockRayCast.SetActive(true);
 
 		_itemSlot = itemSlot;
 		if (_itemSlot is EquipmentSlot)
+		{
 			_equipUequipText.text = "해제";
+			_sellButton.SetActive(false);
+		}
 		else
+		{
 			_equipUequipText.text = "장착";
+			_sellButton.SetActive(true);
+		}
+			
 
-		_ItemImage.sprite = _itemSlot.Item.icon;
+		_itemImage.sprite = _itemSlot.Item.icon;
 
 		_itemNameText.text = item.itemName;
         _itemSlotText.text = item.equipmentType.ToString();
@@ -43,7 +58,7 @@ public class ItemToolTip : MonoBehaviour
 
     public void HideToolTip()
     {
-		_BlockRayCast.SetActive(false);
+		_blockRayCast.SetActive(false);
 		gameObject.SetActive(false);
     }
 
@@ -105,9 +120,17 @@ public class ItemToolTip : MonoBehaviour
             _sb.AppendLine();
     }
 
-	public void ClickButton()
+	public void ClickEquipUnequipButton()
 	{
 		_itemSlot.ClickEvent();
 		HideToolTip();
+		InventoryManager.Instance.Save();
+	}
+
+	public void ClickSellButton()
+	{
+		_itemSlot.ClickSellButton();
+		HideToolTip();
+		InventoryManager.Instance.Save();
 	}
 }

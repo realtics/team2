@@ -40,8 +40,6 @@ public class Inventory : MonoBehaviour, IItemContainer
         int i = 0;
         for(; i < _items.Count && i < _itemSlots.Length; i++)
         {
-			//TODO : 확인
-            //_itemSlots[i].Item = Instantiate(_items[i]);
 			_itemSlots[i].Item = _items[i];
 		}
 
@@ -59,16 +57,6 @@ public class Inventory : MonoBehaviour, IItemContainer
 		_items.Add(item);
 		RefreshUI();
 		return true;
-
-		//for(int i=0; i < _itemSlots.Length; i++)
-		//{
-		//	if(_itemSlots[i].Item == null)
-		//	{
-		//		_itemSlots[i].Item = item;
-		//		return true;
-		//	}
-		//}
-		//return false;
 	}
 
     public bool RemoveItem(Item item)
@@ -79,15 +67,6 @@ public class Inventory : MonoBehaviour, IItemContainer
 			return true;
 		}
 		return false;
-		//for (int i = 0; i < _itemSlots.Length; i++)
-		//{
-		//	if (_itemSlots[i].Item == item)
-		//	{
-		//		_itemSlots[i].Item = item;
-		//		return true;
-		//	}
-		//}
-		//return false;
 	}
 
 	public Item RemoveItem(string itemID)
@@ -109,15 +88,6 @@ public class Inventory : MonoBehaviour, IItemContainer
     public bool IsFull()
     {
 		return _items.Count >= _itemSlots.Length;
-
-		//for (int i = 0; i < _itemSlots.Length; i++)
-		//{
-		//	if (_itemSlots[i].Item == null)
-		//	{
-		//		return false;
-		//	}
-		//}
-		//return true;
 	}
 
 	public void Clear()

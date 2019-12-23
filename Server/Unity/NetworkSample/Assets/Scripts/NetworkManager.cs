@@ -410,6 +410,15 @@ public class NetworkManager : MonoBehaviour
                         ChatManager.Instance.AddNewChat(userName, newChat);
                     }
                     break;
+				case (short)PACKET_INDEX.RES_SIGN_UP:
+					{
+						var desJson = JsonConvert.DeserializeObject<PKT_RES_SIGN_UP>(jsonData);
+
+						// 결과값이 1이면 회원가입 성공, 결과값이 2면 ID 중복으로 회원가입 실패
+						var checkResult = desJson.checkResult;
+						
+					}
+					break;
                 default:
                     {
                         Debug.LogError("Index가 존재 하지 않는 Packet");
@@ -906,4 +915,57 @@ public class NetworkManager : MonoBehaviour
 		int resultSize = _sock.Send(sendByte2);
     }
 
+
+	public void SignUp(string id, string pw, string name)
+	{
+		string jsonData;
+		char endNullValue = '\0';
+
+		var packHeader = new PACKET_HEADER
+		{
+			packetIndex = (short)PACKET_INDEX.REQ_SIGN_UP,
+			packetSize = (short)DefineDefaultValue.packetSize
+		};
+		var packData = new PKT_REQ_SIGN_UP
+		{
+			header = packHeader,
+			userID = id,
+			userPW = pw,
+			userName = name
+		};
+
+		jsonData = JsonConvert.SerializeObject(packData);
+		jsonData += endNullValue;
+
+		byte[] sendByte = new byte[512];
+		sendByte = Encoding.UTF8.GetBytes(jsonData);
+
+		short jsonDataSize = 0;
+		foreach (byte b in sendByte)
+		{
+			jsonDataSize++;
+			if (b == '\0')
+				break;
+		}
+
+		var packHeader2 = new PACKET_HEADER
+		{
+			packetIndex = (short)PACKET_INDEX.REQ_SIGN_UP,
+			packetSize = jsonDataSize
+		};
+		var packData2 = new PKT_REQ_SIGN_UP
+		{
+			header = packHeader2,
+			userID = id,
+			userPW = pw,
+			userName = name
+		};
+		string jsonData2;
+		jsonData2 = JsonConvert.SerializeObject(packData2);
+		jsonData2 += endNullValue;
+		byte[] sendByte2 = new byte[512];
+		sendByte2 = Encoding.UTF8.GetBytes(jsonData2);
+
+		int resultSize = _sock.Send(sendByte2);
+	}
 }

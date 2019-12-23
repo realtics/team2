@@ -21,7 +21,10 @@ public class ItemSlot : MonoBehaviour
             _item = value;
 
             if (_item == null)
-                _image.enabled = false;
+			{
+				_image.enabled = false;
+				_image.sprite = null;
+			}
             else
             {
                 _image.sprite = _item.icon;
@@ -43,26 +46,31 @@ public class ItemSlot : MonoBehaviour
 		FindToolTip();
 	}
 
-	protected virtual void FindToolTip()
+	protected void FindToolTip()
 	{
 		if (_itemToolTip == null)
-			_itemToolTip = InventoryManager.Instance.InventoryTooltip;
+			_itemToolTip = InventoryManager.Instance.ItemTooltip;
 	}
 
 	public void ClickSlot()
 	{
-		if (Item is EquipableItem)
+		if (_item is EquipableItem)
 		{
 
 			if(_itemToolTip.enabled)
 				_itemToolTip.HideToolTip();
 
-			_itemToolTip.ShowToolTip((EquipableItem)Item, this);
+			_itemToolTip.ShowToolTip((EquipableItem)_item, this);
 		}
+	}
+
+	public void ClickSellButton()
+	{
+		InventoryManager.Instance.Inventory.RemoveItem(_item);
 	}
 
 	public void ClickEvent()
 	{
-		OnClickEvent(Item);
+		OnClickEvent(_item);
 	}
 }

@@ -16,16 +16,13 @@ public class InventoryManager : MonoBehaviour
 	[SerializeField]
 	private EquipmentPanel _equipmentPanel;
 	[SerializeField]
-	private ItemToolTip _inventoryTooltip;
-	[SerializeField]
-	private ItemToolTip _equipPanelTooltip;
+	private ItemToolTip _itemTooltip;
 	[SerializeField] 
 	private ItemSaveManager _itemSaveManager;
 	[SerializeField]
 	private ChracterStatInfo _chracterStatInfo;
 
-	public ItemToolTip InventoryTooltip{ get { return _inventoryTooltip; } }
-	public ItemToolTip EquipPanelTooltip { get { return _equipPanelTooltip; } }
+	public ItemToolTip ItemTooltip{ get { return _itemTooltip; } }
 	public Inventory Inventory { get { return _inventory; } }
 	public EquipmentPanel EquipmentPanel { get { return _equipmentPanel; } }
 
