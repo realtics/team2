@@ -23,8 +23,8 @@ public class PlayerManager
 	public PlayerCharacter PlayerCharacter { get { return _playerCharacter; } set { _playerCharacter = value; } }
 
 	////JS 
-	//private CharacterStat _stat;
-	//public CharacterStat Stat { get { return _stat; } }
+	private CharacterStat _stat;
+	public CharacterStat Stat { get { return _stat; } set { _stat = value; } }
 
 	private void Awake()
 	{

@@ -16,13 +16,7 @@ public class ChracterStatInfo : MonoBehaviour
 	[SerializeField] private Text _mentalityBonusText;
 	[SerializeField] private Text _hangmaBonusText;
 
-	private CharacterStat _stat;
-
-
-	private void Awake()
-	{
-		_stat = PlayerManager.Instance.PlayerCharacter.Movement.Stat;
-	}
+	//private CharacterStat _stat;
 
 	public void PopUpStatInfo()
 	{
@@ -37,8 +31,6 @@ public class ChracterStatInfo : MonoBehaviour
 	private void UpdateStat()
 	{
 		//FIXME : 스탯연동할때 지역변수 다 제거 일단은 확인용
-		//CharacterStat stat = new CharacterStat();
-
 		int physicalAttackBonus = 0;
 		int magicAttackBonus = 0;
 		int physicalDefenseBonus = 0;
@@ -75,17 +67,15 @@ public class ChracterStatInfo : MonoBehaviour
 		_mentalityBonusText.text = mentalityBonus.ToString();
 		_hangmaBonusText.text = hangmaBonus.ToString();
 
-		//stat.physicalAttackBonus = physicalAttackBonus;
-		//stat.magicAttackBonus = magicAttackBonus;
-		//stat.physicalDefenseBonus = physicalDefenseBonus;
-		//stat.magicDefenseBonus = magicDefenseBonus;
-		//stat.strengthBonus = strengthBonus;
-		//stat.intelligenceBonus = intelligenceBonus;
-		//stat.healthBonus = healthBonus;
-		//stat.mentalityBonus = mentalityBonus;
-		//stat.hangmaBonus = hangmaBonus;
-
-		//PlayerManager.Instance.PlayerCharacter.Movement.Stat = stat;
+		//_stat.physicalAttackBonus = physicalAttackBonus;
+		//_stat.magicAttackBonus = magicAttackBonus;
+		//_stat.physicalDefenseBonus = physicalDefenseBonus;
+		//_stat.magicDefenseBonus = magicDefenseBonus;
+		//_stat.strengthBonus = strengthBonus;
+		//_stat.intelligenceBonus = intelligenceBonus;
+		//_stat.healthBonus = healthBonus;
+		//_stat.mentalityBonus = mentalityBonus;
+		//_stat.hangmaBonus = hangmaBonus;
 	}
 
 	public void SetCharacterInfo()

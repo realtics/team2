@@ -83,7 +83,11 @@ public class GameManager : MonoBehaviour
     {
         Color fadecolor = _fadeOut.color;
         _time = 0f;
-		SceneManager.UnloadSceneAsync((int)SceneIndex.Inventory);
+		
+		if (SceneManager.GetSceneByBuildIndex((int)SceneIndex.Inventory).isLoaded)
+		{
+			   SceneManager.UnloadSceneAsync((int)SceneIndex.Inventory);
+		}
 		while (fadecolor.a > 0f)
         {
             _time += Time.deltaTime / FadeTime;

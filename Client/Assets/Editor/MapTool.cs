@@ -792,7 +792,7 @@ public class MapTool : EditorWindow
         metaTile.name = _currentPrefab.name;
         metaTile.transform.SetParent(FindLayer(layer).transform);
         metaTile.transform.localPosition = (Vector3)pos + metaTile.transform.InverseTransformVector(OffsetWeirdTiles());
-        ZorderRecorrenciaSpriteRender(metaTile);
+
         if (metaTile.transform.localPosition != (Vector3)pos)
         {
             ArtificialPosition artPos = metaTile.AddComponent<ArtificialPosition>();
@@ -808,7 +808,7 @@ public class MapTool : EditorWindow
         metaTile.name = prefab.name;
         metaTile.transform.SetParent(FindLayer(currentLayer).transform);
         metaTile.transform.localPosition = (Vector3)pos + metaTile.transform.InverseTransformVector(OffsetWeirdTiles());
-        //ZorderRecorrenciaSpriteRender(metaTile);
+
         if (metaTile.transform.localPosition != (Vector3)pos)
         {
             ArtificialPosition artPos = metaTile.AddComponent<ArtificialPosition>();
