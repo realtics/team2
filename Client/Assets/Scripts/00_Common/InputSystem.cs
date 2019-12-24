@@ -67,6 +67,11 @@ public class InputSystem : MonoBehaviour
             sender.StunDuration = 0.5f;
             _pc.SetTest(sender);
         }
+
+		if (Input.GetKeyDown(KeyCode.V))
+		{
+			_pc.Revive();
+		}
     }
 
     public void FindPlayerCharacter()

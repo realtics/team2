@@ -125,4 +125,9 @@ public class PlayerCharacter : MonoBehaviour
     {
         _movement = GetComponent<CharacterMovement>();
     }
+
+	public void Revive()
+	{
+		_movement.Revive();
+	}
 }

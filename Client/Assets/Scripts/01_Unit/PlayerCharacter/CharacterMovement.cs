@@ -371,4 +371,9 @@ public class CharacterMovement : BaseUnit
 		skill = _equipSkills[index];
 		return skill;
 	}
+
+	public void Revive()
+	{
+		_stat.Revive();
+	}
 }
