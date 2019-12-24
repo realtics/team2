@@ -1078,7 +1078,7 @@ public class NetworkManager : MonoBehaviour
 			packetIndex = (short)PACKET_INDEX.REQ_DUNGEON_CLEAR_RESULT_ITEM,
 			packetSize = (short)DefineDefaultValue.packetSize
 		};
-		var packData = new PKT_REQ_NEW_LOGIN { header = packHeader };
+		var packData = new PKT_REQ_DUNGEON_CLEAR_RESULT_ITEM { header = packHeader };
 		DebugLogList(packData.ToString());
 		jsonData = JsonConvert.SerializeObject(packData);
 		jsonData += endNullValue;
