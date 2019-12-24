@@ -8,3 +8,4 @@ Temp/
 *.sln
 *.collabignore
 *.spriteatlas
+Client/Assets/StreamingAssets/build_info
