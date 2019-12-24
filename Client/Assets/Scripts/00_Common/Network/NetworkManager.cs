@@ -35,7 +35,6 @@ public class StateObject    // 데이터를 수신하기 위한 상태 객체
     }
 }
 
-
 public class NetworkManager : MonoBehaviour
 {
 	private static NetworkManager _instance;
@@ -102,6 +101,12 @@ public class NetworkManager : MonoBehaviour
     private List<CharacterSpawnData> _spawnCharacters;
     private List<int> _exitCharacters;
 
+	private string _itemId;
+	public string ItemId { get { return _itemId; } }
+
+
+	private bool _successSignup;
+	public bool SuccessSignup { get { return _successSignup; } set { _successSignup = value; } }
     private void Awake()
     {
         _instance = this;
@@ -497,8 +502,9 @@ public class NetworkManager : MonoBehaviour
                             case RESULT_SIGN_UP_CHECK.RESULT_SIGN_UP_CHECK_SUCCESS:
                                 ToastMessagePanel.Instance.SetToastMessage("회원가입 완료 !");
                                 // FIXME: (안병욱) 파인드 수정
-                                FindObjectOfType<MainMenu>().SuccessSignup();
-                                break;
+								_successSignup = true;
+
+								break;
                         }
 					}
 					break;
@@ -508,6 +514,8 @@ public class NetworkManager : MonoBehaviour
 
 						var itemIndex = desJson.itemIndex;
 						var itemID = desJson.itemID;
+
+						_itemId = itemID;
 					}
 					break;
 				default:
