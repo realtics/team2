@@ -54,11 +54,13 @@ public class SwordmanSkillManager : MonoBehaviour
         {
             case SwordmanSkillIndex.Jingongcham:
                 SwordmanSkillJingongcham jingongcham = new SwordmanSkillJingongcham();
-                skill = jingongcham;
+				sender.Damage = stat.TotalStat.strength * sender.Damage / 10.0f;
+				skill = jingongcham;
                 break;
             case SwordmanSkillIndex.Hadouken:
                 SwordmanSkillHadouken hadouken = new SwordmanSkillHadouken();
-                skill = hadouken;
+				sender.Damage = stat.TotalStat.intelligence * sender.Damage / 10.0f;
+				skill = hadouken;
                 break;
             case SwordmanSkillIndex.Blache:
                 SwordmanSkillBlache blache = new SwordmanSkillBlache();
