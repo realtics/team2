@@ -304,12 +304,14 @@ struct PKT_REQ_DUNGEON_CLEAR_RESULT_ITEM : PACKET_HEADER
 
 struct PKT_RES_DUNGEON_CLEAR_RESULT_ITEM : PACKET_HEADER
 {
-	char resultItemIndex[MAX_RESULT_ITEM_ID];
+	int itemIndex;
+	char itemID[MAX_RESULT_ITEM_ID];
 
 	void Init()
 	{
 		packetIndex = PACKET_INDEX::RES_DUNGEON_CLEAR_RESULT_ITEM;
 		packetSize = sizeof(PKT_RES_DUNGEON_CLEAR_RESULT_ITEM);
-		memset(resultItemIndex, 0, MAX_RESULT_ITEM_ID);
+		itemIndex = 0;
+		memset(itemID, 0, MAX_RESULT_ITEM_ID);
 	}
 };
