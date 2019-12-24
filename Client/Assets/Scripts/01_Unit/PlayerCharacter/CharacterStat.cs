@@ -45,6 +45,7 @@ public class CharacterStat : MonoBehaviour
     public float AttackSpeed { get { return _attackSpeed; } }
     public BaseUnit Unit { get { return _unit; } }
     public CharacterBaseStat TotalStat { get { return _totalStat; } }
+	public bool IsDie { get { return _hp <= 0.0f ? true : false; } }
 
     private void Awake()
     {
@@ -115,4 +116,13 @@ public class CharacterStat : MonoBehaviour
         _uiPlayerInfo.SetPlayerHp(_hp, _maxHp);
         _uiPlayerInfo.SetPlayerMp(_mp, _maxMp);
     }
+
+	public void Revive()
+	{
+		if (!IsDie)
+			return;
+
+		_hp = _maxHp;
+		_mp = _maxMp;
+	}
 }
