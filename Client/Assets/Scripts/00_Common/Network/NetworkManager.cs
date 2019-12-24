@@ -250,9 +250,11 @@ public class NetworkManager : MonoBehaviour
         }
         catch (Exception e)
         {
-            Debug.LogError(e.ToString());
+			_sock = null;
+			Debug.LogError(e.ToString());
             DebugLogList("[!!Exception!!] " + e.ToString());
-        }
+
+		}
 
     }
 
@@ -879,6 +881,9 @@ public class NetworkManager : MonoBehaviour
 
 	public void CheckBeforeLogin(string id, string pw)
 	{
+		if (!IsConnect)
+			return;
+
 		DebugLogList("CheckBeforeLogin() start");
 		string jsonData;
 		char endNullValue = '\0';
@@ -941,6 +946,9 @@ public class NetworkManager : MonoBehaviour
 
 	public void SendChat(string chat)
 	{
+		if (!IsConnect)
+			return;
+
 		string jsonData;
 		char endNullValue = '\0';
 
@@ -1031,6 +1039,9 @@ public class NetworkManager : MonoBehaviour
 
 	public void SignUpUser(string id, string password, string nickName)
 	{
+		if (!IsConnect)
+			return;
+
 		string jsonData;
 		char endNullValue = '\0';
 
