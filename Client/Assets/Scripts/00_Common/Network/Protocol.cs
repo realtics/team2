@@ -176,5 +176,6 @@ public struct PKT_REQ_DUNGEON_CLEAR_RESULT_ITEM
 public struct PKT_RES_DUNGEON_CLEAR_RESULT_ITEM
 {
 	public PACKET_HEADER header;
-	public int resultItemIndex;
+	public int itemIndex;
+	public string itemID;
 }

@@ -1,0 +1,39 @@
+{
+  "DungeonInfos": [
+    {
+      "position": {
+        "x": 0.0,
+        "y": 0.0,
+        "magnitude": 0.0,
+        "sqrMagnitude": 0.0
+      },
+      "objectinfos": [
+        {
+          "filePath": "Dungeon/HellDungeon",
+          "position": {
+            "x": 4.5,
+            "y": -8.5,
+            "z": 0.0
+          }
+        }
+      ],
+      "monsterInfos": [
+        {
+          "filePath": "HellGoblin",
+          "position": {
+            "x": 0.5,
+            "y": -8.5,
+            "z": 0.0
+          }
+        }
+      ],
+      "potalTransportinfos": [],
+      "isBoss": true,
+      "PlayerStartPosition": {
+        "x": -15.5,
+        "y": -8.5,
+        "z": 0.0
+      }
+    }
+  ]
+}
