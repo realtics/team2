@@ -24,6 +24,9 @@
 	RES_PLAYER_MOVE_START = 131,
 	REQ_PLAYER_MOVE_END = 132,
 	RES_PLAYER_MOVE_END = 133,
+
+	REQ_DUNGEON_CLEAR_RESULT_ITEM = 301,
+	RES_DUNGEON_CLEAR_RESULT_ITEM = 302,
 };
 
 enum RESULT_SIGN_UP_CHECK : int
@@ -165,3 +168,13 @@ public struct PKT_RES_PLAYER_MOVE_END
 	public string userDir;
 }
 
+public struct PKT_REQ_DUNGEON_CLEAR_RESULT_ITEM
+{
+	public PACKET_HEADER header;
+}
+
+public struct PKT_RES_DUNGEON_CLEAR_RESULT_ITEM
+{
+	public PACKET_HEADER header;
+	public int resultItemIndex;
+}
