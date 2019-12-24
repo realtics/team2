@@ -632,6 +632,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: LukeDungenSlot (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 9105624054805021932, guid: 4ff95e8e0f24312489789d2207cf60b1,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9105624054805021935, guid: 4ff95e8e0f24312489789d2207cf60b1,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -782,6 +787,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: LukeDungenSlot
+      objectReference: {fileID: 0}
+    - target: {fileID: 9105624054805021932, guid: 4ff95e8e0f24312489789d2207cf60b1,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9105624054805021935, guid: 4ff95e8e0f24312489789d2207cf60b1,
         type: 3}

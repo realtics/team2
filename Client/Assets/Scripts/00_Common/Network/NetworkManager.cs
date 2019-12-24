@@ -101,12 +101,18 @@ public class NetworkManager : MonoBehaviour
     private List<CharacterSpawnData> _spawnCharacters;
     private List<int> _exitCharacters;
 
+	//LJS: InventorySaveManger로 옮겨야함
 	private string _itemId;
 	public string ItemId { get { return _itemId; } }
 
+	private int _itemIndex;
+	public int ItemIndex { get { return _itemIndex; } }
 
+	
 	private bool _successSignup;
 	public bool SuccessSignup { get { return _successSignup; } set { _successSignup = value; } }
+	
+
     private void Awake()
     {
         _instance = this;
@@ -516,6 +522,7 @@ public class NetworkManager : MonoBehaviour
 						var itemID = desJson.itemID;
 
 						_itemId = itemID;
+						_itemIndex = itemIndex;
 					}
 					break;
 				default:

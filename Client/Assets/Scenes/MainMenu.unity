@@ -1350,7 +1350,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40e8e2eb81bc66942a684de3631cc80e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  signupPanel: {fileID: 1831806507}
+  signupPanel: {fileID: 0}
 --- !u!4 &715957464
 Transform:
   m_ObjectHideFlags: 0

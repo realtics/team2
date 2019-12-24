@@ -57,6 +57,7 @@ public class UIGameResult : MonoBehaviour
 			_itemIcon.sprite = newItem.icon;
 			_itemName.text = newItem.itemName;
 
+			Debug.Log(NetworkManager.Instance.ItemIndex+"의 아이템을 서버로부터 받았습니다.");
 		}
 			//아이템얻기 테스트 잘된당!!~~!! 이히~~!!!!
 		else
