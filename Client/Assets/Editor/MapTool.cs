@@ -241,7 +241,7 @@ public class MapTool : EditorWindow
             _fileName = EditorGUILayout.TextField(new GUIContent("FileName", "FileName .Json"), _fileName);
             if (GUILayout.Button("New"))
             {
-                if(_fileName == null)
+                if(_fileName != null)
                 {
                     _jsonManagement.NewJson(_fileName);
                     AssetDatabase.Refresh();
@@ -263,6 +263,8 @@ public class MapTool : EditorWindow
             {
                 if (GUILayout.Button("Save"))
                 {
+                    ActivateTools(false);
+                    _mapToolLoader.SaveRoom(_preSelectRoomGrid);
                     _jsonManagement.SaveJson(_mapToolLoader.dungeonList, _dungeon.name);
                     AssetDatabase.Refresh();
                 }
@@ -275,7 +277,7 @@ public class MapTool : EditorWindow
                 }
                 if (GUILayout.Button("export"))
                 {
-                    _jsonManagement.ExportJson(_mapToolLoader.dungeonList);
+                    _jsonManagement.ExportJson(_mapToolLoader.dungeonList, _dungeon.name);
                     AssetDatabase.Refresh();
                 }
             }
