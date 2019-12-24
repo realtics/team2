@@ -502,6 +502,14 @@ public class NetworkManager : MonoBehaviour
                         }
 					}
 					break;
+				case (short)PACKET_INDEX.RES_DUNGEON_CLEAR_RESULT_ITEM:
+					{
+						var desJson = JsonConvert.DeserializeObject<PKT_RES_DUNGEON_CLEAR_RESULT_ITEM>(jsonData);
+
+						var itemIndex = desJson.itemIndex;
+						var itemID = desJson.itemID;
+					}
+					break;
 				default:
                     {
                         Debug.LogError("Index가 존재 하지 않는 Packet");
@@ -1032,4 +1040,28 @@ public class NetworkManager : MonoBehaviour
 
 		int resultSize = _sock.Send(sendByte);
 	}
+
+	public void DungeonClearResultItem()
+	{
+		DebugLogList("DungeonClearResultItem() start");
+		string jsonData;
+		char endNullValue = '\0';
+
+		var packHeader = new PACKET_HEADER
+		{
+			packetIndex = (short)PACKET_INDEX.REQ_DUNGEON_CLEAR_RESULT_ITEM,
+			packetSize = (short)DefineDefaultValue.packetSize
+		};
+		var packData = new PKT_REQ_NEW_LOGIN { header = packHeader };
+		DebugLogList(packData.ToString());
+		jsonData = JsonConvert.SerializeObject(packData);
+		jsonData += endNullValue;
+		DebugLogList(jsonData.ToString());
+		byte[] sendByte = new byte[512];
+		sendByte = Encoding.UTF8.GetBytes(jsonData);
+		
+		int resultSize = _sock.Send(sendByte);
+		DebugLogList("DungeonClearResultItem() end");
+	}
+
 }
