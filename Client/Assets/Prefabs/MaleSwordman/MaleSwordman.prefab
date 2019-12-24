@@ -140,7 +140,7 @@ GameObject:
   - component: {fileID: 1109627757}
   m_Layer: 8
   m_Name: MaleSwordman
-  m_TagString: Untagged
+  m_TagString: UserPlayer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
