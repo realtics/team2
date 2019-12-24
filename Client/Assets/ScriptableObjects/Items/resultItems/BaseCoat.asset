@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a3a2b901820e084389f2b5956e1c65a, type: 3}
+  m_Name: BaseCoat
+  m_EditorClassIdentifier: 
+  _id: fb0e990fb48f8d542b14508053e3a105
+  itemName: "\uC870\uC545\uD55C \uAC00\uC8FD\uCF54\uD2B8"
+  icon: {fileID: 21300000, guid: df8537a034a04c44a97aaf75fd4466e3, type: 3}
+  physicalAttackBonus: 0
+  magicAttackBonus: 0
+  physicalDefenseBonus: 80
+  magicDefenseBonus: 0
+  strengthBonus: 0
+  intelligenceBonus: 0
+  healthBonus: 80
+  mentalityBonus: 0
+  hangmaBonus: 8
+  strengthPercentBonus: 0
+  intelligencePercentBonus: 0
+  healthPercentBonus: 0
+  mentalityPercentBonus: 0
+  Information: "\uC870\uC545\uD55C \uAC00\uC8FD\uCF54\uD2B8\uC774\uB2E4"
+  equipmentType: 1

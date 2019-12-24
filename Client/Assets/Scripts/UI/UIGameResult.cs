@@ -18,7 +18,7 @@ public class UIGameResult : MonoBehaviour
 	[SerializeField]
 	private Text _itemName;
 	[SerializeField]
-	private ItemDatabase _itemDatabase;
+	private ResultItemDatabase _itemDatabase;
 
     private Image[] _resultBoxImage;
     private Button[] _resultBoxButton;

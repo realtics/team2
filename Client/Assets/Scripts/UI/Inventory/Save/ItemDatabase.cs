@@ -6,7 +6,7 @@ using UnityEditor;
 [CreateAssetMenu]
 public class ItemDatabase : ScriptableObject
 {
-	[SerializeField] Item[] items;
+	[SerializeField] protected Item[] items;
 
 	public string GetRandomItemID(out Sprite icon, out string itemName)
 	{
@@ -55,21 +55,21 @@ public class ItemDatabase : ScriptableObject
 
 	private void OnEnable()
 	{
-		EditorApplication.projectWindowChanged -= LoadItems;
-		EditorApplication.projectWindowChanged += LoadItems;
+		EditorApplication.projectChanged -= LoadItems;
+		EditorApplication.projectChanged += LoadItems;
 	}
 
 	private void OnDisable()
 	{
-		EditorApplication.projectWindowChanged -= LoadItems;
+		EditorApplication.projectChanged -= LoadItems;
 	}
 
-	private void LoadItems()
+	protected virtual void LoadItems()
 	{
 		items = FindAssetsByType<Item>("Assets/ScriptableObjects/Items");
 	}
 
-	// Slightly modified version of this answer: http://answers.unity.com/answers/1216386/view.html
+	//Slightly modified version of this answer: http://answers.unity.com/answers/1216386/view.html
 	public static T[] FindAssetsByType<T>(params string[] folders) where T : Object
 	{
 		string type = typeof(T).Name;
