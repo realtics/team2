@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 2320710737
+CRC: 3854918039
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: fea41432defcb48592dcd3346325f0b7
+    Hash: cdcb7474921a692da8770523d6112b18
   TypeTreeHash:
     serializedVersion: 2
-    Hash: e6ab01c0eb9d47abf134fbe0fae35212
+    Hash: b75f3379b3e3cb0e9c006f2ee2b49714
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -40,8 +40,6 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: a5d041c509245134691aa8c3b1f5aef1, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: f6695e672c84c7240b5208b3191ca23a, type: 3}
-- Class: 114
   Script: {fileID: 11500000, guid: 48d06c5856586af4b8c3570d7dc496f4, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 29b97b68b6ba3e64d9587aedd9fa5c26, type: 3}
@@ -55,6 +53,8 @@ ClassTypes:
   Script: {fileID: 11500000, guid: 2decde5f0c379d549ad25131bddce8f0, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 5b01f02e0454e3b4d9992efb8dc3282d, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: b654e07007ef51c458f53ec33e1c67a8, type: 3}
 - Class: 115
   Script: {instanceID: 0}
 - Class: 212
@@ -74,4 +74,4 @@ Assets:
 - Assets/Prefabs/Monster/Calvary/Unit/Calvary.prefab
 - Assets/Prefabs/Monster/Goblin/Unit/HellGoblin.prefab
 Dependencies:
-- C:/Users/ICT03_07/Documents/GitHub/team2/Client/Assets/StreamingAssets/material
+- C:/Users/ICT03_08/Documents/GitHub/team2/Client/Assets/StreamingAssets/material

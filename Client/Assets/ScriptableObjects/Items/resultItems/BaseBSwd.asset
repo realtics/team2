@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a3a2b901820e084389f2b5956e1c65a, type: 3}
+  m_Name: BaseBSwd
+  m_EditorClassIdentifier: 
+  _id: 1810fb5d3bc76684b82408bf96a78ae3
+  itemName: "\uC870\uC545\uD55C \uAD11\uAC80"
+  icon: {fileID: 21300000, guid: ca220fff31d7bb24f87512d92f9514a7, type: 3}
+  physicalAttackBonus: 50
+  magicAttackBonus: 50
+  physicalDefenseBonus: 0
+  magicDefenseBonus: 0
+  strengthBonus: 5
+  intelligenceBonus: 5
+  healthBonus: 5
+  mentalityBonus: 5
+  hangmaBonus: 5
+  strengthPercentBonus: 0
+  intelligencePercentBonus: 0
+  healthPercentBonus: 0
+  mentalityPercentBonus: 0
+  Information: "\uC870\uC545\uD55C \uAD11\uAC80\uC774\uB2E4"
+  equipmentType: 0

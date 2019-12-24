@@ -5,7 +5,7 @@ using UnityEngine;
 public class HellGoblin : Goblin
 {
     [SerializeField]
-    private ItemDatabase _hellItemDatabase;
+    private HellItemDatabase _hellItemDatabase;
 
     protected override void Awake()
     {
