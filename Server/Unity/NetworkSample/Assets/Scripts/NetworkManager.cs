@@ -489,8 +489,7 @@ public class NetworkManager : MonoBehaviour
         };
         var packTest = new PACKET_TEST
         {
-            header = packHead,
-            han = "테스트임"
+            header = packHead
         };
         testJson = JsonConvert.SerializeObject(packTest);
         testJson += testEndNullValue;

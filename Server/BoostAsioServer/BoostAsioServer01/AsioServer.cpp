@@ -225,6 +225,8 @@ void AsioServer::ProcessPacket(const int sessionID, const char* pData)
 	break;
 	case PACKET_INDEX::REQ_NEW_LOGIN:
 	{
+		_sessionList[sessionID]->SetZone(WORLD_ZONE::WORLD_ZONE_LOBBY);
+
 		PKT_REQ_NEW_LOGIN* pPacket = (PKT_REQ_NEW_LOGIN*)pData;
 
 		PKT_RES_NEW_LOGIN_SUCSESS SendPkt;
@@ -272,17 +274,7 @@ void AsioServer::ProcessPacket(const int sessionID, const char* pData)
 		std::string sendStr2 = oss2.str();
 		std::cout << "[서버->클라] " << sendStr2 << std::endl;
 
-
 		_sessionList[sessionID]->PostSend(false, std::strlen(sendStr2.c_str()), (char*)sendStr2.c_str());
-		//size_t totalSessionCount = _sessionList.size();
-
-		//for (size_t i = 0; i < totalSessionCount; i++)
-		//{
-		//	if (_sessionList[i]->Socket().is_open())
-		//	{
-		//		_sessionList[i]->PostSend(false, std::strlen(sendStr2.c_str()), (char*)sendStr2.c_str());
-		//	}
-		//}
 	}
 	break;
 	case PACKET_INDEX::REQ_CONCURRENT_USER:
@@ -295,6 +287,8 @@ void AsioServer::ProcessPacket(const int sessionID, const char* pData)
 		PKT_REQ_USER_EXIT* pPacket = (PKT_REQ_USER_EXIT*)pData;
 
 		int exitUser = pPacket->sessionID;
+
+		_sessionList[sessionID]->SetZone(WORLD_ZONE::WORLD_ZONE_DUNGEON);
 
 		UserExit(exitUser);
 	}
@@ -411,7 +405,8 @@ void AsioServer::ProcessPacket(const int sessionID, const char* pData)
 				if (_sessionList[i]->SessionID() == (playerMove.sessionID - FIRST_SESSION_INDEX))
 					continue;
 
-				_sessionList[i]->PostSend(false, std::strlen(sendStr2.c_str()), (char*)sendStr2.c_str());
+				if (_sessionList[i]->GetZone() == WORLD_ZONE::WORLD_ZONE_LOBBY)
+					_sessionList[i]->PostSend(false, std::strlen(sendStr2.c_str()), (char*)sendStr2.c_str());
 			}
 		}
 	}
@@ -485,7 +480,8 @@ void AsioServer::ProcessPacket(const int sessionID, const char* pData)
 				if (_sessionList[i]->SessionID() == (playerMove.sessionID - FIRST_SESSION_INDEX))
 					continue;
 
-				_sessionList[i]->PostSend(false, std::strlen(sendStr2.c_str()), (char*)sendStr2.c_str());
+				if (_sessionList[i]->GetZone() == WORLD_ZONE::WORLD_ZONE_LOBBY)
+					_sessionList[i]->PostSend(false, std::strlen(sendStr2.c_str()), (char*)sendStr2.c_str());
 			}
 		}
 	}
@@ -499,10 +495,10 @@ void AsioServer::ProcessPacket(const int sessionID, const char* pData)
 
 		int resultItemSize = _DBMysql.DBDungeonClearResultItemSize();
 
-		boost::random::mt19937 gen;
+		boost::random::mt19937 engine((unsigned int)time(NULL));
 		boost::random::uniform_int_distribution<> dist(10001, (10000+resultItemSize));
-
-		int resultRandom = dist(gen);
+		
+		int resultRandom = dist(engine);
 		SendPkt.itemIndex = resultRandom;
 		// DB 체크
 		strcpy_s(SendPkt.itemID, MAX_RESULT_ITEM_ID, _DBMysql.DBDungeonClearResultItem(resultRandom).c_str());
@@ -567,23 +563,26 @@ void AsioServer::ConcurrentUser()
 	{
 		if (_sessionList[i]->Socket().is_open())
 		{
-			totalUser++;
-
-			int userNum = i + FIRST_SESSION_INDEX;
-
-			userList += std::to_string(userNum);
-			userList += ",";
-
-			userName += _sessionList[i]->GetName();
-			userName += ",";
-
-			if (_totalUserPos.empty() == false)
+			if (_sessionList[i]->GetZone() == WORLD_ZONE::WORLD_ZONE_LOBBY)
 			{
-				userPos += _totalUserPos.find(userNum)->second;
-				userPos += "|";
+				totalUser++;
 
-				userDir += _totalUserDir.find(userNum)->second;
-				userDir += "|";
+				int userNum = i + FIRST_SESSION_INDEX;
+
+				userList += std::to_string(userNum);
+				userList += ",";
+
+				userName += _sessionList[i]->GetName();
+				userName += ",";
+
+				if (_totalUserPos.empty() == false)
+				{
+					userPos += _totalUserPos.find(userNum)->second;
+					userPos += "|";
+
+					userDir += _totalUserDir.find(userNum)->second;
+					userDir += "|";
+				}
 			}
 		}
 	}
@@ -671,7 +670,9 @@ void AsioServer::ConcurrentUser()
 			//	if (_sessionList[i]->SessionID() == (exitUser - FIRST_SESSION_INDEX))
 			//		continue;
 			//}
-			_sessionList[i]->PostSend(false, std::strlen(sendStr2.c_str()), (char*)sendStr2.c_str());
+
+			if(_sessionList[i]->GetZone() == WORLD_ZONE::WORLD_ZONE_LOBBY)
+				_sessionList[i]->PostSend(false, std::strlen(sendStr2.c_str()), (char*)sendStr2.c_str());
 		}
 	}
 }
@@ -722,7 +723,8 @@ void AsioServer::UserExit(int sessionID)
 			if (_sessionList[i]->SessionID() == (userExit.sessionID - FIRST_SESSION_INDEX))
 				continue;
 
-			_sessionList[i]->PostSend(false, std::strlen(sendStr2.c_str()), (char*)sendStr2.c_str());
+			if (_sessionList[i]->GetZone() == WORLD_ZONE::WORLD_ZONE_LOBBY)
+				_sessionList[i]->PostSend(false, std::strlen(sendStr2.c_str()), (char*)sendStr2.c_str());
 		}
 	}
 }

@@ -20,6 +20,7 @@ Session::~Session()
 void Session::Init()
 {
 	_packetBufferMark = 0;
+	_zone = WORLD_ZONE_LOBBY;
 }
 
 void Session::PostReceive()

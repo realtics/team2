@@ -29,6 +29,8 @@ private:
 
 	AsioServer* _pServer;
 
+	WORLD_ZONE _zone;
+
 	void HandleWrite(const boost::system::error_code& error, size_t bytes_transferred);
 	void HandleReceive(const boost::system::error_code& error, size_t bytes_transferred);
 
@@ -45,4 +47,7 @@ public:
 	boost::asio::ip::tcp::socket& Socket() { return _socket; }
 	void SetName(const char* pszName) { _name = pszName; }
 	const char* GetName() { return _name.c_str(); }
+
+	void SetZone(WORLD_ZONE zone) { _zone = zone; }
+	WORLD_ZONE GetZone() { return _zone; }
 };
