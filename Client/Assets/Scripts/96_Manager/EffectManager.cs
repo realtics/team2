@@ -70,8 +70,7 @@ public class EffectManager : MonoBehaviour
     public void SpawnHellItem(Vector3 position, Item item)
     {
         GameObject hellItem = ObjectPoolManager.Instance.GetRestObject(_hellItem);
-        _hellItem.transform.position = position;
-        hellItem.GetComponent<EpicDrop>().SetHellItem(item);
-
-    }
+		hellItem.transform.position = position;
+		hellItem.GetComponent<EpicDrop>().SetHellItem(item);
+	}
 }
