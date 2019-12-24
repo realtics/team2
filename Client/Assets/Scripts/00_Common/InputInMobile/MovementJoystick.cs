@@ -69,6 +69,9 @@ public class MovementJoystick : MonoBehaviour
 
     private void MovePlayerCharacter()
     {
+		if (_pc == null)
+			return;
+
         _pc.SetAxis(_dirVec.x, _dirVec.y);
 
         _oldDirection = _stickDirection;

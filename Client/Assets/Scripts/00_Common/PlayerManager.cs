@@ -26,10 +26,6 @@ public class PlayerManager
 	public CharacterStat Stat { get { return _playerCharacter.Movement.Stat; } }
     public CharacterBaseStat EquipmentStat { get { return _equipmentStat; }}
 
-    public void Update()
-    {
-    }
-
     public void SetEquipmentStat(CharacterBaseStat stat)
     {
         _equipmentStat = stat;
