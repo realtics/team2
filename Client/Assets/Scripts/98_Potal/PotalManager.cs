@@ -17,8 +17,6 @@ public class PotalManager : MonoBehaviour
   
     [SerializeField]
     private Potal[] _potals;
-    private Potal _currentPotal;
-    private ARROW _arrow;
 
     void Start()
     {

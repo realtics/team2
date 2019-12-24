@@ -9,12 +9,19 @@ public class UIGameOver : MonoBehaviour
     [SerializeField]
     private Image _countDown;
     [SerializeField]
+    private Button _coinUseButton;
+    [SerializeField]
     private Sprite[] _countDownSprite;
 
     private int _coin;
     private int _time;
 
     private const int _maxTime = 10;
+
+    private void Start()
+    {
+        _coinUseButton.onClick.AddListener(() => { });
+    }
 
     public int Coin
     {

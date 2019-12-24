@@ -17,12 +17,9 @@ public class AssetBundleManager : MonoBehaviour
     private AssetBundleManifest _manifest;
     private string _atlasBundle = "atlas";
     private string _materialBundle = "material";
-    private string _loadMonseterAssetName = "monster";
-    private string _loadPotalAssetName = "dungeon/potal";
 
     private bool _firstLoadMapAssetbundle = false;
     private bool _firstLoadMonseterAssetbundle = false;
-    private bool _firstLoadPotalAssetbundle = false;
     private bool _firstLoadAtlas = false;
 
     private static AssetBundleManager _instacne;

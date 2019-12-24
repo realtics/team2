@@ -56,7 +56,7 @@ public class DungeonGameManager : GameManager
 
     void CountOver()
     {
-        MoveToScene((int)SceneIndex.MainMenu);
+        MoveToScene((int)SceneIndex.Lobby);
     }
 
     public void GameClear()
