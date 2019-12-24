@@ -33,7 +33,7 @@ public class CharacterStat : MonoBehaviour
     private float _attackSpeed = 100.0f;
     private UIPlayerInfo _uiPlayerInfo;
 
-    [SerializeField]  private CharacterBaseStat _baseStat;
+    [SerializeField] private CharacterBaseStat _baseStat;
     [SerializeField] private CharacterBaseStat _totalStat;
 
     // properties
@@ -53,7 +53,7 @@ public class CharacterStat : MonoBehaviour
 
     private void Start()
     {
-        RefreshExtraStat();
+        
         //_hp = _maxHp;
         //_mp = _maxMp;
         //_uiPlayerInfo = FindObjectOfType<UIPlayerInfo>();

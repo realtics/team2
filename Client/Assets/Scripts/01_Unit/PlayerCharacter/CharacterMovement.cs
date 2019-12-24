@@ -40,6 +40,7 @@ public class CharacterMovement : BaseUnit
 
 	protected override void Start()
 	{
+		_stat.RefreshExtraStat();
 		_equipSkills = new Dictionary<SwordmanSkillIndex, CharacterSkill>();
 		_equipSkills.Add(SwordmanSkillIndex.Jingongcham, SwordmanSkillManager.Instance.GetSkill(_stat, SwordmanSkillIndex.Jingongcham));
 		_equipSkills.Add(SwordmanSkillIndex.Hadouken, SwordmanSkillManager.Instance.GetSkill(_stat, SwordmanSkillIndex.Hadouken));
