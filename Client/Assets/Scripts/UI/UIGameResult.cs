@@ -48,8 +48,12 @@ public class UIGameResult : MonoBehaviour
     // ToDo. 클릭시에 GameManager에서 UI를 호출해서 Sprite 변경 및 임시 아이템 띄우기.
     public void OpenResultBox(int index)
     {
-		//아이템얻기 테스트 잘된당!!~~!! 이히~~!!!!
-		Sprite icon;
+		if (NetworkManager.Instance.IsConnect)
+		{
+
+		}
+			//아이템얻기 테스트 잘된당!!~~!! 이히~~!!!!
+			Sprite icon;
 		string itemName;
 		ItemSaveIO.SaveResultItem(_itemDatabase.GetRandomItemID(out icon, out itemName));
 		_itemIcon.sprite = icon;

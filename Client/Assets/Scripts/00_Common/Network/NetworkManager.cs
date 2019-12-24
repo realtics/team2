@@ -35,7 +35,6 @@ public class StateObject    // 데이터를 수신하기 위한 상태 객체
     }
 }
 
-
 public class NetworkManager : MonoBehaviour
 {
 	private static NetworkManager _instance;
@@ -101,6 +100,9 @@ public class NetworkManager : MonoBehaviour
     private Dictionary<int, CharacterMovement> _characters;
     private List<CharacterSpawnData> _spawnCharacters;
     private List<int> _exitCharacters;
+
+	private string _itemId;
+	public string ItemId { get { return _itemId; } }
 
     private void Awake()
     {
@@ -508,6 +510,8 @@ public class NetworkManager : MonoBehaviour
 
 						var itemIndex = desJson.itemIndex;
 						var itemID = desJson.itemID;
+
+						_itemId = itemID;
 					}
 					break;
 				default:
