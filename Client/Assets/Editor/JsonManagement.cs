@@ -98,14 +98,6 @@ public class JsonManagement
         string strJsonData = JsonConvert.SerializeObject(dungeonJson, setting);
         CreateJsonFile("New1", strJsonData, _mapFolderPath);
     }
-
-    private void CreateJsonFile(string fileName, string jsonData)
-    {
-        FileStream fileStream = new FileStream(string.Format("{0}/{1}.json", Application.dataPath, fileName), FileMode.Create);
-        byte[] data = Encoding.UTF8.GetBytes(jsonData);
-        fileStream.Write(data, 0, data.Length);
-        fileStream.Close();
-    }
     private void CreateJsonFile(string fileName, string jsonData, string addFrontPath)
     {
         FileStream fileStream = new FileStream(string.Format("{0}/{1}.json", Application.dataPath + addFrontPath, fileName), FileMode.Create);

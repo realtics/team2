@@ -241,7 +241,7 @@ public class MapTool : EditorWindow
             _fileName = EditorGUILayout.TextField(new GUIContent("FileName", "FileName .Json"), _fileName);
             if (GUILayout.Button("New"))
             {
-                if(_fileName == null)
+                if(_fileName != null)
                 {
                     _jsonManagement.NewJson(_fileName);
                     AssetDatabase.Refresh();
