@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: testWeapon3
   m_EditorClassIdentifier: 
   _id: 973ab3b4d60cdb84fae1625d93a0f710
+  _netId: 1008
   itemName: TEST
   icon: {fileID: 21300000, guid: 6af40c34b1346df4db14a4eea24f49c2, type: 3}
   physicalAttackBonus: 9999

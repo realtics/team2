@@ -259,6 +259,25 @@ void Session::Deserialization(char* jsonData)
 		memcpy(&_packetBuffer[_packetBufferMark], (char*)&packet, sizeof(packet));
 	}
 	break;
+	case PACKET_INDEX::REQ_INVENTORY_OPEN:
+	{
+		PKT_REQ_INVENTORY_OPEN packet;
+		packet.Init();
+		packet.packetIndex = packetIndex;
+		packet.packetSize = packetSize;
+		memcpy(&_packetBuffer[_packetBufferMark], (char*)&packet, sizeof(packet));
+	}
+	break;
+	case PACKET_INDEX::REQ_INVENTORY_CLOSE:
+	{
+		PKT_REQ_INVENTORY_CLOSE packet;
+		packet.Init();
+		packet.packetIndex = packetIndex;
+		packet.packetSize = packetSize;
+
+		memcpy(&_packetBuffer[_packetBufferMark], (char*)&packet, sizeof(packet));
+	}
+	break;
 	default:
 	{
 		std::cout << "Index가 존재 하지 않는 Packet : " << packetIndex << std::endl;

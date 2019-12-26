@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: BasePants
   m_EditorClassIdentifier: 
   _id: add23627646963846be1b6ba362e79e6
+  _netId: 1006
   itemName: "\uC870\uC545\uD55C \uAC00\uC8FD\uBC14\uC9C0"
   icon: {fileID: 21300000, guid: 89447a6f434327f49bb5fb36ae6ac444, type: 3}
   physicalAttackBonus: 0

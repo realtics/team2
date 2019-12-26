@@ -4,7 +4,11 @@ using UnityEngine;
 
 public class NetworkInventoryInfoSaver
 {
-	private NetworkInventoryInfoSaver() { }
+	private NetworkInventoryInfoSaver()
+	{
+		_inventoryIDs = new List<string>();
+		_equipIDs = new List<string>();
+	}
 	private static NetworkInventoryInfoSaver _instance;
 	public static NetworkInventoryInfoSaver Instance
 	{
@@ -24,18 +28,20 @@ public class NetworkInventoryInfoSaver
 
 	public void SaveItemIDs(ItemSlot[] equipSlots, ItemSlot[] inventorySlots)
 	{
-		_equipIDs.Clear();
-		_inventoryIDs.Clear();
+		if (_equipIDs.Count > 0)
+			_equipIDs.Clear();
+		if (_inventoryIDs.Count > 0)
+			_inventoryIDs.Clear();
 
 		for (int i = 0; i < equipSlots.Length; i++)
 		{
 			if (equipSlots[i].Item == null)
-				return;
-
-			_equipIDs.Add(equipSlots[i].Item.NetID);
+				_equipIDs.Add("0");
+			else
+				_equipIDs.Add(equipSlots[i].Item.NetID);
 		}
 
-		for (int i=0; i < inventorySlots.Length; i++)
+		for (int i = 0; i < inventorySlots.Length; i++)
 		{
 			if (inventorySlots[i].Item == null)
 				return;

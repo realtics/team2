@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: BaseBSwd
   m_EditorClassIdentifier: 
   _id: 1810fb5d3bc76684b82408bf96a78ae3
+  _netId: 1002
   itemName: "\uC870\uC545\uD55C \uAD11\uAC80"
   icon: {fileID: 21300000, guid: ca220fff31d7bb24f87512d92f9514a7, type: 3}
   physicalAttackBonus: 50

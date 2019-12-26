@@ -124,6 +124,8 @@ public class ItemToolTip : MonoBehaviour
 	{
 		_itemSlot.ClickEvent();
 		HideToolTip();
+
+
 		InventoryManager.Instance.Save();
 	}
 

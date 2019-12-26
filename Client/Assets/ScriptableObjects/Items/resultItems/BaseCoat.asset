@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: BaseCoat
   m_EditorClassIdentifier: 
   _id: fb0e990fb48f8d542b14508053e3a105
+  _netId: 1003
   itemName: "\uC870\uC545\uD55C \uAC00\uC8FD\uCF54\uD2B8"
   icon: {fileID: 21300000, guid: df8537a034a04c44a97aaf75fd4466e3, type: 3}
   physicalAttackBonus: 0

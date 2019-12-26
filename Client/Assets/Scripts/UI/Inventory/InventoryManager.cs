@@ -51,6 +51,12 @@ public class InventoryManager : MonoBehaviour
 			_itemSaveManager.SaveEquipment();
 			_itemSaveManager.SaveInventory();
 		}
+
+		if (NetworkManager.Instance.IsConnect)
+		{
+			NetworkInventoryInfoSaver.Instance.SaveItemIDs(_equipmentPanel.EquipmentSlots, _inventory.ItemSlots);
+			NetworkManager.Instance.CloseInventory();
+		}
 	}
 
 	private void OnDestroy()

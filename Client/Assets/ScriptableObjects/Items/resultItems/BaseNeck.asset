@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: BaseNeck
   m_EditorClassIdentifier: 
   _id: c62be42426cba434e880c620db9f88fb
+  _netId: 1005
   itemName: "\uC870\uC545\uD55C \uC5B4\uAE68\uACAC\uC7A5"
   icon: {fileID: 21300000, guid: b77b0198230f09f48a3682c0bd820f0c, type: 3}
   physicalAttackBonus: 0
