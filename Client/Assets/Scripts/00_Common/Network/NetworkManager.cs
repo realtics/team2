@@ -944,6 +944,7 @@ public class NetworkManager : MonoBehaviour
 		_myId = 0;
 		int resultSize = _sock.Send(sendByte2);
 		DebugLogList("CheckBeforeLogin() end");
+		_accountId = id;
 	}
 
 	public void LoginToTown()
@@ -1074,7 +1075,6 @@ public class NetworkManager : MonoBehaviour
 		sendByte = Encoding.UTF8.GetBytes(jsonData);
 
 		int resultSize = _sock.Send(sendByte);
-		_accountId = id;
 	}
 
 	public void DungeonClearResultItem()
