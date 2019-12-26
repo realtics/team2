@@ -15,9 +15,10 @@ public class DungeonGameManager : GameManager
     private const int _maxResultCountDown = 4;
     private bool _countOver;
 
-    private const float _delayResult = 2.0f;
-    private const float _delayClear = 2.0f;
-    private const float _delayDie = 1.0f;
+    private const float DelayResultSingle = 2.0f;
+    private const float DelayResultMulti = 0.5f;
+    private const float DelayClear = 2.0f;
+    private const float DelayDie = 1.0f;
 
     private bool _playerChooseResult = false;
 
@@ -26,6 +27,9 @@ public class DungeonGameManager : GameManager
 
     [SerializeField]
     protected GameState _playerState;
+
+    private bool _RES_DUNGEON_CLEAR_RESULT_ITEM = false;
+    public bool RES_DUNGEON_CLEAR_RESULT_ITEM { get { return _RES_DUNGEON_CLEAR_RESULT_ITEM; } set { _RES_DUNGEON_CLEAR_RESULT_ITEM = value; } }
 
     private static DungeonGameManager _instance;
     public static DungeonGameManager Instance
@@ -49,11 +53,17 @@ public class DungeonGameManager : GameManager
     {
         if (_countOver && _playerState == GameState.Die)
         {
-            Invoke(nameof(CountOver), _delayDie);
+            Invoke(nameof(CountOver), DelayDie);
         }
         if (_countOver && _playerState == GameState.Dungeon)
         {
-            Invoke(nameof(GameClear), _delayClear);
+            Invoke(nameof(GameClear), DelayClear);
+        }
+
+        if (_RES_DUNGEON_CLEAR_RESULT_ITEM)
+        {
+            Invoke(nameof(GameResult), DelayResultMulti);
+            _RES_DUNGEON_CLEAR_RESULT_ITEM = false;
         }
     }
 
@@ -159,8 +169,11 @@ public class DungeonGameManager : GameManager
     {
 		if(NetworkManager.Instance.IsSingle)
 		{
-			NetworkManager.Instance.DungeonClearResultItem();
+            Invoke(nameof(GameResult), DelayResultSingle);
 		}
-        Invoke(nameof(GameResult), _delayResult);
+        else
+        {
+            NetworkManager.Instance.DungeonClearResultItem();
+        }   
     }
 }
