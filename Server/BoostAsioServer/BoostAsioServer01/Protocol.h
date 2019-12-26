@@ -1,5 +1,7 @@
 #pragma once 
 
+#include <vector>
+
 const unsigned short PORT_NUMBER = 31452;
 const int MAX_RECEIVE_BUFFER_LEN = 512;
 
@@ -44,6 +46,12 @@ enum PACKET_INDEX : short
 
 	REQ_DUNGEON_CLEAR_RESULT_ITEM = 301,
 	RES_DUNGEON_CLEAR_RESULT_ITEM = 302,
+
+	REQ_INVENTORY_OPEN = 501,
+	RES_INVENTORY_OPEN = 502,
+
+	REQ_INVENTORY_CLOSE = 511,
+	RES_INVENTORY_CLOSE = 512,
 };
 
 enum WORLD_ZONE
@@ -319,5 +327,50 @@ struct PKT_RES_DUNGEON_CLEAR_RESULT_ITEM : PACKET_HEADER
 		packetSize = sizeof(PKT_RES_DUNGEON_CLEAR_RESULT_ITEM);
 		itemIndex = 0;
 		memset(itemID, 0, MAX_RESULT_ITEM_ID);
+	}
+};
+
+struct PKT_REQ_INVENTORY_OPEN : PACKET_HEADER
+{
+	void Init()
+	{
+		packetIndex = PACKET_INDEX::REQ_INVENTORY_OPEN;
+		packetSize = sizeof(PKT_REQ_INVENTORY_OPEN);
+	}
+};
+
+struct PKT_RES_INVENTORY_OPEN : PACKET_HEADER
+{
+	std::vector<std::string> inventory;
+	std::vector<std::string> equip;
+	
+	void Init()
+	{
+		packetIndex = PACKET_INDEX::RES_INVENTORY_OPEN;
+		packetSize = sizeof(PKT_RES_INVENTORY_OPEN);
+	}
+};
+
+struct PKT_REQ_INVENTORY_CLOSE : PACKET_HEADER
+{
+	std::vector<std::string> inventory;
+	std::vector<std::string> equip;
+
+	void Init()
+	{
+		packetIndex = PACKET_INDEX::REQ_INVENTORY_CLOSE;
+		packetSize = sizeof(PKT_REQ_INVENTORY_CLOSE);
+	}
+};
+
+struct PKT_RES_INVENTORY_CLOSE : public PACKET_HEADER
+{
+	int checkResult;
+
+	void Init()
+	{
+		packetIndex = PACKET_INDEX::RES_INVENTORY_CLOSE;
+		packetSize = sizeof(PKT_RES_INVENTORY_CLOSE);
+		checkResult = 0;
 	}
 };
