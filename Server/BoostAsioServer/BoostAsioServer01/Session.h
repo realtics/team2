@@ -51,3 +51,12 @@ public:
 	void SetZone(WORLD_ZONE zone) { _zone = zone; }
 	WORLD_ZONE GetZone() { return _zone; }
 };
+
+template <typename T>
+std::list<T> as_list(boost::property_tree::ptree const& pt, boost::property_tree::ptree::key_type const& key)
+{
+	std::list<T> _list;
+	for (auto& item : pt.get_child(key))
+		_list.push_back(item.second.get_value<T>());
+	return _list;
+}
