@@ -1100,9 +1100,36 @@ public class NetworkManager : MonoBehaviour
 		DebugLogList("DungeonClearResultItem() end");
 	}
 
+	public void OpenInventory()
+	{
+		DebugLogList("OpenInventory() start");
+		string jsonData;
+		char endNullValue = '\0';
+
+		var packHeader = new PACKET_HEADER
+		{
+			packetIndex = (short)PACKET_INDEX.REQ_INVENTORY_OPEN,
+			packetSize = (short)DefineDefaultValue.packetSize
+		};
+		var packData = new PKT_REQ_INVENTORY_OPEN
+		{ 
+			header = packHeader,
+			userID = _accountId
+		};
+		DebugLogList(packData.ToString());
+		jsonData = JsonConvert.SerializeObject(packData);
+		jsonData += endNullValue;
+		DebugLogList(jsonData.ToString());
+		byte[] sendByte = new byte[512];
+		sendByte = Encoding.UTF8.GetBytes(jsonData);
+
+		int resultSize = _sock.Send(sendByte);
+		DebugLogList("OpenInventory() end");
+	}
+
 	public void CloseInventory()
 	{
-		DebugLogList("DungeonClearResultItem() start");
+		DebugLogList("CloseInventory() start");
 		string jsonData;
 		char endNullValue = '\0';
 
@@ -1126,6 +1153,6 @@ public class NetworkManager : MonoBehaviour
 		sendByte = Encoding.UTF8.GetBytes(jsonData);
 
 		int resultSize = _sock.Send(sendByte);
-		DebugLogList("DungeonClearResultItem() end");
+		DebugLogList("CloseInventory() end");
 	}
 }
