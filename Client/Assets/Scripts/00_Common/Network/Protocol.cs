@@ -191,11 +191,13 @@ public struct PKT_RES_DUNGEON_CLEAR_RESULT_ITEM
 public struct PKT_REQ_INVENTORY_OPEN
 {
 	public PACKET_HEADER header;
+	public string userID;
 }
 
 public struct PKT_RES_INVENTORY_OPEN
 {
 	public PACKET_HEADER header;
+	public string userID;
 	public List<string> equip;
 	public List<string> inventory;
 }
@@ -203,6 +205,7 @@ public struct PKT_RES_INVENTORY_OPEN
 public struct PKT_REQ_INVENTORY_CLOSE
 {
 	public PACKET_HEADER header;
+	public string userID;
 	public List<string> equip;
 	public List<string> inventory;
 }

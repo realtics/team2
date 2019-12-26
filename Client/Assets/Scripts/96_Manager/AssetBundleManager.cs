@@ -18,6 +18,8 @@ public class AssetBundleManager : MonoBehaviour
     private string _atlasBundle = "atlas";
     private string _materialBundle = "material";
 
+    private string _platformAssetBundlePath;
+
     private bool _firstLoadMapAssetbundle = false;
     private bool _firstLoadMonseterAssetbundle = false;
     private bool _firstLoadAtlas = false;
@@ -41,6 +43,22 @@ public class AssetBundleManager : MonoBehaviour
 
     void OnEnable()
     {
+        if (Application.platform == RuntimePlatform.WindowsEditor)
+        {
+            _platformAssetBundlePath = "StandaloneWindows";
+        }
+        else if (Application.platform == RuntimePlatform.Android)
+        {
+            _platformAssetBundlePath = "Android";
+        }
+        else if (Application.platform == RuntimePlatform.WindowsPlayer)
+        {
+            _platformAssetBundlePath = "StandaloneWindows";
+        }
+        else
+        {
+            _platformAssetBundlePath = "StandaloneWindows";
+        }
         SpriteAtlasManager.atlasRequested += RequestLateBindingAtlas;
         LoadMaterial();
     }
@@ -54,7 +72,7 @@ public class AssetBundleManager : MonoBehaviour
         Debug.Log(tag);
         if(!_firstLoadAtlas)
         {
-            _LoadedAtlasAssetBundle = AssetBundle.LoadFromFileAsync(Path.Combine(Application.streamingAssetsPath, _atlasBundle)).assetBundle;
+            _LoadedAtlasAssetBundle = AssetBundle.LoadFromFileAsync(Path.Combine(Application.streamingAssetsPath, _platformAssetBundlePath, _atlasBundle)).assetBundle;
             _firstLoadAtlas = true;
         }
 
@@ -80,7 +98,7 @@ public class AssetBundleManager : MonoBehaviour
     //}
     private void LoadMaterial()
     {
-        _LoadedMaterialAssetBundle = AssetBundle.LoadFromFileAsync(Path.Combine(Application.streamingAssetsPath, _materialBundle)).assetBundle;
+        _LoadedMaterialAssetBundle = AssetBundle.LoadFromFileAsync(Path.Combine(Application.streamingAssetsPath, _platformAssetBundlePath, _materialBundle)).assetBundle;
         _LoadedMaterialAssetBundle.LoadAllAssets();
     }
     //private IEnumerator LoadMaterialFromAssetBundle()
@@ -95,7 +113,7 @@ public class AssetBundleManager : MonoBehaviour
         Debug.Log(assetBundleName);
         if(!_firstLoadMapAssetbundle)
         {
-            _LoadedMapAssetBundle = AssetBundle.LoadFromFileAsync(Path.Combine(Application.streamingAssetsPath, assetBundleName)).assetBundle;
+            _LoadedMapAssetBundle = AssetBundle.LoadFromFileAsync(Path.Combine(Application.streamingAssetsPath, _platformAssetBundlePath, assetBundleName)).assetBundle;
             _firstLoadMapAssetbundle = true;
         }
 #if UNITY_EDITOR
@@ -111,7 +129,7 @@ public class AssetBundleManager : MonoBehaviour
     {
         if (!_firstLoadMonseterAssetbundle)
         {
-            _LoadedMonsterAssetBundle = AssetBundle.LoadFromFileAsync(Path.Combine(Application.streamingAssetsPath, assetBundleName)).assetBundle;
+            _LoadedMonsterAssetBundle = AssetBundle.LoadFromFileAsync(Path.Combine(Application.streamingAssetsPath, _platformAssetBundlePath, assetBundleName)).assetBundle;
             _firstLoadMonseterAssetbundle = true;
         }
 
@@ -127,7 +145,7 @@ public class AssetBundleManager : MonoBehaviour
     public void LoadPotalAssetFromLocalDisk(string assetBundleName)
     {
         Debug.Log(assetBundleName);
-        _LoadedPotalAssetBundle = AssetBundle.LoadFromFileAsync(Path.Combine(Application.streamingAssetsPath, assetBundleName)).assetBundle;
+        _LoadedPotalAssetBundle = AssetBundle.LoadFromFileAsync(Path.Combine(Application.streamingAssetsPath, _platformAssetBundlePath, assetBundleName)).assetBundle;
 #if UNITY_EDITOR
         if (_LoadedPotalAssetBundle == null)
         {
@@ -142,7 +160,7 @@ public class AssetBundleManager : MonoBehaviour
     {
         if(_manifest == null)
         {
-            AssetBundle manifestAssetBundle = AssetBundle.LoadFromFile(Path.Combine(Application.streamingAssetsPath, "StreamingAssets"));
+            AssetBundle manifestAssetBundle = AssetBundle.LoadFromFile(Path.Combine(Application.streamingAssetsPath, _platformAssetBundlePath, "StreamingAssets"));
             _manifest = manifestAssetBundle.LoadAsset<AssetBundleManifest>("assetbundlemanifest");
         }
         string[] dependencies = _manifest.GetAllDependencies(assetBundleName);
@@ -150,7 +168,7 @@ public class AssetBundleManager : MonoBehaviour
 
         foreach (string dependency in dependencies)
         {
-            _LoadedMaterialAssetBundle = AssetBundle.LoadFromFile(Path.Combine(Application.streamingAssetsPath, dependency));
+            _LoadedMaterialAssetBundle = AssetBundle.LoadFromFile(Path.Combine(Application.streamingAssetsPath, _platformAssetBundlePath, dependency));
             _LoadedMaterialAssetBundle.LoadAllAssets();
         }
 

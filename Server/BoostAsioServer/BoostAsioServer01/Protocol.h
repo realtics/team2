@@ -332,15 +332,19 @@ struct PKT_RES_DUNGEON_CLEAR_RESULT_ITEM : PACKET_HEADER
 
 struct PKT_REQ_INVENTORY_OPEN : PACKET_HEADER
 {
+	char userID[MAX_USER_ID];
+
 	void Init()
 	{
 		packetIndex = PACKET_INDEX::REQ_INVENTORY_OPEN;
 		packetSize = sizeof(PKT_REQ_INVENTORY_OPEN);
+		memset(userID, 0, MAX_USER_ID);
 	}
 };
 
 struct PKT_RES_INVENTORY_OPEN : PACKET_HEADER
 {
+	char userID[MAX_USER_ID];
 	std::vector<std::string> equip;
 	std::vector<std::string> inventory;
 		
@@ -348,11 +352,13 @@ struct PKT_RES_INVENTORY_OPEN : PACKET_HEADER
 	{
 		packetIndex = PACKET_INDEX::RES_INVENTORY_OPEN;
 		packetSize = sizeof(PKT_RES_INVENTORY_OPEN);
+		memset(userID, 0, MAX_USER_ID);
 	}
 };
 
 struct PKT_REQ_INVENTORY_CLOSE : PACKET_HEADER
 {
+	char userID[MAX_USER_ID];
 	std::vector<std::string> equip;
 	std::vector<std::string> inventory;
 	
@@ -360,6 +366,7 @@ struct PKT_REQ_INVENTORY_CLOSE : PACKET_HEADER
 	{
 		packetIndex = PACKET_INDEX::REQ_INVENTORY_CLOSE;
 		packetSize = sizeof(PKT_REQ_INVENTORY_CLOSE);
+		memset(userID, 0, MAX_USER_ID);
 	}
 };
 
