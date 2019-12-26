@@ -69,8 +69,8 @@ GameObject:
   - component: {fileID: 2568930803070071767}
   - component: {fileID: 2568930803070071785}
   - component: {fileID: 1144951007954270210}
-  - component: {fileID: 2856910317749373817}
-  - component: {fileID: 1210312370474133122}
+  - component: {fileID: 5186773333717174575}
+  - component: {fileID: 4812996388941731947}
   m_Layer: 0
   m_Name: Tauarmy
   m_TagString: Monster
@@ -159,7 +159,7 @@ MonoBehaviour:
   _hitBox: {fileID: 6638185263794367449}
   _avatar: {fileID: 2568930803150547787}
   _rushAttackBox: {fileID: 7749031719042090271}
---- !u!82 &2856910317749373817
+--- !u!82 &5186773333717174575
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -255,7 +255,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &1210312370474133122
+--- !u!114 &4812996388941731947
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -267,10 +267,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a97cdd5f2bcc13f479ee6ec41090eed6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _attack: {fileID: 0}
-  _die: {fileID: 0}
-  _damage: {fileID: 0}
-  _skill: {fileID: 0}
+  _attack: {fileID: 8300000, guid: 6ee36760aa2782b44b3873de96bbc51e, type: 3}
+  _die: {fileID: 8300000, guid: 720506b0b9ad6e94d8766b1a0bf299b7, type: 3}
+  _damage: {fileID: 8300000, guid: 27f3c4fd16bb86d429ab4dbcd2e936fc, type: 3}
+  _skill: {fileID: 8300000, guid: 94a2355227e25ce43a97e59f769ea256, type: 3}
 --- !u!1 &2568930803150547788
 GameObject:
   m_ObjectHideFlags: 0

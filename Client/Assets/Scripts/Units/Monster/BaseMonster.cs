@@ -75,7 +75,7 @@ public class BaseMonster : MonoBehaviour
 	private float _height;
 	private float _jumpValue;
 
-    private AudioPlayer _audioPlayer;
+    private MonsterAudioPlayer _audioPlayer;
 
 	//values for MoveState 
 	private enum MovementStateInfo
@@ -171,7 +171,7 @@ public class BaseMonster : MonoBehaviour
 		_hitBoxCenter = _hitBox.GetComponent<BoxCollider2D>();
 		_hitEffectSize = _hitBoxCenter.size.y + _hitBoxCenter.size.x;
 		_superArmorLine = _avatar.GetComponent<SpriteOutline>();
-        _audioPlayer = GetComponent<AudioPlayer>();
+        _audioPlayer = GetComponent<MonsterAudioPlayer>();
 
         _state = new StateMachine<BaseMonster>();
 		_state.InitialSetting(this, _moveState);

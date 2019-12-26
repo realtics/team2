@@ -45,7 +45,7 @@ public class AssetBundleManager : MonoBehaviour
     {
         if (Application.platform == RuntimePlatform.WindowsEditor)
         {
-            _platformAssetBundlePath = "StandaloneWindows";
+            _platformAssetBundlePath = "Android";
         }
         else if (Application.platform == RuntimePlatform.Android)
         {
