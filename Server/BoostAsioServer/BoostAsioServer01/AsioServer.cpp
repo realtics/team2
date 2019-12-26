@@ -496,12 +496,12 @@ void AsioServer::ProcessPacket(const int sessionID, const char* pData)
 		int resultItemSize = _DBMysql.DBDungeonClearResultItemSize();
 
 		boost::random::mt19937 engine((unsigned int)time(NULL));
-		boost::random::uniform_int_distribution<> dist(10001, (10000+resultItemSize));
+		boost::random::uniform_int_distribution<> dist(1001, (1000+resultItemSize));
 		
 		int resultRandom = dist(engine);
-		SendPkt.itemIndex = resultRandom;
+		
 		// DB üũ
-		strcpy_s(SendPkt.itemID, MAX_RESULT_ITEM_ID, _DBMysql.DBDungeonClearResultItem(resultRandom).c_str());
+		SendPkt.itemID = _DBMysql.DBDungeonClearResultItem(resultRandom);
 
 		// json
 		boost::property_tree::ptree ptSendHeader;
@@ -510,7 +510,6 @@ void AsioServer::ProcessPacket(const int sessionID, const char* pData)
 
 		boost::property_tree::ptree ptSend;
 		ptSend.add_child("header", ptSendHeader);
-		ptSend.put<int>("itemIndex", SendPkt.itemIndex);
 		ptSend.put<std::string>("itemID", SendPkt.itemID);
 
 		std::string stringRecv;
@@ -526,7 +525,6 @@ void AsioServer::ProcessPacket(const int sessionID, const char* pData)
 
 		boost::property_tree::ptree ptSend2;
 		ptSend2.add_child("header", ptSendHeader2);
-		ptSend2.put<int>("itemIndex", SendPkt.itemIndex);
 		ptSend2.put<std::string>("itemID", SendPkt.itemID);
 
 		std::string stringRecv2;

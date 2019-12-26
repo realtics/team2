@@ -320,13 +320,12 @@ struct PKT_REQ_DUNGEON_CLEAR_RESULT_ITEM : PACKET_HEADER
 
 struct PKT_RES_DUNGEON_CLEAR_RESULT_ITEM : PACKET_HEADER
 {
-	int itemIndex;
+	std::string itemID;
 
 	void Init()
 	{
 		packetIndex = PACKET_INDEX::RES_DUNGEON_CLEAR_RESULT_ITEM;
 		packetSize = sizeof(PKT_RES_DUNGEON_CLEAR_RESULT_ITEM);
-		itemIndex = 0;
 	}
 };
 
