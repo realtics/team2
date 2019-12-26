@@ -7,11 +7,14 @@ public class Item : ScriptableObject
 {
 	[SerializeField]
 	private string _id;
-	
+	[SerializeField]
+	private string _netId;
+
     public string itemName;
     public Sprite icon;
 
 	public string ID { get { return _id; } }
+	public string NetID { get { return _netId; } }
 
 	public virtual Item GetCopy()
 	{

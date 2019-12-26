@@ -114,10 +114,10 @@ public class DNFSceneManager : Single.Singleton<DNFSceneManager>
         {
             return DungeonGameManager.Instance;
         }
-        else if (LobbyGameManager.Instance != null)
-        {
-            return LobbyGameManager.Instance;
-        }
+        //else if (LobbyGameManager.Instance != null)
+        //{
+        //    return LobbyGameManager.Instance;
+        //}
         return null;
     }
 }

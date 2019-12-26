@@ -595,7 +595,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a550649261ec7b408216a4fb56a69bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _coin: 0
+  _coin: 5
   _fadeOut: {fileID: 1997122168}
   _cinemachine: {fileID: 435489374}
   FadeTime: 3
@@ -708,7 +708,7 @@ PrefabInstance:
     - target: {fileID: 1801744680141474054, guid: 41abd85db332e1048bc47b99b8aec411,
         type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 1801744680141474054, guid: 41abd85db332e1048bc47b99b8aec411,
         type: 3}
@@ -1593,7 +1593,7 @@ PrefabInstance:
     - target: {fileID: 1462115890175577049, guid: 9d859b47ccc167d4d8ac96a29092c5d3,
         type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 1462115890175577049, guid: 9d859b47ccc167d4d8ac96a29092c5d3,
         type: 3}
@@ -1766,9 +1766,9 @@ RectTransform:
   - {fileID: 2021354921}
   - {fileID: 1527902663}
   - {fileID: 1997122169}
-  - {fileID: 428955612}
   - {fileID: 1328234908}
   - {fileID: 1433119132}
+  - {fileID: 428955612}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1840,11 +1840,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Title
       objectReference: {fileID: 0}
-    - target: {fileID: 4380689184903694464, guid: 4ff25d0d7cffe694d98dfbc2d6b9f75b,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4380689184903694465, guid: 4ff25d0d7cffe694d98dfbc2d6b9f75b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1883,7 +1878,7 @@ PrefabInstance:
     - target: {fileID: 4380689184903694465, guid: 4ff25d0d7cffe694d98dfbc2d6b9f75b,
         type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 4380689184903694465, guid: 4ff25d0d7cffe694d98dfbc2d6b9f75b,
         type: 3}
@@ -1950,12 +1945,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 4380689185002549847, guid: 4ff25d0d7cffe694d98dfbc2d6b9f75b,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 90065ad7313a38b43aca711025c3875c,
-        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4ff25d0d7cffe694d98dfbc2d6b9f75b, type: 3}
 --- !u!224 &1433119132 stripped
@@ -1975,11 +1964,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: GameOver
-      objectReference: {fileID: 0}
-    - target: {fileID: 322670426628092969, guid: 095e3bee2e9fe194eb78e34b3e37139f,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 322670426628092968, guid: 095e3bee2e9fe194eb78e34b3e37139f,
         type: 3}
@@ -2086,6 +2070,10 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 1527902666, guid: 095e3bee2e9fe194eb78e34b3e37139f, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 240451107}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 095e3bee2e9fe194eb78e34b3e37139f, type: 3}
 --- !u!224 &1527902663 stripped
