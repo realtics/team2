@@ -12,7 +12,7 @@ using UnityEngine.SceneManagement;
 
 enum DefineDefaultValue : short
 {
-    packetSize = 10
+    packetSize = 100
 }
 
 public struct CharacterSpawnData

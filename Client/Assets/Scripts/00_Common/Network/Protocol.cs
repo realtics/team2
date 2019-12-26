@@ -1,4 +1,6 @@
-﻿enum PACKET_INDEX : short
+﻿using System.Collections;
+using System.Collections.Generic;
+enum PACKET_INDEX : short
 {
 	// REQ : 클라->서버, 클라에서 서버에 어떤 값을 요청
 	// RES : 서버->클라, 서버가 어떤 값으로 응답
@@ -179,3 +181,30 @@ public struct PKT_RES_DUNGEON_CLEAR_RESULT_ITEM
 	public int itemIndex;
 	public string itemID;
 }
+
+public struct PKT_REQ_INVENTORY_OPEN
+{
+	public PACKET_HEADER header;
+}
+
+public struct PKT_RES_INVENTORY_OPEN
+{
+	public PACKET_HEADER header;
+	public List<string> inventory;
+	public List<string> equip;
+}
+
+public struct PKT_REQ_INVENTORY_CLOSE
+{
+	public PACKET_HEADER header;
+	public List<string> inventory;
+	public List<string> equip;
+}
+
+public struct PKT_RES_INVENTORY_CLOSE
+{
+	public PACKET_HEADER header;
+	public int checkResult;
+}
+
+
