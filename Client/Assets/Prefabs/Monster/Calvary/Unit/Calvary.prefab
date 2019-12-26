@@ -266,10 +266,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a97cdd5f2bcc13f479ee6ec41090eed6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _attack: {fileID: 0}
-  _die: {fileID: 0}
-  _damage: {fileID: 0}
-  _skill: {fileID: 0}
+  _attack: {fileID: 8300000, guid: eb8330d63b1635e428c45f7710a08219, type: 3}
+  _die: {fileID: 8300000, guid: 54a5a5537e31fb14c8d88b75465a4bef, type: 3}
+  _damage: {fileID: 8300000, guid: bb0295347660199419255e70d8ecb656, type: 3}
+  _skill: {fileID: 8300000, guid: e65da1c3e2f13a94f9e1664d3bee5dbd, type: 3}
 --- !u!1 &4127798058618418200
 GameObject:
   m_ObjectHideFlags: 0
