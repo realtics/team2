@@ -525,10 +525,20 @@ public class NetworkManager : MonoBehaviour
 
 						NetworkInventoryInfoSaver.Instance.ItemID = itemID;
 
-                        //DungeonGameManager.Instance.InvokeGameResult();
                         DungeonGameManager.Instance.RES_DUNGEON_CLEAR_RESULT_ITEM = true;
                     }
 					break;
+                case (short)PACKET_INDEX.RES_DUNGEON_HELL_RESULT_ITEM:
+                    {
+                        var desJson = JsonConvert.DeserializeObject<PKT_RES_DUNGEON_HELL_RESULT_ITEM>(jsonData);
+
+                        var itemID = desJson.itemID;
+
+                        NetworkInventoryInfoSaver.Instance.ItemID = itemID;
+
+                        MapLoader.instance.RES_DUNGEON_HELL_RESULT_ITEM = true;
+                    }
+                    break;
                 case (short)PACKET_INDEX.RES_INVENTORY_OPEN:
                     {
                         var desJson = JsonConvert.DeserializeObject<PKT_RES_INVENTORY_OPEN>(jsonData);
@@ -1100,7 +1110,30 @@ public class NetworkManager : MonoBehaviour
 		DebugLogList("DungeonClearResultItem() end");
 	}
 
-	public void OpenInventory()
+    public void DungeonHellResultItem()
+    {
+        DebugLogList("DungeonHellResultItem() start");
+        string jsonData;
+        char endNullValue = '\0';
+
+        var packHeader = new PACKET_HEADER
+        {
+            packetIndex = (short)PACKET_INDEX.REQ_DUNGEON_HELL_RESULT_ITEM,
+            packetSize = (short)DefineDefaultValue.packetSize
+        };
+        var packData = new PKT_REQ_DUNGEON_HELL_RESULT_ITEM { header = packHeader };
+        DebugLogList(packData.ToString());
+        jsonData = JsonConvert.SerializeObject(packData);
+        jsonData += endNullValue;
+        DebugLogList(jsonData.ToString());
+        byte[] sendByte = new byte[512];
+        sendByte = Encoding.UTF8.GetBytes(jsonData);
+
+        int resultSize = _sock.Send(sendByte);
+        DebugLogList("DungeonHellResultItem() end");
+    }
+
+    public void OpenInventory()
 	{
 		DebugLogList("OpenInventory() start");
 		string jsonData;
