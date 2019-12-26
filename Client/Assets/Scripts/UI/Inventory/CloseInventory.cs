@@ -16,12 +16,12 @@ public class CloseInventory : MonoBehaviour
 	{
 		if (NetworkManager.Instance.IsSingle)
 		{
-			InventoryManager.Instance.Save();
+			InventoryManager.Instance.SaveSingle();
 			DNFSceneManager.instance.UnLoadScene((int)SceneIndex.Inventory);
 		}
 		else
 		{
-			InventoryManager.Instance.SaveNetwork();
+			InventoryManager.Instance.SaveMulti();
 			//FIXME 패킷받앗을때 호출
 			DNFSceneManager.instance.UnLoadScene((int)SceneIndex.Inventory);
 		}
