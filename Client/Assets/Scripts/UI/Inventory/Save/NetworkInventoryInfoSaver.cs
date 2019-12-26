@@ -17,25 +17,41 @@ public class NetworkInventoryInfoSaver
 		}
 	}
 
-	private List<string> _itemIDs;
-	public List<string> ItemIDs { get { return _itemIDs; } }
+	private List<string> _inventoryIDs;
+	private List<string> _equipIDs;
+	public List<string> InventoryIDs { get { return _inventoryIDs; } }
+	public List<string> EquipIDs { get { return _equipIDs; } }
 
-	public void SaveItemIDs(ItemSlot[] itemSlots)
+	public void SaveItemIDs(ItemSlot[] equipSlots, ItemSlot[] inventorySlots)
 	{
-		_itemIDs.Clear();
-		for(int i=0; i < itemSlots.Length; i++)
+		_equipIDs.Clear();
+		_inventoryIDs.Clear();
+
+		for (int i = 0; i < equipSlots.Length; i++)
 		{
-			if (itemSlots[i].Item == null)
+			if (equipSlots[i].Item == null)
 				return;
 
-			_itemIDs.Add(itemSlots[i].Item.NetID);
+			_equipIDs.Add(equipSlots[i].Item.NetID);
+		}
+
+		for (int i=0; i < inventorySlots.Length; i++)
+		{
+			if (inventorySlots[i].Item == null)
+				return;
+
+			_inventoryIDs.Add(inventorySlots[i].Item.NetID);
 		}
 	}
 
-	public void SaveItemIDs(List<string> itemIds)
+	public void SaveItemIDs(List<string> equipIDs, List<string> inventoryIDs)
 	{
-		_itemIDs.Clear();
-		_itemIDs = itemIds;
+		_equipIDs.Clear();
+		_inventoryIDs.Clear();
+
+
+		_equipIDs = equipIDs;
+		_inventoryIDs = inventoryIDs;
 	}
 
 }

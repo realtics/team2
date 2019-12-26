@@ -155,8 +155,10 @@ public class DungeonGameManager : GameManager
 
     public void NoticeBossDie()
     {
-		if(NetworkManager.Instance.IsConnect)NetworkManager.Instance.DungeonClearResultItem();
-
+		if(NetworkManager.Instance.IsConnect)
+		{
+			NetworkManager.Instance.DungeonClearResultItem();
+		}
         Invoke(nameof(GameResult), _delayResult);
     }
 }
