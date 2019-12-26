@@ -5,10 +5,9 @@ CREATE TABLE `login` (
 	`user_name` VARCHAR(50) NOT NULL,
 	`sign_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 	PRIMARY KEY (`index`),
-	UNIQUE INDEX `user_id` (`user_id`),
-	UNIQUE INDEX `user_name` (`user_name`)
+	UNIQUE INDEX `user_id` (`user_id`)
 )
 COLLATE='utf8mb4_0900_ai_ci'
 ENGINE=InnoDB
-AUTO_INCREMENT=6
+AUTO_INCREMENT=11
 ;
