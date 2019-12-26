@@ -1,0 +1,24 @@
+ManifestFileVersion: 0
+CRC: 2664365732
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: e8358e908ab0616b267dd7cb063d68b6
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 5ad585dd02dfb5016c0dad519eab8f49
+HashAppended: 0
+ClassTypes:
+- Class: 49
+  Script: {instanceID: 0}
+Assets:
+- Assets/Map/LightTemple.json
+- Assets/Map/minimap.json
+- Assets/Map/Test2.json
+- Assets/Map/Test.json
+- Assets/Map/Force.json
+- Assets/Map/OnlyBoss.json
+- Assets/Map/LJSTest.json
+- Assets/Map/Hell.json
+- Assets/Map/Tool_Force.json
+Dependencies: []

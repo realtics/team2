@@ -1,0 +1,22 @@
+ManifestFileVersion: 0
+CRC: 3798659959
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: a575a442796ef9d2a7b8e7513ec735dc
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 8d614ba2bf78fe185c64b512c1591e5d
+HashAppended: 0
+ClassTypes:
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+- Class: 687078895
+  Script: {instanceID: 0}
+Assets:
+- Assets/Sprites/Atlases/Monster/CalvaryAtlas.spriteatlas
+- Assets/Sprites/Atlases/Monster/GoblinAtlas.spriteatlas
+- Assets/Sprites/Atlases/Monster/TauarmyAtlas.spriteatlas
+Dependencies: []
