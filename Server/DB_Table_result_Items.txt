@@ -1,9 +1,9 @@
-CREATE TABLE `item` (
+CREATE TABLE `result_items` (
 	`index` INT(10) NOT NULL AUTO_INCREMENT,
-	`item_index` INT(10) NOT NULL,
 	`item_id` VARCHAR(50) NOT NULL,
+	`item_name` VARCHAR(50) NOT NULL,
 	PRIMARY KEY (`index`),
-	UNIQUE INDEX `item_index` (`item_index`)
+	UNIQUE INDEX `item_index` (`item_id`)
 )
 COLLATE='utf8mb4_0900_ai_ci'
 ENGINE=InnoDB

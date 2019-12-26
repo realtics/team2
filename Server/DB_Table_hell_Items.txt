@@ -1,0 +1,11 @@
+CREATE TABLE `hell_items` (
+	`index` INT(10) NOT NULL AUTO_INCREMENT,
+	`item_id` VARCHAR(50) NOT NULL,
+	`item_name` VARCHAR(50) NOT NULL,
+	PRIMARY KEY (`index`),
+	UNIQUE INDEX `item_id` (`item_id`)
+)
+COLLATE='utf8mb4_0900_ai_ci'
+ENGINE=InnoDB
+AUTO_INCREMENT=14
+;
