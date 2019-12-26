@@ -21,7 +21,8 @@ public class DungeonGameManager : GameManager
 
     private bool _playerChooseResult = false;
 
-    private Coroutine coroutine;
+    private Coroutine _CoroutineDieCountdown;
+    private Coroutine _CoroutineResultCountdown;
 
     [SerializeField]
     protected GameState _playerState;
@@ -75,22 +76,23 @@ public class DungeonGameManager : GameManager
             UIHelper.Instance.SetGameOver(true, _coin);
             _countDown = _maxDieCountDown;
             UIHelper.Instance.GameOverSetTime(_countDown);
-            coroutine = StartCoroutine(DieSecondCountdown());
+            _CoroutineDieCountdown = StartCoroutine(DieSecondCountdown());
         }
     }
     public void UseCoin()
     {
         if (_coin > 0)
         {
-            StopCoroutine(coroutine);
+            StopCoroutine(_CoroutineDieCountdown);
             _coin -= 1;
             _countDown = _maxDieCountDown;
             PlayerManager.Instance.PlayerCharacter.Revive();
             UIHelper.Instance.SetGameOver(false, _coin);
+            ResetDie();
         }
     }
 
-    public void DieCountOver()
+    public void ResetDie()
     {
         _countDown = _maxDieCountDown;
         _playerState = GameState.Dungeon;
@@ -101,7 +103,7 @@ public class DungeonGameManager : GameManager
         UIHelper.Instance.SetGameResult(true);
         _countDown = _maxResultCountDown;
         UIHelper.Instance.GameResultSetTime(_countDown);
-        StartCoroutine(ResultSecondCountdown());
+        _CoroutineResultCountdown = StartCoroutine(ResultSecondCountdown());
     }
     public void OnClickResultBox(int index)
     {
@@ -125,7 +127,7 @@ public class DungeonGameManager : GameManager
                 UIHelper.Instance.SetGameOver(false, _coin);
                 _countOver = true;
 
-                StopCoroutine(coroutine);
+                StopCoroutine(_CoroutineDieCountdown);
             }
             yield return new WaitForSeconds(1);
         }
@@ -146,7 +148,7 @@ public class DungeonGameManager : GameManager
                 {
                     OnClickResultBox(0);
                 }
-                StopCoroutine(ResultSecondCountdown());
+                StopCoroutine(_CoroutineResultCountdown);
 
             }
             yield return new WaitForSeconds(1);
@@ -155,8 +157,10 @@ public class DungeonGameManager : GameManager
 
     public void NoticeBossDie()
     {
-		if(NetworkManager.Instance.IsConnect)NetworkManager.Instance.DungeonClearResultItem();
-
+		if(NetworkManager.Instance.IsConnect)
+		{
+			NetworkManager.Instance.DungeonClearResultItem();
+		}
         Invoke(nameof(GameResult), _delayResult);
     }
 }
