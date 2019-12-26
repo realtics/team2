@@ -124,5 +124,6 @@ public class CharacterStat : MonoBehaviour
 
 		_hp = _maxHp;
 		_mp = _maxMp;
+		_uiPlayerInfo.SetPlayerHp(_hp, _maxHp);
 	}
 }
