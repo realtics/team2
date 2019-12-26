@@ -250,8 +250,8 @@ public class NetworkManager : MonoBehaviour
                 Debug.Log("소켓 생성 실패");
             }
             //_sock.Connect(new IPEndPoint(IPAddress.Parse("127.0.0.1"), 31452));
-            //_sock.Connect(new IPEndPoint(IPAddress.Parse("192.168.200.130"), 31452));
-            _sock.Connect(new IPEndPoint(IPAddress.Parse("192.168.1.105"), 31452));
+            _sock.Connect(new IPEndPoint(IPAddress.Parse("192.168.200.141"), 31452));
+           // _sock.Connect(new IPEndPoint(IPAddress.Parse("192.168.1.105"), 31452));
 
             DebugLogList("socket() end");
         }
@@ -536,7 +536,18 @@ public class NetworkManager : MonoBehaviour
 						_itemIndex = itemIndex;
 					}
 					break;
-				default:
+                case (short)PACKET_INDEX.RES_INVENTORY_OPEN:
+                    {
+                        var desJson = JsonConvert.DeserializeObject<PKT_RES_DUNGEON_CLEAR_RESULT_ITEM>(jsonData);
+
+                        var itemIndex = desJson.itemIndex;
+                        var itemID = desJson.itemID;
+
+                        _itemId = itemID;
+                        _itemIndex = itemIndex;
+                    }
+                    break;
+                default:
                     {
                         Debug.LogError("Index가 존재 하지 않는 Packet");
                     }

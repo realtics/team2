@@ -2,49 +2,71 @@
 
 public class InventoryManager : MonoBehaviour
 {
-	private static InventoryManager _instance;
-	public static InventoryManager Instance
-	{
-		get
-		{
-			return _instance;
-		}
+    private static InventoryManager _instance;
+    public static InventoryManager Instance
+    {
+        get
+        {
+            return _instance;
+        }
+    }
+
+    [SerializeField]
+    private Inventory _inventory;
+    [SerializeField]
+    private EquipmentPanel _equipmentPanel;
+    [SerializeField]
+    private ItemToolTip _itemTooltip;
+    [SerializeField]
+    private ItemSaveManager _itemSaveManager;
+    [SerializeField]
+    private ChracterStatInfo _chracterStatInfo;
+
+    public ItemToolTip ItemTooltip { get { return _itemTooltip; } }
+    public Inventory Inventory { get { return _inventory; } }
+    public EquipmentPanel EquipmentPanel { get { return _equipmentPanel; } }
+
+    private void Awake()
+    {
+        _instance = this;
+        _inventory.OnItemClickEvent += EquipFromInventory;
+        _equipmentPanel.OnItemClickEvent += UnequipFromEquipPanel;
+    }
+
+    private void Start()
+    {
+        if (NetworkManager.Instance.IsSingle || NetworkInventoryInfoSaver.Instance.testValue == false)
+        {
+            Load();
+            NetworkInventoryInfoSaver.Instance.testValue = true;
+        }
+           
+        else if(!NetworkManager.Instance.IsSingle && NetworkInventoryInfoSaver.Instance.testValue == true)
+        {
+            LoadMulti();
+        }
 	}
 
-	[SerializeField]
-	private Inventory _inventory;
-	[SerializeField]
-	private EquipmentPanel _equipmentPanel;
-	[SerializeField]
-	private ItemToolTip _itemTooltip;
-	[SerializeField]
-	private ItemSaveManager _itemSaveManager;
-	[SerializeField]
-	private ChracterStatInfo _chracterStatInfo;
+    public void Load()
+    {
+        if (_itemSaveManager != null)
+        {
+            _itemSaveManager.LoadEquipment();
+            _itemSaveManager.LoadInventory();
+            _chracterStatInfo.SetCharacterInfo();
+        }
+    }
 
-	public ItemToolTip ItemTooltip { get { return _itemTooltip; } }
-	public Inventory Inventory { get { return _inventory; } }
-	public EquipmentPanel EquipmentPanel { get { return _equipmentPanel; } }
+    public void LoadMulti()
+    {
+        if (_itemSaveManager != null)
+        {
+            _itemSaveManager.LoadItemsByNetID();
+            _chracterStatInfo.SetCharacterInfo();
+        }
+    }
 
-	private void Awake()
-	{
-		_instance = this;
-		_inventory.OnItemClickEvent += EquipFromInventory;
-		_equipmentPanel.OnItemClickEvent += UnequipFromEquipPanel;
-	}
-
-	private void Start()
-	{
-		if (_itemSaveManager != null)
-		{
-			_itemSaveManager.LoadEquipment();
-			_itemSaveManager.LoadInventory();
-			_chracterStatInfo.SetCharacterInfo();
-
-		}
-	}
-
-	public void Save()
+    public void SaveSingle()
 	{
 		if (_itemSaveManager != null)
 		{
@@ -53,7 +75,7 @@ public class InventoryManager : MonoBehaviour
 		}
 	}
 
-	public void SaveNetwork()
+	public void SaveMulti()
 	{
 		NetworkInventoryInfoSaver.Instance.SaveItemIDs(_equipmentPanel.EquipmentSlots, _inventory.ItemSlots);
 		NetworkManager.Instance.CloseInventory();

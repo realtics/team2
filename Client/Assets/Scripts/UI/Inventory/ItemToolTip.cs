@@ -127,7 +127,7 @@ public class ItemToolTip : MonoBehaviour
 		
 		if (NetworkManager.Instance.IsSingle)
 		{
-			InventoryManager.Instance.Save();
+			InventoryManager.Instance.SaveSingle();
 		}
 	}
 	
@@ -138,7 +138,7 @@ public class ItemToolTip : MonoBehaviour
 
 		if (NetworkManager.Instance.IsSingle)
 		{
-			InventoryManager.Instance.Save();
+			InventoryManager.Instance.SaveSingle();
 		}
 	}
 }

@@ -26,7 +26,9 @@ public class NetworkInventoryInfoSaver
 	public List<string> InventoryIDs { get { return _inventoryIDs; } }
 	public List<string> EquipIDs { get { return _equipIDs; } }
 
-	public void SaveItemIDs(ItemSlot[] equipSlots, ItemSlot[] inventorySlots)
+    public bool testValue = false;
+
+    public void SaveItemIDs(ItemSlot[] equipSlots, ItemSlot[] inventorySlots)
 	{
 		_equipIDs.Clear();
 		_inventoryIDs.Clear();
