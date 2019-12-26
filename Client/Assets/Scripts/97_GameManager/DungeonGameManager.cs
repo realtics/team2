@@ -21,6 +21,8 @@ public class DungeonGameManager : GameManager
 
     private bool _playerChooseResult = false;
 
+    private Coroutine coroutine;
+
     [SerializeField]
     protected GameState _playerState;
 
@@ -73,16 +75,18 @@ public class DungeonGameManager : GameManager
             UIHelper.Instance.SetGameOver(true, _coin);
             _countDown = _maxDieCountDown;
             UIHelper.Instance.GameOverSetTime(_countDown);
-            StartCoroutine(DieSecondCountdown());
+            coroutine = StartCoroutine(DieSecondCountdown());
         }
     }
     public void UseCoin()
     {
         if (_coin > 0)
         {
+            StopCoroutine(coroutine);
             _coin -= 1;
             _countDown = _maxDieCountDown;
-            StopCoroutine(DieSecondCountdown());
+            PlayerManager.Instance.PlayerCharacter.Revive();
+            UIHelper.Instance.SetGameOver(false, _coin);
         }
     }
 
@@ -121,7 +125,7 @@ public class DungeonGameManager : GameManager
                 UIHelper.Instance.SetGameOver(false, _coin);
                 _countOver = true;
 
-                StopCoroutine(DieSecondCountdown());
+                StopCoroutine(coroutine);
             }
             yield return new WaitForSeconds(1);
         }

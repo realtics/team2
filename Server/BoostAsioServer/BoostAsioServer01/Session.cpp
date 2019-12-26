@@ -147,7 +147,7 @@ void Session::Deserialization(char* jsonData)
 {
 	short packetSize = strlen(jsonData) + 1;
 
-	//std::cout << "[클라->서버][Size:" << packetSize << "] " << jsonData << std::endl;
+	std::cout << "[클라->서버][Size:" << packetSize << "] " << jsonData << std::endl;
 
 	//std::string stringJsonData1 = jsonData;
 	//std::string stringJsonData2 = stringJsonData1.substr(25, 3);
@@ -166,7 +166,6 @@ void Session::Deserialization(char* jsonData)
 	{
 	case PACKET_INDEX::REQ_SIGN_UP:
 	{
-		std::cout << "[클라->서버][Size:" << packetSize << "] " << jsonData << std::endl;
 		PKT_REQ_SIGN_UP packet;
 		packet.Init();
 		packet.packetIndex = packetIndex;
@@ -179,7 +178,6 @@ void Session::Deserialization(char* jsonData)
 	break;
 	case PACKET_INDEX::REQ_CHECK_BEFORE_LOGIN:
 	{
-		std::cout << "[클라->서버][Size:" << packetSize << "] " << jsonData << std::endl;
 		PKT_REQ_CHECK_BEFORE_LOGIN packet;
 		packet.Init();
 		packet.packetIndex = packetIndex;
@@ -191,7 +189,6 @@ void Session::Deserialization(char* jsonData)
 	break;
 	case PACKET_INDEX::REQ_NEW_LOGIN:
 	{
-		std::cout << "[클라->서버][Size:" << packetSize << "] " << jsonData << std::endl;
 		PKT_REQ_NEW_LOGIN packet;
 		packet.Init();
 		packet.packetIndex = packetIndex;
@@ -201,7 +198,6 @@ void Session::Deserialization(char* jsonData)
 	break;
 	case PACKET_INDEX::REQ_CONCURRENT_USER:
 	{
-		std::cout << "[클라->서버][Size:" << packetSize << "] " << jsonData << std::endl;
 		PKT_REQ_CONCURRENT_USER packet;
 		packet.Init();
 		packet.packetIndex = packetIndex;
@@ -211,7 +207,6 @@ void Session::Deserialization(char* jsonData)
 	break;
 	case PACKET_INDEX::REQ_USER_EXIT:
 	{
-		std::cout << "[클라->서버][Size:" << packetSize << "] " << jsonData << std::endl;
 		PKT_REQ_USER_EXIT packet;
 		packet.Init();
 		packet.packetIndex = packetIndex;
@@ -222,7 +217,6 @@ void Session::Deserialization(char* jsonData)
 	break;
 	case PACKET_INDEX::REQ_CHATTING:
 	{
-		std::cout << "[클라->서버][Size:" << packetSize << "] " << jsonData << std::endl;
 		PKT_REQ_CHATTING packet;
 		packet.Init();
 		packet.packetIndex = packetIndex;
@@ -234,7 +228,6 @@ void Session::Deserialization(char* jsonData)
 	break;
 	case PACKET_INDEX::REQ_PLAYER_MOVE_START:
 	{
-		//std::cout << "[클라->서버][Size:" << packetSize << "] " << jsonData << std::endl;
 		PKT_REQ_PLAYER_MOVE_START packet;
 		packet.Init();
 		packet.packetIndex = packetIndex;
@@ -247,7 +240,6 @@ void Session::Deserialization(char* jsonData)
 	break;
 	case PACKET_INDEX::REQ_PLAYER_MOVE_END:
 	{
-		//std::cout << "[클라->서버][Size:" << packetSize << "] " << jsonData << std::endl;
 		PKT_REQ_PLAYER_MOVE_END packet;
 		packet.Init();
 		packet.packetIndex = packetIndex;
