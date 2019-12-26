@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class BaseMonster : MonoBehaviour
 {
-	//values for UIHelper 
-	public enum MonsterTypeInfo
+
+    //values for UIHelper 
+    public enum MonsterTypeInfo
 	{
 		Goblin,
 		Tau,
@@ -73,6 +74,8 @@ public class BaseMonster : MonoBehaviour
 	protected Vector3 _originPos;
 	private float _height;
 	private float _jumpValue;
+
+    private AudioPlayer _audioPlayer;
 
 	//values for MoveState 
 	private enum MovementStateInfo
@@ -168,8 +171,9 @@ public class BaseMonster : MonoBehaviour
 		_hitBoxCenter = _hitBox.GetComponent<BoxCollider2D>();
 		_hitEffectSize = _hitBoxCenter.size.y + _hitBoxCenter.size.x;
 		_superArmorLine = _avatar.GetComponent<SpriteOutline>();
+        _audioPlayer = GetComponent<AudioPlayer>();
 
-		_state = new StateMachine<BaseMonster>();
+        _state = new StateMachine<BaseMonster>();
 		_state.InitialSetting(this, _moveState);
 
 		_target = null;
@@ -234,7 +238,9 @@ public class BaseMonster : MonoBehaviour
 		AddHitEffect();
 		AddHitDamageEffect(sender.Damage);
 
-		_currentHp -= sender.Damage;
+        _audioPlayer.PlayDamageAudio();
+
+        _currentHp -= sender.Damage;
 		UIHelper.Instance.SetMonster(this);
 
 		if (!IsSuperArmor)
