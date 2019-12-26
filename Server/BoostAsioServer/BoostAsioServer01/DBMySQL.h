@@ -37,6 +37,9 @@ public:
 
 	int DBDungeonClearResultItemSize();
 	std::string DBDungeonClearResultItem(int resultRandom);
+
+	int DBDungeonHellResultItemSize();
+	std::string DBDungeonHellResultItem(int resultRandom);
 	
 	std::string DBLoginGetUserName(std::string userID);
 };

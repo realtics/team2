@@ -79,7 +79,6 @@ void DBMySQL::DBDataLoginSelectAll()
 int DBMySQL::DBSignUp(std::string inputID, std::string inputPW, std::string inputName)
 {
 	mysql_select_db(&_mysql, _dbName);
-	//INSERT INTO login(user_id, user_password, user_name, sign_date) VALUES ('dddd', 'dddd', '디디디디',CURRENT_TIMESTAMP);
 	const char* DBQuery1 = "INSERT INTO login(user_id, user_password, user_name, sign_date) VALUES('";
 	const char* DBQuery2 = inputID.c_str();
 	const char* DBQuery3 = "', '";
@@ -250,7 +249,7 @@ int DBMySQL::DBDungeonClearResultItemSize()
 {
 	mysql_select_db(&_mysql, _dbName);
 
-	char DBQuery[256] = "SELECT COUNT(item_id) AS cnt FROM item";
+	char DBQuery[256] = "SELECT COUNT(item_id) AS cnt FROM result_items";
 
 	int result = 0;
 
@@ -288,7 +287,99 @@ std::string DBMySQL::DBDungeonClearResultItem(int resultRandom)
 {
 	mysql_select_db(&_mysql, _dbName);
 	
-	const char* DBQuery1 = "SELECT item_id FROM item WHERE item_id = \"";
+	const char* DBQuery1 = "SELECT item_id FROM result_items WHERE item_id = \"";
+	std::string tostring = std::to_string(resultRandom);
+	const char* DBQuery2 = tostring.c_str();
+	const char* DBQuery3 = "\";";
+
+	char DBQuery[256] = "";
+
+	strcat_s(DBQuery, DBQuery1);
+	strcat_s(DBQuery, DBQuery2);
+	strcat_s(DBQuery, DBQuery3);
+
+	if (_pConnection == NULL)
+	{
+		std::cout << mysql_errno(&_mysql) << " 에러 : " << mysql_error(&_mysql) << std::endl;
+	}
+	else
+	{
+		int DBState = mysql_query(_pConnection, DBQuery);
+		if (DBState == 0)
+		{
+			_pSqlResult = mysql_store_result(_pConnection);
+
+			int fields = mysql_num_fields(_pSqlResult);
+
+			while ((_SqlRow = mysql_fetch_row(_pSqlResult)) != NULL)
+			{
+				for (int i = 0; i < fields; i++)
+				{
+					if (_SqlRow[i] != NULL)
+					{
+						std::cout << resultRandom << " : " << _SqlRow[i] << std::endl;
+
+						return _SqlRow[i];
+					}
+					else
+					{
+						return "no_id";
+					}
+
+					std::cout << "\t";
+				}
+				std::cout << std::endl;
+			}
+			mysql_free_result(_pSqlResult);
+		}
+	}
+
+	return "no_id";
+}
+
+int DBMySQL::DBDungeonHellResultItemSize()
+{
+	mysql_select_db(&_mysql, _dbName);
+
+	char DBQuery[256] = "SELECT COUNT(item_id) AS cnt FROM hell_items";
+
+	int result = 0;
+
+	if (_pConnection == NULL)
+	{
+		std::cout << mysql_errno(&_mysql) << " 에러 : " << mysql_error(&_mysql) << std::endl;
+	}
+	else
+	{
+		int DBState = mysql_query(_pConnection, DBQuery);
+		if (DBState == 0)
+		{
+			_pSqlResult = mysql_store_result(_pConnection);
+
+			int fields = mysql_num_fields(_pSqlResult);
+
+			while ((_SqlRow = mysql_fetch_row(_pSqlResult)) != NULL)
+			{
+				for (int i = 0; i < fields; i++)
+				{
+					if (_SqlRow[i] != NULL)
+					{
+						result = boost::lexical_cast<int>(_SqlRow[i]);
+					}
+				}
+			}
+		}
+		mysql_free_result(_pSqlResult);
+	}
+
+	return result;
+}
+
+std::string DBMySQL::DBDungeonHellResultItem(int resultRandom)
+{
+	mysql_select_db(&_mysql, _dbName);
+
+	const char* DBQuery1 = "SELECT item_id FROM hell_items WHERE item_id = \"";
 	std::string tostring = std::to_string(resultRandom);
 	const char* DBQuery2 = tostring.c_str();
 	const char* DBQuery3 = "\";";

@@ -259,6 +259,15 @@ void Session::Deserialization(char* jsonData)
 		memcpy(&_packetBuffer[_packetBufferMark], (char*)&packet, sizeof(packet));
 	}
 	break;
+	case PACKET_INDEX::REQ_DUNGEON_HELL_RESULT_ITEM:
+	{
+		PKT_REQ_DUNGEON_HELL_RESULT_ITEM packet;
+		packet.Init();
+		packet.packetIndex = packetIndex;
+		packet.packetSize = packetSize;
+		memcpy(&_packetBuffer[_packetBufferMark], (char*)&packet, sizeof(packet));
+	}
+	break;
 	case PACKET_INDEX::REQ_INVENTORY_OPEN:
 	{
 		PKT_REQ_INVENTORY_OPEN packet;

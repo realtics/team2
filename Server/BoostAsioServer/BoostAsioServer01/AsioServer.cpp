@@ -496,12 +496,62 @@ void AsioServer::ProcessPacket(const int sessionID, const char* pData)
 		int resultItemSize = _DBMysql.DBDungeonClearResultItemSize();
 
 		boost::random::mt19937 engine((unsigned int)time(NULL));
-		boost::random::uniform_int_distribution<> dist(1001, (1000+resultItemSize));
+		boost::random::uniform_int_distribution<> dist(DB_INDEX_RESULT_ITEMS_START, (DB_INDEX_RESULT_ITEMS + resultItemSize));
 		
 		int resultRandom = dist(engine);
 		
 		// DB 체크
 		SendPkt.itemID = _DBMysql.DBDungeonClearResultItem(resultRandom);
+
+		// json
+		boost::property_tree::ptree ptSendHeader;
+		ptSendHeader.put<short>("packetIndex", SendPkt.packetIndex);
+		ptSendHeader.put<short>("packetSize", SendPkt.packetSize);
+
+		boost::property_tree::ptree ptSend;
+		ptSend.add_child("header", ptSendHeader);
+		ptSend.put<std::string>("itemID", SendPkt.itemID);
+
+		std::string stringRecv;
+		std::ostringstream oss(stringRecv);
+		boost::property_tree::write_json(oss, ptSend, false);
+		std::string sendStr = oss.str();
+
+		short JsonDataAllPacketSize = JsonDataSize(sendStr);
+
+		boost::property_tree::ptree ptSendHeader2;
+		ptSendHeader2.put<short>("packetIndex", SendPkt.packetIndex);
+		ptSendHeader2.put<short>("packetSize", JsonDataAllPacketSize);
+
+		boost::property_tree::ptree ptSend2;
+		ptSend2.add_child("header", ptSendHeader2);
+		ptSend2.put<std::string>("itemID", SendPkt.itemID);
+
+		std::string stringRecv2;
+		std::ostringstream oss2(stringRecv2);
+		boost::property_tree::write_json(oss2, ptSend2, false);
+		std::string sendStr2 = oss2.str();
+		std::cout << "[서버->클라] " << sendStr2 << std::endl;
+
+		_sessionList[sessionID]->PostSend(false, std::strlen(sendStr2.c_str()), (char*)sendStr2.c_str());
+	}
+	break;
+	case PACKET_INDEX::REQ_DUNGEON_HELL_RESULT_ITEM:
+	{
+		PKT_REQ_DUNGEON_HELL_RESULT_ITEM* pPacket = (PKT_REQ_DUNGEON_HELL_RESULT_ITEM*)pData;
+
+		PKT_RES_DUNGEON_HELL_RESULT_ITEM SendPkt;
+		SendPkt.Init();
+
+		int resultItemSize = _DBMysql.DBDungeonHellResultItemSize();
+
+		boost::random::mt19937 engine((unsigned int)time(NULL));
+		boost::random::uniform_int_distribution<> dist(DB_INDEX_HELL_ITEMS_START, (DB_INDEX_HELL_ITEMS + resultItemSize));
+
+		int resultRandom = dist(engine);
+
+		// DB 체크
+		SendPkt.itemID = _DBMysql.DBDungeonHellResultItem(resultRandom);
 
 		// json
 		boost::property_tree::ptree ptSendHeader;
