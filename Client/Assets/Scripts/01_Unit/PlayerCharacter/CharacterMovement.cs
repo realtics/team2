@@ -46,7 +46,7 @@ public class CharacterMovement : BaseUnit
 		_equipSkills.Add(SwordmanSkillIndex.Hadouken, SwordmanSkillManager.Instance.GetSkill(_stat, SwordmanSkillIndex.Hadouken));
 		_equipSkills.Add(SwordmanSkillIndex.Blache, SwordmanSkillManager.Instance.GetSkill(_stat, SwordmanSkillIndex.Blache));
 	}
-
+	 
 	protected override void Update()
     {
         CheckAttackEnd();
@@ -375,5 +375,6 @@ public class CharacterMovement : BaseUnit
 	public void Revive()
 	{
 		_stat.Revive();
+		_animator.SetBool("IsDie", false);
 	}
 }
