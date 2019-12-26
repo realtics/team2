@@ -19,8 +19,16 @@ public class HellGoblin : Goblin
         StartCoroutine(TimeScaleSlow());
         EffectManager.Instance.SpawnClearCircle(HitBoxCenter);
 
-        //임시로 무조건 나오고 무조건 획득
-        Item hellItem = _hellItemDatabase.GetItemCopy(_hellItemDatabase.GetRandomItemID());
+        Item hellItem;
+        if (NetworkManager.Instance.IsSingle)
+        {
+            hellItem = _hellItemDatabase.GetItemCopy(_hellItemDatabase.GetRandomItemID());
+        }
+        else
+        {
+            hellItem = _hellItemDatabase.GetItemCopyByNetId(NetworkInventoryInfoSaver.Instance.ItemID);
+        }
+       
         EffectManager.Instance.SpawnHellItem(HitBoxCenter, hellItem);
 
         base.EnterDieState();

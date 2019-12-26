@@ -106,9 +106,30 @@ public class MapLoader : Single.Singleton<MapLoader>
     private string _dungeonName;
     private string _mapFolderName = "map";
 
+    private bool _RES_DUNGEON_HELL_RESULT_ITEM = false;
+    public bool RES_DUNGEON_HELL_RESULT_ITEM { get { return _RES_DUNGEON_HELL_RESULT_ITEM; } set { _RES_DUNGEON_HELL_RESULT_ITEM = value; } }
+
     public void LoaderDungeon()
     {
         dungeonData = JsonLoad<DungeonJsonData>(_dungeonName);
+        //LJS add
+        if (_dungeonName == "Hell")
+        {
+            if(!NetworkManager.Instance.IsSingle)
+            {
+                NetworkManager.Instance.DungeonHellResultItem();
+                while(true)
+                {
+                    if (_RES_DUNGEON_HELL_RESULT_ITEM)
+                    {
+                        _RES_DUNGEON_HELL_RESULT_ITEM = false;
+                        break;
+                    }
+                }
+            }
+        }
+           
+
         //SpawnManager.instance.UnLoadAssetBundle(false);
     }
     public DungeonInfo GetDungeonInfo(int index)
