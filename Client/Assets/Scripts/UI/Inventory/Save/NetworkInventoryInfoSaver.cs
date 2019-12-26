@@ -28,10 +28,8 @@ public class NetworkInventoryInfoSaver
 
 	public void SaveItemIDs(ItemSlot[] equipSlots, ItemSlot[] inventorySlots)
 	{
-		if (_equipIDs.Count > 0)
-			_equipIDs.Clear();
-		if (_inventoryIDs.Count > 0)
-			_inventoryIDs.Clear();
+		_equipIDs.Clear();
+		_inventoryIDs.Clear();
 
 		for (int i = 0; i < equipSlots.Length; i++)
 		{
@@ -54,7 +52,6 @@ public class NetworkInventoryInfoSaver
 	{
 		_equipIDs.Clear();
 		_inventoryIDs.Clear();
-
 
 		_equipIDs = equipIDs;
 		_inventoryIDs = inventoryIDs;
