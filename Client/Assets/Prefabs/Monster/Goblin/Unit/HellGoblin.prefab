@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 2280325038605461510}
   - component: {fileID: 2280325038605461560}
   - component: {fileID: 2280325038605461564}
-  - component: {fileID: 9115808792875051773}
-  - component: {fileID: 1147232062757584222}
+  - component: {fileID: 1284125028638050986}
+  - component: {fileID: -8812505718429955120}
   m_Layer: 0
   m_Name: HellGoblin
   m_TagString: Monster
@@ -102,7 +102,7 @@ MonoBehaviour:
   _hitBox: {fileID: 6925525971982299144}
   _avatar: {fileID: 2280325038652911770}
   _hellItemDatabase: {fileID: 11400000, guid: 2ec6e3ffba0cbd44eba950a5a4cebf0b, type: 2}
---- !u!82 &9115808792875051773
+--- !u!82 &1284125028638050986
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -198,7 +198,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &1147232062757584222
+--- !u!114 &-8812505718429955120
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

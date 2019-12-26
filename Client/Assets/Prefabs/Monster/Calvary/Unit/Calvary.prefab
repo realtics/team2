@@ -69,8 +69,8 @@ GameObject:
   - component: {fileID: 4127798058604522627}
   - component: {fileID: 4127798058604522685}
   - component: {fileID: 2027343449210597697}
-  - component: {fileID: 6642856805836554405}
-  - component: {fileID: -4913994912559537899}
+  - component: {fileID: 8186579395112428192}
+  - component: {fileID: -5952586212513616604}
   m_Layer: 0
   m_Name: Calvary
   m_TagString: Monster
@@ -158,7 +158,7 @@ MonoBehaviour:
   _baseAttackBox: {fileID: 5101124502921087084}
   _hitBox: {fileID: 5112109842577077389}
   _avatar: {fileID: 4127798058618418207}
---- !u!82 &6642856805836554405
+--- !u!82 &8186579395112428192
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -254,7 +254,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &-4913994912559537899
+--- !u!114 &-5952586212513616604
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

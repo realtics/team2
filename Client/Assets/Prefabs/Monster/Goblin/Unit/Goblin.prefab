@@ -159,8 +159,8 @@ GameObject:
   - component: {fileID: 1020073003416926992}
   - component: {fileID: 1020073003416927022}
   - component: {fileID: 4683341297758660005}
-  - component: {fileID: 7758906404511355784}
-  - component: {fileID: -1152240110639087372}
+  - component: {fileID: 5013469793685067183}
+  - component: {fileID: 1878456773896449355}
   m_Layer: 0
   m_Name: Goblin
   m_TagString: Monster
@@ -248,7 +248,7 @@ MonoBehaviour:
   _baseAttackBox: {fileID: 8190413016591622143}
   _hitBox: {fileID: 8183383958140969758}
   _avatar: {fileID: 1020073003363705740}
---- !u!82 &7758906404511355784
+--- !u!82 &5013469793685067183
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -344,7 +344,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &-1152240110639087372
+--- !u!114 &1878456773896449355
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -356,9 +356,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a97cdd5f2bcc13f479ee6ec41090eed6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _attack: {fileID: 0}
-  _die: {fileID: 0}
-  _damage: {fileID: 0}
+  _attack: {fileID: 8300000, guid: d8f6ca9b957710b429b3f98757f658d4, type: 3}
+  _die: {fileID: 8300000, guid: 606b2fa014f1dba42bc96aae40de1587, type: 3}
+  _damage: {fileID: 8300000, guid: 1b76d15e2e2af624dba8a9617fdf07c6, type: 3}
   _skill: {fileID: 0}
 --- !u!1 &5602223285510543003
 GameObject:
