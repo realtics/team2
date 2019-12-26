@@ -341,9 +341,9 @@ struct PKT_REQ_INVENTORY_OPEN : PACKET_HEADER
 
 struct PKT_RES_INVENTORY_OPEN : PACKET_HEADER
 {
-	std::vector<std::string> inventory;
 	std::vector<std::string> equip;
-	
+	std::vector<std::string> inventory;
+		
 	void Init()
 	{
 		packetIndex = PACKET_INDEX::RES_INVENTORY_OPEN;
@@ -353,9 +353,9 @@ struct PKT_RES_INVENTORY_OPEN : PACKET_HEADER
 
 struct PKT_REQ_INVENTORY_CLOSE : PACKET_HEADER
 {
-	std::vector<std::string> inventory;
 	std::vector<std::string> equip;
-
+	std::vector<std::string> inventory;
+	
 	void Init()
 	{
 		packetIndex = PACKET_INDEX::REQ_INVENTORY_CLOSE;
