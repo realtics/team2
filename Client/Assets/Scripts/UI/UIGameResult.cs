@@ -48,26 +48,23 @@ public class UIGameResult : MonoBehaviour
     // ToDo. 클릭시에 GameManager에서 UI를 호출해서 Sprite 변경 및 임시 아이템 띄우기.
     public void OpenResultBox(int index)
     {
-		
 		if (NetworkManager.Instance.IsSingle)
 		{
-			ItemSaveIO.SaveResultItem(NetworkManager.Instance.ItemId);
-			Item newItem = _itemDatabase.GetItemReference(NetworkManager.Instance.ItemId);
-
-			_itemIcon.sprite = newItem.icon;
-			_itemName.text = newItem.itemName;
-
-			Debug.Log(NetworkManager.Instance.ItemIndex+"의 아이템을 서버로부터 받았습니다.");
+            Sprite icon;
+            string itemName;
+            ItemSaveIO.SaveResultItem(_itemDatabase.GetRandomItemID(out icon, out itemName));
+            _itemIcon.sprite = icon;
+            _itemName.text = itemName;
 		}
-			//아이템얻기 테스트 잘된당!!~~!! 이히~~!!!!
 		else
 		{
-			Sprite icon;
-			string itemName;
-			ItemSaveIO.SaveResultItem(_itemDatabase.GetRandomItemID(out icon, out itemName));
-			_itemIcon.sprite = icon;
-			_itemName.text = itemName;
-		}
+            Item newItem = _itemDatabase.GetItemReferenceByNetId(NetworkInventoryInfoSaver.Instance.ItemID);
+
+            _itemIcon.sprite = newItem.icon;
+            _itemName.text = newItem.itemName;
+
+            Debug.Log(NetworkInventoryInfoSaver.Instance.ItemID + "의 아이템을 서버로부터 받았습니다.");
+        }
 		_openResultBox.transform.position = _resultBox[index].transform.position;
 
 	}
