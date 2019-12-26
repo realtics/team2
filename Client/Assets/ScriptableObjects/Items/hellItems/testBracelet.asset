@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: testBracelet
   m_EditorClassIdentifier: 
   _id: 6b8719acc4832644b9a09323e7faf320
+  _netId: 6002
   itemName: "\uD751\uC6B4 : \uC0BC\uCF1C\uC9C0\uB294 \uD0DC\uC591"
   icon: {fileID: 21300000, guid: 65c6b116c8989ed4f853df7963c85ff1, type: 3}
   physicalAttackBonus: 0

@@ -196,8 +196,8 @@ public struct PKT_REQ_INVENTORY_OPEN
 public struct PKT_RES_INVENTORY_OPEN
 {
 	public PACKET_HEADER header;
-	public List<string> inventory;
 	public List<string> equip;
+	public List<string> inventory;
 }
 
 public struct PKT_REQ_INVENTORY_CLOSE

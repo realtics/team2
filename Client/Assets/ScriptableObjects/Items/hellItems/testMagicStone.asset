@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: testMagicStone
   m_EditorClassIdentifier: 
   _id: fe045270910de804ab5b216c7c7622fe
+  _netId: 6005
   itemName: "\uD751\uD48D : \uAC08\uB77C\uC9C0\uB294 \uD0DC\uC591"
   icon: {fileID: 21300000, guid: 3abdee0a703b5df48bfdfc61471c7d89, type: 3}
   physicalAttackBonus: 0

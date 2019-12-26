@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: testCoat
   m_EditorClassIdentifier: 
   _id: 6b5b0f71828e31541a516aaa8c5c0799
+  _netId: 6003
   itemName: "\u8D85 \uB204\uB9AC - \uB04A\uC774\uC9C0 \uC54A\uB294 \uC0DD\uBA85"
   icon: {fileID: 21300000, guid: 11bd2d0c953beb74f84a7ec1c255001f, type: 3}
   physicalAttackBonus: 0

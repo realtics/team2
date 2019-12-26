@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: testNecklace
   m_EditorClassIdentifier: 
   _id: 042fc638b18bdeb498eeb72f98bd2440
+  _netId: 6007
   itemName: "\uD751\uC870 : \uAC08\uB77C\uC9C0\uB294 \uD0DC\uC591"
   icon: {fileID: 21300000, guid: 0f091c0c34e40464ea37c4c38e0dde63, type: 3}
   physicalAttackBonus: 0

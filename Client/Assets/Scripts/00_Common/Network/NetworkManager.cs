@@ -1098,14 +1098,14 @@ public class NetworkManager : MonoBehaviour
 
 		var packHeader = new PACKET_HEADER
 		{
-			packetIndex = (short)PACKET_INDEX.REQ_DUNGEON_CLEAR_RESULT_ITEM,
+			packetIndex = (short)PACKET_INDEX.REQ_INVENTORY_CLOSE,
 			packetSize = (short)DefineDefaultValue.packetSize
 		};
 		var packData = new PKT_REQ_INVENTORY_CLOSE
 		{
 			header = packHeader,
-			inventory = NetworkInventoryInfoSaver.Instance.InventoryIDs,
 			equip = NetworkInventoryInfoSaver.Instance.EquipIDs,
+			inventory = NetworkInventoryInfoSaver.Instance.InventoryIDs
 		};
 		DebugLogList(packData.ToString());
 		jsonData = JsonConvert.SerializeObject(packData);

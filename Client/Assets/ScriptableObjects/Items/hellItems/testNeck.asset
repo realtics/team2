@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: testNeck
   m_EditorClassIdentifier: 
   _id: ef2a13482a3718947b689a3809d779cb
+  _netId: 6006
   itemName: "\u8D85 \uBB3C\uC624\uB984 - \uB298\uD478\uB974\uAC8C \uC775\uB294 \uC0B0\uB4E4"
   icon: {fileID: 21300000, guid: 326f94c8405cef542bc4297acdef8acf, type: 3}
   physicalAttackBonus: 0

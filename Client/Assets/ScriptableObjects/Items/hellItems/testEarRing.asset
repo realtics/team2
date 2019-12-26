@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: testEarRing
   m_EditorClassIdentifier: 
   _id: 400b4af0e05991f4f9840bf705a31f1b
+  _netId: 6004
   itemName: "\uD751\uC775 : \uC7A0\uC2DD\uB418\uB294 \uD0DC\uC591"
   icon: {fileID: 21300000, guid: 4606d4199737d46469ab5ed063e9b6a4, type: 3}
   physicalAttackBonus: 0

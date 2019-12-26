@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: testSupport
   m_EditorClassIdentifier: 
   _id: 68c69ad00b7bbf24e88672d6fd284ab6
+  _netId: 6011
   itemName: "\uD751\uC5BC : \uC0BC\uCF1C\uC9C0\uB294 \uD0DC\uC591"
   icon: {fileID: 21300000, guid: a0c38dbd29db3474e9a94c15766e872e, type: 3}
   physicalAttackBonus: 0
