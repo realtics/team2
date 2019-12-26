@@ -104,14 +104,6 @@ public class NetworkManager : MonoBehaviour
     private Dictionary<int, CharacterMovement> _characters;
     private List<CharacterSpawnData> _spawnCharacters;
     private List<int> _exitCharacters;
-
-	//LJS: InventorySaveManger로 옮겨야함
-	private string _itemId;
-	public string ItemId { get { return _itemId; } }
-
-	private int _itemIndex;
-	public int ItemIndex { get { return _itemIndex; } }
-
 	
 	private bool _successSignup;
 	public bool SuccessSignup { get { return _successSignup; } set { _successSignup = value; } }
@@ -530,10 +522,8 @@ public class NetworkManager : MonoBehaviour
 						var desJson = JsonConvert.DeserializeObject<PKT_RES_DUNGEON_CLEAR_RESULT_ITEM>(jsonData);
 
 						var itemIndex = desJson.itemIndex;
-						var itemID = desJson.itemID;
 
-						_itemId = itemID;
-						_itemIndex = itemIndex;
+						NetworkInventoryInfoSaver.Instance.ItemIndex = itemIndex;
 					}
 					break;
                 case (short)PACKET_INDEX.RES_INVENTORY_OPEN:

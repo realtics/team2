@@ -21,9 +21,12 @@ public class NetworkInventoryInfoSaver
 		}
 	}
 
-	private List<string> _inventoryIDs;
+    private int _itemIndex;
+    private List<string> _inventoryIDs;
 	private List<string> _equipIDs;
-	public List<string> InventoryIDs { get { return _inventoryIDs; } }
+
+    public int ItemIndex { get { return _itemIndex; } set { _itemIndex = value; } }
+    public List<string> InventoryIDs { get { return _inventoryIDs; } }
 	public List<string> EquipIDs { get { return _equipIDs; } }
 
     public bool testValue = false;
