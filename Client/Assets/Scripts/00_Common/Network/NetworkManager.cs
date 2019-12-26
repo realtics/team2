@@ -521,10 +521,13 @@ public class NetworkManager : MonoBehaviour
 					{
 						var desJson = JsonConvert.DeserializeObject<PKT_RES_DUNGEON_CLEAR_RESULT_ITEM>(jsonData);
 
-						var itemIndex = desJson.itemIndex;
+						var itemID = desJson.itemID;
 
-						NetworkInventoryInfoSaver.Instance.ItemIndex = itemIndex;
-					}
+						NetworkInventoryInfoSaver.Instance.ItemID = itemID;
+
+                        //DungeonGameManager.Instance.InvokeGameResult();
+                        DungeonGameManager.Instance.RES_DUNGEON_CLEAR_RESULT_ITEM = true;
+                    }
 					break;
                 case (short)PACKET_INDEX.RES_INVENTORY_OPEN:
                     {
