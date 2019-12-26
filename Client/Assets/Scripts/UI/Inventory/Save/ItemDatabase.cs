@@ -47,6 +47,24 @@ public class ItemDatabase : ScriptableObject
 		return item != null ? item.GetCopy() : null;
 	}
 
+	public Item GetItemReferenceByNetId(string itemID)
+	{
+		foreach (Item item in items)
+		{
+			if (item.NetID == itemID)
+			{
+				return item;
+			}
+		}
+		return null;
+	}
+
+	public Item GetItemCopyByNetId(string itemID)
+	{
+		Item item = GetItemReferenceByNetId(itemID);
+		return item != null ? item.GetCopy() : null;
+	}
+
 #if UNITY_EDITOR
 	private void OnValidate()
 	{
