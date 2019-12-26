@@ -25,6 +25,7 @@ public class EpicDrop : MonoBehaviour
 
 	private void OnTriggerEnter2D(Collider2D other)
 	{
+        //FixMe : 헬아이템
 		if (other.transform.tag == "UserPlayer")
 		{
 			gameObject.SetActive(false);
