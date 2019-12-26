@@ -65,6 +65,8 @@ public class NetworkManager : MonoBehaviour
 
 	[SerializeField]
 	private int _myId = 0;      // 실행한 클라이언트의 ID
+
+	private bool _isSingle;
 	public int MyId { get { return _myId; } set { _myId = value; } }
 
 
@@ -77,9 +79,10 @@ public class NetworkManager : MonoBehaviour
 
     private string _userList;       // 유저 리스트
     public string UserList { get { return _userList; } set { _userList = value; } }
+	public bool IsSingle { get { return _isSingle; } set { _isSingle = value; } }
 
 
-    private bool _isConcurrentUserList = false;     // 유저리스트 여부
+	private bool _isConcurrentUserList = false;     // 유저리스트 여부
     public bool IsConcurrentUserList { get { return _isConcurrentUserList; } set { _isConcurrentUserList = value; } }
 
 	private bool _login;
@@ -122,8 +125,10 @@ public class NetworkManager : MonoBehaviour
         _exitCharacters = new List<int>();
         _spawnCharacters = new List<CharacterSpawnData>();
         _characters = new Dictionary<int, CharacterMovement>();
-        //Debug.Log(appDataPathParent);
-    }
+		//Debug.Log(appDataPathParent);
+		_isSingle = true;
+
+	}
 
     void Start()
     {
@@ -144,6 +149,7 @@ public class NetworkManager : MonoBehaviour
 		//NewLogin();
 		//NewLoginSucsess();
 		Receive(_sock);
+		_isSingle = false;
 	}
 
     void FixedUpdate()
