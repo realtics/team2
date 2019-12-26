@@ -67,6 +67,7 @@ public class NetworkManager : MonoBehaviour
 	private int _myId = 0;      // 실행한 클라이언트의 ID
 
 	private bool _isSingle;
+	private string _accountId;
 	public int MyId { get { return _myId; } set { _myId = value; } }
 
 
@@ -84,7 +85,7 @@ public class NetworkManager : MonoBehaviour
 
 	private bool _isConcurrentUserList = false;     // 유저리스트 여부
     public bool IsConcurrentUserList { get { return _isConcurrentUserList; } set { _isConcurrentUserList = value; } }
-
+	public string AccountId { get { return _accountId; } set { _accountId = value; } }
 	private bool _login;
 	public bool Login { get { return _login; } }
 
@@ -396,9 +397,11 @@ public class NetworkManager : MonoBehaviour
 								break;
 							case (int)CHECK_BEFORE_LOGIN_RESULT.RESULT_BEFORE_LOGIN_CHECK_NO_ID:
 								ToastMessagePanel.Instance.SetToastMessage("존재하지 않는 아이디입니다.");
+								_accountId = "";
 								break;
 							case (int)CHECK_BEFORE_LOGIN_RESULT.RESULT_BEFORE_LOGIN_CHECK_IS_WRONG_PASSWORD:
 								ToastMessagePanel.Instance.SetToastMessage("비밀번호가 틀렸습니다.");
+								_accountId = "";
 								break;
 						}
 
@@ -1071,6 +1074,7 @@ public class NetworkManager : MonoBehaviour
 		sendByte = Encoding.UTF8.GetBytes(jsonData);
 
 		int resultSize = _sock.Send(sendByte);
+		_accountId = id;
 	}
 
 	public void DungeonClearResultItem()
@@ -1110,7 +1114,7 @@ public class NetworkManager : MonoBehaviour
 		var packData = new PKT_REQ_INVENTORY_CLOSE
 		{
 			header = packHeader,
-			userID = "여기고쳐",
+			userID = _accountId,
 			equip = NetworkInventoryInfoSaver.Instance.EquipIDs,
 			inventory = NetworkInventoryInfoSaver.Instance.InventoryIDs
 		};
