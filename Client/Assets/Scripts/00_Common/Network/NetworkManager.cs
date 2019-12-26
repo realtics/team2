@@ -538,13 +538,9 @@ public class NetworkManager : MonoBehaviour
 					break;
                 case (short)PACKET_INDEX.RES_INVENTORY_OPEN:
                     {
-                        var desJson = JsonConvert.DeserializeObject<PKT_RES_DUNGEON_CLEAR_RESULT_ITEM>(jsonData);
+                        var desJson = JsonConvert.DeserializeObject<PKT_RES_INVENTORY_OPEN>(jsonData);
 
-                        var itemIndex = desJson.itemIndex;
-                        var itemID = desJson.itemID;
-
-                        _itemId = itemID;
-                        _itemIndex = itemIndex;
+                        NetworkInventoryInfoSaver.Instance.SaveItemIDs(desJson.equip, desJson.inventory);
                     }
                     break;
                 default:
