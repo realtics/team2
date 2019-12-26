@@ -124,15 +124,21 @@ public class ItemToolTip : MonoBehaviour
 	{
 		_itemSlot.ClickEvent();
 		HideToolTip();
-
-
-		InventoryManager.Instance.Save();
+		
+		if (NetworkManager.Instance.IsSingle)
+		{
+			InventoryManager.Instance.Save();
+		}
 	}
-
+	
 	public void ClickSellButton()
 	{
 		_itemSlot.ClickSellButton();
 		HideToolTip();
-		InventoryManager.Instance.Save();
+
+		if (NetworkManager.Instance.IsSingle)
+		{
+			InventoryManager.Instance.Save();
+		}
 	}
 }

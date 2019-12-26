@@ -46,13 +46,10 @@ public class CharacterStat : MonoBehaviour
     public BaseUnit Unit { get { return _unit; } }
     public CharacterBaseStat TotalStat { get { return _totalStat; } }
 	public bool IsDie { get { return _hp <= 0.0f ? true : false; } }
-	public bool IsSingle { get { return _isSingle; } set { _isSingle = value; } }
 
     private void Awake()
     {
         _uiPlayerInfo = FindObjectOfType<UIPlayerInfo>();
-		_isSingle = true;
-
 	}
 
     private void Start()

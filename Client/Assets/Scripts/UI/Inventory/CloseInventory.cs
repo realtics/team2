@@ -14,7 +14,16 @@ public class CloseInventory : MonoBehaviour
 
 	public void ClickReturn()
 	{
-		InventoryManager.Instance.Save();
-		DNFSceneManager.instance.UnLoadScene((int)SceneIndex.Inventory);
+		if (NetworkManager.Instance.IsSingle)
+		{
+			InventoryManager.Instance.Save();
+			DNFSceneManager.instance.UnLoadScene((int)SceneIndex.Inventory);
+		}
+		else
+		{
+			InventoryManager.Instance.SaveNetwork();
+			//FIXME 패킷받앗을때 호출
+			DNFSceneManager.instance.UnLoadScene((int)SceneIndex.Inventory);
+		}
 	}
 }

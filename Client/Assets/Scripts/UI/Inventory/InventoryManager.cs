@@ -17,20 +17,20 @@ public class InventoryManager : MonoBehaviour
 	private EquipmentPanel _equipmentPanel;
 	[SerializeField]
 	private ItemToolTip _itemTooltip;
-	[SerializeField] 
+	[SerializeField]
 	private ItemSaveManager _itemSaveManager;
 	[SerializeField]
 	private ChracterStatInfo _chracterStatInfo;
 
-	public ItemToolTip ItemTooltip{ get { return _itemTooltip; } }
+	public ItemToolTip ItemTooltip { get { return _itemTooltip; } }
 	public Inventory Inventory { get { return _inventory; } }
 	public EquipmentPanel EquipmentPanel { get { return _equipmentPanel; } }
 
 	private void Awake()
-    {
+	{
 		_instance = this;
 		_inventory.OnItemClickEvent += EquipFromInventory;
-        _equipmentPanel.OnItemClickEvent += UnequipFromEquipPanel;
+		_equipmentPanel.OnItemClickEvent += UnequipFromEquipPanel;
 	}
 
 	private void Start()
@@ -41,8 +41,8 @@ public class InventoryManager : MonoBehaviour
 			_itemSaveManager.LoadInventory();
 			_chracterStatInfo.SetCharacterInfo();
 
-        }
-    }
+		}
+	}
 
 	public void Save()
 	{
@@ -51,12 +51,12 @@ public class InventoryManager : MonoBehaviour
 			_itemSaveManager.SaveEquipment();
 			_itemSaveManager.SaveInventory();
 		}
+	}
 
-		if (NetworkManager.Instance.IsConnect)
-		{
-			NetworkInventoryInfoSaver.Instance.SaveItemIDs(_equipmentPanel.EquipmentSlots, _inventory.ItemSlots);
-			NetworkManager.Instance.CloseInventory();
-		}
+	public void SaveNetwork()
+	{
+		NetworkInventoryInfoSaver.Instance.SaveItemIDs(_equipmentPanel.EquipmentSlots, _inventory.ItemSlots);
+		NetworkManager.Instance.CloseInventory();
 	}
 
 	private void OnDestroy()
@@ -70,45 +70,45 @@ public class InventoryManager : MonoBehaviour
 
 
 	private void EquipFromInventory(Item item)
-    {
-        if(item is EquipableItem)
-        {
-            Equip((EquipableItem)item);
-        }
-    }
+	{
+		if (item is EquipableItem)
+		{
+			Equip((EquipableItem)item);
+		}
+	}
 
-    private void UnequipFromEquipPanel(Item item)
-    {
-        if (item is EquipableItem)
-        {
-            Unequip((EquipableItem)item);
-        }
-    }
+	private void UnequipFromEquipPanel(Item item)
+	{
+		if (item is EquipableItem)
+		{
+			Unequip((EquipableItem)item);
+		}
+	}
 
-    public void Equip(EquipableItem item)
-    {
-        if(_inventory.RemoveItem(item))
-        {
-            EquipableItem previousItem;
-            if(_equipmentPanel.AddItem(item, out previousItem))
-            {
-                if(previousItem != null)
-                {
-                    _inventory.AddItem(previousItem);
-                }
-            }
-            else
-            {
-                _inventory.AddItem(item);
-            }
-        }
-    }
+	public void Equip(EquipableItem item)
+	{
+		if (_inventory.RemoveItem(item))
+		{
+			EquipableItem previousItem;
+			if (_equipmentPanel.AddItem(item, out previousItem))
+			{
+				if (previousItem != null)
+				{
+					_inventory.AddItem(previousItem);
+				}
+			}
+			else
+			{
+				_inventory.AddItem(item);
+			}
+		}
+	}
 
-    public void Unequip(EquipableItem item)
-    {
-        if(!_inventory.IsFull() && _equipmentPanel.RemonveItem(item))
-        {
-            _inventory.AddItem(item);
-        }
-    }
+	public void Unequip(EquipableItem item)
+	{
+		if (!_inventory.IsFull() && _equipmentPanel.RemonveItem(item))
+		{
+			_inventory.AddItem(item);
+		}
+	}
 }

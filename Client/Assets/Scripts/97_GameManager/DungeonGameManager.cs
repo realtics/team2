@@ -157,7 +157,7 @@ public class DungeonGameManager : GameManager
 
     public void NoticeBossDie()
     {
-		if(NetworkManager.Instance.IsConnect)
+		if(NetworkManager.Instance.IsSingle)
 		{
 			NetworkManager.Instance.DungeonClearResultItem();
 		}

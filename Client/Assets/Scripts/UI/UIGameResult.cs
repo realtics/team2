@@ -49,7 +49,7 @@ public class UIGameResult : MonoBehaviour
     public void OpenResultBox(int index)
     {
 		
-		if (NetworkManager.Instance.IsConnect)
+		if (NetworkManager.Instance.IsSingle)
 		{
 			ItemSaveIO.SaveResultItem(NetworkManager.Instance.ItemId);
 			Item newItem = _itemDatabase.GetItemReference(NetworkManager.Instance.ItemId);

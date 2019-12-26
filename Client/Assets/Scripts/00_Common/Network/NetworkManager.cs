@@ -1110,6 +1110,7 @@ public class NetworkManager : MonoBehaviour
 		var packData = new PKT_REQ_INVENTORY_CLOSE
 		{
 			header = packHeader,
+			userID = "여기고쳐",
 			equip = NetworkInventoryInfoSaver.Instance.EquipIDs,
 			inventory = NetworkInventoryInfoSaver.Instance.InventoryIDs
 		};
