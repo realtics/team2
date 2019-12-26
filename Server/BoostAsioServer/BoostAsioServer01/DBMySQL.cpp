@@ -250,7 +250,7 @@ int DBMySQL::DBDungeonClearResultItemSize()
 {
 	mysql_select_db(&_mysql, _dbName);
 
-	char DBQuery[256] = "SELECT COUNT(item_index) AS cnt FROM item";
+	char DBQuery[256] = "SELECT COUNT(item_id) AS cnt FROM item";
 
 	int result = 0;
 
@@ -288,7 +288,7 @@ std::string DBMySQL::DBDungeonClearResultItem(int resultRandom)
 {
 	mysql_select_db(&_mysql, _dbName);
 	
-	const char* DBQuery1 = "SELECT item_id FROM item WHERE item_index = \"";
+	const char* DBQuery1 = "SELECT item_id FROM item WHERE item_id = \"";
 	std::string tostring = std::to_string(resultRandom);
 	const char* DBQuery2 = tostring.c_str();
 	const char* DBQuery3 = "\";";

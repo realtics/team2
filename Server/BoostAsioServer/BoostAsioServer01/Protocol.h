@@ -1,6 +1,8 @@
 #pragma once 
 
+#include <string>
 #include <vector>
+#include <list>
 
 const unsigned short PORT_NUMBER = 31452;
 const int MAX_RECEIVE_BUFFER_LEN = 512;
@@ -318,15 +320,12 @@ struct PKT_REQ_DUNGEON_CLEAR_RESULT_ITEM : PACKET_HEADER
 
 struct PKT_RES_DUNGEON_CLEAR_RESULT_ITEM : PACKET_HEADER
 {
-	int itemIndex;
-	char itemID[MAX_RESULT_ITEM_ID];
+	std::string itemID;
 
 	void Init()
 	{
 		packetIndex = PACKET_INDEX::RES_DUNGEON_CLEAR_RESULT_ITEM;
 		packetSize = sizeof(PKT_RES_DUNGEON_CLEAR_RESULT_ITEM);
-		itemIndex = 0;
-		memset(itemID, 0, MAX_RESULT_ITEM_ID);
 	}
 };
 
@@ -344,23 +343,21 @@ struct PKT_REQ_INVENTORY_OPEN : PACKET_HEADER
 
 struct PKT_RES_INVENTORY_OPEN : PACKET_HEADER
 {
-	char userID[MAX_USER_ID];
-	std::vector<std::string> equip;
-	std::vector<std::string> inventory;
+	std::list<std::string> equip;
+	std::list<std::string> inventory;
 		
 	void Init()
 	{
 		packetIndex = PACKET_INDEX::RES_INVENTORY_OPEN;
 		packetSize = sizeof(PKT_RES_INVENTORY_OPEN);
-		memset(userID, 0, MAX_USER_ID);
 	}
 };
 
 struct PKT_REQ_INVENTORY_CLOSE : PACKET_HEADER
 {
 	char userID[MAX_USER_ID];
-	std::vector<std::string> equip;
-	std::vector<std::string> inventory;
+	std::list<std::string> equip;
+	std::list<std::string> inventory;
 	
 	void Init()
 	{
