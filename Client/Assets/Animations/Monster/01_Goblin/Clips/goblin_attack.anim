@@ -76,14 +76,21 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0.5714286
-    functionName: OnSmashEffect
+    functionName: OnBaseAttackBox
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 0.5714286
-    functionName: OnBaseAttackBox
+    functionName: PlayMonsterSound
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.5714286
+    functionName: OnSmashEffect
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

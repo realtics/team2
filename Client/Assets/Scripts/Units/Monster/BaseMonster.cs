@@ -75,8 +75,6 @@ public class BaseMonster : MonoBehaviour
 	private float _height;
 	private float _jumpValue;
 
-    private MonsterAudioPlayer _audioPlayer;
-
 	//values for MoveState 
 	private enum MovementStateInfo
 	{
@@ -166,8 +164,7 @@ public class BaseMonster : MonoBehaviour
 		_hitBoxCenter = _hitBox.GetComponent<BoxCollider2D>();
 		_hitEffectSize = _hitBoxCenter.size.y + _hitBoxCenter.size.x;
 		_superArmorLine = _avatar.GetComponent<SpriteOutline>();
-        _audioPlayer = GetComponent<MonsterAudioPlayer>();
-
+       
         _state = new StateMachine<BaseMonster>();
 		_state.InitialSetting(this, _moveState);
 
@@ -363,7 +360,6 @@ public class BaseMonster : MonoBehaviour
 	//AttackState
 	public virtual void EnterAttackState()
 	{
-		_audioPlayer.PlayAttackAudio();
 		if (_target == null)
 		{
 			return;
@@ -424,7 +420,6 @@ public class BaseMonster : MonoBehaviour
 	//DieState
 	public virtual void EnterDieState()
 	{
-		_audioPlayer.PlayDieAudio();
 		_animator.SetBool("isDie", true);
 		InactiveHitBox();
 	}
@@ -454,7 +449,6 @@ public class BaseMonster : MonoBehaviour
 	//HitState
 	public virtual void EnterHitState()
 	{
-		_audioPlayer.PlayDamageAudio();
 		_hitRecoveryCurrentTime = 0.0f;
 		IsHit = true;
 		_animator.SetBool("isHit", true);
@@ -646,7 +640,6 @@ public class BaseMonster : MonoBehaviour
 
 	public void ResetMonster()
 	{
-		_audioPlayer.SetClipNull();
 		_isDead = false;
 		_currentHp = MaxHp;
 		_baseAttackCurrentTime = _baseAttackResetTime;
@@ -659,4 +652,5 @@ public class BaseMonster : MonoBehaviour
 	{
 		gameObject.SetActive(false);
 	}
+
 }
