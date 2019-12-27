@@ -22,6 +22,10 @@ public class DNFSceneManager : Single.Singleton<DNFSceneManager>
         {
             SpawnManager.instance.ClearListdungeonObject();
         }
+        else if (Scene == (int)SceneIndex.LobbySingle)
+        {
+            SpawnManager.instance.ClearListdungeonObject();
+        }
         SceneManager.LoadScene(Scene);
     }
 
