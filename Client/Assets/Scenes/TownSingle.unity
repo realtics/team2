@@ -120,18 +120,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!114 &17056668 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2741275043047209629, guid: 4951e8aea8db5974eb1ce39289150756,
-    type: 3}
-  m_PrefabInstance: {fileID: 356297203}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &17056670 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2741275043047209626, guid: 4951e8aea8db5974eb1ce39289150756,
@@ -466,6 +454,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4951e8aea8db5974eb1ce39289150756, type: 3}
+--- !u!114 &356297204 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2741275043047209629, guid: 4951e8aea8db5974eb1ce39289150756,
+    type: 3}
+  m_PrefabInstance: {fileID: 356297203}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &397230087
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -895,7 +895,7 @@ GameObject:
   - component: {fileID: 1119895329}
   - component: {fileID: 1119895328}
   m_Layer: 0
-  m_Name: GameManager
+  m_Name: LobbyGameManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -913,9 +913,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f80a94b7ed82c847836785b2ed61249, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _coin: 0
-  _fadeOut: {fileID: 17056668}
-  _cinemachine: {fileID: 1519216642}
+  _fadeOut: {fileID: 356297204}
   FadeTime: 3
 --- !u!4 &1119895329
 Transform:
