@@ -11,4 +11,9 @@ public class AudioPlayer : MonoBehaviour
     {
         _audioSource = GetComponent<AudioSource>();
     }
+
+	public void SetClipNull()
+	{
+		_audioSource.clip = null;
+	}
 }
