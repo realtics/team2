@@ -198,7 +198,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 34223262}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.1186182, y: -4.637491, z: -10}
+  m_LocalPosition: {x: 1.1185536, y: -4.6374893, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2296,7 +2296,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1828477994}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.1188881, y: -4.806965, z: -10}
+  m_LocalPosition: {x: 1.1188245, y: -4.806965, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1482920773}
@@ -2412,11 +2412,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a550649261ec7b408216a4fb56a69bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _coin: 0
-  _fadeOut: {fileID: 0}
   _cinemachine: {fileID: 1828477995}
+  _fadeOut: {fileID: 0}
   FadeTime: 3
   _playerState: 0
+  _coin: 0
 --- !u!4 &2091745809
 Transform:
   m_ObjectHideFlags: 0
@@ -2442,6 +2442,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: HellGoblin
+      objectReference: {fileID: 0}
+    - target: {fileID: 2280325038605461565, guid: fe93fb7f7f90e184eaa0d3adfe532e07,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2280325038605461562, guid: fe93fb7f7f90e184eaa0d3adfe532e07,
         type: 3}
@@ -2497,6 +2502,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2280325038605461564, guid: fe93fb7f7f90e184eaa0d3adfe532e07,
+        type: 3}
+      propertyPath: _maxHp
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fe93fb7f7f90e184eaa0d3adfe532e07, type: 3}

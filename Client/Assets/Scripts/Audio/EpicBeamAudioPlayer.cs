@@ -9,7 +9,10 @@ public class EpicBeamAudioPlayer : AudioPlayer
     protected override void Start()
     {
         base.Start();
-		_audioSource.clip = _epicDrop;
-		_audioSource.Play();
+	}
+
+	public void PlayEpicAppearSound()
+	{
+		PlayAudio(_epicDrop);
 	}
 }

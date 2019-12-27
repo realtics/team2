@@ -4,13 +4,24 @@ using UnityEngine;
 
 public class Calvary : BaseMonster
 {
-    protected override void Awake()
+	private AudioSource _audioSource;
+	[SerializeField]
+	private AudioClip _meet;
+
+	protected override void Awake()
 	{
 		base.Awake();
+		_audioSource = GetComponent<AudioSource>();
 		OnSuperArmor();
 	}
 
-    protected override void FixedUpdate()
+	private void Start()
+	{
+		_audioSource.clip = _meet;
+		_audioSource.Play();
+	}
+
+	protected override void FixedUpdate()
     {
         base.FixedUpdate();
         if (Input.GetKeyDown(KeyCode.F2))

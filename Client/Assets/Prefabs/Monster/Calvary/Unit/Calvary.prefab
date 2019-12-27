@@ -68,9 +68,8 @@ GameObject:
   - component: {fileID: 4127798058604522687}
   - component: {fileID: 4127798058604522627}
   - component: {fileID: 4127798058604522685}
+  - component: {fileID: 2674433027368432410}
   - component: {fileID: 2027343449210597697}
-  - component: {fileID: 8186579395112428192}
-  - component: {fileID: -5952586212513616604}
   m_Layer: 0
   m_Name: Calvary
   m_TagString: Monster
@@ -131,34 +130,7 @@ CircleCollider2D:
   m_Offset: {x: 0.03, y: 1.76}
   serializedVersion: 2
   m_Radius: 5
---- !u!114 &2027343449210597697
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4127798058604522680}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b8cdc8dc0ced434dbae51543f99b043, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _monsterType: 2
-  _monsterName: "\uCE7C\uBC14\uB9AC"
-  _monsterLevel: 99
-  _currentHp: 0
-  _maxHp: 2000
-  _attackRange: 3
-  _chaseCancleTime: 5
-  _chaseTime: 0
-  _moveSpeed: 2.5
-  _target: {fileID: 0}
-  _baseAttackResetTime: 1
-  _baseAttackCurrentTime: 0
-  _baseAttackBox: {fileID: 5101124502921087084}
-  _hitBox: {fileID: 5112109842577077389}
-  _avatar: {fileID: 4127798058618418207}
---- !u!82 &8186579395112428192
+--- !u!82 &2674433027368432410
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -254,7 +226,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &-5952586212513616604
+--- !u!114 &2027343449210597697
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -263,13 +235,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 4127798058604522680}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a97cdd5f2bcc13f479ee6ec41090eed6, type: 3}
+  m_Script: {fileID: 11500000, guid: 9b8cdc8dc0ced434dbae51543f99b043, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _attack: {fileID: 8300000, guid: eb8330d63b1635e428c45f7710a08219, type: 3}
-  _die: {fileID: 8300000, guid: 54a5a5537e31fb14c8d88b75465a4bef, type: 3}
-  _damage: {fileID: 8300000, guid: bb0295347660199419255e70d8ecb656, type: 3}
-  _skill: {fileID: 8300000, guid: e65da1c3e2f13a94f9e1664d3bee5dbd, type: 3}
+  _monsterType: 2
+  _monsterName: "\uCE7C\uBC14\uB9AC"
+  _monsterLevel: 99
+  _currentHp: 0
+  _maxHp: 2000
+  _attackRange: 3
+  _chaseCancleTime: 5
+  _chaseTime: 0
+  _moveSpeed: 2.5
+  _target: {fileID: 0}
+  _baseAttackResetTime: 1
+  _baseAttackCurrentTime: 0
+  _baseAttackBox: {fileID: 5101124502921087084}
+  _hitBox: {fileID: 5112109842577077389}
+  _avatar: {fileID: 4127798058618418207}
+  _meet: {fileID: 8300000, guid: 96f8c8fdf84db8d46b91634a13f49f61, type: 3}
 --- !u!1 &4127798058618418200
 GameObject:
   m_ObjectHideFlags: 0
@@ -284,6 +268,8 @@ GameObject:
   - component: {fileID: 1283702879}
   - component: {fileID: 1724810926}
   - component: {fileID: 6080406183113681298}
+  - component: {fileID: 4123417026546381790}
+  - component: {fileID: 3902209609864161808}
   m_Layer: 0
   m_Name: SpriteAnimator
   m_TagString: Untagged
@@ -417,6 +403,118 @@ MonoBehaviour:
   color: {r: 1, g: 0, b: 0, a: 1}
   secondColor: {r: 1, g: 1, b: 0, a: 1}
   outlineSize: 2
+--- !u!82 &4123417026546381790
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4127798058618418200}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &3902209609864161808
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4127798058618418200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a97cdd5f2bcc13f479ee6ec41090eed6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _attack: {fileID: 8300000, guid: 4f7edd69baa506c4b80c69af56d3c34b, type: 3}
+  _die: {fileID: 8300000, guid: 54a5a5537e31fb14c8d88b75465a4bef, type: 3}
+  _hit: {fileID: 0}
+  _skill: {fileID: 8300000, guid: eb8330d63b1635e428c45f7710a08219, type: 3}
 --- !u!1 &5627144005039119760
 GameObject:
   m_ObjectHideFlags: 0
