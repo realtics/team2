@@ -7,21 +7,48 @@ public class SwordmanAudioPlayer : AudioPlayer
 	public List<AudioClip> attackClip;
 	public List<AudioClip> jumpAttackClip;
 
-	public AudioClip jingongClip;
-	public AudioClip hadoukenClip;
 	public AudioClip blacheClip;
-
-	public AudioClip jingongHitClip;
-	public AudioClip hadoukenHitClip;
-	public AudioClip blacheHitClip;
+	public AudioClip jingongClip;
+	public AudioClip onDamageClip;
+	public AudioClip jumpClip;
 
 	protected override void Start()
     {
 		base.Start();
     }
 
-	public void PlayerAttackSound(int idx)
+	public void PlayAttackSound(int idx)
 	{
 		PlayAudio(attackClip[idx]);
+	}
+
+	public void PlayJumpAttackSound()
+	{
+		int rand = Random.Range(0, 2);
+
+		if (rand == 0)
+			PlayAudio(jumpAttackClip[0]);
+		else
+			PlayAudio(jumpAttackClip[1]);
+	}
+
+	public void PlayBlacheSpawnClip()
+	{
+		PlayAudio(blacheClip);
+	}
+
+	public void PlayJingongSpawnClip()
+	{
+		PlayAudio(jingongClip);
+	}
+
+	public void PlayJumpClip()
+	{
+		PlayAudio(jumpClip);
+	}
+
+	public void PlayHitClip()
+	{
+		PlayAudio(onDamageClip);
 	}
 }

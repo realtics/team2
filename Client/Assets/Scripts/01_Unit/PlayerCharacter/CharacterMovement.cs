@@ -12,6 +12,7 @@ public struct CharacterMovePacket
 public class CharacterMovement : BaseUnit
 {
     public TextMeshPro nicknameText;
+
     private int _id;
 	private string _nickName;
     private CharacterAnimController _animController;
@@ -20,6 +21,7 @@ public class CharacterMovement : BaseUnit
 
 	private bool _onMoveStartPacket;
 	private bool _onMoveEndPacket;
+	public int _attackIndex;
 
 	private CharacterMovePacket _moveStartPacket;
 	private CharacterMovePacket _moveEndPacket;
@@ -36,7 +38,9 @@ public class CharacterMovement : BaseUnit
         _animator.SetBool("IsGround", true);
         _animator.SetBool("NextAttack", false);
         _animController = GetComponentInChildren<CharacterAnimController>();
-    }
+		_attackIndex = 0;
+
+	}
 
 	protected override void Start()
 	{
@@ -90,7 +94,9 @@ public class CharacterMovement : BaseUnit
 
         _animator.SetBool("IsAttack", false);
         _animator.SetBool("NextAttack", false);
-    }
+		_attackIndex = 0;
+
+	}
 
     public override bool SetAttack()
     {
@@ -101,7 +107,7 @@ public class CharacterMovement : BaseUnit
 		_animator.SetBool("IsAttack", true);
         SetNextAttack();
 
-        return true;
+		return true;
     }
 
     public void SetNextAttack()
@@ -133,6 +139,7 @@ public class CharacterMovement : BaseUnit
         _animator.SetBool("NextAttack", true);
         StartCoroutine(CoSetFalseNextAttack());
 		_animController.OffAttackBox();
+		_attackIndex++;
 	}
 
     public override bool SetJump()
