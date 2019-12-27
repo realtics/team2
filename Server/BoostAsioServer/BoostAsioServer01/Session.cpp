@@ -286,8 +286,16 @@ void Session::Deserialization(char* jsonData)
 
 		//packet.equip = ptRecv.get<std::string>>("equip");
 		for (auto i : as_list<std::string>(ptRecv, "equip"))
+		{
 			std::cout << i << std::endl;
-		
+			packet.equip.push_back(i);
+		}
+
+		for (auto i : as_list<std::string>(ptRecv, "inventory"))
+		{
+			std::cout << i << std::endl;
+			packet.inventory.push_back(i);
+		}
 
 		memcpy(&_packetBuffer[_packetBufferMark], (char*)&packet, sizeof(packet));
 	}

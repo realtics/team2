@@ -27,7 +27,7 @@ void AsioServer::Init(const int maxSessionCount)
 
 	std::cout << "port : " << PORT_NUMBER << std::endl;
 	_DBMysql.Init();
-	_DBMysql.DBDataLoginSelectAll();
+	//_DBMysql.DBDataLoginSelectAll();
 	_DBMysql.DBMySQLVersion();
 
 	for (int i = 0; i < maxSessionCount; i++)
@@ -586,6 +586,53 @@ void AsioServer::ProcessPacket(const int sessionID, const char* pData)
 		_sessionList[sessionID]->PostSend(false, std::strlen(sendStr2.c_str()), (char*)sendStr2.c_str());
 	}
 	break;
+	case PACKET_INDEX::REQ_INVENTORY_OPEN:
+	{
+
+	}
+	break;
+	case PACKET_INDEX::REQ_INVENTORY_CLOSE:
+	{
+		PKT_REQ_INVENTORY_CLOSE* pPacket = (PKT_REQ_INVENTORY_CLOSE*)pData;
+
+		PKT_REQ_INVENTORY_CLOSE userInven;
+		userInven.Init();
+
+		//아직 작업 중
+
+		//userInven.equip.assign(pPacket->equip.begin(), pPacket->equip.end());
+		//userInven.inventory.assign(pPacket->inventory.begin(), pPacket->inventory.end());
+
+		//boost::property_tree::ptree ptSendHeader;
+		//ptSendHeader.put<short>("packetIndex", userInven.packetIndex);
+		//ptSendHeader.put<short>("packetSize", userInven.packetSize);
+
+		//boost::property_tree::ptree ptSend;
+		//ptSend.add_child("header", ptSendHeader);
+		//
+		//boost::property_tree::ptree ptChild[12];
+		//boost::property_tree::ptree ptChildren;
+
+		//int num = 0;
+		//for (auto i : as_list<std::string>(ptSend, "equip"))
+		//{
+		//	ptChild[num].put("", i);
+
+		//	ptChildren.push_back(std::make_pair("", ptChild[num]));
+
+		//	num++;
+		//}
+		//
+		//ptSend.add_child("equip", ptChildren);
+		//
+		//std::string stringRecv;
+		//std::ostringstream oss(stringRecv);
+		//boost::property_tree::write_json(oss, ptSend, false);
+		//std::string sendStr = oss.str();
+		//std::cout << "[서버->클라] " << sendStr << std::endl;
+	}
+	break;
+
 	}
 
 	return;
