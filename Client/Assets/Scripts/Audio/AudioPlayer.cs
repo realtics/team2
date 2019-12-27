@@ -17,4 +17,9 @@ public class AudioPlayer : MonoBehaviour
 		_audioSource.clip = clip;
 		_audioSource.Play();
 	}
+
+	public void SetClipNull()
+	{
+		_audioSource.clip = null;
+	}
 }

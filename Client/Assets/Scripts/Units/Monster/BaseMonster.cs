@@ -238,8 +238,6 @@ public class BaseMonster : MonoBehaviour
 		AddHitEffect();
 		AddHitDamageEffect(sender.Damage);
 
-        _audioPlayer.PlayDamageAudio();
-
         _currentHp -= sender.Damage;
 		UIHelper.Instance.SetMonster(this);
 
@@ -370,6 +368,7 @@ public class BaseMonster : MonoBehaviour
 	//AttackState
 	public virtual void EnterAttackState()
 	{
+		_audioPlayer.PlayAttackAudio();
 		if (_target == null)
 		{
 			return;
@@ -430,6 +429,7 @@ public class BaseMonster : MonoBehaviour
 	//DieState
 	public virtual void EnterDieState()
 	{
+		_audioPlayer.PlayDieAudio();
 		_animator.SetBool("isDie", true);
 		InactiveHitBox();
 	}
@@ -459,6 +459,7 @@ public class BaseMonster : MonoBehaviour
 	//HitState
 	public virtual void EnterHitState()
 	{
+		_audioPlayer.PlayDamageAudio();
 		_hitRecoveryCurrentTime = 0.0f;
 		IsHit = true;
 		_animator.SetBool("isHit", true);
@@ -650,6 +651,7 @@ public class BaseMonster : MonoBehaviour
 
 	public void ResetMonster()
 	{
+		_audioPlayer.SetClipNull();
 		_isDead = false;
 		_currentHp = MaxHp;
 		_baseAttackCurrentTime = _baseAttackResetTime;
