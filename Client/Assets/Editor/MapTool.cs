@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using System;
-
+using System.IO;
+using UnityEditor.SceneManagement;
 
 public class MapTool : EditorWindow
 {
@@ -71,6 +72,9 @@ public class MapTool : EditorWindow
     private MapToolLoader _mapToolLoader;
     private MapToolSpawn _mapToolSpawn;
 
+    private string _folderPath = "";
+    private string _resourcesFolderPath = "Assets/Resources/";
+
     public static int currentZOrder = 0;
 
     private bool _isLoadDungeon = false;
@@ -113,7 +117,7 @@ public class MapTool : EditorWindow
 
     private void OnFocus()
     {
-        LoadPrefabs();
+        LoadPrefabs(_folderPath);
         ShowLog("MapMaker Activated");
         if (Tools.current != Tool.None)
             _currentTool = Tools.current;
@@ -339,8 +343,30 @@ public class MapTool : EditorWindow
 
         EditorGUILayout.Space();
 
+        if (GUILayout.Button("Open Folder"))
+        {
+            _folderPath = EditorUtility.OpenFolderPanel("Load Prefab", _resourcesFolderPath, "");
 
-        _scrollPos =
+            if (_folderPath != null)
+            {
+                _folderPath = _mapToolLoader.GetSubstringResourcesLoadFilePath(_folderPath);
+
+                LoadPrefabs(_folderPath);
+                //string[] files = Directory.GetFiles(path);
+
+                //for(int i = 0; i < files.Length; i++)
+                //{
+                //    files[i] = _mapToolLoader.GetSubstringResourcesLoadFilePath(files[i].Replace("\\", "/"));
+                //}
+            }      
+        }
+        if (GUILayout.Button("All Prefab"))
+        {
+            _folderPath = "";
+            LoadPrefabs(_folderPath);
+        }
+
+            _scrollPos =
             EditorGUILayout.BeginScrollView(_scrollPos, false, false);
         EditorGUILayout.LabelField("Select a prefab");
 
@@ -429,6 +455,20 @@ public class MapTool : EditorWindow
         allPrefabs.Clear();
 
         var loadedObjects = Resources.LoadAll("");
+
+        foreach (var loadedObject in loadedObjects)
+        {
+            if (loadedObject.GetType() == typeof(GameObject))
+                allPrefabs.Add(loadedObject as GameObject);
+        }
+    }
+    private void LoadPrefabs(string path)
+    {
+        if (allPrefabs == null)
+            allPrefabs = new List<GameObject>();
+        allPrefabs.Clear();
+
+        var loadedObjects = Resources.LoadAll(path);
 
         foreach (var loadedObject in loadedObjects)
         {

@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 3990440557154998220}
   - component: {fileID: 3990440556722671933}
   - component: {fileID: 8112936347164094788}
+  - component: {fileID: 7858096714507074884}
+  - component: {fileID: 7132315164330511065}
   m_Layer: 0
   m_Name: SpriteAnimator
   m_TagString: Untagged
@@ -147,114 +149,13 @@ MonoBehaviour:
   color: {r: 1, g: 0, b: 0, a: 1}
   secondColor: {r: 1, g: 1, b: 0, a: 1}
   outlineSize: 2
---- !u!1 &1020073003416927019
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1020073003416927020}
-  - component: {fileID: 1020073003416926992}
-  - component: {fileID: 1020073003416927022}
-  - component: {fileID: 4683341297758660005}
-  - component: {fileID: 5013469793685067183}
-  - component: {fileID: 1878456773896449355}
-  m_Layer: 0
-  m_Name: Goblin
-  m_TagString: Monster
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1020073003416927020
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1020073003416927019}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 6363402574694258683}
-  - {fileID: 1020073003363705740}
-  m_Father: {fileID: 0}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!50 &1020073003416926992
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1020073003416927019}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 4
---- !u!58 &1020073003416927022
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1020073003416927019}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.03, y: 1.76}
-  serializedVersion: 2
-  m_Radius: 5
---- !u!114 &4683341297758660005
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1020073003416927019}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2decde5f0c379d549ad25131bddce8f0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _monsterType: 0
-  _monsterName: "\uACE0\uBE14\uB9B0"
-  _monsterLevel: 5
-  _currentHp: 0
-  _maxHp: 600
-  _attackRange: 1.2
-  _chaseCancleTime: 1
-  _chaseTime: 0
-  _moveSpeed: 1
-  _target: {fileID: 0}
-  _baseAttackResetTime: 3
-  _baseAttackCurrentTime: 0
-  _baseAttackBox: {fileID: 8190413016591622143}
-  _hitBox: {fileID: 8183383958140969758}
-  _avatar: {fileID: 1020073003363705740}
---- !u!82 &5013469793685067183
+--- !u!82 &7858096714507074884
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1020073003416927019}
+  m_GameObject: {fileID: 1020073003363705739}
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
@@ -344,7 +245,95 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &1878456773896449355
+--- !u!114 &7132315164330511065
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1020073003363705739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a97cdd5f2bcc13f479ee6ec41090eed6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _attack: {fileID: 8300000, guid: d8f6ca9b957710b429b3f98757f658d4, type: 3}
+  _die: {fileID: 8300000, guid: 606b2fa014f1dba42bc96aae40de1587, type: 3}
+  _hit: {fileID: 8300000, guid: 1b76d15e2e2af624dba8a9617fdf07c6, type: 3}
+  _skill: {fileID: 0}
+--- !u!1 &1020073003416927019
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1020073003416927020}
+  - component: {fileID: 1020073003416926992}
+  - component: {fileID: 1020073003416927022}
+  - component: {fileID: 4683341297758660005}
+  m_Layer: 0
+  m_Name: Goblin
+  m_TagString: Monster
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1020073003416927020
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1020073003416927019}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 6363402574694258683}
+  - {fileID: 1020073003363705740}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!50 &1020073003416926992
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1020073003416927019}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
+--- !u!58 &1020073003416927022
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1020073003416927019}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.03, y: 1.76}
+  serializedVersion: 2
+  m_Radius: 5
+--- !u!114 &4683341297758660005
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -353,13 +342,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 1020073003416927019}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a97cdd5f2bcc13f479ee6ec41090eed6, type: 3}
+  m_Script: {fileID: 11500000, guid: 2decde5f0c379d549ad25131bddce8f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _attack: {fileID: 8300000, guid: d8f6ca9b957710b429b3f98757f658d4, type: 3}
-  _die: {fileID: 8300000, guid: 606b2fa014f1dba42bc96aae40de1587, type: 3}
-  _damage: {fileID: 8300000, guid: 1b76d15e2e2af624dba8a9617fdf07c6, type: 3}
-  _skill: {fileID: 0}
+  _monsterType: 0
+  _monsterName: "\uACE0\uBE14\uB9B0"
+  _monsterLevel: 5
+  _currentHp: 0
+  _maxHp: 600
+  _attackRange: 1.2
+  _chaseCancleTime: 1
+  _chaseTime: 0
+  _moveSpeed: 1
+  _target: {fileID: 0}
+  _baseAttackResetTime: 3
+  _baseAttackCurrentTime: 0
+  _baseAttackBox: {fileID: 8190413016591622143}
+  _hitBox: {fileID: 8183383958140969758}
+  _avatar: {fileID: 1020073003363705740}
 --- !u!1 &5602223285510543003
 GameObject:
   m_ObjectHideFlags: 0

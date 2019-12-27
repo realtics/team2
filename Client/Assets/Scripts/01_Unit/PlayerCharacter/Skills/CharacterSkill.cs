@@ -9,6 +9,7 @@ public class CharacterSkill
     protected GameObject _instanceEffect;
     private int _motionIndex;
     protected CharacterStat _stat;
+	protected CharacterMovement _movement;
     protected AttackInfoSender _sender;
     protected float _coolTime;
     protected float _initCoolTime;
@@ -38,6 +39,7 @@ public class CharacterSkill
 	public void SetCreateEffect(CharacterStat stat, GameObject effect, float coolTime, int motion = 1)
 	{
 		_stat = stat;
+		_movement = (CharacterMovement)_stat.Unit;
 		_motionIndex = motion;
 		_effectPrefab = effect;
 		_initCoolTime = coolTime;
@@ -47,6 +49,7 @@ public class CharacterSkill
 	public void SetCreateEffect(CharacterStat stat, AttackInfoSender sender, GameObject effectPrefab, float coolTime = 1.0f, int motion = 1)
 	{
 		_stat = stat;
+		_movement = (CharacterMovement)_stat.Unit;
 		_sender = sender;
 		_motionIndex = motion;
 		_effectPrefab = effectPrefab;

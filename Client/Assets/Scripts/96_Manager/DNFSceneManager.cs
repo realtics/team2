@@ -16,11 +16,13 @@ public class DNFSceneManager : Single.Singleton<DNFSceneManager>
     private int _currentDungeonIndex;
     private const int _startDungeonIndex = 0;
 
-    // Use this for initialization
-
     public void LoadScene(int Scene)
     {
         if(Scene == (int)SceneIndex.Lobby)
+        {
+            SpawnManager.instance.ClearListdungeonObject();
+        }
+        else if (Scene == (int)SceneIndex.LobbySingle)
         {
             SpawnManager.instance.ClearListdungeonObject();
         }
@@ -39,9 +41,7 @@ public class DNFSceneManager : Single.Singleton<DNFSceneManager>
 
     public void ChangeRoom(int index, ARROW arrow)
     {
-        GameManager gameManager = GetGameManager();
-        gameManager.FadeOut();
-
+        DungeonGameManager.Instance.FadeOut();
         SpawnManager.instance.RoomSetActive(false, _currentDungeonIndex);
         DungeonInfo dungeonInfo = MapLoader.instance.GetDungeonInfo(index);
         SpawnManager.instance.Spawn(dungeonInfo);
@@ -52,14 +52,12 @@ public class DNFSceneManager : Single.Singleton<DNFSceneManager>
 
         MiniMapManager.instance.movePlayerCursor(dungeonInfo.position);
 
-        gameManager.FindCameraCollider();
-        gameManager.MoveToPlayer(PotalManager.instance.FindGetArrowPotalPosition(FlipArrow(arrow)));
+        DungeonGameManager.Instance.FindCameraCollider();
+        DungeonGameManager.Instance.MoveToPlayer(PotalManager.instance.FindGetArrowPotalPosition(FlipArrow(arrow)));
     }
     public void Loader()
     {
-        GameManager gameManager = GetGameManager();
-        gameManager.FadeOut();
-
+        DungeonGameManager.Instance.FadeOut();
         MapLoader.instance.LoaderDungeon();
         DungeonInfo dungeonInfo = MapLoader.instance.GetDungeonInfo(_startDungeonIndex);
 
@@ -68,8 +66,8 @@ public class DNFSceneManager : Single.Singleton<DNFSceneManager>
 
         MoveRoomPotalActive();
 
-        gameManager.FindCameraCollider();
-        gameManager.MoveToPlayer(dungeonInfo.PlayerStartPosition);
+        DungeonGameManager.Instance.FindCameraCollider();
+        DungeonGameManager.Instance.MoveToPlayer(dungeonInfo.PlayerStartPosition);
     }
 
     private void MoveRoomPotalActive()
@@ -108,16 +106,5 @@ public class DNFSceneManager : Single.Singleton<DNFSceneManager>
                 }
         }
     }
-    private GameManager GetGameManager()
-    {
-        if (DungeonGameManager.Instance != null)
-        {
-            return DungeonGameManager.Instance;
-        }
-        //else if (LobbyGameManager.Instance != null)
-        //{
-        //    return LobbyGameManager.Instance;
-        //}
-        return null;
-    }
+
 }

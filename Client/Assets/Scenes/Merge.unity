@@ -595,11 +595,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a550649261ec7b408216a4fb56a69bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _coin: 5
-  _fadeOut: {fileID: 1997122168}
   _cinemachine: {fileID: 435489374}
+  _fadeOut: {fileID: 1997122168}
   FadeTime: 3
   _playerState: 0
+  _coin: 5
 --- !u!4 &240451108
 Transform:
   m_ObjectHideFlags: 0
@@ -2268,7 +2268,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 5dba119099bed894a8efea2d8995667c, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.4
   m_Pitch: 1
   Loop: 1
   Mute: 0

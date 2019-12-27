@@ -75,8 +75,6 @@ public class BaseMonster : MonoBehaviour
 	private float _height;
 	private float _jumpValue;
 
-    private MonsterAudioPlayer _audioPlayer;
-
 	//values for MoveState 
 	private enum MovementStateInfo
 	{
@@ -104,11 +102,6 @@ public class BaseMonster : MonoBehaviour
 	private Vector3 _knockBackDirection;
 	private float _knockBackSpeed;
 	private float _knockBackDuration;
-
-	//values for superArmor Color
-	private Color32 _colorRed = Color.red;
-	private Color32 _colorYellow = Color.yellow;
-	private bool _isColorChange;
 
 	//properties
 	public MonsterTypeInfo MonsterType { get { return _monsterType; } }
@@ -171,8 +164,7 @@ public class BaseMonster : MonoBehaviour
 		_hitBoxCenter = _hitBox.GetComponent<BoxCollider2D>();
 		_hitEffectSize = _hitBoxCenter.size.y + _hitBoxCenter.size.x;
 		_superArmorLine = _avatar.GetComponent<SpriteOutline>();
-        _audioPlayer = GetComponent<MonsterAudioPlayer>();
-
+       
         _state = new StateMachine<BaseMonster>();
 		_state.InitialSetting(this, _moveState);
 
@@ -237,8 +229,6 @@ public class BaseMonster : MonoBehaviour
 	{
 		AddHitEffect();
 		AddHitDamageEffect(sender.Damage);
-
-        _audioPlayer.PlayDamageAudio();
 
         _currentHp -= sender.Damage;
 		UIHelper.Instance.SetMonster(this);
@@ -662,4 +652,5 @@ public class BaseMonster : MonoBehaviour
 	{
 		gameObject.SetActive(false);
 	}
+
 }
