@@ -105,11 +105,6 @@ public class BaseMonster : MonoBehaviour
 	private float _knockBackSpeed;
 	private float _knockBackDuration;
 
-	//values for superArmor Color
-	private Color32 _colorRed = Color.red;
-	private Color32 _colorYellow = Color.yellow;
-	private bool _isColorChange;
-
 	//properties
 	public MonsterTypeInfo MonsterType { get { return _monsterType; } }
 	public string MonsterName { get { return _monsterName; } }
