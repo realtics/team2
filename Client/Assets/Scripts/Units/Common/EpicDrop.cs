@@ -13,15 +13,21 @@ public class EpicDrop : MonoBehaviour
 	private TextMeshPro _itemText;
 
 	private Item _item;
+	//private EpicBeamAudioPlayer _audioPlayer;
 
-    public void SetHellItem(Item item)
+	//private void Awake()
+	//{
+	//	_audioPlayer = GetComponent<EpicBeamAudioPlayer>();
+	//}
+
+	public void SetHellItem(Item item)
     {
         _itemIcon.sprite = item.icon;
         _itemText.text = item.itemName;
         _itemTextField.transform.localScale = new Vector3(item.itemName.Length/2, 1, 1);
 
 		_item = item;
-    }
+	}
 
 	private void OnTriggerEnter2D(Collider2D other)
 	{
