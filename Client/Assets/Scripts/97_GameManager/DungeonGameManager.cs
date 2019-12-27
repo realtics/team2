@@ -1,15 +1,32 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
-enum PartyNumber
-{ 
-    p1 = 0,
-    p2,
-    p3,
-    p4
-}
-public class DungeonGameManager : GameManager
+public enum GameState
 {
+    Dungeon,
+    Die,
+    Result
+}
+
+public class DungeonGameManager : MonoBehaviour
+{
+    private GameObject _player;
+
+    [SerializeField]
+    protected Cinemachine.CinemachineConfiner _cinemachine;
+
+    [SerializeField]
+    private Image _fadeOut;
+
+    public float FadeTime = 3f; // Fade효과 재생시간
+
+    private const float _start = 1.0f;
+    private const float _end = 0.0f;
+
+    private float _time = 0f;
+
     private int _countDown;
     private const int _maxDieCountDown = 10;
     private const int _maxResultCountDown = 4;
@@ -28,6 +45,9 @@ public class DungeonGameManager : GameManager
     [SerializeField]
     protected GameState _playerState;
 
+    [SerializeField]
+    protected int _coin;
+
     private bool _RES_DUNGEON_CLEAR_RESULT_ITEM = false;
     public bool RES_DUNGEON_CLEAR_RESULT_ITEM { get { return _RES_DUNGEON_CLEAR_RESULT_ITEM; } set { _RES_DUNGEON_CLEAR_RESULT_ITEM = value; } }
 
@@ -41,10 +61,15 @@ public class DungeonGameManager : GameManager
     }
 
     // Start is called before the first frame update
-    protected override void Start()
+    private void Start()
     {
-        base.Start();
         _instance = this;
+        FadeOut();
+        PlayerCharacter pc = GameObject.FindObjectOfType<PlayerCharacter>();
+
+        if (pc != null)
+            _player = pc.gameObject;
+
         DNFSceneManager.instance.Loader();
     }
 
@@ -65,6 +90,29 @@ public class DungeonGameManager : GameManager
             Invoke(nameof(GameResult), DelayResultMulti);
             _RES_DUNGEON_CLEAR_RESULT_ITEM = false;
         }
+    }
+    public void FindCameraCollider()
+    {
+        _cinemachine.InvalidatePathCache();
+        _cinemachine.m_BoundingShape2D = GameObject.FindGameObjectWithTag("CameraCollider").GetComponent<Collider2D>();
+    }
+
+    public void MoveToScene(int Scene)
+    {
+        LoadScene(Scene);
+    }
+
+    private void LoadScene(int Scene)
+    {
+        DNFSceneManager.instance.LoadScene(Scene);
+    }
+
+    public void MoveToPlayer(Vector3 position)
+    {
+        if (_player == null)
+            return;
+
+        _player.transform.position = position;
     }
 
     void CountOver()
@@ -175,5 +223,34 @@ public class DungeonGameManager : GameManager
         {
             NetworkManager.Instance.DungeonClearResultItem();
         }   
+    }
+    public void FadeOut()
+    {
+        FadeIn();
+        StartCoroutine(Fadeoutplay());
+    }
+    private void FadeIn()
+    {
+        Color fadecolor = _fadeOut.color;
+        fadecolor.a = 1.0f;
+        _fadeOut.color = fadecolor;
+    }
+
+    IEnumerator Fadeoutplay()
+    {
+        Color fadecolor = _fadeOut.color;
+        _time = 0f;
+
+        if (SceneManager.GetSceneByBuildIndex((int)SceneIndex.Inventory).isLoaded)
+        {
+            SceneManager.UnloadSceneAsync((int)SceneIndex.Inventory);
+        }
+        while (fadecolor.a > 0f)
+        {
+            _time += Time.deltaTime / FadeTime;
+            fadecolor.a = Mathf.Lerp(_start, _end, _time);
+            _fadeOut.color = fadecolor;
+            yield return null;
+        }
     }
 }

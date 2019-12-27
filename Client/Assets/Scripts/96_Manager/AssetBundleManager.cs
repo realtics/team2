@@ -69,7 +69,6 @@ public class AssetBundleManager : MonoBehaviour
     }
     private void RequestLateBindingAtlas(string tag, System.Action<SpriteAtlas> action)
     {
-        Debug.Log(tag);
         if(!_firstLoadAtlas)
         {
             _LoadedAtlasAssetBundle = AssetBundle.LoadFromFileAsync(Path.Combine(Application.streamingAssetsPath, _platformAssetBundlePath, _atlasBundle)).assetBundle;
@@ -110,7 +109,6 @@ public class AssetBundleManager : MonoBehaviour
     //}
     public void LoadMapAssetFromLocalDisk(string assetBundleName)
     {
-        Debug.Log(assetBundleName);
         if(!_firstLoadMapAssetbundle)
         {
             _LoadedMapAssetBundle = AssetBundle.LoadFromFileAsync(Path.Combine(Application.streamingAssetsPath, _platformAssetBundlePath, assetBundleName)).assetBundle;
@@ -144,7 +142,6 @@ public class AssetBundleManager : MonoBehaviour
     }
     public void LoadPotalAssetFromLocalDisk(string assetBundleName)
     {
-        Debug.Log(assetBundleName);
         _LoadedPotalAssetBundle = AssetBundle.LoadFromFileAsync(Path.Combine(Application.streamingAssetsPath, _platformAssetBundlePath, assetBundleName)).assetBundle;
 #if UNITY_EDITOR
         if (_LoadedPotalAssetBundle == null)
