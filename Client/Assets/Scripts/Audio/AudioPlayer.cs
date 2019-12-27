@@ -11,4 +11,10 @@ public class AudioPlayer : MonoBehaviour
     {
         _audioSource = GetComponent<AudioSource>();
     }
+
+	protected void PlayAudio(AudioClip clip)
+	{
+		_audioSource.clip = clip;
+		_audioSource.Play();
+	}
 }
