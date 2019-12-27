@@ -12,11 +12,6 @@ public class MonsterAudioPlayer : AudioPlayer
     [SerializeField]
     private AudioClip _skill;
 
-    public AudioClip attack { get { return _attack; } }
-    public AudioClip die { get { return _die; } }
-    public AudioClip damage { get { return _damage; } }
-    public AudioClip skill { get { return _skill; } }
-
     protected override void Start()
     {
         base.Start();
