@@ -135,9 +135,8 @@ public class MapToolLoader
         dungeonInfo.potalTransportinfos.Add(potalTransportinfo);
     }
 
-    string GetSubstringResourcesLoadFilePath(string filePath)
-    {
-        
+    public string GetSubstringResourcesLoadFilePath(string filePath)
+    {     
         int FilePos = filePath.LastIndexOf("Resources/") + _lastSubstringIndex;
         string DirectoryFile = filePath.Substring(FilePos);
         int TagPos = DirectoryFile.IndexOf('/');
@@ -145,7 +144,11 @@ public class MapToolLoader
         {
             DirectoryFile.Remove(TagPos);
         }
-        DirectoryFile = DirectoryFile.Remove(DirectoryFile.LastIndexOf('.'));
+        int extensionPos = DirectoryFile.LastIndexOf('.');
+        if(extensionPos > 0)
+        {
+            DirectoryFile = DirectoryFile.Remove(DirectoryFile.LastIndexOf('.'));
+        }
         return DirectoryFile;
     }
 
