@@ -352,6 +352,7 @@ public class MapTool : EditorWindow
                 _folderPath = _mapToolLoader.GetSubstringResourcesLoadFilePath(_folderPath);
 
                 LoadPrefabs(_folderPath);
+                ChangeGizmoTile();
                 //string[] files = Directory.GetFiles(path);
 
                 //for(int i = 0; i < files.Length; i++)
