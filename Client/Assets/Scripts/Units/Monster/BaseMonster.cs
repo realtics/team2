@@ -24,6 +24,8 @@ public class BaseMonster : MonoBehaviour
 	protected float _maxHp;
     [SerializeField]
     protected float _attackDamage;
+    [SerializeField]
+    protected float _defensePercent;
 
 	//values for MonsterControl
 	[SerializeField]
@@ -230,10 +232,12 @@ public class BaseMonster : MonoBehaviour
 
 	public void OnHit(AttackInfoSender sender)
 	{
-		AddHitEffect();
-		AddHitDamageEffect(sender.Damage);
+        float realDmage = sender.Damage * (1.0f - _defensePercent);
 
-        _currentHp -= sender.Damage;
+        AddHitEffect();
+		AddHitDamageEffect(realDmage);
+
+        _currentHp -= realDmage;
 		UIHelper.Instance.SetMonster(this);
 
 		if (!IsSuperArmor)

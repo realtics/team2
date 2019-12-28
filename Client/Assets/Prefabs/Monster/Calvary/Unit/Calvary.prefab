@@ -57,6 +57,21 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 0.6893945}
   m_EdgeRadius: 0
+--- !u!114 &8917905186618086786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3092787098566418335}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee206c0ccd87a8b499a371b5bfa22355, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: {r: 0, g: 0, b: 0, a: 1}
+  threshold: 0.2
+  slope: 0
 --- !u!1 &4127798058604522680
 GameObject:
   m_ObjectHideFlags: 0
@@ -244,6 +259,7 @@ MonoBehaviour:
   _currentHp: 0
   _maxHp: 9999
   _attackDamage: 150
+  _defensePercent: 0.5
   _attackRange: 3
   _chaseCancleTime: 5
   _chaseTime: 0
@@ -652,21 +668,6 @@ MonoBehaviour:
     _extraHeightValue: 0.2
     _stunDuration: 2
   _damgePercent: 1
---- !u!114 &8917905186618086786
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3092787098566418335}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee206c0ccd87a8b499a371b5bfa22355, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  color: {r: 0, g: 0, b: 0, a: 1}
-  threshold: 0.2
-  slope: 0
 --- !u!1 &8854073493097922824
 GameObject:
   m_ObjectHideFlags: 0

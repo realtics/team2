@@ -147,6 +147,7 @@ MonoBehaviour:
   _currentHp: 0
   _maxHp: 1200
   _attackDamage: 100
+  _defensePercent: 0.3
   _attackRange: 2.5
   _chaseCancleTime: 3
   _chaseTime: 0
