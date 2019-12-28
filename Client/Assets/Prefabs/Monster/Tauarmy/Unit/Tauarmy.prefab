@@ -156,6 +156,8 @@ MonoBehaviour:
   _baseAttackBox: {fileID: 6639602415026870072}
   _hitBox: {fileID: 6638185263794367449}
   _avatar: {fileID: 2568930803150547787}
+  _rushAttackResetTime: 5
+  _rushAttackCurrentTime: 0
   _rushAttackBox: {fileID: 7749031719042090271}
 --- !u!1 &2568930803150547788
 GameObject:

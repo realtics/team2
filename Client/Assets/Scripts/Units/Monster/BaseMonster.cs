@@ -155,7 +155,7 @@ public class BaseMonster : MonoBehaviour
 		_state.ChangeState(state);
 	}
 
-	protected void SetInitialState()
+	protected virtual void SetInitialState()
 	{
 		_animator = GetComponentInChildren<Animator>();
 		_currentHp = MaxHp;
@@ -372,7 +372,6 @@ public class BaseMonster : MonoBehaviour
 
 	public virtual void UpdateAttackState()
 	{
-
 		if (!_animator.IsInTransition(0))
 		{
 			if (_animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f)
@@ -411,6 +410,7 @@ public class BaseMonster : MonoBehaviour
 		yield return new WaitForFixedUpdate();
 		StartCoroutine("CheckBaseAttackTime");
 	}
+
 	protected void StartCheckBaseAttackTime()
 	{
 		_baseAttackCurrentTime = 0.0f;

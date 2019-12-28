@@ -13,9 +13,20 @@ public class Tauarmy : BaseMonster
     private TauarmyAttackMotion _currentAttackMotion;
 
     [SerializeField]
+    private float _rushAttackResetTime;
+    [SerializeField]
+    private float _rushAttackCurrentTime;
+
+    [SerializeField]
     private Transform _rushAttackBox;
 
-	protected override void Awake()
+    protected override void SetInitialState()
+    {
+        base.SetInitialState();
+        _rushAttackCurrentTime = _rushAttackResetTime;
+    }
+
+    protected override void Awake()
 	{
 		base.Awake();
     }
@@ -40,8 +51,8 @@ public class Tauarmy : BaseMonster
     { 
         base.EnterAttackState();
 		OnSuperArmor();
-
-		_currentAttackMotion = (TauarmyAttackMotion)Random.Range((int)TauarmyAttackMotion.AttackMotion1, (int)TauarmyAttackMotion.AttacknMotionEnd);
+        CanRushAttack();
+		//_currentAttackMotion = (TauarmyAttackMotion)Random.Range((int)TauarmyAttackMotion.AttackMotion1, (int)TauarmyAttackMotion.AttacknMotionEnd);
         _animator.SetInteger("attackMotion", (int)_currentAttackMotion);
         SetForwardDirection();
 	}
@@ -109,5 +120,37 @@ public class Tauarmy : BaseMonster
     public override void ExitDieState()
     {
         base.ExitDieState();
+    }
+
+    private void CanRushAttack()
+    {
+        if (_rushAttackCurrentTime >= _rushAttackResetTime)
+        {
+            _currentAttackMotion = TauarmyAttackMotion.AttackMotion2;
+            StartCheckRushAttackTime();
+        }
+        else
+        {
+            _currentAttackMotion = TauarmyAttackMotion.AttackMotion1;
+        }
+    }
+
+    IEnumerator CheckRushAttackTime()
+    {
+        _rushAttackCurrentTime += Time.deltaTime;
+
+        if (_rushAttackCurrentTime >= _rushAttackResetTime)
+        {
+            StopCoroutine("CheckRushAttackTime");
+            yield break;
+        }
+        yield return new WaitForFixedUpdate();
+        StartCoroutine("CheckRushAttackTime");
+    }
+
+    protected void StartCheckRushAttackTime()
+    {
+        _rushAttackCurrentTime = 0.0f;
+        StartCoroutine("CheckRushAttackTime");
     }
 }
