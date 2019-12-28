@@ -69,7 +69,7 @@ public class CharacterStat : MonoBehaviour
     public void OnHitDamage(AttackInfoSender sender)
     {
         float damage = CalcReceiveDamage(sender.Damage);
-        EffectManager.Instance.AddHitDamageEffect(transform.root.position, damage);
+        EffectManager.Instance.AddHitDamageEffect(transform.root.position, (int)damage);
         _hp = Mathf.Max(_hp - damage, 0);
 
         if (_hp == 0.0f)
