@@ -146,6 +146,7 @@ MonoBehaviour:
   _monsterLevel: 10
   _currentHp: 0
   _maxHp: 1200
+  _attackDamage: 100
   _attackRange: 2.5
   _chaseCancleTime: 3
   _chaseTime: 0
@@ -196,7 +197,7 @@ Transform:
   - {fileID: 6639602415026870072}
   - {fileID: 7749031719042090271}
   - {fileID: 1189623608296957862}
-  - {fileID: 3443073944282032996}
+  - {fileID: 1349302252580625804}
   - {fileID: 6638185263794367449}
   m_Father: {fileID: 2568930803070071787}
   m_RootOrder: 1
@@ -282,7 +283,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _baseAttackEffectPivot: {fileID: 1189623608296957862}
-  _baseAttackEffect: {fileID: 3443073944282032996}
+  _baseAttackEffect: {fileID: 1349302252580625804}
 --- !u!114 &1940574813402241530
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -500,6 +501,7 @@ MonoBehaviour:
     _verticalExtraMoveValue: 0
     _extraHeightValue: 0
     _stunDuration: 0.5
+  _damgePercent: 1
 --- !u!1 &6123188132498424516
 GameObject:
   m_ObjectHideFlags: 0
@@ -665,6 +667,7 @@ MonoBehaviour:
     _verticalExtraMoveValue: 0
     _extraHeightValue: 0
     _stunDuration: 0.4
+  _damgePercent: 0.7
 --- !u!1001 &100382000865523081
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -754,7 +757,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 06027d883472f7f468752b02cfce4cf7, type: 3}
---- !u!4 &3443073944282032996 stripped
+--- !u!4 &1349302252580625804 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3363310855431905005, guid: 06027d883472f7f468752b02cfce4cf7,
     type: 3}

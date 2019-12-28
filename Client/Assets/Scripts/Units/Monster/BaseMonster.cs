@@ -22,6 +22,8 @@ public class BaseMonster : MonoBehaviour
 	protected float _currentHp;
 	[SerializeField]
 	protected float _maxHp;
+    [SerializeField]
+    protected float _attackDamage;
 
 	//values for MonsterControl
 	[SerializeField]
@@ -109,8 +111,9 @@ public class BaseMonster : MonoBehaviour
 	public int MonsterLevel { get { return _monsterLevel; } }
 	public float CurrentHp { get { return _currentHp; } }
 	public float MaxHp { get { return _maxHp; } }
+    public float AttackDamage { get { return _attackDamage; } }
 
-	public bool IsGround { get { return !(_height > 0.0f); } }
+    public bool IsGround { get { return !(_height > 0.0f); } }
 	public bool IsAttack { get { return _isAttack; } set { _isAttack = value; } }
 	public bool IsHit { get { return _isHit; } set { _isHit = value; } }
 	public bool IsSuperArmor { get { return _superArmorLine.enabled; }}
@@ -314,7 +317,6 @@ public class BaseMonster : MonoBehaviour
 		_jumpValue = sender;
 		StartCoroutine("AerialProcess");
 	}
-
 
 	IEnumerator AerialProcess()
 	{

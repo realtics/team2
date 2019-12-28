@@ -198,7 +198,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 34223262}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.1185536, y: -4.6374893, z: -10}
+  m_LocalPosition: {x: 1.1182003, y: -4.63748, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2296,7 +2296,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1828477994}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.1188245, y: -4.806965, z: -10}
+  m_LocalPosition: {x: 1.1184711, y: -4.806965, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1482920773}
@@ -2833,6 +2833,11 @@ PrefabInstance:
         type: 3}
       propertyPath: _maxHp
       value: 120000
+      objectReference: {fileID: 0}
+    - target: {fileID: 1144951007954270210, guid: b9e4e00062790fe42afe46f52f3b1801,
+        type: 3}
+      propertyPath: _rushAttackResetTime
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b9e4e00062790fe42afe46f52f3b1801, type: 3}

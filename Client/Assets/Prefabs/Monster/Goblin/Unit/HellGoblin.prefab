@@ -87,8 +87,9 @@ MonoBehaviour:
   _monsterType: 0
   _monsterName: "\uD5EC\uACE0\uBE14\uB9B0"
   _monsterLevel: 1
-  _currentHp: 0
+  _currentHp: 5000
   _maxHp: 1
+  _attackDamage: 120
   _attackRange: 1.2
   _chaseCancleTime: 1
   _chaseTime: 0
@@ -221,7 +222,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _baseAttackEffectPivot: {fileID: 3207019371465047159}
-  _baseAttackEffect: {fileID: 7240424708108005303}
+  _baseAttackEffect: {fileID: 4604059616440215421}
 --- !u!114 &2805098240211681835
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -388,7 +389,7 @@ Transform:
   m_LocalPosition: {x: -0.7571429, y: 0.14285713, z: 0}
   m_LocalScale: {x: 0.47619048, y: 0.47619048, z: 1}
   m_Children:
-  - {fileID: 7240424708108005303}
+  - {fileID: 4604059616440215421}
   m_Father: {fileID: 2280325038652911770}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -584,6 +585,7 @@ MonoBehaviour:
     _verticalExtraMoveValue: 0
     _extraHeightValue: 0
     _stunDuration: 0.1
+  _damgePercent: 1
 --- !u!1001 &8808836485724888753
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -668,7 +670,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 968b8146c23a87141894d489ae10aac2, type: 3}
---- !u!4 &7240424708108005303 stripped
+--- !u!4 &4604059616440215421 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2180975827898659078, guid: 968b8146c23a87141894d489ae10aac2,
     type: 3}

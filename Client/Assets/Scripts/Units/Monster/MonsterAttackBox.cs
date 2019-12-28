@@ -8,12 +8,14 @@ public class MonsterAttackBox : MonoBehaviour
     private BaseMonster _monster;
     [SerializeField]
     private AttackInfoSender _sender;
+    [SerializeField]
+    private float _damgePercent;
 
-    void Start()
+    private void Start()
     {
         _monster = transform.root.GetComponent<BaseMonster>();
         _sender.Attacker = transform.root;
-        _sender.Damage = 100f;
+        _sender.Damage = _monster.AttackDamage * _damgePercent;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
