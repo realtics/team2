@@ -86,15 +86,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _monsterType: 0
   _monsterName: "\uD5EC\uACE0\uBE14\uB9B0"
-  _monsterLevel: 1
-  _currentHp: 3000
-  _maxHp: 1
-  _attackDamage: 120
+  _monsterLevel: 66
+  _currentHp: 0
+  _maxHp: 3000
+  _attackDamage: 444
   _defensePercent: 0.6
   _attackRange: 1.2
-  _chaseCancleTime: 1
+  _chaseCancleTime: 5
   _chaseTime: 0
-  _moveSpeed: 1
+  _moveSpeed: 5
   _target: {fileID: 0}
   _baseAttackResetTime: 0
   _baseAttackCurrentTime: 0

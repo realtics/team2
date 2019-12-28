@@ -550,7 +550,7 @@ public class BaseMonster : MonoBehaviour
 	//MoveState
 	public virtual void EnterMoveState()
 	{
-		_randomMoveResetTime = InitialResetTime;
+        _randomMoveResetTime = InitialResetTime;
 		_randomMoveCurrentTime = _randomMoveResetTime;
 	}
 
@@ -558,7 +558,8 @@ public class BaseMonster : MonoBehaviour
 	{
 		if (_target != null)
 		{
-			_animator.SetBool("isMoving", true);
+            _animator.SetFloat("animSpeed", _moveSpeed);
+            _animator.SetBool("isMoving", true);
 			if (!CheckRange())
 			{
 				//FIXME : 추적시간 초과 함수화
@@ -610,15 +611,16 @@ public class BaseMonster : MonoBehaviour
 				direction = Vector3.right;
 				transform.localScale = new Vector3(-1, 1, 1);
 			}
-
-			transform.position += direction * Time.smoothDeltaTime * (_moveSpeed / 3f);
+            _animator.SetFloat("animSpeed", _moveSpeed / 3f);
+            transform.position += direction * Time.smoothDeltaTime * (_moveSpeed / 3f);
 		}
 	}
 
 	public virtual void ExitMoveState()
 	{
 		_movementState = MovementStateInfo.Idle;
-		_animator.SetBool("isMoving", false);
+        _animator.SetFloat("animSpeed", 1.0f);
+        _animator.SetBool("isMoving", false);
 	}
 
 	protected void SetRandDirection()
