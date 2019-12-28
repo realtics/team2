@@ -47,6 +47,8 @@ MonoBehaviour:
     type: 3}
   _hitDamagePrefab: {fileID: 5150396272498270025, guid: 97c88936c554874488f6eb9e6c60254c,
     type: 3}
+  _hitPlayerDamagePrefab: {fileID: 5150396272498270025, guid: 6fcb492de3f22324695a87c4651b4961,
+    type: 3}
   _clearCircle: {fileID: 5784346509610660004, guid: 88c4e49d08d98c144a0069a14df9e142,
     type: 3}
   _cutin: {fileID: 2271839019722285728, guid: 64f84d7016819284ca01baaa70a59f80, type: 3}

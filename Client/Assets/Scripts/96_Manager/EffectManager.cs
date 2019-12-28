@@ -18,7 +18,9 @@ public class EffectManager : MonoBehaviour
 	private GameObject _effectPrefab;
 	[SerializeField]
 	private GameObject _hitDamagePrefab;
-	[SerializeField]
+    [SerializeField]
+    private GameObject _hitPlayerDamagePrefab;
+    [SerializeField]
 	private GameObject _clearCircle;
 	[SerializeField]
 	private GameObject _cutin;
@@ -46,14 +48,21 @@ public class EffectManager : MonoBehaviour
 		hitEffect.transform.localScale = new Vector3(size, size, 0);
 	}
 
-	public void AddHitDamageEffect(Vector3 position, float damage)
+    public void AddHitDamageEffect(Vector3 position, float damage)
+    {
+        GameObject hitDamage = ObjectPoolManager.Instance.GetRestObject(_hitDamagePrefab);
+        hitDamage.transform.position = position;
+        hitDamage.GetComponent<Damage>().SetDamage(damage);
+    }
+
+    public void AddHitPlayerDamageEffect(Vector3 position, float damage)
 	{
-		GameObject hitDamage = ObjectPoolManager.Instance.GetRestObject(_hitDamagePrefab);
-		hitDamage.transform.position = position;
-		hitDamage.GetComponent<Damage>().SetDamage(damage);
+		GameObject hitPlayerDamagePrefab = ObjectPoolManager.Instance.GetRestObject(_hitPlayerDamagePrefab);
+        hitPlayerDamagePrefab.transform.position = position;
+        hitPlayerDamagePrefab.GetComponent<Damage>().SetDamage(damage);
 	}
 
-	public void SpawnClearCircle(Vector3 position)
+    public void SpawnClearCircle(Vector3 position)
 	{
 		GameObject clearCircle = ObjectPoolManager.Instance.GetRestObject(_clearCircle);
 		clearCircle.transform.position = position;

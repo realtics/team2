@@ -611,7 +611,7 @@ public class BaseMonster : MonoBehaviour
 				direction = Vector3.right;
 				transform.localScale = new Vector3(-1, 1, 1);
 			}
-            _animator.SetFloat("animSpeed", _moveSpeed / 3f);
+            _animator.SetFloat("animSpeed", 1.0f);
             transform.position += direction * Time.smoothDeltaTime * (_moveSpeed / 3f);
 		}
 	}
