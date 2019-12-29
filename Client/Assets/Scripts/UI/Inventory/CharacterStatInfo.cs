@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class ChracterStatInfo : MonoBehaviour
+public class CharacterStatInfo : MonoBehaviour
 {
 	[SerializeField]
 	private EquipmentPanel _equipmentPanel;

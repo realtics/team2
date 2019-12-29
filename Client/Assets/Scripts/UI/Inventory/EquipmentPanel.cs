@@ -40,7 +40,7 @@ public class EquipmentPanel : MonoBehaviour
         return false;
     }
 
-    public bool RemonveItem(EquipableItem item)
+    public bool RemoveItem(EquipableItem item)
     {
         for (int i = 0; i < _equipmentSlots.Length; i++)
         {
