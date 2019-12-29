@@ -556,11 +556,7 @@ public class BaseMonster : MonoBehaviour
 
 	public virtual void ExitDownRecoveryState()
 	{
-        if(_animator.GetCurrentAnimatorStateInfo(0).IsName("Down"))
-        {
-            _state.RestartState();
-            return;
-        }
+        
 		_isDownRecovery = false;
 		_animator.SetBool("isDownRecovery", false);
 	}
