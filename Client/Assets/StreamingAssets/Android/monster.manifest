@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 859333391
+CRC: 1810598686
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 6919d70b57c5d4564361349a73298e95
+    Hash: 3e82abd8eea147fe88dfe7a90f786f14
   TypeTreeHash:
     serializedVersion: 2
-    Hash: db37633684d2f3884f9151ab320079b6
+    Hash: 480e3879a60cfeda50d4137192d506e5
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -75,8 +75,6 @@ ClassTypes:
   Script: {instanceID: 0}
 - Class: 221
   Script: {instanceID: 0}
-- Class: 687078895
-  Script: {instanceID: 0}
 Assets:
 - Assets/Prefabs/Monster/Tauarmy/Unit/Tauarmy.prefab
 - Assets/Prefabs/Monster/Goblin/Unit/Goblin.prefab
@@ -85,4 +83,4 @@ Assets:
 - Assets/Prefabs/Monster/Calvary/Unit/Calvary.prefab
 - Assets/Prefabs/Monster/Goblin/Unit/HellGoblin.prefab
 Dependencies:
-- C:/Users/zzang/Documents/GitHub/team2/Client/Assets/StreamingAssets/Android/material
+- C:/Users/KSJ/Documents/GitHub/team2/Client/Assets/StreamingAssets/Android/material
