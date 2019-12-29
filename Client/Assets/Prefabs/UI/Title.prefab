@@ -77,7 +77,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\uB8E8\uD06C \uC2E4\uD5D8\uC2E4"
+  m_Text: MDNF
 --- !u!95 &6767118385622400208
 Animator:
   serializedVersion: 3
@@ -107,6 +107,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4380689184903694465}
   - component: {fileID: 4380689184903694479}
+  - component: {fileID: 2259468058368102508}
   m_Layer: 5
   m_Name: Title
   m_TagString: Untagged
@@ -144,6 +145,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4380689184903694464}
   m_CullTransparentMesh: 0
+--- !u!114 &2259468058368102508
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4380689184903694464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ad0068c54577694098e4b717fd53e00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _title: {fileID: 4380689186129470022}
 --- !u!1 &4380689185002549833
 GameObject:
   m_ObjectHideFlags: 0
@@ -314,7 +328,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\uBE5B\uC758 \uC81C\uB2E8"
+  m_Text: Unknown
 --- !u!95 &888818105138484891
 Animator:
   serializedVersion: 3

@@ -156,6 +156,7 @@ MonoBehaviour:
   _gameResult: {fileID: 428955613}
   _dungeonClearMenu: {fileID: 653243341}
   _miniMap: {fileID: 662208261}
+  _dungeonTitle: {fileID: 1433119133}
 --- !u!4 &5090258
 Transform:
   m_ObjectHideFlags: 0
@@ -1953,6 +1954,18 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1433119131}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1433119133 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2259468058368102508, guid: 4ff25d0d7cffe694d98dfbc2d6b9f75b,
+    type: 3}
+  m_PrefabInstance: {fileID: 1433119131}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ad0068c54577694098e4b717fd53e00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1527902662
 PrefabInstance:
   m_ObjectHideFlags: 0

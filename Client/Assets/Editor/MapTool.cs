@@ -81,6 +81,8 @@ public class MapTool : EditorWindow
 
     private string _fileName = "";
 
+    private string _dungeonName = "";
+
     [MenuItem("Window/MapTool/Open Editor %m", false, 1)]
     static void InitWindow()
     {
@@ -269,20 +271,29 @@ public class MapTool : EditorWindow
                 {
                     ActivateTools(false);
                     _mapToolLoader.SaveRoom(_preSelectRoomGrid);
-                    _jsonManagement.SaveJson(_mapToolLoader.dungeonList, _dungeon.name);
+                    _jsonManagement.SaveJson(_mapToolLoader.dungeonData, _dungeon.name);
                     AssetDatabase.Refresh();
                 }
                 if (GUILayout.Button("Load"))
                 {
                     _mapToolSpawn.DestoryAllObjects();
                     _mapToolLoader.LoaderDungeon(_dungeon);
-                    _mapToolSpawn.Spawn(_mapToolLoader.dungeonList.dungeonObjectList[_selectRoomGrid], SpawnTile);
+                    _dungeonName = _mapToolLoader.GetDungeonName();
+                    _mapToolSpawn.Spawn(_mapToolLoader.dungeonData.dungeonObjectList[_selectRoomGrid], SpawnTile);
                     _isLoadDungeon = true;
                 }
                 if (GUILayout.Button("export"))
                 {
-                    _jsonManagement.ExportJson(_mapToolLoader.dungeonList, _dungeon.name);
+                    _jsonManagement.ExportJson(_mapToolLoader.dungeonData, _dungeon.name);
                     AssetDatabase.Refresh();
+                }
+            }
+            using (new EditorGUILayout.HorizontalScope())
+            {
+                _dungeonName = EditorGUILayout.TextField(_dungeonName);
+                if (GUILayout.Button("Save"))
+                {
+                    _mapToolLoader.SetDungeonName(_dungeonName);
                 }
             }
         }
@@ -290,11 +301,11 @@ public class MapTool : EditorWindow
         {
             EditorGUILayout.LabelField("Select a RoomSlot");
 
-            int count = _mapToolLoader.dungeonList.dungeonObjectList.Count;
+            int count = _mapToolLoader.dungeonData.dungeonObjectList.Count;
             GUIContent[] dungeonSlot = new GUIContent[count];
             for (int i = 0; i < count; i++)
             {
-                if(_mapToolLoader.dungeonList.dungeonObjectList[i].isBoss)
+                if(_mapToolLoader.dungeonData.dungeonObjectList[i].isBoss)
                     dungeonSlot[i] = new GUIContent("Boss");
                 else
                     dungeonSlot[i] = new GUIContent(i.ToString());
@@ -314,7 +325,7 @@ public class MapTool : EditorWindow
                 ActivateTools(false);
                 _mapToolLoader.SaveRoom(_preSelectRoomGrid);
                 _mapToolSpawn.DestoryAllObjects();
-                _mapToolSpawn.Spawn(_mapToolLoader.dungeonList.dungeonObjectList[_selectRoomGrid], SpawnTile);
+                _mapToolSpawn.Spawn(_mapToolLoader.dungeonData.dungeonObjectList[_selectRoomGrid], SpawnTile);
                 _preSelectRoomGrid = _selectRoomGrid;
             }
             EditorGUILayout.Space();
@@ -326,13 +337,13 @@ public class MapTool : EditorWindow
                 }
                 if (GUILayout.Button("Delete"))
                 {
-                    if(_mapToolLoader.dungeonList.dungeonObjectList.Count > 1)
+                    if(_mapToolLoader.dungeonData.dungeonObjectList.Count > 1)
                     {
                         _mapToolLoader.DeleteRoom(_selectRoomGrid);
                         _selectRoomGrid = 0;
                         ActivateTools(false);
                         _mapToolSpawn.DestoryAllObjects();
-                        _mapToolSpawn.Spawn(_mapToolLoader.dungeonList.dungeonObjectList[_selectRoomGrid], SpawnTile);
+                        _mapToolSpawn.Spawn(_mapToolLoader.dungeonData.dungeonObjectList[_selectRoomGrid], SpawnTile);
                         _preSelectRoomGrid = _selectRoomGrid;
                     }
                 }

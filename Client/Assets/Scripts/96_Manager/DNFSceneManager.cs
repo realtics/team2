@@ -66,6 +66,7 @@ public class DNFSceneManager : Single.Singleton<DNFSceneManager>
 
         MoveRoomPotalActive();
 
+        UIHelper.Instance.SetDungeonTitle(MapLoader.instance.GetDungeonName());
         DungeonGameManager.Instance.FindCameraCollider();
         DungeonGameManager.Instance.MoveToPlayer(dungeonInfo.PlayerStartPosition);
     }

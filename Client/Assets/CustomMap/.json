@@ -1,0 +1,21 @@
+{
+  "DungeonInfos": [
+    {
+      "position": {
+        "x": 0.0,
+        "y": 0.0,
+        "magnitude": 0.0,
+        "sqrMagnitude": 0.0
+      },
+      "objectinfos": [],
+      "monsterInfos": [],
+      "potalTransportinfos": [],
+      "isBoss": false,
+      "PlayerStartPosition": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      }
+    }
+  ]
+}

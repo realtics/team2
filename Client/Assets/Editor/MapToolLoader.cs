@@ -5,8 +5,8 @@ using System.Collections.Generic;
 
 public class MapToolLoader
 {
-    public JsonData dungeonList;
-    private DungeonJsonData dungeonData;
+    public JsonData dungeonData;
+    private DungeonJsonData dungeonJsonData;
     private const string _objectTag = "FieldObject";
     private const string _monsterTag = "Monster";
     private const string _potalTranportTag = "PotalTransport";
@@ -15,21 +15,22 @@ public class MapToolLoader
 
     public MapToolLoader()
     {
-        dungeonList = new JsonData();
+        dungeonData = new JsonData();
     }
 
     public void LoaderDungeon(TextAsset dungeon)
     {
-        dungeonData = JsonLoad<DungeonJsonData>(dungeon);
-        dungeonList.dungeonObjectList.Clear();
-        for (int i = 0; i < dungeonData.DungeonInfos.Length; i++)
+        dungeonJsonData = JsonLoad<DungeonJsonData>(dungeon);
+        dungeonData.dungeonObjectList.Clear();
+        dungeonData.dungeonName = dungeonJsonData.dungeonName;
+        for (int i = 0; i < dungeonJsonData.DungeonInfos.Length; i++)
         {
-            dungeonList.dungeonObjectList.Add(dungeonData.DungeonInfos[i]);
+            dungeonData.dungeonObjectList.Add(dungeonJsonData.DungeonInfos[i]);
         }
     }
     public DungeonInfo GetDungeonInfo(int index)
     {
-        return dungeonList.dungeonObjectList[index];
+        return dungeonData.dungeonObjectList[index];
     }
     public void AddRoom()
     {
@@ -38,9 +39,9 @@ public class MapToolLoader
         DungeonInfo dungeonInfo = new DungeonInfo();
          
         dungeonInfo.PlayerStartPosition = new Vector3(0, 0, 0);
-        if (dungeonList.dungeonObjectList.Count > 0)
+        if (dungeonData.dungeonObjectList.Count > 0)
         {
-            position = dungeonList.dungeonObjectList[dungeonList.dungeonObjectList.Count - 1].position;
+            position = dungeonData.dungeonObjectList[dungeonData.dungeonObjectList.Count - 1].position;
             position.Set(position.x + 1, position.y);
             dungeonInfo.position = position;
         }
@@ -49,16 +50,16 @@ public class MapToolLoader
             dungeonInfo.position = new Vector2(0, 0);
         }
         dungeonInfo.isBoss = false;
-        dungeonList.dungeonObjectList.Add(dungeonInfo);
+        dungeonData.dungeonObjectList.Add(dungeonInfo);
     }
 
     public void DeleteRoom(int roomIndex)
     {
-        dungeonList.dungeonObjectList.Remove(dungeonList.dungeonObjectList[roomIndex]);
+        dungeonData.dungeonObjectList.Remove(dungeonData.dungeonObjectList[roomIndex]);
     }
     public void SaveRoom(int roomIndex)
     {
-        DungeonInfo dungeonInfo = dungeonList.dungeonObjectList[roomIndex];
+        DungeonInfo dungeonInfo = dungeonData.dungeonObjectList[roomIndex];
         dungeonInfo.monsterInfos.Clear();
         dungeonInfo.objectinfos.Clear();
         dungeonInfo.potalTransportinfos.Clear();
@@ -158,8 +159,12 @@ public class MapToolLoader
         return JsonConvert.DeserializeObject<T>(dungeonText);
     }
 
-    public void SetBossRoom(int roomIndex, bool isBoss)
+    public void SetDungeonName(string name)
     {
-        dungeonList.dungeonObjectList[roomIndex].isBoss = isBoss;
+        dungeonData.dungeonName = name;
+    }
+    public string GetDungeonName()
+    {
+        return dungeonData.dungeonName;
     }
 }

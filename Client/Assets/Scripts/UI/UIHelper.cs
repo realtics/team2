@@ -27,8 +27,11 @@ public class UIHelper : MonoBehaviour
     [SerializeField]
     private UIDungeonClearMenu _dungeonClearMenu;
     [SerializeField]
-    private UIMiniMap _miniMap;
-	public UIMiniMap miniMap
+    private UIMiniMap _miniMap;    
+    [SerializeField]
+    private UIDungeonTitle _dungeonTitle;
+
+    public UIMiniMap miniMap
     {
         get
         {
@@ -53,7 +56,7 @@ public class UIHelper : MonoBehaviour
         if (_dungeonSelectMenu != null)
             _dungeonSelectMenu.gameObject.SetActive(false);
         if (_miniMap != null)
-            _miniMap.gameObject.SetActive(true);
+            _miniMap.gameObject.SetActive(true);        
     }
 
 
@@ -90,6 +93,10 @@ public class UIHelper : MonoBehaviour
     public void OpenResultBox(int index)
     {
         _gameResult.OpenResultBox(index);
+    }    
+    public void SetDungeonTitle(string name)
+    {
+        _dungeonTitle.SetTitle(name);
     }
 
     // Todo.
