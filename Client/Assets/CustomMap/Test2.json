@@ -94,7 +94,7 @@
       ],
       "monsterInfos": [
         {
-          "filePath": "HellGoblin",
+          "filePath": "Monster/HellGoblin",
           "position": {
             "x": -0.5,
             "y": -7.5,
