@@ -423,9 +423,9 @@ struct PKT_RES_INVENTORY_OPEN : PACKET_HEADER
 struct PKT_REQ_INVENTORY_CLOSE : PACKET_HEADER
 {
 	char userID[MAX_USER_ID];
+	int userExo;
 	char equip[MAX_USER_EQUIP][MAX_USER_ITEM_LEN];
 	char inventory[MAX_USER_INVENTORY][MAX_USER_ITEM_LEN];
-	int userExo;
 	
 	void Init()
 	{
