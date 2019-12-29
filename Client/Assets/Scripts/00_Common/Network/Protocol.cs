@@ -227,9 +227,9 @@ public struct PKT_REQ_INVENTORY_CLOSE
 {
 	public PACKET_HEADER header;
 	public string userID;
+	public int userExo;
 	public List<string> equip;
 	public List<string> inventory;
-	public int userExo;
 }
 
 public struct PKT_RES_INVENTORY_CLOSE
