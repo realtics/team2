@@ -1109,7 +1109,11 @@ public class NetworkManager : MonoBehaviour
 			packetIndex = (short)PACKET_INDEX.REQ_DUNGEON_CLEAR_RESULT_ITEM,
 			packetSize = (short)DefineDefaultValue.packetSize
 		};
-		var packData = new PKT_REQ_DUNGEON_CLEAR_RESULT_ITEM { header = packHeader };
+		var packData = new PKT_REQ_DUNGEON_CLEAR_RESULT_ITEM
+        {
+            header = packHeader,
+            userID = _accountId
+        };
 		DebugLogList(packData.ToString());
 		jsonData = JsonConvert.SerializeObject(packData);
 		jsonData += endNullValue;
@@ -1132,7 +1136,11 @@ public class NetworkManager : MonoBehaviour
             packetIndex = (short)PACKET_INDEX.REQ_DUNGEON_HELL_RESULT_ITEM,
             packetSize = (short)DefineDefaultValue.packetSize
         };
-        var packData = new PKT_REQ_DUNGEON_HELL_RESULT_ITEM { header = packHeader };
+        var packData = new PKT_REQ_DUNGEON_HELL_RESULT_ITEM
+        {
+            header = packHeader,
+            userID = _accountId
+        };
         DebugLogList(packData.ToString());
         jsonData = JsonConvert.SerializeObject(packData);
         jsonData += endNullValue;
@@ -1142,6 +1150,33 @@ public class NetworkManager : MonoBehaviour
 
         int resultSize = _sock.Send(sendByte);
         DebugLogList("DungeonHellResultItem() end");
+    }
+
+    public void DungeonHellItemPickUp()
+    {
+        DebugLogList("DungeonHellItemPickUp() start");
+        string jsonData;
+        char endNullValue = '\0';
+
+        var packHeader = new PACKET_HEADER
+        {
+            packetIndex = (short)PACKET_INDEX.REQ_DUNGEON_HELL_ITEM_PICK_UP,
+            packetSize = (short)DefineDefaultValue.packetSize
+        };
+        var packData = new PKT_REQ_DUNGEON_HELL_ITEM_PICK_UP
+        {
+            header = packHeader,
+            userID = _accountId
+        };
+        DebugLogList(packData.ToString());
+        jsonData = JsonConvert.SerializeObject(packData);
+        jsonData += endNullValue;
+        DebugLogList(jsonData.ToString());
+        byte[] sendByte = new byte[512];
+        sendByte = Encoding.UTF8.GetBytes(jsonData);
+
+        int resultSize = _sock.Send(sendByte);
+        DebugLogList("DungeonHellItemPickUp() end");
     }
 
     public void OpenInventory()

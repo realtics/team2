@@ -35,7 +35,14 @@ public class EpicDrop : MonoBehaviour
 		if (other.transform.tag == "UserPlayer")
 		{
 			gameObject.SetActive(false);
-			ItemSaveIO.SaveResultItem(_item.ID);
-		}
-	}
+            if(NetworkManager.Instance.IsSingle)
+            {
+                ItemSaveIO.SaveResultItem(_item.ID);
+            }
+			else
+            {
+                NetworkManager.Instance.DungeonHellItemPickUp();
+            }
+        }
+    }
 }

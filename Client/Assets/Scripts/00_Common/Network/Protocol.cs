@@ -205,7 +205,7 @@ public struct PKT_RES_DUNGEON_HELL_RESULT_ITEM
 	public string itemID;
 }
 
-public struct REQ_DUNGEON_HELL_ITEM_PICK_UP
+public struct PKT_REQ_DUNGEON_HELL_ITEM_PICK_UP
 {
 	public PACKET_HEADER header;
 	public string userID;
