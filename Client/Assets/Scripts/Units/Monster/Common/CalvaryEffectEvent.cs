@@ -14,6 +14,11 @@ public class CalvaryEffectEvent : MonoBehaviour
     private Transform _smashCircleEffectRightTop;
     [SerializeField]
     private Transform _smashCircleEffectRightBottom;
+    [Space]
+    [SerializeField]
+    private Transform _smash01Effect;
+    [SerializeField]
+    private Transform _smash02Effect;
 
     private void Start()
     {
@@ -28,6 +33,22 @@ public class CalvaryEffectEvent : MonoBehaviour
             _smashCircleEffectLeftBottom.gameObject.SetActive(true);
             _smashCircleEffectRightTop.gameObject.SetActive(true);
             _smashCircleEffectRightBottom.gameObject.SetActive(true);
+        }
+    }
+
+    private void OnSmash01Effect()
+    {
+        if (_monster.IsAttack)
+        {
+            _smash01Effect.gameObject.SetActive(true);
+        }
+    }
+
+    private void OnSmash02Effect()
+    {
+        if (_monster.IsAttack)
+        {
+            _smash02Effect.gameObject.SetActive(true);
         }
     }
 }

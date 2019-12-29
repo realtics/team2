@@ -15,8 +15,6 @@ public class CalvarySmashCircleBox : MonsterAttackBox
         if (!other.tag.Contains("Player"))
             return;
 
-        if (Mathf.Abs(_monster.transform.position.y - other.transform.position.y) > AttackRange)
-            return;
         if (!other.transform.root.GetComponent<BaseUnit>().IsGround)
             return;
 
