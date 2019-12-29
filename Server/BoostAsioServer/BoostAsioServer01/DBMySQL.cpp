@@ -40,7 +40,7 @@ void DBMySQL::DBDataLoginSelectAll()
 {
 	mysql_select_db(&_mysql, _dbName);
 
-	const char* DBQuery = "SELECT * FROM login";
+	std::string DBQuery = "SELECT * FROM login";
 
 	if (_pConnection == NULL)
 	{
@@ -48,7 +48,7 @@ void DBMySQL::DBDataLoginSelectAll()
 	}
 	else
 	{
-		int DBState = mysql_query(_pConnection, DBQuery);
+		int DBState = mysql_query(_pConnection, DBQuery.c_str());
 		if (DBState == 0)
 		{
 			_pSqlResult = mysql_store_result(_pConnection);
@@ -79,24 +79,16 @@ void DBMySQL::DBDataLoginSelectAll()
 int DBMySQL::DBSignUpCreate(std::string inputID, std::string inputPW, std::string inputName)
 {
 	mysql_select_db(&_mysql, _dbName);
-	const char* DBQuery1 = "INSERT INTO login(user_id, user_password, user_name, sign_date) VALUES('";
-	const char* DBQuery2 = inputID.c_str();
-	const char* DBQuery3 = "', '";
-	const char* DBQuery4 = inputPW.c_str();
-	const char* DBQuery5 = "', '";
-	const char* DBQuery6 = inputName.c_str();
-	const char* DBQuery7 = "', ";
-	const char* DBQuery8 = "CURRENT_TIMESTAMP);";
 
-	char DBQuery[256] = "";
-	strcat_s(DBQuery, DBQuery1);
-	strcat_s(DBQuery, DBQuery2);
-	strcat_s(DBQuery, DBQuery3);
-	strcat_s(DBQuery, DBQuery4);
-	strcat_s(DBQuery, DBQuery5);
-	strcat_s(DBQuery, DBQuery6);
-	strcat_s(DBQuery, DBQuery7);
-	strcat_s(DBQuery, DBQuery8);
+	std::string DBQuery;
+	DBQuery += "INSERT INTO login(user_id, user_password, user_name, sign_date) VALUES('";
+	DBQuery += inputID.c_str();
+	DBQuery += "', '";
+	DBQuery += inputPW.c_str();
+	DBQuery += "', '";
+	DBQuery += inputName.c_str();
+	DBQuery += "', ";
+	DBQuery += "CURRENT_TIMESTAMP);";
 	
 	if (_pConnection == NULL)
 	{
@@ -104,7 +96,7 @@ int DBMySQL::DBSignUpCreate(std::string inputID, std::string inputPW, std::strin
 	}
 	else
 	{
-		int DBState = mysql_query(_pConnection, DBQuery);
+		int DBState = mysql_query(_pConnection, DBQuery.c_str());
 		if (DBState == 0)
 		{
 			_pSqlResult = mysql_store_result(_pConnection);
@@ -134,14 +126,10 @@ int DBMySQL::DBSignUpCreate(std::string inputID, std::string inputPW, std::strin
 int DBMySQL::DBInventoryCreate(std::string inputID)
 {
 	mysql_select_db(&_mysql, _dbName);
-	const char* DBQuery1 = "INSERT INTO inventory(user_id) VALUES('";
-	const char* DBQuery2 = inputID.c_str();
-	const char* DBQuery3 = "');";
-
-	char DBQuery[256] = "";
-	strcat_s(DBQuery, DBQuery1);
-	strcat_s(DBQuery, DBQuery2);
-	strcat_s(DBQuery, DBQuery3);
+	std::string DBQuery;
+	DBQuery += "INSERT INTO inventory(user_id) VALUES('";
+	DBQuery += inputID.c_str();
+	DBQuery += "');";
 
 	if (_pConnection == NULL)
 	{
@@ -149,7 +137,7 @@ int DBMySQL::DBInventoryCreate(std::string inputID)
 	}
 	else
 	{
-		int DBState = mysql_query(_pConnection, DBQuery);
+		int DBState = mysql_query(_pConnection, DBQuery.c_str());
 		if (DBState == 0)
 		{
 			_pSqlResult = mysql_store_result(_pConnection);
@@ -177,15 +165,10 @@ int DBMySQL::DBLoginCheckUserID(std::string checkID)
 {
 	mysql_select_db(&_mysql, _dbName);
 	
-	const char* DBQuery1 = "SELECT user_id FROM login WHERE user_ID = \"";
-	const char* DBQuery2 = checkID.c_str();
-	const char* DBQuery3 = "\";";
-
-	char DBQuery[256] = "";
-
-	strcat_s(DBQuery, DBQuery1);
-	strcat_s(DBQuery, DBQuery2);
-	strcat_s(DBQuery, DBQuery3);
+	std::string DBQuery;
+	DBQuery += "SELECT user_id FROM login WHERE user_ID = \"";
+	DBQuery += checkID.c_str();
+	DBQuery += "\";";
 
 	if (_pConnection == NULL)
 	{
@@ -193,7 +176,7 @@ int DBMySQL::DBLoginCheckUserID(std::string checkID)
 	}
 	else
 	{
-		int DBState = mysql_query(_pConnection, DBQuery);
+		int DBState = mysql_query(_pConnection, DBQuery.c_str());
 		if (DBState == 0)
 		{
 			_pSqlResult = mysql_store_result(_pConnection);
@@ -231,15 +214,10 @@ int DBMySQL::DBLoginCheckUserPW(std::string checkID, std::string checkPW)
 {
 	mysql_select_db(&_mysql, _dbName);
 
-	const char* DBQuery1 = "SELECT user_password FROM login WHERE user_id = \"";
-	const char* DBQuery2 = checkID.c_str();
-	const char* DBQuery3 = "\";";
-
-	char DBQuery[256] = "";
-
-	strcat_s(DBQuery, DBQuery1);
-	strcat_s(DBQuery, DBQuery2);
-	strcat_s(DBQuery, DBQuery3);
+	std::string DBQuery;
+	DBQuery += "SELECT user_password FROM login WHERE user_id = \"";
+	DBQuery += checkID.c_str();
+	DBQuery += "\";";
 
 	if (_pConnection == NULL)
 	{
@@ -247,7 +225,7 @@ int DBMySQL::DBLoginCheckUserPW(std::string checkID, std::string checkPW)
 	}
 	else
 	{
-		int DBState = mysql_query(_pConnection, DBQuery);
+		int DBState = mysql_query(_pConnection, DBQuery.c_str());
 		if (DBState == 0)
 		{
 			_pSqlResult = mysql_store_result(_pConnection);
@@ -285,7 +263,7 @@ int DBMySQL::DBDungeonClearResultItemSize()
 {
 	mysql_select_db(&_mysql, _dbName);
 
-	char DBQuery[256] = "SELECT COUNT(item_id) AS cnt FROM result_items";
+	std::string DBQuery = "SELECT COUNT(item_id) AS cnt FROM result_items";
 
 	int result = 0;
 
@@ -295,7 +273,7 @@ int DBMySQL::DBDungeonClearResultItemSize()
 	}
 	else
 	{
-		int DBState = mysql_query(_pConnection, DBQuery);
+		int DBState = mysql_query(_pConnection, DBQuery.c_str());
 		if (DBState == 0)
 		{
 			_pSqlResult = mysql_store_result(_pConnection);
@@ -323,16 +301,10 @@ std::string DBMySQL::DBDungeonClearResultItem(int resultRandom)
 {
 	mysql_select_db(&_mysql, _dbName);
 	
-	const char* DBQuery1 = "SELECT item_id FROM result_items WHERE item_id = \"";
-	std::string tostring = std::to_string(resultRandom);
-	const char* DBQuery2 = tostring.c_str();
-	const char* DBQuery3 = "\";";
-
-	char DBQuery[256] = "";
-
-	strcat_s(DBQuery, DBQuery1);
-	strcat_s(DBQuery, DBQuery2);
-	strcat_s(DBQuery, DBQuery3);
+	std::string DBQuery;
+	DBQuery += "SELECT item_id FROM result_items WHERE item_id = \"";
+	DBQuery += std::to_string(resultRandom).c_str();
+	DBQuery += "\";";
 
 	if (_pConnection == NULL)
 	{
@@ -340,7 +312,7 @@ std::string DBMySQL::DBDungeonClearResultItem(int resultRandom)
 	}
 	else
 	{
-		int DBState = mysql_query(_pConnection, DBQuery);
+		int DBState = mysql_query(_pConnection, DBQuery.c_str());
 		if (DBState == 0)
 		{
 			_pSqlResult = mysql_store_result(_pConnection);
@@ -377,7 +349,7 @@ int DBMySQL::DBDungeonHellResultItemSize()
 {
 	mysql_select_db(&_mysql, _dbName);
 
-	char DBQuery[256] = "SELECT COUNT(item_id) AS cnt FROM hell_items";
+	std::string DBQuery = "SELECT COUNT(item_id) AS cnt FROM hell_items";
 
 	int result = 0;
 
@@ -387,7 +359,7 @@ int DBMySQL::DBDungeonHellResultItemSize()
 	}
 	else
 	{
-		int DBState = mysql_query(_pConnection, DBQuery);
+		int DBState = mysql_query(_pConnection, DBQuery.c_str());
 		if (DBState == 0)
 		{
 			_pSqlResult = mysql_store_result(_pConnection);
@@ -415,16 +387,10 @@ std::string DBMySQL::DBDungeonHellResultItem(int resultRandom)
 {
 	mysql_select_db(&_mysql, _dbName);
 
-	const char* DBQuery1 = "SELECT item_id FROM hell_items WHERE item_id = \"";
-	std::string tostring = std::to_string(resultRandom);
-	const char* DBQuery2 = tostring.c_str();
-	const char* DBQuery3 = "\";";
-
-	char DBQuery[256] = "";
-
-	strcat_s(DBQuery, DBQuery1);
-	strcat_s(DBQuery, DBQuery2);
-	strcat_s(DBQuery, DBQuery3);
+	std::string DBQuery;
+	DBQuery += "SELECT item_id FROM hell_items WHERE item_id = \"";
+	DBQuery += std::to_string(resultRandom).c_str();
+	DBQuery += "\";";
 
 	if (_pConnection == NULL)
 	{
@@ -432,7 +398,7 @@ std::string DBMySQL::DBDungeonHellResultItem(int resultRandom)
 	}
 	else
 	{
-		int DBState = mysql_query(_pConnection, DBQuery);
+		int DBState = mysql_query(_pConnection, DBQuery.c_str());
 		if (DBState == 0)
 		{
 			_pSqlResult = mysql_store_result(_pConnection);
@@ -469,15 +435,11 @@ std::array<std::string, MAX_INVENTORY_COLUMN> DBMySQL::DBInventorySelect(std::st
 {
 	mysql_select_db(&_mysql, _dbName);
 
-	const char* DBQuery1 = "SELECT* FROM inventory WHERE user_id = '";
-	const char* DBQuery2 = inputID.c_str();
-	const char* DBQuery3 = "';";
 
-	char DBQuery[256] = "";
-
-	strcat_s(DBQuery, DBQuery1);
-	strcat_s(DBQuery, DBQuery2);
-	strcat_s(DBQuery, DBQuery3);
+	std::string DBQuery;
+	DBQuery += "SELECT* FROM inventory WHERE user_id = '";
+	DBQuery += inputID.c_str();
+	DBQuery += "';";
 
 	std::array<std::string, MAX_INVENTORY_COLUMN> userInventory;
 
@@ -487,7 +449,7 @@ std::array<std::string, MAX_INVENTORY_COLUMN> DBMySQL::DBInventorySelect(std::st
 	}
 	else
 	{
-		int DBState = mysql_query(_pConnection, DBQuery);
+		int DBState = mysql_query(_pConnection, DBQuery.c_str());
 		if (DBState == 0)
 		{
 			_pSqlResult = mysql_store_result(_pConnection);
@@ -503,7 +465,6 @@ std::array<std::string, MAX_INVENTORY_COLUMN> DBMySQL::DBInventorySelect(std::st
 					{
 						std::cout << _SqlRow[i];
 						userInventory[i] = _SqlRow[i];
-						//return _SqlRow[i];
 					}
 					else
 					{
@@ -616,15 +577,10 @@ std::string DBMySQL::DBLoginGetUserName(std::string inputID)
 {
 	mysql_select_db(&_mysql, _dbName);
 
-	const char* DBQuery1 = "SELECT user_name FROM login WHERE user_id = \"";
-	const char* DBQuery2 = inputID.c_str();
-	const char* DBQuery3 = "\";";
-
-	char DBQuery[256] = "";
-
-	strcat_s(DBQuery, DBQuery1);
-	strcat_s(DBQuery, DBQuery2);
-	strcat_s(DBQuery, DBQuery3);
+	std::string DBQuery;
+	DBQuery += "SELECT user_name FROM login WHERE user_id = \"";
+	DBQuery += inputID.c_str();
+	DBQuery += "\";";
 
 	if (_pConnection == NULL)
 	{
@@ -632,7 +588,7 @@ std::string DBMySQL::DBLoginGetUserName(std::string inputID)
 	}
 	else
 	{
-		int DBState = mysql_query(_pConnection, DBQuery);
+		int DBState = mysql_query(_pConnection, DBQuery.c_str());
 		if (DBState == 0)
 		{
 			_pSqlResult = mysql_store_result(_pConnection);
