@@ -6,17 +6,9 @@ public class BlacheAttackBox : MonoBehaviour
 {
     private AttackInfoSender _sender;
 
-    void Start()
+    public void SetAttackInfo(AttackInfoSender info)
     {
-        _sender = new AttackInfoSender();
-        _sender.Damage = 6666.0f;
-        _sender.ExtraHeightValue = 0.2f;
-        _sender.StunDuration = 1.0f;
-    }
-
-    void Update()
-    {
-        
+        _sender = info;
     }
 
     private void OnTriggerEnter2D(Collider2D other)

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SwordmanSkillBlache : CharacterSkill
 {
+    private BlacheAttackBox _attackBox;
     public override bool OnSkill()
     {
         if (!base.OnSkill())
@@ -14,13 +15,15 @@ public class SwordmanSkillBlache : CharacterSkill
         SetSpriteFlipForward();
 		EffectManager.Instance.ShowCutin();
 
-		//GameObject canvas = GameObject.Find("CutinParent");
-		//if (canvas != null)
-		//{
-		//	GameObject cutin = ObjectPoolManager.Instance.GetRestObject(SwordmanSkillManager.Instance.FindSkillEffect(SwordmanSkillIndex.CutIn), canvas.transform);
-		//	cutin.transform.localScale = Vector3.one;
-		//	cutin.transform.localPosition = Vector3.zero;
-		//}
+        _attackBox = _instanceEffect.GetComponent<BlacheAttackBox>();
+        _attackBox.SetAttackInfo(_sender);
+        //GameObject canvas = GameObject.Find("CutinParent");
+        //if (canvas != null)
+        //{
+        //	GameObject cutin = ObjectPoolManager.Instance.GetRestObject(SwordmanSkillManager.Instance.FindSkillEffect(SwordmanSkillIndex.CutIn), canvas.transform);
+        //	cutin.transform.localScale = Vector3.one;
+        //	cutin.transform.localPosition = Vector3.zero;
+        //}
         return true;
     }
 
