@@ -31,6 +31,8 @@ private:
 
 	WORLD_ZONE _zone;
 
+	int _hellRandom;
+
 	void HandleWrite(const boost::system::error_code& error, size_t bytes_transferred);
 	void HandleReceive(const boost::system::error_code& error, size_t bytes_transferred);
 
@@ -50,6 +52,9 @@ public:
 
 	void SetZone(WORLD_ZONE zone) { _zone = zone; }
 	WORLD_ZONE GetZone() { return _zone; }
+
+	void SetHellRandom(int hellRandom) { _hellRandom = hellRandom; }
+	int GetHellRandom() { return _hellRandom; }
 };
 
 template <typename T>
