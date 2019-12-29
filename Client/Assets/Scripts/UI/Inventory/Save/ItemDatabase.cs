@@ -17,7 +17,6 @@ public class ItemDatabase : ScriptableObject
 		icon = items[randNum].icon;
 		itemName = items[randNum].itemName;
 		return items[randNum].ID;
-		
 	}
 
     public string GetRandomItemID()

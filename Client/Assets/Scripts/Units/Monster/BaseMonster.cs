@@ -7,7 +7,6 @@ using UnityEditor;
 
 public class BaseMonster : MonoBehaviour
 {
-
     //values for UIHelper 
     public enum MonsterTypeInfo
 	{
