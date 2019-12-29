@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &6582171582866420938
+--- !u!1 &1702163455802210008
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,38 +8,39 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6582171582866420981}
-  - component: {fileID: 6582171582866420980}
-  - component: {fileID: 6582171582866420939}
-  - component: {fileID: 6582171582866420982}
+  - component: {fileID: 1702163455802210013}
+  - component: {fileID: 1702163455802210010}
+  - component: {fileID: 1702163455802210011}
+  - component: {fileID: 5593321194282500950}
+  - component: {fileID: 3535791311345482974}
   m_Layer: 0
-  m_Name: CalvaryBaseAttackEffect
+  m_Name: calvary_splash01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6582171582866420981
+--- !u!4 &1702163455802210013
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6582171582866420938}
+  m_GameObject: {fileID: 1702163455802210008}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.48, y: 3.51, z: 0}
+  m_LocalPosition: {x: 4.56, y: -4.3168964, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &6582171582866420980
+--- !u!212 &1702163455802210010
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6582171582866420938}
+  m_GameObject: {fileID: 1702163455802210008}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -70,29 +71,29 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 101
-  m_Sprite: {fileID: 21300000, guid: 454e7886285d3de41a7ac265b4a41fb3, type: 3}
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: 5a2c34f7c918f3a49910ae731ac8fe4d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.63, y: 2.16}
+  m_Size: {x: 1.24, y: 3.55}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!95 &6582171582866420939
+--- !u!95 &1702163455802210011
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6582171582866420938}
+  m_GameObject: {fileID: 1702163455802210008}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: b80538810ded33e47902cc7d0d3502d7, type: 2}
+  m_Controller: {fileID: 9100000, guid: 22cc22996d011c5459b4b3b8b2755f83, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -101,16 +102,28 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &6582171582866420982
+--- !u!114 &5593321194282500950
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6582171582866420938}
+  m_GameObject: {fileID: 1702163455802210008}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 91a71d3e566804d4180ff11b290ba1ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _deleteTime: 0
+  _deleteTime: 0.4
+--- !u!114 &3535791311345482974
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1702163455802210008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48d06c5856586af4b8c3570d7dc496f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

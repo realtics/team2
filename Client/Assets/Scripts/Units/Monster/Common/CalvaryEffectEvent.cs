@@ -19,6 +19,13 @@ public class CalvaryEffectEvent : MonoBehaviour
     private Transform _smash01Effect;
     [SerializeField]
     private Transform _smash02Effect;
+    [Space]
+    [SerializeField]
+    private Transform[] _splash01Effect;
+    [SerializeField]
+    private Transform _upSplash02Effect;
+    [SerializeField]
+    private Transform _downSplash02Effect;
 
     private void Start()
     {
@@ -51,4 +58,22 @@ public class CalvaryEffectEvent : MonoBehaviour
             _smash02Effect.gameObject.SetActive(true);
         }
     }
+
+    private void OnSplash01Effect(int index)
+    {
+        if (_monster.IsAttack)
+        {
+            _splash01Effect[index].gameObject.SetActive(true);
+        }
+    }
+
+    private void OnSplash02Effect()
+    {
+        if (_monster.IsAttack)
+        {
+            _upSplash02Effect.gameObject.SetActive(true);
+            _downSplash02Effect.gameObject.SetActive(true);
+        }
+    }
 }
+
