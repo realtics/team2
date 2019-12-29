@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 3021299335
+CRC: 1604712498
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: e145eb7c8442aac5a4f0e9089db9f295
+    Hash: e8fa84d4a9a607c26d240a8707251f7c
   TypeTreeHash:
     serializedVersion: 2
     Hash: 8d614ba2bf78fe185c64b512c1591e5d
@@ -16,7 +16,8 @@ ClassTypes:
 - Class: 687078895
   Script: {instanceID: 0}
 Assets:
-- Assets/Sprites/Monster/99_Calvary/CalvaryAtlas.spriteatlas
+- Assets/Sprites/Monster/99_Calvary/CalvaryEffectAtlas.spriteatlas
+- Assets/Sprites/Monster/99_Calvary/CalvaryMotionAtlas.spriteatlas
 - Assets/Sprites/Monster/00_Goblin/GoblinAtlas.spriteatlas
 - Assets/Sprites/Monster/01_Tauarmy/TauarmyAtlas.spriteatlas
 Dependencies: []

@@ -24,9 +24,13 @@ public class Calvary : BaseMonster
 	[SerializeField]
 	private AudioClip _meet;
 
+    private float _originalRange;
+
     protected override void SetInitialState()
     {
         base.SetInitialState();
+        _originalRange = _attackRange;
+        _attackRange = _originalRange * 3;
         _smashAttackCurrentTime = _smashAttackResetTime;
     }
 
@@ -46,6 +50,9 @@ public class Calvary : BaseMonster
 	protected override void FixedUpdate()
     {
         base.FixedUpdate();
+
+        ChangeAttackRange();
+
         if (Input.GetKeyDown(KeyCode.F2))
         {
             //MonsterManager.Instance.ReceiveMonsterDie(this);
@@ -67,7 +74,7 @@ public class Calvary : BaseMonster
     public override void EnterAttackState()
     {
         base.EnterAttackState();
-        CansmashAttack();
+        CanSmashAttack();
         _animator.SetInteger("attackMotion", (int)_currentAttackMotion);
 	}
 
@@ -80,7 +87,8 @@ public class Calvary : BaseMonster
     {
         base.ExitAttackState();
 		_animator.SetFloat("animSpeed", 1.0f);
-	}
+        _attackRange = _originalRange;
+    }
 
     //MoveState
     public override void EnterMoveState()
@@ -152,7 +160,7 @@ public class Calvary : BaseMonster
         Time.timeScale = 1.0f;
     }
 
-    private void CansmashAttack()
+    private void CanSmashAttack()
     {
         if (_smashAttackCurrentTime >= _smashAttackResetTime)
         {
@@ -183,6 +191,14 @@ public class Calvary : BaseMonster
     {
         _smashAttackCurrentTime = 0.0f;
         StartCoroutine("CheckSmashAttackTime");
+    }
+
+    private void ChangeAttackRange()
+    {
+        if (_smashAttackCurrentTime >= _smashAttackResetTime)
+        {
+            _attackRange = _originalRange * 3;
+        }
     }
 }
 
