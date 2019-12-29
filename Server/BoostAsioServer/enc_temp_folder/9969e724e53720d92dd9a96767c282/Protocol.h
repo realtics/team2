@@ -425,7 +425,6 @@ struct PKT_REQ_INVENTORY_CLOSE : PACKET_HEADER
 	char userID[MAX_USER_ID];
 	char equip[MAX_USER_EQUIP][MAX_USER_ITEM_LEN];
 	char inventory[MAX_USER_INVENTORY][MAX_USER_ITEM_LEN];
-	int userExo;
 	
 	void Init()
 	{
@@ -434,7 +433,6 @@ struct PKT_REQ_INVENTORY_CLOSE : PACKET_HEADER
 		memset(userID, 0, MAX_USER_ID);
 		memset(equip, 0, sizeof(equip));
 		memset(inventory, 0, sizeof(inventory));
-		userExo = 0;
 	}
 };
 

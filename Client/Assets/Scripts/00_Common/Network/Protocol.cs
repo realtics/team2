@@ -229,6 +229,7 @@ public struct PKT_REQ_INVENTORY_CLOSE
 	public string userID;
 	public List<string> equip;
 	public List<string> inventory;
+	public int userExo;
 }
 
 public struct PKT_RES_INVENTORY_CLOSE
