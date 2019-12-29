@@ -9,7 +9,7 @@ public class BlacheAttackBox : MonoBehaviour
     void Start()
     {
         _sender = new AttackInfoSender();
-        _sender.Damage = 99999.0f;
+        _sender.Damage = 6666.0f;
         _sender.ExtraHeightValue = 0.2f;
         _sender.StunDuration = 1.0f;
     }
