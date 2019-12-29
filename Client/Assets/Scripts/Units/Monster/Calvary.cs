@@ -21,9 +21,23 @@ public class Calvary : BaseMonster
     private Transform _smashAttackBox;
 
     private AudioSource _audioSource;
-	[SerializeField]
-	private AudioClip _meet;
+    [Space]
+    [SerializeField]
+    private AudioClip _meet;
+    [SerializeField]
+    private AudioClip _madMode;
+    [SerializeField]
+    private AudioClip _baseAttack;
+    [SerializeField]
+    private AudioClip _smashAttack;
 
+    [Space]
+    [SerializeField]
+    private Transform _madBackEffect;
+    [SerializeField]
+    private Transform _madFrontEffect;
+
+    private bool _isMadeMode = false;
     private float _originalRange;
 
     protected override void SetInitialState()
@@ -35,22 +49,26 @@ public class Calvary : BaseMonster
     }
 
     protected override void Awake()
-	{
-		base.Awake();
-		_audioSource = GetComponent<AudioSource>();
-		OnSuperArmor();
-	}
+    {
+        base.Awake();
+        _audioSource = GetComponent<AudioSource>();
+        OnSuperArmor();
+    }
 
-	private void Start()
-	{
-		_audioSource.clip = _meet;
-		_audioSource.Play();
-	}
+    private void Start()
+    {
+        AudioPlay(_meet);
+        _audioSource.Play();
+    }
 
-	protected override void FixedUpdate()
+    protected override void FixedUpdate()
     {
         base.FixedUpdate();
 
+        if (!_isMadeMode && _currentHp <= _maxHp / 2)
+        {
+            ChangeMadMode();
+        }
         ChangeAttackRange();
 
         if (Input.GetKeyDown(KeyCode.F2))
@@ -76,17 +94,17 @@ public class Calvary : BaseMonster
         base.EnterAttackState();
         CanSmashAttack();
         _animator.SetInteger("attackMotion", (int)_currentAttackMotion);
-	}
+    }
 
     public override void UpdateAttackState()
     {
         base.UpdateAttackState();
-	}
+    }
 
     public override void ExitAttackState()
     {
         base.ExitAttackState();
-		_animator.SetFloat("animSpeed", 1.0f);
+        _animator.SetFloat("animSpeed", 1.0f);
         _attackRange = _originalRange;
     }
 
@@ -109,8 +127,8 @@ public class Calvary : BaseMonster
     //HitState
     public override void EnterHitState()
     {
-        base.EnterHitState();	
-	}
+        base.EnterHitState();
+    }
 
     public override void UpdateHitState()
     {
@@ -120,15 +138,22 @@ public class Calvary : BaseMonster
     public override void ExitHitState()
     {
         base.ExitHitState();
-	}
+    }
 
     //DieState
     public override void EnterDieState()
     {
-        StartCoroutine(TimeScaleSlow());
-		EffectManager.Instance.SpawnClearCircle(HitBoxCenter);
+        if (_madBackEffect.gameObject.activeSelf)
+        {
+            _madBackEffect.gameObject.SetActive(false);
+            _madFrontEffect.gameObject.SetActive(false);
+        }
+        OffSuperArmor();
 
-		base.EnterDieState();
+        StartCoroutine(TimeScaleSlow());
+        EffectManager.Instance.SpawnClearCircle(HitBoxCenter);
+
+        base.EnterDieState();
     }
 
     public override void UpdateDieState()
@@ -166,11 +191,13 @@ public class Calvary : BaseMonster
         {
             _currentAttackMotion = CalvaryAttackMotion.AttackMotion2;
             StartCheckSmashAttackTime();
+            AudioPlay(_smashAttack);
         }
         else
         {
             _currentAttackMotion = CalvaryAttackMotion.AttackMotion1;
             _animator.SetFloat("animSpeed", 1.5f);
+            AudioPlay(_baseAttack);
         }
     }
 
@@ -199,6 +226,26 @@ public class Calvary : BaseMonster
         {
             _attackRange = _originalRange * 3;
         }
+    }
+
+    private void ChangeMadMode()
+    {
+        AudioPlay(_madMode);
+
+        _madBackEffect.gameObject.SetActive(true);
+        _madFrontEffect.gameObject.SetActive(true);
+
+        _attackDamage *= 2f;
+        _defensePercent += 0.25f;
+        _moveSpeed *= 1.5f;
+
+        _isMadeMode = true;
+    }
+
+    private void AudioPlay(AudioClip audioClip)
+    {
+        _audioSource.clip = audioClip;
+        _audioSource.Play();
     }
 }
 
