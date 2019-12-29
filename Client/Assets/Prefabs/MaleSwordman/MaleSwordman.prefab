@@ -246,7 +246,7 @@ MonoBehaviour:
     _horizontalExtraMoveValue: -2
     _verticalExtraMoveDuration: 0
     _verticalExtraMoveValue: 0
-    _extraHeightValue: 0.4
+    _extraHeightValue: 0.15
     _stunDuration: 1
   attackBox: {fileID: 5955886557323474264}
   _attackIndex: 0
