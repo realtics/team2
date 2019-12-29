@@ -117,7 +117,14 @@ public class DungeonGameManager : MonoBehaviour
 
     void CountOver()
     {
-        MoveToScene((int)SceneIndex.Lobby);
+        if(NetworkManager.Instance.IsSingle)
+        {
+            MoveToScene((int)SceneIndex.LobbySingle);
+        }
+        else
+        {
+            MoveToScene((int)SceneIndex.Lobby);
+        }
     }
 
     public void GameClear()
