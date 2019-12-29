@@ -2748,7 +2748,7 @@ PrefabInstance:
     - target: {fileID: 2027343449210597697, guid: 1062798e89fa7ff48b49faaa1a382347,
         type: 3}
       propertyPath: _smashAttackResetTime
-      value: 8
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6080406183113681298, guid: 1062798e89fa7ff48b49faaa1a382347,
         type: 3}
