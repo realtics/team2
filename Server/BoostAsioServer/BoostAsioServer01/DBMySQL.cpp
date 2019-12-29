@@ -159,8 +159,6 @@ int DBMySQL::DBInventoryCreate(std::string inputID)
 	return RESULT_INVENTORY_CHECK::RESULT_INVENTORY_CHECK_UNKNOWN;
 }
 
-
-
 int DBMySQL::DBLoginCheckUserID(std::string checkID)
 {
 	mysql_select_db(&_mysql, _dbName);
@@ -435,7 +433,6 @@ std::array<std::string, MAX_INVENTORY_COLUMN> DBMySQL::DBInventorySelect(std::st
 {
 	mysql_select_db(&_mysql, _dbName);
 
-
 	std::string DBQuery;
 	DBQuery += "SELECT* FROM inventory WHERE user_id = '";
 	DBQuery += inputID.c_str();
@@ -486,8 +483,6 @@ std::array<std::string, MAX_INVENTORY_COLUMN> DBMySQL::DBInventorySelect(std::st
 int DBMySQL::DBInventoryUpdate(std::string inputID, char (*arr1)[MAX_USER_ITEM_LEN], char (*arr2)[MAX_USER_ITEM_LEN])
 {
 	mysql_select_db(&_mysql, _dbName);
-	
-	// 기본 형태 : UPDATE inventory SET equip_00='6012', equip_01='0', equip_02='1006', equip_03='1005', equip_04='0', equip_05='0', equip_06='6002', equip_07='0', equip_08='0', equip_09='6011', equip_10='0', equip_11='6004', user_inventory='6002,1005,1006' WHERE user_id="test";
 
 	std::string inventoryString;
 	for (int i = 0; i < MAX_USER_INVENTORY; i++)
