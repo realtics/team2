@@ -1217,11 +1217,12 @@ public class NetworkManager : MonoBehaviour
 			packetIndex = (short)PACKET_INDEX.REQ_INVENTORY_CLOSE,
 			packetSize = (short)DefineDefaultValue.packetSize
 		};
-		var packData = new PKT_REQ_INVENTORY_CLOSE
-		{
-			header = packHeader,
-			userID = _accountId,
-			equip = NetworkInventoryInfoSaver.Instance.EquipIDs,
+        var packData = new PKT_REQ_INVENTORY_CLOSE
+        {
+            header = packHeader,
+            userID = _accountId,
+            userExo = NetworkInventoryInfoSaver.Instance.Hangma,
+            equip = NetworkInventoryInfoSaver.Instance.EquipIDs,
 			inventory = NetworkInventoryInfoSaver.Instance.InventoryIDs
 		};
 		DebugLogList(packData.ToString());

@@ -61,6 +61,10 @@ public class ChracterStatInfo : MonoBehaviour
 		_mentalityBonusText.text = PlayerManager.Instance.Stat.TotalStat.mentality.ToString();
 		_hangmaBonusText.text = PlayerManager.Instance.Stat.TotalStat.hangma.ToString();
 
+        if(!NetworkManager.Instance.IsSingle)
+        {
+            NetworkInventoryInfoSaver.Instance.Hangma = PlayerManager.Instance.Stat.TotalStat.hangma;
+        }
     }
 
 	public void SetCharacterInfo()
