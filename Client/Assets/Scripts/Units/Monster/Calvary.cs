@@ -1,6 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 public class Calvary : BaseMonster
 {
@@ -71,11 +74,13 @@ public class Calvary : BaseMonster
         }
         ChangeAttackRange();
 
+#if UNITY_EDITOR
         if (Input.GetKeyDown(KeyCode.F2))
         {
             //MonsterManager.Instance.ReceiveMonsterDie(this);
             ChangeDieState();
         }
+#endif
     }
 
     public void ActiveSmashAttackBox()

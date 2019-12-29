@@ -1,6 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 public class BaseMonster : MonoBehaviour
 {
@@ -135,13 +138,14 @@ public class BaseMonster : MonoBehaviour
 			_isDead = true;
 		}
 		_state.Update();
-
-		//치트키
-		if (Input.GetKeyDown(KeyCode.F1))
+#if UNITY_EDITOR
+        //치트키
+        if (Input.GetKeyDown(KeyCode.F1))
 		{
 			ChangeState(_dieState);
 		}
-	}
+#endif
+    }
 
 	private void OnTriggerStay2D(Collider2D other)
 	{
@@ -451,6 +455,11 @@ public class BaseMonster : MonoBehaviour
 	{
 		ChangeState(_dieState);
 	}
+
+    protected void ForceChangeAttackState()
+    {
+        ChangeState(_attackState);
+    }
 
 	//HitState
 	public virtual void EnterHitState()
