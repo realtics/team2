@@ -192,7 +192,9 @@ public class NetworkManager : MonoBehaviour
                     if (input != null)
                         input.PC = pc;
 
-                    SceneManager.LoadScene((int)SceneIndex.Inventory, LoadSceneMode.Additive);
+                    NetworkInventoryInfoSaver.Instance.InventoryInitValue = false;
+                    OpenInventory();
+                   
                 }
                 else
 					newPlayer.transform.GetChild(0).tag = "UserPlayer";
@@ -539,11 +541,20 @@ public class NetworkManager : MonoBehaviour
                         MapLoader.instance.RES_DUNGEON_HELL_RESULT_ITEM = true;
                     }
                     break;
+                case (short)PACKET_INDEX.RES_INVENTORY_CLOSE:
+                    {
+                        var desJson = JsonConvert.DeserializeObject<PKT_RES_INVENTORY_CLOSE>(jsonData);
+
+                        Debug.Log(desJson.checkResult);
+                    }
+                    break;
                 case (short)PACKET_INDEX.RES_INVENTORY_OPEN:
                     {
                         var desJson = JsonConvert.DeserializeObject<PKT_RES_INVENTORY_OPEN>(jsonData);
 
                         NetworkInventoryInfoSaver.Instance.SaveItemIDs(desJson.equip, desJson.inventory);
+
+                        NetworkInventoryInfoSaver.Instance.RES_INVENTORY_OPEN = true;
                     }
                     break;
                 default:

@@ -35,15 +35,20 @@ public class InventoryManager : MonoBehaviour
 
     private void Start()
     {
-        if (NetworkManager.Instance.IsSingle || NetworkInventoryInfoSaver.Instance.testValue == false)
+        if (NetworkManager.Instance.IsSingle)
         {
             Load();
-            NetworkInventoryInfoSaver.Instance.testValue = true;
         }
            
-        else if(!NetworkManager.Instance.IsSingle && NetworkInventoryInfoSaver.Instance.testValue == true)
+        else if(!NetworkManager.Instance.IsSingle)
         {
             LoadMulti();
+
+            if (NetworkInventoryInfoSaver.Instance.InventoryInitValue == false)
+            {
+                NetworkInventoryInfoSaver.Instance.InventoryInitValue = true;
+                DNFSceneManager.instance.UnLoadScene((int)SceneIndex.Inventory);
+            }
         }
 	}
 

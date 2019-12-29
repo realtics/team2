@@ -95,6 +95,7 @@ public class ItemSaveManager : MonoBehaviour
             InventoryManager.Instance.Equip((EquipableItem)item);
         }
         //LoadInventory
+        if (NetworkInventoryInfoSaver.Instance.InventoryIDs != null)
         foreach (string ID in NetworkInventoryInfoSaver.Instance.InventoryIDs)
         {
             InventoryManager.Instance.Inventory.AddItem(itemDatabase.GetItemCopyByNetId(ID));
