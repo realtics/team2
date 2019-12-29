@@ -4,11 +4,33 @@ using UnityEngine;
 
 public class Calvary : BaseMonster
 {
-	private AudioSource _audioSource;
+    private enum CalvaryAttackMotion
+    {
+        AttackMotion1 = 0,
+        AttackMotion2 = 1,
+        AttacknMotionEnd = 2
+    }
+    private CalvaryAttackMotion _currentAttackMotion;
+
+    [SerializeField]
+    private float _smashAttackResetTime;
+    [SerializeField]
+    private float _smashAttackCurrentTime;
+
+    [SerializeField]
+    private Transform _smashAttackBox;
+
+    private AudioSource _audioSource;
 	[SerializeField]
 	private AudioClip _meet;
 
-	protected override void Awake()
+    protected override void SetInitialState()
+    {
+        base.SetInitialState();
+        _smashAttackCurrentTime = _smashAttackResetTime;
+    }
+
+    protected override void Awake()
 	{
 		base.Awake();
 		_audioSource = GetComponent<AudioSource>();
@@ -31,11 +53,22 @@ public class Calvary : BaseMonster
         }
     }
 
-	//AttackState
-	public override void EnterAttackState()
+    public void ActiveSmashAttackBox()
+    {
+        _smashAttackBox.gameObject.SetActive(true);
+    }
+
+    public void InactiveSmashAttackBox()
+    {
+        _smashAttackBox.gameObject.SetActive(false);
+    }
+
+    //AttackState
+    public override void EnterAttackState()
     {
         base.EnterAttackState();
-		_animator.SetFloat("animSpeed", 1.5f);
+        CansmashAttack();
+        _animator.SetInteger("attackMotion", (int)_currentAttackMotion);
 	}
 
     public override void UpdateAttackState()
@@ -117,6 +150,39 @@ public class Calvary : BaseMonster
         Time.timeScale = 0.1f;
         yield return new WaitForSeconds(0.2f);
         Time.timeScale = 1.0f;
+    }
+
+    private void CansmashAttack()
+    {
+        if (_smashAttackCurrentTime >= _smashAttackResetTime)
+        {
+            _currentAttackMotion = CalvaryAttackMotion.AttackMotion2;
+            StartCheckSmashAttackTime();
+        }
+        else
+        {
+            _currentAttackMotion = CalvaryAttackMotion.AttackMotion1;
+            _animator.SetFloat("animSpeed", 1.5f);
+        }
+    }
+
+    IEnumerator CheckSmashAttackTime()
+    {
+        _smashAttackCurrentTime += Time.deltaTime;
+
+        if (_smashAttackCurrentTime >= _smashAttackResetTime)
+        {
+            StopCoroutine("CheckSmashAttackTime");
+            yield break;
+        }
+        yield return new WaitForFixedUpdate();
+        StartCoroutine("CheckSmashAttackTime");
+    }
+
+    protected void StartCheckSmashAttackTime()
+    {
+        _smashAttackCurrentTime = 0.0f;
+        StartCoroutine("CheckSmashAttackTime");
     }
 }
 

@@ -22,4 +22,9 @@ public class DestroyEffect : MonoBehaviour
             _currentTime = 0.0f;
         }
     }
+
+    public void OnEffect()
+    {
+        gameObject.SetActive(true);
+    }
 }
