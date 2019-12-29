@@ -537,9 +537,11 @@ public class BaseMonster : MonoBehaviour
 	//DownRecoveryState
 	public virtual void EnterDownRecoveryState()
 	{
+        _isDown = false;
         _isDownRecovery = true;
+        _animator.SetBool("isDown", false);
         _animator.SetBool("isDownRecovery", true);
-	}
+    }
 
 	public virtual void UpdateDownRecoveryState()
 	{
