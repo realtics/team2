@@ -19,6 +19,12 @@ const int MAX_USER_NAME = 50;
 
 const int MAX_RESULT_ITEM_ID = 50;
 
+const int MAX_USER_ITEM_LEN = 5;
+const int MAX_USER_EQUIP = 12;
+const int MAX_USER_INVENTORY = 25;
+
+const int MAX_INVENTORY_COLUMN = 15;
+
 enum DB_INDEX : int
 {
 	DB_INDEX_RESULT_ITEMS = 1000,
@@ -80,6 +86,13 @@ enum RESULT_SIGN_UP_CHECK : int
 	RESULT_SIGN_UP_OVERLAP_ID = 2,
 
 	RESULT_SIGN_UP_UNKNOWN = -1,
+};
+
+enum RESULT_INVENTORY_CHECK : int
+{
+	RESULT_INVENTORY_CHECK_SUCCESS = 1,
+
+	RESULT_INVENTORY_CHECK_UNKNOWN = -1,
 };
 
 enum RESULT_BEFORE_LOGIN_CHECK : int
@@ -375,27 +388,31 @@ struct PKT_REQ_INVENTORY_OPEN : PACKET_HEADER
 
 struct PKT_RES_INVENTORY_OPEN : PACKET_HEADER
 {
-	std::list<std::string> equip;
-	std::list<std::string> inventory;
+	char equip[MAX_USER_EQUIP][MAX_USER_ITEM_LEN];
+	char inventory[MAX_USER_INVENTORY][MAX_USER_ITEM_LEN];
 		
 	void Init()
 	{
 		packetIndex = PACKET_INDEX::RES_INVENTORY_OPEN;
 		packetSize = sizeof(PKT_RES_INVENTORY_OPEN);
+		memset(equip, 0, sizeof(equip));
+		memset(inventory, 0, sizeof(inventory));
 	}
 };
 
 struct PKT_REQ_INVENTORY_CLOSE : PACKET_HEADER
 {
 	char userID[MAX_USER_ID];
-	std::list<std::string> equip;
-	std::list<std::string> inventory;
+	char equip[MAX_USER_EQUIP][MAX_USER_ITEM_LEN];
+	char inventory[MAX_USER_INVENTORY][MAX_USER_ITEM_LEN];
 	
 	void Init()
 	{
 		packetIndex = PACKET_INDEX::REQ_INVENTORY_CLOSE;
 		packetSize = sizeof(PKT_REQ_INVENTORY_CLOSE);
 		memset(userID, 0, MAX_USER_ID);
+		memset(equip, 0, sizeof(equip));
+		memset(inventory, 0, sizeof(inventory));
 	}
 };
 

@@ -274,6 +274,7 @@ void Session::Deserialization(char* jsonData)
 		packet.Init();
 		packet.packetIndex = packetIndex;
 		packet.packetSize = packetSize;
+		strcpy_s(packet.userID, MAX_USER_ID, ptRecv.get<std::string>("userID").c_str());
 		memcpy(&_packetBuffer[_packetBufferMark], (char*)&packet, sizeof(packet));
 	}
 	break;
@@ -283,18 +284,20 @@ void Session::Deserialization(char* jsonData)
 		packet.Init();
 		packet.packetIndex = packetIndex;
 		packet.packetSize = packetSize;
-
-		//packet.equip = ptRecv.get<std::string>>("equip");
+		strcpy_s(packet.userID, MAX_USER_ID, ptRecv.get<std::string>("userID").c_str());
+		
+		int equipNum = 0;
 		for (auto i : as_list<std::string>(ptRecv, "equip"))
 		{
-			std::cout << i << std::endl;
-			packet.equip.push_back(i);
+			strcpy_s(packet.equip[equipNum], MAX_USER_ITEM_LEN, i.c_str());
+			equipNum++;
 		}
 
+		int inventoryNum = 0;
 		for (auto i : as_list<std::string>(ptRecv, "inventory"))
 		{
-			std::cout << i << std::endl;
-			packet.inventory.push_back(i);
+			strcpy_s(packet.inventory[inventoryNum], MAX_USER_ITEM_LEN, i.c_str());
+			inventoryNum++;
 		}
 
 		memcpy(&_packetBuffer[_packetBufferMark], (char*)&packet, sizeof(packet));

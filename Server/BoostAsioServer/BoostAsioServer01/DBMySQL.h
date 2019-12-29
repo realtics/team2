@@ -30,7 +30,8 @@ public:
 	void DBMySQLVersion();
 	void DBDataLoginSelectAll();
 
-	int DBSignUp(std::string inputID, std::string inputPW, std::string inputName);
+	int DBSignUpCreate(std::string inputID, std::string inputPW, std::string inputName);
+	int DBInventoryCreate(std::string inputID);
 
 	int DBLoginCheckUserID(std::string checkID);
 	int DBLoginCheckUserPW(std::string checkID, std::string checkPW);
@@ -38,8 +39,13 @@ public:
 	int DBDungeonClearResultItemSize();
 	std::string DBDungeonClearResultItem(int resultRandom);
 
+
 	int DBDungeonHellResultItemSize();
 	std::string DBDungeonHellResultItem(int resultRandom);
+
+
+	std::array<std::string, MAX_INVENTORY_COLUMN> DBInventorySelect(std::string inputID);
+	int DBInventoryUpdate(std::string inputID, char (*arr1)[MAX_USER_ITEM_LEN], char(*arr2)[MAX_USER_ITEM_LEN]);
 	
-	std::string DBLoginGetUserName(std::string userID);
+	std::string DBLoginGetUserName(std::string inputID);
 };

@@ -7,5 +7,5 @@ CREATE TABLE `result_items` (
 )
 COLLATE='utf8mb4_0900_ai_ci'
 ENGINE=InnoDB
-AUTO_INCREMENT=14
+AUTO_INCREMENT=9
 ;

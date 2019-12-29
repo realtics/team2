@@ -124,7 +124,8 @@ void AsioServer::ProcessPacket(const int sessionID, const char* pData)
 		PKT_RES_SIGN_UP SendPkt;
 		SendPkt.Init();
 		
-		SendPkt.checkResult = _DBMysql.DBSignUp(pPacket->userID, pPacket->userPW, pPacket->userName);
+		SendPkt.checkResult = _DBMysql.DBSignUpCreate(pPacket->userID, pPacket->userPW, pPacket->userName);
+		_DBMysql.DBInventoryCreate(pPacket->userID);
 
 		// json
 		boost::property_tree::ptree ptSendHeader;
@@ -233,7 +234,7 @@ void AsioServer::ProcessPacket(const int sessionID, const char* pData)
 		SendPkt.Init();
 		
 		std::cout << "\"" << _sessionID << "\"번 클라이언트 로그인 성공" << std::endl;
-
+		
 		SendPkt.isSuccess = true;
 		SendPkt.sessionID = _sessionID;
 		
@@ -588,48 +589,130 @@ void AsioServer::ProcessPacket(const int sessionID, const char* pData)
 	break;
 	case PACKET_INDEX::REQ_INVENTORY_OPEN:
 	{
+		PKT_REQ_INVENTORY_OPEN* pPacket = (PKT_REQ_INVENTORY_OPEN*)pData;
 
+		PKT_RES_INVENTORY_OPEN userInven;
+		userInven.Init();
+
+		std::array<std::string, MAX_INVENTORY_COLUMN> userDBInventory = _DBMysql.DBInventorySelect(pPacket->userID);
+
+		int columnCorrection = MAX_INVENTORY_COLUMN - MAX_USER_EQUIP - 1;
+		for (int i = 0; i < MAX_USER_EQUIP; i++)
+		{
+			strcpy_s(userInven.equip[i], MAX_USER_ITEM_LEN, userDBInventory[(i + columnCorrection)].c_str());
+		}
+
+		std::string inven = userDBInventory[MAX_INVENTORY_COLUMN - 1];
+		for (int i = 0; i < MAX_USER_INVENTORY; i++)
+		{
+			if (!strcmp(inven.c_str(), ""))
+				break;
+
+			if (inven.find(",") != -1)
+			{
+				std::string invenData;
+				invenData = inven.substr(0, MAX_USER_ITEM_LEN - 1);
+
+				strcpy_s(userInven.inventory[i], MAX_USER_ITEM_LEN, invenData.c_str());
+
+				inven.erase(0, MAX_USER_ITEM_LEN);
+			}
+			else
+			{
+				if (strcmp(inven.c_str(), "") != 0)
+				{
+					strcpy_s(userInven.inventory[i], MAX_USER_ITEM_LEN, inven.c_str());
+					inven.erase(0, MAX_USER_ITEM_LEN);
+				}
+				else
+					break;
+			}
+		}
+
+		boost::property_tree::ptree ptSendHeader;
+		ptSendHeader.put<short>("packetIndex", userInven.packetIndex);
+		ptSendHeader.put<short>("packetSize", userInven.packetSize);
+
+		boost::property_tree::ptree ptSend;
+		ptSend.add_child("header", ptSendHeader);
+
+		boost::property_tree::ptree ptChild1[MAX_USER_EQUIP];
+		boost::property_tree::ptree ptEquipChildren;
+		boost::property_tree::ptree ptChild2[MAX_USER_INVENTORY];
+		boost::property_tree::ptree ptInventoryChildren;
+
+		int equipNum = 0;
+		for (int i = 0; i < MAX_USER_EQUIP; i++)
+		{
+			ptChild1[equipNum].put("", userInven.equip[i]);
+			ptEquipChildren.push_back(std::make_pair("", ptChild1[equipNum]));
+			equipNum++;
+		}
+		ptSend.add_child("equip", ptEquipChildren);
+
+		int inventoryNum = 0;
+		for (int i = 0; i < MAX_USER_INVENTORY; i++)
+		{
+			if (!strcmp(userInven.inventory[i], ""))
+			{
+				ptChild2[inventoryNum].empty();
+				ptInventoryChildren.push_back(std::make_pair("", ptChild2[inventoryNum]));
+				break;
+			}
+			ptChild2[inventoryNum].put("", userInven.inventory[i]);
+			ptInventoryChildren.push_back(std::make_pair("", ptChild2[inventoryNum]));
+			inventoryNum++;
+		}
+		ptSend.add_child("inventory", ptInventoryChildren);
+
+		std::string stringRecv;
+		std::ostringstream oss(stringRecv);
+		boost::property_tree::write_json(oss, ptSend, false);
+		std::string sendStr = oss.str();
+		std::cout << "[서버->클라] " << sendStr << std::endl;
+
+		_sessionList[sessionID]->PostSend(false, std::strlen(sendStr.c_str()), (char*)sendStr.c_str());
 	}
 	break;
 	case PACKET_INDEX::REQ_INVENTORY_CLOSE:
 	{
 		PKT_REQ_INVENTORY_CLOSE* pPacket = (PKT_REQ_INVENTORY_CLOSE*)pData;
 
-		PKT_REQ_INVENTORY_CLOSE userInven;
+		PKT_RES_INVENTORY_CLOSE userInven;
 		userInven.Init();
 
-		//아직 작업 중
+		userInven.checkResult = _DBMysql.DBInventoryUpdate(pPacket->userID, pPacket->equip, pPacket->inventory);
 
-		//userInven.equip.assign(pPacket->equip.begin(), pPacket->equip.end());
-		//userInven.inventory.assign(pPacket->inventory.begin(), pPacket->inventory.end());
+		boost::property_tree::ptree ptSendHeader;
+		ptSendHeader.put<short>("packetIndex", userInven.packetIndex);
+		ptSendHeader.put<short>("packetSize", userInven.packetSize);
 
-		//boost::property_tree::ptree ptSendHeader;
-		//ptSendHeader.put<short>("packetIndex", userInven.packetIndex);
-		//ptSendHeader.put<short>("packetSize", userInven.packetSize);
+		boost::property_tree::ptree ptSend;
+		ptSend.add_child("header", ptSendHeader);
+		ptSend.put<int>("checkResult", userInven.checkResult);
 
-		//boost::property_tree::ptree ptSend;
-		//ptSend.add_child("header", ptSendHeader);
-		//
-		//boost::property_tree::ptree ptChild[12];
-		//boost::property_tree::ptree ptChildren;
+		std::string stringRecv;
+		std::ostringstream oss(stringRecv);
+		boost::property_tree::write_json(oss, ptSend, false);
+		std::string sendStr = oss.str();
 
-		//int num = 0;
-		//for (auto i : as_list<std::string>(ptSend, "equip"))
-		//{
-		//	ptChild[num].put("", i);
+		short JsonDataAllPacketSize = JsonDataSize(sendStr);
 
-		//	ptChildren.push_back(std::make_pair("", ptChild[num]));
+		boost::property_tree::ptree ptSendHeader2;
+		ptSendHeader2.put<short>("packetIndex", userInven.packetIndex);
+		ptSendHeader2.put<short>("packetSize", JsonDataAllPacketSize);
 
-		//	num++;
-		//}
-		//
-		//ptSend.add_child("equip", ptChildren);
-		//
-		//std::string stringRecv;
-		//std::ostringstream oss(stringRecv);
-		//boost::property_tree::write_json(oss, ptSend, false);
-		//std::string sendStr = oss.str();
-		//std::cout << "[서버->클라] " << sendStr << std::endl;
+		boost::property_tree::ptree ptSend2;
+		ptSend2.add_child("header", ptSendHeader2);
+		ptSend2.put<int>("checkResult", userInven.checkResult);
+
+		std::string stringRecv2;
+		std::ostringstream oss2(stringRecv2);
+		boost::property_tree::write_json(oss2, ptSend2, false);
+		std::string sendStr2 = oss2.str();
+		std::cout << "[서버->클라] " << sendStr2 << std::endl;
+
+		_sessionList[sessionID]->PostSend(false, std::strlen(sendStr2.c_str()), (char*)sendStr2.c_str());
 	}
 	break;
 
