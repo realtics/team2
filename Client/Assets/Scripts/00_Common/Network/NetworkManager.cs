@@ -538,7 +538,7 @@ public class NetworkManager : MonoBehaviour
 
                         NetworkInventoryInfoSaver.Instance.ItemID = itemID;
 
-                        MapLoader.instance.RES_DUNGEON_HELL_RESULT_ITEM = true;
+                        MapLoader.Instance.RES_DUNGEON_HELL_RESULT_ITEM = true;
                     }
                     break;
                 case (short)PACKET_INDEX.RES_INVENTORY_CLOSE:

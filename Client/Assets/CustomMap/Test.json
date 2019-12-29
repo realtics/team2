@@ -132,7 +132,7 @@
       ],
       "monsterInfos": [
         {
-          "filePath": "Calvary",
+          "filePath": "Monster/Calvary",
           "position": {
             "x": 0.5,
             "y": -7.5,

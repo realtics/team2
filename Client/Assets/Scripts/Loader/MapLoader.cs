@@ -153,9 +153,9 @@ public class MapLoader : Single.Singleton<MapLoader>
 
     private T JsonLoad<T>(string fileName)
     {
-        SpawnManager.instance.LoadMapAssetBundle(_mapFolderName);
+        SpawnManager.Instance.LoadMapAssetBundle(_mapFolderName);
  
-        TextAsset textAsset = SpawnManager.instance.LoadMapObjectAsset(fileName) as TextAsset;
+        TextAsset textAsset = SpawnManager.Instance.LoadMapObjectAsset(fileName) as TextAsset;
 
         string dungeonText = textAsset.text;
         return JsonConvert.DeserializeObject<T>(dungeonText);

@@ -6,16 +6,16 @@ namespace Single
     public class Singleton<T> where T : class, new()
     {
         protected static object _instanceLock = new object();
-        protected static volatile T _instance;
-        public static T instance
+        protected static volatile T _Instance;
+        public static T Instance
         {
             get
             {
                 lock (_instanceLock)
                 {
-                    if (null == _instance) _instance = new T();
+                    if (null == _Instance) _Instance = new T();
                 }
-                return _instance;
+                return _Instance;
             }
         }
     }

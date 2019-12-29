@@ -47,7 +47,7 @@ public class InventoryManager : MonoBehaviour
             if (NetworkInventoryInfoSaver.Instance.InventoryInitValue == false)
             {
                 NetworkInventoryInfoSaver.Instance.InventoryInitValue = true;
-                DNFSceneManager.instance.UnLoadScene((int)SceneIndex.Inventory);
+                DNFSceneManager.Instance.UnLoadScene((int)SceneIndex.Inventory);
             }
         }
 	}

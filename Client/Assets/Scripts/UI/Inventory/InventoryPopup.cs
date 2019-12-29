@@ -16,7 +16,7 @@ public class InventoryPopup : MonoBehaviour
     {
         if (NetworkInventoryInfoSaver.Instance.RES_INVENTORY_OPEN)
         {
-            DNFSceneManager.instance.LoadSceneAddtive((int)SceneIndex.Inventory);
+            DNFSceneManager.Instance.LoadSceneAddtive((int)SceneIndex.Inventory);
             NetworkInventoryInfoSaver.Instance.RES_INVENTORY_OPEN = false;
         }
     }
@@ -24,7 +24,7 @@ public class InventoryPopup : MonoBehaviour
     public void ClickInventory()
 	{
         if(NetworkManager.Instance.IsSingle)
-		DNFSceneManager.instance.LoadSceneAddtive((int)SceneIndex.Inventory);
+		DNFSceneManager.Instance.LoadSceneAddtive((int)SceneIndex.Inventory);
 
         else
         {
