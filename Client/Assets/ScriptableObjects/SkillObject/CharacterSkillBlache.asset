@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: CharacterSkillBlache
   m_EditorClassIdentifier: 
   AttackInfo:
-    _damage: 6666
+    _damage: 9999
     _horizontalExtraMoveDuration: 0
     _horizontalExtraMoveValue: 0
     _verticalExtraMoveDuration: 0

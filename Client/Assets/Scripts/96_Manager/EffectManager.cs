@@ -28,6 +28,8 @@ public class EffectManager : MonoBehaviour
 	private Transform _cutinParent;
     [SerializeField]
     private GameObject _hellItem;
+	[SerializeField]
+	private GameObject _coinCry;
 
 	private void Awake()
 	{

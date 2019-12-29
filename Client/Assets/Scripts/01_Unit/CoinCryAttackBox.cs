@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BlacheAttackBox : MonoBehaviour
+public class CoinCryAttackBox : MonoBehaviour
 {
+    [SerializeField]
     private AttackInfoSender _sender;
 
-    public void SetAttackInfo(AttackInfoSender info)
+    private void Awake()
     {
-        _sender = info;
+        _sender.Attacker = transform;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
