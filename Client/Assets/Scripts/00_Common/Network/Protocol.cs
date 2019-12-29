@@ -33,6 +33,8 @@ enum PACKET_INDEX : short
 	REQ_DUNGEON_HELL_RESULT_ITEM = 351,
 	RES_DUNGEON_HELL_RESULT_ITEM = 352,
 
+	REQ_DUNGEON_HELL_ITEM_PICK_UP = 361,
+
 	REQ_INVENTORY_OPEN = 501,
 	RES_INVENTORY_OPEN = 502,
 
@@ -193,14 +195,21 @@ public struct PKT_RES_DUNGEON_CLEAR_RESULT_ITEM
 public struct PKT_REQ_DUNGEON_HELL_RESULT_ITEM
 {
 	public PACKET_HEADER header;
+	public string userID;
 }
 
 public struct PKT_RES_DUNGEON_HELL_RESULT_ITEM
 {
 	public PACKET_HEADER header;
+	public string userID;
 	public string itemID;
 }
 
+public struct REQ_DUNGEON_HELL_ITEM_PICK_UP
+{
+	public PACKET_HEADER header;
+	public string userID;
+}
 public struct PKT_REQ_INVENTORY_OPEN
 {
 	public PACKET_HEADER header;
