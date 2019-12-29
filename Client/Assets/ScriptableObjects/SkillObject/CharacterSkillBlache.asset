@@ -24,4 +24,4 @@ MonoBehaviour:
   skillPrefab: {fileID: 5148761421375241879, guid: 4ec3600802fa18a408c4c1abe0751902,
     type: 3}
   motion: 3
-  coolTime: 0
+  coolTime: 20
