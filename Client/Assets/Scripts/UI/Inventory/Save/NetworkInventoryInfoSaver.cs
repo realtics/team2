@@ -24,6 +24,8 @@ public class NetworkInventoryInfoSaver
     private string _itemID;
     private List<string> _inventoryIDs;
 	private List<string> _equipIDs;
+    private int _hangma;
+    public bool _inventoryInitValue = false;
 
     private bool _RES_INVENTORY_OPEN = false;
 
@@ -31,8 +33,9 @@ public class NetworkInventoryInfoSaver
     public List<string> InventoryIDs { get { return _inventoryIDs; } }
 	public List<string> EquipIDs { get { return _equipIDs; } }
     public bool RES_INVENTORY_OPEN { get { return _RES_INVENTORY_OPEN; } set { _RES_INVENTORY_OPEN = value; } }
+    public int Hangma { get { return _hangma; } set { _hangma = value; } }
 
-    public bool InventoryInitValue = false;
+    public bool InventoryInitValue { get { return _inventoryInitValue; } set { _inventoryInitValue = value; } }
 
     public void SaveItemIDs(ItemSlot[] equipSlots, ItemSlot[] inventorySlots)
 	{
