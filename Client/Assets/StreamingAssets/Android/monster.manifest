@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 1688151472
+CRC: 110826949
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: be4ed6979a22c83b69176ba31a452dbf
+    Hash: 9b5ffcd80af501c78728fd09a24d0428
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 49aa84bdce21ba14426722b6d8dfb473
+    Hash: d4091d0554761bbcdbb815f2864e6574
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -44,6 +44,8 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: 07977fa0d10651641b23300a1a2b3527, type: 3}
 - Class: 114
+  Script: {fileID: 11500000, guid: 6ee5e2d011e746d4e859d37337901761, type: 3}
+- Class: 114
   Script: {fileID: 11500000, guid: a5d041c509245134691aa8c3b1f5aef1, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 48d06c5856586af4b8c3570d7dc496f4, type: 3}
@@ -80,7 +82,6 @@ Assets:
 - Assets/Prefabs/Monster/Goblin/Unit/Goblin.prefab
 - Assets/Prefabs/Monster/Goblin/Effect/GoblinBaseAttackEffect.prefab
 - Assets/Prefabs/Monster/Tauarmy/Effect/TauarmyBaseAttackEffect.prefab
-- Assets/Prefabs/Monster/Calvary/Effect/CalvaryBaseAttackEffect.prefab
 - Assets/Prefabs/Monster/Calvary/Unit/Calvary.prefab
 - Assets/Prefabs/Monster/Goblin/Unit/HellGoblin.prefab
 Dependencies:
