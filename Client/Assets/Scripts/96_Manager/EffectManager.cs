@@ -84,4 +84,10 @@ public class EffectManager : MonoBehaviour
 		hellItem.transform.position = position;
 		hellItem.GetComponent<EpicDrop>().SetHellItem(item);
 	}
+
+	public void SpawnCoinCry(Vector3 position)
+	{
+		GameObject coinCry = ObjectPoolManager.Instance.GetRestObject(_coinCry);
+		coinCry.transform.position = position;
+	}
 }
