@@ -92,11 +92,13 @@ public class DungeonInfo
 }
 public class JsonData
 {
+    public string dungeonName;
     public List<DungeonInfo> dungeonObjectList = new List<DungeonInfo>();
 }
 
 public class DungeonJsonData
 {
+    public string dungeonName;
     public DungeonInfo[] DungeonInfos;
 }
 
@@ -135,6 +137,10 @@ public class MapLoader : Single.Singleton<MapLoader>
     public DungeonInfo GetDungeonInfo(int index)
     {
         return dungeonData.DungeonInfos[index];
+    }
+    public string GetDungeonName()
+    {
+        return dungeonData.dungeonName;
     }
     public void SetMap(string dungeonName)
     {

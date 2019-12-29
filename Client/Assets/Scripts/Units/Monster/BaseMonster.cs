@@ -1,6 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 public class BaseMonster : MonoBehaviour
 {
@@ -135,13 +138,14 @@ public class BaseMonster : MonoBehaviour
 			_isDead = true;
 		}
 		_state.Update();
-
-		//치트키
-		if (Input.GetKeyDown(KeyCode.F1))
+#if UNITY_EDITOR
+        //치트키
+        if (Input.GetKeyDown(KeyCode.F1))
 		{
 			ChangeState(_dieState);
 		}
-	}
+#endif
+    }
 
 	private void OnTriggerStay2D(Collider2D other)
 	{
@@ -452,6 +456,11 @@ public class BaseMonster : MonoBehaviour
 		ChangeState(_dieState);
 	}
 
+    protected void ForceChangeAttackState()
+    {
+        ChangeState(_attackState);
+    }
+
 	//HitState
 	public virtual void EnterHitState()
 	{
@@ -481,8 +490,10 @@ public class BaseMonster : MonoBehaviour
 				if (_isDown)
 				{
 					_isDown = false;
-					_animator.SetBool("isDown", false);
-					ChangeState(_downRecoveryState);
+                    _isDownRecovery = true;
+                    _animator.SetBool("isDown", false);
+                    _animator.SetBool("isDownRecovery", true);
+                    ChangeState(_downRecoveryState);
 				}
 				else
 				{
@@ -526,20 +537,20 @@ public class BaseMonster : MonoBehaviour
 	//DownRecoveryState
 	public virtual void EnterDownRecoveryState()
 	{
-		_isDownRecovery = true;
-		_animator.SetBool("isDownRecovery", true);
+        _isDownRecovery = true;
+        _animator.SetBool("isDownRecovery", true);
 	}
 
 	public virtual void UpdateDownRecoveryState()
 	{
-		if (!_animator.IsInTransition(0))
-		{
-			if (_animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f)
-			{
-				ChangeState(_moveState);
-			}
-		}
-	}
+        if (!_animator.IsInTransition(0))
+        {
+            if (_animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f)
+            {
+                ChangeState(_moveState);
+            }
+        }
+    }
 
 	public virtual void ExitDownRecoveryState()
 	{
