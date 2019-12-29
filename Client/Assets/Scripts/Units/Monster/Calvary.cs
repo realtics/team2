@@ -29,11 +29,6 @@ public class Calvary : BaseMonster
     private AudioClip _meet;
     [SerializeField]
     private AudioClip _madMode;
-    [SerializeField]
-    private AudioClip _baseAttack;
-    [SerializeField]
-    private AudioClip _smashAttack;
-
     [Space]
     [SerializeField]
     private Transform _madBackEffect;
@@ -104,15 +99,6 @@ public class Calvary : BaseMonster
 
     public override void UpdateAttackState()
     {
-        if (!_animator.IsInTransition(0) && !_CheckTrnasition)
-        {
-            if (_currentAttackMotion == CalvaryAttackMotion.AttackMotion2)
-                AudioPlay(_smashAttack);
-            else if (_currentAttackMotion == CalvaryAttackMotion.AttackMotion1)
-                AudioPlay(_baseAttack);
-           
-            _CheckTrnasition = true;
-        }
         base.UpdateAttackState();
     }
 

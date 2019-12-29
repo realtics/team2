@@ -150,14 +150,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5fd03d7ebb86a244b25e880f0d60706, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sender:
-    _damage: 0
-    _horizontalExtraMoveDuration: 0.2
-    _horizontalExtraMoveValue: -2
-    _verticalExtraMoveDuration: 0
-    _verticalExtraMoveValue: 0
-    _extraHeightValue: 0
-    _stunDuration: 1
 --- !u!1 &2955555381847146544
 GameObject:
   m_ObjectHideFlags: 0
@@ -630,6 +622,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _avatar: {fileID: 6108689419143669460}
   nicknameText: {fileID: 4062143340024954436}
+  attackInfo: []
+  attackBox: {fileID: 5091465504349147438}
+  _attackIndex: 0
 --- !u!114 &1445386797651293979
 MonoBehaviour:
   m_ObjectHideFlags: 0

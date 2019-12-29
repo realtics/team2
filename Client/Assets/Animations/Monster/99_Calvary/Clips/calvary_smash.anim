@@ -316,6 +316,13 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
+  - time: 0.5
+    functionName: PlayMonsterSound
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 3
+    messageOptions: 0
   - time: 0.5833333
     functionName: OnSmash02Effect
     data: 
@@ -327,14 +334,6 @@ AnimationClip:
     functionName: OnSmashCircleEffect
     data: 
     objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
-  - time: 0.5833333
-    functionName: PlayAudio
-    data: 
-    objectReferenceParameter: {fileID: 8300000, guid: eca9250d2c363334381b7005d3f93ca3,
-      type: 3}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
