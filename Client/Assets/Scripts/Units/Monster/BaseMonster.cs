@@ -545,7 +545,7 @@ public class BaseMonster : MonoBehaviour
 
 	public virtual void UpdateDownRecoveryState()
 	{
-        if (!_animator.IsInTransition(0))
+        if (_animator.GetCurrentAnimatorStateInfo(0).IsName("DownRecovery"))
         {
             if (_animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f)
             {
