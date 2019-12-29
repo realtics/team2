@@ -28,6 +28,8 @@ public class EffectManager : MonoBehaviour
 	private Transform _cutinParent;
     [SerializeField]
     private GameObject _hellItem;
+	[SerializeField]
+	private GameObject _coinCry;
 
 	private void Awake()
 	{
@@ -81,5 +83,11 @@ public class EffectManager : MonoBehaviour
         GameObject hellItem = ObjectPoolManager.Instance.GetRestObject(_hellItem);
 		hellItem.transform.position = position;
 		hellItem.GetComponent<EpicDrop>().SetHellItem(item);
+	}
+
+	public void SpawnCoinCry(Vector3 position)
+	{
+		GameObject coinCry = ObjectPoolManager.Instance.GetRestObject(_coinCry);
+		coinCry.transform.position = position;
 	}
 }

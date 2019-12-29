@@ -1,0 +1,114 @@
+{
+  "dungeonName": "테스트 던전입니다.",
+  "DungeonInfos": [
+    {
+      "position": {
+        "x": 0.0,
+        "y": 0.0,
+        "magnitude": 0.0,
+        "sqrMagnitude": 0.0
+      },
+      "objectinfos": [
+        {
+          "filePath": "Object/Hell/HellTile1",
+          "position": {
+            "x": -13.5,
+            "y": -8.5,
+            "z": 0.0
+          }
+        },
+        {
+          "filePath": "Object/Hell/HellTile1",
+          "position": {
+            "x": -9.5,
+            "y": -8.5,
+            "z": 0.0
+          }
+        },
+        {
+          "filePath": "Object/Hell/HellTile1",
+          "position": {
+            "x": -5.5,
+            "y": -8.5,
+            "z": 0.0
+          }
+        },
+        {
+          "filePath": "Object/Hell/HellTile1",
+          "position": {
+            "x": -1.5,
+            "y": -8.5,
+            "z": 0.0
+          }
+        },
+        {
+          "filePath": "Object/Hell/HellTile1",
+          "position": {
+            "x": 2.5,
+            "y": -8.5,
+            "z": 0.0
+          }
+        },
+        {
+          "filePath": "Object/Hell/HellCube",
+          "position": {
+            "x": -5.5,
+            "y": -0.5,
+            "z": 0.0
+          }
+        },
+        {
+          "filePath": "Object/Hell/HellBackground",
+          "position": {
+            "x": -5.5,
+            "y": -3.8,
+            "z": 0.0
+          }
+        }
+      ],
+      "monsterInfos": [],
+      "potalTransportinfos": [],
+      "isBoss": false,
+      "PlayerStartPosition": {
+        "x": -12.5,
+        "y": -8.5,
+        "z": 0.0
+      }
+    },
+    {
+      "position": {
+        "x": 1.0,
+        "y": 0.0,
+        "magnitude": 1.0,
+        "sqrMagnitude": 1.0
+      },
+      "objectinfos": [
+        {
+          "filePath": "Dungeon/HellDungeon",
+          "position": {
+            "x": 4.5,
+            "y": -8.5,
+            "z": 0.0
+          }
+        }
+      ],
+      "monsterInfos": [
+        {
+          "filePath": "Monster/HellGoblin",
+          "position": {
+            "x": -0.5,
+            "y": -7.5,
+            "z": 0.0
+          }
+        }
+      ],
+      "potalTransportinfos": [],
+      "isBoss": true,
+      "PlayerStartPosition": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      }
+    }
+  ]
+}

@@ -1,264 +1,113 @@
 {
+  "dungeonName": "테스트 던전입니다.",
   "DungeonInfos": [
     {
-      "objectinfos": [
-        {
-          "filePath": "Dungeon/LorienAndForceAltar",
-          "position": {
-            "x": 3.82,
-            "y": -9.45,
-            "z": -4.17578125,
-            "normalized": {
-              "x": 0.346797228,
-              "y": -0.857914567,
-              "z": -0.3790967,
-              "magnitude": 1.0,
-              "sqrMagnitude": 1.0
-            },
-            "magnitude": 11.0150824,
-            "sqrMagnitude": 121.332047
-          }
-        }
-      ],
-      "monsterInfos": [
-        {
-          "filePath": "Monster/Tauarmy/Unit/Tauarmy",
-          "position": {
-            "x": -2.18,
-            "y": -10.28,
-            "z": 0.0,
-            "normalized": {
-              "x": -0.207449019,
-              "y": -0.9782458,
-              "z": 0.0,
-              "normalized": {
-                "x": -0.207449034,
-                "y": -0.978245854,
-                "z": 0.0,
-                "magnitude": 1.0,
-                "sqrMagnitude": 1.0
-              },
-              "magnitude": 0.99999994,
-              "sqrMagnitude": 0.99999994
-            },
-            "magnitude": 10.508606,
-            "sqrMagnitude": 110.430794
-          }
-        }
-      ],
-      "potalTransportinfos": [
-        {
-          "filePath": "Object/PotalTransport Side",
-          "position": {
-            "x": 5.93,
-            "y": -7.23,
-            "z": 0.0,
-            "normalized": {
-              "x": 0.6341691,
-              "y": -0.773194432,
-              "z": 0.0,
-              "magnitude": 1.0,
-              "sqrMagnitude": 1.00000012
-            },
-            "magnitude": 9.350818,
-            "sqrMagnitude": 87.4378
-          },
-          "spotPosition": [
-            {
-              "x": 7.89,
-              "y": -7.85,
-              "z": 0.0,
-              "normalized": {
-                "x": 0.708901465,
-                "y": -0.705307543,
-                "z": 0.0,
-                "magnitude": 1.0,
-                "sqrMagnitude": 1.0
-              },
-              "magnitude": 11.1298962,
-              "sqrMagnitude": 123.874596
-            },
-            {
-              "x": 5.93,
-              "y": -7.23,
-              "z": 0.0,
-              "normalized": {
-                "x": 0.6341691,
-                "y": -0.773194432,
-                "z": 0.0,
-                "magnitude": 1.0,
-                "sqrMagnitude": 1.00000012
-              },
-              "magnitude": 9.350818,
-              "sqrMagnitude": 87.4378
-            },
-            {
-              "x": 5.93,
-              "y": -7.23,
-              "z": 0.0,
-              "normalized": {
-                "x": 0.6341691,
-                "y": -0.773194432,
-                "z": 0.0,
-                "magnitude": 1.0,
-                "sqrMagnitude": 1.00000012
-              },
-              "magnitude": 9.350818,
-              "sqrMagnitude": 87.4378
-            },
-            {
-              "x": 5.93,
-              "y": -7.23,
-              "z": 0.0,
-              "normalized": {
-                "x": 0.6341691,
-                "y": -0.773194432,
-                "z": 0.0,
-                "magnitude": 1.0,
-                "sqrMagnitude": 1.00000012
-              },
-              "magnitude": 9.350818,
-              "sqrMagnitude": 87.4378
-            }
-          ],
-          "arrow": 3,
-          "nextIndex": 1
-        }
-      ],
-      "potalSceneInfos": [],
-      "PlayerStartPosition": {
+      "position": {
         "x": 0.0,
         "y": 0.0,
-        "z": 0.0,
         "magnitude": 0.0,
         "sqrMagnitude": 0.0
+      },
+      "objectinfos": [
+        {
+          "filePath": "Object/Hell/HellTile1",
+          "position": {
+            "x": -13.5,
+            "y": -8.5,
+            "z": 0.0
+          }
+        },
+        {
+          "filePath": "Object/Hell/HellTile1",
+          "position": {
+            "x": -9.5,
+            "y": -8.5,
+            "z": 0.0
+          }
+        },
+        {
+          "filePath": "Object/Hell/HellTile1",
+          "position": {
+            "x": -5.5,
+            "y": -8.5,
+            "z": 0.0
+          }
+        },
+        {
+          "filePath": "Object/Hell/HellTile1",
+          "position": {
+            "x": -1.5,
+            "y": -8.5,
+            "z": 0.0
+          }
+        },
+        {
+          "filePath": "Object/Hell/HellTile1",
+          "position": {
+            "x": 2.5,
+            "y": -8.5,
+            "z": 0.0
+          }
+        },
+        {
+          "filePath": "Object/Hell/HellCube",
+          "position": {
+            "x": -5.5,
+            "y": -0.5,
+            "z": 0.0
+          }
+        },
+        {
+          "filePath": "Object/Hell/HellBackground",
+          "position": {
+            "x": -5.5,
+            "y": -3.8,
+            "z": 0.0
+          }
+        }
+      ],
+      "monsterInfos": [],
+      "potalTransportinfos": [],
+      "isBoss": false,
+      "PlayerStartPosition": {
+        "x": -12.5,
+        "y": -8.5,
+        "z": 0.0
       }
     },
     {
+      "position": {
+        "x": 1.0,
+        "y": 0.0,
+        "magnitude": 1.0,
+        "sqrMagnitude": 1.0
+      },
       "objectinfos": [
         {
-          "filePath": "Dungeon/Dungeon",
+          "filePath": "Dungeon/HellDungeon",
           "position": {
-            "x": 5.3,
-            "y": -9.4,
-            "z": -4.17578125,
-            "normalized": {
-              "x": 0.458043218,
-              "y": -0.812378466,
-              "z": -0.360884577,
-              "magnitude": 1.0,
-              "sqrMagnitude": 1.0
-            },
-            "magnitude": 11.570961,
-            "sqrMagnitude": 133.887146
+            "x": 4.5,
+            "y": -8.5,
+            "z": 0.0
           }
         }
       ],
       "monsterInfos": [
         {
-          "filePath": "Monster/Goblin/Unit/Goblin",
+          "filePath": "HellGoblin",
           "position": {
-            "x": 0.07,
-            "y": -9.26,
-            "z": 0.0,
-            "normalized": {
-              "x": 0.00755917933,
-              "y": -0.999971449,
-              "z": 0.0,
-              "magnitude": 1.0,
-              "sqrMagnitude": 1.0
-            },
-            "magnitude": 9.260264,
-            "sqrMagnitude": 85.7525
+            "x": -0.5,
+            "y": -7.5,
+            "z": 0.0
           }
         }
       ],
-      "potalTransportinfos": [
-        {
-          "filePath": "Object/PotalTransport Side",
-          "position": {
-            "x": -14.18,
-            "y": -7.23,
-            "z": 0.0,
-            "normalized": {
-              "x": -0.89088124,
-              "y": -0.454236329,
-              "z": 0.0,
-              "magnitude": 1.0,
-              "sqrMagnitude": 1.0
-            },
-            "magnitude": 15.9168243,
-            "sqrMagnitude": 253.3453
-          },
-          "spotPosition": [
-            {
-              "x": -12.22,
-              "y": -7.85,
-              "z": 0.0,
-              "normalized": {
-                "x": -0.8413574,
-                "y": -0.5404792,
-                "z": 0.0,
-                "magnitude": 1.0,
-                "sqrMagnitude": 1.0
-              },
-              "magnitude": 14.5241489,
-              "sqrMagnitude": 210.950912
-            },
-            {
-              "x": -14.18,
-              "y": -7.23,
-              "z": 0.0,
-              "normalized": {
-                "x": -0.89088124,
-                "y": -0.454236329,
-                "z": 0.0,
-                "magnitude": 1.0,
-                "sqrMagnitude": 1.0
-              },
-              "magnitude": 15.9168243,
-              "sqrMagnitude": 253.3453
-            },
-            {
-              "x": -14.18,
-              "y": -7.23,
-              "z": 0.0,
-              "normalized": {
-                "x": -0.89088124,
-                "y": -0.454236329,
-                "z": 0.0,
-                "magnitude": 1.0,
-                "sqrMagnitude": 1.0
-              },
-              "magnitude": 15.9168243,
-              "sqrMagnitude": 253.3453
-            },
-            {
-              "x": -14.18,
-              "y": -7.23,
-              "z": 0.0,
-              "normalized": {
-                "x": -0.89088124,
-                "y": -0.454236329,
-                "z": 0.0,
-                "magnitude": 1.0,
-                "sqrMagnitude": 1.0
-              },
-              "magnitude": 15.9168243,
-              "sqrMagnitude": 253.3453
-            }
-          ],
-          "arrow": 2,
-          "nextIndex": 0
-        }
-      ],
-      "potalSceneInfos": [],
+      "potalTransportinfos": [],
+      "isBoss": true,
       "PlayerStartPosition": {
         "x": 0.0,
         "y": 0.0,
-        "z": 0.0,
-        "magnitude": 0.0,
-        "sqrMagnitude": 0.0
+        "z": 0.0
       }
     }
   ]
