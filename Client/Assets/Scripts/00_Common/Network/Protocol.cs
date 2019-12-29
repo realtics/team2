@@ -184,12 +184,12 @@ public struct PKT_RES_PLAYER_MOVE_END
 public struct PKT_REQ_DUNGEON_CLEAR_RESULT_ITEM
 {
 	public PACKET_HEADER header;
+	public string userID;
 }
 
 public struct PKT_RES_DUNGEON_CLEAR_RESULT_ITEM
 {
 	public PACKET_HEADER header;
-	public string itemID;
 }
 
 public struct PKT_REQ_DUNGEON_HELL_RESULT_ITEM
@@ -201,7 +201,6 @@ public struct PKT_REQ_DUNGEON_HELL_RESULT_ITEM
 public struct PKT_RES_DUNGEON_HELL_RESULT_ITEM
 {
 	public PACKET_HEADER header;
-	public string userID;
 	public string itemID;
 }
 
