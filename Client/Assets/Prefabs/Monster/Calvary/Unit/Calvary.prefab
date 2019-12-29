@@ -339,8 +339,6 @@ MonoBehaviour:
   _smashAttackBox: {fileID: 0}
   _meet: {fileID: 8300000, guid: 96f8c8fdf84db8d46b91634a13f49f61, type: 3}
   _madMode: {fileID: 8300000, guid: b19df23a778cf094ab8bfc812745e6cc, type: 3}
-  _baseAttack: {fileID: 8300000, guid: 4f7edd69baa506c4b80c69af56d3c34b, type: 3}
-  _smashAttack: {fileID: 8300000, guid: eb8330d63b1635e428c45f7710a08219, type: 3}
   _madBackEffect: {fileID: 3194679085811159415}
   _madFrontEffect: {fileID: 7149192583504796811}
 --- !u!1 &4127798058618418200
@@ -481,6 +479,7 @@ MonoBehaviour:
   - {fileID: 4219133727108299469}
   - {fileID: 7434811914534451044}
   - {fileID: 7458086511958187897}
+  - {fileID: 0}
   _upSplash02Effect: {fileID: 2094947549096931302}
   _downSplash02Effect: {fileID: 175371541775854928}
 --- !u!114 &1724810926
