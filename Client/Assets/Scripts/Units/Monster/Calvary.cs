@@ -42,6 +42,7 @@ public class Calvary : BaseMonster
 
     private bool _isMadeMode = false;
     private float _originalRange;
+    private bool _CheckTrnasition =false;
 
     protected override void SetInitialState()
     {
@@ -103,6 +104,15 @@ public class Calvary : BaseMonster
 
     public override void UpdateAttackState()
     {
+        if (!_animator.IsInTransition(0) && !_CheckTrnasition)
+        {
+            if (_currentAttackMotion == CalvaryAttackMotion.AttackMotion2)
+                AudioPlay(_smashAttack);
+            else if (_currentAttackMotion == CalvaryAttackMotion.AttackMotion1)
+                AudioPlay(_baseAttack);
+           
+            _CheckTrnasition = true;
+        }
         base.UpdateAttackState();
     }
 
@@ -111,6 +121,7 @@ public class Calvary : BaseMonster
         base.ExitAttackState();
         _animator.SetFloat("animSpeed", 1.0f);
         _attackRange = _originalRange;
+        _CheckTrnasition = false;
     }
 
     //MoveState
@@ -196,13 +207,11 @@ public class Calvary : BaseMonster
         {
             _currentAttackMotion = CalvaryAttackMotion.AttackMotion2;
             StartCheckSmashAttackTime();
-            AudioPlay(_smashAttack);
         }
         else
         {
             _currentAttackMotion = CalvaryAttackMotion.AttackMotion1;
             _animator.SetFloat("animSpeed", 1.5f);
-            AudioPlay(_baseAttack);
         }
     }
 

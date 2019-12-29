@@ -541,14 +541,18 @@ public class BaseMonster : MonoBehaviour
 
 	public virtual void UpdateDownRecoveryState()
 	{
-		if (!_animator.IsInTransition(0))
-		{
-			if (_animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f)
-			{
-				ChangeState(_moveState);
-			}
-		}
-	}
+		//if (!_animator.IsInTransition(0))
+		//{
+		//	if (_animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f)
+		//	{
+		//		ChangeState(_moveState);
+		//	}
+		//}
+        if (_animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f)
+        {
+            ChangeState(_moveState);
+        }
+    }
 
 	public virtual void ExitDownRecoveryState()
 	{
