@@ -38,11 +38,11 @@ public:
 
 	int DBDungeonClearResultItemSize();
 	std::string DBDungeonClearResultItem(int resultRandom);
-
+	int DBDungeonClearResultItemInventoryAdd(std::string inputID, int resultRandom);
 
 	int DBDungeonHellResultItemSize();
 	std::string DBDungeonHellResultItem(int resultRandom);
-
+	int DBDungeonHellResultItemInventoryAdd(std::string inputID, int resultRandom);
 
 	std::array<std::string, MAX_INVENTORY_COLUMN> DBInventorySelect(std::string inputID);
 	int DBInventoryUpdate(std::string inputID, char (*arr1)[MAX_USER_ITEM_LEN], char(*arr2)[MAX_USER_ITEM_LEN]);

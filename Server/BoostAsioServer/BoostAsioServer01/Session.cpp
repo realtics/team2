@@ -256,6 +256,7 @@ void Session::Deserialization(char* jsonData)
 		packet.Init();
 		packet.packetIndex = packetIndex;
 		packet.packetSize = packetSize;
+		strcpy_s(packet.userID, MAX_USER_ID, ptRecv.get<std::string>("userID").c_str());
 		memcpy(&_packetBuffer[_packetBufferMark], (char*)&packet, sizeof(packet));
 	}
 	break;
@@ -265,6 +266,17 @@ void Session::Deserialization(char* jsonData)
 		packet.Init();
 		packet.packetIndex = packetIndex;
 		packet.packetSize = packetSize;
+		strcpy_s(packet.userID, MAX_USER_ID, ptRecv.get<std::string>("userID").c_str());
+		memcpy(&_packetBuffer[_packetBufferMark], (char*)&packet, sizeof(packet));
+	}
+	break;
+	case PACKET_INDEX::REQ_DUNGEON_HELL_ITEM_PICK_UP:
+	{
+		PKT_REQ_DUNGEON_HELL_ITEM_PICK_UP packet;
+		packet.Init();
+		packet.packetIndex = packetIndex;
+		packet.packetSize = packetSize;
+		strcpy_s(packet.userID, MAX_USER_ID, ptRecv.get<std::string>("userID").c_str());
 		memcpy(&_packetBuffer[_packetBufferMark], (char*)&packet, sizeof(packet));
 	}
 	break;

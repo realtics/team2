@@ -323,7 +323,7 @@ std::string DBMySQL::DBDungeonClearResultItem(int resultRandom)
 				{
 					if (_SqlRow[i] != NULL)
 					{
-						std::cout << "[DB][결과 아이템 ID]" << _SqlRow[i] << std::endl;
+						std::cout << "[DB][결과 아이템 ID] " << _SqlRow[i] << std::endl;
 
 						return _SqlRow[i];
 					}
@@ -342,6 +342,89 @@ std::string DBMySQL::DBDungeonClearResultItem(int resultRandom)
 
 	return "no_id";
 }
+
+int DBMySQL::DBDungeonClearResultItemInventoryAdd(std::string inputID, int resultRandom)
+{
+	mysql_select_db(&_mysql, _dbName);
+
+	std::string DBQuerySelect;
+	DBQuerySelect += "SELECT user_inventory FROM inventory WHERE user_id = \"";
+	DBQuerySelect += inputID.c_str();
+	DBQuerySelect += "\";";
+
+	std::string inventoryString;
+
+	if (_pConnection == NULL)
+	{
+		std::cout << mysql_errno(&_mysql) << " 에러 : " << mysql_error(&_mysql) << std::endl;
+	}
+	else
+	{
+		int DBState = mysql_query(_pConnection, DBQuerySelect.c_str());
+		if (DBState == 0)
+		{
+			_pSqlResult = mysql_store_result(_pConnection);
+
+			int fields = mysql_num_fields(_pSqlResult);
+
+			while ((_SqlRow = mysql_fetch_row(_pSqlResult)) != NULL)
+			{
+				for (int i = 0; i < fields; i++)
+				{
+					if (_SqlRow[i] != NULL)
+					{
+						inventoryString = _SqlRow[i];
+					}
+				}
+			}
+		}
+	}
+
+	if (strcmp(inventoryString.c_str(), "") == 0)
+	{
+		inventoryString += std::to_string(resultRandom);
+	}
+	else if (strcmp(inventoryString.c_str(), "") != 0)
+	{
+		inventoryString += ",";
+		inventoryString += std::to_string(resultRandom);
+	}
+		
+	std::string DBQuery;
+	DBQuery += "UPDATE inventory SET user_inventory='";
+	DBQuery += inventoryString;
+	DBQuery += "' WHERE user_id=\"";
+	DBQuery += inputID.c_str();
+	DBQuery += "\";";
+
+	if (_pConnection == NULL)
+	{
+		std::cout << mysql_errno(&_mysql) << " 에러 : " << mysql_error(&_mysql) << std::endl;
+	}
+	else
+	{
+		int DBState = mysql_query(_pConnection, DBQuery.c_str());
+		if (DBState == 0)
+		{
+			_pSqlResult = mysql_store_result(_pConnection);
+
+			mysql_free_result(_pSqlResult);
+
+			std::cout << "[DB][ID] " << inputID << " [인벤토리 추가]" << std::endl;
+
+			return RESULT_INVENTORY_CHECK::RESULT_INVENTORY_CHECK_SUCCESS;
+		}
+		else
+		{
+			std::cout << mysql_errno(&_mysql) << " 에러 : " << mysql_error(&_mysql) << std::endl;
+
+			return RESULT_INVENTORY_CHECK::RESULT_INVENTORY_CHECK_UNKNOWN;
+		}
+	}
+	mysql_free_result(_pSqlResult);
+	return RESULT_INVENTORY_CHECK::RESULT_INVENTORY_CHECK_UNKNOWN;
+}
+
 
 int DBMySQL::DBDungeonHellResultItemSize()
 {
@@ -427,6 +510,88 @@ std::string DBMySQL::DBDungeonHellResultItem(int resultRandom)
 	}
 
 	return "no_id";
+}
+
+int DBMySQL::DBDungeonHellResultItemInventoryAdd(std::string inputID, int resultRandom)
+{
+	mysql_select_db(&_mysql, _dbName);
+
+	std::string DBQuerySelect;
+	DBQuerySelect += "SELECT user_inventory FROM inventory WHERE user_id = \"";
+	DBQuerySelect += inputID.c_str();
+	DBQuerySelect += "\";";
+
+	std::string inventoryString;
+
+	if (_pConnection == NULL)
+	{
+		std::cout << mysql_errno(&_mysql) << " 에러 : " << mysql_error(&_mysql) << std::endl;
+	}
+	else
+	{
+		int DBState = mysql_query(_pConnection, DBQuerySelect.c_str());
+		if (DBState == 0)
+		{
+			_pSqlResult = mysql_store_result(_pConnection);
+
+			int fields = mysql_num_fields(_pSqlResult);
+
+			while ((_SqlRow = mysql_fetch_row(_pSqlResult)) != NULL)
+			{
+				for (int i = 0; i < fields; i++)
+				{
+					if (_SqlRow[i] != NULL)
+					{
+						inventoryString = _SqlRow[i];
+					}
+				}
+			}
+		}
+	}
+
+	if (strcmp(inventoryString.c_str(), "") == 0)
+	{
+		inventoryString += std::to_string(resultRandom);
+	}
+	else if (strcmp(inventoryString.c_str(), "") != 0)
+	{
+		inventoryString += ",";
+		inventoryString += std::to_string(resultRandom);
+	}
+
+	std::string DBQuery;
+	DBQuery += "UPDATE inventory SET user_inventory='";
+	DBQuery += inventoryString;
+	DBQuery += "' WHERE user_id=\"";
+	DBQuery += inputID.c_str();
+	DBQuery += "\";";
+
+	if (_pConnection == NULL)
+	{
+		std::cout << mysql_errno(&_mysql) << " 에러 : " << mysql_error(&_mysql) << std::endl;
+	}
+	else
+	{
+		int DBState = mysql_query(_pConnection, DBQuery.c_str());
+		if (DBState == 0)
+		{
+			_pSqlResult = mysql_store_result(_pConnection);
+
+			mysql_free_result(_pSqlResult);
+
+			std::cout << "[DB][ID] " << inputID << " [인벤토리 추가]" << std::endl;
+
+			return RESULT_INVENTORY_CHECK::RESULT_INVENTORY_CHECK_SUCCESS;
+		}
+		else
+		{
+			std::cout << mysql_errno(&_mysql) << " 에러 : " << mysql_error(&_mysql) << std::endl;
+
+			return RESULT_INVENTORY_CHECK::RESULT_INVENTORY_CHECK_UNKNOWN;
+		}
+	}
+	mysql_free_result(_pSqlResult);
+	return RESULT_INVENTORY_CHECK::RESULT_INVENTORY_CHECK_UNKNOWN;
 }
 
 std::array<std::string, MAX_INVENTORY_COLUMN> DBMySQL::DBInventorySelect(std::string inputID)

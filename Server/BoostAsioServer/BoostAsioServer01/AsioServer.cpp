@@ -503,6 +503,8 @@ void AsioServer::ProcessPacket(const int sessionID, const char* pData)
 		
 		// DB üũ
 		SendPkt.itemID = _DBMysql.DBDungeonClearResultItem(resultRandom);
+		
+		_DBMysql.DBDungeonClearResultItemInventoryAdd(pPacket->userID, resultRandom);
 
 		// json
 		boost::property_tree::ptree ptSendHeader;
@@ -551,6 +553,9 @@ void AsioServer::ProcessPacket(const int sessionID, const char* pData)
 
 		int resultRandom = dist(engine);
 
+		_sessionList[sessionID]->SetHellRandom(0);
+		_sessionList[sessionID]->SetHellRandom(resultRandom);
+
 		// DB üũ
 		SendPkt.itemID = _DBMysql.DBDungeonHellResultItem(resultRandom);
 
@@ -587,6 +592,17 @@ void AsioServer::ProcessPacket(const int sessionID, const char* pData)
 		_sessionList[sessionID]->PostSend(false, std::strlen(sendStr2.c_str()), (char*)sendStr2.c_str());
 	}
 	break;
+	case PACKET_INDEX::REQ_DUNGEON_HELL_ITEM_PICK_UP:
+	{
+		PKT_REQ_DUNGEON_HELL_ITEM_PICK_UP* pPacket = (PKT_REQ_DUNGEON_HELL_ITEM_PICK_UP*)pData;
+
+		PKT_REQ_DUNGEON_HELL_ITEM_PICK_UP hellPickUp;
+		hellPickUp.Init();
+		
+		_DBMysql.DBDungeonHellResultItemInventoryAdd(pPacket->userID, _sessionList[sessionID]->GetHellRandom());
+
+	}
+
 	case PACKET_INDEX::REQ_INVENTORY_OPEN:
 	{
 		PKT_REQ_INVENTORY_OPEN* pPacket = (PKT_REQ_INVENTORY_OPEN*)pData;
@@ -654,11 +670,8 @@ void AsioServer::ProcessPacket(const int sessionID, const char* pData)
 		for (int i = 0; i < MAX_USER_INVENTORY; i++)
 		{
 			if (!strcmp(userInven.inventory[i], ""))
-			{
-				ptChild2[inventoryNum].empty();
-				ptInventoryChildren.push_back(std::make_pair("", ptChild2[inventoryNum]));
 				break;
-			}
+
 			ptChild2[inventoryNum].put("", userInven.inventory[i]);
 			ptInventoryChildren.push_back(std::make_pair("", ptChild2[inventoryNum]));
 			inventoryNum++;
