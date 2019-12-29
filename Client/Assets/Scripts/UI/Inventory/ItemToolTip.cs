@@ -129,6 +129,10 @@ public class ItemToolTip : MonoBehaviour
 		{
 			InventoryManager.Instance.SaveSingle();
 		}
+        else
+        {
+            InventoryManager.Instance.SaveMulti();
+        }
 	}
 	
 	public void ClickSellButton()
@@ -140,5 +144,9 @@ public class ItemToolTip : MonoBehaviour
 		{
 			InventoryManager.Instance.SaveSingle();
 		}
-	}
+        else
+        {
+            InventoryManager.Instance.SaveMulti();
+        }
+    }
 }

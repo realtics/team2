@@ -6,14 +6,29 @@ public class InventoryPopup : MonoBehaviour
 {
 	private Button _button;
 
-	private void Awake()
+    private void Awake()
 	{
 		_button = GetComponent<Button>();
 		_button.onClick.AddListener(ClickInventory);
 	}
 
-	public void ClickInventory()
+    private void Update()
+    {
+        if (NetworkInventoryInfoSaver.Instance.RES_INVENTORY_OPEN)
+        {
+            DNFSceneManager.instance.LoadSceneAddtive((int)SceneIndex.Inventory);
+            NetworkInventoryInfoSaver.Instance.RES_INVENTORY_OPEN = false;
+        }
+    }
+
+    public void ClickInventory()
 	{
+        if(NetworkManager.Instance.IsSingle)
 		DNFSceneManager.instance.LoadSceneAddtive((int)SceneIndex.Inventory);
+
+        else
+        {
+            NetworkManager.Instance.OpenInventory();
+        }
 	}
 }

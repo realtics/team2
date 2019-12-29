@@ -25,11 +25,14 @@ public class NetworkInventoryInfoSaver
     private List<string> _inventoryIDs;
 	private List<string> _equipIDs;
 
+    private bool _RES_INVENTORY_OPEN = false;
+
     public string ItemID { get { return _itemID; } set { _itemID = value; } }
     public List<string> InventoryIDs { get { return _inventoryIDs; } }
 	public List<string> EquipIDs { get { return _equipIDs; } }
+    public bool RES_INVENTORY_OPEN { get { return _RES_INVENTORY_OPEN; } set { _RES_INVENTORY_OPEN = value; } }
 
-    public bool testValue = false;
+    public bool InventoryInitValue = false;
 
     public void SaveItemIDs(ItemSlot[] equipSlots, ItemSlot[] inventorySlots)
 	{
@@ -58,8 +61,11 @@ public class NetworkInventoryInfoSaver
 		_equipIDs.Clear();
 		_inventoryIDs.Clear();
 
-		_equipIDs = equipIDs;
-		_inventoryIDs = inventoryIDs;
+        if(equipIDs != null)
+            _equipIDs = equipIDs;
+
+        if(inventoryIDs != null)
+            _inventoryIDs = inventoryIDs;
 	}
 
 }
