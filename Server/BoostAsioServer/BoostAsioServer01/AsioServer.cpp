@@ -125,7 +125,9 @@ void AsioServer::ProcessPacket(const int sessionID, const char* pData)
 		SendPkt.Init();
 		
 		SendPkt.checkResult = _DBMysql.DBSignUpCreate(pPacket->userID, pPacket->userPW, pPacket->userName);
-		_DBMysql.DBInventoryCreate(pPacket->userID);
+		
+		if(SendPkt.checkResult == RESULT_SIGN_UP_CHECK::RESULT_SIGN_UP_CHECK_SUCCESS)
+			_DBMysql.DBInventoryCreate(pPacket->userID);
 
 		// json
 		boost::property_tree::ptree ptSendHeader;
