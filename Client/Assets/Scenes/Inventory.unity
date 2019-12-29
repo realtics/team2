@@ -2933,7 +2933,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _inventory: {fileID: 106051398}
   _equipmentPanel: {fileID: 1159700939}
-  _itemTooltip: {fileID: 0}
+  _itemTooltip: {fileID: 1945245642}
   _itemSaveManager: {fileID: 830287661}
   _chracterStatInfo: {fileID: 274585491}
 --- !u!1 &455305064

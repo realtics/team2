@@ -20,7 +20,7 @@ public class InventoryManager : MonoBehaviour
     [SerializeField]
     private ItemSaveManager _itemSaveManager;
     [SerializeField]
-    private ChracterStatInfo _chracterStatInfo;
+    private CharacterStatInfo _chracterStatInfo;
 
     public ItemToolTip ItemTooltip { get { return _itemTooltip; } }
     public Inventory Inventory { get { return _inventory; } }
@@ -133,7 +133,7 @@ public class InventoryManager : MonoBehaviour
 
 	public void Unequip(EquipableItem item)
 	{
-		if (!_inventory.IsFull() && _equipmentPanel.RemonveItem(item))
+		if (!_inventory.IsFull() && _equipmentPanel.RemoveItem(item))
 		{
 			_inventory.AddItem(item);
 		}
