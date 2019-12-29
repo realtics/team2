@@ -558,6 +558,7 @@ void AsioServer::ProcessPacket(const int sessionID, const char* pData)
 
 		// DB üũ
 		SendPkt.itemID = _DBMysql.DBDungeonHellResultItem(resultRandom);
+		_DBMysql.DBLogHellResultItem(pPacket->userID, resultRandom);
 
 		// json
 		boost::property_tree::ptree ptSendHeader;
@@ -600,6 +601,7 @@ void AsioServer::ProcessPacket(const int sessionID, const char* pData)
 		hellPickUp.Init();
 		
 		_DBMysql.DBDungeonHellResultItemInventoryAdd(pPacket->userID, _sessionList[sessionID]->GetHellRandom());
+		_DBMysql.DBLogHellResultItem(pPacket->userID, _sessionList[sessionID]->GetHellRandom());
 
 	}
 
