@@ -2604,7 +2604,7 @@ PrefabInstance:
     - target: {fileID: 1020073003416927019, guid: 9e770ae2b90bf63409cba0581ffbe468,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1020073003416927020, guid: 9e770ae2b90bf63409cba0581ffbe468,
         type: 3}
@@ -2683,7 +2683,7 @@ PrefabInstance:
     - target: {fileID: 4127798058604522680, guid: 1062798e89fa7ff48b49faaa1a382347,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4127798058604522687, guid: 1062798e89fa7ff48b49faaa1a382347,
         type: 3}
@@ -2744,6 +2744,11 @@ PrefabInstance:
         type: 3}
       propertyPath: _maxHp
       value: 2000000
+      objectReference: {fileID: 0}
+    - target: {fileID: 2027343449210597697, guid: 1062798e89fa7ff48b49faaa1a382347,
+        type: 3}
+      propertyPath: _smashAttackResetTime
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 6080406183113681298, guid: 1062798e89fa7ff48b49faaa1a382347,
         type: 3}

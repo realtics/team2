@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class AnimationEffectEvent : MonoBehaviour
 {
-    //public GameObject effect;
     private BaseMonster _monster;
-    //private Tauarmy _tauarmy;
    
     [SerializeField]
     private Transform _baseAttackEffect;

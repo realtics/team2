@@ -4,28 +4,27 @@ using UnityEngine;
 
 public class MonsterAttackBox : MonoBehaviour
 {
-    private const float AttackRange = 0.8f;
-    private BaseMonster _monster;
+    protected const float AttackRange = 0.8f;
+    protected BaseMonster _monster;
     [SerializeField]
-    private AttackInfoSender _sender;
+    protected AttackInfoSender _sender;
     [SerializeField]
-    private float _damgePercent;
+    protected float _damgePercent;
 
-    private void Start()
+    protected virtual void Start()
     {
         _monster = transform.root.GetComponent<BaseMonster>();
         _sender.Attacker = transform.root;
         _sender.Damage = _monster.AttackDamage * _damgePercent;
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    protected virtual void OnTriggerEnter2D(Collider2D other)
     {
         if (!other.tag.Contains("Player"))
             return;
 
         if (Mathf.Abs(_monster.transform.position.y - other.transform.position.y) > AttackRange)
             return;
-
         other.transform.root.GetComponent<BaseUnit>().OnHit(_sender);
     }
 }
