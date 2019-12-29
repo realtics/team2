@@ -1,0 +1,20 @@
+CREATE TABLE `result_items` (
+	`index` INT(10) NOT NULL AUTO_INCREMENT,
+	`item_id` VARCHAR(50) NOT NULL,
+	`item_name` VARCHAR(50) NOT NULL,
+	`item_attack_physical` INT(10) NOT NULL DEFAULT '0',
+	`item_attack_magic` INT(10) NOT NULL DEFAULT '0',
+	`item_defense_physical` INT(10) NOT NULL DEFAULT '0',
+	`item_defense_magic` INT(10) NOT NULL DEFAULT '0',
+	`item_stats_strength` INT(10) NOT NULL DEFAULT '0',
+	`item_stats_Intelligence` INT(10) NOT NULL DEFAULT '0',
+	`item_stats_health` INT(10) NOT NULL DEFAULT '0',
+	`item_stats_mentality` INT(10) NOT NULL DEFAULT '0',
+	`item_stats_exo` INT(10) NOT NULL DEFAULT '0',
+	PRIMARY KEY (`index`),
+	UNIQUE INDEX `item_index` (`item_id`)
+)
+COLLATE='utf8mb4_0900_ai_ci'
+ENGINE=InnoDB
+AUTO_INCREMENT=9
+;
