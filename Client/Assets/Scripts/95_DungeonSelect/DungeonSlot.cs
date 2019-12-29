@@ -20,8 +20,8 @@ public class DungeonSlot : MonoBehaviour
         button = gameObject.GetComponent<Button>();
         button.onClick.AddListener(() =>
         { 
-            MapLoader.instance.SetMap(_dungeonFileName);
-            DNFSceneManager.instance.LoadScene((int)SceneIndex.Dungen);
+            MapLoader.Instance.SetMap(_dungeonFileName);
+            DNFSceneManager.Instance.LoadScene((int)SceneIndex.Dungen);
 
 			if (NetworkManager.Instance != null)
 				NetworkManager.Instance.UserExit();

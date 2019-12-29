@@ -18,7 +18,7 @@ public class SpawnManager : Single.Singleton<SpawnManager>
 
     public SpawnManager()
     {
-        _assetBundleManager = AssetBundleManager.instacne;
+        _assetBundleManager = AssetBundleManager.Instacne;
     }
 
     public GameObject LoadResourceFromCache(string path)

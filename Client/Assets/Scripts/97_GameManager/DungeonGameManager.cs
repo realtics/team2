@@ -70,7 +70,7 @@ public class DungeonGameManager : MonoBehaviour
         if (pc != null)
             _player = pc.gameObject;
 
-        DNFSceneManager.instance.Loader();
+        DNFSceneManager.Instance.Loader();
     }
 
     // Update is called once per frame
@@ -104,7 +104,7 @@ public class DungeonGameManager : MonoBehaviour
 
     private void LoadScene(int Scene)
     {
-        DNFSceneManager.instance.LoadScene(Scene);
+        DNFSceneManager.Instance.LoadScene(Scene);
     }
 
     public void MoveToPlayer(Vector3 position)

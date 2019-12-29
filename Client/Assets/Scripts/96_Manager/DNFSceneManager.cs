@@ -20,11 +20,11 @@ public class DNFSceneManager : Single.Singleton<DNFSceneManager>
     {
         if(Scene == (int)SceneIndex.Lobby)
         {
-            SpawnManager.instance.ClearListdungeonObject();
+            SpawnManager.Instance.ClearListdungeonObject();
         }
         else if (Scene == (int)SceneIndex.LobbySingle)
         {
-            SpawnManager.instance.ClearListdungeonObject();
+            SpawnManager.Instance.ClearListdungeonObject();
         }
         SceneManager.LoadScene(Scene);
     }
@@ -42,10 +42,10 @@ public class DNFSceneManager : Single.Singleton<DNFSceneManager>
     public void ChangeRoom(int index, ARROW arrow)
     {
         DungeonGameManager.Instance.FadeOut();
-        SpawnManager.instance.RoomSetActive(false, _currentDungeonIndex);
-        DungeonInfo dungeonInfo = MapLoader.instance.GetDungeonInfo(index);
-        SpawnManager.instance.Spawn(dungeonInfo);
-        MapLoader.instance.DeleteAfterInstantiateMonster(_currentDungeonIndex);
+        SpawnManager.Instance.RoomSetActive(false, _currentDungeonIndex);
+        DungeonInfo dungeonInfo = MapLoader.Instance.GetDungeonInfo(index);
+        SpawnManager.Instance.Spawn(dungeonInfo);
+        MapLoader.Instance.DeleteAfterInstantiateMonster(_currentDungeonIndex);
         _currentDungeonIndex = index;
 
         MoveRoomPotalActive();
@@ -58,15 +58,15 @@ public class DNFSceneManager : Single.Singleton<DNFSceneManager>
     public void Loader()
     {
         DungeonGameManager.Instance.FadeOut();
-        MapLoader.instance.LoaderDungeon();
-        DungeonInfo dungeonInfo = MapLoader.instance.GetDungeonInfo(_startDungeonIndex);
+        MapLoader.Instance.LoaderDungeon();
+        DungeonInfo dungeonInfo = MapLoader.Instance.GetDungeonInfo(_startDungeonIndex);
 
-        SpawnManager.instance.Spawn(dungeonInfo);
+        SpawnManager.Instance.Spawn(dungeonInfo);
         _currentDungeonIndex = _startDungeonIndex;
 
         MoveRoomPotalActive();
 
-        UIHelper.Instance.SetDungeonTitle(MapLoader.instance.GetDungeonName());
+        UIHelper.Instance.SetDungeonTitle(MapLoader.Instance.GetDungeonName());
         DungeonGameManager.Instance.FindCameraCollider();
         DungeonGameManager.Instance.MoveToPlayer(dungeonInfo.PlayerStartPosition);
     }

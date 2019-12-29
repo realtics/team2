@@ -24,12 +24,12 @@ public class AssetBundleManager : MonoBehaviour
     private bool _firstLoadMonseterAssetbundle = false;
     private bool _firstLoadAtlas = false;
 
-    private static AssetBundleManager _instacne;
-    public static AssetBundleManager instacne
+    private static AssetBundleManager _Instacne;
+    public static AssetBundleManager Instacne
     {
         get
         {
-            return _instacne;
+            return _Instacne;
         }
     }
     private void Awake()
@@ -38,7 +38,7 @@ public class AssetBundleManager : MonoBehaviour
     }
     private void Start()
     {
-        _instacne = this;
+        _Instacne = this;
     }
 
     void OnEnable()
