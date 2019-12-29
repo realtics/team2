@@ -48,6 +48,18 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: FarBackground
+    uniqueID: 3618326073
+    locked: 0
+  - name: Background
+    uniqueID: 3920697447
+    locked: 0
+  - name: Tile
+    uniqueID: 1718189609
+    locked: 0
+  - name: Object
+    uniqueID: 2542227997
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
