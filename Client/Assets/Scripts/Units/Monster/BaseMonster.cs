@@ -490,8 +490,10 @@ public class BaseMonster : MonoBehaviour
 				if (_isDown)
 				{
 					_isDown = false;
-					_animator.SetBool("isDown", false);
-					ChangeState(_downRecoveryState);
+                    _isDownRecovery = true;
+                    _animator.SetBool("isDown", false);
+                    _animator.SetBool("isDownRecovery", true);
+                    ChangeState(_downRecoveryState);
 				}
 				else
 				{
@@ -535,22 +537,18 @@ public class BaseMonster : MonoBehaviour
 	//DownRecoveryState
 	public virtual void EnterDownRecoveryState()
 	{
-		_isDownRecovery = true;
-		_animator.SetBool("isDownRecovery", true);
+        _isDownRecovery = true;
+        _animator.SetBool("isDownRecovery", true);
 	}
 
 	public virtual void UpdateDownRecoveryState()
 	{
-		//if (!_animator.IsInTransition(0))
-		//{
-		//	if (_animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f)
-		//	{
-		//		ChangeState(_moveState);
-		//	}
-		//}
-        if (_animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f)
+        if (!_animator.IsInTransition(0))
         {
-            ChangeState(_moveState);
+            if (_animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f)
+            {
+                ChangeState(_moveState);
+            }
         }
     }
 
