@@ -594,6 +594,37 @@ int DBMySQL::DBDungeonHellResultItemInventoryAdd(std::string inputID, int result
 	return RESULT_INVENTORY_CHECK::RESULT_INVENTORY_CHECK_UNKNOWN;
 }
 
+void DBMySQL::DBLogHellResultItem(std::string inputID, int resultRandom)
+{
+	mysql_select_db(&_mysql, _dbName);
+	std::string DBQuery;
+	DBQuery += "INSERT INTO log_hell(user_id, item_id) VALUES('";
+	DBQuery += inputID.c_str();
+	DBQuery += "', '";
+	DBQuery += std::to_string(resultRandom);
+	DBQuery += "');";
+
+	if (_pConnection == NULL)
+	{
+		std::cout << mysql_errno(&_mysql) << " 에러 : " << mysql_error(&_mysql) << std::endl;
+	}
+	else
+	{
+		int DBState = mysql_query(_pConnection, DBQuery.c_str());
+		if (DBState == 0)
+		{
+			_pSqlResult = mysql_store_result(_pConnection);
+
+			mysql_free_result(_pSqlResult);
+
+			std::cout << "[DB][HELL 로그] " << inputID << ", " << resultRandom << std::endl;
+		}
+		else
+			std::cout << mysql_errno(&_mysql) << " 에러 : " << mysql_error(&_mysql) << std::endl;
+	}
+
+}
+
 std::array<std::string, MAX_INVENTORY_COLUMN> DBMySQL::DBInventorySelect(std::string inputID)
 {
 	mysql_select_db(&_mysql, _dbName);
