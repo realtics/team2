@@ -12,6 +12,8 @@ public struct CharacterMovePacket
 public class CharacterMovement : BaseUnit
 {
     public TextMeshPro nicknameText;
+    public List<AttackInfoSender> attackInfo;
+    public CharacterAttackBox attackBox;
 
     private int _id;
 	private string _nickName;
@@ -107,7 +109,12 @@ public class CharacterMovement : BaseUnit
 		_animator.SetBool("IsAttack", true);
         SetNextAttack();
 
-		return true;
+        AttackInfoSender curInfo = attackInfo[_attackIndex];
+        curInfo.Attacker = transform;
+        attackBox.Sender = curInfo;
+
+
+        return true;
     }
 
     public void SetNextAttack()

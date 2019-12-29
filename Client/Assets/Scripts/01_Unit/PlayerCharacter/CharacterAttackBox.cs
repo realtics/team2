@@ -7,8 +7,8 @@ public class CharacterAttackBox : MonoBehaviour
     private const float AttackRange = 1.2f;
     private CharacterStat _stat;
 
-    [SerializeField]
     private AttackInfoSender _sender;
+    public AttackInfoSender Sender { get { return _sender; } set { _sender = value; } }
 
     void Start()
     {

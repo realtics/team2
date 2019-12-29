@@ -70,14 +70,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5fd03d7ebb86a244b25e880f0d60706, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sender:
-    _damage: 0
-    _horizontalExtraMoveDuration: 0.2
-    _horizontalExtraMoveValue: -2
-    _verticalExtraMoveDuration: 0
-    _verticalExtraMoveValue: 0
-    _extraHeightValue: 0
-    _stunDuration: 1
 --- !u!1 &1296146674891883568
 GameObject:
   m_ObjectHideFlags: 0
@@ -234,7 +226,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _avatar: {fileID: 4668375787703239330}
   nicknameText: {fileID: 8040596804756707122}
-  audioPlayer: {fileID: 0}
+  attackInfo:
+  - _damage: 0
+    _horizontalExtraMoveDuration: 0.2
+    _horizontalExtraMoveValue: -2
+    _verticalExtraMoveDuration: 0
+    _verticalExtraMoveValue: 0
+    _extraHeightValue: 0
+    _stunDuration: 1
+  - _damage: 0
+    _horizontalExtraMoveDuration: 0.2
+    _horizontalExtraMoveValue: -2
+    _verticalExtraMoveDuration: 0
+    _verticalExtraMoveValue: 0
+    _extraHeightValue: 0
+    _stunDuration: 1
+  - _damage: 0
+    _horizontalExtraMoveDuration: 0.2
+    _horizontalExtraMoveValue: -2
+    _verticalExtraMoveDuration: 0
+    _verticalExtraMoveValue: 0
+    _extraHeightValue: 0.4
+    _stunDuration: 1
+  attackBox: {fileID: 5955886557323474264}
   _attackIndex: 0
 --- !u!114 &1109627757
 MonoBehaviour:
@@ -546,6 +560,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 62a83b7179e9f744d843f90502bfeb99, type: 3}
   - {fileID: 8300000, guid: c62563f295b91804d951c037bed997a0, type: 3}
   blacheClip: {fileID: 8300000, guid: 9bb876b8f862a0f41bdd705d9d37adbc, type: 3}
+  jingongClip: {fileID: 0}
   onDamageClip: {fileID: 8300000, guid: 7ee25cf6f9cdfa24b86b37640c1c1d02, type: 3}
   jumpClip: {fileID: 8300000, guid: 135071e6a3c9c4a4996e0b90d725c9c0, type: 3}
 --- !u!82 &5698143877180037983
