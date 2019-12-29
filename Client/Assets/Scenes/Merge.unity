@@ -2534,6 +2534,12 @@ PrefabInstance:
       propertyPath: _cutinParent
       value: 
       objectReference: {fileID: 217537398}
+    - target: {fileID: 3290036672774756142, guid: d5c170d3d3cb9d444bcf0b102b7f01af,
+        type: 3}
+      propertyPath: _coinCry
+      value: 
+      objectReference: {fileID: 7648343515305138447, guid: 77f1c793178b271488280b09f62815b5,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d5c170d3d3cb9d444bcf0b102b7f01af, type: 3}
 --- !u!4 &1948332029 stripped

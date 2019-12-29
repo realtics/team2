@@ -390,5 +390,6 @@ public class CharacterMovement : BaseUnit
 	{
 		_stat.Revive();
 		_animator.SetBool("IsDie", false);
+        EffectManager.Instance.SpawnCoinCry(transform.position);
 	}
 }
