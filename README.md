@@ -1,4 +1,4 @@
-# team2
+# Team2 MDNF
 
 
 시연영상 : https://youtu.be/3HK3G92PWVY
