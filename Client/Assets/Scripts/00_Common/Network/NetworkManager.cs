@@ -243,11 +243,11 @@ public class NetworkManager : MonoBehaviour
             {
                 Debug.Log("소켓 생성 실패");
             }
-            //_sock.Connect(new IPEndPoint(IPAddress.Parse("127.0.0.1"), 31452));
-            _sock.Connect(new IPEndPoint(IPAddress.Parse("192.168.200.141"), 31452));
-           // _sock.Connect(new IPEndPoint(IPAddress.Parse("192.168.1.105"), 31452));
+			_sock.Connect(new IPEndPoint(IPAddress.Parse("127.0.0.1"), 31452));
+			//_sock.Connect(new IPEndPoint(IPAddress.Parse("192.168.200.141"), 31452));
+			// _sock.Connect(new IPEndPoint(IPAddress.Parse("192.168.1.105"), 31452));
 
-            DebugLogList("socket() end");
+			DebugLogList("socket() end");
         }
         catch (Exception e)
         {
