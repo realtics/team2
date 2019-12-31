@@ -11,7 +11,7 @@
 
 Build 폴더
 
-1. DB 생성 시 (1.jpg)
+1. DB 생성 시 (DB_01.jpg)
 
 -----DB 사용자 이름 "mdnf"
 
@@ -21,7 +21,7 @@ Build 폴더
 
 -----포트번호 3306으로 설정
 
------"mdnf" 데이터베이스에, DB_SQL.sql 쿼리 실행 (2.jpg)
+-----"mdnf" 데이터베이스에, DB_SQL.sql 쿼리 실행 (DB_02.jpg)
 
 
 -
