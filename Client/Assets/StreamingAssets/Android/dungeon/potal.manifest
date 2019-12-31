@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 877039708
+CRC: 3909708052
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: e4b438294aa299a254cde70b1f32f3dc
+    Hash: 588aa33e025a5bfbdf9e479829258b8c
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 44a33f750f07df9b0f179c6857eb6a72
+    Hash: d1834d3106c69c8cab4ec8e0d2fcab7d
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -34,6 +34,8 @@ ClassTypes:
 - Class: 212
   Script: {instanceID: 0}
 - Class: 213
+  Script: {instanceID: 0}
+- Class: 687078895
   Script: {instanceID: 0}
 Assets:
 - Assets/Prefabs/Dungeon/Potal/PotalTransport Up.prefab

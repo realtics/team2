@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Potal
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings: []
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 0
+      enableTightPacking: 0
+    variantMultiplier: 1
+    packables:
+    - {fileID: 102900000, guid: addca9c9eabdf9b4585a61bdda13e86f, type: 3}
+    - {fileID: 102900000, guid: 8f40a761a69593e42b4e1262e756c563, type: 3}
+    - {fileID: 102900000, guid: 0d71aad89ce48f044b8bb25020fc54fc, type: 3}
+    totalSpriteSurfaceArea: 291357
+    bindAsDefault: 1
+    storedHash:
+      serializedVersion: 2
+      Hash: 00000000000000000000000000000000
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: de7a49a035d99804eb088a3fdbe6a6e1, type: 3}
+  - {fileID: 21300000, guid: 602e8dc0123c1364cb9505343ec6d5d3, type: 3}
+  - {fileID: 21300000, guid: 17bb3fd24d8007b4697cdc7810d2614e, type: 3}
+  - {fileID: 21300000, guid: f0a7c6639c93c914a806f5e315c10899, type: 3}
+  - {fileID: 21300000, guid: 9f166535b780e724190d115415d60dfe, type: 3}
+  - {fileID: 21300000, guid: 86ff1d5507c2f0d4b871f4900661faa4, type: 3}
+  - {fileID: 21300000, guid: 12cbaf06d941be94f94c25f918516dda, type: 3}
+  - {fileID: 21300000, guid: ccf5a1170f99e1f46bafb551faedb4af, type: 3}
+  - {fileID: 21300000, guid: f54932da51bafe74abf55fabfe9237df, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - 0
+  - 1
+  - 0
+  - 1
+  - 0
+  - 1
+  - 0
+  - 0
+  - 0
+  m_Tag: Potal
+  m_IsVariant: 0
