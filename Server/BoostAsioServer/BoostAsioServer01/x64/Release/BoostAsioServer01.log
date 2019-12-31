@@ -1,5 +1,34 @@
-﻿  코드를 생성하고 있습니다.
-  Previous IPDB not found, fall back to full compilation.
-  All 2727 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+﻿  AsioServer.cpp
+H:\project\github\neople\team2\Server\BoostAsioServer\BoostAsioServer01\AsioServer.cpp(161,98): warning C4267: '인수': 'size_t'에서 'const int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+H:\project\github\neople\team2\Server\BoostAsioServer\BoostAsioServer01\AsioServer.cpp(225,98): warning C4267: '인수': 'size_t'에서 'const int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+H:\project\github\neople\team2\Server\BoostAsioServer\BoostAsioServer01\AsioServer.cpp(279,98): warning C4267: '인수': 'size_t'에서 'const int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+H:\project\github\neople\team2\Server\BoostAsioServer\BoostAsioServer01\AsioServer.cpp(351,92): warning C4267: '인수': 'size_t'에서 'const int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+H:\project\github\neople\team2\Server\BoostAsioServer\BoostAsioServer01\AsioServer.cpp(411,93): warning C4267: '인수': 'size_t'에서 'const int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+H:\project\github\neople\team2\Server\BoostAsioServer\BoostAsioServer01\AsioServer.cpp(486,93): warning C4267: '인수': 'size_t'에서 'const int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+H:\project\github\neople\team2\Server\BoostAsioServer\BoostAsioServer01\AsioServer.cpp(540,98): warning C4267: '인수': 'size_t'에서 'const int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+H:\project\github\neople\team2\Server\BoostAsioServer\BoostAsioServer01\AsioServer.cpp(594,98): warning C4267: '인수': 'size_t'에서 'const int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+H:\project\github\neople\team2\Server\BoostAsioServer\BoostAsioServer01\AsioServer.cpp(690,96): warning C4267: '인수': 'size_t'에서 'const int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+H:\project\github\neople\team2\Server\BoostAsioServer\BoostAsioServer01\AsioServer.cpp(731,98): warning C4267: '인수': 'size_t'에서 'const int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+H:\project\github\neople\team2\Server\BoostAsioServer\BoostAsioServer01\AsioServer.cpp(764,42): warning C4267: '초기화 중': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+H:\project\github\neople\team2\Server\BoostAsioServer\BoostAsioServer01\AsioServer.cpp(787,40): warning C4267: '초기화 중': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+H:\project\github\neople\team2\Server\BoostAsioServer\BoostAsioServer01\AsioServer.cpp(790,40): warning C4267: '초기화 중': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+H:\project\github\neople\team2\Server\BoostAsioServer\BoostAsioServer01\AsioServer.cpp(795,39): warning C4267: '초기화 중': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+H:\project\github\neople\team2\Server\BoostAsioServer\BoostAsioServer01\AsioServer.cpp(798,39): warning C4267: '초기화 중': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+H:\project\github\neople\team2\Server\BoostAsioServer\BoostAsioServer01\AsioServer.cpp(863,92): warning C4267: '인수': 'size_t'에서 'const int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+H:\project\github\neople\team2\Server\BoostAsioServer\BoostAsioServer01\AsioServer.cpp(915,92): warning C4267: '인수': 'size_t'에서 'const int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  DBMySQL.cpp
+H:\project\github\neople\team2\Server\BoostAsioServer\BoostAsioServer01\DBMySQL.cpp(696,55): warning C4267: '초기화 중': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  ServerMain.cpp
+  Session.cpp
+  Please define _WIN32_WINNT or _WIN32_WINDOWS appropriately. For example:
+  - add -D_WIN32_WINNT=0x0601 to the compiler command line; or
+  - add _WIN32_WINNT=0x0601 to your project's Preprocessor Definitions.
+  Assuming _WIN32_WINNT=0x0601 (i.e. Windows 7 target).
+H:\project\github\neople\team2\Server\BoostAsioServer\BoostAsioServer01\Session.cpp(105,57): warning C4267: '초기화 중': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+H:\project\github\neople\team2\Server\BoostAsioServer\BoostAsioServer01\Session.cpp(148,41): warning C4267: '초기화 중': 'size_t'에서 'short'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  코드를 생성하고 있습니다.
+  5 of 2728 functions ( 0.2%) were compiled, the rest were copied from previous compilation.
+    1 functions were new in current compilation
+    136 functions had inline decision re-evaluated but remain unchanged
   코드를 생성했습니다.
   BoostAsioServer01.vcxproj -> H:\project\github\neople\team2\Server\BoostAsioServer\x64\Release\BoostAsioServer01.exe
