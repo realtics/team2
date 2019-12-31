@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 1189539499
+CRC: 3276990702
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: efeb2c1e21692b86ca5c5bec6fa189e8
+    Hash: fed7fc9e7c549b7e3dbf8a0932011de5
   TypeTreeHash:
     serializedVersion: 2
     Hash: 5ad585dd02dfb5016c0dad519eab8f49
@@ -14,7 +14,6 @@ ClassTypes:
 Assets:
 - Assets/Map/LightTemple.json
 - Assets/Map/minimap.json
-- Assets/Map/Test2.json
 - Assets/Map/Test.json
 - Assets/Map/Force.json
 - Assets/Map/OnlyBoss.json
