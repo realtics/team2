@@ -21,10 +21,10 @@ public class UIDungeonClearMenu : MonoBehaviour
         //_menuButton[(int)DungenClearMenu.Retry].onClick.AddListener(() => { DungeonGameManager.Instance.MoveToScene((int)SceneIndex.Dungen); });
         //_menuButton[(int)DungenClearMenu.OtherDugeon].onClick.AddListener(() => { DungeonGameManager.Instance.MoveToScene((int)SceneIndex.Dungen); });
         _menuButton[(int)DungenClearMenu.Retrun].onClick.AddListener(() => { 
-			if (NetworkManager.Instance.IsConnect)
-				DungeonGameManager.Instance.MoveToScene((int)SceneIndex.Lobby);
-			else
+			if (NetworkManager.Instance.IsSingle)
 				DungeonGameManager.Instance.MoveToScene((int)SceneIndex.LobbySingle);
+			else
+				DungeonGameManager.Instance.MoveToScene((int)SceneIndex.Lobby);
 		});
         
     }

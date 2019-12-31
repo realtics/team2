@@ -28,6 +28,7 @@ public class MainMenu : MonoBehaviour
 		SceneManager.LoadScene((int)SceneIndex.LobbySingle);
 		//JS add
 		SceneManager.LoadScene((int)SceneIndex.Inventory,LoadSceneMode.Additive);
+		NetworkManager.Instance.IsSingle = true;
 	}
 
 	private void CheckLogin()
