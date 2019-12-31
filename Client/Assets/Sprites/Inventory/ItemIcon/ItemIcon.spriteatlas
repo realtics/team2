@@ -1,0 +1,99 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: ItemIcon
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings: []
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 1
+    variantMultiplier: 1
+    packables:
+    - {fileID: 102900000, guid: 48026a1205bc22d42a2df08a033c1181, type: 3}
+    - {fileID: 102900000, guid: a5b7119d866e046409060fc4f058ac1a, type: 3}
+    - {fileID: 102900000, guid: 9d2aa9fbae49a7f4abcb35ed59b529b0, type: 3}
+    - {fileID: 102900000, guid: 36a34831ceb1c534f92048439bc8e48e, type: 3}
+    - {fileID: 102900000, guid: 1562f80d570ac5342b37c346acf3c729, type: 3}
+    - {fileID: 102900000, guid: fc6cc3580f3047d4f8c705f78c45ae06, type: 3}
+    - {fileID: 102900000, guid: 2123a262cbb1e7544ad8fdc452c5d9a8, type: 3}
+    - {fileID: 102900000, guid: 874fb44c738535c4980051e1b042a5b0, type: 3}
+    - {fileID: 102900000, guid: 09392056ee9206e43bc938d7a0b6676e, type: 3}
+    - {fileID: 102900000, guid: bdc0363d44bad5946b8034dfae4b4bfb, type: 3}
+    - {fileID: 102900000, guid: 1bd83e83350c4384fbfa5f8ae55113dc, type: 3}
+    - {fileID: 102900000, guid: f5aea0b023a27a04eb244974011062c6, type: 3}
+    - {fileID: 102900000, guid: cc2f7fef3f4139141a329e530864fdb3, type: 3}
+    totalSpriteSurfaceArea: 17248
+    bindAsDefault: 1
+    storedHash:
+      serializedVersion: 2
+      Hash: 18c95e9d947672d01a6dcf9baaedd025
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: df8537a034a04c44a97aaf75fd4466e3, type: 3}
+  - {fileID: 21300000, guid: 1c296fd1e203b794e8f2650770278979, type: 3}
+  - {fileID: 21300000, guid: 8b527fb2fe6889a48ace489d2aea9305, type: 3}
+  - {fileID: 21300000, guid: 957526639ee6b8349bea8b4ce8d09bf3, type: 3}
+  - {fileID: 21300000, guid: 6af40c34b1346df4db14a4eea24f49c2, type: 3}
+  - {fileID: 21300000, guid: 65c6b116c8989ed4f853df7963c85ff1, type: 3}
+  - {fileID: 21300000, guid: b77b0198230f09f48a3682c0bd820f0c, type: 3}
+  - {fileID: 21300000, guid: 326f94c8405cef542bc4297acdef8acf, type: 3}
+  - {fileID: 21300000, guid: 9cbecf0967e0af443b6b474c25aede35, type: 3}
+  - {fileID: 21300000, guid: 4606d4199737d46469ab5ed063e9b6a4, type: 3}
+  - {fileID: 21300000, guid: 3abdee0a703b5df48bfdfc61471c7d89, type: 3}
+  - {fileID: 21300000, guid: d3f51b5a52e946b46a9d5f51052edf04, type: 3}
+  - {fileID: 21300000, guid: 0f091c0c34e40464ea37c4c38e0dde63, type: 3}
+  - {fileID: 21300000, guid: 11bd2d0c953beb74f84a7ec1c255001f, type: 3}
+  - {fileID: 21300000, guid: 96b74e8c0990b8c4ebc6f839618354ef, type: 3}
+  - {fileID: 21300000, guid: df4d1b3d8ad4dc440a11a9cf1a6b2725, type: 3}
+  - {fileID: 21300000, guid: a0c38dbd29db3474e9a94c15766e872e, type: 3}
+  - {fileID: 21300000, guid: e1d6a00e4277b874cb01b225af6ad990, type: 3}
+  - {fileID: 21300000, guid: f69c615e4b2a6464a88e9a8e2e65a88f, type: 3}
+  - {fileID: 21300000, guid: f2790a7e07dc5b040b5d408337a5e23b, type: 3}
+  - {fileID: 21300000, guid: 89447a6f434327f49bb5fb36ae6ac444, type: 3}
+  - {fileID: 21300000, guid: ca220fff31d7bb24f87512d92f9514a7, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - 1
+  - 1
+  - 0
+  - 188
+  - 27
+  - 208
+  - 1
+  - 68
+  - 72
+  - 31
+  - 236
+  - 70
+  - 216
+  - 74
+  - 71
+  - 155
+  - 249
+  - 1
+  - 260
+  - 237
+  - 1
+  - 0
+  m_Tag: ItemIcon
+  m_IsVariant: 0

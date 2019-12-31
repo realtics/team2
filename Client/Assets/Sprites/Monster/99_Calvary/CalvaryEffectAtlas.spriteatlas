@@ -1,0 +1,177 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: CalvaryEffectAtlas
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings: []
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 1
+    variantMultiplier: 1
+    packables:
+    - {fileID: 102900000, guid: 5769c9d245892bf4c8d8751add210985, type: 3}
+    totalSpriteSurfaceArea: 3807222
+    bindAsDefault: 1
+    storedHash:
+      serializedVersion: 2
+      Hash: 2b832d5e5339f16dc49da20442a9f6ce
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: 98fd7300a221b784c860cddc619a2065, type: 3}
+  - {fileID: 21300000, guid: 829d6b007f0d64d4996452b8ba4643dc, type: 3}
+  - {fileID: 21300000, guid: fca59110f53579844911d21d50c2a08b, type: 3}
+  - {fileID: 21300000, guid: 5405e8202912cee44b76cfad877464fb, type: 3}
+  - {fileID: 21300000, guid: 73357930e4e80744d8688847f6b2ff23, type: 3}
+  - {fileID: 21300000, guid: 8ae1e740f4fac8142bcadea75b1c5a15, type: 3}
+  - {fileID: 21300000, guid: ad6fe4b0a4b050a44922dc2234f11f4b, type: 3}
+  - {fileID: 21300000, guid: 1dff9fb012cf123459cee7220ac51106, type: 3}
+  - {fileID: 21300000, guid: a19b8ae0ef16fcc4e9154140c2527500, type: 3}
+  - {fileID: 21300000, guid: 8781c7f095f15814197dcc8788d57422, type: 3}
+  - {fileID: 21300000, guid: 95339e12d6530c24ebf53cf2e4da4bce, type: 3}
+  - {fileID: 21300000, guid: 496ce63241e2e9f4a9f26a956e9787ad, type: 3}
+  - {fileID: 21300000, guid: 66404ea2180f054448b6a74fc0f2cccd, type: 3}
+  - {fileID: 21300000, guid: bd22afa2d1e609948b77c2c8e3eb8469, type: 3}
+  - {fileID: 21300000, guid: ec5f48d2877752a4194005c316a1a119, type: 3}
+  - {fileID: 21300000, guid: 9d0f0ae204b746d4ea264fcd884d37b9, type: 3}
+  - {fileID: 21300000, guid: 9686768352cc86649b207551124da125, type: 3}
+  - {fileID: 21300000, guid: c1136dc3325ddc748905feaf23a57454, type: 3}
+  - {fileID: 21300000, guid: 2bc90004a0da22d4187c6695d1e4ca88, type: 3}
+  - {fileID: 21300000, guid: 00e5a27409b942a4c950030068e8f092, type: 3}
+  - {fileID: 21300000, guid: 172e037456b048f4fa8cb0550d30da0f, type: 3}
+  - {fileID: 21300000, guid: e6ff7b84563b4cd4c91a62790bdc0214, type: 3}
+  - {fileID: 21300000, guid: 1d31dd949bfc0be47a0d26c248381f49, type: 3}
+  - {fileID: 21300000, guid: 6879d1650a987064cac6abb8c860b804, type: 3}
+  - {fileID: 21300000, guid: 9dd157652268af94f8995506a9fd03eb, type: 3}
+  - {fileID: 21300000, guid: a50f1a6585ca12c43a180cd3e39707d5, type: 3}
+  - {fileID: 21300000, guid: db47eb65bf26f3c4a8988415202d0e1e, type: 3}
+  - {fileID: 21300000, guid: c5109fe541ae01d4085745168c4be99f, type: 3}
+  - {fileID: 21300000, guid: 3b4fc306569f7714e8be63fc95093919, type: 3}
+  - {fileID: 21300000, guid: e5f529264ea132c4ebdfad57d1b6ddd1, type: 3}
+  - {fileID: 21300000, guid: 91916e468473cd54aae70221be9be3d9, type: 3}
+  - {fileID: 21300000, guid: 30762156536622445b34aa1c8a729d57, type: 3}
+  - {fileID: 21300000, guid: 93432556c331b4f44829a8be92e7a874, type: 3}
+  - {fileID: 21300000, guid: bf67c886af06c8140920b18ad8d6576a, type: 3}
+  - {fileID: 21300000, guid: 5f8a8507f1f27404da734e32542eb2db, type: 3}
+  - {fileID: 21300000, guid: c37f933709e73a9458b9e96362bb025b, type: 3}
+  - {fileID: 21300000, guid: 3cee9497d04615242bef548f9fb84dd2, type: 3}
+  - {fileID: 21300000, guid: 5a2c34f7c918f3a49910ae731ac8fe4d, type: 3}
+  - {fileID: 21300000, guid: 75941c68722491b4d89d89bc35ed7c56, type: 3}
+  - {fileID: 21300000, guid: 590cea88fdc72a540952dbffd0ef1394, type: 3}
+  - {fileID: 21300000, guid: 655a9098373b0e34c9c4bee2e2efa829, type: 3}
+  - {fileID: 21300000, guid: 2493c7a819793da488fd07bf8ebd0dd8, type: 3}
+  - {fileID: 21300000, guid: ebe5e2d8448c93846863d5a0e6764408, type: 3}
+  - {fileID: 21300000, guid: f0d467291ea9f0d4ab81144261063bbd, type: 3}
+  - {fileID: 21300000, guid: 6a110d39e4f60824b86bc8566d31c6f9, type: 3}
+  - {fileID: 21300000, guid: 82ee145966f49b04b9a6228ae3c0036e, type: 3}
+  - {fileID: 21300000, guid: 1558ca598735e864a861cba85ec865d4, type: 3}
+  - {fileID: 21300000, guid: a66c8ad9676b4a7479807224c2258dd7, type: 3}
+  - {fileID: 21300000, guid: 29e3a55ae01e4804ebc0431566157fbf, type: 3}
+  - {fileID: 21300000, guid: 61aa798a0aea47247bf38afce247b8e9, type: 3}
+  - {fileID: 21300000, guid: 5da9191b01c3cff4caebb75d772e18b9, type: 3}
+  - {fileID: 21300000, guid: 5023406bf7440284c80b67a050362580, type: 3}
+  - {fileID: 21300000, guid: cb99078b955573d4388d43d7c4362c6f, type: 3}
+  - {fileID: 21300000, guid: dcae21fb22bcf7c4d8491599e4514fe7, type: 3}
+  - {fileID: 21300000, guid: 2d6c490c380dbe04fa6e1ebc6e233dc5, type: 3}
+  - {fileID: 21300000, guid: 51e4551c772727d4aa3d2854e520afd5, type: 3}
+  - {fileID: 21300000, guid: f66f29ecedc9a404f9020cf49a47043a, type: 3}
+  - {fileID: 21300000, guid: 64cd59fc6aba4fd45aa066395ac8154b, type: 3}
+  - {fileID: 21300000, guid: f9a11e1d7b8775942a6d8cd8a740c8d7, type: 3}
+  - {fileID: 21300000, guid: e719065def349c941b928a9d9ab20f0a, type: 3}
+  - {fileID: 21300000, guid: 127f787da49ae5345b34d352926090b7, type: 3}
+  - {fileID: 21300000, guid: 5719847e2dd92284d8edd96f21b828bf, type: 3}
+  - {fileID: 21300000, guid: ed1b397ee402bc14d812efea091c5703, type: 3}
+  - {fileID: 21300000, guid: 911b3f9e953952f439c316d33a26c72d, type: 3}
+  - {fileID: 21300000, guid: 0102b3be309bba34c969892099902283, type: 3}
+  - {fileID: 21300000, guid: 3a70045fed540d34a9ae2091a485edff, type: 3}
+  - {fileID: 21300000, guid: 806099cf39ac2da45955c8cb0970f20b, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - 1
+  - 2
+  - 4
+  - 3
+  - 5
+  - 7
+  - 8
+  - 3
+  - 9
+  - 4
+  - 0
+  - 7
+  - 2
+  - 3
+  - 11
+  - 0
+  - 9
+  - 10
+  - 0
+  - 6
+  - 4
+  - 4
+  - 3
+  - 6
+  - 10
+  - 4
+  - 3
+  - 1
+  - 7
+  - 2
+  - 11
+  - 8
+  - 2
+  - 0
+  - 6
+  - 2
+  - 0
+  - 0
+  - 1
+  - 3
+  - 5
+  - 6
+  - 9
+  - 0
+  - 0
+  - 7
+  - 3
+  - 2
+  - 1
+  - 5
+  - 6
+  - 11
+  - 1
+  - 10
+  - 1
+  - 8
+  - 12
+  - 4
+  - 3
+  - 5
+  - 2
+  - 1
+  - 7
+  - 5
+  - 2
+  - 4
+  - 1
+  m_Tag: CalvaryEffectAtlas
+  m_IsVariant: 0

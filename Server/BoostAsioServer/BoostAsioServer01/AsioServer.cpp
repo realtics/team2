@@ -106,7 +106,6 @@ void AsioServer::CloseSession(const int sessionID)
 	_totalUserDir.erase(_sessionID);
 
 	UserExit(_sessionID);
-	//ConcurrentUser();	//유저가 접속 종료 하면 클라이언트에게 갱신된 정보를 보냄
 }
 
 void AsioServer::ProcessPacket(const int sessionID, const char* pData)
@@ -125,7 +124,9 @@ void AsioServer::ProcessPacket(const int sessionID, const char* pData)
 		SendPkt.Init();
 		
 		SendPkt.checkResult = _DBMysql.DBSignUpCreate(pPacket->userID, pPacket->userPW, pPacket->userName);
-		_DBMysql.DBInventoryCreate(pPacket->userID);
+		
+		if(SendPkt.checkResult == RESULT_SIGN_UP_CHECK::RESULT_SIGN_UP_CHECK_SUCCESS)
+			_DBMysql.DBInventoryCreate(pPacket->userID);
 
 		// json
 		boost::property_tree::ptree ptSendHeader;
@@ -858,12 +859,6 @@ void AsioServer::ConcurrentUser()
 	{
 		if (_sessionList[i]->Socket().is_open())
 		{
-			//if(exitUser != 0)
-			//{
-			//	if (_sessionList[i]->SessionID() == (exitUser - FIRST_SESSION_INDEX))
-			//		continue;
-			//}
-
 			if(_sessionList[i]->GetZone() == WORLD_ZONE::WORLD_ZONE_LOBBY)
 				_sessionList[i]->PostSend(false, std::strlen(sendStr2.c_str()), (char*)sendStr2.c_str());
 		}

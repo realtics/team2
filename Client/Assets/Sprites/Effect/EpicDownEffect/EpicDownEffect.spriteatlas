@@ -1,0 +1,90 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: EpicDownEffect
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings: []
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 1
+    variantMultiplier: 1
+    packables:
+    - {fileID: 2800000, guid: a7ef49ce3e468e24fbcce18df9e5d2c0, type: 3}
+    - {fileID: 2800000, guid: d5cc32108d693274f89c27b20046bd48, type: 3}
+    - {fileID: 2800000, guid: b529b488a6be9244a840015e6c3c64f0, type: 3}
+    - {fileID: 2800000, guid: fd23e4e51145b724dab33cd2a8f3d47e, type: 3}
+    - {fileID: 2800000, guid: bb985dcb4eaaac04ca596f9b9f8350bb, type: 3}
+    - {fileID: 2800000, guid: 9bd2965a17845a84b9f360ea59478fca, type: 3}
+    - {fileID: 2800000, guid: 31bc8f61f82f3f94993f42028aa3b24e, type: 3}
+    - {fileID: 2800000, guid: 6df1f95ae02ec9a4894d9ed777472dec, type: 3}
+    - {fileID: 2800000, guid: d073f263ce93a794299769fa6a5feeb9, type: 3}
+    - {fileID: 2800000, guid: d92f66c01c70baf4e967bf553ba81678, type: 3}
+    - {fileID: 2800000, guid: b2fa1ca96ffa56b43afdf0b138e11cc9, type: 3}
+    - {fileID: 2800000, guid: d5ca82d8bacede3418849e6ff84376e1, type: 3}
+    - {fileID: 2800000, guid: cba88a2902f6e4e48a6eb458a4bfd00b, type: 3}
+    - {fileID: 2800000, guid: ef540b4d024f8b94db5df9c1219020f1, type: 3}
+    - {fileID: 2800000, guid: 000df09324b032445bd2c5a74615b654, type: 3}
+    - {fileID: 2800000, guid: aab4541e9967d604290a318a089be8a9, type: 3}
+    totalSpriteSurfaceArea: 153216
+    bindAsDefault: 1
+    storedHash:
+      serializedVersion: 2
+      Hash: 623cfaf22502980ad4c95c3cfba24666
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: d5cc32108d693274f89c27b20046bd48, type: 3}
+  - {fileID: 21300000, guid: d92f66c01c70baf4e967bf553ba81678, type: 3}
+  - {fileID: 21300000, guid: 31bc8f61f82f3f94993f42028aa3b24e, type: 3}
+  - {fileID: 21300000, guid: d073f263ce93a794299769fa6a5feeb9, type: 3}
+  - {fileID: 21300000, guid: 000df09324b032445bd2c5a74615b654, type: 3}
+  - {fileID: 21300000, guid: fd23e4e51145b724dab33cd2a8f3d47e, type: 3}
+  - {fileID: 21300000, guid: b529b488a6be9244a840015e6c3c64f0, type: 3}
+  - {fileID: 21300000, guid: d5ca82d8bacede3418849e6ff84376e1, type: 3}
+  - {fileID: 21300000, guid: cba88a2902f6e4e48a6eb458a4bfd00b, type: 3}
+  - {fileID: 21300000, guid: b2fa1ca96ffa56b43afdf0b138e11cc9, type: 3}
+  - {fileID: 21300000, guid: 9bd2965a17845a84b9f360ea59478fca, type: 3}
+  - {fileID: 21300000, guid: 6df1f95ae02ec9a4894d9ed777472dec, type: 3}
+  - {fileID: 21300000, guid: bb985dcb4eaaac04ca596f9b9f8350bb, type: 3}
+  - {fileID: 21300000, guid: ef540b4d024f8b94db5df9c1219020f1, type: 3}
+  - {fileID: 21300000, guid: aab4541e9967d604290a318a089be8a9, type: 3}
+  - {fileID: 21300000, guid: a7ef49ce3e468e24fbcce18df9e5d2c0, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - 25
+  - 33
+  - 30
+  - 32
+  - 38
+  - 27
+  - 26
+  - 35
+  - 36
+  - 34
+  - 29
+  - 31
+  - 28
+  - 37
+  - 39
+  - 24
+  m_Tag: EpicDownEffect
+  m_IsVariant: 0
