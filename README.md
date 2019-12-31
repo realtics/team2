@@ -6,6 +6,8 @@
 맵툴영상 : https://youtu.be/_HGc2cHunFo
 
 
+
+
 Build 폴더
 
 1. DB 생성 시 (1.jpg)
@@ -21,11 +23,15 @@ Build 폴더
   "mdnf" 데이터베이스에, MDNF_DB_v0.2.zip 압축 해제 후 DB_SQL.sql 쿼리 실행 (2.jpg)
 
 
+
+
 2. 서버 실행
 
   Release 폴더의 BoostAsioServer01.exe 파일 실행
 
   위의 "mdnf" 데이터베이스가 있는 곳에서 실행해야 합니다.
+
+
 
 
 3. 게임 실행
