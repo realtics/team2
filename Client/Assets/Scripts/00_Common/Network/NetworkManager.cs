@@ -69,6 +69,7 @@ public class NetworkManager : MonoBehaviour
 	[SerializeField]
 	private int _myId = 0;      // 실행한 클라이언트의 ID
 
+    [SerializeField]
 	private bool _isSingle;
 	private string _accountId;
 	public int MyId { get { return _myId; } set { _myId = value; } }

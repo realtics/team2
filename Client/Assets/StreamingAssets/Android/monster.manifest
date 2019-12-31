@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 3831467893
+CRC: 1113822868
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 7200cf990e7c82e79f2b1222022e86ec
+    Hash: 5a40ad2f61908a0ef7a13bb015cd60d6
   TypeTreeHash:
     serializedVersion: 2
     Hash: cf614f4c95bf68fb5d416f905004f6fc
@@ -89,4 +89,4 @@ Assets:
 - Assets/Prefabs/Monster/Calvary/Unit/Calvary.prefab
 - Assets/Prefabs/Monster/Goblin/Unit/HellGoblin.prefab
 Dependencies:
-- C:/Users/zzang/Documents/GitHub/team2/Client/Assets/StreamingAssets/Android/material
+- C:/Users/KSJ/Documents/GitHub/team2/Client/Assets/StreamingAssets/Android/material
