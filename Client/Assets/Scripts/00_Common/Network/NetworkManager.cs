@@ -60,6 +60,9 @@ public class NetworkManager : MonoBehaviour
 	public string appDataPath;
 	public string appDataPathParent;
 
+    [SerializeField]
+    private string _ipAddress;
+    public string IpAddress { get { return _ipAddress; } set { _ipAddress = value; } }
 	private Socket _sock = null;
 	public bool IsConnect { get { return _sock == null ? false : true; } }
 
@@ -131,6 +134,11 @@ public class NetworkManager : MonoBehaviour
 		//ConnectToServer();
 
         DebugLogList("start() end");
+    }
+
+    public void SetIPAddress(string address)
+    {
+        _ipAddress = address;
     }
 
 	public void ConnectToServer()
@@ -243,7 +251,7 @@ public class NetworkManager : MonoBehaviour
             {
                 Debug.Log("소켓 생성 실패");
             }
-			_sock.Connect(new IPEndPoint(IPAddress.Parse("127.0.0.1"), 31452));
+			_sock.Connect(new IPEndPoint(IPAddress.Parse(_ipAddress), 31452));
 			//_sock.Connect(new IPEndPoint(IPAddress.Parse("192.168.200.141"), 31452));
 			// _sock.Connect(new IPEndPoint(IPAddress.Parse("192.168.1.105"), 31452));
 
